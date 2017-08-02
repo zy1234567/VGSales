@@ -133,7 +133,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
-            android:layout_centerHorizontal="true"
             android:drawableTop="@drawable/tab_s_3"
             android:drawablePadding="2dp"
             android:gravity="center"
@@ -141,7 +140,9 @@
             android:text="交流"
             android:paddingBottom="4dp"
             android:textColor="#999"
-            android:textSize="9dp" />
+            android:textSize="9dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:id="@+id/txt_4_hint_2"

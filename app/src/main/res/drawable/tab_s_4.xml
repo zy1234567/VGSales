@@ -2,5 +2,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:state_selected="true"
         android:drawable="@mipmap/wl_wd" />
-    <item android:drawable="@mipmap/wl_wd_n" />
+    <item android:state_selected="false"
+        android:drawable="@mipmap/wl_wd_n" />
 </selector>

@@ -26,30 +26,28 @@ import butterknife.Unbinder;
 
 public class BottomBar extends FrameLayout implements View.OnClickListener{
 
-
     @BindView(R.id.img_share)
     ImageView ivTab0;
-    @BindView(R.id.txt_1)
-    TextView tvTab0;
-    @BindView(R.id.lt_1)
-    LinearLayout llTab0;
-
     @BindView(R.id.img_chance)
     ImageView ivTab1;
-    @BindView(R.id.txt_2)
-    TextView tvTab1;
-    @BindView(R.id.lt_2)
-    LinearLayout llTab1;
-
-
     @BindView(R.id.txt_4)
     TextView tvTab2;
+    @BindView(R.id.txt_5)
+    TextView tvTab3;
+
+    @BindView(R.id.txt_1)
+    TextView tvTab0;
+    @BindView(R.id.rl_1)
+    RelativeLayout rlTab0;
+
+    @BindView(R.id.txt_2)
+    TextView tvTab1;
+    @BindView(R.id.rl_2)
+    RelativeLayout rlTab1;
+
     @BindView(R.id.rl_4)
     RelativeLayout rlTab2;
 
-
-    @BindView(R.id.txt_5)
-    TextView tvTab3;
     @BindView(R.id.rl_5)
     RelativeLayout rlTab3;
 
@@ -76,11 +74,11 @@ public class BottomBar extends FrameLayout implements View.OnClickListener{
     private void init() {
         View v = LayoutInflater.from(getContext()).inflate(R.layout.layout_bottom_tab, this, true);
         unbinder = ButterKnife.bind(this, v);
-        llTab0.setOnClickListener(this);
-        llTab1.setOnClickListener(this);
+        rlTab0.setOnClickListener(this);
+        rlTab1.setOnClickListener(this);
         rlTab2.setOnClickListener(this);
         rlTab3.setOnClickListener(this);
-
+        updateTabView(0);
     }
 
 
@@ -90,18 +88,49 @@ public class BottomBar extends FrameLayout implements View.OnClickListener{
             return;
         }
         switch (view.getId()) {
-            case R.id.lt_1:
-                onTabItemClickListener.onItemClick(0);
+            case R.id.rl_1:
+                onTabClick(0);
                 break;
-            case R.id.lt_2:
-                onTabItemClickListener.onItemClick(1);
+            case R.id.rl_2:
+                onTabClick(1);
                 break;
             case R.id.rl_4:
-                onTabItemClickListener.onItemClick(3);
+                onTabClick(2);
                 break;
             case R.id.rl_5:
-                onTabItemClickListener.onItemClick(4);
+                onTabClick(3);
                 break;
+        }
+    }
+
+
+    private void onTabClick(int index) {
+        onTabItemClickListener.onItemClick(index);
+        updateTabView(index);
+    }
+
+
+    private void updateTabView(int index) {
+        if (index == 0) {
+            ivTab0.setSelected(true);
+            ivTab1.setSelected(false);
+            tvTab2.setSelected(false);
+            tvTab3.setSelected(false);
+        }else if (index == 1) {
+            ivTab0.setSelected(false);
+            ivTab1.setSelected(true);
+            tvTab2.setSelected(false);
+            tvTab3.setSelected(false);
+        }else if (index == 2) {
+            ivTab0.setSelected(false);
+            ivTab1.setSelected(false);
+            tvTab2.setSelected(true);
+            tvTab3.setSelected(false);
+        }else if (index == 3) {
+            ivTab0.setSelected(false);
+            ivTab1.setSelected(false);
+            tvTab2.setSelected(false);
+            tvTab3.setSelected(true);
         }
     }
 
