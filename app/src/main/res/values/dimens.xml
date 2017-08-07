@@ -11,6 +11,14 @@
     <dimen name="activity_main_tab_hint_w_2">8dp</dimen>
     <dimen name="activity_main_tab_num_margin_left_2">-2dp</dimen>
     <dimen name="list_item_title_txt_size_3">9dp</dimen>
+    <dimen name="item_news_recycler_header_top_height">50dp</dimen>
+    <dimen name="item_news_recycler_header_top_text_size">14sp</dimen>
+    <dimen name="item_news_recycler_header_top_line_margin_top">8dp</dimen>
+    <dimen name="item_news_recycler_header_top_line_margin_bottom">4dp</dimen>
+    <dimen name="item_news_recycler_header_margin_top">16dp</dimen>
+    <dimen name="item_news_recycler_header_circle_image_size">100dp</dimen>
+    <dimen name="item_news_recycler_header_circle_image_margin_left">20dp</dimen>
+    <dimen name="text_size_news_recycler_header_right">10sp</dimen>
 
 
 </resources>

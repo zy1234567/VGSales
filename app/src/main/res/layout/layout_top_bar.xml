@@ -20,15 +20,7 @@
         android:layout_centerInParent="true"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
-        android:background="@drawable/rect_fill_round_color_14_frame_color_19" >
-
-        <ImageView
-            android:id="@+id/img_total_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_alignParentLeft="true"
-            android:src="@mipmap/total_search" />
+         >
 
         <TextView
             android:id="@+id/txt_title"
@@ -36,16 +28,10 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="蔚来一起学"
+            android:text="鸿雁"
             android:textColor="@color/weilai_color_001"
             android:textSize="14dp" />
-        <ImageView
-            android:id="@+id/img_saoyisao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/total_sao"
-            android:layout_alignParentRight="true" />
+
     </RelativeLayout>
 
     <ImageView

@@ -266,5 +266,10 @@
     <color name="result_point_color">#C0FFFF00</color>
     <color name="laser_color">#0F0</color>
     <color name="corner_color">#00FF00</color>
+    <color name="item_news_item_bg">#fff</color>
+    <color name="line_color">#e5e5e5</color>
 
+
+    <color name="vgsales_color_1">#4b84cb</color>
+    <color name="vgsales_color_2">#75aae3</color>
 </resources>

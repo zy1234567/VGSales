@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:background="@color/item_news_item_bg"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_news_recycler_header_top_height">
+
+
+        <TextView
+            android:textSize="@dimen/item_news_recycler_header_top_text_size"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <View
+            android:background="@color/line_color"
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/item_news_recycler_header_top_line_margin_top"
+            android:layout_marginBottom="@dimen/item_news_recycler_header_top_line_margin_bottom" />
+
+        <TextView
+            android:textSize="@dimen/item_news_recycler_header_top_text_size"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <View
+            android:background="@color/line_color"
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/item_news_recycler_header_top_line_margin_top"
+            android:layout_marginBottom="@dimen/item_news_recycler_header_top_line_margin_bottom" />
+
+        <TextView
+            android:textSize="@dimen/item_news_recycler_header_top_text_size"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <View
+            android:background="@color/line_color"
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/item_news_recycler_header_top_line_margin_top"
+            android:layout_marginBottom="@dimen/item_news_recycler_header_top_line_margin_bottom" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/item_news_recycler_header_margin_top"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:padding="22dp">
+
+        <ImageView
+            android:background="#f00"
+            android:id="@+id/civ_recycler_header"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/item_news_recycler_header_circle_image_margin_left"
+            android:layout_marginLeft="@dimen/item_news_recycler_header_circle_image_margin_left"
+            android:layout_width="@dimen/item_news_recycler_header_circle_image_size"
+            android:layout_height="@dimen/item_news_recycler_header_circle_image_size" />
+
+
+        <TextView
+            android:id="@+id/tv_recycler_header_username"
+        android:layout_alignLeft="@id/civ_recycler_header"
+        android:layout_alignStart="@id/civ_recycler_header"
+        android:layout_alignRight="@id/civ_recycler_header"
+        android:layout_alignEnd="@id/civ_recycler_header"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:text="王思聪"
+        android:layout_below="@id/civ_recycler_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_recycler_header_location"
+            android:layout_alignLeft="@id/civ_recycler_header"
+            android:layout_alignStart="@id/civ_recycler_header"
+            android:layout_alignRight="@id/civ_recycler_header"
+            android:layout_alignEnd="@id/civ_recycler_header"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:text="北京市朝阳区"
+            android:layout_below="@id/tv_recycler_header_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_recycler_header_referee"
+            android:layout_alignLeft="@id/civ_recycler_header"
+            android:layout_alignStart="@id/civ_recycler_header"
+            android:layout_alignRight="@id/civ_recycler_header"
+            android:layout_alignEnd="@id/civ_recycler_header"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:text="推荐人：张三丰"
+            android:layout_below="@id/tv_recycler_header_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_toRightOf="@id/civ_recycler_header"
+            android:background="#f00"
+            android:layout_marginLeft="8dp"
+            android:id="@+id/iv_recycler_header_add"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/iv_recycler_header_add"
+            android:layout_marginLeft="8dp"
+            android:padding="8dp">
+
+            <TextView
+                android:textSize="@dimen/text_size_news_recycler_header_right"
+                android:id="@+id/tv_recycler_header_right_line1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="名下销售人员总数"/>
+
+            <TextView
+                android:textSize="@dimen/text_size_news_recycler_header_right"
+                android:id="@+id/tv_recycler_header_right_line4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="五级以外：26人"
+                />
+
+            <TextView
+                android:text="五级以内：16人"
+                android:textSize="@dimen/text_size_news_recycler_header_right"
+                android:id="@+id/tv_recycler_header_right_line3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/tv_recycler_header_right_line4"/>
+
+
+            <TextView
+                android:textSize="@dimen/text_size_news_recycler_header_right"
+                android:id="@+id/tv_recycler_header_right_line2"
+                android:layout_above="@id/tv_recycler_header_right_line3"
+                android:text="直属销售：6人"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/line_color" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tv_recycler_header_bottom_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tv_recycler_header_bottom_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tv_recycler_header_bottom_3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tv_recycler_header_bottom_4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>
