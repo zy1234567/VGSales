@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ztstech.mate.activitys.complete_info.FillInfoActivity">
+    tools:context="com.ztstech.vgmate.activitys.complete_info.FillInfoActivity">
 
 </LinearLayout>

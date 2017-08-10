@@ -4,23 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ztstech.mate.activitys.main.MainActivity">
+    tools:context="com.ztstech.vgmate.activitys.main.MainActivity">
 
 
-    <com.ztstech.mate.activitys.main.widget.TopBar
+    <com.ztstech.vgmate.activitys.main.widget.TopBar
         android:layout_alignParentTop="true"
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_bar_height">
-    </com.ztstech.mate.activitys.main.widget.TopBar>
+    </com.ztstech.vgmate.activitys.main.widget.TopBar>
 
 
-    <com.ztstech.mate.activitys.main.widget.BottomBar
+    <com.ztstech.vgmate.activitys.main.widget.BottomBar
         android:layout_alignParentBottom="true"
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_bar_height">
-    </com.ztstech.mate.activitys.main.widget.BottomBar>
+    </com.ztstech.vgmate.activitys.main.widget.BottomBar>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_main"
