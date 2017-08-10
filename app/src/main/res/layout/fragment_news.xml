@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ztstech.vgsales.activitys.news.NewsFragment">
+    tools:context="com.ztstech.mate.activitys.news.NewsFragment">
 
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView
