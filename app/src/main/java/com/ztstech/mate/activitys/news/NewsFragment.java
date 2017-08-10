@@ -3,10 +3,12 @@ package com.ztstech.mate.activitys.news;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.ztstech.mate.R;
 import com.ztstech.mate.activitys.MVPFragment;
+import com.ztstech.mate.activitys.main.widget.MyXRecycler;
 import com.ztstech.mate.activitys.news.adapter.NewsRecyclerAdapter;
 import com.ztstech.mate.model.news.NewsModel;
 
@@ -21,7 +23,7 @@ import butterknife.BindView;
 public class NewsFragment extends MVPFragment<NewsContract.Presenter> implements NewsContract.View {
 
     @BindView(R.id.xrv_news)
-    XRecyclerView recyclerView;
+    RecyclerView recyclerView;
 
     public static NewsFragment newInstance() {
         NewsFragment fragment = new NewsFragment();

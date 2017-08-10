@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/top_bar_height"
-    android:background="@color/weilai_color_003"
     >
 
     <ImageView
@@ -29,7 +28,6 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="鸿雁"
-            android:textColor="@color/weilai_color_001"
             android:textSize="14dp" />
 
     </RelativeLayout>

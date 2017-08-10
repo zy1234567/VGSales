@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+
 import com.ztstech.mate.R;
 
 import butterknife.BindView;
@@ -25,30 +26,30 @@ import butterknife.Unbinder;
 
 public class BottomBar extends FrameLayout implements View.OnClickListener{
 
-    @BindView(R.id.img_share)
-    ImageView ivTab0;
-    @BindView(R.id.img_chance)
-    ImageView ivTab1;
-    @BindView(R.id.txt_4)
-    TextView tvTab2;
-    @BindView(R.id.txt_5)
-    TextView tvTab3;
-
-    @BindView(R.id.txt_1)
-    TextView tvTab0;
-    @BindView(R.id.rl_1)
+    @BindView(R.id.rl_tab0)
     RelativeLayout rlTab0;
 
-    @BindView(R.id.txt_2)
-    TextView tvTab1;
-    @BindView(R.id.rl_2)
+    @BindView(R.id.rl_tab1)
     RelativeLayout rlTab1;
 
-    @BindView(R.id.rl_4)
+    @BindView(R.id.rl_tab2)
     RelativeLayout rlTab2;
 
-    @BindView(R.id.rl_5)
+    @BindView(R.id.rl_tab3)
     RelativeLayout rlTab3;
+
+    @BindView(R.id.tv_tab0)
+    TextView tvTab0;
+
+    @BindView(R.id.tv_tab1)
+    TextView tvTab1;
+
+    @BindView(R.id.tv_tab2)
+    TextView tvTab2;
+
+    @BindView(R.id.tv_tab3)
+    TextView tvTab3;
+
 
     private Unbinder unbinder;
 
@@ -71,7 +72,7 @@ public class BottomBar extends FrameLayout implements View.OnClickListener{
 
 
     private void init() {
-        View v = LayoutInflater.from(getContext()).inflate(R.layout.layout_bottom_tab, this, true);
+        View v = LayoutInflater.from(getContext()).inflate(R.layout.layout_tabbar, this, true);
         unbinder = ButterKnife.bind(this, v);
         rlTab0.setOnClickListener(this);
         rlTab1.setOnClickListener(this);
@@ -87,16 +88,16 @@ public class BottomBar extends FrameLayout implements View.OnClickListener{
             return;
         }
         switch (view.getId()) {
-            case R.id.rl_1:
+            case R.id.rl_tab0:
                 onTabClick(0);
                 break;
-            case R.id.rl_2:
+            case R.id.rl_tab1:
                 onTabClick(1);
                 break;
-            case R.id.rl_4:
+            case R.id.rl_tab2:
                 onTabClick(2);
                 break;
-            case R.id.rl_5:
+            case R.id.rl_tab3:
                 onTabClick(3);
                 break;
         }
@@ -111,23 +112,23 @@ public class BottomBar extends FrameLayout implements View.OnClickListener{
 
     private void updateTabView(int index) {
         if (index == 0) {
-            ivTab0.setSelected(true);
-            ivTab1.setSelected(false);
+            tvTab0.setSelected(true);
+            tvTab1.setSelected(false);
             tvTab2.setSelected(false);
             tvTab3.setSelected(false);
         }else if (index == 1) {
-            ivTab0.setSelected(false);
-            ivTab1.setSelected(true);
+            tvTab0.setSelected(false);
+            tvTab1.setSelected(true);
             tvTab2.setSelected(false);
             tvTab3.setSelected(false);
         }else if (index == 2) {
-            ivTab0.setSelected(false);
-            ivTab1.setSelected(false);
+            tvTab0.setSelected(false);
+            tvTab1.setSelected(false);
             tvTab2.setSelected(true);
             tvTab3.setSelected(false);
         }else if (index == 3) {
-            ivTab0.setSelected(false);
-            ivTab1.setSelected(false);
+            tvTab0.setSelected(false);
+            tvTab1.setSelected(false);
             tvTab2.setSelected(false);
             tvTab3.setSelected(true);
         }

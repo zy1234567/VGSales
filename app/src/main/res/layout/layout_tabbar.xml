@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#fafafa">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/rl_tab0"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_tab0"
+                android:includeFontPadding="false"
+                android:gravity="center_horizontal"
+                android:drawableTop="@mipmap/tab_home_pre"
+                android:textColor="@color/color_001"
+                android:textSize="@dimen/text_9"
+                android:text="首页"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="6dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_tab1"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_tab1"
+                android:includeFontPadding="false"
+                android:gravity="center_horizontal"
+                android:drawableTop="@mipmap/tab_share"
+                android:textColor="@color/color_102"
+                android:textSize="@dimen/text_9"
+                android:text="分享"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="6dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_tab2"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_tab2"
+                android:includeFontPadding="false"
+                android:gravity="center_horizontal"
+                android:drawableTop="@mipmap/tab_question"
+                android:textColor="@color/color_102"
+                android:textSize="@dimen/text_9"
+                android:text="问答"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="6dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_tab3"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_tab3"
+                android:includeFontPadding="false"
+                android:gravity="center_horizontal"
+                android:drawableTop="@mipmap/tab_communicate"
+                android:textColor="@color/color_102"
+                android:textSize="@dimen/text_9"
+                android:text="交流"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="6dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    
+    <View
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/color_105" />
+    
+
+</RelativeLayout>

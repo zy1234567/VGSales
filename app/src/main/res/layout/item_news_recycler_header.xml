@@ -1,209 +1,409 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#88abcd">
 
-    <LinearLayout
-        android:background="@color/item_news_item_bg"
-        android:orientation="horizontal"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_news_recycler_header_top_height">
+        android:layout_height="55dp">
+
+        <FrameLayout
+            android:alpha="0.1"
+            android:background="#ff000000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </FrameLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="55dp">
 
 
-        <TextView
-            android:textSize="@dimen/item_news_recycler_header_top_text_size"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
+            <RelativeLayout
+                android:paddingLeft="15dp"
+                android:paddingStart="15dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
 
-        <View
-            android:background="@color/line_color"
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/item_news_recycler_header_top_line_margin_top"
-            android:layout_marginBottom="@dimen/item_news_recycler_header_top_line_margin_bottom" />
+                <ImageView
+                    android:src="@mipmap/expect_income_home"
+                    android:id="@+id/img_top_left"
+                    android:layout_centerVertical="true"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
 
-        <TextView
-            android:textSize="@dimen/item_news_recycler_header_top_text_size"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/tv_top_left_top"
+                    android:text="预计到账"
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/color_109"
+                    android:layout_marginLeft="7dp"
+                    android:layout_toRightOf="@id/img_top_left"
+                    android:layout_alignTop="@id/img_top_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-        <View
-            android:background="@color/line_color"
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/item_news_recycler_header_top_line_margin_top"
-            android:layout_marginBottom="@dimen/item_news_recycler_header_top_line_margin_bottom" />
+                <TextView
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/color_109"
+                    android:text="¥140,000"
+                    android:layout_alignLeft="@id/tv_top_left_top"
+                    android:layout_alignBottom="@id/img_top_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-        <TextView
-            android:textSize="@dimen/item_news_recycler_header_top_text_size"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
 
-        <View
-            android:background="@color/line_color"
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/item_news_recycler_header_top_line_margin_top"
-            android:layout_marginBottom="@dimen/item_news_recycler_header_top_line_margin_bottom" />
 
-    </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:paddingLeft="15dp"
+                android:paddingStart="15dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:src="@mipmap/completed_income_home"
+                    android:id="@+id/img_top_center"
+                    android:layout_centerVertical="true"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+
+                <TextView
+                    android:id="@+id/tv_top_center_top"
+                    android:text="已经完成"
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/color_109"
+                    android:layout_marginLeft="7dp"
+                    android:layout_toRightOf="@id/img_top_center"
+                    android:layout_alignTop="@id/img_top_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/color_109"
+                    android:text="¥140,000"
+                    android:layout_alignLeft="@id/tv_top_center_top"
+                    android:layout_alignBottom="@id/img_top_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:paddingLeft="15dp"
+                android:paddingStart="15dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:src="@mipmap/real_income_home"
+                    android:id="@+id/img_top_right"
+                    android:layout_centerVertical="true"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+
+                <TextView
+                    android:id="@+id/tv_top_right_top"
+                    android:text="实际到账"
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/color_109"
+                    android:layout_marginLeft="7dp"
+                    android:layout_toRightOf="@id/img_top_right"
+                    android:layout_alignTop="@id/img_top_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/color_109"
+                    android:text="¥140,000"
+                    android:layout_alignLeft="@id/tv_top_right_top"
+                    android:layout_alignBottom="@id/img_top_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
 
     <RelativeLayout
-        android:layout_marginTop="@dimen/item_news_recycler_header_margin_top"
+        android:layout_marginTop="16pt"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:padding="22dp">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
 
         <ImageView
+            android:id="@+id/img_header"
             android:background="#f00"
-            android:id="@+id/civ_recycler_header"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="@dimen/item_news_recycler_header_circle_image_margin_left"
-            android:layout_marginLeft="@dimen/item_news_recycler_header_circle_image_margin_left"
-            android:layout_width="@dimen/item_news_recycler_header_circle_image_size"
-            android:layout_height="@dimen/item_news_recycler_header_circle_image_size" />
-
+            android:layout_centerHorizontal="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
 
         <TextView
-            android:id="@+id/tv_recycler_header_username"
-        android:layout_alignLeft="@id/civ_recycler_header"
-        android:layout_alignStart="@id/civ_recycler_header"
-        android:layout_alignRight="@id/civ_recycler_header"
-        android:layout_alignEnd="@id/civ_recycler_header"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:text="王思聪"
-        android:layout_below="@id/civ_recycler_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/tv_recycler_header_location"
-            android:layout_alignLeft="@id/civ_recycler_header"
-            android:layout_alignStart="@id/civ_recycler_header"
-            android:layout_alignRight="@id/civ_recycler_header"
-            android:layout_alignEnd="@id/civ_recycler_header"
-            android:gravity="center"
-            android:textSize="12sp"
-            android:text="北京市朝阳区"
-            android:layout_below="@id/tv_recycler_header_username"
+            android:id="@+id/tv_name"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/img_header"
+            android:text="吕晓梦"
+            android:textColor="@color/color_109"
+            android:textSize="@dimen/text_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/tv_recycler_header_referee"
-            android:layout_alignLeft="@id/civ_recycler_header"
-            android:layout_alignStart="@id/civ_recycler_header"
-            android:layout_alignRight="@id/civ_recycler_header"
-            android:layout_alignEnd="@id/civ_recycler_header"
-            android:gravity="center"
-            android:textSize="12sp"
-            android:text="推荐人：张三丰"
-            android:layout_below="@id/tv_recycler_header_location"
+            android:id="@+id/tv_introducer"
+            android:layout_marginTop="8dp"
+            android:textSize="@dimen/text_7"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/tv_name"
+            android:text="介绍人：王珊珊"
+            android:textColor="@color/color_109"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_below="@id/tv_introducer"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/color_109"
+            android:text="北京市 市辖区 西城区"
+            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
 
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="42dp">
+        <FrameLayout
+            android:alpha="0.08"
+            android:background="@color/color_006"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_toRightOf="@id/civ_recycler_header"
-            android:background="#f00"
-            android:layout_marginLeft="8dp"
-            android:id="@+id/iv_recycler_header_add"/>
+            android:id="@+id/img_notice"
+            android:src="@mipmap/notice_home"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_centerVertical="true"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:text="销售机会：+35"
+            android:textColor="@color/color_100"
+            android:textSize="@dimen/text_4"
+            android:layout_marginLeft="6dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/img_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
             android:layout_alignParentRight="true"
-            android:layout_toRightOf="@id/iv_recycler_header_add"
-            android:layout_marginLeft="8dp"
-            android:padding="8dp">
+            android:layout_width="70dp"
+            android:layout_height="25dp">
 
             <TextView
-                android:textSize="@dimen/text_size_news_recycler_header_right"
-                android:id="@+id/tv_recycler_header_right_line1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="名下销售人员总数"/>
-
-            <TextView
-                android:textSize="@dimen/text_size_news_recycler_header_right"
-                android:id="@+id/tv_recycler_header_right_line4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:text="五级以外：26人"
-                />
-
-            <TextView
-                android:text="五级以内：16人"
-                android:textSize="@dimen/text_size_news_recycler_header_right"
-                android:id="@+id/tv_recycler_header_right_line3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/tv_recycler_header_right_line4"/>
-
-
-            <TextView
-                android:textSize="@dimen/text_size_news_recycler_header_right"
-                android:id="@+id/tv_recycler_header_right_line2"
-                android:layout_above="@id/tv_recycler_header_right_line3"
-                android:text="直属销售：6人"
+                android:gravity="center_vertical"
+                android:drawablePadding="3dp"
+                android:drawableLeft="@mipmap/ico_grab_home"
+                android:text="抢机会"
+                android:textColor="@color/color_109"
+                android:textSize="@dimen/text_6"
+                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
 
         </RelativeLayout>
 
     </RelativeLayout>
 
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:background="@color/line_color" />
-
     <LinearLayout
+        android:background="#fff"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <TextView
-            android:gravity="center"
-            android:id="@+id/tv_recycler_header_bottom_1"
+        
+        <RelativeLayout
+            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_height="match_parent">
 
-        <TextView
-            android:gravity="center"
-            android:id="@+id/tv_recycler_header_bottom_2"
+            <ImageView
+                android:src="@mipmap/institution_self_home"
+                android:id="@+id/img_bottom_0"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:id="@+id/tv_bottom_title_0"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/img_bottom_0"
+                android:text="自行开拓机构"
+                android:textColor="@color/color_100"
+                android:textSize="@dimen/text_7"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="20"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/tv_bottom_title_0"
+                android:textColor="@color/color_100"
+                android:textSize="@dimen/text_7"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_height="match_parent">
 
-        <TextView
-            android:gravity="center"
-            android:id="@+id/tv_recycler_header_bottom_3"
+            <ImageView
+                android:src="@mipmap/institution_partner_home"
+                android:id="@+id/img_bottom_1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:id="@+id/tv_bottom_title_1"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/img_bottom_1"
+                android:text="伙伴开拓机构"
+                android:textColor="@color/color_100"
+                android:textSize="@dimen/text_7"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="20"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/tv_bottom_title_1"
+                android:textColor="@color/color_100"
+                android:textSize="@dimen/text_7"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_height="match_parent">
 
-        <TextView
-            android:gravity="center"
-            android:id="@+id/tv_recycler_header_bottom_4"
+            <ImageView
+                android:src="@mipmap/parters_home"
+                android:id="@+id/img_bottom_2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:id="@+id/tv_bottom_title_2"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/img_bottom_2"
+                android:text="销售伙伴"
+                android:textColor="@color/color_100"
+                android:textSize="@dimen/text_7"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="20"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/tv_bottom_title_2"
+                android:textColor="@color/color_100"
+                android:textSize="@dimen/text_7"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_height="match_parent">
 
+            <ImageView
+                android:src="@mipmap/add_partners"
+                android:id="@+id/img_bottom_3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:id="@+id/tv_bottom_title_3"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/img_bottom_3"
+                android:text="添加销售伙伴"
+                android:textColor="@color/color_100"
+                android:textSize="@dimen/text_7"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/tv_bottom_title_3"
+                android:textColor="@color/color_100"
+                android:textSize="@dimen/text_7"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
 
     </LinearLayout>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_107" />
+
+
 
 </LinearLayout>
+

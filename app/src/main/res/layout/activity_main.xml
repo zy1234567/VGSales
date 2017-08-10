@@ -15,7 +15,6 @@
     </com.ztstech.mate.activitys.main.widget.TopBar>
 
 
-
     <com.ztstech.mate.activitys.main.widget.BottomBar
         android:layout_alignParentBottom="true"
         android:id="@+id/bottom_bar"
