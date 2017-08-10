@@ -222,6 +222,7 @@
 
 
         <RelativeLayout
+            android:background="@drawable/bg_main_chance"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:layout_alignParentRight="true"
@@ -229,8 +230,7 @@
             android:layout_height="25dp">
 
             <TextView
-                android:gravity="center_vertical"
-                android:drawablePadding="3dp"
+                android:gravity="center"
                 android:drawableLeft="@mipmap/ico_grab_home"
                 android:text="抢机会"
                 android:textColor="@color/color_109"
