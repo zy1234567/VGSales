@@ -2,7 +2,7 @@ package com.ztstech.vgmate.manager;
 
 import android.support.v4.app.Fragment;
 
-import com.ztstech.vgmate.activitys.news.NewsFragment;
+import com.ztstech.vgmate.activitys.main_fragment.MainFragment;
 import com.ztstech.vgmate.activitys.share.ShareFragment;
 
 /**
@@ -27,7 +27,7 @@ public class MainFragmentFactory {
 
     private Fragment createFragment(int index) {
         if (index == 0) {
-            return NewsFragment.newInstance();
+            return MainFragment.newInstance();
         }else if (index == 1) {
             return ShareFragment.newInstance();
         }else if (index == 2) {

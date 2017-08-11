@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.news;
+package com.ztstech.vgmate.activitys.main_fragment;
 
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.BaseView;
@@ -7,13 +7,13 @@ import com.ztstech.vgmate.activitys.BaseView;
  * Created by zhiyuan on 2017/8/1.
  */
 
-public interface NewsContract {
+public interface MainContract {
 
     interface View extends BaseView {
 
     }
 
-    interface Presenter extends BasePresenter<NewsContract.View> {
+    interface Presenter extends BasePresenter<MainContract.View> {
 
     }
 }
