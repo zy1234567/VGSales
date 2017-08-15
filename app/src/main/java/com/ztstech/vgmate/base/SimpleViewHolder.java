@@ -10,7 +10,7 @@ import butterknife.ButterKnife;
  * Created by zhiyuan on 2017/7/27.
  */
 
-public abstract class SimpleViewHolder<T> extends RecyclerView.ViewHolder{
+public class SimpleViewHolder<T> extends RecyclerView.ViewHolder{
 
     private ItemViewClickListener itemViewClickListener;
     private SimpleRecyclerAdapter<T> adapter;
@@ -42,7 +42,7 @@ public abstract class SimpleViewHolder<T> extends RecyclerView.ViewHolder{
         refreshView(data);
     }
 
-    protected abstract void refreshView(T data);
+    protected void refreshView(T data) {};
 
     private class ItemViewClickListener implements View.OnClickListener {
 
