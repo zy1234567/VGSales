@@ -7,7 +7,10 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <RelativeLayout
             android:id="@+id/rl_tab0"
@@ -19,15 +22,16 @@
                 android:id="@+id/tv_tab0"
                 android:includeFontPadding="false"
                 android:gravity="center_horizontal"
-                android:drawableTop="@mipmap/tab_home_pre"
-                android:textColor="@color/color_001"
+                android:drawableTop="@drawable/sel_tab_0"
+                android:textColor="@drawable/sel_tab_text"
                 android:textSize="@dimen/text_9"
                 android:text="首页"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="6dp"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                />
 
         </RelativeLayout>
 
@@ -41,8 +45,8 @@
                 android:id="@+id/tv_tab1"
                 android:includeFontPadding="false"
                 android:gravity="center_horizontal"
-                android:drawableTop="@mipmap/tab_share"
-                android:textColor="@color/color_102"
+                android:drawableTop="@drawable/sel_tab_1"
+                android:textColor="@drawable/sel_tab_text"
                 android:textSize="@dimen/text_9"
                 android:text="分享"
                 android:layout_alignParentBottom="true"
@@ -63,8 +67,8 @@
                 android:id="@+id/tv_tab2"
                 android:includeFontPadding="false"
                 android:gravity="center_horizontal"
-                android:drawableTop="@mipmap/tab_question"
-                android:textColor="@color/color_102"
+                android:drawableTop="@drawable/sel_tab_2"
+                android:textColor="@drawable/sel_tab_text"
                 android:textSize="@dimen/text_9"
                 android:text="问答"
                 android:layout_alignParentBottom="true"
@@ -85,8 +89,8 @@
                 android:id="@+id/tv_tab3"
                 android:includeFontPadding="false"
                 android:gravity="center_horizontal"
-                android:drawableTop="@mipmap/tab_communicate"
-                android:textColor="@color/color_102"
+                android:drawableTop="@drawable/sel_tab_3"
+                android:textColor="@drawable/sel_tab_text"
                 android:textSize="@dimen/text_9"
                 android:text="交流"
                 android:layout_alignParentBottom="true"
