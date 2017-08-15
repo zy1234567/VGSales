@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.ztstech.vgmate.R;
 
@@ -17,6 +18,7 @@ import com.ztstech.vgmate.R;
 
 public class TopBar extends FrameLayout {
 
+    private ImageView imgRight;
 
     public TopBar(@NonNull Context context) {
         super(context);
@@ -34,10 +36,13 @@ public class TopBar extends FrameLayout {
     }
 
     private void init() {
-
         View topView = LayoutInflater.from(getContext()).inflate(R.layout.layout_top_bar,
                 this, true);
+        imgRight = topView.findViewById(R.id.btn_new_top_bar_right);
 
+    }
 
+    public ImageView getRightImage() {
+        return imgRight;
     }
 }

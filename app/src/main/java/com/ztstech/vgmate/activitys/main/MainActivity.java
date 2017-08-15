@@ -1,13 +1,16 @@
 package com.ztstech.vgmate.activitys.main;
 
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.main.adapter.MainPagerAdapter;
 import com.ztstech.vgmate.activitys.main.widget.BottomBar;
 import com.ztstech.vgmate.activitys.main.widget.TopBar;
+import com.ztstech.vgmate.activitys.provide_chance.ProvideChanceActivity;
 
 import butterknife.BindView;
 
@@ -42,6 +45,15 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
         bottomBar.setOnTabItemClickListener(this);
 
         vpMain.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
+
+        topBar.getRightImage().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //跳转提供销售机会
+                startActivity(new Intent(MainActivity.this, ProvideChanceActivity.class));
+            }
+        });
+
     }
 
     @Override

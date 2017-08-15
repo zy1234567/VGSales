@@ -8,25 +8,26 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
-        android:name="com.ztstech.vgmate.base.BaseApplication"
+        android:name=".base.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.ztstech.vgmate.activitys.splash.SplashActivity">
+        <activity android:name=".activitys.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ztstech.vgmate.activitys.main.MainActivity" />
+        <activity android:name=".activitys.main.MainActivity" />
         <activity
-            android:name="com.ztstech.vgmate.activitys.login.LoginActivity"
+            android:name=".activitys.login.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name="com.ztstech.vgmate.activitys.complete_info.FillInfoActivity"></activity>
+        <activity android:name=".activitys.complete_info.FillInfoActivity" />
+        <activity android:name=".activitys.provide_chance.ProvideChanceActivity"></activity>
     </application>
 
 </manifest>
