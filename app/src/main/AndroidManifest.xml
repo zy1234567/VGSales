@@ -27,7 +27,10 @@
             android:name=".activitys.login.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".activitys.complete_info.FillInfoActivity" />
-        <activity android:name=".activitys.provide_chance.ProvideChanceActivity"></activity>
+        <activity android:name=".activitys.provide_chance.ProvideChanceActivity">
+        </activity>
+        <activity android:name=".activitys.location_select.LocationInfoActivity" />
+        <activity android:name=".activitys.location_select.LocationSelectActivity" />
     </application>
 
 </manifest>

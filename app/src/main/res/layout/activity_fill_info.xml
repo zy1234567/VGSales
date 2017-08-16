@@ -255,10 +255,12 @@
 
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_location"
                     android:textSize="@dimen/text_5"
                     android:textColorHint="@color/color_103"
                     android:hint="请选择"
-                    android:enabled="false"
+                    android:enabled="true"
+                    android:inputType="none"
                     android:layout_toRightOf="@id/tv_location_title"
                     android:background="@null"
                     android:layout_width="match_parent"

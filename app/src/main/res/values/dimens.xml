@@ -21,4 +21,641 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+
+
+
+
+
+
+    <!--复用之前界面所使用的值-->
+    <dimen name="text_size_1">17sp</dimen>
+    <dimen name="text_size_2">15sp</dimen>
+    <dimen name="text_size_3">14sp</dimen>
+    <dimen name="text_size_4">13sp</dimen>
+    <dimen name="text_size_5">12sp</dimen>
+    <dimen name="text_size_6">18sp</dimen>
+    <dimen name="text_size_7">10sp</dimen>
+    <dimen name="text_size_8">9sp</dimen>
+    <dimen name="text_size_9">16sp</dimen>
+    <dimen name="text_size_10">11sp</dimen>
+
+
+    <dimen name="split_h_1">1.5px</dimen>
+    <dimen name="split_h_2">2px</dimen>
+    <dimen name="split_h_3">1dp</dimen>
+    <dimen name="split_h_4">10dp</dimen>
+    <dimen name="split_w_1">1dp</dimen>
+
+    <dimen name="tab_height">48dp</dimen>
+
+    <integer name="anim_duration">300</integer>
+
+    <dimen name="actionbar_title_txt_size">18dp</dimen>
+
+    <dimen name="top_bar_h">48dp</dimen>
+    <dimen name="top_bar_w">80dp</dimen>
+    <dimen name="wiper_switch_w">60dp</dimen>
+    <dimen name="wiper_switch_h">18dp</dimen>
+
+    <dimen name="detail_title_bar_h">40dp</dimen>
+    <dimen name="detail_info_title_bar_2_h">36dp</dimen>
+    <dimen name="detail_info_title_img_1_w">24dp</dimen>
+    <dimen name="detail_info_title_img_1_h">24dp</dimen>
+    <dimen name="detail_info_title_img_2_w">44dp</dimen>
+    <dimen name="detail_info_title_img_2_h">24dp</dimen>
+    <dimen name="detail_info_bottom_bar_h">40dp</dimen>
+
+    <dimen name="default_margin_l_r">14dp</dimen>
+
+    <dimen name="default_txt_drawable_padding">4dp</dimen>
+
+    <dimen name="position_detail_margin_l_r_1">28dp</dimen>
+    <dimen name="position_detail_margin_l_r_2">14dp</dimen>
+    <dimen name="position_detail_margin_l_r_3">-6dp</dimen>
+    <dimen name="position_detail_margin_l_r_4">12dp</dimen>
+    <dimen name="position_detail_margin_l_r_5">29dp</dimen>
+    <dimen name="position_detail_margin_l_r_6">20dp</dimen>
+    <dimen name="position_detail_margin_l_r_7">6dp</dimen>
+    <dimen name="position_detail_margin_l_r_8">26dp</dimen>
+    <dimen name="position_detail_margin_t_b_1">22dp</dimen>
+    <dimen name="position_detail_margin_t_b_2">6dp</dimen>
+    <dimen name="position_detail_margin_t_b_3">-12dp</dimen>
+    <dimen name="position_detail_margin_t_b_4">9dp</dimen>
+    <dimen name="position_detail_margin_t_b_5">-4dp</dimen>
+    <dimen name="position_detail_margin_t_b_6">8dp</dimen>
+    <dimen name="position_detail_margin_padding_1">2dp</dimen>
+    <dimen name="position_detail_w_1">60dp</dimen>
+    <dimen name="position_detail_w_2">105dp</dimen>
+    <dimen name="position_detail_w_3">300dp</dimen>
+    <dimen name="position_detail_w_4">65dp</dimen>
+    <dimen name="position_detail_h_1">20dp</dimen>
+    <dimen name="position_detail_pic_w_1">68dp</dimen>
+    <dimen name="position_detail_pic_h_1">68dp</dimen>
+    <dimen name="position_detail_pic_w_2">68dp</dimen>
+    <dimen name="position_detail_pic_h_2">68dp</dimen>
+    <dimen name="position_detail_bottom_bar_2_h">150dp</dimen>
+    <dimen name="position_detail_txt_drawable_padding_top">12dp</dimen>
+
+    <dimen name="company_detail_2_w_1">90dp</dimen>
+    <dimen name="company_detail_2_h_1">30dp</dimen>
+    <dimen name="company_detail_2_w_2">3dp</dimen>
+    <dimen name="company_detail_2_h_2">16dp</dimen>
+    <dimen name="company_detail_2_margin_1">24dp</dimen>
+    <dimen name="company_detail_2_margin_2">10dp</dimen>
+    <dimen name="company_detail_2_margin_3">14dp</dimen>
+    <dimen name="company_detail_2_margin_4">5dp</dimen>
+    <dimen name="company_detail_2_margin_5">1dp</dimen>
+    <dimen name="company_detail_2_padding_1">30dp</dimen>
+
+    <dimen name="detail_bottom_bar_1_margin_l_1">32dp</dimen>
+    <dimen name="detail_bottom_bar_1_margin_l_2">22dp</dimen>
+    <dimen name="detail_bottom_bar_1_margin_l_3">27dp</dimen>
+
+    <dimen name="progress_bar_h_1">2dp</dimen>
+
+
+    <dimen name="widget_info_title_margin_left">14dp</dimen>
+    <dimen name="widget_info_title_margin_top">10dp</dimen>
+    <dimen name="widget_info_title_margin_top2">20dp</dimen>
+    <dimen name="widget_info_title_margin_left1">12dp</dimen>
+    <dimen name="widget_info_title_margin_top1">6dp</dimen>
+    <dimen name="widget_info_title_margin_topp">0dp</dimen>
+
+    <dimen name="widget_info_title_margin_bottom">140dp</dimen>
+    <dimen name="widget_info_title_margin_bottom1">155dp</dimen>
+
+    <dimen name="widget_info_title_margin_top3">16dp</dimen>
+
+    <dimen name="widget_public_title_margin_top">6dp</dimen>
+
+    <dimen name="list_item_title_txt_size_1">16dp</dimen>
+    <dimen name="list_item_title_txt_size_2">12dp</dimen>
+    <dimen name="list_item_title_txt_size_3">9dp</dimen>
+    <dimen name="list_item_title_txt_size_4">8dp</dimen>
+    <dimen name="list_item_title_txt_size_5">18dp</dimen>
+    <dimen name="list_item_title_txt_size_6">10dp</dimen>
+    <dimen name="list_item_title_txt_size_7">20dp</dimen>
+    <dimen name="list_item_title_txt_size_8">15dp</dimen>
+    <dimen name="list_item_title_txt_size_9">6dp</dimen>
+    <dimen name="list_item_title_txt_size_10">22dp</dimen>
+    <dimen name="list_item_title_txt_size_11">7dp</dimen>
+    <dimen name="list_item_title_txt_size_12">14dp</dimen>
+    <dimen name="list_item_title_txt_size_13">24dp</dimen>
+    <dimen name="dialog_isfrist_used">12dp</dimen>
+    <dimen name="dialog_isfrist_used1">52dp</dimen>
+    <dimen name="dialog_isfrist_used_btn">184dp</dimen>
+    <dimen name="dialog_isfrist_used_btn1">33dp</dimen>
+    <dimen name="dialog_isfrist_used_btn2">273dp</dimen>
+    <dimen name="dialog_isfrist_used_btn3">360dp</dimen>
+
+
+    <dimen name="m_1">5dp</dimen>
+    <dimen name="m_2">10dp</dimen>
+    <dimen name="m_3">15dp</dimen>
+    <dimen name="m_4">20dp</dimen>
+    <dimen name="m_5">25dp</dimen>
+    <dimen name="m_6">30dp</dimen>
+    <dimen name="m_7">3dp</dimen>
+
+
+    <dimen name="act_splash_margin_1">66dp</dimen>
+    <dimen name="act_splash_margin_2">10dp</dimen>
+
+    <dimen name="touch_area_w">50dp</dimen>
+
+    <dimen name="two_chars_btn_w">60dp</dimen>
+
+    <dimen name="dlg_school_approve_margin_1">44dp</dimen>
+    <dimen name="dlg_school_approve_margin_2">35dp</dimen>
+
+    <dimen name="fragment_join_round_1">15dp</dimen>
+    <dimen name="fragment_join_margin_1">10dp</dimen>
+    <dimen name="fragment_join_margin_2">10dp</dimen>
+    <dimen name="fragment_join_margin_3">14dp</dimen>
+    <dimen name="fragment_join_margin_4">7dp</dimen>
+    <dimen name="fragment_join_w_1">90dp</dimen>
+    <dimen name="fragment_join_h_1">27dp</dimen>
+    <dimen name="fragment_join_h_2">52dp</dimen>
+    <dimen name="fragment_join_h_3">88dp</dimen>
+    <dimen name="fragment_join_h_4">53dp</dimen>
+    <dimen name="fragment_join_h_5">58dp</dimen>
+    <dimen name="fragment_join_h_6">68dp</dimen>
+
+    <dimen name="pop_submit_w_1">50dp</dimen>
+    <dimen name="pop_submit_h_1">25dp</dimen>
+
+    <dimen name="lock_w_1">270dp</dimen>
+    <dimen name="lock_h_1">15dp</dimen>
+    <dimen name="lock_w_2">280dp</dimen>
+    <dimen name="lock_h_2">20dp</dimen>
+    <dimen name="lock_w_3">20dp</dimen>
+    <dimen name="lock_h_3">20dp</dimen>
+    <dimen name="lock_h_4">40dp</dimen>
+    <dimen name="lock_margin_1">20dp</dimen>
+    <dimen name="lock_margin_2">15dp</dimen>
+    <dimen name="lock_margin_3">35dp</dimen>
+    <dimen name="lock_margin_4">12dp</dimen>
+
+    <dimen name="list_fragment_join_1_item_h">88dp</dimen>
+    <dimen name="list_fragment_join_2_item_h">73dp</dimen>
+
+    <dimen name="list_hr_dyn_margin_1">12dp</dimen>
+    <dimen name="list_hr_dyn_margin_2">5dp</dimen>
+    <dimen name="list_hr_dyn_margin_3">25dp</dimen>
+
+    <dimen name="list_item_margin_left_1">15dp</dimen>
+    <dimen name="list_item_margin_left_2">5dp</dimen>
+    <dimen name="list_item_margin_left_3">5dp</dimen>
+    <dimen name="list_item_margin_right_1">7dp</dimen>
+
+    <dimen name="rect_h">10dp</dimen>
+    <dimen name="rect_w_1">22dp</dimen>
+    <dimen name="rect_h_1">11dp</dimen>
+    <dimen name="rect_w_2">30dp</dimen>
+    <dimen name="rect_h_2">11dp</dimen>
+    <dimen name="rect_w_3">40dp</dimen>
+    <dimen name="rect_h_3">11dp</dimen>
+    <dimen name="rect_w_4">33dp</dimen>
+    <dimen name="rect_h_4">15dp</dimen>
+    <dimen name="rect_w_5">26dp</dimen>
+    <dimen name="rect_h_5">12dp</dimen>
+    <dimen name="rect_w_6">25dp</dimen>
+    <dimen name="rect_h_6">13dp</dimen>
+    <dimen name="rect_w_7">48dp</dimen>
+    <dimen name="rect_h_7">13dp</dimen>
+    <dimen name="rect_w_8">34dp</dimen>
+    <dimen name="rect_padding_left">2dp</dimen>
+    <dimen name="rect_padding_right">2dp</dimen>
+
+    <dimen name="list_postion_tag_margin_top_1">-5dp</dimen>
+    <dimen name="list_postion_tag_margin_top_2">5dp</dimen>
+    <dimen name="list_postion_img_margin_top">8dp</dimen>
+
+    <dimen name="list_item_tag_min_w_1">19dp</dimen>
+
+    <dimen name="list_item_comment_head_h">25dp</dimen>
+    <dimen name="list_item_comment_head_margin_left">14dp</dimen>
+    <dimen name="comment_footer_h">48dp</dimen>
+    <dimen name="comment_footer_margin_left">14dp</dimen>
+    <dimen name="comment_footer_padding_left">16dp</dimen>
+    <dimen name="comment_footer_margin_right">16dp</dimen>
+    <dimen name="comment_footer_margin_right_2">18dp</dimen>
+    <dimen name="comment_footer_edittext_radius">20dp</dimen>
+    <dimen name="comment_footer_edittext_w">270dp</dimen>
+    <dimen name="comment_footer_edittext_h">30dp</dimen>
+    <dimen name="comment_footer_cancel_button_w">42dp</dimen>
+    <dimen name="comment_footer_cancel_button_h">30dp</dimen>
+    <dimen name="comment_footer_cancel_button_radius">4dp</dimen>
+
+
+    <dimen name="job_space_margin_1">14dp</dimen>
+    <dimen name="job_space_margin_2">9dp</dimen>
+    <dimen name="job_space_margin_3">14dp</dimen>
+    <dimen name="job_space_margin_3_1">3.5dp</dimen>
+    <dimen name="job_space_margin_4">6dp</dimen>
+    <dimen name="job_space_margin_5">10dp</dimen>
+    <dimen name="job_space_margin_6">24dp</dimen>
+    <dimen name="job_space_margin_7">4dp</dimen>
+    <dimen name="job_space_margin_8">-18dp</dimen>
+    <dimen name="job_space_margin_9">18dp</dimen>
+    <dimen name="job_space_circle_w_1">9dp</dimen>
+
+    <dimen name="reg_new_margin_1">30dp</dimen>
+    <dimen name="reg_new_margin_2">9dp</dimen>
+    <dimen name="reg_new_margin_3">6dp</dimen>
+    <dimen name="reg_new_margin_4">12dp</dimen>
+    <dimen name="reg_new_margin_5">6dp</dimen>
+    <dimen name="reg_new_margin_6">20dp</dimen>
+    <dimen name="reg_new_margin_7">18dp</dimen>
+    <dimen name="reg_new_w_1">15dp</dimen>
+    <dimen name="reg_new_h_1">15dp</dimen>
+    <dimen name="reg_new_w_2">90dp</dimen>
+    <dimen name="reg_new_h_2">30dp</dimen>
+    <dimen name="reg_new_w_3">300dp</dimen>
+    <dimen name="reg_new_h_3">40dp</dimen>
+
+    <dimen name="login_new_margin_1">54dp</dimen>
+    <dimen name="login_new_margin_2">38dp</dimen>
+    <dimen name="login_new_margin_3">18dp</dimen>
+    <dimen name="login_new_margin_4">12dp</dimen>
+    <dimen name="login_new_margin_5">24dp</dimen>
+    <dimen name="login_new_margin_6">24dp</dimen>
+    <dimen name="login_new_margin_7">10dp</dimen>
+    <dimen name="login_new_margin_8">2dp</dimen>
+    <dimen name="login_new_margin_9">5dp</dimen>
+    <dimen name="login_new_margin_10">53dp</dimen>
+    <dimen name="login_new_margin_11">20dp</dimen>
+    <dimen name="login_new_w_1">68dp</dimen>
+    <dimen name="login_new_w_2">150dp</dimen>
+    <dimen name="login_new_h_1">68dp</dimen>
+    <dimen name="login_new_h_2">80dp</dimen>
+    <dimen name="login_new_h_3">40dp</dimen>
+    <dimen name="login_new_h_4">30dp</dimen>
+
+    <dimen name="fill_info_margin_1">27dp</dimen>
+    <dimen name="fill_info_margin_2">14dp</dimen>
+    <dimen name="fill_info_margin_3">6dp</dimen>
+    <dimen name="fill_info_margin_4">15dp</dimen>
+    <dimen name="fill_info_margin_5">24dp</dimen>
+    <dimen name="fill_info_margin_6">12dp</dimen>
+    <dimen name="fill_info_h_1">45dp</dimen>
+
+    <dimen name="auth_company_margin_2">14dp</dimen>
+    <dimen name="auth_company_margin_3">30dp</dimen>
+
+    <dimen name="feedback_margin_1">24dp</dimen>
+    <dimen name="feedback_margin_2">14dp</dimen>
+    <dimen name="feedback_margin_3">9dp</dimen>
+    <dimen name="feedback_margin_4">6dp</dimen>
+    <dimen name="feedback_margin_5">30dp</dimen>
+    <dimen name="feedback_margin_6">42dp</dimen>
+    <dimen name="feedback_margin_7">32dp</dimen>
+    <dimen name="feedback_h_1">110dp</dimen>
+    <dimen name="feedback_h_2">40dp</dimen>
+
+    <dimen name="myevent_margin_1">16dp</dimen>
+    <dimen name="myevent_margin_2">10dp</dimen>
+    <dimen name="myevent_margin_3">7dp</dimen>
+    <dimen name="myevent_w_1">70dp</dimen>
+    <dimen name="myevent_w_2">36dp</dimen>
+    <dimen name="myevent_h_2">36dp</dimen>
+    <dimen name="myevent_round_1">2dp</dimen>
+
+    <dimen name="submit_setting_margin_1">14dp</dimen>
+    <dimen name="submit_setting_margin_2">10dp</dimen>
+    <dimen name="submit_setting_margin_3">14dp</dimen>
+    <dimen name="submit_setting_h_1">45dp</dimen>
+
+    <dimen name="submit_w_1">50dp</dimen>
+    <dimen name="submit_h_1">50dp</dimen>
+    <dimen name="submit_h_2">90dp</dimen>
+
+    <dimen name="js_share_create_h_1">30dp</dimen>
+    <dimen name="js_share_create_w_2">50dp</dimen>
+    <dimen name="js_share_create_h_2">50dp</dimen>
+    <dimen name="js_share_create_margin_1">23dp</dimen>
+
+    <dimen name="teacher_share_create_w">92dp</dimen>
+    <dimen name="teacher_share_create_h">68dp</dimen>
+
+    <!-- to be deleted -->
+    <dimen name="reg_new_big_btn_h">50dp</dimen>
+    <dimen name="reg_new_margin_left">10dp</dimen>
+    <dimen name="reg_new_margin_top">10dp</dimen>
+    <dimen name="reg_new_img_margin_left">5dp</dimen>
+    <dimen name="reg_new_reminder_txt_size">14dp</dimen>
+    <dimen name="reg_new_big_x_w">34dp</dimen>
+    <dimen name="reg_new_big_x_h">34dp</dimen>
+    <dimen name="reg_new_little_x_w">25dp</dimen>
+    <dimen name="reg_new_little_x_h">25dp</dimen>
+    <dimen name="reg_new_app_name_w">151dp</dimen>
+    <dimen name="reg_new_app_name_h">46dp</dimen>
+    <dimen name="reg_new_verify_pic_w">110px</dimen>
+    <dimen name="reg_new_verify_pic_h">80px</dimen>
+    <!-- to be deleted -->
+
+
+    <dimen name="list_item_src_tag_margin_left">7dp</dimen>
+
+    <dimen name="listview_margin_left">12dp</dimen>
+    <dimen name="line_spacing_extra">6dp</dimen>
+    <dimen name="edittext_padding_left">4dp</dimen>
+    <dimen name="edittext_h">32dp</dimen>
+
+    <dimen name="list_job_0_item_h">18dp</dimen>
+    <dimen name="list_job_0_margin_top_1">7dp</dimen>
+    <dimen name="list_job_0_margin_top_2">-5dp</dimen>
+    <dimen name="list_job_0_english_txt_size">9dp</dimen>
+    <dimen name="list_job_0_chinese_txt_size">14dp</dimen>
+    <dimen name="list_job_intro_text_size">11dp</dimen>
+    <dimen name="list_job_property_text_size">9dp</dimen>
+
+    <dimen name="activity_main_tab_h">55dp</dimen>
+    <dimen name="activity_main_tab_btn_margin_top">4dp</dimen>
+    <dimen name="activity_main_tab_btn_margin_top_2">8dp</dimen>
+    <dimen name="activity_main_tab_btn_margin_top_3">3dp</dimen>
+    <dimen name="activity_main_tab_btn_margin_top_4">-14dp</dimen>
+    <dimen name="activity_main_tab_btn_margin_top_5">3dp</dimen>
+    <dimen name="activity_main_tab_textsize">14dp</dimen>
+    <dimen name="activity_main_tab_num_size">12dp</dimen>
+    <dimen name="activity_main_tab_num_margin_left">-5dp</dimen>
+    <dimen name="activity_main_tab_num_margin_left_2">-2dp</dimen>
+    <dimen name="activity_main_tab_num_margin_top">4dp</dimen>
+    <dimen name="activity_main_tab_btn_split_w">4px</dimen>
+    <dimen name="activity_main_tab_hint_w">16dp</dimen>
+    <dimen name="activity_main_tab_hint_w_2">8dp</dimen>
+    <dimen name="activity_main_tab_hint_w4">10dp</dimen>
+
+    <dimen name="job_space_icon_w">92dp</dimen>
+    <dimen name="job_space_icon_h">92dp</dimen>
+
+    <dimen name="job_space_icon_w1">72dp</dimen>
+    <dimen name="job_space_icon_h1">72dp</dimen>
+
+    <dimen name="fragment_top_tab_h">40dp</dimen>
+    <dimen name="fragment_top_tab_h_jobspace">35dp</dimen>
+    <dimen name="fragment_top_tab_margin_left">5dp</dimen>
+
+    <dimen name="list_info_img_w">92dp</dimen>
+    <dimen name="list_info_img_h">68dp</dimen>
+    <dimen name="list_photowall_img_h">80dp</dimen>
+    <dimen name="list_info_jobspace_img_w">58dp</dimen>
+    <dimen name="list_info_jobspace_img_h">58dp</dimen>
+    <dimen name="list_info_tag_txt_size">8dp</dimen>
+    <dimen name="list_info_read_txt_size">9dp</dimen>
+    <dimen name="list_info_padding_top">6dp</dimen>
+    <dimen name="list_info_padding">10dp</dimen>
+    <dimen name="list_info_txt_margin_left">8dp</dimen>
+    <dimen name="ui_10_dip">10dip</dimen>
+
+    <dimen name="list_job_0_search_txt_size">12dp</dimen>
+    <dimen name="list_job_name_txt_size">16dp</dimen>
+    <dimen name="list_job_ping_txt_size">12dp</dimen>
+    <dimen name="list_job_img_margin_top">2dp</dimen>
+    <dimen name="list_job_img_w">92dp</dimen>
+    <dimen name="list_job_img_h">68dp</dimen>
+    <dimen name="list_job_img_righ_gap">14dp</dimen>
+    <dimen name="list_job_img_righ_gap_1">7dp</dimen>
+
+    <dimen name="list_position_margin_top_1">5dp</dimen>
+
+    <dimen name="list_hr_img_w">68dp</dimen>
+    <dimen name="list_hr_img_h">68dp</dimen>
+    <dimen name="list_hr_txt_size_1">10dp</dimen>
+
+    <dimen name="list_cand_img_w">68dp</dimen>
+    <dimen name="list_cand_img_h">68dp</dimen>
+    <dimen name="list_cand_img_margin_left">12dp</dimen>
+    <dimen name="list_cand_txt_margin_left">20dp</dimen>
+    <dimen name="list_cand_line_spacing_extra">3dp</dimen>
+
+    <dimen name="list_company_img_w">92dp</dimen>
+    <dimen name="list_company_img_h">68dp</dimen>
+
+    <dimen name="find_position_margin_top_1">15dp</dimen>
+    <dimen name="find_position_input_txt_size">15dp</dimen>
+    <dimen name="find_position_btn_txt_size">18dp</dimen>
+
+    <dimen name="find_near_margin_top_1">25dp</dimen>
+    <dimen name="find_near_margin_top_2">9dp</dimen>
+    <dimen name="find_near_margin_left_1">25dp</dimen>
+    <dimen name="find_near_margin_left_2">12dp</dimen>
+    <dimen name="find_near_txt_size">15dp</dimen>
+
+    <dimen name="list_story_0_txt_size">15dp</dimen>
+
+    <dimen name="list_school_story_0_margin_1">18dp</dimen>
+    <dimen name="list_school_story_0_margin_2">10dp</dimen>
+    <dimen name="list_school_story_0_margin_3">34dp</dimen>
+
+    <dimen name="list_school_story_0_margin_w_1">120dp</dimen>
+    <dimen name="list_school_story_0_margin_h_1">40dp</dimen>
+    <dimen name="list_school_story_0_margin_h_2">200dp</dimen>
+
+    <dimen name="fragment_mine_margin_top">20dp</dimen>
+    <dimen name="fragment_mine_margin_left">8dp</dimen>
+    <dimen name="fragment_mine_item_h">48dp</dimen>
+    <dimen name="fragment_mine_img_w">28dp</dimen>
+    <dimen name="fragment_mine_img_h">28dp</dimen>
+
+    <dimen name="fragment_mine_new_margin_1">8dp</dimen>
+    <dimen name="fragment_mine_new_margin_2">14dp</dimen>
+    <dimen name="fragment_mine_new_margin_3">10dp</dimen>
+    <dimen name="fragment_mine_new_margin_4">30dp</dimen>
+    <dimen name="fragment_mine_new_margin_5">45dp</dimen>
+    <dimen name="fragment_mine_new_margin_6">5dp</dimen>
+    <dimen name="fragment_mine_new_margin_7">8dp</dimen>
+    <dimen name="fragment_mine_new_margin_8">25dp</dimen>
+    <dimen name="fragment_mine_new_margin_9">12dp</dimen>
+    <dimen name="fragment_mine_new_margin_10">11dp</dimen>
+    <dimen name="fragment_mine_new_margin_11">28dp</dimen>
+    <dimen name="fragment_mine_new_w_1">68dp</dimen>
+    <dimen name="fragment_mine_new_h_1">68dp</dimen>
+    <dimen name="fragment_mine_new_h_2">105dp</dimen>
+    <dimen name="fragment_mine_new_h_3">45dp</dimen>
+    <dimen name="fragment_mine_new_h_4">15dp</dimen>
+    <dimen name="fragment_mine_new_h_5">48dp</dimen>
+
+    <dimen name="fragment_list_share_margin_1">4dp</dimen>
+    <dimen name="fragment_list_share_margin_2">18dp</dimen>
+    <dimen name="fragment_list_share_margin_3">25dp</dimen>
+    <dimen name="fragment_list_share_w_1">240dp</dimen>
+    <dimen name="fragment_list_share_h_1">40dp</dimen>
+    <dimen name="fragment_list_share_h_2">50dp</dimen>
+
+    <dimen name="fragment_my_info_h_1">40dp</dimen>
+    <dimen name="fragment_my_info_h_2">60dp</dimen>
+    <dimen name="fragment_my_info_margin_1">8dp</dimen>
+    <dimen name="fragment_my_info_margin_2">22dp</dimen>
+    <dimen name="fragment_my_info_margin_3">5dp</dimen>
+    <dimen name="fragment_my_info_margin_4">15dp</dimen>
+
+    <dimen name="act_input_sel_with_custom_h_1">20dp</dimen>
+    <dimen name="act_input_sel_with_custom_w_1">200dp</dimen>
+
+    <dimen name="act_setting_margin_1">40dp</dimen>
+
+    <dimen name="act_school_verify_margin_1">15dp</dimen>
+
+    <dimen name="act_send_mail_h_1">10dp</dimen>
+    <dimen name="act_send_mail_h_2">30dp</dimen>
+    <dimen name="act_send_mail_h_3">200dp</dimen>
+    <dimen name="act_send_mail_padding_1">8dp</dimen>
+
+    <dimen name="pop_edit_margin_1">10dp</dimen>
+    <dimen name="pop_edit_h_1">110dp</dimen>
+
+    <!-- pull refresh listview -->
+    <dimen name="indicator_right_padding">10dp</dimen>
+    <dimen name="indicator_corner_radius">12dp</dimen>
+    <dimen name="indicator_internal_padding">4dp</dimen>
+    <dimen name="header_footer_left_right_padding">24dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">6dp</dimen>
+    <!-- pull refresh listview -->
+
+    <!-- com.geniuseoe2012.dialog -->
+    <dimen name="geniuseoe2012_title_h">40dp</dimen>
+    <dimen name="geniuseoe2012_btn_container_h">60dp</dimen>
+    <dimen name="geniuseoe2012_btn_w">80dp</dimen>
+    <dimen name="geniuseoe2012_btn_h">40dp</dimen>
+    <!-- com.geniuseoe2012.dialog -->
+
+    <dimen name="listview_inner_gap">10dp</dimen>
+    <dimen name="listview_img_w">80dp</dimen>
+    <dimen name="listview_img_h">80dp</dimen>
+    <dimen name="listview_normal_padding">8dp</dimen>
+    <dimen name="listview_normal_margin">8dp</dimen>
+
+    <dimen name="listview_little_margin">4dp</dimen>
+    <dimen name="listview_very_little_padding">2dp</dimen>
+
+    <dimen name="pop_txt_padding">10dp</dimen>
+
+    <dimen name="act_input_margin_l_r">15dp</dimen>
+    <dimen name="act_input_gap_h">15dp</dimen>
+    <dimen name="act_input_little_gap_h">5dp</dimen>
+    <dimen name="act_input_item_h">55dp</dimen>
+    <dimen name="act_input_txt_l_r">5dp</dimen>
+    <dimen name="act_input_content_big_txt_size">20dp</dimen>
+    <dimen name="act_input_content_little_txt_size">14dp</dimen>
+    <dimen name="act_input_title_h">30dp</dimen>
+    <dimen name="act_input_title_margin_top">5dp</dimen>
+
+    <dimen name="mine_head_img_w">56px</dimen>
+    <dimen name="mine_head_img_h">56px</dimen>
+
+    <dimen name="pop_industry_text_w">70dp</dimen>
+
+    <dimen name="pop_job_space_msg_menu_w">93dp</dimen>
+    <dimen name="pop_job_space_msg_menu_h">81dp</dimen>
+    <dimen name="pop_job_space_msg_menu_h_2">61dp</dimen>
+    <dimen name="pop_job_space_msg_menu_margin_1">12dp</dimen>
+    <dimen name="pop_job_space_msg_menu_margin_2">8dp</dimen>
+
+    <dimen name="pop_job_space_connect_menu_w">130dp</dimen>
+    <dimen name="pop_job_space_connect_menu_h">160dp</dimen>
+    <dimen name="pop_job_space_connect_menu_h_2">120dp</dimen>
+    <dimen name="pop_job_space_connect_menu_h_3">80dp</dimen>
+
+    <dimen name="pop_bottom_bar_menu_w">124dp</dimen>
+    <dimen name="pop_bottom_bar_menu_h">40dp</dimen>
+    <dimen name="pop_bottom_bar_menu_margin_1">12dp</dimen>
+    <dimen name="pop_bottom_bar_menu_margin_2">24dp</dimen>
+
+    <dimen name="job_space_txt_name_max_width">115dp</dimen>
+    <dimen name="job_space_gap_1">2dp</dimen>
+    <dimen name="job_space_gap_2">6dp</dimen>
+    <dimen name="job_space_gap_3">12dp</dimen>
+    <dimen name="job_space_txt_size_1">12dp</dimen>
+    <dimen name="job_space_txt_margin_left_1">15dp</dimen>
+    <dimen name="job_space_txt_margin_top_1">12dp</dimen>
+    <dimen name="job_space_txt_padding_top_1">5dp</dimen>
+    <dimen name="job_space_lock_txt_margin_top_1">5dp</dimen>
+    <dimen name="job_space_lock_txt_margin_left_1">15dp</dimen>
+    <dimen name="job_space_lock_txt_size_1">11dp</dimen>
+    <dimen name="job_space_lock_txt_size_2">9dp</dimen>
+    <dimen name="job_space_lock_txt_size_3">12dp</dimen>
+    <dimen name="job_space_resume_txt_size_1">15dp</dimen>
+    <dimen name="job_space_resume_txt_size_2">9dp</dimen>
+    <dimen name="job_space_resume_txt_size_3">11dp</dimen>
+    <dimen name="job_space_resume_txt_magin_left_1">10dp</dimen>
+    <dimen name="job_space_resume_txt_magin_top_1">13dp</dimen>
+    <dimen name="job_space_resume_txt_w_1">45dp</dimen>
+    <dimen name="job_space_resume_txt_w_2">60dp</dimen>
+    <dimen name="job_space_share_txt_date_size_1">20dp</dimen>
+    <dimen name="job_space_share_txt_date_size_2">11dp</dimen>
+    <dimen name="job_space_share_txt_size_1">14dp</dimen>
+    <dimen name="job_space_share_txt_size_2">12dp</dimen>
+    <dimen name="job_space_share_txt_size_3">9dp</dimen>
+    <dimen name="job_space_share_txt_magin_left_1">55dp</dimen>
+    <dimen name="job_space_share_txt_magin_top_1">5dp</dimen>
+    <dimen name="job_space_share_img_w">50dp</dimen>
+    <dimen name="job_space_share_img_h">50dp</dimen>
+
+
+    <dimen name="topbar_btn_margin_top">5dp</dimen>
+
+    <dimen name="detail_txt_line_spacing_extra">8dp</dimen>
+
+    <dimen name="list_txt_line_margin_top">1dp</dimen>
+
+    <dimen name="list_item_title_txt_size">16dp</dimen>
+    <dimen name="list_item_desc_txt_size">9dp</dimen>
+    <dimen name="list_item_gap_h">6dp</dimen>
+
+
+    <dimen name="dlg_txt_size">30px</dimen>
+    <dimen name="dlg_content_min_h">105dp</dimen>
+    <dimen name="dlg_btn_min_h">45dp</dimen>
+    <dimen name="dlg_w">250dp</dimen>
+    <dimen name="dlg_w_new">270dp</dimen>
+    <dimen name="dlg_w_new_2">300dp</dimen>
+    <dimen name="dlg_min_w">160dp</dimen>
+    <dimen name="dlg_w1">280dp</dimen>
+
+    <dimen name="rect_round">5dp</dimen>
+    <dimen name="rect_round_2">2dp</dimen>
+    <dimen name="rect_round_3">3px</dimen>
+    <dimen name="rect_round_4">15dp</dimen>
+    <dimen name="rect_round_5">10dp</dimen>
+    <dimen name="rect_round_6">20dp</dimen>
+    <dimen name="rect_round_7">2dp</dimen>
+
+    <dimen name="list_item_comment_padding_left">14dp</dimen>
+    <dimen name="list_item_comment_padding_top">10dp</dimen>
+    <dimen name="list_item_comment_padding_bottom">10dp</dimen>
+    <dimen name="list_item_comment_padding_right">14dp</dimen>
+    <dimen name="list_item_comment_picurl_size">40dp</dimen>
+    <dimen name="list_item_school_ontop_width1">26dp</dimen>
+    <dimen name="list_item_school_ontop_width">20dp</dimen>
+    <dimen name="list_item_school_ontop_height">11dp</dimen>
+
+    <dimen name="list_item_school_ontop_margin_bottom">8dp</dimen>
+
+    <dimen name="list_item_collect_article_padding_top">10dp</dimen>
+    <dimen name="list_item_collect_article_padding_top2">12dp</dimen>
+    <dimen name="list_item_collect_article_padding_bottom">10dp</dimen>
+    <dimen name="list_item_collect_article_margin_left">8dp</dimen>
+
+    <dimen name="list_item_layout_width">104dp</dimen>
+    <dimen name="list_item_news_margin_left">12dp</dimen>
+    <dimen name="list_item_news_margin_top">10dp</dimen>
+    <dimen name="list_item_news_margin_top2">6dp</dimen>
+    <dimen name="list_item_news_link_height">50dp</dimen>
+    <dimen name="list_item_news_link_pic_w_h">36dp</dimen>
+    <dimen name="list_item_news_margin_left2">16dp</dimen>
+    <dimen name="list_item_news_margin_left3">4dp</dimen>
+    <dimen name="list_item_news_margin_right">26dp</dimen>
+
+    <dimen name="fragment_warning_margin_1">8dp</dimen>
+
+    <dimen name="fragment_photowall_margin">14dp</dimen>
+    <dimen name="fragment_photowall_margin_top">8dp</dimen>
+
+    <dimen name="list_item_zhiding_height">5dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+
+
 </resources>
