@@ -27,6 +27,9 @@ import butterknife.OnClick;
 
 public class LocationInfoActivity extends AppCompatActivity {
 
+    public static final String INTENT_CITY = "city";
+    public static final String INTENT_CODE = "ccode";
+
     @BindView(R.id.img_back)
     ImageView imgBack;
     @BindView(R.id.listview1)
@@ -97,8 +100,8 @@ public class LocationInfoActivity extends AppCompatActivity {
 
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            intent.putExtra("city", citylist.get(i).getSname());
-            intent.putExtra("ccode",citylist.get(i).getSid());
+            intent.putExtra(INTENT_CITY, citylist.get(i).getSname());
+            intent.putExtra(INTENT_CODE, citylist.get(i).getSid());
             LocationInfoActivity.this.setResult(RESULT_OK,intent);
             LocationInfoActivity.this.finish();
 

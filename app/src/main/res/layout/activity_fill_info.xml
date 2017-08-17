@@ -193,7 +193,7 @@
                     android:textColor="@color/color_100"
                     android:textSize="@dimen/text_5"
                     android:gravity="center_vertical"
-                    android:text="年龄"
+                    android:text="出生年月"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
                     android:layout_alignParentLeft="true"
