@@ -39,6 +39,12 @@ import butterknife.OnClick;
 
 public class LocationSelectActivity extends AppCompatActivity {
 
+    /**返回结果代码*/
+    public static final String RESULT_CODE = "code";
+    /**返回结果名称*/
+    public static final String RESULT_NAME = "value";
+
+
     @BindView(R.id.img_back)
     ImageView imgBack;
     @BindView(R.id.title)
@@ -164,8 +170,8 @@ public class LocationSelectActivity extends AppCompatActivity {
         Intent intent = new Intent();
         if (province.contains("香港") || province.contains("澳门")  //港澳台目前只有一级选择
                 || province.contains("台湾")) {
-            intent.putExtra("value", province);
-            intent.putExtra("code", psid);
+            intent.putExtra(RESULT_NAME, province);
+            intent.putExtra(RESULT_CODE, psid);
             setResult(RESULT_OK, intent);
         } else {
             if (cPosition == -1) {
@@ -176,8 +182,8 @@ public class LocationSelectActivity extends AppCompatActivity {
                 ToastUtil.toastCenter(this, "请选择区县!");
                 return;
             }
-            intent.putExtra("value", province + "-" + city + "-" + area);
-            intent.putExtra("code", asid);
+            intent.putExtra(RESULT_NAME, province + "-" + city + "-" + area);
+            intent.putExtra(RESULT_CODE, asid);
             setResult(RESULT_OK, intent);
         }
         if (updateOrgInfo) {

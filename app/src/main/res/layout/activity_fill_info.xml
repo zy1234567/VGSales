@@ -13,7 +13,6 @@
         android:layout_height="@dimen/top_bar_height">
 
         <ImageView
-
             android:src="@mipmap/return_nav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -40,21 +39,20 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
             <TextView
-                android:textColor="@color/color_102"
-                android:textSize="@dimen/text_7"
-                android:text="基本资料"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="@color/color_107"
                 android:gravity="center_vertical"
                 android:paddingLeft="12dp"
-                android:background="@color/color_107"
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
+                android:text="基本资料"
+                android:textColor="@color/color_102"
+                android:textSize="@dimen/text_7" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -62,44 +60,45 @@
 
                 <TextView
                     android:id="@+id/tv_header_title"
-                    android:textColor="@color/color_100"
-                    android:textSize="@dimen/text_5"
-                    android:gravity="center_vertical"
-                    android:text="头像"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_width="75dp"
-                    android:layout_height="match_parent" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="头像"
+                    android:textColor="@color/color_100"
+                    android:textSize="@dimen/text_5" />
 
                 <ImageView
                     android:id="@+id/img_header_arrow"
-                    android:src="@mipmap/arrow_right_choice"
-                    android:layout_marginRight="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_marginRight="12dp"
+                    android:src="@mipmap/arrow_right_choice" />
 
                 <ImageView
                     android:id="@+id/img_header"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
                     android:layout_toLeftOf="@id/img_header_arrow"
-                    android:background="#f00"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp" />
+                    android:background="#f00" />
 
                 <android.support.design.widget.TextInputEditText
-                    android:textSize="@dimen/text_5"
-                    android:textColorHint="@color/color_103"
-                    android:hint="请上传"
-                    android:enabled="false"
+                    android:id="@+id/et_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@id/tv_header_title"
                     android:background="@null"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:enabled="true"
+                    android:hint="请上传"
+                    android:textColorHint="@color/color_103"
+                    android:textSize="@dimen/text_5" />
             </RelativeLayout>
 
             <View
@@ -113,27 +112,28 @@
 
                 <TextView
                     android:id="@+id/tv_name_title"
-                    android:textColor="@color/color_100"
-                    android:textSize="@dimen/text_5"
-                    android:gravity="center_vertical"
-                    android:text="姓名"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_width="75dp"
-                    android:layout_height="match_parent" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="姓名"
+                    android:textColor="@color/color_100"
+                    android:textSize="@dimen/text_5" />
 
 
                 <android.support.design.widget.TextInputEditText
-                    android:textSize="@dimen/text_5"
-                    android:textColorHint="@color/color_103"
-                    android:hint="请填写"
-                    android:enabled="false"
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@id/tv_name_title"
                     android:background="@null"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:enabled="true"
+                    android:hint="请填写"
+                    android:textColorHint="@color/color_103"
+                    android:textSize="@dimen/text_5" />
             </RelativeLayout>
 
             <View
@@ -147,36 +147,37 @@
 
                 <TextView
                     android:id="@+id/tv_gender_title"
-                    android:textColor="@color/color_100"
-                    android:textSize="@dimen/text_5"
-                    android:gravity="center_vertical"
-                    android:text="性别"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_width="75dp"
-                    android:layout_height="match_parent" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="性别"
+                    android:textColor="@color/color_100"
+                    android:textSize="@dimen/text_5" />
 
                 <ImageView
                     android:id="@+id/img_gender_arrow"
-                    android:src="@mipmap/arrow_right_choice"
-                    android:layout_marginRight="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_marginRight="12dp"
+                    android:src="@mipmap/arrow_right_choice" />
 
 
                 <android.support.design.widget.TextInputEditText
-                    android:textSize="@dimen/text_5"
-                    android:textColorHint="@color/color_103"
-                    android:hint="请选择"
-                    android:enabled="false"
+                    android:id="@+id/et_sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@id/tv_gender_title"
                     android:background="@null"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:enabled="true"
+                    android:hint="请选择"
+                    android:textColorHint="@color/color_103"
+                    android:textSize="@dimen/text_5" />
             </RelativeLayout>
 
             <View
@@ -190,36 +191,37 @@
 
                 <TextView
                     android:id="@+id/tv_age_title"
-                    android:textColor="@color/color_100"
-                    android:textSize="@dimen/text_5"
-                    android:gravity="center_vertical"
-                    android:text="出生年月"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_width="75dp"
-                    android:layout_height="match_parent" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="出生年月"
+                    android:textColor="@color/color_100"
+                    android:textSize="@dimen/text_5" />
 
                 <ImageView
                     android:id="@+id/img_age_arrow"
-                    android:src="@mipmap/arrow_right_choice"
-                    android:layout_marginRight="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_marginRight="12dp"
+                    android:src="@mipmap/arrow_right_choice" />
 
 
                 <android.support.design.widget.TextInputEditText
-                    android:textSize="@dimen/text_5"
-                    android:textColorHint="@color/color_103"
-                    android:hint="请选择"
-                    android:enabled="false"
+                    android:id="@+id/et_birthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@id/tv_age_title"
                     android:background="@null"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:enabled="true"
+                    android:hint="请选择"
+                    android:textColorHint="@color/color_103"
+                    android:textSize="@dimen/text_5" />
             </RelativeLayout>
 
             <View
@@ -233,49 +235,49 @@
 
                 <TextView
                     android:id="@+id/tv_location_title"
-                    android:textColor="@color/color_100"
-                    android:textSize="@dimen/text_5"
-                    android:gravity="center_vertical"
-                    android:text="常驻地"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_width="75dp"
-                    android:layout_height="match_parent" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="常驻地"
+                    android:textColor="@color/color_100"
+                    android:textSize="@dimen/text_5" />
 
                 <ImageView
                     android:id="@+id/img_location_arrow"
-                    android:src="@mipmap/arrow_right_choice"
-                    android:layout_marginRight="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_marginRight="12dp"
+                    android:src="@mipmap/arrow_right_choice" />
 
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/et_location"
-                    android:textSize="@dimen/text_5"
-                    android:textColorHint="@color/color_103"
-                    android:hint="请选择"
-                    android:enabled="true"
-                    android:inputType="none"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@id/tv_location_title"
                     android:background="@null"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:enabled="true"
+                    android:hint="请选择"
+                    android:inputType="none"
+                    android:textColorHint="@color/color_103"
+                    android:textSize="@dimen/text_5" />
             </RelativeLayout>
 
             <TextView
-                android:textColor="@color/color_102"
-                android:textSize="@dimen/text_7"
-                android:text="身份证信息"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="@color/color_107"
                 android:gravity="center_vertical"
                 android:paddingLeft="12dp"
-                android:background="@color/color_107"
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
+                android:text="身份证信息"
+                android:textColor="@color/color_102"
+                android:textSize="@dimen/text_7" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -283,37 +285,38 @@
 
                 <TextView
                     android:id="@+id/tv_id_title"
-                    android:textColor="@color/color_100"
-                    android:textSize="@dimen/text_5"
-                    android:gravity="center_vertical"
-                    android:text="身份证"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_width="75dp"
-                    android:layout_height="match_parent" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="身份证"
+                    android:textColor="@color/color_100"
+                    android:textSize="@dimen/text_5" />
 
                 <android.support.design.widget.TextInputEditText
-                    android:textSize="@dimen/text_5"
-                    android:textColorHint="@color/color_103"
-                    android:hint="请填写"
-                    android:enabled="false"
+                    android:id="@+id/et_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@id/tv_id_title"
                     android:background="@null"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:enabled="true"
+                    android:hint="请填写"
+                    android:textColorHint="@color/color_103"
+                    android:textSize="@dimen/text_5" />
             </RelativeLayout>
 
             <TextView
-                android:textColor="@color/color_102"
-                android:textSize="@dimen/text_7"
-                android:text="银行卡信息"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="@color/color_107"
                 android:gravity="center_vertical"
                 android:paddingLeft="12dp"
-                android:background="@color/color_107"
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
+                android:text="银行卡信息"
+                android:textColor="@color/color_102"
+                android:textSize="@dimen/text_7" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -321,26 +324,27 @@
 
                 <TextView
                     android:id="@+id/tv_card_user_title"
-                    android:textColor="@color/color_100"
-                    android:textSize="@dimen/text_5"
-                    android:gravity="center_vertical"
-                    android:text="持卡人"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_width="75dp"
-                    android:layout_height="match_parent" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="持卡人"
+                    android:textColor="@color/color_100"
+                    android:textSize="@dimen/text_5" />
 
                 <android.support.design.widget.TextInputEditText
-                    android:textSize="@dimen/text_5"
-                    android:textColorHint="@color/color_103"
-                    android:hint="请填写"
-                    android:enabled="false"
+                    android:id="@+id/et_card_master"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@id/tv_card_user_title"
                     android:background="@null"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:enabled="true"
+                    android:hint="请填写"
+                    android:textColorHint="@color/color_103"
+                    android:textSize="@dimen/text_5" />
             </RelativeLayout>
 
             <View
@@ -354,26 +358,27 @@
 
                 <TextView
                     android:id="@+id/tv_card_num_title"
-                    android:textColor="@color/color_100"
-                    android:textSize="@dimen/text_5"
-                    android:gravity="center_vertical"
-                    android:text="卡号"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_width="75dp"
-                    android:layout_height="match_parent" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="卡号"
+                    android:textColor="@color/color_100"
+                    android:textSize="@dimen/text_5" />
 
                 <android.support.design.widget.TextInputEditText
-                    android:textSize="@dimen/text_5"
-                    android:textColorHint="@color/color_103"
-                    android:hint="请填写"
-                    android:enabled="false"
+                    android:id="@+id/et_card_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@id/tv_card_num_title"
                     android:background="@null"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:enabled="true"
+                    android:hint="请填写"
+                    android:textColorHint="@color/color_103"
+                    android:textSize="@dimen/text_5" />
             </RelativeLayout>
 
             <View
@@ -387,89 +392,134 @@
 
                 <TextView
                     android:id="@+id/tv_card_bank_title"
-                    android:textColor="@color/color_100"
-                    android:textSize="@dimen/text_5"
-                    android:gravity="center_vertical"
-                    android:text="开户行"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="12dp"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_width="75dp"
-                    android:layout_height="match_parent" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="开户行"
+                    android:textColor="@color/color_100"
+                    android:textSize="@dimen/text_5" />
 
                 <android.support.design.widget.TextInputEditText
-                    android:textSize="@dimen/text_5"
-                    android:textColorHint="@color/color_103"
-                    android:hint="请填写"
-                    android:enabled="false"
+                    android:id="@+id/et_card_bank"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@id/tv_card_bank_title"
                     android:background="@null"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:enabled="true"
+                    android:hint="请填写"
+                    android:textColorHint="@color/color_103"
+                    android:textSize="@dimen/text_5" />
             </RelativeLayout>
 
             <TextView
-                android:textColor="@color/color_102"
-                android:textSize="@dimen/text_7"
-                android:text="上传相关照片"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="@color/color_107"
                 android:gravity="center_vertical"
                 android:paddingLeft="12dp"
-                android:background="@color/color_107"
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
-            
+                android:text="上传相关照片"
+                android:textColor="@color/color_102"
+                android:textSize="@dimen/text_7" />
+
             <LinearLayout
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
 
-                <TextView
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_marginLeft="12dp"
-                    android:gravity="center_horizontal"
-                    android:text="上传身份证正面"
-                    android:drawablePadding="6dp"
-                    android:drawableTop="@mipmap/front_idcard"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iv_id"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/front_idcard"/>
+
+                    <TextView
+                        android:layout_marginTop="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="上传身份证正面" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:gravity="center_horizontal"
+                        android:id="@+id/iv_id_back"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/back_idcard"/>
+
+                    <TextView
+                        android:layout_marginTop="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="上传身份证反面" />
+
+                </LinearLayout>
 
 
-                <TextView
-                    android:gravity="center_horizontal"
-                    android:text="上传身份证反面"
-                    android:drawablePadding="6dp"
-                    android:drawableTop="@mipmap/back_idcard"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
-
-                <TextView
+                <LinearLayout
                     android:layout_marginRight="12dp"
-                    android:gravity="center_horizontal"
-                    android:text="上传银行卡正面"
-                    android:drawablePadding="6dp"
-                    android:drawableTop="@mipmap/front_bankcard"
+                    android:orientation="vertical"
                     android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:gravity="center_horizontal"
+                        android:id="@+id/iv_card"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/front_bankcard"/>
+
+                    <TextView
+                        android:layout_marginTop="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="上传银行卡正面" />
+
+                </LinearLayout>
 
 
             </LinearLayout>
 
             <TextView
-                android:onClick="onSubmitClick"
-                android:background="@drawable/sel_fillinfo_submit"
-                android:layout_marginBottom="30dp"
-                android:layout_marginTop="30dp"
-                android:gravity="center"
-                android:textSize="@dimen/text_3"
-                android:textColor="@color/color_109"
-                android:enabled="true"
-                android:text="提交"
                 android:layout_width="match_parent"
-                android:layout_height="40dp" />
+                android:layout_height="40dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/sel_fillinfo_submit"
+                android:enabled="true"
+                android:gravity="center"
+                android:onClick="onSubmitClick"
+                android:text="提交"
+                android:textColor="@color/color_109"
+                android:textSize="@dimen/text_3" />
 
 
         </LinearLayout>
