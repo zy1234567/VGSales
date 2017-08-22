@@ -6,6 +6,6 @@ package com.ztstech.vgmate.data.constants;
 
 public interface NetConstants {
 
-    String BASE_URL = "https://api.douban.com/v2/movie/";
+    String BASE_URL = "http://bucea.verygrow.com/";
 
 }

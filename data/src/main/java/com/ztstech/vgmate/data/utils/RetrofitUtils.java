@@ -9,6 +9,8 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -21,11 +23,19 @@ import rx.functions.Action1;
 
 public class RetrofitUtils {
 
+    private static OkHttpClient httpClient;
+    static {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        httpClient = new OkHttpClient.Builder().addInterceptor(logging).build();
+    }
+
     public static <T> T createService(Class<T> clazz) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(NetConstants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(httpClient)
                 .build();
         return retrofit.create(clazz);
     }
