@@ -1,6 +1,7 @@
 package com.ztstech.vgmate.activitys.complete_info;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
+import com.ztstech.vgmate.model.fill_info.FillInfoModel;
 
 /**
  * Created by zhiyuan on 2017/8/17.
@@ -14,7 +15,11 @@ public class FillInfoPresenter extends PresenterImpl<FillInfoContract.View> impl
     }
 
     @Override
-    public void uploadImage(String path) {
+    public void saveInfo(FillInfoModel model) {
 
+
+        mView.onSubmitSucceed();
     }
+
+
 }

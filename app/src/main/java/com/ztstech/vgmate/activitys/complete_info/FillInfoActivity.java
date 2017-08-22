@@ -1,6 +1,8 @@
 package com.ztstech.vgmate.activitys.complete_info;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,6 +25,8 @@ import com.ztstech.vgmate.activitys.main.MainActivity;
 import com.ztstech.vgmate.model.fill_info.FillInfoModel;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.utils.ToastUtil;
+
+import java.io.File;
 
 import butterknife.BindView;
 
@@ -68,12 +72,14 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
 
     private TakePhotoHelper takePhotoHelper;
     private InvokeParam invokeParam;
+    private TakePhoto takePhoto;
+
+    /**当前选择的文件*/
+    private File currentFile;
+    /**当前imageView*/
+    private ImageView currentImageView;
 
 
-    private String pathHeader;      //头像路径
-    private String pathId;          //身份证正面图片路径
-    private String pathIdBack;      //身份证反面图片路径
-    private String pathCard;        //银行卡图片路径
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -85,7 +91,18 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
             etLocation.setText(locationName);
             model.locationId = locationCode;
             model.location = locationName;
+        }else {
+            takePhoto.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        PermissionManager.TPermissionType type = PermissionManager.onRequestPermissionsResult(
+                requestCode,permissions,grantResults);
+        PermissionManager.handlePermissionsResult(this,type,invokeParam,this);
     }
 
     @Override
@@ -99,12 +116,29 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
 
         imgHeader.setOnClickListener(this);
         etHeader.setOnClickListener(this);
-
-        takePhotoHelper = new TakePhotoHelper(this, (TakePhoto) TakePhotoInvocationHandler.of(this)
-                .bind(new TakePhotoImpl(this,this)), true);
+        imgId.setOnClickListener(this);
+        imgCard.setOnClickListener(this);
+        imgIdBack.setOnClickListener(this);
 
         etLocation.setOnClickListener(this);
     }
+
+    @Override
+    protected void onSuperCreateFinish(@Nullable Bundle savedInstanceState) {
+        super.onSuperCreateFinish(savedInstanceState);
+        takePhoto = (TakePhoto) TakePhotoInvocationHandler.of(this)
+                .bind(new TakePhotoImpl(this,this));
+        takePhoto.onCreate(savedInstanceState);
+
+        takePhotoHelper = new TakePhotoHelper(this, takePhoto, true);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        takePhoto.onSaveInstanceState(outState);
+        super.onSaveInstanceState(outState);
+    }
+
 
     /**
      * 点击提交
@@ -112,7 +146,6 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
      */
     public void onSubmitClick(View view) {
         onSubmitClick();
-
     }
 
     @Override
@@ -120,6 +153,20 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
         if (view == etLocation) {
             startActivityForResult(new Intent(this, LocationSelectActivity.class), REQ_LOCATION);
         }else if (view == imgHeader || view == etHeader) {
+            currentImageView = imgHeader;
+            currentFile = model.headFile;
+            takePhotoHelper.show();
+        }else if (view == imgIdBack) {
+            currentImageView = imgIdBack;
+            currentFile = model.idBackFile;
+            takePhotoHelper.show();
+        }else if (view == imgCard) {
+            currentImageView = imgCard;
+            currentFile = model.cardFile;
+            takePhotoHelper.show();
+        }else if (view == imgId) {
+            currentFile = model.idFile;
+            currentImageView = imgId;
             takePhotoHelper.show();
         }
     }
@@ -165,7 +212,21 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
         }else if (model.sex.isEmpty()) {
             ToastUtil.toastCenter(this, "请填写性别");
             return;
+        }else if (model.headFile == null || !model.headFile.exists()) {
+            ToastUtil.toastCenter(this, "请选择头像");
+            return;
+        }else if (model.idFile == null || !model.idFile.exists()) {
+            ToastUtil.toastCenter(this, "请选择身份证正面照片");
+            return;
+        }else if (model.idBackFile == null || !model.idBackFile.exists()) {
+            ToastUtil.toastCenter(this, "请选择身份证反面照片");
+            return;
+        }else if (model.cardFile == null || !model.cardFile.exists()) {
+            ToastUtil.toastCenter(this, "请选择银行卡照片");
+            return;
         }
+
+
 
     }
 
@@ -189,7 +250,11 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
 
     @Override
     public void takeSuccess(TResult result) {
-
+        if (result != null && currentImageView != null) {
+            String uri = result.getImage().getOriginalPath();
+            currentFile = new File(uri);
+            currentImageView.setImageBitmap(takePhotoHelper.fileToBitmap(uri));
+        }
     }
 
     @Override

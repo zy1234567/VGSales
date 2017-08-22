@@ -91,6 +91,7 @@
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/et_header"
+                    android:inputType="none"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toRightOf="@id/tv_header_title"
@@ -439,10 +440,11 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
+                        android:scaleType="centerCrop"
                         android:id="@+id/iv_id"
                         android:layout_gravity="center_horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="113dp"
+                        android:layout_height="70dp"
                         android:src="@mipmap/front_idcard"/>
 
                     <TextView
@@ -462,11 +464,12 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
+                        android:scaleType="centerCrop"
                         android:gravity="center_horizontal"
                         android:id="@+id/iv_id_back"
                         android:layout_gravity="center_horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="113dp"
+                        android:layout_height="70dp"
                         android:src="@mipmap/back_idcard"/>
 
                     <TextView
@@ -487,11 +490,12 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
+                        android:scaleType="centerCrop"
                         android:gravity="center_horizontal"
                         android:id="@+id/iv_card"
                         android:layout_gravity="center_horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="113dp"
+                        android:layout_height="70dp"
                         android:src="@mipmap/front_bankcard"/>
 
                     <TextView

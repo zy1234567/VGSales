@@ -1,5 +1,7 @@
 package com.ztstech.vgmate.model.fill_info;
 
+import java.io.File;
+
 /**
  * Created by zhiyuan on 2017/8/17.
  * 填写资料model
@@ -7,8 +9,7 @@ package com.ztstech.vgmate.model.fill_info;
 
 public class FillInfoModel {
 
-
-    public String headerUrl;
+    public File headFile;
 
     public String name;
 
@@ -29,11 +30,11 @@ public class FillInfoModel {
 
     public String cardBank;
 
-    /**身份证正面*/
-    public String imgIdUrl;
+    public File idFile;
 
-    public String imgIdBackUrl;
-    /**银行卡卡号url*/
-    public String imgCardUrl;
+    public File idBackFile;
+
+    public File cardFile;
+
 
 }
