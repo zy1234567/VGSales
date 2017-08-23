@@ -4,9 +4,10 @@ import android.content.Intent;
 import android.os.Handler;
 
 import com.ztstech.vgmate.R;
+import com.ztstech.vgmate.activitys.complete_info.FillInfoActivity;
 import com.ztstech.vgmate.activitys.login.LoginActivity;
-import com.ztstech.vgmate.activitys.main.MainActivity;
 import com.ztstech.vgmate.base.BaseActivity;
+import com.ztstech.vgmate.data.repository.UserRepository;
 
 public class SplashActivity extends BaseActivity {
 
@@ -18,7 +19,7 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void run() {
                 if (isUserLogin()) {
-                    toMain();
+                    toFillInfo();
                 }else {
                     toLogin();
                 }
@@ -33,10 +34,10 @@ public class SplashActivity extends BaseActivity {
 
 
     /**
-     * 跳转主界面
+     * 跳转填写资料
      */
-    private void toMain() {
-        startActivity(new Intent(this, MainActivity.class));
+    private void toFillInfo() {
+        startActivity(new Intent(this, FillInfoActivity.class));
         finish();
     }
 
@@ -46,6 +47,6 @@ public class SplashActivity extends BaseActivity {
     }
 
     private boolean isUserLogin() {
-        return false;
+        return UserRepository.getInstance().isUserLogined();
     }
 }

@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.data;
+package com.ztstech.vgmate.data.repository;
 
 import android.support.annotation.NonNull;
 
@@ -7,6 +7,7 @@ import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.utils.RetrofitUtils;
 
 import rx.Observable;
+import rx.functions.Action1;
 
 /**
  * Created by zhiyuan on 2017/8/22.
@@ -56,6 +57,22 @@ public class UserRepository {
      * @return
      */
     public Observable<BaseRespBean> login(@NonNull String phone, @NonNull String code) {
-        return loginApi.login(phone, code, TYPE_LOGIN);
+        return loginApi.login(phone, code, TYPE_LOGIN).doOnNext(new Action1<BaseRespBean>() {
+            @Override
+            public void call(BaseRespBean baseRespBean) {
+                if (baseRespBean.messageCode == 0) {
+                    //登录成功
+                    UserPreferenceManager.getInstance().onLoginSucceed();
+                }
+            }
+        });
+    }
+
+    /**
+     * 用户是否登录
+     * @return
+     */
+    public boolean isUserLogined() {
+        return UserPreferenceManager.getInstance().isUserLogined();
     }
 }

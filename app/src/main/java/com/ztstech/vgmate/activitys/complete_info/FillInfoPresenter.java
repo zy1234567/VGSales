@@ -21,5 +21,10 @@ public class FillInfoPresenter extends PresenterImpl<FillInfoContract.View> impl
         mView.onSubmitSucceed();
     }
 
+    @Override
+    public boolean isInfoFilled() {
+        return false;
+    }
+
 
 }

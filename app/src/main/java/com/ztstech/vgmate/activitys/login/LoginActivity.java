@@ -66,7 +66,7 @@ public class LoginActivity extends MVPActivity<LoginContract.Presenter> implemen
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                btNext.setEnabled(editable.length() == 4);
+                btNext.setEnabled(editable.length() == 6);
             }
         });
 
@@ -100,6 +100,9 @@ public class LoginActivity extends MVPActivity<LoginContract.Presenter> implemen
 
     @Override
     public void updateSeconds(int second) {
+        if (isFinishing()) {
+            return;
+        }
         if (second == 0) {
             tvGetCode.setEnabled(true);
             tvGetCode.setText("获取验证码");

@@ -22,6 +22,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
 import com.ztstech.vgmate.activitys.main.MainActivity;
+import com.ztstech.vgmate.data.repository.UserRepository;
 import com.ztstech.vgmate.model.fill_info.FillInfoModel;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.utils.ToastUtil;
@@ -126,6 +127,11 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
     @Override
     protected void onSuperCreateFinish(@Nullable Bundle savedInstanceState) {
         super.onSuperCreateFinish(savedInstanceState);
+        if (mPresenter.isInfoFilled()) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+            return;
+        }
         takePhoto = (TakePhoto) TakePhotoInvocationHandler.of(this)
                 .bind(new TakePhotoImpl(this,this));
         takePhoto.onCreate(savedInstanceState);

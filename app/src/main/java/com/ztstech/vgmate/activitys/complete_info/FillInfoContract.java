@@ -19,6 +19,11 @@ interface FillInfoContract {
 
 
         void saveInfo(FillInfoModel model);
+
+        /**
+         * 资料是否已经完成
+         */
+        boolean isInfoFilled();
     }
 
 }

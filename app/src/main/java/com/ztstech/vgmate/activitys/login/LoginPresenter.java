@@ -1,15 +1,13 @@
 package com.ztstech.vgmate.activitys.login;
 
 import android.os.Handler;
-import android.util.Log;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
-import com.ztstech.vgmate.data.UserRepository;
+import com.ztstech.vgmate.data.repository.UserRepository;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.utils.PresenterSubscriber;
 
 import java.lang.ref.WeakReference;
-import java.util.TimerTask;
 
 /**
  * Created by zhiyuan on 2017/8/22.
@@ -40,9 +38,19 @@ public class LoginPresenter extends PresenterImpl<LoginContract.View> implements
             @Override
             public void onNext(BaseRespBean baseRespBean) {
                 mView.hideLoading(null);
-                mView.sendCodeFinish(baseRespBean.getErrmsg());
-                if (baseRespBean.isSucceed()) {
-                    mCountDown.start();
+                if (baseRespBean.messageCode == 0) {
+                    mView.sendCodeFinish(null);
+                    if (baseRespBean.isSucceed()) {
+                        mCountDown.start();
+                    }
+                } else if (baseRespBean.messageCode == 1) {
+                    mView.sendCodeFinish("验证码一小时内发送超过5条，请稍后再试");
+                } else if (baseRespBean.messageCode == 2) {
+                    mView.sendCodeFinish("验证码一天内发送超过20条，请稍后再试");
+                } else if (baseRespBean.messageCode == 3) {
+                    mView.sendCodeFinish("无此号码");
+                }else {
+                    mView.sendCodeFinish("未知错误");
                 }
             }
         }.run(userRepository.sendLoginCode(phone));
@@ -56,10 +64,9 @@ public class LoginPresenter extends PresenterImpl<LoginContract.View> implements
             @Override
             public void onNext(BaseRespBean baseRespBean) {
                 mView.hideLoading(null);
+//                messageCode为0时正常，为1时一小时超过5条，为2时一天超过20条，为3时没有此手机号
                 if (baseRespBean.messageCode == 0) {
                     mView.loginFinish(null);
-                }else if (baseRespBean.messageCode == 1){
-                    mView.loginFinish("验证码错误");
                 }else {
                     mView.loginFinish("未知错误");
                 }

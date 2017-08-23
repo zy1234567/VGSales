@@ -3,5 +3,5 @@
 
     <corners android:radius="2dp" />
 
-    <solid android:color="@color/color_104" />
+    <solid android:color="@drawable/sel_btn_login" />
 </shape>
