@@ -18,4 +18,16 @@ public interface LoginApi {
     @POST("exempt/saleCheckCodeByPhone")
     Observable<BaseRespBean> login(@Query("phone") String phone, @Query("code") String code,
                                    @Query("type") String type);
+
+
+    @POST("exempt/saleUpdateUserMsg")
+    Observable<BaseRespBean> updateUserInfo(@Query("picurl") byte[] picurl,
+                                            @Query("didurl") String didurl,
+                                            @Query("cardUrl") byte[] cardUrl,
+                                            @Query("sex") String sex,
+                                            @Query("did") String did,
+                                            @Query("bname") String bname,
+                                            @Query("banks") String banks,
+                                            @Query("status") String status,
+                                            @Query("cardNo") String cardNo);
 }

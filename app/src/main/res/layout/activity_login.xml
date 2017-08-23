@@ -32,6 +32,7 @@
         android:drawableLeft="@mipmap/ico_phone_signin"
         android:drawablePadding="16dp"
         android:hint="请输入您的手机号"
+        android:textCursorDrawable="@null"
         android:textColorHint="@color/color_104"
         android:textSize="@dimen/text_4" />
 
@@ -57,6 +58,7 @@
         android:textColorHint="@color/color_104"
         android:textSize="@dimen/text_4"
         android:hint="请输入验证码"
+        android:textCursorDrawable="@null"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@null"

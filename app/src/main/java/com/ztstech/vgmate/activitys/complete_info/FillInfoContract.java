@@ -13,6 +13,8 @@ interface FillInfoContract {
     interface View extends BaseView {
 
         void onSubmitSucceed();
+
+        void onSubmitFailed(String message);
     }
 
     interface Presenter extends BasePresenter<View> {

@@ -4,8 +4,10 @@ import android.support.annotation.NonNull;
 
 import com.ztstech.vgmate.data.api.LoginApi;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
+import com.ztstech.vgmate.data.beans.UpdateUserInfoBean;
 import com.ztstech.vgmate.data.utils.RetrofitUtils;
 
+import retrofit2.http.Query;
 import rx.Observable;
 import rx.functions.Action1;
 
@@ -74,5 +76,15 @@ public class UserRepository {
      */
     public boolean isUserLogined() {
         return UserPreferenceManager.getInstance().isUserLogined();
+    }
+
+    /**
+     * 更新用户信息
+     * @param bean
+     * @return
+     */
+    public Observable<BaseRespBean> updateUserInfo(UpdateUserInfoBean bean) {
+        return loginApi.updateUserInfo(bean.picurl, bean.didurl, bean.cardUrl, bean.sex, bean.did,
+                bean.bname, bean.banks, bean.status, bean.cardNo);
     }
 }

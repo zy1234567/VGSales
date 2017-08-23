@@ -1,15 +1,18 @@
 package com.ztstech.vgmate.activitys.complete_info;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.app.TakePhotoImpl;
 import com.jph.takephoto.model.InvokeParam;
@@ -41,7 +44,7 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
     public static final int REQ_LOCATION = 0;
 
     @BindView(R.id.et_location)
-    TextInputEditText etLocation;
+    EditText etLocation;
     @BindView(R.id.et_name)
     TextInputEditText etName;
     @BindView(R.id.et_sex)
@@ -75,8 +78,6 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
     private InvokeParam invokeParam;
     private TakePhoto takePhoto;
 
-    /**当前选择的文件*/
-    private File currentFile;
     /**当前imageView*/
     private ImageView currentImageView;
 
@@ -122,6 +123,7 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
         imgIdBack.setOnClickListener(this);
 
         etLocation.setOnClickListener(this);
+
     }
 
     @Override
@@ -160,18 +162,14 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
             startActivityForResult(new Intent(this, LocationSelectActivity.class), REQ_LOCATION);
         }else if (view == imgHeader || view == etHeader) {
             currentImageView = imgHeader;
-            currentFile = model.headFile;
             takePhotoHelper.show();
         }else if (view == imgIdBack) {
             currentImageView = imgIdBack;
-            currentFile = model.idBackFile;
             takePhotoHelper.show();
         }else if (view == imgCard) {
             currentImageView = imgCard;
-            currentFile = model.cardFile;
             takePhotoHelper.show();
         }else if (view == imgId) {
-            currentFile = model.idFile;
             currentImageView = imgId;
             takePhotoHelper.show();
         }
@@ -218,21 +216,21 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
         }else if (model.sex.isEmpty()) {
             ToastUtil.toastCenter(this, "请填写性别");
             return;
-        }else if (model.headFile == null || !model.headFile.exists()) {
+        }else if (model.headerFile == null) {
             ToastUtil.toastCenter(this, "请选择头像");
             return;
-        }else if (model.idFile == null || !model.idFile.exists()) {
+        }else if (model.idFile == null) {
             ToastUtil.toastCenter(this, "请选择身份证正面照片");
             return;
-        }else if (model.idBackFile == null || !model.idBackFile.exists()) {
+        }else if (model.idBackFile == null) {
             ToastUtil.toastCenter(this, "请选择身份证反面照片");
             return;
-        }else if (model.cardFile == null || !model.cardFile.exists()) {
+        }else if (model.cardFile == null) {
             ToastUtil.toastCenter(this, "请选择银行卡照片");
             return;
         }
 
-
+        mPresenter.saveInfo(model);
 
     }
 
@@ -240,6 +238,11 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
     public void onSubmitSucceed() {
         startActivity(new Intent(this, MainActivity.class));
         finish();
+    }
+
+    @Override
+    public void onSubmitFailed(String message) {
+        ToastUtil.toastCenter(this, "" + message);
     }
 
 
@@ -258,8 +261,17 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
     public void takeSuccess(TResult result) {
         if (result != null && currentImageView != null) {
             String uri = result.getImage().getOriginalPath();
-            currentFile = new File(uri);
-            currentImageView.setImageBitmap(takePhotoHelper.fileToBitmap(uri));
+            Bitmap bitmap = takePhotoHelper.fileToBitmap(uri);
+            currentImageView.setImageBitmap(bitmap);
+            if (currentImageView == imgCard) {
+                model.cardFile = bitmap;
+            }else if (currentImageView == imgIdBack) {
+                model.idBackFile = bitmap;
+            }else if (currentImageView == imgHeader) {
+                model.headerFile = bitmap;
+            }else if (currentImageView == imgId) {
+                model.idFile = bitmap;
+            }
         }
     }
 
