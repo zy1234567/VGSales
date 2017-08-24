@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.main.widget;
+package com.ztstech.vgmate.weigets;
 
 import android.content.Context;
 import android.support.annotation.AttrRes;

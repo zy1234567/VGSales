@@ -12,9 +12,9 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activitys.splash.SplashActivity">
             <intent-filter>
@@ -28,10 +28,12 @@
             android:name=".activitys.login.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".activitys.complete_info.FillInfoActivity" />
-        <activity android:name=".activitys.provide_chance.ProvideChanceActivity">
-        </activity>
+        <activity android:name=".activitys.provide_chance.ProvideChanceActivity" />
         <activity android:name=".activitys.location_select.LocationInfoActivity" />
         <activity android:name=".activitys.location_select.LocationSelectActivity" />
+        <activity android:name=".activitys.add_sell_mate.AddSellMateActivity" />
+        <activity android:name=".activitys.sell_chance.SellChanceActivity" />
+        <activity android:name=".activitys.get_chance.GetChanceActivity"></activity>
     </application>
 
 </manifest>

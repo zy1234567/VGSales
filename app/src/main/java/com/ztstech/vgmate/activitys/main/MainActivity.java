@@ -9,7 +9,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.main.adapter.MainPagerAdapter;
 import com.ztstech.vgmate.activitys.main.widget.BottomBar;
-import com.ztstech.vgmate.activitys.main.widget.TopBar;
+import com.ztstech.vgmate.weigets.TopBar;
 import com.ztstech.vgmate.activitys.provide_chance.ProvideChanceActivity;
 
 import butterknife.BindView;

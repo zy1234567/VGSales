@@ -7,12 +7,12 @@
     tools:context="com.ztstech.vgmate.activitys.main.MainActivity">
 
 
-    <com.ztstech.vgmate.activitys.main.widget.TopBar
+    <com.ztstech.vgmate.weigets.TopBar
         android:layout_alignParentTop="true"
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_bar_height">
-    </com.ztstech.vgmate.activitys.main.widget.TopBar>
+    </com.ztstech.vgmate.weigets.TopBar>
 
 
     <com.ztstech.vgmate.activitys.main.widget.BottomBar

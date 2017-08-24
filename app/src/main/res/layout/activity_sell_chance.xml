@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    tools:context="com.ztstech.vgmate.activitys.sell_chance.SellChanceActivity">
+
+    <com.ztstech.vgmate.weigets.TopBar
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height">
+
+    </com.ztstech.vgmate.weigets.TopBar>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="1dp"
+        app:tabIndicatorColor="@color/color_001"
+        app:tabIndicatorHeight="3dp"
+        app:tabTextColor="@color/color_100"
+        app:tabSelectedTextColor="@color/color_001"
+        app:tabGravity="fill"
+        android:paddingBottom="2dp"
+        />
+    <View
+        android:background="@color/color_106"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+
+    <android.support.v4.view.ViewPager
+        android:background="@color/color_107"
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    </android.support.v4.view.ViewPager>
+
+
+</LinearLayout>
