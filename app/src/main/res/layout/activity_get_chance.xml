@@ -1,9 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff"
     tools:context="com.ztstech.vgmate.activitys.get_chance.GetChanceActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <com.ztstech.vgmate.weigets.TopBar
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.ztstech.vgmate.weigets.TopBar>
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/et"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginLeft="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:hint="请输入您的沟通记录"
+        android:gravity="top"
+        android:textSize="@dimen/text_5"
+        android:textColor="@color/color_100"
+        android:textColorHint="@color/color_103"
+        android:background="@color/color_107"
+        android:layout_width="match_parent"
+        android:layout_height="99.5dp">
+
+    </android.support.design.widget.TextInputEditText>
+
+    <Button
+        android:id="@+id/btn_commit"
+        android:textSize="@dimen/text_4"
+        android:textColor="@color/color_109"
+        android:text="提交"
+        android:enabled="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginLeft="12dp"
+        android:background="@drawable/sel_fillinfo_submit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+    
+    <View
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/color_107" />
+
+    <TextView
+        android:drawablePadding="6dp"
+        android:drawableLeft="@mipmap/ico_history_record"
+        android:layout_marginLeft="12dp"
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_5"
+        android:gravity="center_vertical"
+        android:text="历史沟通记录"
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/color_106" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>
