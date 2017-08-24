@@ -32,18 +32,9 @@ public class FillInfoPresenter extends PresenterImpl<FillInfoContract.View> impl
     @Override
     public void saveInfo(final FillInfoModel model) {
         mView.showLoading(null);
-        Observable.create(new Action1<Emitter<UpdateUserInfoBean>>() {
 
-            @Override
-            public void call(Emitter<UpdateUserInfoBean> updateUserInfoBeanEmitter) {
-                updateUserInfoBeanEmitter.onNext(new UserInfoBeanMapper().transform(model));
-                updateUserInfoBeanEmitter.onCompleted();
-            }
-        }, Emitter.BackpressureMode.NONE).observeOn(AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.io())
-        .subscribe(new Action1<UpdateUserInfoBean>() {
-            @Override
-            public void call(UpdateUserInfoBean updateUserInfoBean) {
+        //// TODO: 2017/8/24 增加上传接口 
+        UpdateUserInfoBean updateUserInfoBean =  new UserInfoBeanMapper().transform(model);
 
                 new PresenterSubscriber<BaseRespBean>() {
                     @Override
@@ -57,8 +48,8 @@ public class FillInfoPresenter extends PresenterImpl<FillInfoContract.View> impl
 
                     }
                 }.run(userRepository.updateUserInfo(updateUserInfoBean));
-            }
-        });
+//            }
+//        });
 
 
     }

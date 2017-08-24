@@ -11,8 +11,8 @@ import java.io.File;
 
 public class FillInfoModel {
 
-//    public File headFile;
-    public Bitmap headerFile;
+    public File headerFile;
+//    public Bitmap headerFile;
 
     public String name;
 
@@ -33,16 +33,16 @@ public class FillInfoModel {
 
     public String cardBank;
 
-    public Bitmap idFile;
+//    public Bitmap idFile;
 
-    public Bitmap idBackFile;
+//    public Bitmap idBackFile;
 
-    public Bitmap cardFile;
-//    public File idFile;
+//    public Bitmap cardFile;
+    public File idFile;
 //
-//    public File idBackFile;
+    public File idBackFile;
 //
-//    public File cardFile;
+    public File cardFile;
 
 
 }

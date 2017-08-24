@@ -21,9 +21,9 @@ public interface LoginApi {
 
 
     @POST("exempt/saleUpdateUserMsg")
-    Observable<BaseRespBean> updateUserInfo(@Query("picurl") byte[] picurl,
+    Observable<BaseRespBean> updateUserInfo(@Query("picurl") String picurl,
                                             @Query("didurl") String didurl,
-                                            @Query("cardUrl") byte[] cardUrl,
+                                            @Query("cardUrl") String cardUrl,
                                             @Query("sex") String sex,
                                             @Query("did") String did,
                                             @Query("bname") String bname,

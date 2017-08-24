@@ -7,12 +7,12 @@ package com.ztstech.vgmate.data.beans;
 
 public class UpdateUserInfoBean {
 
-    public byte[] picurl;
+    public String picurl;
 
     /**身份证，正反用,隔开*/
     public String didurl;
 
-    public byte[] cardUrl;
+    public String cardUrl;
 
     public String sex;
     public String did;

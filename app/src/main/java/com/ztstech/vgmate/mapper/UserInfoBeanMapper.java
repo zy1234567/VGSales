@@ -25,9 +25,9 @@ public class UserInfoBeanMapper implements Mapper<FillInfoModel, UpdateUserInfoB
         result.did = bean.id;
         result.sex = bean.sex;
 
-        result.picurl = FileUtils.getBytes(bean.headerFile);
-        result.didurl = new String(FileUtils.getBytes(bean.idFile)) + "," + new String(FileUtils.getBytes(bean.idBackFile));
-        result.cardUrl = FileUtils.getBytes(bean.cardFile);
+//        result.picurl = FileUtils.getBytes(bean.headerFile);
+//        result.didurl = new String(FileUtils.getBytes(bean.idFile)) + "," + new String(FileUtils.getBytes(bean.idBackFile));
+//        result.cardUrl = FileUtils.getBytes(bean.cardFile);
 
         return result;
     }

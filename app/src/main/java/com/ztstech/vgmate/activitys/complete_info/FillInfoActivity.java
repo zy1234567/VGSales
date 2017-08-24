@@ -261,16 +261,16 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
     public void takeSuccess(TResult result) {
         if (result != null && currentImageView != null) {
             String uri = result.getImage().getOriginalPath();
-            Bitmap bitmap = takePhotoHelper.fileToBitmap(uri);
-            currentImageView.setImageBitmap(bitmap);
+            File f = new File(uri);
+            Glide.with(this).load(f).into(currentImageView);
             if (currentImageView == imgCard) {
-                model.cardFile = bitmap;
+                model.cardFile = f;
             }else if (currentImageView == imgIdBack) {
-                model.idBackFile = bitmap;
+                model.idBackFile = f;
             }else if (currentImageView == imgHeader) {
-                model.headerFile = bitmap;
+                model.headerFile = f;
             }else if (currentImageView == imgId) {
-                model.idFile = bitmap;
+                model.idFile = f;
             }
         }
     }
