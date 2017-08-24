@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.main_fragment.adapter.MainFragmentPagerAdapter;
+import com.ztstech.vgmate.data.beans.MainPageBean;
 
 import butterknife.BindView;
 
@@ -46,14 +47,18 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
 
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(new MainFragmentPagerAdapter(getChildFragmentManager()));
-//        NewsRecyclerAdapter adapter = new NewsRecyclerAdapter();
-//        List<NewsModel> newsModelList = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
-//            newsModelList.add(new NewsModel());
-//        }
-//        adapter.setListData(newsModelList);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        recyclerView.setAdapter(adapter);
+
+        mPresenter.loadData();
+
+    }
+
+    @Override
+    public void loadError(String errorMessage) {
+
+    }
+
+    @Override
+    public void setData(MainPageBean mainPageBean) {
 
     }
 }
