@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
+import com.ztstech.vgmate.activitys.add_sell_mate.AddSellMateActivity;
 import com.ztstech.vgmate.activitys.main_fragment.adapter.MainFragmentPagerAdapter;
 import com.ztstech.vgmate.activitys.sell_chance.SellChanceActivity;
 import com.ztstech.vgmate.data.beans.MainPageBean;
@@ -60,6 +61,11 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
     @OnClick(R.id.fl_sell_chance)
     public void onSellChanceClick(View v) {
         startActivity(new Intent(getActivity(), SellChanceActivity.class));
+    }
+
+    @OnClick(R.id.img_bottom_2)
+    public void onAddSellMateClick(View v) {
+        startActivity(new Intent(getActivity(), AddSellMateActivity.class));
     }
 
     @Override

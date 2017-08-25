@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ztstech.vgmate.R;
 
@@ -19,6 +20,8 @@ import com.ztstech.vgmate.R;
 public class TopBar extends FrameLayout {
 
     private ImageView imgRight;
+    private TextView tvTitle;
+    private String title;
 
     public TopBar(@NonNull Context context) {
         super(context);
@@ -39,10 +42,23 @@ public class TopBar extends FrameLayout {
         View topView = LayoutInflater.from(getContext()).inflate(R.layout.layout_top_bar,
                 this, true);
         imgRight = topView.findViewById(R.id.btn_new_top_bar_right);
+        tvTitle = topView.findViewById(R.id.tv_title);
+
+        if (title != null) {
+            tvTitle.setText(title);
+        }
 
     }
 
+
     public ImageView getRightImage() {
         return imgRight;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+        if (tvTitle != null) {
+            tvTitle.setText(title);
+        }
     }
 }

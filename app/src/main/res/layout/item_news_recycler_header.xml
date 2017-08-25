@@ -142,53 +142,53 @@
 
 
     <RelativeLayout
-        android:layout_marginTop="16pt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="16pt">
 
-        <ImageView
+        <com.ztstech.vgmate.weigets.CircleImageView
             android:id="@+id/img_header"
-            android:background="#f00"
-            android:layout_centerHorizontal="true"
             android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:background="#f00" />
 
         <TextView
             android:id="@+id/tv_name"
-            android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/img_header"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:text="吕晓梦"
             android:textColor="@color/color_109"
-            android:textSize="@dimen/text_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textSize="@dimen/text_2" />
 
         <TextView
             android:id="@+id/tv_introducer"
-            android:layout_marginTop="8dp"
-            android:textSize="@dimen/text_7"
-            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/tv_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
             android:text="介绍人：王珊珊"
             android:textColor="@color/color_109"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textSize="@dimen/text_7" />
 
         <TextView
             android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/tv_introducer"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/color_109"
-            android:text="北京市 市辖区 西城区"
             android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:text="北京市 市辖区 西城区"
+            android:textColor="@color/color_109" />
 
 
     </RelativeLayout>
-    
+
     <RelativeLayout
         android:background="#fff"
         android:layout_width="match_parent"
