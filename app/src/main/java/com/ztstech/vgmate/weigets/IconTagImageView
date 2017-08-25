@@ -1,0 +1,74 @@
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.widget.Toast;
+
+/**
+ * Created by zhiyuan on 2017/8/25.
+ */
+
+public class IconTagImageView extends android.support.v7.widget.AppCompatImageView {
+
+    private Paint mBitmapPaint = new Paint();
+    private RectF mRect = new RectF();
+
+    private int iconSize = 32;
+
+    private OnClickListener onIconClickListener;
+
+    public IconTagImageView(Context context) {
+        this(context, null, 0);
+    }
+
+    public IconTagImageView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public IconTagImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+
+        mBitmapPaint.setStyle(Paint.Style.FILL);
+        mBitmapPaint.setColor(Color.BLACK);
+    }
+
+    public void setOnIconClickListener(OnClickListener onIconClickListener) {
+        this.onIconClickListener = onIconClickListener;
+    }
+
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        int width = getWidth();
+        mRect.left = width - iconSize;
+        mRect.top = 0;
+        mRect.right = width;
+        mRect.bottom = iconSize;
+        canvas.drawRect(mRect, mBitmapPaint);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        float x = event.getX();
+        float y = event.getY();
+
+        if (this.onIconClickListener != null) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (isTouchIcon(x, y)) {
+                    this.onIconClickListener.onClick(this);
+                    return true;
+                }
+            }
+        }
+        return super.onTouchEvent(event);
+    }
+
+    private boolean isTouchIcon(float x, float y) {
+        return y <= iconSize && y >= 0 && x >= getWidth() - iconSize && x <= getWidth();
+    }
+}
