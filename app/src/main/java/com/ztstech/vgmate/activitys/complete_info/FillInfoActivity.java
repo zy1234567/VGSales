@@ -1,16 +1,12 @@
 package com.ztstech.vgmate.activitys.complete_info;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jph.takephoto.app.TakePhoto;
@@ -25,7 +21,6 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
 import com.ztstech.vgmate.activitys.main.MainActivity;
-import com.ztstech.vgmate.data.repository.UserRepository;
 import com.ztstech.vgmate.model.fill_info.FillInfoModel;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.utils.ToastUtil;
@@ -43,14 +38,14 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
     /**请求地址*/
     public static final int REQ_LOCATION = 0;
 
-    @BindView(R.id.et_location)
-    EditText etLocation;
+    @BindView(R.id.tv_location)
+    TextView tvLocation;
     @BindView(R.id.et_name)
     TextInputEditText etName;
-    @BindView(R.id.et_sex)
-    TextInputEditText etSex;
-    @BindView(R.id.et_birthday)
-    TextInputEditText etBirthday;
+    @BindView(R.id.tv_sex)
+    TextView tvSex;
+    @BindView(R.id.tv_birthday)
+    TextView tvBirthday;
     @BindView(R.id.et_id)
     TextInputEditText etId;
     @BindView(R.id.et_card_master)
@@ -59,8 +54,8 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
     TextInputEditText etCardNo;
     @BindView(R.id.et_card_bank)
     TextInputEditText etCardBank;
-    @BindView(R.id.et_header)
-    TextInputEditText etHeader;
+    @BindView(R.id.tv_header)
+    TextView tvHeader;
 
 
     @BindView(R.id.img_header)
@@ -82,7 +77,6 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
     private ImageView currentImageView;
 
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -90,7 +84,7 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
             String locationName = data.getStringExtra(LocationSelectActivity.RESULT_NAME);
             String locationCode = data.getStringExtra(LocationSelectActivity.RESULT_CODE);
 
-            etLocation.setText(locationName);
+            tvLocation.setText(locationName);
             model.locationId = locationCode;
             model.location = locationName;
         }else {
@@ -117,12 +111,12 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
         super.onViewBindFinish();
 
         imgHeader.setOnClickListener(this);
-        etHeader.setOnClickListener(this);
+        tvHeader.setOnClickListener(this);
         imgId.setOnClickListener(this);
         imgCard.setOnClickListener(this);
         imgIdBack.setOnClickListener(this);
 
-        etLocation.setOnClickListener(this);
+        tvLocation.setOnClickListener(this);
 
     }
 
@@ -158,9 +152,9 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
 
     @Override
     public void onClick(View view) {
-        if (view == etLocation) {
+        if (view == tvLocation) {
             startActivityForResult(new Intent(this, LocationSelectActivity.class), REQ_LOCATION);
-        }else if (view == imgHeader || view == etHeader) {
+        }else if (view == imgHeader || view == tvHeader) {
             currentImageView = imgHeader;
             takePhotoHelper.show();
         }else if (view == imgIdBack) {
@@ -186,7 +180,7 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
         //暂时跳转主界面
         onSubmitSucceed();
 
-//        model.location = etLocation.getText().toString();
+//        model.location = tvLocation.getText().toString();
 //        model.birthday = etBirthday.getText().toString();
 //        model.cardBank = etCardBank.getText().toString();
 //        model.cardMaster = etCardMaster.getText().toString();

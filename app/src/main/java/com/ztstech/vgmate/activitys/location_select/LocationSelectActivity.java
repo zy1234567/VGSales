@@ -31,6 +31,12 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Emitter;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by smm on 2017/6/23.
@@ -112,8 +118,28 @@ public class LocationSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_select);
         ButterKnife.bind(this);
-        initData();
-        initListener();
+
+        kProgressHUD = HUDUtils.create(this);
+        kProgressHUD.setLabel("正在初始化");
+        kProgressHUD.show();
+
+        Observable.create(new Action1<Emitter<Void>>() {
+            @Override
+            public void call(Emitter<Void> emitter) {
+                initData();
+                emitter.onNext(null);
+                emitter.onCompleted();
+            }
+        }, Emitter.BackpressureMode.NONE)
+                .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+        .subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                kProgressHUD.dismiss();
+                initListener();
+            }
+        });
     }
 
     private void initData() {
@@ -123,18 +149,8 @@ public class LocationSelectActivity extends AppCompatActivity {
         list_province = new Gson().fromJson(s, new TypeToken<List<LocationBean>>() {
         }.getType());
         updateOrgInfo = getIntent().getBooleanExtra("updateOrgInfo", false);
-        if (updateOrgInfo) {
-            kProgressHUD = HUDUtils.create(this);
-        }
 
-        list_city = new ArrayList<>();
-        list_area = new ArrayList<>();
-        adapterProvince = new ProvinceAdapter(list_province, this);
-        adapterCity = new CityAdapter(list_city, this);
-        adapterArea = new AreaApapter(list_area, this);
-        lvProvince.setAdapter(adapterProvince);
-        lvCity.setAdapter(adapterCity);
-        lvArea.setAdapter(adapterArea);
+
 
     }
 
@@ -195,6 +211,16 @@ public class LocationSelectActivity extends AppCompatActivity {
 
 
     private void initListener() {
+
+        list_city = new ArrayList<>();
+        list_area = new ArrayList<>();
+        adapterProvince = new ProvinceAdapter(list_province, this);
+        adapterCity = new CityAdapter(list_city, this);
+        adapterArea = new AreaApapter(list_area, this);
+        lvProvince.setAdapter(adapterProvince);
+        lvCity.setAdapter(adapterCity);
+        lvArea.setAdapter(adapterArea);
+
         lvProvince.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
