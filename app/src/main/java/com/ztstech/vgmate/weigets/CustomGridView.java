@@ -56,8 +56,8 @@ public class CustomGridView extends ViewGroup {
             int row = i / countOfColumn;
             int column = i % countOfColumn;
 
-            int x = l + column * childWidth + column * mChildViewMarginHorizontal;
-            int y = t + row * childWidth + row * mChildViewMarginVertical;
+            int x = column * childWidth + column * mChildViewMarginHorizontal;
+            int y = row * childWidth + row * mChildViewMarginVertical;
 
             getChildAt(i).layout(x, y, x + childWidth, y + childWidth);
         }
