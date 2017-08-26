@@ -34,7 +34,8 @@
         <activity android:name=".activitys.add_sell_mate.AddSellMateActivity" />
         <activity android:name=".activitys.sell_chance.SellChanceActivity" />
         <activity android:name=".activitys.get_chance.GetChanceActivity" />
-        <activity android:name=".activitys.self_organization.SelfOrganizationActivity"></activity>
+        <activity android:name=".activitys.self_organization.SelfOrganizationActivity" />
+        <activity android:name=".activitys.self_organization_detail.SelfOrganizationDetailActivity"></activity>
     </application>
 
 </manifest>

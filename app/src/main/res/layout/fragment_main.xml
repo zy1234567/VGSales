@@ -5,20 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    </android.support.v4.view.ViewPager>
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        >
+        android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:titleEnabled="false"
             android:fitsSystemWindows="false"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:titleEnabled="false">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -31,39 +39,29 @@
             </RelativeLayout>
 
 
-
         </android.support.design.widget.CollapsingToolbarLayout>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_collapseMode="pin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            app:layout_collapseMode="pin">
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="1dp"
-            app:tabIndicatorColor="@color/color_001"
-            app:tabIndicatorHeight="3dp"
-            app:tabTextColor="@color/color_100"
-            app:tabSelectedTextColor="@color/color_001"
-            app:tabGravity="fill"
-            android:paddingBottom="2dp"
-            />
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="1dp"
+                android:paddingBottom="2dp"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/color_001"
+                app:tabIndicatorHeight="3dp"
+                app:tabSelectedTextColor="@color/color_001"
+                app:tabTextColor="@color/color_100" />
 
         </LinearLayout>
 
     </android.support.design.widget.AppBarLayout>
-
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-    </android.support.v4.view.ViewPager>
 
 </android.support.design.widget.CoordinatorLayout>

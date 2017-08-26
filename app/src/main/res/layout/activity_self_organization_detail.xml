@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ztstech.vgmate.activitys.self_organization_detail.SelfOrganizationDetailActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tab_height">
+
+        <ImageView
+            android:id="@+id/iv_left"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@mipmap/return_nav"/>
+
+        <android.support.design.widget.TabLayout
+            android:layout_toRightOf="@id/iv_left"
+            android:layout_marginRight="50dp"
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="1dp"
+            android:paddingBottom="2dp"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/color_001"
+            app:tabIndicatorHeight="3dp"
+            app:tabSelectedTextColor="@color/color_001"
+            app:tabTextColor="@color/color_100" />
+
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+
+
+
+
+
+</LinearLayout>
