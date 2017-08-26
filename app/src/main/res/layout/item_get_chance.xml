@@ -6,6 +6,7 @@
 
 
     <TextView
+        android:includeFontPadding="false"
         android:id="@+id/tv_day"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="12dp"
@@ -16,6 +17,7 @@
 
 
     <TextView
+        android:includeFontPadding="false"
         android:layout_marginTop="5dp"
         android:text="2017年"
         android:textColor="@color/color_102"
@@ -63,13 +65,35 @@
         android:layout_marginBottom="10dp"/>
 
     <View
+
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="-11dp"
-        android:layout_alignBottom="@id/tv_info"
         android:id="@+id/v"
         android:background="@color/color_103"
         android:layout_marginLeft="69dp"
         android:layout_width="1dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="20dp"/>
+
+    <ImageView
+        android:id="@+id/circle"
+        android:scaleType="center"
+        android:src="@drawable/circle_radius_6"
+        android:layout_marginLeft="66.5dp"
+        android:layout_alignTop="@id/tv_day"
+        android:layout_alignBottom="@id/tv_day"
+        android:layout_below="@id/v"
+        android:layout_width="6dp"
+        android:layout_height="6dp" />
+
+    <View
+        android:background="@color/color_103"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/circle"
+        android:layout_alignLeft="@id/v"
+        android:layout_alignRight="@id/v"
+        android:layout_alignBottom="@id/tv_info"
+        android:layout_marginBottom="-11dp"
+        />
+
 
 </RelativeLayout>
