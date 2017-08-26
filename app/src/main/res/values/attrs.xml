@@ -5,6 +5,7 @@
         <attr name="barTitle" format="string" />
         <attr name="srcLeft" format="reference" />
         <attr name="srcRight" format="reference" />
+        <attr name="showBackNav" format="boolean" />
     </declare-styleable>
 
 </resources>

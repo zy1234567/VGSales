@@ -1,5 +1,6 @@
 package com.ztstech.vgmate.weigets;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.AttrRes;
@@ -24,6 +25,8 @@ public class TopBar extends FrameLayout {
     private TextView tvTitle;
     private String title;
 
+    private boolean showBackNav = false;
+
     public TopBar(@NonNull Context context) {
         this(context, null, 0);
     }
@@ -46,6 +49,7 @@ public class TopBar extends FrameLayout {
 
         int leftDrawableId = typedArray.getResourceId(R.styleable.TopBar_srcLeft, -1);
         int rightDrawableId = typedArray.getResourceId(R.styleable.TopBar_srcRight, -1);
+        showBackNav = typedArray.getBoolean(R.styleable.TopBar_showBackNav, false);
 
         title = typedArray.getString(R.styleable.TopBar_barTitle);
 
@@ -60,6 +64,16 @@ public class TopBar extends FrameLayout {
         }
         if (rightDrawableId != -1) {
             imgRight.setImageResource(rightDrawableId);
+        }
+
+        if (showBackNav) {
+            imgLeft.setImageResource(R.mipmap.return_nav);
+            imgLeft.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((Activity) getContext()).finish();
+                }
+            });
         }
 
         addView(topView);
