@@ -8,4 +8,9 @@ public interface NetConstants {
 
     String BASE_URL = "http://bucea.verygrow.com/";
 
+    /**
+     * 上传文件
+     */
+    String UPLOAD_FILES = BASE_URL + "static/uploadFiles";
+
 }

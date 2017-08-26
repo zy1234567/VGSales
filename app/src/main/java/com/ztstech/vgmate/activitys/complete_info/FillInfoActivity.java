@@ -116,6 +116,8 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
         imgCard.setOnClickListener(this);
         imgIdBack.setOnClickListener(this);
 
+        tvSex.setOnClickListener(this);
+        tvBirthday.setOnClickListener(this);
         tvLocation.setOnClickListener(this);
 
     }
@@ -166,6 +168,12 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
         }else if (view == imgId) {
             currentImageView = imgId;
             takePhotoHelper.show();
+        }else if (view == tvSex) {
+            //选择性别
+
+        }else if (view == tvBirthday) {
+            //选择生日
+
         }
     }
 

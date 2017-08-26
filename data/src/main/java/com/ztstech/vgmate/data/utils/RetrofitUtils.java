@@ -1,20 +1,30 @@
 package com.ztstech.vgmate.data.utils;
 
 import com.google.gson.Gson;
+import com.ztstech.vgmate.data.api.UploadApi;
+import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.constants.NetConstants;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
 
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
+import okio.BufferedSink;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Emitter;
+import rx.Observable;
 import rx.functions.Action1;
 
 /**
@@ -39,6 +49,21 @@ public class RetrofitUtils {
                 .build();
         return retrofit.create(clazz);
     }
+
+    /**
+     * 上传文件
+     * @param file
+     * @return
+     */
+    public static Observable<BaseRespBean> uploadFile(File[] file) {
+        Map<String, RequestBody> requestFiles = new HashMap<>();
+        for (int i = 0; i < file.length; i++) {
+            RequestBody body = RequestBody.create(MediaType.parse("image"), file[i]);
+            requestFiles.put(file[i].getName(), body);
+        }
+        return createService(UploadApi.class).uploadFile("01", requestFiles);
+    }
+
 
     /**
      * 创建测试接口
