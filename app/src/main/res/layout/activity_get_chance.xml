@@ -9,6 +9,7 @@
     tools:context="com.ztstech.vgmate.activitys.get_chance.GetChanceActivity">
 
     <com.ztstech.vgmate.weigets.TopBar
+        app:barTitle="销售机会"
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

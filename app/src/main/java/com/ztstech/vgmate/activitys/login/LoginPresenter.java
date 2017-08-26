@@ -33,7 +33,7 @@ public class LoginPresenter extends PresenterImpl<LoginContract.View> implements
     @Override
     public void sendCode(String phone) {
         mView.showLoading(null);
-        new PresenterSubscriber<BaseRespBean>() {
+        new PresenterSubscriber<BaseRespBean>(mView) {
 
             @Override
             public void onNext(BaseRespBean baseRespBean) {

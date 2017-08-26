@@ -6,7 +6,7 @@
     >
 
     <ImageView
-        android:id="@+id/btn_new_top_bar_left"
+        android:id="@+id/iv_left"
         android:layout_width="50dp"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
@@ -36,7 +36,7 @@
     </RelativeLayout>
 
     <ImageView
-        android:id="@+id/btn_new_top_bar_right"
+        android:id="@+id/iv_right"
         android:layout_width="50dp"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"

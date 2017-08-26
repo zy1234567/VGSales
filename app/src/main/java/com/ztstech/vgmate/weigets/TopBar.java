@@ -1,6 +1,7 @@
 package com.ztstech.vgmate.weigets;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,36 +20,53 @@ import com.ztstech.vgmate.R;
 
 public class TopBar extends FrameLayout {
 
-    private ImageView imgRight;
+    private ImageView imgRight, imgLeft;
     private TextView tvTitle;
     private String title;
 
     public TopBar(@NonNull Context context) {
-        super(context);
-        init();
+        this(context, null, 0);
     }
 
     public TopBar(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        init();
+        this(context, attrs, 0);
     }
 
     public TopBar(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
-    }
 
-    private void init() {
         View topView = LayoutInflater.from(getContext()).inflate(R.layout.layout_top_bar,
-                this, true);
-        imgRight = topView.findViewById(R.id.btn_new_top_bar_right);
+                this, false);
+        imgRight = topView.findViewById(R.id.iv_right);
         tvTitle = topView.findViewById(R.id.tv_title);
+        imgLeft = topView.findViewById(R.id.iv_left);
+
+
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.TopBar);
+
+        int leftDrawableId = typedArray.getResourceId(R.styleable.TopBar_srcLeft, -1);
+        int rightDrawableId = typedArray.getResourceId(R.styleable.TopBar_srcRight, -1);
+
+        title = typedArray.getString(R.styleable.TopBar_barTitle);
+
+        typedArray.recycle();
 
         if (title != null) {
             tvTitle.setText(title);
         }
 
+        if (leftDrawableId != -1) {
+            imgLeft.setImageResource(leftDrawableId);
+        }
+        if (rightDrawableId != -1) {
+            imgRight.setImageResource(rightDrawableId);
+        }
+
+        addView(topView);
+
     }
+
+
 
 
     public ImageView getRightImage() {

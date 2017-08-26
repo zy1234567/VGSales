@@ -118,7 +118,9 @@ public class LoginActivity extends MVPActivity<LoginContract.Presenter> implemen
      * @param view
      */
     public void onNextClick(View view) {
-        mPresenter.login(etPhone.getText().toString(), etCode.getText().toString());
+        // TODO: 2017/8/26 test
+//        mPresenter.login(etPhone.getText().toString(), etCode.getText().toString());
+        loginFinish(null);
     }
 }
 

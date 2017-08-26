@@ -63,7 +63,7 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
         startActivity(new Intent(getActivity(), SellChanceActivity.class));
     }
 
-    @OnClick(R.id.img_bottom_2)
+    @OnClick(R.id.img_bottom_3)
     public void onAddSellMateClick(View v) {
         startActivity(new Intent(getActivity(), AddSellMateActivity.class));
     }
