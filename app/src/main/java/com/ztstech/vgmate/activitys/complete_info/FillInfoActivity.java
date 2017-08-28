@@ -1,10 +1,15 @@
 package com.ztstech.vgmate.activitys.complete_info;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.text.format.DateFormat;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +22,8 @@ import com.jph.takephoto.model.TResult;
 import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
+import com.prolificinteractive.materialcalendarview.CalendarMode;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
@@ -26,6 +33,10 @@ import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.utils.ToastUtil;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 
@@ -69,7 +80,6 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
 
     private final FillInfoModel model = new FillInfoModel();
 
-    private TakePhotoHelper takePhotoHelper;
     private InvokeParam invokeParam;
     private TakePhoto takePhoto;
 
@@ -134,7 +144,7 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
                 .bind(new TakePhotoImpl(this,this));
         takePhoto.onCreate(savedInstanceState);
 
-        takePhotoHelper = new TakePhotoHelper(this, takePhoto, true);
+
     }
 
     @Override
@@ -158,21 +168,52 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
             startActivityForResult(new Intent(this, LocationSelectActivity.class), REQ_LOCATION);
         }else if (view == imgHeader || view == tvHeader) {
             currentImageView = imgHeader;
-            takePhotoHelper.show();
+            new TakePhotoHelper(this, takePhoto, true).show();
         }else if (view == imgIdBack) {
             currentImageView = imgIdBack;
-            takePhotoHelper.show();
+            new TakePhotoHelper(this, takePhoto, true).show();
         }else if (view == imgCard) {
             currentImageView = imgCard;
-            takePhotoHelper.show();
+            new TakePhotoHelper(this, takePhoto, true).show();
         }else if (view == imgId) {
             currentImageView = imgId;
-            takePhotoHelper.show();
+            new TakePhotoHelper(this, takePhoto, true).show();
         }else if (view == tvSex) {
             //选择性别
-
+            new AlertDialog.Builder(this).setTitle("选择性别").setItems(new String[]{"男", "女"},
+                    new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    if (i == 0) {
+                        model.sex = "1";
+                        tvSex.setText("男");
+                    }else {
+                        model.sex = "2";
+                        tvSex.setText("女");
+                    }
+                }
+            }).create().show();
         }else if (view == tvBirthday) {
             //选择生日
+
+            final DatePicker datePicker = new DatePicker(this);
+            datePicker.setMaxDate(new Date().getTime());
+
+            new AlertDialog.Builder(this).setView(datePicker)
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.set(datePicker.getYear(), datePicker.getMonth(),
+                            datePicker.getDayOfMonth());
+                    Date date = calendar.getTime();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd",
+                            Locale.getDefault());
+                    String text = simpleDateFormat.format(date);
+                    tvBirthday.setText(text);
+                    model.birthday = text;
+                }
+            }).create().show();
 
         }
     }
@@ -186,56 +227,56 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
 
     private void onSubmitClick() {
         //暂时跳转主界面
-        onSubmitSucceed();
+//        onSubmitSucceed();
 
-//        model.location = tvLocation.getText().toString();
-//        model.birthday = etBirthday.getText().toString();
-//        model.cardBank = etCardBank.getText().toString();
-//        model.cardMaster = etCardMaster.getText().toString();
-//        model.cardNo = etCardNo.getText().toString();
-//        model.id = etId.getText().toString();
-//        model.name = etName.getText().toString();
-//        model.sex = etSex.getText().toString();
-//
-//        if (model.location.isEmpty()) {
-//            ToastUtil.toastCenter(this, "请填写地址");
-//            return;
-//        }else if (model.birthday.isEmpty()) {
-//            ToastUtil.toastCenter(this, "请填写出生日期");
-//            return;
-//        }else if (model.cardBank.isEmpty()) {
-//            ToastUtil.toastCenter(this, "请填写开户银行");
-//            return;
-//        }else if (model.cardMaster.isEmpty()) {
-//            ToastUtil.toastCenter(this, "请填写持卡人");
-//            return;
-//        }else if (model.cardNo.isEmpty()) {
-//            ToastUtil.toastCenter(this, "请填写银行卡号");
-//            return;
-//        }else if (model.id.isEmpty()) {
-//            ToastUtil.toastCenter(this, "请填写身份证号");
-//            return;
-//        }else if (model.name.isEmpty()) {
-//            ToastUtil.toastCenter(this, "请填写姓名");
-//            return;
-//        }else if (model.sex.isEmpty()) {
-//            ToastUtil.toastCenter(this, "请填写性别");
-//            return;
-//        }else if (model.headerFile == null) {
-//            ToastUtil.toastCenter(this, "请选择头像");
-//            return;
-//        }else if (model.idFile == null) {
-//            ToastUtil.toastCenter(this, "请选择身份证正面照片");
-//            return;
-//        }else if (model.idBackFile == null) {
-//            ToastUtil.toastCenter(this, "请选择身份证反面照片");
-//            return;
-//        }else if (model.cardFile == null) {
-//            ToastUtil.toastCenter(this, "请选择银行卡照片");
-//            return;
-//        }
-//
-//        mPresenter.saveInfo(model);
+        model.location = tvLocation.getText().toString();
+        model.birthday = tvBirthday.getText().toString();
+        model.cardBank = etCardBank.getText().toString();
+        model.cardMaster = etCardMaster.getText().toString();
+        model.cardNo = etCardNo.getText().toString();
+        model.id = etId.getText().toString();
+        model.name = etName.getText().toString();
+        model.sex = tvSex.getText().toString();
+
+        if (model.location.isEmpty()) {
+            ToastUtil.toastCenter(this, "请填写地址");
+            return;
+        }else if (model.birthday.isEmpty()) {
+            ToastUtil.toastCenter(this, "请填写出生日期");
+            return;
+        }else if (model.cardBank.isEmpty()) {
+            ToastUtil.toastCenter(this, "请填写开户银行");
+            return;
+        }else if (model.cardMaster.isEmpty()) {
+            ToastUtil.toastCenter(this, "请填写持卡人");
+            return;
+        }else if (model.cardNo.isEmpty()) {
+            ToastUtil.toastCenter(this, "请填写银行卡号");
+            return;
+        }else if (model.id.isEmpty()) {
+            ToastUtil.toastCenter(this, "请填写身份证号");
+            return;
+        }else if (model.name.isEmpty()) {
+            ToastUtil.toastCenter(this, "请填写姓名");
+            return;
+        }else if (model.sex.isEmpty()) {
+            ToastUtil.toastCenter(this, "请填写性别");
+            return;
+        }else if (model.headerFile == null) {
+            ToastUtil.toastCenter(this, "请选择头像");
+            return;
+        }else if (model.idFile == null) {
+            ToastUtil.toastCenter(this, "请选择身份证正面照片");
+            return;
+        }else if (model.idBackFile == null) {
+            ToastUtil.toastCenter(this, "请选择身份证反面照片");
+            return;
+        }else if (model.cardFile == null) {
+            ToastUtil.toastCenter(this, "请选择银行卡照片");
+            return;
+        }
+
+        mPresenter.saveInfo(model);
 
     }
 

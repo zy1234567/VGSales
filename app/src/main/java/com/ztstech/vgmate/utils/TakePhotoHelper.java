@@ -56,7 +56,8 @@ public class TakePhotoHelper {
         this.activity = activity;
         this.takePhoto = takePhoto;
         this.iscrop = iscrop;
-        File file = new File(Environment.getExternalStorageDirectory(), "/ztstechDown/" + System.currentTimeMillis() + ".jpg");
+        File file = new File(activity.getCacheDir(), "/ztstechDown/" +
+                System.currentTimeMillis() + ".jpg");
         if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
         imageUri = Uri.fromFile(file);
     }
@@ -66,7 +67,8 @@ public class TakePhotoHelper {
         this.takePhoto = takePhoto;
         this.iscrop = iscrop;
         this.mCropOptions = mCropOptions;
-        File file = new File(Environment.getExternalStorageDirectory(), "/ztstechDown/" + System.currentTimeMillis() + ".jpg");
+        File file = new File(activity.getCacheDir(), "/ztstechDown/" +
+                System.currentTimeMillis() + ".jpg");
         if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
         imageUri = Uri.fromFile(file);
     }
@@ -179,7 +181,8 @@ public class TakePhotoHelper {
      * 创建自定义裁剪配置 cropOptions
      */
     public CropOptions getCropOptions(int aspectX, int aspectY, int outPutX, int outPutY) {
-        return new CropOptions.Builder().setWithOwnCrop(true).setAspectX(aspectX).setAspectY(aspectY).setOutputX(outPutX).setOutputY(outPutY).create();
+        return new CropOptions.Builder().setWithOwnCrop(true).setAspectX(aspectX)
+                .setAspectY(aspectY).setOutputX(outPutX).setOutputY(outPutY).create();
     }
 
     /**

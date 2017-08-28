@@ -2,6 +2,7 @@ package com.ztstech.vgmate.data.api;
 
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -28,7 +29,8 @@ public interface UploadApi {
      * @param files
      * @return
      */
+    @Multipart
     @POST(UPLOAD_FILES)
-    Observable<BaseRespBean> uploadFile(@Query("savetype") String savetype,
-                                        @PartMap() Map<String, RequestBody> files);
+    Observable<BaseRespBean> uploadFile(@Part("savetype") String savetype,
+                                        @Part List<MultipartBody.Part> files);
 }

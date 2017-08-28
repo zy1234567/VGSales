@@ -12,10 +12,13 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -52,17 +55,21 @@ public class RetrofitUtils {
 
     /**
      * 上传文件
-     * @param file
      * @return
      */
-    public static Observable<BaseRespBean> uploadFile(File[] file) {
-        Map<String, RequestBody> requestFiles = new HashMap<>();
-        for (int i = 0; i < file.length; i++) {
-            RequestBody body = RequestBody.create(MediaType.parse("image"), file[i]);
-            requestFiles.put(file[i].getName(), body);
+    public static Observable<BaseRespBean> uploadFile(File[] files) {
+        List<MultipartBody.Part> parts = new ArrayList<>(files.length);
+        for (File file : files) {
+            RequestBody requestBody = RequestBody.create(MediaType.parse("file"), file);
+
+            MultipartBody.Part part = MultipartBody.Part.createFormData("files", file.getName(),
+                    requestBody);
+            parts.add(part);
+
         }
-        return createService(UploadApi.class).uploadFile("01", requestFiles);
+        return createService(UploadApi.class).uploadFile("01", parts);
     }
+
 
 
     /**
