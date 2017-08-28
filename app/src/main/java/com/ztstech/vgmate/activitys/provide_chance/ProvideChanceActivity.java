@@ -46,16 +46,23 @@ public class ProvideChanceActivity extends MVPActivity<ProvideChanceContract.Pre
         ImageView imageView = new ImageView(this);
         imageView.setImageResource(R.mipmap.add_img);
         imageView.setTag(TAG_ADD);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         customGridView.addView(imageView);
         customGridView.requestLayout();
-
     }
 
     @Override
     public void onClick(View view) {
         int tag = (int)view.getTag();
         if (TAG_ADD == tag) {
-
+            showPickImage();
         }
+    }
+
+    /**
+     * 显示选取图片
+     */
+    private void showPickImage() {
+
     }
 }
