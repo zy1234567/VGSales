@@ -22,7 +22,7 @@ public class MainFragmentFactory {
     }
 
     public int getCount() {
-        return 4;
+        return 1;
     }
 
     private Fragment createFragment(int index) {

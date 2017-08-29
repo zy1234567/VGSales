@@ -23,8 +23,6 @@ import butterknife.OnClick;
  */
 public class MainFragment extends MVPFragment<MainContract.Presenter> implements MainContract.View {
 
-//    @BindView(R.id.xrv_news)
-//    RecyclerView recyclerView;
 
     @BindView(R.id.viewpager)
     ViewPager viewPager;

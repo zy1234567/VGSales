@@ -2,8 +2,12 @@
 <resources>
 
     <color name="colorAccent">#1aa1fb</color>
-    <color name="colorPrimary">#ff9700</color>
+    <color name="colorPrimary">#fff</color>
     <color name="colorPrimaryDark">#ff000000</color>
+
+    <color name="datePicker_colorAccent">#1aa1fb</color>
+    <color name="datePicker_colorPrimary">#ff9700</color>
+    <color name="datePicker_colorPrimaryDark">#ff000000</color>
 
     <color name="color_001">#1aa1fb</color>
     <color name="color_002">#ff9700</color>

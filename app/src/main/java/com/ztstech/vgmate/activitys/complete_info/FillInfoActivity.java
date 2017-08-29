@@ -227,56 +227,56 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
 
     private void onSubmitClick() {
         //暂时跳转主界面
-//        onSubmitSucceed();
+        onSubmitSucceed();
 
-        model.location = tvLocation.getText().toString();
-        model.birthday = tvBirthday.getText().toString();
-        model.cardBank = etCardBank.getText().toString();
-        model.cardMaster = etCardMaster.getText().toString();
-        model.cardNo = etCardNo.getText().toString();
-        model.id = etId.getText().toString();
-        model.name = etName.getText().toString();
-        model.sex = tvSex.getText().toString();
-
-        if (model.location.isEmpty()) {
-            ToastUtil.toastCenter(this, "请填写地址");
-            return;
-        }else if (model.birthday.isEmpty()) {
-            ToastUtil.toastCenter(this, "请填写出生日期");
-            return;
-        }else if (model.cardBank.isEmpty()) {
-            ToastUtil.toastCenter(this, "请填写开户银行");
-            return;
-        }else if (model.cardMaster.isEmpty()) {
-            ToastUtil.toastCenter(this, "请填写持卡人");
-            return;
-        }else if (model.cardNo.isEmpty()) {
-            ToastUtil.toastCenter(this, "请填写银行卡号");
-            return;
-        }else if (model.id.isEmpty()) {
-            ToastUtil.toastCenter(this, "请填写身份证号");
-            return;
-        }else if (model.name.isEmpty()) {
-            ToastUtil.toastCenter(this, "请填写姓名");
-            return;
-        }else if (model.sex.isEmpty()) {
-            ToastUtil.toastCenter(this, "请填写性别");
-            return;
-        }else if (model.headerFile == null) {
-            ToastUtil.toastCenter(this, "请选择头像");
-            return;
-        }else if (model.idFile == null) {
-            ToastUtil.toastCenter(this, "请选择身份证正面照片");
-            return;
-        }else if (model.idBackFile == null) {
-            ToastUtil.toastCenter(this, "请选择身份证反面照片");
-            return;
-        }else if (model.cardFile == null) {
-            ToastUtil.toastCenter(this, "请选择银行卡照片");
-            return;
-        }
-
-        mPresenter.saveInfo(model);
+//        model.location = tvLocation.getText().toString();
+//        model.birthday = tvBirthday.getText().toString();
+//        model.cardBank = etCardBank.getText().toString();
+//        model.cardMaster = etCardMaster.getText().toString();
+//        model.cardNo = etCardNo.getText().toString();
+//        model.id = etId.getText().toString();
+//        model.name = etName.getText().toString();
+//        model.sex = tvSex.getText().toString();
+//
+//        if (model.location.isEmpty()) {
+//            ToastUtil.toastCenter(this, "请填写地址");
+//            return;
+//        }else if (model.birthday.isEmpty()) {
+//            ToastUtil.toastCenter(this, "请填写出生日期");
+//            return;
+//        }else if (model.cardBank.isEmpty()) {
+//            ToastUtil.toastCenter(this, "请填写开户银行");
+//            return;
+//        }else if (model.cardMaster.isEmpty()) {
+//            ToastUtil.toastCenter(this, "请填写持卡人");
+//            return;
+//        }else if (model.cardNo.isEmpty()) {
+//            ToastUtil.toastCenter(this, "请填写银行卡号");
+//            return;
+//        }else if (model.id.isEmpty()) {
+//            ToastUtil.toastCenter(this, "请填写身份证号");
+//            return;
+//        }else if (model.name.isEmpty()) {
+//            ToastUtil.toastCenter(this, "请填写姓名");
+//            return;
+//        }else if (model.sex.isEmpty()) {
+//            ToastUtil.toastCenter(this, "请填写性别");
+//            return;
+//        }else if (model.headerFile == null) {
+//            ToastUtil.toastCenter(this, "请选择头像");
+//            return;
+//        }else if (model.idFile == null) {
+//            ToastUtil.toastCenter(this, "请选择身份证正面照片");
+//            return;
+//        }else if (model.idBackFile == null) {
+//            ToastUtil.toastCenter(this, "请选择身份证反面照片");
+//            return;
+//        }else if (model.cardFile == null) {
+//            ToastUtil.toastCenter(this, "请选择银行卡照片");
+//            return;
+//        }
+//
+//        mPresenter.saveInfo(model);
 
     }
 
