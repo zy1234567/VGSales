@@ -1,6 +1,7 @@
 package com.ztstech.vgmate.data.api;
 
 import com.ztstech.vgmate.data.beans.BaseRespBean;
+import com.ztstech.vgmate.data.beans.UploadImageBean;
 
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,6 @@ public interface UploadApi {
      */
     @Multipart
     @POST(UPLOAD_FILES)
-    Observable<BaseRespBean> uploadFile(@Part("savetype") String savetype,
-                                        @Part List<MultipartBody.Part> files);
+    Observable<UploadImageBean> uploadFile(@Part("savetype") String savetype,
+                                           @Part List<MultipartBody.Part> files);
 }

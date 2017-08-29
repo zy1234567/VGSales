@@ -10,7 +10,7 @@ public class UpdateUserInfoBean {
     public String picurl;
 
     /**身份证，正反用,隔开*/
-    public String didurl;
+    public String[] didurl;
 
     public String cardUrl;
 

@@ -22,7 +22,7 @@ public interface LoginApi {
 
     @POST("exempt/saleUpdateUserMsg")
     Observable<BaseRespBean> updateUserInfo(@Query("picurl") String picurl,
-                                            @Query("didurl") String didurl,
+                                            @Query("didurl") String[] didurl,
                                             @Query("cardUrl") String cardUrl,
                                             @Query("sex") String sex,
                                             @Query("did") String did,

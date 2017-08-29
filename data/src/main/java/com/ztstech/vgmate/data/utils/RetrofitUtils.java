@@ -3,6 +3,7 @@ package com.ztstech.vgmate.data.utils;
 import com.google.gson.Gson;
 import com.ztstech.vgmate.data.api.UploadApi;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
+import com.ztstech.vgmate.data.beans.UploadImageBean;
 import com.ztstech.vgmate.data.constants.NetConstants;
 
 import java.io.File;
@@ -57,7 +58,7 @@ public class RetrofitUtils {
      * 上传文件
      * @return
      */
-    public static Observable<BaseRespBean> uploadFile(File[] files) {
+    public static Observable<UploadImageBean> uploadFile(File[] files) {
         List<MultipartBody.Part> parts = new ArrayList<>(files.length);
         for (File file : files) {
             RequestBody requestBody = RequestBody.create(MediaType.parse("file"), file);
