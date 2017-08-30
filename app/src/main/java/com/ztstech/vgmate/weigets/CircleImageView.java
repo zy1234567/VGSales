@@ -40,7 +40,10 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
         float small = width < height ? width : height;
         path.reset();
         path.addCircle(width / 2, height / 2, small / 2, Path.Direction.CCW);
-        canvas.clipPath(path, Region.Op.INTERSECT);
+//        canvas.clipPath(path, Region.Op.INTERSECT);
+        canvas.clipPath(path);
+
+
 
         super.onDraw(canvas);
     }

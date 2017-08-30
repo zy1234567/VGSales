@@ -37,5 +37,11 @@ interface LoginContract {
         void sendCode(String phone);
 
         void login(String phone, String code);
+
+        /**
+         * 用户身份信息是否完善
+         * @return
+         */
+        boolean isUserinfoCompleted();
     }
 }

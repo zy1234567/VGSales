@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.complete_info.FillInfoActivity;
+import com.ztstech.vgmate.activitys.main.MainActivity;
 import com.ztstech.vgmate.utils.ToastUtil;
 
 import butterknife.BindView;
@@ -91,7 +92,11 @@ public class LoginActivity extends MVPActivity<LoginContract.Presenter> implemen
     @Override
     public void loginFinish(@Nullable String errorMessage) {
         if (errorMessage == null) {
-            startActivity(new Intent(this, FillInfoActivity.class));
+            if (mPresenter.isUserinfoCompleted()) {
+                startActivity(new Intent(this, MainActivity.class));
+            }else {
+                startActivity(new Intent(this, FillInfoActivity.class));
+            }
             finish();
         }else {
             ToastUtil.toastCenter(this, "登录失败：" + errorMessage);

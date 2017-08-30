@@ -1,6 +1,7 @@
 package com.ztstech.vgmate.activitys.login;
 
 import android.os.Handler;
+import android.text.TextUtils;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.UserBean;
@@ -72,6 +73,11 @@ public class LoginPresenter extends PresenterImpl<LoginContract.View> implements
                 }
             }
         }.run(userRepository.login(phone, code));
+    }
+
+    @Override
+    public boolean isUserinfoCompleted() {
+        return !TextUtils.isEmpty(userRepository.getUser().info.picurl);
     }
 
 
