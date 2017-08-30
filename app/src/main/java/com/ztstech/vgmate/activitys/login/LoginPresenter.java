@@ -3,6 +3,7 @@ package com.ztstech.vgmate.activitys.login;
 import android.os.Handler;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
+import com.ztstech.vgmate.data.beans.UserBean;
 import com.ztstech.vgmate.data.repository.UserRepository;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.utils.PresenterSubscriber;
@@ -59,16 +60,15 @@ public class LoginPresenter extends PresenterImpl<LoginContract.View> implements
     @Override
     public void login(String phone, String code) {
         mView.showLoading(null);
-        new PresenterSubscriber<BaseRespBean>() {
+        new PresenterSubscriber<UserBean>() {
 
             @Override
-            public void onNext(BaseRespBean baseRespBean) {
+            public void onNext(UserBean baseRespBean) {
                 mView.hideLoading(null);
-//                messageCode为0时正常，为1时一小时超过5条，为2时一天超过20条，为3时没有此手机号
-                if (baseRespBean.messageCode == 0) {
+                if (baseRespBean.isSucceed()) {
                     mView.loginFinish(null);
                 }else {
-                    mView.loginFinish("未知错误");
+                    mView.loginFinish(baseRespBean.getErrmsg());
                 }
             }
         }.run(userRepository.login(phone, code));

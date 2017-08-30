@@ -4,6 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.google.gson.Gson;
+import com.ztstech.vgmate.data.beans.UserBean;
+
+import rx.Emitter;
+import rx.Observable;
+import rx.functions.Action1;
+
 
 /**
  * Created by zhiyuan on 2017/8/23.
@@ -11,8 +18,7 @@ import android.preference.PreferenceManager;
 
 public class UserPreferenceManager {
 
-    public static final String USER_LOGINED = "pref_user_logined";
-
+    private static final String USER = "pref_user_";
 
     private static UserPreferenceManager instance;
 
@@ -38,11 +44,50 @@ public class UserPreferenceManager {
 
 
     public boolean isUserLogined() {
-        return preferences.getBoolean(USER_LOGINED, false);
+        return preferences.getString(USER, null) != null;
     }
 
-    public void onLoginSucceed() {
-        preferences.edit().putBoolean(USER_LOGINED, true).apply();
+
+    /**
+     * 登录成功
+     * @param user
+     */
+    public void onLoginSucceed(final UserBean user) {
+        new Thread(){
+            @Override
+            public void run() {
+                String cacheData = new Gson().toJson(user);
+                preferences.edit().putString(cacheData, USER).apply();
+            }
+        }.start();
+    }
+
+    /**
+     * 获取本地用户
+     * @return
+     */
+    public Observable<UserBean> getCachedUserAsync() {
+        return Observable.create(new Action1<Emitter<UserBean>>() {
+            @Override
+            public void call(Emitter<UserBean> userBeanEmitter) {
+                String data = preferences.getString(USER, null);
+                if (data == null) {
+                    userBeanEmitter.onError(new NullPointerException("无此用户"));
+                }else {
+                    UserBean bean = new Gson().fromJson(data, UserBean.class);
+                    userBeanEmitter.onNext(bean);
+                }
+                userBeanEmitter.onCompleted();
+            }
+        }, Emitter.BackpressureMode.NONE);
+    }
+
+    public UserBean getCachedUserSync() {
+        String data = preferences.getString(USER, null);
+        if (data != null) {
+            return new Gson().fromJson(data, UserBean.class);
+        }
+        return null;
     }
 
 

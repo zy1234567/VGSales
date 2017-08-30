@@ -11,6 +11,6 @@ import rx.Observable;
 
 public interface MainPageApi {
 
-    @GET("AppSaleCountHomeMsg")
+    @GET("exempt/AppSaleCountHomeMsg")
     Observable<MainPageBean> loadMainPageInfo();
 }

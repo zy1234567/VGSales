@@ -14,4 +14,9 @@ public interface NetConstants {
      */
     String UPLOAD_FILES = BASE_URL + "static/uploadFiles";
 
+
+    int STATUS_SUCCEED = 0;
+
+
+
 }

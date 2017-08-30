@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import com.ztstech.vgmate.data.api.LoginApi;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.UpdateUserInfoBean;
+import com.ztstech.vgmate.data.beans.UserBean;
+import com.ztstech.vgmate.data.constants.NetConstants;
 import com.ztstech.vgmate.data.utils.RetrofitUtils;
 
 import retrofit2.http.Query;
@@ -28,6 +30,8 @@ public class UserRepository {
 
     private LoginApi loginApi;
 
+    private UserBean user;
+
     private UserRepository() {
         loginApi = RetrofitUtils.createService(LoginApi.class);
     }
@@ -37,11 +41,15 @@ public class UserRepository {
             synchronized (UserRepository.class) {
                 if (instance == null) {
                     instance = new UserRepository();
+                    //初始化数据
+                    instance.getCachedBeanAsync();
                 }
             }
         }
         return instance;
     }
+
+
 
     /**
      * 发送登录验证码
@@ -58,13 +66,14 @@ public class UserRepository {
      * @param code
      * @return
      */
-    public Observable<BaseRespBean> login(@NonNull String phone, @NonNull String code) {
-        return loginApi.login(phone, code, TYPE_LOGIN).doOnNext(new Action1<BaseRespBean>() {
+    public Observable<UserBean> login(@NonNull String phone, @NonNull String code) {
+        return loginApi.login(phone, code, TYPE_LOGIN).doOnNext(new Action1<UserBean>() {
             @Override
-            public void call(BaseRespBean baseRespBean) {
-                if (baseRespBean.messageCode == 0) {
+            public void call(UserBean baseRespBean) {
+                if (baseRespBean.isSucceed()) {
                     //登录成功
-                    UserPreferenceManager.getInstance().onLoginSucceed();
+                    UserPreferenceManager.getInstance().onLoginSucceed(baseRespBean);
+                    user = baseRespBean;
                 }
             }
         });
@@ -86,5 +95,31 @@ public class UserRepository {
     public Observable<BaseRespBean> updateUserInfo(UpdateUserInfoBean bean) {
         return loginApi.updateUserInfo(bean.picurl, bean.didurl, bean.cardUrl, bean.sex, bean.did,
                 bean.bname, bean.banks, bean.status, bean.cardNo);
+    }
+
+    /**
+     * 获取缓存用户
+     * @return
+     */
+    public Observable<UserBean> getCachedBeanAsync() {
+        return UserPreferenceManager.getInstance().getCachedUserAsync().doOnNext(
+                new Action1<UserBean>() {
+            @Override
+            public void call(UserBean userBean) {
+                user = userBean;
+            }
+        });
+    }
+
+
+
+
+
+    /**
+     * 获取内存用户
+     * @return
+     */
+    public UserBean getUser() {
+        return user;
     }
 }

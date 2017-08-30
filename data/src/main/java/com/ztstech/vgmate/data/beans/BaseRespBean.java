@@ -1,5 +1,7 @@
 package com.ztstech.vgmate.data.beans;
 
+import com.ztstech.vgmate.data.constants.NetConstants;
+
 /**
  * Created by zhiyuan on 2017/8/22.
  * 通用返回值
@@ -18,7 +20,7 @@ public class BaseRespBean {
      * @return
      */
     public boolean isSucceed() {
-        return status == 0;
+        return status == NetConstants.STATUS_SUCCEED;
     }
 
     /**

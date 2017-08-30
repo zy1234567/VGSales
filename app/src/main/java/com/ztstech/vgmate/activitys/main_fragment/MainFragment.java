@@ -6,7 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.add_sell_mate.AddSellMateActivity;
@@ -14,6 +17,7 @@ import com.ztstech.vgmate.activitys.main_fragment.adapter.MainFragmentPagerAdapt
 import com.ztstech.vgmate.activitys.self_organization.SelfOrganizationActivity;
 import com.ztstech.vgmate.activitys.sell_chance.SellChanceActivity;
 import com.ztstech.vgmate.data.beans.MainPageBean;
+import com.ztstech.vgmate.data.beans.UserBean;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -29,6 +33,12 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
 
     @BindView(R.id.tablayout)
     TabLayout tabLayout;
+
+    @BindView(R.id.img_header)
+    ImageView imgHeader;
+
+    @BindView(R.id.tv_name)
+    TextView tvName;
 
 
     public static MainFragment newInstance() {
@@ -82,5 +92,11 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
     @Override
     public void setData(MainPageBean mainPageBean) {
 
+    }
+
+    @Override
+    public void setUserInfo(UserBean userBean) {
+        Glide.with(getActivity()).load(userBean.info.picurl).into(imgHeader);
+        tvName.setText(userBean.info.uname);
     }
 }

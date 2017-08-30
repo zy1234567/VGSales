@@ -1,6 +1,7 @@
 package com.ztstech.vgmate.data.api;
 
 import com.ztstech.vgmate.data.beans.BaseRespBean;
+import com.ztstech.vgmate.data.beans.UserBean;
 
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -16,8 +17,8 @@ public interface LoginApi {
     Observable<BaseRespBean> sendLoginCode(@Query("phone") String phone);
 
     @POST("exempt/saleCheckCodeByPhone")
-    Observable<BaseRespBean> login(@Query("phone") String phone, @Query("code") String code,
-                                   @Query("type") String type);
+    Observable<UserBean> login(@Query("phone") String phone, @Query("code") String code,
+                               @Query("type") String type);
 
 
     @POST("exempt/saleUpdateUserMsg")
