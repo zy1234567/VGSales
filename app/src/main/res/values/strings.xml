@@ -5,6 +5,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">Sign in</string>
 
+
+    <string name="shop_tags_hint">请只添加已经提供服务的课程标签，否则会误导学员，也可能增加相关费用。</string>
+
+
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
