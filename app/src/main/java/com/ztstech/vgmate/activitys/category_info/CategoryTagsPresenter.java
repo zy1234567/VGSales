@@ -29,6 +29,18 @@ import rx.Subscriber;
  */
 public class CategoryTagsPresenter implements CategoryTagsContract.IPresenter, ExpandableLayout.LinesChangedListener {
 
+    /**
+     * intent key id
+     * activity result id 用 "," 隔开
+     */
+    public static final String PARAM_ID = "feedBackIds";
+
+    /**
+     * intent key name
+     * activity result name 用"、"隔开
+     */
+    public static final String PARAM_NAME = "feedBackNames";
+
     Context context;
     ExpandableLayout layoutTags;
     CategoryTagsContract.IView iView;
@@ -42,7 +54,6 @@ public class CategoryTagsPresenter implements CategoryTagsContract.IPresenter, E
     private int fatPositionNow = 0;
     private boolean allSubSelected = false;
     String selectedIds, selectedNames;
-//    private MineDataSource dataSource;
     String feedBackIds, feedBackNames;
     private KProgressHUD kProgressHUD;
 
@@ -163,7 +174,8 @@ public class CategoryTagsPresenter implements CategoryTagsContract.IPresenter, E
         Intent feedBackIntent = new Intent();
         StringBuilder builder = new StringBuilder();
         for (String id : subAdapter.getSelectedIds()) {
-            builder.append(id + ",");
+            builder.append(id);
+            builder.append(",");
         }
         if (!builder.toString().isEmpty()){
             feedBackIds = builder.toString().substring(0, builder.length() - 1);
@@ -171,49 +183,15 @@ public class CategoryTagsPresenter implements CategoryTagsContract.IPresenter, E
         }
         builder.delete(0, builder.length());
         for (String name : subAdapter.getSelectedNames()) {
-            builder.append(name + "、");
+            builder.append(name);
+            builder.append("、");
         }
-        feedBackIntent.putExtra("feedBackIds", feedBackIds);
-        feedBackIntent.putExtra("feedBackNames", feedBackNames);
+        feedBackIntent.putExtra(PARAM_ID, feedBackIds);
+        feedBackIntent.putExtra(PARAM_NAME, feedBackNames);
         return feedBackIntent;
     }
 
-//    /**
-//     * 更新机构信息
-//     */
-//    public void updateOrgInfo(){
-//        kProgressHUD.show();
-//        Map<String,String> params = new HashMap<>();
-//        params.put("otype",feedBackIds);
-//        params.put("authId", UserRepository.getInstance().getAuthId());
-//        dataSource.updateOrgInfo(params, new Subscriber<StringResponseData>() {
-//            @Override
-//            public void onCompleted() {
-//
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                kProgressHUD.dismiss();
-//                ToastUtil.toastCenter(context, NetConfig.INTERNET_ERROR_MESSAGE);
-//            }
-//
-//            @Override
-//            public void onNext(StringResponseData stringResponseData) {
-//                kProgressHUD.dismiss();
-//                if(stringResponseData.isSucceed()){
-//                    ToastUtil.toastCenter(context,"修改成功");
-//                    User user = UserRepository.getInstance().getUserBean();
-//                    User.OrgMapBean orgBean = user.getOrgmap();
-//                    orgBean.setOtypenames(feedBackNames);
-//                    orgBean.setOtype(feedBackIds);
-//                    user.setOrgmap(orgBean);
-//                    UserRepository.getInstance().setUserBean(user);
-//                    iView.finishActivity();
-//                }
-//            }
-//        });
-//    }
+
 
     /**
      * scrollview 是否展开

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jph.takephoto.app.TakePhoto;
@@ -19,6 +20,7 @@ import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.activitys.category_info.CategoryTagsActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.weigets.CustomGridView;
@@ -33,12 +35,21 @@ import butterknife.BindView;
  * 提供销售机会
  */
 public class ProvideChanceActivity extends MVPActivity<ProvideChanceContract.Presenter> implements
-        ProvideChanceContract.View, View.OnClickListener, InvokeListener, TakePhoto.TakeResultListener{
+        ProvideChanceContract.View, View.OnClickListener, InvokeListener,
+        TakePhoto.TakeResultListener{
 
-    private final int TAG_ADD = -1;
+    /**
+     * 请求标签key
+     */
+    public static final int REQUEST_TAG = 1;
 
     @BindView(R.id.cgv)
     CustomGridView customGridView;
+
+    @BindView(R.id.tv_tag)
+    TextView tvTag;
+
+    private ImageView imgAddImg;
 
     private TakePhoto takePhoto;
     private InvokeParam invokeParam;
@@ -61,12 +72,18 @@ public class ProvideChanceActivity extends MVPActivity<ProvideChanceContract.Pre
         super.onViewBindFinish();
 
         addDefaultImage();
+
+        tvTag.setOnClickListener(this);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        takePhoto.onActivityResult(requestCode, resultCode, data);
+        if (REQUEST_TAG == requestCode) {
+
+        }else {
+            takePhoto.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
@@ -83,19 +100,19 @@ public class ProvideChanceActivity extends MVPActivity<ProvideChanceContract.Pre
      * 增加默认图片
      */
     private void addDefaultImage() {
-        ImageView imageView = new ImageView(this);
-        imageView.setImageResource(R.mipmap.add_img);
-        imageView.setTag(TAG_ADD);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imageView.setOnClickListener(this);
-        customGridView.addView(imageView);
+        imgAddImg = new ImageView(this);
+        imgAddImg.setImageResource(R.mipmap.add_img);
+        imgAddImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imgAddImg.setOnClickListener(this);
+        customGridView.addView(imgAddImg);
         customGridView.requestLayout();
     }
 
     @Override
     public void onClick(View view) {
-        int tag = (int)view.getTag();
-        if (TAG_ADD == tag) {
+        if (view == tvTag) {
+            startActivityForResult(new Intent(this, CategoryTagsActivity.class), REQUEST_TAG);
+        }else if (view == imgAddImg) {
             showPickImage();
         }
     }

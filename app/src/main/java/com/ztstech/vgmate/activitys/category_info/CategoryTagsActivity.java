@@ -86,16 +86,16 @@ public class CategoryTagsActivity extends AppCompatActivity implements CategoryT
                 break;
             case R.id.tv_save:
                 feedBackData = presenter.getFeedBackData();
-                if(getIntent().getBooleanExtra("updateOrgInfo",false)){
-                    /* 机构修改资料*/
-//                    presenter.updateOrgInfo();
-                    throw new UnsupportedOperationException("不支持的操作");
-                }else {
+//                if(getIntent().getBooleanExtra("updateOrgInfo",false)){
+//                    /* 机构修改资料*/
+////                    presenter.updateOrgInfo();
+//                    throw new UnsupportedOperationException("不支持的操作");
+//                }else {
                     /* 注册*/
-                    setResult(RESULT_OK, feedBackData);
-                    finish();
-                    break;
-                }
+                setResult(RESULT_OK, feedBackData);
+                finish();
+                break;
+//                }
         }
     }
 

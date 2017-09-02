@@ -82,7 +82,7 @@
                     android:layout_height="60dp">
 
                     <TextView
-                        android:id="@+id/tv_tag"
+                        android:id="@+id/tv_tag_title"
                         android:textColor="@color/color_100"
                         android:textSize="@dimen/text_5"
                         android:gravity="center_vertical"
@@ -105,13 +105,14 @@
 
 
 
-                    <android.support.design.widget.TextInputEditText
+                    <TextView
+                        android:id="@+id/tv_tag"
+                        android:gravity="center_vertical"
                         android:layout_toLeftOf="@id/img_tag_arrow"
                         android:textSize="@dimen/text_5"
                         android:textColorHint="@color/color_103"
                         android:hint="请选择机构标签"
-                        android:enabled="false"
-                        android:layout_toRightOf="@id/tv_tag"
+                        android:layout_toRightOf="@id/tv_tag_title"
                         android:background="@null"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
