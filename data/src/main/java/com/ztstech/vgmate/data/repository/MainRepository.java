@@ -20,6 +20,6 @@ public class MainRepository {
     }
 
     public Observable<MainPageBean> loadMainPageInfo() {
-        return api.loadMainPageInfo();
+        return api.loadMainPageInfo(UserRepository.getInstance().getAuthId());
     }
 }

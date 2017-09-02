@@ -17,6 +17,8 @@ public interface NetConstants {
 
     int STATUS_SUCCEED = 0;
 
+    String PARAM_AUTHID = "authId";
+
 
 
 }

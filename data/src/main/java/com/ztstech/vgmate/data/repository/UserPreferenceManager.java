@@ -57,7 +57,7 @@ public class UserPreferenceManager {
             @Override
             public void run() {
                 String cacheData = new Gson().toJson(user);
-                preferences.edit().putString(cacheData, USER).apply();
+                preferences.edit().putString(USER, cacheData).apply();
             }
         }.start();
     }

@@ -28,5 +28,6 @@ public interface MainContract {
          */
         void loadData();
 
+
     }
 }

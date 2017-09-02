@@ -77,7 +77,7 @@ public class LoginPresenter extends PresenterImpl<LoginContract.View> implements
 
     @Override
     public boolean isUserinfoCompleted() {
-        return !TextUtils.isEmpty(userRepository.getUser().info.picurl);
+        return userRepository.isUserInfoCompleted();
     }
 
 

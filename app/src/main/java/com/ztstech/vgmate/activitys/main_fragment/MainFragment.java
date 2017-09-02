@@ -18,6 +18,7 @@ import com.ztstech.vgmate.activitys.self_organization.SelfOrganizationActivity;
 import com.ztstech.vgmate.activitys.sell_chance.SellChanceActivity;
 import com.ztstech.vgmate.data.beans.MainPageBean;
 import com.ztstech.vgmate.data.beans.UserBean;
+import com.ztstech.vgmate.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -86,7 +87,7 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
 
     @Override
     public void loadError(String errorMessage) {
-
+        ToastUtil.toastCenter(getActivity(), errorMessage);
     }
 
     @Override

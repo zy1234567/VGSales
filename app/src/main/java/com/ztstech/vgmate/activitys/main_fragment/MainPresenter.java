@@ -26,13 +26,16 @@ public class MainPresenter extends PresenterImpl<MainContract.View> implements
     @Override
     public void loadData() {
         //加载主界面数据
-        new PresenterSubscriber<MainPageBean>() {
+        new PresenterSubscriber<MainPageBean>(mView) {
 
             @Override
             public void onNext(MainPageBean mainPageBean) {
-                mView.hideLoading(null);
-                mView.setData(mainPageBean);
-
+                if (mainPageBean.isSucceed()) {
+                    mView.hideLoading(null);
+                    mView.setData(mainPageBean);
+                }else {
+                    mView.loadError(mainPageBean.getErrmsg());
+                }
             }
         }.run(repository.loadMainPageInfo());
 

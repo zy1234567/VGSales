@@ -8,4 +8,9 @@
         <attr name="showBackNav" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="CircleImageView">
+        <attr name="drawBorder" format="boolean" />
+        <attr name="borderColor" format="color" />
+        <attr name="borderWidth" format="dimension" />
+    </declare-styleable>
 </resources>

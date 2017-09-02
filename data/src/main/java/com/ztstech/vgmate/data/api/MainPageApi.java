@@ -1,8 +1,10 @@
 package com.ztstech.vgmate.data.api;
 
 import com.ztstech.vgmate.data.beans.MainPageBean;
+import com.ztstech.vgmate.data.constants.NetConstants;
 
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -12,5 +14,5 @@ import rx.Observable;
 public interface MainPageApi {
 
     @GET("exempt/AppSaleCountHomeMsg")
-    Observable<MainPageBean> loadMainPageInfo();
+    Observable<MainPageBean> loadMainPageInfo(@Query(NetConstants.PARAM_AUTHID) String authId);
 }

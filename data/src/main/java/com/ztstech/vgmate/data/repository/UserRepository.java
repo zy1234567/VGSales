@@ -1,6 +1,7 @@
 package com.ztstech.vgmate.data.repository;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.ztstech.vgmate.data.api.LoginApi;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
@@ -42,11 +43,19 @@ public class UserRepository {
                 if (instance == null) {
                     instance = new UserRepository();
                     //初始化数据
-                    instance.getCachedBeanAsync();
+                    instance.getCachedBeanSync();
                 }
             }
         }
         return instance;
+    }
+
+    /**
+     * 获取authid
+     * @return
+     */
+    public String getAuthId() {
+        return user.authId;
     }
 
 
@@ -111,7 +120,18 @@ public class UserRepository {
         });
     }
 
+    public UserBean getCachedBeanSync() {
+        user = UserPreferenceManager.getInstance().getCachedUserSync();
+        return user;
+    }
 
+    /**
+     * 用户资料是否完善
+     * @return
+     */
+    public boolean isUserInfoCompleted() {
+        return !TextUtils.isEmpty(user.info.picurl);
+    }
 
 
 

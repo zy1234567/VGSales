@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#88abcd">
 
@@ -148,11 +150,14 @@
         android:layout_marginTop="16pt">
 
         <com.ztstech.vgmate.weigets.CircleImageView
+            app:drawBorder="true"
+            app:borderColor="@color/color_50_109"
+            app:borderWidth="1dp"
             android:id="@+id/img_header"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
-            android:background="#f00" />
+            />
 
         <TextView
             android:id="@+id/tv_name"
