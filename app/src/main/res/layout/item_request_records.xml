@@ -19,7 +19,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginRight="12dp"
         android:layout_marginLeft="12dp"
-        android:background="@drawable/bg_c_10_s_101_f_fff"
+        android:background="@drawable/bg_c_10_s_104_f_fff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         
@@ -206,9 +206,10 @@
 
 
             <TextView
+                android:lines="1"
                 android:textSize="@dimen/text_5"
                 android:textColor="@color/color_100"
-                android:text="该机构申请添加标签：七天在线学习，趣味"
+                android:text="该机构申请添加标签：七天在线学习，趣味数学测试"
                 android:ellipsize="end"
                 android:layout_marginRight="10dp"
                 android:layout_toRightOf="@id/rl_gap"
