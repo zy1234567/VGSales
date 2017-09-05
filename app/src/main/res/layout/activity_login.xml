@@ -100,7 +100,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginRight="12dp"
         android:layout_marginLeft="12dp"
-        android:background="@drawable/bg_login_next"
+        android:background="@drawable/bg_c_2_f_sel_ben_login"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="下一步"

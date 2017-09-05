@@ -227,7 +227,7 @@
 
 
         <RelativeLayout
-            android:background="@drawable/bg_main_chance"
+            android:background="@drawable/bg_c_2_sz_70_25_f_002"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:layout_alignParentRight="true"

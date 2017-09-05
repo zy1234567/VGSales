@@ -11,7 +11,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="7.5dp"
         android:layout_marginRight="7.5dp"
-        android:background="@drawable/bg_ff9700_alpha_005"
+        android:background="@drawable/bg_c_2_s_ff9700_f_0dff9700"
         android:gravity="center"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"

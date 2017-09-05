@@ -251,7 +251,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="12dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/bg_001_border_003_angle_2_1px"
+            android:background="@drawable/bg_c_2_s_003_f_001"
             android:drawableLeft="@mipmap/ico_add"
             android:gravity="center"
             android:paddingLeft="6dp"

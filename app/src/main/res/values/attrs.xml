@@ -13,4 +13,8 @@
         <attr name="borderColor" format="color" />
         <attr name="borderWidth" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="CircleGapView">
+        <attr name="color" format="color" />
+    </declare-styleable>
 </resources>

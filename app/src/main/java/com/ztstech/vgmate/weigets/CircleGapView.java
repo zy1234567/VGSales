@@ -1,6 +1,7 @@
 package com.ztstech.vgmate.weigets;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
@@ -36,7 +37,13 @@ public class CircleGapView extends View {
     public CircleGapView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        mColor = ContextCompat.getColor(context, R.color.color_006);
+        int defaultColor = ContextCompat.getColor(context, R.color.color_006);
+
+        if (attrs != null) {
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CircleGapView);
+            mColor = typedArray.getColor(R.styleable.CircleGapView_color, defaultColor);
+            typedArray.recycle();
+        }
 
         mFillRadius = ViewUtils.dp2px(context, mFillRadius);
         mStrokeWidth = ViewUtils.dp2px(context, mStrokeWidth);

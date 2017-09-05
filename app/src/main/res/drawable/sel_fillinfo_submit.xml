@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:state_enabled="true" android:drawable="@drawable/bg_fillinfo_submit_enable" />
-    <item android:state_enabled="false" android:drawable="@drawable/bg_fillinfo_submit_disable" />
+    <item android:state_enabled="true" android:drawable="@drawable/bg_c_2_f_001" />
+    <item android:state_enabled="false" android:drawable="@drawable/bg_c_2_f_104" />
 </selector>
