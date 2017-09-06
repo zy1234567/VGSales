@@ -43,6 +43,7 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/ll_bottom"
             android:background="@drawable/bg_c_10_0_0_10_f_fff"
             android:orientation="vertical"
             android:layout_below="@id/rl_header"
@@ -70,9 +71,12 @@
 
         </LinearLayout>
         
-        
-
-
+        <ImageView
+            android:layout_marginTop="16dp"
+            android:layout_below="@id/ll_bottom"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
 
