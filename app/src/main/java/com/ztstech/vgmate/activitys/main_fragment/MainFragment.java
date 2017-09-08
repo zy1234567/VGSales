@@ -14,6 +14,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.add_sell_mate.AddSellMateActivity;
 import com.ztstech.vgmate.activitys.main_fragment.adapter.MainFragmentPagerAdapter;
+import com.ztstech.vgmate.activitys.org_list.OrgListActivity;
 import com.ztstech.vgmate.activitys.self_organization.SelfOrganizationActivity;
 import com.ztstech.vgmate.activitys.sell_chance.SellChanceActivity;
 import com.ztstech.vgmate.data.beans.MainPageBean;
@@ -68,21 +69,21 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
 
     }
 
-    @OnClick(R.id.fl_sell_chance)
-    public void onSellChanceClick(View v) {
-        startActivity(new Intent(getActivity(), SellChanceActivity.class));
-    }
+//    @OnClick(R.id.fl_sell_chance)
+//    public void onSellChanceClick(View v) {
+//        startActivity(new Intent(getActivity(), SellChanceActivity.class));
+//    }
 
-    @OnClick(R.id.img_bottom_3)
+    @OnClick(R.id.tv_mate)
     public void onAddSellMateClick(View v) {
         //点击增加销售伙伴
         startActivity(new Intent(getActivity(), AddSellMateActivity.class));
     }
 
-    @OnClick(R.id.img_bottom_0)
+    @OnClick(R.id.tv_org)
     public void onSelfOrganizationClick(View v) {
         //点击自拓机构
-        startActivity(new Intent(getActivity(), SelfOrganizationActivity.class));
+        startActivity(new Intent(getActivity(), OrgListActivity.class));
     }
 
     @Override

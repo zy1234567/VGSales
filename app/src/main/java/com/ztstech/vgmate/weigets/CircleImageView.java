@@ -25,6 +25,8 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
     private float mBorderWidth;
     private boolean showBroder = true;
 
+    private int mBorderBackgroundColor = 0x8889abcd;
+
 
     public CircleImageView(Context context) {
         this(context, null, 0);
@@ -69,8 +71,12 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
 
         super.onDraw(canvas);
         if (showBroder) {
-            paint.setColor(mBorderColor);
+
+            paint.setColor(mBorderBackgroundColor);
             paint.setStrokeWidth(mBorderWidth);
+            canvas.drawCircle(width / 2, height / 2, small / 2, paint);
+
+            paint.setColor(mBorderColor);
             canvas.drawCircle(width / 2, height / 2, small / 2, paint);
 
         }
