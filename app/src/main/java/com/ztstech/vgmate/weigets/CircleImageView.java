@@ -52,7 +52,7 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
             mBorderColor = typedArray.getColor(R.styleable.CircleImageView_borderColor,
                     ContextCompat.getColor(context, R.color.color_50_109));
             showBroder = typedArray.getBoolean(R.styleable.CircleImageView_drawBorder, true);
-            mBorderWidth = typedArray.getDimension(R.styleable.CircleImageView_borderWidth, 2);
+            mBorderWidth = typedArray.getDimension(R.styleable.CircleImageView_borderWidth, 3);
             typedArray.recycle();
         }
 

@@ -157,11 +157,11 @@
 
         <com.ztstech.vgmate.weigets.CircleImageView
             android:id="@+id/img_header"
-            android:layout_width="61dp"
-            android:layout_height="61dp"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
             android:layout_centerHorizontal="true"
             app:borderColor="@color/color_50_109"
-            app:borderWidth="1dp"
+            app:borderWidth="2dp"
             app:drawBorder="true" />
 
         <TextView
