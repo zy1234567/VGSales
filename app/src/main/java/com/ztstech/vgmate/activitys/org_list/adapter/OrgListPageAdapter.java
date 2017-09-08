@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.ztstech.vgmate.activitys.org_list.fragments.AuditFragment;
 import com.ztstech.vgmate.activitys.org_list.fragments.InvalidFragment;
-import com.ztstech.vgmate.activitys.org_list.fragments.PassFragment;
+import com.ztstech.vgmate.activitys.org_list.fragments.pass.PassFragment;
 
 /**
  * Created by zhiyuan on 2017/9/8.
