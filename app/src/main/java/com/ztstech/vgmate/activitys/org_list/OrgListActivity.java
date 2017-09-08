@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.activitys.org_list.adapter.OrgListPageAdapter;
 import com.ztstech.vgmate.activitys.self_organization_detail.adapter.SelfOrganizationDetailPagerAdapter;
 
 import butterknife.BindView;
@@ -23,7 +24,7 @@ public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> impl
     @BindView(R.id.tab_layout)
     TabLayout tableLayout;
 
-    private SelfOrganizationDetailPagerAdapter pagerAdapter;
+    private OrgListPageAdapter pagerAdapter;
 
     @Override
     protected int getLayoutRes() {
@@ -41,7 +42,7 @@ public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> impl
         super.onViewBindFinish();
         tableLayout.setupWithViewPager(viewPager);
 
-        pagerAdapter = new SelfOrganizationDetailPagerAdapter(getSupportFragmentManager());
+        pagerAdapter = new OrgListPageAdapter(getSupportFragmentManager());
 
         viewPager.setAdapter(pagerAdapter);
     }
