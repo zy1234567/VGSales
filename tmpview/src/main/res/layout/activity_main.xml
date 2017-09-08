@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <com.ztstech.vgmate.weigets.TopBar
+        android:layout_alignParentTop="true"
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        app:srcLeft="@mipmap/me_home"
+        app:srcRight="@mipmap/add_opportunity"
+        android:layout_height="@dimen/top_bar_height">
+    </com.ztstech.vgmate.weigets.TopBar>
+
+
+    <com.ztstech.vgmate.activitys.main.widget.BottomBar
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_bar_height">
+    </com.ztstech.vgmate.activitys.main.widget.BottomBar>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_main"
+        android:layout_above="@id/bottom_bar"
+        android:layout_below="@id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>

@@ -36,10 +36,10 @@
         <activity android:name=".activitys.self_organization.SelfOrganizationActivity" />
         <activity android:name=".activitys.self_organization_detail.SelfOrganizationDetailActivity" />
         <activity android:name=".activitys.category_info.CategoryTagsActivity" />
-        <activity android:name=".activitys.request_record_detail.RequestRecordDialogActivity"
-            android:theme="@style/DialogActivity">
-
-        </activity>
+        <activity
+            android:name=".activitys.request_record_detail.RequestRecordDialogActivity"
+            android:theme="@style/DialogActivity"></activity>
+        <activity android:name=".activitys.org_list.OrgListActivity"></activity>
     </application>
 
 </manifest>
