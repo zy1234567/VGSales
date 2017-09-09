@@ -1,6 +1,7 @@
 package com.ztstech.vgmate.activitys.article_detail;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -62,7 +63,9 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
 
         webView.getSettings().setJavaScriptEnabled(true);
 
-        webView.loadUrl(data.url);
+        if (!TextUtils.isEmpty(data.url)) {
+            webView.loadUrl(data.url);
+        }
 
     }
 

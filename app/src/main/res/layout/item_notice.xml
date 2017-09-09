@@ -7,36 +7,35 @@
 
 
     <ImageView
-        android:id="@+id/iv_item_recycler_notice"
+        android:id="@+id/iv_title"
         android:background="#f00"
         android:layout_centerVertical="true"
         android:layout_width="73dp"
         android:layout_height="73dp" />
 
     <TextView
-        android:text="蔚来伙伴2017年全国风采展示很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长"
         android:lines="1"
         android:ellipsize="end"
         android:layout_marginRight="12dp"
         android:textColor="@color/color_100"
         android:textSize="@dimen/text_4"
-        android:id="@+id/tv_item_recycler_notice_title"
-        android:layout_toRightOf="@id/iv_item_recycler_notice"
+        android:id="@+id/tv_title"
+        android:layout_toRightOf="@id/iv_title"
         android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
+
         android:layout_marginBottom="15dp"
         android:ellipsize="end"
-        android:layout_alignLeft="@id/tv_item_recycler_notice_title"
+        android:layout_alignLeft="@id/tv_title"
         android:gravity="bottom"
         android:lines="3"
-        android:id="@+id/tv_date"
+        android:id="@+id/tv_content"
         android:textColor="@color/color_102"
         android:textSize="@dimen/text_8"
         android:layout_alignParentBottom="true"
-        android:text="1、时长混乱\n2、爱松紧哦 iasokaposkaposkpoakspoakspokapokspoakpsoka"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

@@ -16,6 +16,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.main_fragment.subview.notice.adapter.NoticeRecyclerAdapter;
+import com.ztstech.vgmate.data.beans.MainListBean;
 import com.ztstech.vgmate.model.notice.NoticeModel;
 import com.ztstech.vgmate.utils.ViewUtils;
 
@@ -91,14 +92,15 @@ public class NoticeFragment extends MVPFragment<NoticeContract.Presenter> implem
 
     }
 
-    @Override
-    public void setData(List<NoticeModel> items) {
-        if (refreshLayout.isLoading()) {
-            refreshLayout.finishLoadmore();
-            refreshLayout.finishRefresh();
 
-        }
-        recyclerAdapter.setListData(items);
+    @Override
+    public void setData(MainListBean data) {
+        recyclerAdapter.setListData(data.list);
         recyclerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showError(String errorMessage) {
+
     }
 }
