@@ -16,6 +16,7 @@ import android.widget.PopupWindow;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.activitys.add_org.AddOrgActivity;
 import com.ztstech.vgmate.activitys.add_sell_mate.AddSellMateActivity;
 import com.ztstech.vgmate.activitys.create_share_info.CreateShareInfoActivity;
 import com.ztstech.vgmate.activitys.create_share_notice.CreateShareNoticeActivity;
@@ -126,7 +127,7 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
                 break;
             case R.id.tv_add_org:
                 //添加机构
-                startActivity(new Intent(this, ProvideChanceActivity.class));
+                startActivity(new Intent(this, AddOrgActivity.class));
                 break;
             case R.id.tv_share_info:
                 //分享资讯

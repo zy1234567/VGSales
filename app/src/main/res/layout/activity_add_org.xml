@@ -109,6 +109,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:layout_marginRight="12dp"
                     android:id="@+id/tv_check"
                     android:gravity="center"
                     android:text="检测重复"
@@ -265,6 +266,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:layout_marginRight="12dp"
                     android:id="@+id/tv_contact"
                     android:gravity="center"
                     android:text="手机通讯录"
