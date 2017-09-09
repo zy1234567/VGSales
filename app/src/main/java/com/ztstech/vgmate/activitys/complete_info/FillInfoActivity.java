@@ -31,6 +31,7 @@ import com.ztstech.vgmate.activitys.main.MainActivity;
 import com.ztstech.vgmate.model.fill_info.FillInfoModel;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.utils.ToastUtil;
+import com.ztstech.vgmate.weigets.TopBar;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -48,6 +49,9 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
 
     /**请求地址*/
     public static final int REQ_LOCATION = 0;
+
+    @BindView(R.id.top_bar)
+    TopBar topBar;
 
     @BindView(R.id.tv_location)
     TextView tvLocation;

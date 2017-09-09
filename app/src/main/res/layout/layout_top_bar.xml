@@ -13,6 +13,25 @@
         android:layout_centerVertical="true"
         android:scaleType="centerInside" />
 
+    <TextView
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_2"
+        android:id="@+id/tv_left"
+        android:layout_marginLeft="12dp"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_2"
+        android:id="@+id/tv_right"
+        android:layout_marginRight="12dp"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
     <RelativeLayout
         android:id="@+id/rl_total_search"
         android:layout_width="match_parent"

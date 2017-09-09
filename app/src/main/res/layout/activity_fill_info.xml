@@ -7,32 +7,40 @@
     android:orientation="vertical"
     tools:context="com.ztstech.vgmate.activitys.complete_info.FillInfoActivity">
 
-
-    <RelativeLayout
+    <com.ztstech.vgmate.weigets.TopBar
+        android:id="@+id/top_bar"
+        app:showBackNav="true"
+        app:barTitle="完善身份资料"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/top_bar_height">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:src="@mipmap/return_nav"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+    </com.ztstech.vgmate.weigets.TopBar>
 
-        <TextView
-            android:textColor="@color/color_100"
-            android:textSize="@dimen/text_2"
-            android:text="完善身份资料"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/top_bar_height">-->
 
-        <View
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/color_105" />
+        <!--<ImageView-->
+            <!--android:src="@mipmap/return_nav"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent" />-->
 
-    </RelativeLayout>
+        <!--<TextView-->
+            <!--android:textColor="@color/color_100"-->
+            <!--android:textSize="@dimen/text_2"-->
+            <!--android:text="完善身份资料"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+
+        <!--<View-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1px"-->
+            <!--android:background="@color/color_105" />-->
+
+    <!--</RelativeLayout>-->
 
     <ScrollView
         android:layout_width="match_parent"

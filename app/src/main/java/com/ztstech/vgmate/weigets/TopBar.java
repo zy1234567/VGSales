@@ -22,8 +22,9 @@ import com.ztstech.vgmate.R;
 public class TopBar extends FrameLayout {
 
     private ImageView imgRight, imgLeft;
-    private TextView tvTitle;
-    private String title;
+    private TextView tvTitle, tvLeft, tvRight;
+
+    private String title, leftText, rightText;
 
     private boolean showBackNav = false;
 
@@ -43,6 +44,8 @@ public class TopBar extends FrameLayout {
         imgRight = topView.findViewById(R.id.iv_right);
         tvTitle = topView.findViewById(R.id.tv_title);
         imgLeft = topView.findViewById(R.id.iv_left);
+        tvLeft = topView.findViewById(R.id.tv_left);
+        tvRight = topView.findViewById(R.id.tv_right);
 
 
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.TopBar);
@@ -57,6 +60,14 @@ public class TopBar extends FrameLayout {
 
         if (title != null) {
             tvTitle.setText(title);
+        }
+
+        if (leftText != null) {
+            tvLeft.setText(leftText);
+        }
+
+        if (rightText != null) {
+            tvRight.setText(rightText);
         }
 
         if (leftDrawableId != -1) {
@@ -91,6 +102,20 @@ public class TopBar extends FrameLayout {
         this.title = title;
         if (tvTitle != null) {
             tvTitle.setText(title);
+        }
+    }
+
+    public void setLeftText(String leftText) {
+        this.leftText = leftText;
+        if (tvLeft != null) {
+            tvLeft.setText(leftText);
+        }
+    }
+
+    public void setRightText(String rightText) {
+        this.rightText = rightText;
+        if (tvRight != null) {
+            tvRight.setText(rightText);
         }
     }
 }
