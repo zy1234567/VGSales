@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_30_000"
+    android:id="@+id/rl_container">
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/top_bar_height"
+        android:background="#fff"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_add_friend"
+            android:textColor="@color/color_100"
+            android:textSize="@dimen/text_5"
+            android:gravity="center"
+            android:text="添加伙伴"
+            android:paddingRight="13dp"
+            android:paddingLeft="13dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color_106" />
+
+        <TextView
+            android:id="@+id/tv_add_org"
+            android:textColor="@color/color_100"
+            android:textSize="@dimen/text_5"
+            android:gravity="center"
+            android:text="添加机构"
+            android:paddingRight="13dp"
+            android:paddingLeft="13dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color_106" />
+
+        <TextView
+            android:id="@+id/tv_share_info"
+            android:textColor="@color/color_100"
+            android:textSize="@dimen/text_5"
+            android:gravity="center"
+            android:text="发布资讯"
+            android:paddingRight="13dp"
+            android:paddingLeft="13dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color_106" />
+
+        <TextView
+            android:id="@+id/tv_share_notice"
+            android:textColor="@color/color_100"
+            android:textSize="@dimen/text_5"
+            android:gravity="center"
+            android:text="发布公告"
+            android:paddingRight="13dp"
+            android:paddingLeft="13dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
