@@ -13,6 +13,8 @@ import java.util.List;
 public class InformationPresenter extends PresenterImpl<InformationContract.View> implements
         InformationContract.Presenter{
 
+    /**当前页数*/
+    private int currentPage = 1;
 
     public InformationPresenter(InformationContract.View view) {
         super(view);
@@ -31,5 +33,19 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
             models.add(model);
         }
         mView.setListData(models);
+    }
+
+    @Override
+    public void appendData() {
+
+    }
+
+
+    /**
+     * 根据页数加载数据
+     * @param page
+     */
+    private void loadDataWithPage(int page) {
+
     }
 }

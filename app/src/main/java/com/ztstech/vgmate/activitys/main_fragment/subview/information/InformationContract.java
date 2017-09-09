@@ -19,7 +19,15 @@ interface InformationContract {
 
     interface Presenter extends BasePresenter<InformationContract.View> {
 
+        /**
+         * 加载列表数据，即下拉刷新
+         */
         void loadListData();
+
+        /**
+         * 添加数据
+         */
+        void appendData();
     }
 
 }

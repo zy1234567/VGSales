@@ -5,10 +5,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.main_fragment.subview.information.adapter.InformationRecyclerAdapter;
 import com.ztstech.vgmate.model.information.InformationModel;
+import com.ztstech.vgmate.utils.ViewUtils;
 
 import java.util.List;
 
@@ -21,6 +25,9 @@ public class InformationFragment extends MVPFragment<InformationContract.Present
 
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
+
+    @BindView(R.id.refresh_layout)
+    RefreshLayout refreshLayout;
 
     private InformationRecyclerAdapter recyclerAdapter;
 
@@ -50,7 +57,24 @@ public class InformationFragment extends MVPFragment<InformationContract.Present
 
         recyclerView.setAdapter(recyclerAdapter);
 
+        refreshLayout.setEnableRefresh(false);  //禁止下拉刷新
+
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000);
+            }
+        });
+
+        refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadmore(2000);
+            }
+        });
+
         mPresenter.loadListData();
+
 
     }
 

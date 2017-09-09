@@ -10,10 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.main_fragment.subview.notice.adapter.NoticeRecyclerAdapter;
 import com.ztstech.vgmate.model.notice.NoticeModel;
+import com.ztstech.vgmate.utils.ViewUtils;
 
 import java.util.List;
 
@@ -27,6 +31,10 @@ public class NoticeFragment extends MVPFragment<NoticeContract.Presenter> implem
 
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
+
+
+    @BindView(R.id.refresh_layout)
+    RefreshLayout refreshLayout;
 
     private NoticeRecyclerAdapter recyclerAdapter;
 
@@ -61,12 +69,35 @@ public class NoticeFragment extends MVPFragment<NoticeContract.Presenter> implem
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(recyclerAdapter);
 
+        refreshLayout.setEnableRefresh(false);  //禁止下拉刷新
+
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000);
+            }
+        });
+
+        refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadmore(2000);
+            }
+        });
+
+
         mPresenter.loadData();
+
 
     }
 
     @Override
     public void setData(List<NoticeModel> items) {
+        if (refreshLayout.isLoading()) {
+            refreshLayout.finishLoadmore();
+            refreshLayout.finishRefresh();
+
+        }
         recyclerAdapter.setListData(items);
         recyclerAdapter.notifyDataSetChanged();
     }
