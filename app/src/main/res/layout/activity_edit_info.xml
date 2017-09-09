@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="@color/color_107"
     android:layout_height="match_parent">
 
 
@@ -30,6 +31,9 @@
 
 
             <TextView
+                android:background="#fff"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="15dp"
                 android:id="@+id/tv_setting"
                 android:gravity="center_vertical"
                 android:paddingLeft="12dp"
@@ -37,7 +41,7 @@
                 android:text="设置"
                 android:drawableLeft="@mipmap/ico_me_setting"
                 android:layout_width="match_parent"
-                android:layout_height="60dp" />
+                android:layout_height="45dp" />
 
         </LinearLayout>
 
