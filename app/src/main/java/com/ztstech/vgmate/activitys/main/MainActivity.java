@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.activitys.info.EditInfoActivity;
 import com.ztstech.vgmate.activitys.main.adapter.MainPagerAdapter;
 import com.ztstech.vgmate.activitys.main.widget.BottomBar;
 import com.ztstech.vgmate.weigets.TopBar;
@@ -53,6 +54,14 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
                 startActivity(new Intent(MainActivity.this, ProvideChanceActivity.class));
             }
         });
+
+        topBar.getLeftImage().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, EditInfoActivity.class));
+            }
+        });
+
 
     }
 

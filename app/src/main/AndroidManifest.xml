@@ -40,7 +40,8 @@
             android:name=".activitys.request_record_detail.RequestRecordDialogActivity"
             android:theme="@style/DialogActivity" />
         <activity android:name=".activitys.org_list.OrgListActivity" />
-        <activity android:name=".activitys.info.InfoActivity"></activity>
+        <activity android:name=".activitys.info.EditInfoActivity" />
+        <activity android:name=".activitys.setting.SettingActivity"></activity>
     </application>
 
 </manifest>

@@ -54,6 +54,9 @@ public class TopBar extends FrameLayout {
         int rightDrawableId = typedArray.getResourceId(R.styleable.TopBar_srcRight, -1);
         showBackNav = typedArray.getBoolean(R.styleable.TopBar_showBackNav, false);
 
+        leftText = typedArray.getString(R.styleable.TopBar_textLeft);
+        rightText = typedArray.getString(R.styleable.TopBar_textRight);
+
         title = typedArray.getString(R.styleable.TopBar_barTitle);
 
         typedArray.recycle();
@@ -96,6 +99,18 @@ public class TopBar extends FrameLayout {
 
     public ImageView getRightImage() {
         return imgRight;
+    }
+
+    public ImageView getLeftImage() {
+        return imgLeft;
+    }
+
+    public TextView getRightTextView() {
+        return tvRight;
+    }
+
+    public TextView getLeftTextView() {
+        return tvLeft;
     }
 
     public void setTitle(String title) {
