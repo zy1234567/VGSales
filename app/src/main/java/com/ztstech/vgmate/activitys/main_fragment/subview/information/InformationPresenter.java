@@ -1,7 +1,10 @@
 package com.ztstech.vgmate.activitys.main_fragment.subview.information;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
+import com.ztstech.vgmate.data.beans.MainListBean;
+import com.ztstech.vgmate.data.repository.MainListRepository;
 import com.ztstech.vgmate.model.information.InformationModel;
+import com.ztstech.vgmate.utils.PresenterSubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,23 +19,29 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
     /**当前页数*/
     private int currentPage = 1;
 
+    private MainListRepository mainListRepository;
+
     public InformationPresenter(InformationContract.View view) {
         super(view);
+        mainListRepository = MainListRepository.getInstance();
     }
 
 
     @Override
     public void loadListData() {
-        List<InformationModel> models = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            InformationModel model = new InformationModel();
-            model.title = "titleasasa" + i;
-            model.date = "4月1日";
-            model.comment = 12;
-            model.picurl = "";
-            models.add(model);
-        }
-        mView.setListData(models);
+
+        new PresenterSubscriber<MainListBean>(mView){
+
+            @Override
+            public void onNext(MainListBean mainListBean) {
+                if (mainListBean.isSucceed()) {
+                    mView.setListData(mainListBean);
+                }else {
+                    mView.showError(mainListBean.getErrmsg());
+                }
+            }
+        }.run(mainListRepository.queryInformation());
+
     }
 
     @Override

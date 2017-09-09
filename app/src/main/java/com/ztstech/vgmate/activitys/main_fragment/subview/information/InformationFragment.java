@@ -11,6 +11,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.main_fragment.subview.information.adapter.InformationRecyclerAdapter;
+import com.ztstech.vgmate.data.beans.MainListBean;
 import com.ztstech.vgmate.model.information.InformationModel;
 import com.ztstech.vgmate.utils.ViewUtils;
 
@@ -79,8 +80,19 @@ public class InformationFragment extends MVPFragment<InformationContract.Present
     }
 
     @Override
-    public void setListData(List<InformationModel> informationModels) {
-        recyclerAdapter.setListData(informationModels);
+    public void setListData(MainListBean mainListBean) {
+        recyclerAdapter.setListData(mainListBean.list);
         recyclerAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void showError(String errorMessage) {
+
+    }
+
+    //    @Override
+//    public void setListData(List<InformationModel> informationModels) {
+//        recyclerAdapter.setListData(informationModels);
+//        recyclerAdapter.notifyDataSetChanged();
+//    }
 }

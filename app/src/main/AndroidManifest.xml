@@ -41,7 +41,8 @@
             android:theme="@style/DialogActivity" />
         <activity android:name=".activitys.org_list.OrgListActivity" />
         <activity android:name=".activitys.info.EditInfoActivity" />
-        <activity android:name=".activitys.setting.SettingActivity"></activity>
+        <activity android:name=".activitys.setting.SettingActivity" />
+        <activity android:name=".activitys.article_detail.ArticleDetailActivity"></activity>
     </application>
 
 </manifest>
