@@ -98,7 +98,9 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
 
     @Override
     public void setUserInfo(UserBean userBean) {
-        Glide.with(getActivity()).load(userBean.info.picurl).into(imgHeader);
+        Glide.with(getActivity())
+                .load(userBean.info.picurl)
+                .into(imgHeader);
         tvName.setText(userBean.info.uname);
     }
 }

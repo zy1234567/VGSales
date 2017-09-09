@@ -155,14 +155,13 @@
         android:layout_marginBottom="20dp"
         android:layout_marginTop="16pt">
 
-        <com.ztstech.vgmate.weigets.CircleImageView
+        <de.hdodenhof.circleimageview.CircleImageView
+            app:civ_border_color="@color/color_50_109"
+            app:civ_border_width="1dp"
             android:id="@+id/img_header"
-            android:layout_width="62dp"
-            android:layout_height="62dp"
-            android:layout_centerHorizontal="true"
-            app:borderColor="@color/color_50_109"
-            app:borderWidth="2dp"
-            app:drawBorder="true" />
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:id="@+id/tv_name"
