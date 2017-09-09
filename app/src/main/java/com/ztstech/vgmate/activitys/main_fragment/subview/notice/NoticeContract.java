@@ -15,9 +15,15 @@ interface NoticeContract {
 
     interface View extends BaseView {
 
-        void setData(MainListBean data);
+        void setData(List<MainListBean.ListBean> listData);
 
         void showError(String errorMessage);
+
+        /**
+         * 设置为没有更多数据
+         * @param noreMoreData
+         */
+        void setNoreMoreData(boolean noreMoreData);
     }
 
     interface Presenter extends BasePresenter<View> {

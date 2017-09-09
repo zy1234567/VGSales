@@ -17,15 +17,19 @@ interface InformationContract {
 
         /**
          * 设置列表数据
-         * @param mainListBean
          */
-        void setListData(MainListBean mainListBean);
+        void setListData(List<MainListBean.ListBean> listData);
 
         /**
          * 显示错误
          * @param errorMessage
          */
         void showError(String errorMessage);
+
+        /**
+         * 显示没有更多数据
+         */
+        void showNomoreData(boolean nomore);
     }
 
     interface Presenter extends BasePresenter<InformationContract.View> {

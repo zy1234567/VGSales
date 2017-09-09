@@ -19,7 +19,12 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
     /**当前页数*/
     private int currentPage = 1;
 
+    private int maxPage = 1;
+
     private MainListRepository mainListRepository;
+
+    /**列表数据*/
+    private List<MainListBean.ListBean> listData = new ArrayList<>();
 
     public InformationPresenter(InformationContract.View view) {
         super(view);
@@ -29,24 +34,16 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
 
     @Override
     public void loadListData() {
-
-        new PresenterSubscriber<MainListBean>(mView){
-
-            @Override
-            public void onNext(MainListBean mainListBean) {
-                if (mainListBean.isSucceed()) {
-                    mView.setListData(mainListBean);
-                }else {
-                    mView.showError(mainListBean.getErrmsg());
-                }
-            }
-        }.run(mainListRepository.queryInformation());
-
+        loadDataWithPage(1);
     }
 
     @Override
     public void appendData() {
-
+        if (currentPage < maxPage) {
+            loadDataWithPage(currentPage + 1);
+        }else {
+            mView.setListData(listData);
+        }
     }
 
 
@@ -55,6 +52,27 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
      * @param page
      */
     private void loadDataWithPage(int page) {
+        new PresenterSubscriber<MainListBean>(mView){
 
+            @Override
+            public void onNext(MainListBean mainListBean) {
+                if (mainListBean.isSucceed()) {
+                    maxPage = mainListBean.pager.totalPages;
+                    currentPage = mainListBean.pager.currentPage;
+
+                    if (currentPage == 1) {
+                        //如果当前是第一页，清除数据
+                        listData.clear();
+                    }
+
+                    listData.addAll(mainListBean.list);
+                    mView.setListData(listData);
+
+                    mView.showNomoreData(currentPage == maxPage);
+                }else {
+                    mView.showError(mainListBean.getErrmsg());
+                }
+            }
+        }.run(mainListRepository.queryInformation(page));
     }
 }

@@ -35,15 +35,15 @@ public class MainListRepository {
      * 查询通告
      * @return
      */
-    public Observable<MainListBean> queryNotice() {
-        return api.queryList("01");
+    public Observable<MainListBean> queryNotice(int currentPage) {
+        return api.queryList("01", currentPage);
     }
 
     /**
      * 查询资讯
      * @return
      */
-    public Observable<MainListBean> queryInformation() {
-        return api.queryList("00");
+    public Observable<MainListBean> queryInformation(int currentPage) {
+        return api.queryList("00", currentPage);
     }
 }

@@ -19,5 +19,6 @@ public interface MainListApi {
      * @return
      */
     @GET("exempt/AppSalesQueryNewList")
-    Observable<MainListBean> queryList(@Query("type") String type);
+    Observable<MainListBean> queryList(@Query("type") String type,
+                                       @Query("currentPage") int currentPage);
 }

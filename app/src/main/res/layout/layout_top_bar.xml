@@ -15,7 +15,7 @@
 
     <TextView
         android:textColor="@color/color_100"
-        android:textSize="@dimen/text_2"
+        android:textSize="@dimen/text_4"
         android:id="@+id/tv_left"
         android:layout_marginLeft="12dp"
         android:gravity="center_vertical"
@@ -24,7 +24,7 @@
 
     <TextView
         android:textColor="@color/color_100"
-        android:textSize="@dimen/text_2"
+        android:textSize="@dimen/text_4"
         android:id="@+id/tv_right"
         android:layout_marginRight="12dp"
         android:layout_alignParentRight="true"

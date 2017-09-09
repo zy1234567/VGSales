@@ -75,14 +75,13 @@ public class NoticeFragment extends MVPFragment<NoticeContract.Presenter> implem
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000);
             }
         });
 
         refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000);
+                mPresenter.appendData();
             }
         });
 
@@ -93,14 +92,24 @@ public class NoticeFragment extends MVPFragment<NoticeContract.Presenter> implem
     }
 
 
+
+
     @Override
-    public void setData(MainListBean data) {
-        recyclerAdapter.setListData(data.list);
+    public void setData(List<MainListBean.ListBean> listData) {
+        if (refreshLayout.isLoading()) {
+            refreshLayout.finishLoadmore();
+        }
+        recyclerAdapter.setListData(listData);
         recyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showError(String errorMessage) {
+
+    }
+
+    @Override
+    public void setNoreMoreData(boolean noreMoreData) {
 
     }
 }
