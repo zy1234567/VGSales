@@ -21,6 +21,7 @@ import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.activitys.create_share_add_cover.CreateShareAddCoverActivity;
 import com.ztstech.vgmate.activitys.create_share_add_desc.CreateShareAddDescActivity;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.weigets.CustomGridView;
@@ -80,6 +81,7 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
     protected void onViewBindFinish() {
         super.onViewBindFinish();
 
+        tvNext.setEnabled(true);
         tvNext.setOnClickListener(this);
 
         addDefaultImage();
@@ -90,7 +92,7 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
         if (view == imgAddImg) {
             showPickImage();
         }else if (view == tvNext) {
-
+            startActivity(new Intent(this, CreateShareAddCoverActivity.class));
         }
     }
 

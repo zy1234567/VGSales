@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_107"
+    tools:context="com.ztstech.vgmate.activitys.create_share_add_cover.CreateShareAddCoverActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.ztstech.vgmate.weigets.TopBar
+            app:barTitle="资讯内容编辑"
+            app:showBackNav="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.ztstech.vgmate.weigets.TopBar>
+
+        <TextView
+            android:id="@+id/tv_next"
+            android:enabled="false"
+            android:layout_marginRight="12dp"
+            android:gravity="center"
+            android:background="@drawable/sel_share_next"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="发布"
+            android:textColor="@color/color_109"
+            android:textSize="@dimen/text_7"
+            android:layout_width="51dp"
+            android:layout_height="23dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:background="#fff"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_cover"
+            android:background="#f00"
+            android:layout_width="112dp"
+            android:layout_height="73dp" />
+
+    </RelativeLayout>
+</LinearLayout>
