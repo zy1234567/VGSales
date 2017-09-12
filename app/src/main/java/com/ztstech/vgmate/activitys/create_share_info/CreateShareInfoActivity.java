@@ -21,6 +21,7 @@ import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.activitys.create_share_add_desc.CreateShareAddDescActivity;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.weigets.CustomGridView;
 
@@ -36,6 +37,10 @@ import butterknife.BindView;
 public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract.Presenter>
         implements CreateShareInfoContract.View, View.OnClickListener, InvokeListener,
         TakePhoto.TakeResultListener {
+
+    /**请求图片描述*/
+    public static final int REQ_DESC = 1;
+
 
     @BindView(R.id.tv_next)
     TextView tvNext;
@@ -58,6 +63,9 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
     /**图片文件*/
     private List<File> imageFiles = new ArrayList<>();
 
+    /**当前正在请求描述的textView*/
+    private TextView tvCurrentReqDesc;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_create_share_info;
@@ -72,6 +80,7 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
     protected void onViewBindFinish() {
         super.onViewBindFinish();
 
+        tvNext.setOnClickListener(this);
 
         addDefaultImage();
     }
@@ -80,13 +89,25 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
     public void onClick(View view) {
         if (view == imgAddImg) {
             showPickImage();
+        }else if (view == tvNext) {
+
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        takePhoto.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        if (requestCode == REQ_DESC) {
+            if (tvCurrentReqDesc != null) {
+                String text = data.getStringExtra(CreateShareAddDescActivity.ARG_DESC);
+                tvCurrentReqDesc.setText(text);
+            }
+        }else {
+            takePhoto.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
@@ -127,6 +148,20 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
             ImageView img = itemView.findViewById(R.id.img);
             Glide.with(this).load(f).into(img);
             View del = itemView.findViewById(R.id.del);
+            final TextView tvAddDesc = itemView.findViewById(R.id.tv_desc);
+
+            tvAddDesc.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tvCurrentReqDesc = tvAddDesc;       //记录当前textView
+                    //请求图片描述
+                    Intent it = new Intent(CreateShareInfoActivity.this,
+                            CreateShareAddDescActivity.class);
+                    it.putExtra(CreateShareAddDescActivity.ARG_DESC, tvAddDesc.getText());
+                    //存储当前描述位置，在请求成功返回时更新view
+                    startActivityForResult(it, REQ_DESC);
+                }
+            });
 
             imageFiles.add(f);
             customGridView.addView(itemView, 0);
@@ -138,6 +173,7 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
                     imageFiles.remove(f);
                 }
             });
+
 
         }
     }

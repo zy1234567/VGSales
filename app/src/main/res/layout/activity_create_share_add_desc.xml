@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_107"
+    tools:context="com.ztstech.vgmate.activitys.create_share_add_desc.CreateShareAddDescActivity">
+
+    <com.ztstech.vgmate.weigets.TopBar
+        android:id="@+id/top_bar"
+        app:showBackNav="true"
+        app:textRight="保存"
+        app:barTitle="添加描述"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.ztstech.vgmate.weigets.TopBar>
+
+    <EditText
+        android:id="@+id/et_desc"
+        android:gravity="top"
+        android:hint="请编辑图片描述..."
+        android:textSize="@dimen/text_4"
+        android:textColor="@color/color_103"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="12dp"
+        android:paddingLeft="12dp"
+        android:layout_marginTop="10dp"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+
+</LinearLayout>

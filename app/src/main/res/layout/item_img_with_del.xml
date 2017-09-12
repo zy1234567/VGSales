@@ -19,4 +19,19 @@
         android:layout_width="15dp"
         android:layout_height="15dp" />
 
+    <TextView
+        android:lines="1"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/tv_desc"
+        android:text="添加描述"
+        android:background="@color/color_30_000"
+        android:paddingRight="6dp"
+        android:paddingLeft="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:ellipsize="end"
+        android:textSize="@dimen/text_8"
+        android:textColor="@color/color_109"/>
+
 </RelativeLayout>
