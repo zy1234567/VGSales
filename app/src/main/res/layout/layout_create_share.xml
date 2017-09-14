@@ -66,15 +66,50 @@
 
     </RelativeLayout>
 
-    <com.ztstech.vgmate.weigets.CustomGridView
-        android:id="@+id/cgv"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="10dp"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-    </com.ztstech.vgmate.weigets.CustomGridView>
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_webview"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_none_link"
+                android:text="剪切板中没有有效链接"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <WebView
+                android:id="@+id/web_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </WebView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.ztstech.vgmate.weigets.CustomGridView
+                android:id="@+id/cgv"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.ztstech.vgmate.weigets.CustomGridView>
+        </LinearLayout>
+    </FrameLayout>
+
 
 
 </LinearLayout>

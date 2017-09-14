@@ -1,10 +1,13 @@
 package com.ztstech.vgmate.data.utils;
 
 import com.google.gson.Gson;
+import com.ztstech.vgmate.data.api.CreateShareApi;
 import com.ztstech.vgmate.data.api.UploadApi;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
+import com.ztstech.vgmate.data.beans.CreateShareBean;
 import com.ztstech.vgmate.data.beans.UploadImageBean;
 import com.ztstech.vgmate.data.constants.NetConstants;
+import com.ztstech.vgmate.data.repository.UserRepository;
 
 import java.io.File;
 import java.io.IOException;
@@ -69,6 +72,25 @@ public class RetrofitUtils {
 
         }
         return createService(UploadApi.class).uploadFile("01", parts);
+    }
+
+    /**
+     * 创建分享
+     * @return
+     */
+    public static Observable<BaseRespBean> createShare(CreateShareBean createShareBean) {
+        CreateShareApi createShareApi = RetrofitUtils.createService(CreateShareApi.class);
+        return createShareApi.createShare(
+                createShareBean.title,
+                createShareBean.summary,
+                createShareBean.contentpicurl,
+                createShareBean.contentpicsurl,
+                createShareBean.picurl,
+                createShareBean.picsurl,
+                createShareBean.picdescribe,
+                createShareBean.type,
+                createShareBean.url,
+                UserRepository.getInstance().getAuthId());
     }
 
 

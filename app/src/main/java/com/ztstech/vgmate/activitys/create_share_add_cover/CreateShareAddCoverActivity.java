@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.app.TakePhotoImpl;
 import com.jph.takephoto.model.InvokeParam;
@@ -18,7 +20,9 @@ import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.data.beans.CreateShareBean;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
+import com.ztstech.vgmate.utils.ToastUtil;
 
 import java.io.File;
 
@@ -31,11 +35,23 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
         implements CreateShareAddCoverContract.View, View.OnClickListener , InvokeListener,
         TakePhoto.TakeResultListener {
 
+    /**
+     * 创建分享bean
+     */
+    public static final String ARG_CREATE_SHARE_BEAN = "arg_create_share_bean";
+
     @BindView(R.id.img_cover)
     ImageView imgCover;
+    @BindView(R.id.tv_next)
+    TextView tvNext;
 
     private TakePhoto takePhoto;
     private InvokeParam invokeParam;
+
+    /**
+     * 创建分享bean
+     */
+    private CreateShareBean createShareBean;
 
     @Override
     protected int getLayoutRes() {
@@ -45,6 +61,12 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
     @Override
     protected void onSuperCreateFinish(@Nullable Bundle savedInstanceState) {
         super.onSuperCreateFinish(savedInstanceState);
+
+        //从intent中获取创建分享数据
+        Intent it = getIntent();
+        createShareBean = new Gson().fromJson(it.getStringExtra(ARG_CREATE_SHARE_BEAN),
+                CreateShareBean.class);
+
         takePhoto = (TakePhoto) TakePhotoInvocationHandler.of(this)
                 .bind(new TakePhotoImpl(this,this));
         takePhoto.onCreate(savedInstanceState);
@@ -66,12 +88,15 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
     protected void onViewBindFinish() {
         super.onViewBindFinish();
         imgCover.setOnClickListener(this);
+        tvNext.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         if (imgCover == view) {
             showPickImage();
+        }else if (tvNext == view) {
+            mPresenter.submit(createShareBean);
         }
     }
 
@@ -87,7 +112,9 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
         if (result != null) {
             String uri = result.getImage().getOriginalPath();
             final File f = new File(uri);
+            createShareBean.headFile = f;
             Glide.with(this).load(f).into(imgCover);
+            tvNext.setEnabled(true);
         }
     }
 
@@ -107,5 +134,16 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
             this.invokeParam = invokeParam;
         }
         return type;
+    }
+
+    @Override
+    public void submitFinish(@Nullable String errorMessage) {
+        if (errorMessage == null) {
+            //成功
+            finish();
+        }else {
+            //失败
+            ToastUtil.toastCenter(this, "分享失败：" + errorMessage);
+        }
     }
 }

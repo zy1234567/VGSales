@@ -1,16 +1,26 @@
 package com.ztstech.vgmate.activitys.create_share_info;
 
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.app.TakePhotoImpl;
 import com.jph.takephoto.model.InvokeParam;
@@ -23,6 +33,8 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.create_share_add_cover.CreateShareAddCoverActivity;
 import com.ztstech.vgmate.activitys.create_share_add_desc.CreateShareAddDescActivity;
+import com.ztstech.vgmate.data.api.CreateShareApi;
+import com.ztstech.vgmate.data.beans.CreateShareBean;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.weigets.CustomGridView;
 
@@ -55,11 +67,21 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
     EditText etContent;
     @BindView(R.id.btn_link)
     Button btInsertLink;
+    @BindView(R.id.ll_grid)
+    LinearLayout llGrid;
+    @BindView(R.id.ll_webview)
+    LinearLayout llWebView;
+    @BindView(R.id.tv_none_link)
+    TextView tvNoneLink;
+    @BindView(R.id.web_view)
+    WebView webView;
 
     private ImageView imgAddImg;
 
     private TakePhoto takePhoto;
     private InvokeParam invokeParam;
+
+    private CreateShareBean createShareBean;
 
     /**图片文件*/
     private List<File> imageFiles = new ArrayList<>();
@@ -81,8 +103,38 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
     protected void onViewBindFinish() {
         super.onViewBindFinish();
 
-        tvNext.setEnabled(true);
+
+
         tvNext.setOnClickListener(this);
+        btInsertLink.setOnClickListener(this);
+
+
+        webView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return true;
+            }
+        });
+
+        etContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (TextUtils.isEmpty(editable.toString())) {
+                    tvNext.setEnabled(false);
+                }else {
+                    tvNext.setEnabled(true);
+                }
+            }
+        });
+
+        webView.getSettings().setJavaScriptEnabled(true);
 
         addDefaultImage();
     }
@@ -92,7 +144,43 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
         if (view == imgAddImg) {
             showPickImage();
         }else if (view == tvNext) {
-            startActivity(new Intent(this, CreateShareAddCoverActivity.class));
+            //实例化存储数据类
+            createShareBean = new CreateShareBean();
+            createShareBean.type = CreateShareApi.SHARE_INFO;
+
+            if (View.VISIBLE == llGrid.getVisibility()) {
+                //如果是发布图片
+
+                //获取图片
+                createShareBean.contentpicfiles = new File[imageFiles.size()];
+                for (int i = 0; i < imageFiles.size(); i++) {
+                    createShareBean.contentpicfiles[i] = imageFiles.get(i);
+                }
+
+                //获取图片描述
+                if (customGridView.getChildCount() > 1) {
+                    //如果选择了图片
+                    String[] descs = new String[customGridView.getChildCount() - 1];
+
+                    for (int i = 0; i < customGridView.getChildCount() - 1; i++) {
+                        descs[i] = ((TextView)customGridView.getChildAt(i)
+                                .findViewById(R.id.tv_desc)).getText().toString();
+                    }
+                    createShareBean.picdescribe = new Gson().toJson(descs);
+                }
+            }else {
+                //如果是插入链接
+                createShareBean.url = getLinkUrl();
+            }
+
+
+            Intent it = new Intent(this, CreateShareAddCoverActivity.class);
+            it.putExtra(CreateShareAddCoverActivity.ARG_CREATE_SHARE_BEAN,
+                    new Gson().toJson(createShareBean));
+            startActivity(it);
+        }else if (view == btInsertLink) {
+            //点击插入链接
+            toggleUrlMode();
         }
     }
 
@@ -134,10 +222,50 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
 
 
     /**
+     * 切换url模式
+     */
+    private void toggleUrlMode() {
+        if (View.VISIBLE == llGrid.getVisibility()) {
+            //如果没有隐藏图片，切换到链接模式
+            llGrid.setVisibility(View.GONE);
+            llWebView.setVisibility(View.VISIBLE);
+
+            String url = getLinkUrl();
+            if (url == null) {
+                tvNoneLink.setVisibility(View.VISIBLE);
+            }else {
+                tvNoneLink.setVisibility(View.INVISIBLE);
+                webView.loadUrl(url);
+            }
+
+        }else {
+            llWebView.setVisibility(View.GONE);
+            llGrid.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+    /**
      * 显示选取图片
      */
     private void showPickImage() {
         new TakePhotoHelper(this, takePhoto, true).show();
+    }
+
+    /**
+     * 获取剪切板url
+     * @return
+     */
+    private String getLinkUrl() {
+        String tempStr = null;
+        ClipboardManager clipboardManager=(ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
+        if(clipboardManager==null) {
+            return null;
+        }
+        if(clipboardManager.getText()!=null) {
+            tempStr=clipboardManager.getText().toString();
+        }
+        return tempStr;
     }
 
     @Override
@@ -165,7 +293,7 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
                 }
             });
 
-            imageFiles.add(f);
+            imageFiles.add(0, f);
             customGridView.addView(itemView, 0);
 
             del.setOnClickListener(new View.OnClickListener() {
@@ -195,4 +323,9 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
         }
         return type;
     }
+//
+//    @Override
+//    public void submitFinish(@Nullable String errorMessage) {
+//
+//    }
 }
