@@ -54,6 +54,9 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
     /**请求图片描述*/
     public static final int REQ_DESC = 1;
 
+    /**分享类型*/
+    public static final String ARG_TYPE = "arg_type";
+
 
     @BindView(R.id.tv_next)
     TextView tvNext;
@@ -146,7 +149,8 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
         }else if (view == tvNext) {
             //实例化存储数据类
             createShareBean = new CreateShareBean();
-            createShareBean.type = CreateShareApi.SHARE_INFO;
+            //类型
+            createShareBean.type = getIntent().getStringExtra(ARG_TYPE);
 
             if (View.VISIBLE == llGrid.getVisibility()) {
                 //如果是发布图片

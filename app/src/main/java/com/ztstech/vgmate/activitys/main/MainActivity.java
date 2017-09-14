@@ -1,31 +1,23 @@
 package com.ztstech.vgmate.activitys.main;
 
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.add_org.AddOrgActivity;
 import com.ztstech.vgmate.activitys.add_sell_mate.AddSellMateActivity;
 import com.ztstech.vgmate.activitys.create_share_info.CreateShareInfoActivity;
-import com.ztstech.vgmate.activitys.create_share_notice.CreateShareNoticeActivity;
 import com.ztstech.vgmate.activitys.info.EditInfoActivity;
 import com.ztstech.vgmate.activitys.main.adapter.MainPagerAdapter;
 import com.ztstech.vgmate.activitys.main.widget.BottomBar;
-import com.ztstech.vgmate.utils.ViewUtils;
+import com.ztstech.vgmate.data.api.CreateShareApi;
 import com.ztstech.vgmate.weigets.TopBar;
-import com.ztstech.vgmate.activitys.provide_chance.ProvideChanceActivity;
 
 import butterknife.BindView;
 
@@ -131,11 +123,15 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
                 break;
             case R.id.tv_share_info:
                 //分享资讯
-                startActivity(new Intent(this, CreateShareInfoActivity.class));
+                Intent itInfo = new Intent(this, CreateShareInfoActivity.class);
+                itInfo.putExtra(CreateShareInfoActivity.ARG_TYPE, CreateShareApi.SHARE_INFO);
+                startActivity(itInfo);
                 break;
             case R.id.tv_share_notice:
                 //分享公告
-                startActivity(new Intent(this, CreateShareNoticeActivity.class));
+                Intent itNotice = new Intent(this, CreateShareInfoActivity.class);
+                itNotice.putExtra(CreateShareInfoActivity.ARG_TYPE, CreateShareApi.SHARE_NOTICE);
+                startActivity(itNotice);
                 break;
         }
     }

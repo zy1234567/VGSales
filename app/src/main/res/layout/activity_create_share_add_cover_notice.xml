@@ -36,6 +36,22 @@
 
     </RelativeLayout>
 
+    <!--<RelativeLayout-->
+        <!--android:background="#fff"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:paddingLeft="12dp"-->
+        <!--android:paddingRight="12dp"-->
+        <!--android:paddingTop="15dp"-->
+        <!--android:paddingBottom="15dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/img_cover"-->
+            <!--android:background="#f00"-->
+            <!--android:layout_width="112dp"-->
+            <!--android:layout_height="73dp" />-->
+
     <RelativeLayout
         android:background="#fff"
         android:layout_marginTop="10dp"
@@ -49,32 +65,39 @@
             android:id="@+id/img"
             android:background="#f00"
             android:layout_centerVertical="true"
-            android:layout_width="112dp"
+            android:layout_width="73dp"
             android:layout_height="73dp" />
 
         <TextView
-            android:lines="2"
+            android:lines="1"
             android:ellipsize="end"
             android:layout_marginRight="12dp"
             android:textColor="@color/color_100"
             android:textSize="@dimen/text_4"
             android:id="@+id/tv_title"
-            android:layout_toRightOf="@id/iv_item_recycler_news"
+            android:layout_toRightOf="@id/img"
             android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
             android:layout_marginBottom="15dp"
+            android:ellipsize="end"
             android:layout_alignLeft="@id/tv_title"
-            android:gravity="center"
+            android:gravity="bottom"
+            android:lines="3"
             android:id="@+id/tv_content"
             android:textColor="@color/color_102"
             android:textSize="@dimen/text_8"
             android:layout_alignParentBottom="true"
-            android:layout_width="wrap_content"
-            android:layout_height="14dp" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
+        <View
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/color_106" />
 
     </RelativeLayout>
 </LinearLayout>

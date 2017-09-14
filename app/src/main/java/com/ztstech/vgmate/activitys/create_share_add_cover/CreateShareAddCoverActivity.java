@@ -20,11 +20,14 @@ import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.data.api.CreateShareApi;
 import com.ztstech.vgmate.data.beans.CreateShareBean;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.utils.ToastUtil;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import butterknife.BindView;
 
@@ -40,10 +43,16 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
      */
     public static final String ARG_CREATE_SHARE_BEAN = "arg_create_share_bean";
 
-    @BindView(R.id.img_cover)
+    @BindView(R.id.img)
     ImageView imgCover;
     @BindView(R.id.tv_next)
     TextView tvNext;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+
+    /**内容，日期*/
+    @BindView(R.id.tv_content)
+    TextView tvContent;
 
     private TakePhoto takePhoto;
     private InvokeParam invokeParam;
@@ -55,8 +64,14 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.activity_create_share_add_cover;
+        if (createShareBean.type.equals(CreateShareApi.SHARE_INFO)) {
+            return R.layout.activity_create_share_add_cover;
+        }else {
+            return R.layout.activity_create_share_add_cover_notice;
+        }
     }
+
+
 
     @Override
     protected void onSuperCreateFinish(@Nullable Bundle savedInstanceState) {
@@ -89,6 +104,17 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
         super.onViewBindFinish();
         imgCover.setOnClickListener(this);
         tvNext.setOnClickListener(this);
+
+        tvTitle.setText(createShareBean.title);
+
+        if (createShareBean.type.equals(CreateShareApi.SHARE_INFO)) {
+            //信息
+            tvContent.setText(createShareBean.summary);
+            imgCover.setImageResource(R.mipmap.img_uploadcover);
+        }else {
+            tvContent.setText(getDate());
+            imgCover.setImageResource(R.mipmap.img_uploadcover1);
+        }
     }
 
     @Override
@@ -145,5 +171,16 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
             //失败
             ToastUtil.toastCenter(this, "分享失败：" + errorMessage);
         }
+    }
+
+    /**
+     * 获取日期
+     * @return
+     */
+    private String getDate() {
+        Calendar calendar = Calendar.getInstance();
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        return month + "月" + day + "日";
     }
 }
