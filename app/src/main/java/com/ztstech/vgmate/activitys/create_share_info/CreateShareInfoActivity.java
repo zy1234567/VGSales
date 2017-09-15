@@ -129,7 +129,24 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (TextUtils.isEmpty(editable.toString())) {
+                if (TextUtils.isEmpty(etContent.toString()) || TextUtils.isEmpty(etTitle.getText())) {
+                    tvNext.setEnabled(false);
+                }else {
+                    tvNext.setEnabled(true);
+                }
+            }
+        });
+
+        etTitle.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (TextUtils.isEmpty(etContent.toString()) || TextUtils.isEmpty(etTitle.getText())) {
                     tvNext.setEnabled(false);
                 }else {
                     tvNext.setEnabled(true);
@@ -151,6 +168,8 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
             createShareBean = new CreateShareBean();
             //类型
             createShareBean.type = getIntent().getStringExtra(ARG_TYPE);
+            createShareBean.title = etTitle.getText().toString();
+            createShareBean.summary = etContent.getText().toString();
 
             if (View.VISIBLE == llGrid.getVisibility()) {
                 //如果是发布图片

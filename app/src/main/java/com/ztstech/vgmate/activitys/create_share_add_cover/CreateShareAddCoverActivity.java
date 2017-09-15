@@ -47,7 +47,7 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
     ImageView imgCover;
     @BindView(R.id.tv_next)
     TextView tvNext;
-    @BindView(R.id.tv_title)
+    @BindView(R.id.tv_item_title)
     TextView tvTitle;
 
     /**内容，日期*/
