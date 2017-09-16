@@ -1,9 +1,12 @@
 package com.ztstech.vgmate.activitys.add_sell_mate;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PermissionInfo;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,12 +17,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tbruyelle.rxpermissions.RxPermissions;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
 import com.ztstech.vgmate.data.dto.AddSellMateData;
 
 import butterknife.BindView;
+import rx.functions.Action1;
 
 /**
  * 添加销售伙伴
@@ -66,6 +71,7 @@ public class AddSellMateActivity extends MVPActivity<AddSellMateContract.Present
         super.onViewBindFinish();
         tvLocation.setOnClickListener(this);
         btSubmit.setOnClickListener(this);
+        tvContract.setOnClickListener(this);
     }
 
     @Override
@@ -117,8 +123,23 @@ public class AddSellMateActivity extends MVPActivity<AddSellMateContract.Present
             checkToSubmit();
         }else if (view == tvContract) {
             //打开联系人
-            Intent i = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-            startActivityForResult(i , REQ_CONTACT);
+            RxPermissions rxPermissions = new RxPermissions(this);
+            rxPermissions
+                    .request(Manifest.permission.CAMERA)
+                    .subscribe(new Action1<Boolean>() {
+                        @Override
+                        public void call(Boolean aBoolean) {
+
+                            if (aBoolean) {
+                                Intent i = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+                                startActivityForResult(i , REQ_CONTACT);
+                            }else {
+                                Toast.makeText(AddSellMateActivity.this, "无权限", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+ 
         }
     }
 
@@ -154,6 +175,10 @@ public class AddSellMateActivity extends MVPActivity<AddSellMateContract.Present
 
     @Override
     public void onSubmitFinish(String errorMessage) {
-
+        if (errorMessage == null) {
+            finish();
+        }else {
+            Toast.makeText(this, "邀请失败：" + errorMessage, Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -52,7 +52,6 @@
         android:background="@color/color_106" />
     <RelativeLayout
         android:background="#fff"
-
         android:layout_width="match_parent"
         android:layout_height="60dp">
 

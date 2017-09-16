@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -55,6 +56,9 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
 
     /**分享类型*/
     public static final String ARG_TYPE = "arg_type";
+
+    /**最大内容数*/
+    public static final int MAX_CONTENT_COUNT = 1000;
 
 
     @BindView(R.id.tv_next)
@@ -133,6 +137,7 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
                 }else {
                     tvNext.setEnabled(true);
                 }
+                tvCount.setText(String.valueOf(etContent.getText().length()) + "/" + MAX_CONTENT_COUNT);
             }
         });
 
@@ -163,6 +168,12 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
         if (view == imgAddImg) {
             showPickImage();
         }else if (view == tvNext) {
+
+            if (etContent.getText().length() > MAX_CONTENT_COUNT) {
+                Toast.makeText(this, "内容超出预定数量", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             //实例化存储数据类
             createShareData = new CreateShareData();
             //类型
@@ -198,6 +209,7 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
                 //如果是插入链接
                 createShareData.url = getLinkUrl();
             }
+
 
 
             Intent it = new Intent(this, CreateShareAddCoverActivity.class);
