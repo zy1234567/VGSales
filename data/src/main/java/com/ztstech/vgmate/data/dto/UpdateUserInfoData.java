@@ -1,11 +1,11 @@
-package com.ztstech.vgmate.data.beans;
+package com.ztstech.vgmate.data.dto;
 
 /**
  * Created by zhiyuan on 2017/8/23.
  * 上传用户身份信息
  */
 
-public class UpdateUserInfoBean {
+public class UpdateUserInfoData {
 
     public String picurl;
 

@@ -4,29 +4,25 @@ import com.google.gson.Gson;
 import com.ztstech.vgmate.data.api.CreateShareApi;
 import com.ztstech.vgmate.data.api.UploadApi;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
-import com.ztstech.vgmate.data.beans.CreateShareBean;
+import com.ztstech.vgmate.data.dto.CreateShareData;
 import com.ztstech.vgmate.data.beans.UploadImageBean;
 import com.ztstech.vgmate.data.constants.NetConstants;
 import com.ztstech.vgmate.data.repository.UserRepository;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
-import okio.BufferedSink;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -78,18 +74,18 @@ public class RetrofitUtils {
      * 创建分享
      * @return
      */
-    public static Observable<BaseRespBean> createShare(CreateShareBean createShareBean) {
+    public static Observable<BaseRespBean> createShare(CreateShareData createShareData) {
         CreateShareApi createShareApi = RetrofitUtils.createService(CreateShareApi.class);
         return createShareApi.createShare(
-                createShareBean.title,
-                createShareBean.summary,
-                createShareBean.contentpicurl,
-                createShareBean.contentpicsurl,
-                createShareBean.picurl,
-                createShareBean.picsurl,
-                createShareBean.picdescribe,
-                createShareBean.type,
-                createShareBean.url,
+                createShareData.title,
+                createShareData.summary,
+                createShareData.contentpicurl,
+                createShareData.contentpicsurl,
+                createShareData.picurl,
+                createShareData.picsurl,
+                createShareData.picdescribe,
+                createShareData.type,
+                createShareData.url,
                 UserRepository.getInstance().getAuthId());
     }
 

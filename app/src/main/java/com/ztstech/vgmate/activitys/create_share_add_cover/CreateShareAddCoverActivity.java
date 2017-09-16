@@ -2,7 +2,6 @@ package com.ztstech.vgmate.activitys.create_share_add_cover;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,12 +20,11 @@ import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.data.api.CreateShareApi;
-import com.ztstech.vgmate.data.beans.CreateShareBean;
+import com.ztstech.vgmate.data.dto.CreateShareData;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.utils.ToastUtil;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import butterknife.BindView;
@@ -60,11 +58,11 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
     /**
      * 创建分享bean
      */
-    private CreateShareBean createShareBean;
+    private CreateShareData createShareData;
 
     @Override
     protected int getLayoutRes() {
-        if (createShareBean.type.equals(CreateShareApi.SHARE_INFO)) {
+        if (createShareData.type.equals(CreateShareApi.SHARE_INFO)) {
             return R.layout.activity_create_share_add_cover;
         }else {
             return R.layout.activity_create_share_add_cover_notice;
@@ -79,8 +77,8 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
 
         //从intent中获取创建分享数据
         Intent it = getIntent();
-        createShareBean = new Gson().fromJson(it.getStringExtra(ARG_CREATE_SHARE_BEAN),
-                CreateShareBean.class);
+        createShareData = new Gson().fromJson(it.getStringExtra(ARG_CREATE_SHARE_BEAN),
+                CreateShareData.class);
 
         takePhoto = (TakePhoto) TakePhotoInvocationHandler.of(this)
                 .bind(new TakePhotoImpl(this,this));
@@ -105,11 +103,11 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
         imgCover.setOnClickListener(this);
         tvNext.setOnClickListener(this);
 
-        tvTitle.setText(createShareBean.title);
+        tvTitle.setText(createShareData.title);
 
-        if (createShareBean.type.equals(CreateShareApi.SHARE_INFO)) {
+        if (createShareData.type.equals(CreateShareApi.SHARE_INFO)) {
             //信息
-            tvContent.setText(createShareBean.summary);
+            tvContent.setText(createShareData.summary);
             imgCover.setImageResource(R.mipmap.img_uploadcover);
         }else {
             tvContent.setText(getDate());
@@ -122,7 +120,7 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
         if (imgCover == view) {
             showPickImage();
         }else if (tvNext == view) {
-            mPresenter.submit(createShareBean);
+            mPresenter.submit(createShareData);
         }
     }
 
@@ -138,7 +136,7 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
         if (result != null) {
             String uri = result.getImage().getOriginalPath();
             final File f = new File(uri);
-            createShareBean.headFile = f;
+            createShareData.headFile = f;
             Glide.with(this).load(f).into(imgCover);
             tvNext.setEnabled(true);
         }

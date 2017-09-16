@@ -1,14 +1,6 @@
 package com.ztstech.vgmate.activitys.create_share_info;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
-import com.ztstech.vgmate.data.beans.CreateShareBean;
-import com.ztstech.vgmate.data.beans.UploadImageBean;
-import com.ztstech.vgmate.data.utils.RetrofitUtils;
-import com.ztstech.vgmate.utils.PresenterSubscriber;
-
-import java.io.File;
-
-import rx.Observable;
 
 /**
  * Created by zhiyuan on 2017/9/12.
@@ -22,7 +14,7 @@ public class CreateShareInfoPresenter extends PresenterImpl<CreateShareInfoContr
     }
 
 //    @Override
-//    public void submit(CreateShareBean createShareBean) {
+//    public void submit(CreateShareData createShareBean) {
 //        Observable<UploadImageBean> uploadHeadObs = null;
 //        Observable<UploadImageBean> uploadContentObs = null;
 //        if (createShareBean.headFile != null) {

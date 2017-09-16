@@ -5,12 +5,10 @@ import android.text.TextUtils;
 
 import com.ztstech.vgmate.data.api.LoginApi;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
-import com.ztstech.vgmate.data.beans.UpdateUserInfoBean;
+import com.ztstech.vgmate.data.dto.UpdateUserInfoData;
 import com.ztstech.vgmate.data.beans.UserBean;
-import com.ztstech.vgmate.data.constants.NetConstants;
 import com.ztstech.vgmate.data.utils.RetrofitUtils;
 
-import retrofit2.http.Query;
 import rx.Observable;
 import rx.functions.Action1;
 
@@ -101,7 +99,7 @@ public class UserRepository {
      * @param bean
      * @return
      */
-    public Observable<BaseRespBean> updateUserInfo(UpdateUserInfoBean bean) {
+    public Observable<BaseRespBean> updateUserInfo(UpdateUserInfoData bean) {
         return loginApi.updateUserInfo(bean.picurl, bean.didurl, bean.cardUrl, bean.sex, bean.did,
                 bean.bname, bean.banks, bean.status, bean.cardNo);
     }

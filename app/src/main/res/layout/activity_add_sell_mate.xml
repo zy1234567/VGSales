@@ -69,8 +69,22 @@
             android:textColor="@color/color_100"
             android:textSize="@dimen/text_5" />
 
+        <TextView
+            android:layout_marginRight="12dp"
+            android:id="@+id/tv_contact"
+            android:gravity="center"
+            android:text="手机通讯录"
+            android:textColor="#fff"
+            android:background="@drawable/bg_c_2_f_001"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="80dp"
+            android:layout_height="30dp" />
+
 
         <android.support.design.widget.TextInputEditText
+            android:layout_toLeftOf="@id/tv_contact"
+            android:layout_marginRight="8dp"
             android:textCursorDrawable="@null"
             android:id="@+id/et_phone"
             android:layout_width="match_parent"
@@ -82,6 +96,8 @@
             android:hint="请输入手机号码"
             android:textColorHint="@color/color_103"
             android:textSize="@dimen/text_5" />
+
+
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
@@ -109,6 +125,7 @@
 
         <android.support.design.widget.TextInputEditText
             android:textCursorDrawable="@null"
+            android:layout_marginRight="12dp"
             android:id="@+id/et_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -152,10 +169,11 @@
             android:src="@mipmap/arrow_right_choice" />
 
 
-        <EditText
+        <TextView
+            android:layout_marginRight="12dp"
+            android:gravity="center_vertical"
             android:textCursorDrawable="@null"
-            android:editable="false"
-            android:id="@+id/et_location"
+            android:id="@+id/tv_location"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_toRightOf="@id/tv_location_title"
@@ -171,7 +189,10 @@
         android:background="@color/color_106" />
 
 
-    <TextView
+    <CheckBox
+        android:id="@+id/cb_send_code"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="8dp"
         android:text="发送短信通知"

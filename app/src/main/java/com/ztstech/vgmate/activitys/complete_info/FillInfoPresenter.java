@@ -5,7 +5,7 @@ import android.util.Log;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.constants.Constants;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
-import com.ztstech.vgmate.data.beans.UpdateUserInfoBean;
+import com.ztstech.vgmate.data.dto.UpdateUserInfoData;
 import com.ztstech.vgmate.data.beans.UploadImageBean;
 import com.ztstech.vgmate.data.repository.UserRepository;
 import com.ztstech.vgmate.data.utils.RetrofitUtils;
@@ -50,10 +50,10 @@ public class FillInfoPresenter extends PresenterImpl<FillInfoContract.View> impl
                     if (urls.length != 4) {
                         mView.onSubmitFailed("服务器返回数据异常");
                     }else {
-                        UpdateUserInfoBean updateUserInfoBean =  new UserInfoBeanMapper().transform(model);
-                        updateUserInfoBean.picurl = urls[0];
-                        updateUserInfoBean.cardUrl = urls[1];
-                        updateUserInfoBean.didurl = new String[] {urls[2], urls[3]};
+                        UpdateUserInfoData updateUserInfoData =  new UserInfoBeanMapper().transform(model);
+                        updateUserInfoData.picurl = urls[0];
+                        updateUserInfoData.cardUrl = urls[1];
+                        updateUserInfoData.didurl = new String[] {urls[2], urls[3]};
 
                         //上传资料
                         new PresenterSubscriber<BaseRespBean>() {
@@ -67,7 +67,7 @@ public class FillInfoPresenter extends PresenterImpl<FillInfoContract.View> impl
                                 }
 
                             }
-                        }.run(userRepository.updateUserInfo(updateUserInfoBean));
+                        }.run(userRepository.updateUserInfo(updateUserInfoData));
 
                     }
 

@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.data.beans;
+package com.ztstech.vgmate.data.dto;
 
 import java.io.File;
 
@@ -6,7 +6,7 @@ import java.io.File;
  * Created by zhiyuan on 2017/9/13.
  * 创建分享bean
  */
-public class CreateShareBean {
+public class CreateShareData {
 //    @param title 标题
 //  * @param summary 内容
 //  * @param contentpicurl 内容图片地址

@@ -2,14 +2,12 @@ package com.ztstech.vgmate.activitys.create_share_add_cover;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
-import com.ztstech.vgmate.data.beans.CreateShareBean;
+import com.ztstech.vgmate.data.dto.CreateShareData;
 import com.ztstech.vgmate.data.beans.UploadImageBean;
 import com.ztstech.vgmate.data.utils.RetrofitUtils;
 import com.ztstech.vgmate.utils.PresenterSubscriber;
 
 import java.io.File;
-
-import rx.Observable;
 
 /**
  * Created by zhiyuan on 2017/9/12.
@@ -23,7 +21,7 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
     }
 
     @Override
-    public void submit(final CreateShareBean createShareBean) {
+    public void submit(final CreateShareData createShareData) {
         mView.showLoading("请稍等");
         new PresenterSubscriber<UploadImageBean>() {
 
@@ -31,14 +29,14 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
             public void onNext(UploadImageBean uploadImageBean) {
                 //上传头像结束
                 if (uploadImageBean.isSucceed()) {
-                    createShareBean.picurl = uploadImageBean.urls;
-                    createShareBean.picsurl = uploadImageBean.suourls;
+                    createShareData.picurl = uploadImageBean.urls;
+                    createShareData.picsurl = uploadImageBean.suourls;
 
-                    if (createShareBean.contentpicfiles != null &&
-                            createShareBean.contentpicfiles.length > 0) {
-                        uploadContentPic(createShareBean);
+                    if (createShareData.contentpicfiles != null &&
+                            createShareData.contentpicfiles.length > 0) {
+                        uploadContentPic(createShareData);
                     }else {
-                        uploadData(createShareBean);
+                        uploadData(createShareData);
                     }
 
                 }else {
@@ -52,26 +50,26 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
                 super.onError(e);
                 mView.hideLoading(e.getMessage());
             }
-        }.run(RetrofitUtils.uploadFile(new File[] {createShareBean.headFile}));
+        }.run(RetrofitUtils.uploadFile(new File[] {createShareData.headFile}));
 
     }
 
     /**
      * 上传内容图片
-     * @param createShareBean
+     * @param createShareData
      */
-    private void uploadContentPic(final CreateShareBean createShareBean) {
+    private void uploadContentPic(final CreateShareData createShareData) {
         //上传内容图片
         new PresenterSubscriber<UploadImageBean>() {
 
             @Override
             public void onNext(UploadImageBean uploadImageBean) {
                 if (uploadImageBean.isSucceed()) {
-                    createShareBean.contentpicurl = uploadImageBean.urls;
-                    createShareBean.contentpicsurl = uploadImageBean.suourls;
+                    createShareData.contentpicurl = uploadImageBean.urls;
+                    createShareData.contentpicsurl = uploadImageBean.suourls;
 
 
-                    uploadData(createShareBean);
+                    uploadData(createShareData);
 
 
                 }else {
@@ -79,16 +77,16 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
                 }
             }
 
-        }.run(RetrofitUtils.uploadFile(createShareBean.contentpicfiles));
+        }.run(RetrofitUtils.uploadFile(createShareData.contentpicfiles));
 
     }
 
 
     /**
      * 上传数据
-     * @param createShareBean
+     * @param createShareData
      */
-    private void uploadData(CreateShareBean createShareBean) {
+    private void uploadData(CreateShareData createShareData) {
         //上传数据
         new PresenterSubscriber<BaseRespBean>() {
 
@@ -103,6 +101,6 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
                 mView.hideLoading(null);
             }
 
-        }.run(RetrofitUtils.createShare(createShareBean));
+        }.run(RetrofitUtils.createShare(createShareData));
     }
 }

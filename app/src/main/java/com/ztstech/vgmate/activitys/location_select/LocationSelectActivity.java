@@ -49,6 +49,12 @@ public class LocationSelectActivity extends AppCompatActivity {
     public static final String RESULT_CODE = "code";
     /**返回结果名称*/
     public static final String RESULT_NAME = "value";
+    /**省*/
+    public static final String RESULT_P = "result_p";
+    /**市*/
+    public static final String RESULT_C = "result_c";
+    /**区*/
+    public static final String RESULT_A = "result_A";
 
 
     @BindView(R.id.img_back)
@@ -150,8 +156,6 @@ public class LocationSelectActivity extends AppCompatActivity {
         }.getType());
         updateOrgInfo = getIntent().getBooleanExtra("updateOrgInfo", false);
 
-
-
     }
 
     @OnClick({R.id.img_back, R.id.tv_save, R.id.rl_province, R.id.rl_city, R.id.rl_area})
@@ -188,6 +192,9 @@ public class LocationSelectActivity extends AppCompatActivity {
                 || province.contains("台湾")) {
             intent.putExtra(RESULT_NAME, province);
             intent.putExtra(RESULT_CODE, psid);
+            intent.putExtra(RESULT_P, psid);
+            intent.putExtra(RESULT_C, csid);
+            intent.putExtra(RESULT_A, asid);
             setResult(RESULT_OK, intent);
         } else {
             if (cPosition == -1) {
@@ -200,6 +207,9 @@ public class LocationSelectActivity extends AppCompatActivity {
             }
             intent.putExtra(RESULT_NAME, province + "-" + city + "-" + area);
             intent.putExtra(RESULT_CODE, asid);
+            intent.putExtra(RESULT_P, psid);
+            intent.putExtra(RESULT_C, csid);
+            intent.putExtra(RESULT_A, asid);
             setResult(RESULT_OK, intent);
         }
         if (updateOrgInfo) {

@@ -33,8 +33,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.create_share_add_cover.CreateShareAddCoverActivity;
 import com.ztstech.vgmate.activitys.create_share_add_desc.CreateShareAddDescActivity;
-import com.ztstech.vgmate.data.api.CreateShareApi;
-import com.ztstech.vgmate.data.beans.CreateShareBean;
+import com.ztstech.vgmate.data.dto.CreateShareData;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.weigets.CustomGridView;
 
@@ -84,7 +83,7 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
     private TakePhoto takePhoto;
     private InvokeParam invokeParam;
 
-    private CreateShareBean createShareBean;
+    private CreateShareData createShareData;
 
     /**图片文件*/
     private List<File> imageFiles = new ArrayList<>();
@@ -165,19 +164,19 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
             showPickImage();
         }else if (view == tvNext) {
             //实例化存储数据类
-            createShareBean = new CreateShareBean();
+            createShareData = new CreateShareData();
             //类型
-            createShareBean.type = getIntent().getStringExtra(ARG_TYPE);
-            createShareBean.title = etTitle.getText().toString();
-            createShareBean.summary = etContent.getText().toString();
+            createShareData.type = getIntent().getStringExtra(ARG_TYPE);
+            createShareData.title = etTitle.getText().toString();
+            createShareData.summary = etContent.getText().toString();
 
             if (View.VISIBLE == llGrid.getVisibility()) {
                 //如果是发布图片
 
                 //获取图片
-                createShareBean.contentpicfiles = new File[imageFiles.size()];
+                createShareData.contentpicfiles = new File[imageFiles.size()];
                 for (int i = 0; i < imageFiles.size(); i++) {
-                    createShareBean.contentpicfiles[i] = imageFiles.get(i);
+                    createShareData.contentpicfiles[i] = imageFiles.get(i);
                 }
 
                 //获取图片描述
@@ -186,20 +185,24 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
                     String[] descs = new String[customGridView.getChildCount() - 1];
 
                     for (int i = 0; i < customGridView.getChildCount() - 1; i++) {
-                        descs[i] = ((TextView)customGridView.getChildAt(i)
+                        String text = ((TextView)customGridView.getChildAt(i)
                                 .findViewById(R.id.tv_desc)).getText().toString();
+                        if (TextUtils.equals("添加描述", text)) {
+                            text = "";
+                        }
+                        descs[i] = text;
                     }
-                    createShareBean.picdescribe = new Gson().toJson(descs);
+                    createShareData.picdescribe = new Gson().toJson(descs);
                 }
             }else {
                 //如果是插入链接
-                createShareBean.url = getLinkUrl();
+                createShareData.url = getLinkUrl();
             }
 
 
             Intent it = new Intent(this, CreateShareAddCoverActivity.class);
             it.putExtra(CreateShareAddCoverActivity.ARG_CREATE_SHARE_BEAN,
-                    new Gson().toJson(createShareBean));
+                    new Gson().toJson(createShareData));
             startActivity(it);
         }else if (view == btInsertLink) {
             //点击插入链接
