@@ -79,12 +79,33 @@ public class UserRepository {
             public void call(UserBean baseRespBean) {
                 if (baseRespBean.isSucceed()) {
                     //登录成功
-                    UserPreferenceManager.getInstance().onLoginSucceed(baseRespBean);
+                    UserPreferenceManager.getInstance().cacheUser(baseRespBean);
                     user = baseRespBean;
                 }
             }
         });
     }
+
+    /**
+     * 刷新登录
+     * @return
+     */
+    public Observable<UserBean> refreshLogin() {
+        if (user == null) {
+            return null;
+        }
+        return loginApi.refreshLogin(user.info.phone, getAuthId()).doOnNext(new Action1<UserBean>() {
+            @Override
+            public void call(UserBean userBean) {
+                //登录成功
+                if (userBean.isSucceed()) {
+                    UserPreferenceManager.getInstance().cacheUser(userBean);
+                    user = userBean;
+                }
+            }
+        });
+    }
+
 
     /**
      * 用户是否登录
@@ -99,9 +120,30 @@ public class UserRepository {
      * @param bean
      * @return
      */
-    public Observable<BaseRespBean> updateUserInfo(UpdateUserInfoData bean) {
+    public Observable<BaseRespBean> updateUserInfo(final UpdateUserInfoData bean) {
         return loginApi.updateUserInfo(bean.picurl, bean.didurl, bean.cardUrl, bean.sex, bean.did,
-                bean.bname, bean.banks, bean.status, bean.cardNo);
+                bean.bname, bean.banks, bean.status, bean.cardNo, bean.wdistrict, bean.birthday,
+                bean.uid, bean.uname)
+                .doOnNext(new Action1<BaseRespBean>() {
+            @Override
+            public void call(BaseRespBean baseRespBean) {
+                if (baseRespBean.isSucceed()) {
+                    user.info.banks = bean.banks;
+                    user.info.picurl = bean.picurl;
+                    user.info.didurl = bean.didurl[0] + "," + bean.didurl[1];
+                    user.info.cardImg = bean.cardUrl;
+                    user.info.wdistrict = bean.wdistrict;
+                    user.info.sex = bean.sex;
+                    user.info.did = bean.did;
+                    user.info.bname = bean.bname;
+                    user.info.cardNo = bean.cardNo;
+                    user.info.birthday = bean.birthday;
+                    user.info.uname = bean.uname;
+                    UserPreferenceManager.getInstance().cacheUser(user);
+                }
+            }
+        });
+
     }
 
     /**

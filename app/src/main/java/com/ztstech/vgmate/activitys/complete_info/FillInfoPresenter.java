@@ -60,7 +60,7 @@ public class FillInfoPresenter extends PresenterImpl<FillInfoContract.View> impl
                             @Override
                             public void onNext(BaseRespBean baseRespBean) {
                                 mView.hideLoading(null);
-                                if (baseRespBean.status == Constants.STATUS_SUCCEED) {
+                                if (baseRespBean.isSucceed()) {
                                     mView.onSubmitSucceed();
                                 }else {
                                     mView.onSubmitFailed("提交失败");
@@ -82,13 +82,6 @@ public class FillInfoPresenter extends PresenterImpl<FillInfoContract.View> impl
     @Override
     public boolean isInfoFilled() {
         return false;
-    }
-
-    /**
-     * 上传图片
-     */
-    private void uploadImage() {
-
     }
 
 

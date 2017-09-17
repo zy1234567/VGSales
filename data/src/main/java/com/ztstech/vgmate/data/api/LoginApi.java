@@ -30,5 +30,17 @@ public interface LoginApi {
                                             @Query("bname") String bname,
                                             @Query("banks") String banks,
                                             @Query("status") String status,
-                                            @Query("cardNo") String cardNo);
+                                            @Query("cardNo") String cardNo,
+                                            @Query("wdistrict") String wdistrict,
+                                            @Query("birthday") String birthday,
+                                            @Query("uid") String uid,
+                                            @Query("uname") String uname);
+
+    /**
+     * 刷新登录
+     * @return
+     */
+    @POST("exempt/AppSaleUpdateLoginStatus")
+    Observable<UserBean> refreshLogin(@Query("phone") String phone,
+                                      @Query("authId") String authId);
 }

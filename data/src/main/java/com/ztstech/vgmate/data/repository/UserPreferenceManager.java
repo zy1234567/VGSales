@@ -49,10 +49,10 @@ public class UserPreferenceManager {
 
 
     /**
-     * 登录成功
+     * 缓存用户
      * @param user
      */
-    public void onLoginSucceed(final UserBean user) {
+    public void cacheUser(final UserBean user) {
         new Thread(){
             @Override
             public void run() {

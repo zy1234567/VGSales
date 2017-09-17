@@ -29,6 +29,7 @@ import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
 import com.ztstech.vgmate.activitys.main.MainActivity;
 import com.ztstech.vgmate.model.fill_info.FillInfoModel;
+import com.ztstech.vgmate.utils.SexUtils;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.TopBar;
@@ -184,17 +185,16 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
             new TakePhotoHelper(this, takePhoto, true).show();
         }else if (view == tvSex) {
             //选择性别
-            new AlertDialog.Builder(this).setTitle("选择性别").setItems(new String[]{"男", "女"},
+            new AlertDialog.Builder(this).setTitle("选择性别").setItems(SexUtils.NAME,
                     new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     if (i == 0) {
-                        model.sex = "1";
-                        tvSex.setText("男");
+                        model.sex = "01";
                     }else {
-                        model.sex = "2";
-                        tvSex.setText("女");
+                        model.sex = "02";
                     }
+                    tvSex.setText(SexUtils.getNameById(model.sex));
                 }
             }).create().show();
         }else if (view == tvBirthday) {
@@ -230,8 +230,6 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
 
 
     private void onSubmitClick() {
-        //暂时跳转主界面
-//        onSubmitSucceed();
 
         model.location = tvLocation.getText().toString();
         model.birthday = tvBirthday.getText().toString();
@@ -281,7 +279,6 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
         }
 
         mPresenter.saveInfo(model);
-
     }
 
     @Override

@@ -21,4 +21,11 @@ public class UpdateUserInfoData {
     public String status;
     public String cardNo;
 
+    public String wdistrict;
+    public String birthday;
+    public String uid;
+    public String uname;
+
+
+
 }

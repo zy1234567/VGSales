@@ -6,7 +6,6 @@ package com.ztstech.vgmate.constants;
 
 public interface Constants {
 
-    /**网络请求成功*/
-    int STATUS_SUCCEED = 1;
+
 
 }

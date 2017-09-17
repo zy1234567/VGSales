@@ -39,7 +39,7 @@
             android:layout_marginRight="12dp"
             android:src="@mipmap/arrow_right_choice" />
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_header"
             android:layout_width="45dp"
             android:layout_height="45dp"
