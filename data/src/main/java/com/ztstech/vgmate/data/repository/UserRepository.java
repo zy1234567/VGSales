@@ -87,6 +87,21 @@ public class UserRepository {
     }
 
     /**
+     * 登出
+     * @return
+     */
+    public Observable<BaseRespBean> logout() {
+        return loginApi.logout(getAuthId()).doOnNext(new Action1<BaseRespBean>() {
+            @Override
+            public void call(BaseRespBean baseRespBean) {
+                if (baseRespBean.isSucceed()) {
+                    clearUserInfo();
+                }
+            }
+        });
+    }
+
+    /**
      * 刷新登录
      * @return
      */
@@ -104,6 +119,14 @@ public class UserRepository {
                 }
             }
         });
+    }
+
+    /**
+     * 清空用户
+     */
+    public void clearUserInfo() {
+        user = null;
+        UserPreferenceManager.getInstance().clearUserInfo();
     }
 
 

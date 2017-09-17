@@ -43,4 +43,7 @@ public interface LoginApi {
     @POST("exempt/AppSaleUpdateLoginStatus")
     Observable<UserBean> refreshLogin(@Query("phone") String phone,
                                       @Query("authId") String authId);
+
+    @POST("exempt/AppSaleLoginout")
+    Observable<BaseRespBean> logout(@Query("authId") String authId);
 }

@@ -37,7 +37,6 @@
             android:id="@+id/tv_phone"
             android:textColor="@color/color_100"
             android:textSize="@dimen/text_5"
-            android:text="13111111111"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"

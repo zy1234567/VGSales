@@ -45,8 +45,7 @@
             android:layout_height="45dp"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/img_header_arrow"
-            android:background="#f00" />
+            android:layout_toLeftOf="@id/img_header_arrow" />
 
         <TextView
             android:gravity="center_vertical"

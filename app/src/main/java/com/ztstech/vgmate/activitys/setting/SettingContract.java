@@ -11,9 +11,13 @@ interface SettingContract {
 
     interface View extends BaseView {
 
+        void onLogoutFinish(String errorMessage);
     }
 
     interface Presenter extends BasePresenter<View> {
 
+        void logout();
+
+        String getPhone();
     }
 }

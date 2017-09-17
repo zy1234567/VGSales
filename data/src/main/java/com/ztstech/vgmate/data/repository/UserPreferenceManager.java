@@ -47,6 +47,13 @@ public class UserPreferenceManager {
         return preferences.getString(USER, null) != null;
     }
 
+    /**
+     * 清空用户信息
+     */
+    public void clearUserInfo() {
+        preferences.edit().remove(USER).apply();
+    }
+
 
     /**
      * 缓存用户
