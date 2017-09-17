@@ -58,7 +58,7 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
     public static final String ARG_TYPE = "arg_type";
 
     /**最大内容数*/
-    public static final int MAX_CONTENT_COUNT = 1000;
+    public static final int MAX_CONTENT_COUNT = 10000;
 
 
     @BindView(R.id.tv_next)
