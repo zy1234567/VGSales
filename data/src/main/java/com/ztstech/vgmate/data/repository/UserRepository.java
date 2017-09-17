@@ -7,7 +7,10 @@ import com.ztstech.vgmate.data.api.LoginApi;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.dto.UpdateUserInfoData;
 import com.ztstech.vgmate.data.beans.UserBean;
+import com.ztstech.vgmate.data.events.LogoutEvent;
 import com.ztstech.vgmate.data.utils.RetrofitUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import rx.Observable;
 import rx.functions.Action1;
@@ -96,6 +99,7 @@ public class UserRepository {
             public void call(BaseRespBean baseRespBean) {
                 if (baseRespBean.isSucceed()) {
                     clearUserInfo();
+                    EventBus.getDefault().post(new LogoutEvent());
                 }
             }
         });

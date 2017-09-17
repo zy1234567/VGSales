@@ -1,5 +1,6 @@
 package com.ztstech.vgmate.activitys.setting;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,7 +36,6 @@ public class SettingActivity extends MVPActivity<SettingContract.Presenter> impl
     @Override
     protected SettingContract.Presenter initPresenter() {
         return new SettingPresenter(this);
-
     }
 
     @Override

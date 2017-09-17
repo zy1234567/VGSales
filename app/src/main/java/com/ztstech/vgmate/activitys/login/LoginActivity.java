@@ -15,6 +15,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.complete_info.FillInfoActivity;
 import com.ztstech.vgmate.activitys.main.MainActivity;
+import com.ztstech.vgmate.data.events.LogoutEvent;
 import com.ztstech.vgmate.utils.ToastUtil;
 
 import butterknife.BindView;
@@ -125,7 +126,11 @@ public class LoginActivity extends MVPActivity<LoginContract.Presenter> implemen
     public void onNextClick(View view) {
         // TODO: 2017/8/26 test
         mPresenter.login(etPhone.getText().toString(), etCode.getText().toString());
-//        loginFinish(null);
+    }
+
+    @Override
+    public void onLogout(LogoutEvent logoutEvent) {
+
     }
 }
 

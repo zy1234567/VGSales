@@ -39,6 +39,6 @@ public class SettingPresenter extends PresenterImpl<SettingContract.View> implem
 
     @Override
     public String getPhone() {
-        return null;
+        return userRepository.getUser().info.phone;
     }
 }
