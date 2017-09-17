@@ -1,16 +1,17 @@
-package com.ztstech.vgmate.activitys.info;
+package com.ztstech.vgmate.activitys.edit_info;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -90,6 +91,11 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
     private InvokeParam invokeParam;
     private TakePhoto takePhoto;
 
+    /**
+     * 隐私信息是否允许编辑
+     */
+    private boolean privateInfoEditEnabled;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_edit_info;
@@ -112,6 +118,16 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
         tvLocation.setOnClickListener(this);
         tvBirthday.setOnClickListener(this);
         tvSex.setOnClickListener(this);
+
+
+        etId.setOnClickListener(this);
+        etCardMaster.setOnClickListener(this);
+        etBank.setOnClickListener(this);
+        etCardNumber.setOnClickListener(this);
+
+
+        setEditPrivateInfoEnabled(true);
+
         mPresenter.loadUserModule();
 
         topBar.getRightTextView().setOnClickListener(this);
@@ -169,6 +185,16 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
         setModelToView();
     }
 
+    @Override
+    public void setEditPrivateInfoEnabled(boolean enabled) {
+        this.privateInfoEditEnabled = enabled;
+
+        etId.setFocusableInTouchMode(enabled);
+        etCardMaster.setFocusableInTouchMode(enabled);
+        etBank.setFocusableInTouchMode(enabled);
+        etCardNumber.setFocusableInTouchMode(enabled);
+    }
+
     /**
      * 将model数据设置到界面
      */
@@ -218,12 +244,24 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
                         }
                     }).create().show();
         }else if (view == ivId) {
+            if (!privateInfoEditEnabled) {
+                showPrivateInfoDisabled();
+                return;
+            }
             currentImageView = (ImageView) view;
             new TakePhotoHelper(this, takePhoto, true).show();
         }else if (view == ivIdBack) {
+            if (!privateInfoEditEnabled) {
+                showPrivateInfoDisabled();
+                return;
+            }
             currentImageView = (ImageView) view;
             new TakePhotoHelper(this, takePhoto, true).show();
         }else if (view == ivCard) {
+            if (!privateInfoEditEnabled) {
+                showPrivateInfoDisabled();
+                return;
+            }
             currentImageView = (ImageView) view;
             new TakePhotoHelper(this, takePhoto, true).show();
         }else if (view == imgHeader) {
@@ -253,6 +291,10 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
         }else if (view == topBar.getRightTextView()) {
             //点击保存
             onSubmitClick();
+        }else if (view == etCardNumber || view == etCardMaster || view == etId || view == etBank) {
+            if (!privateInfoEditEnabled) {
+                showPrivateInfoDisabled();
+            }
         }
 
     }
@@ -332,5 +374,10 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
         }
 
         mPresenter.saveInfo(model);
+    }
+
+
+    private void showPrivateInfoDisabled() {
+        ToastUtil.toastCenter(this, "您提交的资料正在审核，审核完成后可以继续修改");
     }
 }

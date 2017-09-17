@@ -1,9 +1,6 @@
-package com.ztstech.vgmate.activitys.info;
-
-import android.util.Log;
+package com.ztstech.vgmate.activitys.edit_info;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
-import com.ztstech.vgmate.constants.Constants;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.UploadImageBean;
 import com.ztstech.vgmate.data.beans.UserBean;

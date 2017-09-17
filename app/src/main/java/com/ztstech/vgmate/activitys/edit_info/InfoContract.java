@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.info;
+package com.ztstech.vgmate.activitys.edit_info;
 
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.BaseView;
@@ -20,6 +20,12 @@ interface InfoContract {
          * 设置用户数据
          */
         void setUserModule(FillInfoModel model);
+
+        /**
+         * 设置是否允许信息编辑
+         * @param enabled
+         */
+        void setEditPrivateInfoEnabled(boolean enabled);
     }
 
     interface Presenter extends BasePresenter<View> {

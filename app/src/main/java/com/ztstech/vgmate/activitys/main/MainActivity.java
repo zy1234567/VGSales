@@ -13,7 +13,7 @@ import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.add_org.AddOrgActivity;
 import com.ztstech.vgmate.activitys.add_sell_mate.AddSellMateActivity;
 import com.ztstech.vgmate.activitys.create_share_info.CreateShareInfoActivity;
-import com.ztstech.vgmate.activitys.info.EditInfoActivity;
+import com.ztstech.vgmate.activitys.edit_info.EditInfoActivity;
 import com.ztstech.vgmate.activitys.main.adapter.MainPagerAdapter;
 import com.ztstech.vgmate.activitys.main.widget.BottomBar;
 import com.ztstech.vgmate.data.api.CreateShareApi;
