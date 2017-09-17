@@ -268,6 +268,8 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
             llGrid.setVisibility(View.GONE);
             llWebView.setVisibility(View.VISIBLE);
 
+            btInsertLink.setSelected(true);
+
             String url = getLinkUrl();
             if (url == null) {
                 tvNoneLink.setVisibility(View.VISIBLE);
@@ -279,6 +281,8 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
         }else {
             llWebView.setVisibility(View.GONE);
             llGrid.setVisibility(View.VISIBLE);
+            btInsertLink.setSelected(false);
+
         }
     }
 
