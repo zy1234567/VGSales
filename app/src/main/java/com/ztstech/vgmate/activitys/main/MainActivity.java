@@ -116,22 +116,26 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
             case R.id.tv_add_friend:
                 //添加销售伙伴
                 startActivity(new Intent(this, AddSellMateActivity.class));
+                dialog.setVisibility(View.GONE);
                 break;
             case R.id.tv_add_org:
                 //添加机构
                 startActivity(new Intent(this, AddOrgActivity.class));
+                dialog.setVisibility(View.GONE);
                 break;
             case R.id.tv_share_info:
                 //分享资讯
                 Intent itInfo = new Intent(this, CreateShareInfoActivity.class);
                 itInfo.putExtra(CreateShareInfoActivity.ARG_TYPE, CreateShareApi.SHARE_INFO);
                 startActivity(itInfo);
+                dialog.setVisibility(View.GONE);
                 break;
             case R.id.tv_share_notice:
                 //分享公告
                 Intent itNotice = new Intent(this, CreateShareInfoActivity.class);
                 itNotice.putExtra(CreateShareInfoActivity.ARG_TYPE, CreateShareApi.SHARE_NOTICE);
                 startActivity(itNotice);
+                dialog.setVisibility(View.GONE);
                 break;
         }
     }
