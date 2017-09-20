@@ -7,6 +7,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.ztstech.vgmate.activitys.org_list.fragments.AuditFragment;
 import com.ztstech.vgmate.activitys.org_list.fragments.invalid.InvalidFragment;
 import com.ztstech.vgmate.activitys.org_list.fragments.pass.PassFragment;
+import com.ztstech.vgmate.activitys.org_list.fragments.v2.claimed.OrglistClaimedFragment;
+import com.ztstech.vgmate.activitys.org_list.fragments.v2.unclaim.OrglistUnclaimFragment;
+import com.ztstech.vgmate.activitys.org_list.fragments.v2.unsure.OrglistUnsureFragment;
+import com.ztstech.vgmate.activitys.org_list.fragments.v2.web.OrglistWebFragment;
 
 /**
  * Created by zhiyuan on 2017/9/8.
@@ -21,18 +25,20 @@ public class OrgListPageAdapter extends FragmentPagerAdapter{
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return new PassFragment();
+            return new OrglistUnsureFragment();
         }else if (position == 1) {
-            return new AuditFragment();
+            return new OrglistUnclaimFragment();
         }else if (position == 2) {
-            return new InvalidFragment();
+            return new OrglistClaimedFragment();
+        }else if (position == 3) {
+            return new OrglistWebFragment();
         }
         return null;
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
     @Override
