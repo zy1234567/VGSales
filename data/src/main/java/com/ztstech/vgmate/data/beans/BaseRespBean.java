@@ -13,7 +13,7 @@ public class BaseRespBean {
 
     public int status = -1;
 
-    public String errmsg;
+    public String errmsg = "";
 
     /**
      * 是否为请求成功的bean

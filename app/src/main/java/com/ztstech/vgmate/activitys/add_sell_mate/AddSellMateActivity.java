@@ -125,7 +125,7 @@ public class AddSellMateActivity extends MVPActivity<AddSellMateContract.Present
             //打开联系人
             RxPermissions rxPermissions = new RxPermissions(this);
             rxPermissions
-                    .request(Manifest.permission.CAMERA)
+                    .request(Manifest.permission.READ_CONTACTS)
                     .subscribe(new Action1<Boolean>() {
                         @Override
                         public void call(Boolean aBoolean) {
