@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="339dp"
+
+    android:layout_height="wrap_content"
+    android:background="@color/color_109">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:textStyle="bold"
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_1"
+        android:layout_marginTop="25dp"
+        android:text="审核机构"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
+    <ImageView
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/ico_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+
+    <TextView
+        android:textColor="@drawable/sel_dialog_audit_org_btn_pass_text_color"
+        android:background="@drawable/sel_dialog_audit_org_btn_pass"
+        android:id="@+id/tv_pass"
+        android:textSize="@dimen/text_4"
+        android:gravity="center"
+        android:text="通过审核"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
+        android:layout_below="@id/tv_title"
+        android:layout_width="90dp"
+        android:layout_height="35dp" />
+    
+    <TextView
+        android:textColor="@drawable/sel_dialog_audit_org_btn_repeat_text_color"
+        android:background="@drawable/sel_dialog_audit_org_btn_repeat"
+        android:id="@+id/tv_repeat"
+        android:textSize="@dimen/text_4"
+        android:layout_width="90dp"
+        android:layout_height="35dp"
+        android:layout_alignTop="@id/tv_pass"
+        android:layout_toRightOf="@id/tv_pass"
+        android:layout_marginLeft="10dp"
+        android:text="设为重复"
+        android:gravity="center"/>
+    
+    <TextView
+        android:textColor="@drawable/sel_dialog_audit_org_btn_invalid_text_color"
+        android:background="@drawable/sel_dialog_audit_org_btn_invalid"
+        android:id="@+id/tv_invalid"
+        android:gravity="center"
+        android:text="无效信息"
+        android:textSize="@dimen/text_4"
+        android:layout_alignTop="@id/tv_pass"
+        android:layout_width="90dp"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="25dp"/>
+
+
+    <FrameLayout
+        android:layout_below="@id/tv_pass"
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:layout_marginBottom="6dp"
+            android:background="#f0f4f5"
+            android:id="@+id/rl_pass"
+            android:layout_marginTop="9dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="90dp">
+
+            <EditText
+                android:layout_marginTop="6dp"
+                android:background="@null"
+                android:textColor="@color/color_100"
+                android:textSize="@dimen/text_5"
+                android:gravity="top"
+                android:text="该机构唯一并真实存在，通过审核"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="83dp" />
+
+            <TextView
+                android:text="0/100"
+                android:layout_marginBottom="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/color_103"
+                android:textSize="@dimen/text_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/rl_repeat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_repeat_title"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:text="请输入或者选择与哪个机构重复"
+                android:textColor="@color/color_102"
+                android:textSize="@dimen/text_7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <EditText
+                android:id="@+id/et_repeat"
+                android:textSize="@dimen/text_7"
+                android:textColorHint="@color/color_103"
+                android:hint="请输入机构ID"
+                android:lines="1"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_below="@id/tv_repeat_title"
+                android:background="@drawable/bg_c_2_f_107"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+            
+            <android.support.v7.widget.RecyclerView
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/et_repeat"
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="226dp">
+
+            </android.support.v7.widget.RecyclerView>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:layout_marginBottom="6dp"
+            android:background="#f0f4f5"
+            android:id="@+id/rl_invalid"
+            android:layout_marginTop="9dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="90dp">
+
+            <EditText
+                android:textColorHint="@color/color_103"
+                android:hint="请简要说明该机构无效的原因..."
+                android:layout_marginTop="6dp"
+                android:background="@null"
+                android:textColor="@color/color_100"
+                android:textSize="@dimen/text_5"
+                android:gravity="top"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="83dp" />
+
+            <TextView
+                android:text="0/100"
+                android:layout_marginBottom="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/color_103"
+                android:textSize="@dimen/text_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <TextView
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_c_2_f_001"
+        android:textColor="@color/color_109"
+        android:textSize="@dimen/text_3"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:gravity="center"
+        android:text="提交"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/fl_content"/>
+
+
+
+</RelativeLayout>
