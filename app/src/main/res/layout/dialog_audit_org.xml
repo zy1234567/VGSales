@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="339dp"
 
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/color_40_000">
+
+
+<RelativeLayout
+    android:layout_centerInParent="true"
+    android:layout_width="339dp"
     android:layout_height="wrap_content"
-    android:background="@color/color_109">
+    android:background="#fff">
 
     <TextView
         android:id="@+id/tv_title"
@@ -17,6 +24,7 @@
         android:layout_height="wrap_content" />
     
     <ImageView
+        android:id="@+id/img_close"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:layout_alignParentRight="true"
@@ -84,6 +92,7 @@
             android:layout_height="90dp">
 
             <EditText
+                android:id="@+id/et_pass"
                 android:layout_marginTop="6dp"
                 android:background="@null"
                 android:textColor="@color/color_100"
@@ -95,6 +104,7 @@
                 android:layout_height="83dp" />
 
             <TextView
+                android:id="@+id/tv_pass_count"
                 android:text="0/100"
                 android:layout_marginBottom="7dp"
                 android:layout_marginRight="7dp"
@@ -163,6 +173,7 @@
             android:layout_height="90dp">
 
             <EditText
+                android:id="@+id/et_invalid"
                 android:textColorHint="@color/color_103"
                 android:hint="请简要说明该机构无效的原因..."
                 android:layout_marginTop="6dp"
@@ -175,6 +186,7 @@
                 android:layout_height="83dp" />
 
             <TextView
+                android:id="@+id/tv_invalid_count"
                 android:text="0/100"
                 android:layout_marginBottom="7dp"
                 android:layout_marginRight="7dp"
@@ -190,6 +202,7 @@
     </FrameLayout>
 
     <TextView
+        android:id="@+id/tv_submit"
         android:layout_marginBottom="30dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_c_2_f_001"
@@ -205,4 +218,5 @@
 
 
 
+</RelativeLayout>
 </RelativeLayout>
