@@ -4,13 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.ztstech.vgmate.activitys.org_list.fragments.AuditFragment;
-import com.ztstech.vgmate.activitys.org_list.fragments.invalid.InvalidFragment;
-import com.ztstech.vgmate.activitys.org_list.fragments.pass.PassFragment;
-import com.ztstech.vgmate.activitys.org_list.fragments.v2.claimed.OrglistClaimedFragment;
-import com.ztstech.vgmate.activitys.org_list.fragments.v2.unclaim.OrglistUnclaimFragment;
-import com.ztstech.vgmate.activitys.org_list.fragments.v2.unsure.OrglistUnsureFragment;
-import com.ztstech.vgmate.activitys.org_list.fragments.v2.web.OrglistWebFragment;
+import com.ztstech.vgmate.activitys.org_list.fragments.claimed.OrglistClaimedFragment;
+import com.ztstech.vgmate.activitys.org_list.fragments.unclaim.OrglistUnclaimFragment;
+import com.ztstech.vgmate.activitys.org_list.fragments.unsure.OrglistUnsureFragment;
+import com.ztstech.vgmate.activitys.org_list.fragments.web.OrglistWebFragment;
 
 /**
  * Created by zhiyuan on 2017/9/8.
@@ -18,8 +15,20 @@ import com.ztstech.vgmate.activitys.org_list.fragments.v2.web.OrglistWebFragment
 
 public class OrgListPageAdapter extends FragmentPagerAdapter{
 
+    private String[] titles;
+
+
     public OrgListPageAdapter(FragmentManager fm) {
         super(fm);
+    }
+
+
+    /**
+     * 设置标题
+     * @param titles
+     */
+    public void setTitles(String[] titles) {
+        this.titles = titles;
     }
 
     @Override
@@ -43,12 +52,8 @@ public class OrgListPageAdapter extends FragmentPagerAdapter{
 
     @Override
     public CharSequence getPageTitle(int position) {
-        if (position == 0) {
-            return PassFragment.TITLE;
-        }else if (position == 1) {
-            return AuditFragment.TITLE;
-        }else if (position == 2) {
-            return InvalidFragment.TITLE;
+        if (titles != null) {
+            return titles[position];
         }
         return super.getPageTitle(position);
     }

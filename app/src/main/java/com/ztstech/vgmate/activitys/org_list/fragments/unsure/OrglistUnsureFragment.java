@@ -1,7 +1,6 @@
-package com.ztstech.vgmate.activitys.org_list.fragments.v2.unclaim;
+package com.ztstech.vgmate.activitys.org_list.fragments.unsure;
 
-import android.content.Context;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,17 +11,21 @@ import com.ztstech.vgmate.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * 待认领
+ * 待确认
  */
-public class OrglistUnclaimFragment extends Fragment {
+public class OrglistUnsureFragment extends Fragment {
+
+
+    public OrglistUnsureFragment() {
+        // Required empty public constructor
+    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_orglist_unclaim, container, false);
+        return inflater.inflate(R.layout.fragment_orglist_unsure, container, false);
     }
-
 
 }

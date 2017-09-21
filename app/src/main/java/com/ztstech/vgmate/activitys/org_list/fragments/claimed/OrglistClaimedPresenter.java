@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.org_list.fragments.v2.claimed;
+package com.ztstech.vgmate.activitys.org_list.fragments.claimed;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
 

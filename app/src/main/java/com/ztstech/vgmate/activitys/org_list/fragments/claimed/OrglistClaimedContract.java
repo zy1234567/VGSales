@@ -1,13 +1,13 @@
-package com.ztstech.vgmate.activitys.org_list.fragments.pass;
+package com.ztstech.vgmate.activitys.org_list.fragments.claimed;
 
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.BaseView;
 
 /**
- * Created by zhiyuan on 2017/9/8.
+ * Created by zhiyuan on 2017/9/20.
  */
 
-interface PassContract {
+interface OrglistClaimedContract {
 
     interface View extends BaseView {
 

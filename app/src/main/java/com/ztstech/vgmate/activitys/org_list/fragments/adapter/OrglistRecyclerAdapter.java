@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.org_list.fragments.v2.adapter;
+package com.ztstech.vgmate.activitys.org_list.fragments.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

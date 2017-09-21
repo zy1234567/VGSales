@@ -1,5 +1,4 @@
-package com.ztstech.vgmate.activitys.org_list.fragments;
-
+package com.ztstech.vgmate.activitys.org_list.fragments.unclaim;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,22 +10,17 @@ import com.ztstech.vgmate.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * 审核
+ * 待认领
  */
-public class AuditFragment extends Fragment {
-
-    public static final String TITLE = "审核";
-
-    public AuditFragment() {
-        // Required empty public constructor
-    }
+public class OrglistUnclaimFragment extends Fragment {
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_audit, container, false);
+        return inflater.inflate(R.layout.fragment_orglist_unclaim, container, false);
     }
+
 
 }

@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.org_list.fragments.v2.web;
+package com.ztstech.vgmate.activitys.org_list.fragments.web;
 
 
 import android.os.Bundle;
