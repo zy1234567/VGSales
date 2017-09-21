@@ -3,6 +3,8 @@ package com.ztstech.vgmate.weigets;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,10 +23,17 @@ import com.ztstech.vgmate.R;
 
 public class TopBar extends FrameLayout {
 
+    private View topView;
     private ImageView imgRight, imgLeft;
     private TextView tvTitle, tvLeft, tvRight;
 
     private String title, leftText, rightText;
+
+    private int backgroundColor = -1;
+    private int colorLeft;
+    private int colorRight;
+
+
 
     private boolean showBackNav = false;
 
@@ -39,7 +48,7 @@ public class TopBar extends FrameLayout {
     public TopBar(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        View topView = LayoutInflater.from(getContext()).inflate(R.layout.layout_top_bar,
+        topView = LayoutInflater.from(getContext()).inflate(R.layout.layout_top_bar,
                 this, false);
         imgRight = topView.findViewById(R.id.iv_right);
         tvTitle = topView.findViewById(R.id.tv_title);
@@ -52,6 +61,9 @@ public class TopBar extends FrameLayout {
 
         int leftDrawableId = typedArray.getResourceId(R.styleable.TopBar_srcLeft, -1);
         int rightDrawableId = typedArray.getResourceId(R.styleable.TopBar_srcRight, -1);
+        backgroundColor = typedArray.getColor(R.styleable.TopBar_backgroundColor, 0);
+        colorLeft = typedArray.getColor(R.styleable.TopBar_colorLeft, 0);
+        colorRight = typedArray.getColor(R.styleable.TopBar_colorRight, 0);
         showBackNav = typedArray.getBoolean(R.styleable.TopBar_showBackNav, false);
 
         leftText = typedArray.getString(R.styleable.TopBar_textLeft);
@@ -60,6 +72,10 @@ public class TopBar extends FrameLayout {
         title = typedArray.getString(R.styleable.TopBar_barTitle);
 
         typedArray.recycle();
+
+        if (backgroundColor != -1) {
+            topView.setBackgroundColor(backgroundColor);
+        }
 
         if (title != null) {
             tvTitle.setText(title);
@@ -80,6 +96,17 @@ public class TopBar extends FrameLayout {
             imgRight.setImageResource(rightDrawableId);
         }
 
+        //颜色为纯白色暂时无法显示
+        if (colorLeft != 0) {
+            imgLeft.setColorFilter(colorLeft);
+            tvLeft.setTextColor(colorLeft);
+        }
+        if (colorRight != 0) {
+            imgRight.setColorFilter(colorRight);
+            tvRight.setTextColor(colorRight);
+        }
+
+
         if (showBackNav) {
             imgLeft.setImageResource(R.mipmap.return_nav);
             imgLeft.setOnClickListener(new OnClickListener() {
@@ -90,11 +117,13 @@ public class TopBar extends FrameLayout {
             });
         }
 
+
+
+
         addView(topView);
 
+
     }
-
-
 
 
     public ImageView getRightImage() {

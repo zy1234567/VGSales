@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ztstech.vgmate.activitys.org_detail.OrgDetailActivity">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.ztstech.vgmate.weigets.TopBar
+            app:backgroundColor="@color/color_001"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:barTitle=""
+            app:showBackNav="true"
+            app:layout_collapseMode="pin"
+            app:colorLeft="@color/color_109">
+
+        </com.ztstech.vgmate.weigets.TopBar>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:background="#fff"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/rl_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="55dp">
+
+                <View
+                    android:layout_alignParentTop="true"
+                    android:background="@color/color_104"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="@color/color_100"
+                        android:textSize="@dimen/text_3"
+                        android:layout_weight="1"
+                        android:text="完善资料"
+                        android:background="@drawable/bg_c_2_s_104"
+                        android:layout_marginRight="6dp"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp" />
+
+                    <TextView
+                        android:textColor="@color/color_100"
+                        android:textSize="@dimen/text_3"
+                        android:layout_weight="1"
+                        android:text="确认审核"
+                        android:background="@drawable/bg_c_2_f_005"
+                        android:layout_marginLeft="6dp"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp" />
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+            
+            <WebView
+                android:layout_above="@id/rl_bottom"
+                android:id="@+id/web_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
+</android.support.design.widget.CoordinatorLayout>

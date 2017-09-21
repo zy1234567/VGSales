@@ -47,7 +47,8 @@
         <activity android:name=".activitys.create_share_info.CreateShareInfoActivity" />
         <activity android:name=".activitys.add_org.AddOrgActivity" />
         <activity android:name=".activitys.create_share_add_desc.CreateShareAddDescActivity" />
-        <activity android:name=".activitys.create_share_add_cover.CreateShareAddCoverActivity"></activity>
+        <activity android:name=".activitys.create_share_add_cover.CreateShareAddCoverActivity" />
+        <activity android:name=".activitys.org_detail.OrgDetailActivity"></activity>
     </application>
 
 </manifest>

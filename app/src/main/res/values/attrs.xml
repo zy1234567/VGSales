@@ -8,6 +8,9 @@
         <attr name="showBackNav" format="boolean" />
         <attr name="textLeft" format="string" />
         <attr name="textRight" format="string" />
+        <attr name="backgroundColor" format="color" />
+        <attr name="colorLeft" format="color" />
+        <attr name="colorRight" format="color" />
     </declare-styleable>
 
     <declare-styleable name="CircleImageView">
