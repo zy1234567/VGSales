@@ -2,6 +2,8 @@ package com.ztstech.vgmate.data.api;
 
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -21,15 +23,16 @@ public interface CreateShareApi {
      * 创建分享
      * @return
      */
+    @FormUrlEncoded
     @POST("exempt/AppSaleMakeNews")
-    Observable<BaseRespBean> createShare(@Query("title") String title,
-                                         @Query("summary") String summary,
-                                         @Query("contentpicurl") String contentpicurl,
-                                         @Query("contentpicsurl") String contentpicsurl,
-                                         @Query("picurl") String picurl,
-                                         @Query("picsurl") String picsurl,
-                                         @Query("picdescribe") String picdescribe,
-                                         @Query("type") String type,
-                                         @Query("url") String url,
-                                         @Query("authId") String authId);
+    Observable<BaseRespBean> createShare(@Field("title") String title,
+                                         @Field("summary") String summary,
+                                         @Field("contentpicurl") String contentpicurl,
+                                         @Field("contentpicsurl") String contentpicsurl,
+                                         @Field("picurl") String picurl,
+                                         @Field("picsurl") String picsurl,
+                                         @Field("picdescribe") String picdescribe,
+                                         @Field("type") String type,
+                                         @Field("url") String url,
+                                         @Field("authId") String authId);
 }

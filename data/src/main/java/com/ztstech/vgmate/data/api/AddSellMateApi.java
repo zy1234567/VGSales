@@ -2,6 +2,8 @@ package com.ztstech.vgmate.data.api;
 
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -12,13 +14,14 @@ import rx.Observable;
 
 public interface AddSellMateApi {
 
+    @FormUrlEncoded
     @POST("exempt/saleInsertNewSale")
-    Observable<BaseRespBean> addSellMate(@Query("phone") String phone,
-                                         @Query("uname") String uname,
-                                         @Query("did") String did,
-                                         @Query("wprovince") String wprovince,
-                                         @Query("wcity") String wcity,
-                                         @Query("wdistrict") String wdistrict,
-                                         @Query("authId") String authId,
-                                         @Query("noteswitch") String noteswitch);
+    Observable<BaseRespBean> addSellMate(@Field("phone") String phone,
+                                         @Field("uname") String uname,
+                                         @Field("did") String did,
+                                         @Field("wprovince") String wprovince,
+                                         @Field("wcity") String wcity,
+                                         @Field("wdistrict") String wdistrict,
+                                         @Field("authId") String authId,
+                                         @Field("noteswitch") String noteswitch);
 }
