@@ -5,9 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.text.format.DateFormat;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -22,8 +21,6 @@ import com.jph.takephoto.model.TResult;
 import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
-import com.prolificinteractive.materialcalendarview.CalendarMode;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
@@ -67,23 +64,23 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
     @BindView(R.id.et_card_master)
     TextInputEditText etCardMaster;
     @BindView(R.id.et_card_no)
-    TextInputEditText etCardNo;
+    TextInputEditText etCardNumber;
     @BindView(R.id.et_card_bank)
-    TextInputEditText etCardBank;
+    TextInputEditText etBank;
     @BindView(R.id.tv_header)
     TextView tvHeader;
 
 
     @BindView(R.id.img_header)
-    ImageView imgHeader;
+    ImageView ivIdBack;
     @BindView(R.id.iv_id)
-    ImageView imgId;
+    ImageView ivId;
     @BindView(R.id.iv_id_back)
     ImageView imgIdBack;
     @BindView(R.id.iv_card)
-    ImageView imgCard;          //银行卡
+    ImageView ivCard;          //银行卡
 
-    private final FillInfoModel model = new FillInfoModel();
+    private FillInfoModel model = new FillInfoModel();
 
     private InvokeParam invokeParam;
     private TakePhoto takePhoto;
@@ -125,15 +122,18 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
     protected void onViewBindFinish() {
         super.onViewBindFinish();
 
-        imgHeader.setOnClickListener(this);
+        ivIdBack.setOnClickListener(this);
         tvHeader.setOnClickListener(this);
-        imgId.setOnClickListener(this);
-        imgCard.setOnClickListener(this);
+        ivId.setOnClickListener(this);
+        ivCard.setOnClickListener(this);
         imgIdBack.setOnClickListener(this);
 
         tvSex.setOnClickListener(this);
         tvBirthday.setOnClickListener(this);
         tvLocation.setOnClickListener(this);
+
+
+        mPresenter.loadUserModule();
 
     }
 
@@ -171,17 +171,17 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
     public void onClick(View view) {
         if (view == tvLocation) {
             startActivityForResult(new Intent(this, LocationSelectActivity.class), REQ_LOCATION);
-        }else if (view == imgHeader || view == tvHeader) {
-            currentImageView = imgHeader;
+        }else if (view == ivIdBack || view == tvHeader) {
+            currentImageView = ivIdBack;
             new TakePhotoHelper(this, takePhoto, true).show();
         }else if (view == imgIdBack) {
             currentImageView = imgIdBack;
             new TakePhotoHelper(this, takePhoto, true).show();
-        }else if (view == imgCard) {
-            currentImageView = imgCard;
+        }else if (view == ivCard) {
+            currentImageView = ivCard;
             new TakePhotoHelper(this, takePhoto, true).show();
-        }else if (view == imgId) {
-            currentImageView = imgId;
+        }else if (view == ivId) {
+            currentImageView = ivId;
             new TakePhotoHelper(this, takePhoto, true).show();
         }else if (view == tvSex) {
             //选择性别
@@ -233,9 +233,9 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
 
         model.location = tvLocation.getText().toString();
         model.birthday = tvBirthday.getText().toString();
-        model.cardBank = etCardBank.getText().toString();
+        model.cardBank = etBank.getText().toString();
         model.cardMaster = etCardMaster.getText().toString();
-        model.cardNo = etCardNo.getText().toString();
+        model.cardNo = etCardNumber.getText().toString();
         model.id = etId.getText().toString();
         model.name = etName.getText().toString();
         model.sex = tvSex.getText().toString();
@@ -292,6 +292,12 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
         ToastUtil.toastCenter(this, "" + message);
     }
 
+    @Override
+    public void setUserModule(FillInfoModel model) {
+        this.model = model;
+        setModelToView();
+    }
+
 
     //拍照回调
 
@@ -310,13 +316,13 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
             String uri = result.getImage().getOriginalPath();
             File f = new File(uri);
             Glide.with(this).load(f).into(currentImageView);
-            if (currentImageView == imgCard) {
+            if (currentImageView == ivCard) {
                 model.cardFile = f;
             }else if (currentImageView == imgIdBack) {
                 model.idBackFile = f;
-            }else if (currentImageView == imgHeader) {
+            }else if (currentImageView == ivIdBack) {
                 model.headerFile = f;
-            }else if (currentImageView == imgId) {
+            }else if (currentImageView == ivId) {
                 model.idFile = f;
             }
         }
@@ -330,5 +336,39 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
     @Override
     public void takeCancel() {
 
+    }
+
+
+    /**
+     * 将model数据设置到界面
+     */
+    private void setModelToView() {
+        if (this.model == null) {
+            return;
+        }
+
+        if (!TextUtils.isEmpty(model.headUrl)) {
+            Glide.with(this).load(model.headUrl).into(ivIdBack);
+            tvHeader.setText("已上传");
+        }
+        if (!TextUtils.isEmpty(model.cardUrl)) {
+            Glide.with(this).load(model.headUrl).into(ivCard);
+        }
+        if (!TextUtils.isEmpty(model.idUrl)) {
+            Glide.with(this).load(model.idUrl).into(ivId);
+        }
+        if (!TextUtils.isEmpty(model.idBackUrl)) {
+            Glide.with(this).load(model.idBackUrl).into(ivIdBack);
+        }
+
+
+        etBank.setText(model.cardBank);
+        etCardMaster.setText(model.cardMaster);
+        etCardNumber.setText(model.cardNo);
+        etId.setText(model.id);
+        etName.setText(model.name);
+        tvLocation.setText(model.location);
+        tvBirthday.setText(model.birthday);
+        tvSex.setText(model.sex);
     }
 }

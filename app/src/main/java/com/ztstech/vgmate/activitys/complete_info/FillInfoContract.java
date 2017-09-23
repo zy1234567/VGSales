@@ -15,6 +15,11 @@ interface FillInfoContract {
         void onSubmitSucceed();
 
         void onSubmitFailed(String message);
+
+        /**
+         * 设置用户数据
+         */
+        void setUserModule(FillInfoModel model);
     }
 
     interface Presenter extends BasePresenter<View> {
@@ -26,6 +31,10 @@ interface FillInfoContract {
          * 资料是否已经完成
          */
         boolean isInfoFilled();
+
+
+        void loadUserModule();
+
     }
 
 }

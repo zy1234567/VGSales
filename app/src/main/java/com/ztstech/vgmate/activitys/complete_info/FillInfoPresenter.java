@@ -5,10 +5,12 @@ import android.util.Log;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.constants.Constants;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
+import com.ztstech.vgmate.data.beans.UserBean;
 import com.ztstech.vgmate.data.dto.UpdateUserInfoData;
 import com.ztstech.vgmate.data.beans.UploadImageBean;
 import com.ztstech.vgmate.data.repository.UserRepository;
 import com.ztstech.vgmate.data.utils.RetrofitUtils;
+import com.ztstech.vgmate.mapper.FillInfoModelMapper;
 import com.ztstech.vgmate.mapper.UserInfoBeanMapper;
 import com.ztstech.vgmate.model.fill_info.FillInfoModel;
 import com.ztstech.vgmate.utils.PresenterSubscriber;
@@ -43,7 +45,7 @@ public class FillInfoPresenter extends PresenterImpl<FillInfoContract.View> impl
 
                 //上传图片成功上传数据
                 Log.d("", "" + baseRespBean);
-                if ("0".equals(baseRespBean.status)) {
+                if (baseRespBean.isSucceed()) {
                     //上传成功
                     String[] urls = baseRespBean.urls.split(",");
 
@@ -82,6 +84,13 @@ public class FillInfoPresenter extends PresenterImpl<FillInfoContract.View> impl
     @Override
     public boolean isInfoFilled() {
         return false;
+    }
+
+    @Override
+    public void loadUserModule() {
+        UserBean userBean = userRepository.getUser();
+        FillInfoModel model = new FillInfoModelMapper().transform(userBean);
+        mView.setUserModule(model);
     }
 
 

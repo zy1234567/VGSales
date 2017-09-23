@@ -11,6 +11,7 @@ import com.ztstech.vgmate.activitys.login.LoginActivity;
 import com.ztstech.vgmate.activitys.main.MainActivity;
 import com.ztstech.vgmate.base.BaseActivity;
 import com.ztstech.vgmate.data.repository.UserRepository;
+import com.ztstech.vgmate.utils.LocationUtils;
 
 public class SplashActivity extends BaseActivity {
 
@@ -18,6 +19,21 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onViewBindFinish() {
         hideSystemNavigationBar();
+        LocationUtils.init(new Runnable() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        postJump();
+                    }
+                });
+            }
+        });
+
+    }
+
+    private void postJump() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

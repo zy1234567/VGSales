@@ -1,5 +1,7 @@
 package com.ztstech.vgmate.utils;
 
+import android.text.TextUtils;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ztstech.vgmate.base.BaseApplication;
@@ -9,40 +11,52 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import rx.functions.Action1;
+
 /**
  * Created by zhiyuan on 2017/9/17.
  */
 
 public class LocationUtils {
-    private static Map<String, String> codeNameMap;
+
+    /**
+     * 地址 - 编码
+     */
     private static Map<String, String> nameCodeMap;
 
-    static {
-        codeNameMap = new HashMap<>();
-        nameCodeMap = new HashMap<>();
-        String locationJson = CommonUtil.getDataFromAssets(
-                BaseApplication.getApplicationInstance().getApplicationContext(), "location.txt");
-        List<LocationBean> locationBeanList = new Gson().fromJson(locationJson,
-                new TypeToken<List<LocationBean>>() {
-        }.getType());
-        if (locationBeanList != null) {
-            for (LocationBean bean : locationBeanList) {
-                codeNameMap.put(bean.getSid(), bean.getSname());
-                nameCodeMap.put(bean.getSname(), bean.getSid());
-                if (bean.getCity() != null) {
-                    for (LocationBean.CityBean city : bean.getCity()) {
-                        codeNameMap.put(city.getSid(), city.getSname());
-                        nameCodeMap.put(city.getSname(), city.getSid());
-                        if (city.getSite() != null) {
-                            for (LocationBean.CityBean.SiteBean site : city.getSite()) {
-                                codeNameMap.put(site.getSid(), site.getSname());
-                                nameCodeMap.put(site.getSname(), site.getSid());
+    public static void init(final Runnable finish) {
+        new Thread(){
+            @Override
+            public void run() {
+                nameCodeMap = new HashMap<>();
+                String locationJson = CommonUtil.getDataFromAssets(
+                        BaseApplication.getApplicationInstance().getApplicationContext(), "location.txt");
+                List<LocationBean> locationBeanList = new Gson().fromJson(locationJson,
+                        new TypeToken<List<LocationBean>>() {
+                        }.getType());
+                if (locationBeanList != null) {
+                    for (LocationBean bean : locationBeanList) {
+                        nameCodeMap.put(bean.getSname(), bean.getSid());
+                        if (bean.getCity() != null) {
+                            for (LocationBean.CityBean city : bean.getCity()) {
+                                nameCodeMap.put(city.getSname(), city.getSid());
+                                if (city.getSite() != null) {
+                                    for (LocationBean.CityBean.SiteBean site : city.getSite()) {
+                                        nameCodeMap.put(site.getSname(), site.getSid());
+                                    }
+                                }
                             }
                         }
                     }
                 }
+
+                finish.run();
             }
-        }
+        }.start();
+    }
+
+    public static Map<String, String> getData() {
+        return nameCodeMap;
     }
 
     /**
@@ -52,7 +66,12 @@ public class LocationUtils {
      * @return
      */
     public static String getLocationNameByCode(String locationCode) {
-        return codeNameMap.get(locationCode);
+        for (Map.Entry<String, String> item : nameCodeMap.entrySet()) {
+            if (TextUtils.equals(locationCode, item.getValue())) {
+                return item.getKey();
+            }
+        }
+        return null;
     }
 
     /**

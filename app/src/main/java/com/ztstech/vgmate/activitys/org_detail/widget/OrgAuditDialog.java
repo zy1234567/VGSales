@@ -38,14 +38,8 @@ public class OrgAuditDialog extends Dialog {
 
         setCancelable(false);
 
-        Point point = new Point();
-        getWindow().getWindowManager().getDefaultDisplay().getSize(point);
 
-        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        WindowManager.LayoutParams mWindowAttributes = getWindow().getAttributes();
-        getWindow().getDecorView().setPadding(0, 0, 0, 0);
-        mWindowAttributes.width = point.x;
-        mWindowAttributes.height = WindowManager.LayoutParams.MATCH_PARENT;
+        ViewUtils.setDialogFullScreen(this);
 
         View v = LayoutInflater.from(context).inflate(R.layout.dialog_audit_org,
                 null, false);
@@ -67,7 +61,6 @@ public class OrgAuditDialog extends Dialog {
         setContentView(v);
 
     }
-
 
 
 
