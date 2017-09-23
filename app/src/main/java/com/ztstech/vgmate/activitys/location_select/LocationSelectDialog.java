@@ -22,6 +22,7 @@ import com.ztstech.vgmate.activitys.location_select.adapter.ProvinceAdapter;
 import com.ztstech.vgmate.data.beans.LocationBean;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.HUDUtils;
+import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.utils.ViewUtils;
 
@@ -41,7 +42,7 @@ import rx.schedulers.Schedulers;
  * Created by zhiyuan on 2017/9/22.
  */
 
-public class LocationSelectDialog extends Dialog {
+public class LocationSelectDialog extends Dialog implements View.OnClickListener {
 
 
     /**返回结果代码*/
@@ -66,6 +67,8 @@ public class LocationSelectDialog extends Dialog {
     ListView lvProvince;
     ListView lvCity;
     ListView lvArea;
+    /**灰色背景区域*/
+    private LinearLayout llParent;
 
     ProvinceAdapter adapterProvince;
     CityAdapter adapterCity;
@@ -97,6 +100,8 @@ public class LocationSelectDialog extends Dialog {
 
     KProgressHUD kProgressHUD;
 
+    private OnLocationSelectListener listener;
+
 
     public LocationSelectDialog(@NonNull Context context) {
         super(context,  R.style.dialog);
@@ -114,6 +119,8 @@ public class LocationSelectDialog extends Dialog {
         lvProvince = content.findViewById(R.id.listview_province);
         lvCity = content.findViewById(R.id.listview_city);
         lvArea = content.findViewById(R.id.listview_area);
+        llParent = content.findViewById(R.id.ll_parent);
+
 
 
         setContentView(content);
@@ -141,10 +148,15 @@ public class LocationSelectDialog extends Dialog {
                 });
     }
 
+    public void setOnLocationSelectedListener(OnLocationSelectListener listener) {
+        this.listener = listener;
+    }
+
     private void initData() {
-        String s = CommonUtil.getDataFromAssets(getContext(), "location.txt");
-        list_province = new Gson().fromJson(s, new TypeToken<List<LocationBean>>() {
-        }.getType());
+//        String s = CommonUtil.getDataFromAssets(getContext(), "location.txt");
+//        list_province = new Gson().fromJson(s, new TypeToken<List<LocationBean>>() {
+//        }.getType());
+        list_province = LocationUtils.getLocationList();
     }
 
     @OnClick({R.id.img_back, R.id.tv_save, R.id.rl_province, R.id.rl_city, R.id.rl_area})
@@ -152,9 +164,6 @@ public class LocationSelectDialog extends Dialog {
         switch (view.getId()) {
             case R.id.img_back:
                 dismiss();
-                break;
-            case R.id.tv_save:
-                commit();
                 break;
             case R.id.rl_province:
                 selectProvince();
@@ -185,9 +194,10 @@ public class LocationSelectDialog extends Dialog {
             intent.putExtra(RESULT_C, csid);
             intent.putExtra(RESULT_A, asid);
 
-            // TODO: 2017/9/22 保存数据 
-
-//            setResult(RESULT_OK, intent);
+            if (listener != null) {
+                listener.onLocationSelected(province, psid, csid, asid);
+            }
+            dismiss();
         } else {
             if (cPosition == -1) {
                 ToastUtil.toastCenter(getContext(), "请选择城市!");
@@ -203,17 +213,17 @@ public class LocationSelectDialog extends Dialog {
             intent.putExtra(RESULT_C, csid);
             intent.putExtra(RESULT_A, asid);
 
-            // TODO: 2017/9/22 保存数据
-//            setResult(RESULT_OK, intent);
+            if (listener != null) {
+                listener.onLocationSelected(province + "-" + city + "-" + area, psid, csid, asid);
+            }
+            dismiss();
         }
 
-        dismiss();
     }
 
 
 
     private void initListener() {
-
         list_city = new ArrayList<>();
         list_area = new ArrayList<>();
         adapterProvince = new ProvinceAdapter(list_province, getContext());
@@ -248,7 +258,13 @@ public class LocationSelectDialog extends Dialog {
                 area = "";
                 cPosition = -1;
                 aPosition = -1;
-                selectCity();
+
+                if (province.contains("香港") || province.contains("澳门")  //港澳台目前只有一级选择
+                        || province.contains("台湾")){
+                    commit();
+                }else {
+                    selectCity();
+                }
             }
         });
         lvCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -291,6 +307,8 @@ public class LocationSelectDialog extends Dialog {
                 area = aBean.getSname();
                 asid = aBean.getSid();
                 tvCuerrentSelect.setText(province + city + area);
+
+                commit();
             }
         });
     }
@@ -347,4 +365,22 @@ public class LocationSelectDialog extends Dialog {
         lvArea.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void onClick(View view) {
+        if (view == llParent) {
+            dismiss();
+        }
+    }
+
+    public interface OnLocationSelectListener {
+
+        /**
+         * 地址选中事件
+         * @param locationName 地址名称
+         * @param locP  地址，省
+         * @param locC  地址，市
+         * @param locA  地址，区
+         */
+        void onLocationSelected(String locationName, String locP, String locC, String locA);
+    }
 }

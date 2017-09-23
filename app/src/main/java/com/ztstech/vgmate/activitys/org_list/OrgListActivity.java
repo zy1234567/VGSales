@@ -5,6 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ztstech.vgmate.R;
@@ -20,7 +21,7 @@ import butterknife.OnClick;
  * 组织名录
  */
 public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> implements
-        OrgListContract.View {
+        OrgListContract.View, View.OnClickListener {
 
 
     @BindView(R.id.viewpager)
@@ -29,6 +30,8 @@ public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> impl
     TabLayout tableLayout;
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.iv_left)
+    ImageView ivLeft;
 
     private OrgListPageAdapter pagerAdapter;
 
@@ -36,6 +39,15 @@ public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> impl
 
     /**标题*/
     private String[] titles = new String[] {"待确认", "待认领", "已认领", "网站端"};
+
+
+    private LocationSelectDialog.OnLocationSelectListener onLocationSelectListener =
+            new LocationSelectDialog.OnLocationSelectListener() {
+                @Override
+                public void onLocationSelected(String locationName, String locP, String locC, String locA) {
+                    tvTitle.setText(locationName);
+                }
+            };
 
     @Override
     protected int getLayoutRes() {
@@ -57,11 +69,21 @@ public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> impl
         pagerAdapter.setTitles(titles);
 
         viewPager.setAdapter(pagerAdapter);
+
+        ivLeft.setOnClickListener(this);
     }
 
     @OnClick(R.id.tv_title)
     public void onTitleClick(View v) {
         locationSelectDialog = new LocationSelectDialog(this);
+        locationSelectDialog.setOnLocationSelectedListener(onLocationSelectListener);
         locationSelectDialog.show();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == ivLeft) {
+            finish();
+        }
     }
 }

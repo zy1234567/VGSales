@@ -24,6 +24,8 @@ public class LocationUtils {
      */
     private static Map<String, String> nameCodeMap;
 
+    private static List<LocationBean> locationBeanList;
+
     public static void init(final Runnable finish) {
         new Thread(){
             @Override
@@ -31,7 +33,7 @@ public class LocationUtils {
                 nameCodeMap = new HashMap<>();
                 String locationJson = CommonUtil.getDataFromAssets(
                         BaseApplication.getApplicationInstance().getApplicationContext(), "location.txt");
-                List<LocationBean> locationBeanList = new Gson().fromJson(locationJson,
+                locationBeanList = new Gson().fromJson(locationJson,
                         new TypeToken<List<LocationBean>>() {
                         }.getType());
                 if (locationBeanList != null) {
@@ -53,6 +55,10 @@ public class LocationUtils {
                 finish.run();
             }
         }.start();
+    }
+
+    public static List<LocationBean> getLocationList() {
+        return locationBeanList;
     }
 
     public static Map<String, String> getData() {

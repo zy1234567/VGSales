@@ -6,6 +6,7 @@
     >
 
     <LinearLayout
+        android:id="@+id/ll_parent"
         android:background="@color/color_40_000"
         android:paddingBottom="150dp"
         android:orientation="vertical"

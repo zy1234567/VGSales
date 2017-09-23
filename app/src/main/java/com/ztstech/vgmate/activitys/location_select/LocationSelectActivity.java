@@ -20,6 +20,7 @@ import com.ztstech.vgmate.activitys.location_select.adapter.ProvinceAdapter;
 import com.ztstech.vgmate.data.beans.LocationBean;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.HUDUtils;
+import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 
 
@@ -151,9 +152,10 @@ public class LocationSelectActivity extends AppCompatActivity {
     private void initData() {
         tvSave.setText("确认");
         title.setText("地区选择");
-        String s = CommonUtil.getDataFromAssets(this, "location.txt");
-        list_province = new Gson().fromJson(s, new TypeToken<List<LocationBean>>() {
-        }.getType());
+//        String s = CommonUtil.getDataFromAssets(this, "location.txt");
+//        list_province = new Gson().fromJson(s, new TypeToken<List<LocationBean>>() {
+//        }.getType());
+        list_province = LocationUtils.getLocationList();
         updateOrgInfo = getIntent().getBooleanExtra("updateOrgInfo", false);
 
     }
