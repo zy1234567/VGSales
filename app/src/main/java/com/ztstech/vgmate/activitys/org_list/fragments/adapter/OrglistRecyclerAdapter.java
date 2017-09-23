@@ -6,15 +6,18 @@ import android.view.ViewGroup;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.base.SimpleRecyclerAdapter;
 import com.ztstech.vgmate.base.SimpleViewHolder;
+import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
 
 /**
  * Created by zhiyuan on 2017/9/20.
  */
 
-public class OrglistRecyclerAdapter extends SimpleRecyclerAdapter<String> {
+public class OrglistRecyclerAdapter extends SimpleRecyclerAdapter<GetOrgListItemsBean.ListBean> {
     @Override
-    public SimpleViewHolder<String> onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new SimpleViewHolder<String>(LayoutInflater.from(parent.getContext())
+    public SimpleViewHolder<GetOrgListItemsBean.ListBean> onCreateViewHolder(ViewGroup parent,
+                                                                             int viewType) {
+        return new SimpleViewHolder<GetOrgListItemsBean.ListBean>(
+                LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_orglist, parent, false), this);
     }
 }

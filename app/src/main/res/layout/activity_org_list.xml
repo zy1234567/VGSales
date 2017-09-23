@@ -25,7 +25,7 @@
             android:drawableRight="@drawable/sel_drop_down"
             android:textColor="@color/color_100"
             android:textSize="@dimen/text_2"
-            android:text="北京市大兴区"
+            android:text="北京市东城区"
             android:drawablePadding="7dp"
             android:drawableLeft="@mipmap/ico_location_y"
             android:id="@+id/tv_title"

@@ -12,8 +12,6 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.main_fragment.subview.information.adapter.InformationRecyclerAdapter;
 import com.ztstech.vgmate.data.beans.MainListBean;
-import com.ztstech.vgmate.model.information.InformationModel;
-import com.ztstech.vgmate.utils.ViewUtils;
 
 import java.util.List;
 
@@ -51,8 +49,8 @@ public class InformationFragment extends MVPFragment<InformationContract.Present
 
 
     @Override
-    protected void onCreateViewFinish(@Nullable Bundle savedInstanceState) {
-        super.onCreateViewFinish(savedInstanceState);
+    protected void onViewBindFinish(@Nullable Bundle savedInstanceState) {
+        super.onViewBindFinish(savedInstanceState);
         recyclerAdapter = new InformationRecyclerAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 

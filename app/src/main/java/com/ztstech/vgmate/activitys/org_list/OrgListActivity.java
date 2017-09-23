@@ -118,4 +118,12 @@ public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> impl
 
         }
     }
+
+    /**
+     * 被fragment调用方法
+     * @return 当前地址
+     */
+    public String getLocationId() {
+        return mDefaultLocation;
+    }
 }

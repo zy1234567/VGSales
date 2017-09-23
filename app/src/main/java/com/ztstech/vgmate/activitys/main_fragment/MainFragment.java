@@ -16,8 +16,6 @@ import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.add_sell_mate.AddSellMateActivity;
 import com.ztstech.vgmate.activitys.main_fragment.adapter.MainFragmentPagerAdapter;
 import com.ztstech.vgmate.activitys.org_list.OrgListActivity;
-import com.ztstech.vgmate.activitys.self_organization.SelfOrganizationActivity;
-import com.ztstech.vgmate.activitys.sell_chance.SellChanceActivity;
 import com.ztstech.vgmate.data.beans.MainPageBean;
 import com.ztstech.vgmate.data.beans.UserBean;
 import com.ztstech.vgmate.utils.LocationUtils;
@@ -88,8 +86,8 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
     }
 
     @Override
-    protected void onCreateViewFinish(@Nullable Bundle savedInstanceState) {
-        super.onCreateViewFinish(savedInstanceState);
+    protected void onViewBindFinish(@Nullable Bundle savedInstanceState) {
+        super.onViewBindFinish(savedInstanceState);
 
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(new MainFragmentPagerAdapter(getChildFragmentManager()));

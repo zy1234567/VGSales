@@ -1,0 +1,93 @@
+package com.ztstech.vgmate.activitys.org_list.fragments;
+
+import com.ztstech.vgmate.activitys.PresenterImpl;
+import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
+import com.ztstech.vgmate.data.user_case.GetOrgListItems;
+import com.ztstech.vgmate.utils.PresenterSubscriber;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import rx.functions.Action1;
+
+/**
+ * Created by zhiyuan on 2017/9/23.
+ */
+
+public class OrglistitemPresenter extends PresenterImpl<OrglistItemContract.View> implements
+        OrglistItemContract.Presenter {
+
+    /**当前页数*/
+    private int pageNo = 1;
+    private int maxPage;
+
+    private GetOrgListItems getOrgListItems;
+
+    private List<GetOrgListItemsBean.ListBean> listItems = new ArrayList<>();
+
+    public OrglistitemPresenter(OrglistItemContract.View view) {
+        super(view);
+        getOrgListItems = new GetOrgListItems();
+    }
+
+    @Override
+    public void refreshList(String locationId, String status) {
+        //刷新
+        pageNo = 1;
+        requestData(locationId, status, pageNo,new Action1<GetOrgListItemsBean>() {
+            @Override
+            public void call(GetOrgListItemsBean getOrgListItemsBean) {
+                if (getOrgListItemsBean.isSucceed()) {
+                    listItems.clear();
+                    listItems.addAll(getOrgListItemsBean.list);
+                    pageNo = getOrgListItemsBean.pager.currentPage;
+                    maxPage = getOrgListItemsBean.pager.totalPages;
+                    mView.onRefreshFinish(listItems, null);
+                }else {
+                    mView.onRefreshFinish(listItems, getOrgListItemsBean.getErrmsg());
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void appendList(String locationId, String status) {
+        //加载
+
+        if (pageNo >= maxPage) {
+            //如果当前已经是最大页数
+            mView.onLoadMoreFinish(listItems, null);
+            return;
+        }
+
+
+        requestData(locationId, status, pageNo + 1,new Action1<GetOrgListItemsBean>() {
+            @Override
+            public void call(GetOrgListItemsBean getOrgListItemsBean) {
+                if (getOrgListItemsBean.isSucceed()) {
+                    listItems.addAll(getOrgListItemsBean.list);
+                    pageNo = getOrgListItemsBean.pager.currentPage;
+                    maxPage = getOrgListItemsBean.pager.totalPages;
+                    mView.onLoadMoreFinish(listItems, null);
+                }else {
+                    mView.onLoadMoreFinish(listItems, getOrgListItemsBean.getErrmsg());
+                }
+            }
+        });
+
+
+
+    }
+
+    private void requestData(String locationId, String status, int page, Action1<GetOrgListItemsBean>
+            doOnNext) {
+        getOrgListItems.setQueryInfo(status, locationId, page);
+        new PresenterSubscriber<GetOrgListItemsBean>(mView){
+
+            @Override
+            public void onNext(GetOrgListItemsBean getOrgListItemsBean) {}
+
+        }.run(getOrgListItems.run().doOnNext(doOnNext));
+    }
+}

@@ -27,7 +27,7 @@ public abstract class BaseFragment extends Fragment {
             contentView = inflater.inflate(getLayoutRes(), container, false);
         }
         mUnbinder = ButterKnife.bind(this, contentView);
-        onCreateViewFinish(savedInstanceState);
+        onViewBindFinish(savedInstanceState);
         return contentView;
     }
 
@@ -39,8 +39,10 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    protected void onCreateViewFinish(@Nullable Bundle savedInstanceState) {}
+    protected void onViewBindFinish(@Nullable Bundle savedInstanceState) {}
 
     protected abstract int getLayoutRes();
+
+
 }
 
