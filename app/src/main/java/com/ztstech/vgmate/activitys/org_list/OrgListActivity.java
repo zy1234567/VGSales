@@ -13,6 +13,8 @@ import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectDialog;
 import com.ztstech.vgmate.activitys.org_list.adapter.OrgListPageAdapter;
 import com.ztstech.vgmate.activitys.self_organization_detail.adapter.SelfOrganizationDetailPagerAdapter;
+import com.ztstech.vgmate.data.beans.GetOrgListCountBean;
+import com.ztstech.vgmate.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -37,6 +39,9 @@ public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> impl
 
     private LocationSelectDialog locationSelectDialog;
 
+    /**筛选地址*/
+    private String mDefaultLocation = "110101";
+
     /**标题*/
     private String[] titles = new String[] {"待确认", "待认领", "已认领", "网站端"};
 
@@ -46,6 +51,14 @@ public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> impl
                 @Override
                 public void onLocationSelected(String locationName, String locP, String locC, String locA) {
                     tvTitle.setText(locationName);
+                    if (locA != null) {
+                        mDefaultLocation = locA;
+                    }else if (locC != null) {
+                        mDefaultLocation = locC;
+                    }else if (locP != null) {
+                        mDefaultLocation = locP;
+                    }
+                    mPresenter.loadCount(mDefaultLocation);
                 }
             };
 
@@ -71,6 +84,8 @@ public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> impl
         viewPager.setAdapter(pagerAdapter);
 
         ivLeft.setOnClickListener(this);
+
+        mPresenter.loadCount(mDefaultLocation);
     }
 
     @OnClick(R.id.tv_title)
@@ -84,6 +99,23 @@ public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> impl
     public void onClick(View view) {
         if (view == ivLeft) {
             finish();
+        }
+    }
+
+    @Override
+    public void onLoadCountFinish(GetOrgListCountBean bean, String errmsg) {
+        if (errmsg != null) {
+//            ToastUtil.toastCenter(this, "查询失败：" + errmsg);
+        }else if (bean != null) {
+
+            titles[0] = "待确认 " + bean.waitConfirmcount;
+            titles[1] = "待认领 " + bean.waitClaimcount;
+            titles[2] = "已认领 " + bean.alreadayClaimcount;
+            titles[3] = "网页端 " + bean.webcount;
+
+            pagerAdapter.setTitles(titles);
+            tableLayout.setupWithViewPager(viewPager);
+
         }
     }
 }
