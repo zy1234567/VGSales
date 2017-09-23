@@ -14,5 +14,5 @@ import rx.Observable;
 public interface MainPageApi {
 
     @GET("exempt/AppSaleCountHomeMsg")
-    Observable<MainPageBean> loadMainPageInfo(@Query(NetConstants.PARAM_AUTHID) String authId);
+    Observable<MainPageBean> loadMainPageInfo(@Query("authId") String authId);
 }

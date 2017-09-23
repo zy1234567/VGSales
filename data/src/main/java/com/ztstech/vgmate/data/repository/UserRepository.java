@@ -12,6 +12,9 @@ import com.ztstech.vgmate.data.utils.RetrofitUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import rx.Observable;
 import rx.functions.Action1;
 
@@ -148,7 +151,59 @@ public class UserRepository {
      * @return
      */
     public Observable<BaseRespBean> updateUserInfo(final UpdateUserInfoData bean) {
-        return loginApi.updateUserInfo(bean.picurl, bean.didurl, bean.cardUrl, bean.sex, bean.did,
+//        Map<String, Object> data = new HashMap<String, Object>();
+//        data.put("banks", bean.banks);
+//        data.put("picurl", bean.picurl);
+//        data.put("didurl", bean.didurl[0] + "," + bean.didurl[1]);
+//        data.put("cardurl", bean.cardUrl);
+//        data.put("wdistrict", bean.wdistrict);
+//        data.put("sex", bean.sex);
+//        data.put("did", bean.did);
+//        data.put("bname", bean.bname);
+//        data.put("cardNo", bean.cardNo);
+//        data.put("birthday", bean.birthday);
+//        data.put("uname", bean.uname);
+//        return loginApi.updateUserInfo(data).doOnNext(new Action1<BaseRespBean>() {
+//            @Override
+//            public void call(BaseRespBean baseRespBean) {
+//                if (baseRespBean.isSucceed()) {
+//                    user.info.banks = bean.banks;
+//                    user.info.picurl = bean.picurl;
+//                    user.info.didurl = bean.didurl[0] + "," + bean.didurl[1];
+//                    user.info.cardImg = bean.cardUrl;
+//                    user.info.wdistrict = bean.wdistrict;
+//                    user.info.sex = bean.sex;
+//                    user.info.did = bean.did;
+//                    user.info.bname = bean.bname;
+//                    user.info.cardNo = bean.cardNo;
+//                    user.info.birthday = bean.birthday;
+//                    user.info.uname = bean.uname;
+//                    UserPreferenceManager.getInstance().cacheUser(user);
+//                }
+//            }
+//        });
+
+//        return loginApi.updateUserInfo(bean).doOnNext(new Action1<BaseRespBean>() {
+//            @Override
+//            public void call(BaseRespBean baseRespBean) {
+//                if (baseRespBean.isSucceed()) {
+//                    user.info.banks = bean.banks;
+//                    user.info.picurl = bean.picurl;
+//                    user.info.didurl = bean.didurl[0] + "," + bean.didurl[1];
+//                    user.info.cardImg = bean.cardUrl;
+//                    user.info.wdistrict = bean.wdistrict;
+//                    user.info.sex = bean.sex;
+//                    user.info.did = bean.did;
+//                    user.info.bname = bean.bname;
+//                    user.info.cardNo = bean.cardNo;
+//                    user.info.birthday = bean.birthday;
+//                    user.info.uname = bean.uname;
+//                    UserPreferenceManager.getInstance().cacheUser(user);
+//                }
+//            }
+//        });
+
+        return loginApi.updateUserInfo(getAuthId(), bean.picurl, bean.didurl, bean.cardUrl, bean.sex, bean.did,
                 bean.bname, bean.banks, bean.status, bean.cardNo, bean.wdistrict, bean.birthday,
                 bean.uid, bean.uname)
                 .doOnNext(new Action1<BaseRespBean>() {
@@ -157,7 +212,7 @@ public class UserRepository {
                 if (baseRespBean.isSucceed()) {
                     user.info.banks = bean.banks;
                     user.info.picurl = bean.picurl;
-                    user.info.didurl = bean.didurl[0] + "," + bean.didurl[1];
+                    user.info.didurl = bean.didurl;
                     user.info.cardImg = bean.cardUrl;
                     user.info.wdistrict = bean.wdistrict;
                     user.info.sex = bean.sex;

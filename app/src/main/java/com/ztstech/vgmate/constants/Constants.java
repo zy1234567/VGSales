@@ -7,5 +7,4 @@ package com.ztstech.vgmate.constants;
 public interface Constants {
 
 
-
 }

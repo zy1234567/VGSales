@@ -67,7 +67,7 @@ public class RetrofitUtils {
             parts.add(part);
 
         }
-        return createService(UploadApi.class).uploadFile("01", parts);
+        return createService(UploadApi.class).uploadFile("savetype", parts);
     }
 
     /**

@@ -238,7 +238,6 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
         model.cardNo = etCardNumber.getText().toString();
         model.id = etId.getText().toString();
         model.name = etName.getText().toString();
-        model.sex = tvSex.getText().toString();
 
         if (model.location.isEmpty()) {
             ToastUtil.toastCenter(this, "请填写地址");
@@ -261,7 +260,7 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
         }else if (model.name.isEmpty()) {
             ToastUtil.toastCenter(this, "请填写姓名");
             return;
-        }else if (model.sex.isEmpty()) {
+        }else if (TextUtils.isEmpty(model.sex)) {
             ToastUtil.toastCenter(this, "请填写性别");
             return;
         }else if (model.headerFile == null) {

@@ -36,7 +36,7 @@ public class MainListRepository {
      * @return
      */
     public Observable<MainListBean> queryNotice(int currentPage) {
-        return api.queryList("01", currentPage);
+        return api.queryList(UserRepository.getInstance().getAuthId(), "01", currentPage);
     }
 
     /**
@@ -44,6 +44,6 @@ public class MainListRepository {
      * @return
      */
     public Observable<MainListBean> queryInformation(int currentPage) {
-        return api.queryList("00", currentPage);
+        return api.queryList(UserRepository.getInstance().getAuthId(), "00", currentPage);
     }
 }

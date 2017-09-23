@@ -55,7 +55,7 @@ public class FillInfoPresenter extends PresenterImpl<FillInfoContract.View> impl
                         UpdateUserInfoData updateUserInfoData =  new UserInfoBeanMapper().transform(model);
                         updateUserInfoData.picurl = urls[0];
                         updateUserInfoData.cardUrl = urls[1];
-                        updateUserInfoData.didurl = new String[] {urls[2], urls[3]};
+                        updateUserInfoData.didurl = urls[2] + "," + urls[3];
 
                         //上传资料
                         new PresenterSubscriber<BaseRespBean>() {

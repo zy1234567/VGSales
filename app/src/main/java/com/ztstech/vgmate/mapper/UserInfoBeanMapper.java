@@ -27,7 +27,7 @@ public class UserInfoBeanMapper implements Mapper<FillInfoModel, UpdateUserInfoD
 
         result.picurl = bean.headUrl;
         result.cardUrl = bean.cardUrl;
-        result.didurl = new String[] {bean.idUrl, bean.idBackUrl};
+        result.didurl = bean.idUrl + "," + bean.idBackUrl;
 
         return result;
     }

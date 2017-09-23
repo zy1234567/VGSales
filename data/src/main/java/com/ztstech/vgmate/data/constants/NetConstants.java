@@ -6,7 +6,7 @@ package com.ztstech.vgmate.data.constants;
 
 public interface NetConstants {
 
-//    String BASE_URL = "http://192.168.1.100/tom/";
+//    String BASE_URL = "http://192.168.1.142/tom/";
     String BASE_URL = "http://bucea.verygrow.com/";
 
     /**
