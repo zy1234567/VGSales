@@ -106,12 +106,12 @@ public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> impl
     public void onLoadCountFinish(GetOrgListCountBean bean, String errmsg) {
         if (errmsg != null) {
 //            ToastUtil.toastCenter(this, "查询失败：" + errmsg);
-        }else if (bean != null) {
+        }else if (bean != null && bean.info != null) {
 
-            titles[0] = "待确认 " + bean.waitConfirmcount;
-            titles[1] = "待认领 " + bean.waitClaimcount;
-            titles[2] = "已认领 " + bean.alreadayClaimcount;
-            titles[3] = "网页端 " + bean.webcount;
+            titles[0] = "待确认 " + bean.info.waitConfirmcount;
+            titles[1] = "待认领 " + bean.info.waitClaimcount;
+            titles[2] = "已认领 " + bean.info.alreadayClaimcount;
+            titles[3] = "网页端 " + bean.info.webcount;
 
             pagerAdapter.setTitles(titles);
             tableLayout.setupWithViewPager(viewPager);

@@ -38,6 +38,7 @@ public class OrglistPresenter extends PresenterImpl<OrgListContract.View> implem
                 }else {
                     mView.onLoadCountFinish(null, getOrgListCountBean.getErrmsg());
                 }
+                isLoadingCount = false;
             }
 
         }.run(getOrgListCount.run());

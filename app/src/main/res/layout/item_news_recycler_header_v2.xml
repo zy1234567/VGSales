@@ -50,10 +50,11 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tv_money_ready"
                     android:gravity="center"
                     android:textSize="@dimen/text_7"
                     android:textColor="@color/color_109"
-                    android:text="¥140,000"
+                    android:text="¥0"
                     android:layout_alignLeft="@id/tv_top_left_top"
                     android:layout_alignBottom="@id/img_top_left"
                     android:layout_width="match_parent"
@@ -90,10 +91,11 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tv_money_finish"
                     android:gravity="center"
                     android:textSize="@dimen/text_7"
                     android:textColor="@color/color_109"
-                    android:text="¥140,000"
+                    android:text="¥0"
                     android:layout_alignLeft="@id/tv_top_center_top"
                     android:layout_alignBottom="@id/img_top_center"
                     android:layout_width="match_parent"
@@ -129,10 +131,11 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tv_money_already"
                     android:gravity="center"
                     android:textSize="@dimen/text_7"
                     android:textColor="@color/color_109"
-                    android:text="¥140,000"
+                    android:text="¥0"
                     android:layout_alignLeft="@id/tv_top_right_top"
                     android:layout_alignBottom="@id/img_top_right"
                     android:layout_width="match_parent"
@@ -170,7 +173,6 @@
             android:layout_below="@id/img_header"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:text="吕晓梦"
             android:textColor="@color/color_109"
             android:textSize="@dimen/text_3"
             android:textStyle="bold"/>
@@ -182,7 +184,6 @@
             android:layout_below="@id/tv_name"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
-            android:text="介绍人：王珊珊"
             android:textColor="@color/color_109"
             android:textSize="@dimen/text_7" />
 
@@ -193,7 +194,6 @@
             android:layout_below="@id/tv_introducer"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
-            android:text="北京市 市辖区 西城区"
             android:textColor="@color/color_109"
             android:textSize="@dimen/text_7"/>
 
@@ -215,7 +215,8 @@
             android:layout_height="24dp" />
 
         <TextView
-            android:text="销售机会：+35"
+            android:id="@+id/tv_new_chance"
+            android:text="销售机会：+0"
             android:textColor="@color/color_100"
             android:textSize="@dimen/text_4"
             android:layout_marginLeft="6dp"
@@ -245,6 +246,7 @@
         </RelativeLayout>
 
         <TextView
+            android:visibility="invisible"
             android:includeFontPadding="false"
             android:gravity="center"
             android:layout_marginTop="3dp"
@@ -254,7 +256,7 @@
             android:background="@drawable/bg_new_chance_count"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="11"
+            android:text="0"
             android:layout_alignParentRight="true"
             android:layout_width="20dp"
             android:layout_height="11dp" />
@@ -286,7 +288,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="销售伙伴\n55"
+                android:text="销售伙伴\n0"
                 android:textColor="@color/color_100"
                 android:textSize="@dimen/text_4" />
 
@@ -317,7 +319,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="机构名录\n20"
+                android:text="区县机构\n0"
                 android:textColor="@color/color_100"
                 android:textSize="@dimen/text_4" />
 

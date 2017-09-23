@@ -10,6 +10,8 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -25,6 +27,7 @@ public interface LoginApi {
     @POST("exempt/sendLogincode.do")
     Observable<BaseRespBean> sendLoginCode(@Query("phone") String phone);
 
+    @Headers("user-agent: Android")
     @POST("exempt/saleCheckCodeByPhone")
     Observable<UserBean> login(@Query("phone") String phone, @Query("code") String code,
                                @Query("type") String type);
@@ -67,12 +70,11 @@ public interface LoginApi {
      * 刷新登录
      * @return
      */
-    @FormUrlEncoded
+    @Headers("user-agent: Android")
     @POST("exempt/AppSaleUpdateLoginStatus")
-    Observable<UserBean> refreshLogin(@Field("phone") String phone,
-                                      @Field("authId") String authId);
+    Observable<UserBean> refreshLogin(@Query("phone") String phone,
+                                      @Query("authId") String authId);
 
-    @FormUrlEncoded
     @POST("exempt/AppSaleLoginout")
-    Observable<BaseRespBean> logout(@Field("authId") String authId);
+    Observable<BaseRespBean> logout(@Query("authId") String authId);
 }

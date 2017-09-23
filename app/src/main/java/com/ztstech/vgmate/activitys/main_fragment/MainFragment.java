@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import com.ztstech.vgmate.activitys.self_organization.SelfOrganizationActivity;
 import com.ztstech.vgmate.activitys.sell_chance.SellChanceActivity;
 import com.ztstech.vgmate.data.beans.MainPageBean;
 import com.ztstech.vgmate.data.beans.UserBean;
+import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 
 import butterknife.BindView;
@@ -41,6 +43,33 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
 
     @BindView(R.id.tv_name)
     TextView tvName;
+
+    @BindView(R.id.tv_location)
+    TextView tvLocation;
+
+    /**预计到账*/
+    @BindView(R.id.tv_money_ready)
+    TextView tvMoneyReady;
+    /**实际到账*/
+    @BindView(R.id.tv_money_already)
+    TextView tvMoneyAlready;
+    /**已经完成*/
+    @BindView(R.id.tv_money_finish)
+    TextView tvMoneyFinish;
+    /**新机会+ */
+    @BindView(R.id.tv_new_chance)
+    TextView tvNewChance;
+
+    /**销售伙伴数*/
+    @BindView(R.id.tv_mate)
+    TextView tvMate;
+
+    /**介绍人*/
+    @BindView(R.id.tv_introducer)
+    TextView tvIntroducer;
+    /**机构名录*/
+    @BindView(R.id.tv_org)
+    TextView tvOrg;
 
 
     public static MainFragment newInstance() {
@@ -93,6 +122,40 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
 
     @Override
     public void setData(MainPageBean mainPageBean) {
+        if (mainPageBean == null || mainPageBean.info == null) {
+            return;
+        }
+
+        tvMoneyReady.setText("¥" + String.valueOf(mainPageBean.info.maxmoney));
+        tvMoneyFinish.setText("¥" + String.valueOf(mainPageBean.info.finalmoney));
+        tvMoneyAlready.setText("¥" + String.valueOf(mainPageBean.info.realmoney));
+        tvNewChance.setText("销售机会：+" + mainPageBean.info.comnum);
+        tvName.setText(mainPageBean.info.uname);
+
+        StringBuilder locationStr = new StringBuilder();
+        String p = LocationUtils.getProvinceNameByAreaCode(mainPageBean.info.district);
+        if (!TextUtils.isEmpty(p)) {
+            locationStr.append(p);
+        }
+        String c = LocationUtils.getCityNameByAreaCode(mainPageBean.info.district);
+        if (!TextUtils.isEmpty(c)) {
+            if (locationStr.length() != 0) {
+                locationStr.append(" ");
+            }
+            locationStr.append(c);
+        }
+        String a = LocationUtils.getLocationNameByCode(mainPageBean.info.district);
+        if (!TextUtils.isEmpty(a)) {
+            if (locationStr.length() != 0) {
+                locationStr.append(" ");
+            }
+            locationStr.append(a);
+        }
+
+        tvLocation.setText(locationStr.toString());
+        tvMate.setText("销售伙伴\n" + mainPageBean.info.firstcnt);
+        tvIntroducer.setText(mainPageBean.info.fname);
+        tvOrg.setText("区县机构\n" + String.valueOf(mainPageBean.info.rbinum));
 
     }
 
