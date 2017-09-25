@@ -18,7 +18,7 @@ public class OrglistRecyclerAdapter extends SimpleRecyclerAdapter<GetOrgListItem
     public OrglistHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new OrglistHolder(
                 LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_orglist, parent, false));
+                .inflate(R.layout.item_orglist, parent, false), this);
     }
 
 }

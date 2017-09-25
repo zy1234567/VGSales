@@ -1,20 +1,24 @@
 package com.ztstech.vgmate.activitys.org_list.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
+import com.ztstech.vgmate.activitys.org_detail.OrgDetailActivity;
 import com.ztstech.vgmate.activitys.org_list.OrgListActivity;
 import com.ztstech.vgmate.activitys.org_list.adapter.OrgListPageAdapter;
 import com.ztstech.vgmate.activitys.org_list.fragments.adapter.OrglistRecyclerAdapter;
+import com.ztstech.vgmate.base.SimpleRecyclerAdapter;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
 
 import java.util.List;
@@ -28,6 +32,9 @@ public class OrglistItemFragment extends MVPFragment<OrglistItemContract.Present
         OrglistItemContract.View {
 
     public static final String ARG_STATUS = "status";
+
+    /**intent 跳转详情，如果result_ok需要刷新*/
+    public static final int REQ_DETAIL = 1;
 
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
@@ -97,6 +104,15 @@ public class OrglistItemFragment extends MVPFragment<OrglistItemContract.Present
 
 
         adapter = new OrglistRecyclerAdapter();
+        adapter.setOnItemClickListener(
+                new SimpleRecyclerAdapter.OnItemClickListener<GetOrgListItemsBean.ListBean>() {
+            @Override
+            public void onItemClick(GetOrgListItemsBean.ListBean item, int index) {
+                Intent it = new Intent(getActivity(), OrgDetailActivity.class);
+                it.putExtra(OrgDetailActivity.ARG_ORG_BEAN, new Gson().toJson(item));
+                startActivityForResult(it, REQ_DETAIL);
+            }
+        });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);

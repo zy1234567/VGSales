@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.ztstech.vgmate.R;
+import com.ztstech.vgmate.base.SimpleRecyclerAdapter;
 import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
 import com.ztstech.vgmate.utils.CommonUtil;
@@ -44,8 +45,8 @@ public class OrglistHolder extends SimpleViewHolder<GetOrgListItemsBean.ListBean
 
     private String id;
 
-    public OrglistHolder(View itemView) {
-        super(itemView);
+    public OrglistHolder(View itemView, SimpleRecyclerAdapter adapter) {
+        super(itemView, adapter);
 
         tvCopy.setOnClickListener(new View.OnClickListener() {
             @Override
