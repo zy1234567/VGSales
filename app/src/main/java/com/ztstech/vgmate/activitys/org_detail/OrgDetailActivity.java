@@ -1,8 +1,6 @@
 package com.ztstech.vgmate.activitys.org_detail;
 
 import android.app.Dialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -10,9 +8,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
-import com.ztstech.vgmate.activitys.org_detail.widget.OrgAuditDialog;
+import com.ztstech.vgmate.activitys.org_detail.dialog.OrgAuditDialog;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
-import com.ztstech.vgmate.data.beans.MainListBean;
 
 import butterknife.BindView;
 import butterknife.OnClick;

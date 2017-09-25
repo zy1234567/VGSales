@@ -85,13 +85,6 @@ public class OrglistItemFragment extends MVPFragment<OrglistItemContract.Present
             }
         });
 
-//        smartRefreshLayout.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                refreshData();
-//            }
-//        });
-
 
         smartRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
@@ -99,8 +92,6 @@ public class OrglistItemFragment extends MVPFragment<OrglistItemContract.Present
                 appendData();
             }
         });
-//
-//        smartRefreshLayout.setOn
 
 
         adapter = new OrglistRecyclerAdapter();
