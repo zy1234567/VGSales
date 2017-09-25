@@ -54,7 +54,7 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
 
     @OnClick(R.id.tv_confirm)
     public void onConfirmClick(View v) {
-        Dialog dialog = new OrgAuditDialog(this);
+        Dialog dialog = new OrgAuditDialog(this, bean);
         dialog.show();
     }
 

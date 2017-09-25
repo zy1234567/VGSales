@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+    <ImageView
+        android:id="@+id/img"
+        android:src="@mipmap/uncheck"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="22dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_marginRight="15dp"
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_6"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_id"
+        android:layout_marginBottom="10dp"
+        android:drawableLeft="@mipmap/id_agency"
+        android:drawablePadding="6dp"
+        android:textColor="@color/color_102"
+        android:textSize="@dimen/text_7"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/tv_title"
+        android:layout_alignLeft="@id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
+    <TextView
+        android:id="@+id/tv_tag"
+        android:layout_marginLeft="5dp"
+        android:layout_alignBaseline="@id/tv_id"
+        android:layout_toRightOf="@id/tv_id"
+        android:text="已认领"
+        android:gravity="center"
+        android:background="@drawable/bg_c_2_f_001"
+        android:textSize="@dimen/text_9"
+        android:textColor="@color/color_109"
+        android:layout_width="37dp"
+        android:layout_height="15dp" />
+
+</RelativeLayout>

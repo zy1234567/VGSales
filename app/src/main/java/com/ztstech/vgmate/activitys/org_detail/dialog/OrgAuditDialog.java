@@ -8,6 +8,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +19,18 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.ViewImpl;
+import com.ztstech.vgmate.activitys.org_detail.dialog.adapter.OrgAuditDialogRecyclerAdapter;
+import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
+import com.ztstech.vgmate.data.beans.RepeatOrgBean;
 import com.ztstech.vgmate.utils.ViewUtils;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -43,14 +54,24 @@ public class OrgAuditDialog extends Dialog implements OrgAuditDialogContract.Vie
 
     private TextView tvSubmit;
 
+    /**中间显示的recycler*/
+    private RecyclerView recyclerView;
+
+    private SmartRefreshLayout smartRefreshLayout;
+
+    private OrgAuditDialogRecyclerAdapter adapter;
+
 
     private ViewImpl<OrgAuditDialogContract.Presenter> viewImpl;
     private OrgAuditDialogContract.Presenter presenter;
 
+    private GetOrgListItemsBean.ListBean bean;
 
 
-    public OrgAuditDialog(@NonNull Context context) {
+
+    public OrgAuditDialog(@NonNull Context context,final GetOrgListItemsBean.ListBean bean) {
         super(context);
+        this.bean = bean;
 
         presenter = new OrgAuditDialogPresenter(this);
         viewImpl = new ViewImpl<>(context);
@@ -63,6 +84,7 @@ public class OrgAuditDialog extends Dialog implements OrgAuditDialogContract.Vie
                 null, false);
 
         imgClose = (ImageView) v.findViewById(R.id.img_close);
+        smartRefreshLayout = (SmartRefreshLayout) v.findViewById(R.id.srl);
 
         tvPass = (TextView) v.findViewById(R.id.tv_pass);
         tvRepeat = (TextView) v.findViewById(R.id.tv_repeat);
@@ -80,15 +102,36 @@ public class OrgAuditDialog extends Dialog implements OrgAuditDialogContract.Vie
 
         tvSubmit = (TextView) v.findViewById(R.id.tv_submit);
 
+        recyclerView = (RecyclerView) v.findViewById(R.id.recycler);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        adapter = new OrgAuditDialogRecyclerAdapter();
+        recyclerView.setAdapter(adapter);
 
         imgClose.setOnClickListener(this);
         tvPass.setOnClickListener(this);
         tvRepeat.setOnClickListener(this);
         tvInvalid.setOnClickListener(this);
 
+        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                presenter.loadRepeatData(bean);
+            }
+        });
+
+        smartRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                presenter.appendData(bean);
+            }
+        });
+
         setContentView(v);
 
         setMode(MODE_PASS);
+
+        presenter.loadRepeatData(bean);
 
 
     }
@@ -151,5 +194,19 @@ public class OrgAuditDialog extends Dialog implements OrgAuditDialogContract.Vie
     @Override
     public boolean isViewFinish() {
         return !isShowing();
+    }
+
+    @Override
+    public void loadRepeatDataFinish(List<RepeatOrgBean.ListBean> bean, String errmsg) {
+        adapter.setListData(bean);
+        adapter.notifyDataSetChanged();
+        smartRefreshLayout.finishRefresh();
+    }
+
+    @Override
+    public void appendFinish(List<RepeatOrgBean.ListBean> bean, String errmsg) {
+        adapter.setListData(bean);
+        adapter.notifyDataSetChanged();
+        smartRefreshLayout.finishLoadmore();
     }
 }
