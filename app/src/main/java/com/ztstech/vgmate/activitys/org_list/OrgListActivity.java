@@ -43,7 +43,7 @@ public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> impl
     private String mDefaultLocation = "110101";
 
     /**标题*/
-    private String[] titles = new String[] {"待确认", "待认领", "已认领", "网站端"};
+    private String[] titles = new String[] {"待确认", "已定位", "已认领", "网站端"};
 
 
     private LocationSelectDialog.OnLocationSelectListener onLocationSelectListener =
@@ -109,7 +109,7 @@ public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> impl
         }else if (bean != null && bean.info != null) {
 
             titles[0] = "待确认 " + bean.info.waitConfirmcount;
-            titles[1] = "待认领 " + bean.info.waitClaimcount;
+            titles[1] = "已定位 " + bean.info.waitClaimcount;
             titles[2] = "已认领 " + bean.info.alreadayClaimcount;
             titles[3] = "网页端 " + bean.info.webcount;
 

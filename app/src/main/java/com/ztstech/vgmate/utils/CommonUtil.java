@@ -1,6 +1,7 @@
 package com.ztstech.vgmate.utils;
 
 import android.app.ActivityManager;
+import android.content.ClipboardManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -525,6 +526,11 @@ public class CommonUtil {
         rs.destroy();
 
         return outBitmap;
+    }
+
+    public static void copy(String text, Context context) {
+        ClipboardManager cmb = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        cmb.setText(text);
     }
 
 

@@ -47,5 +47,4 @@ dependencies {
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
-    compile 'com.dinuscxj:recyclerrefreshlayout:2.0.5'
 }
