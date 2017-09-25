@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 
+import com.dinuscxj.refresh.RecyclerRefreshLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -71,18 +72,30 @@ public class OrglistItemFragment extends MVPFragment<OrglistItemContract.Present
             throw new IllegalArgumentException("状态不能为空");
         }
 
-        smartRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-                appendData();
-            }
-        });
         smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 refreshData();
             }
         });
+
+//        smartRefreshLayout.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                refreshData();
+//            }
+//        });
+
+
+        smartRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                appendData();
+            }
+        });
+//
+//        smartRefreshLayout.setOn
+
 
         adapter = new OrglistRecyclerAdapter();
 
@@ -108,6 +121,7 @@ public class OrglistItemFragment extends MVPFragment<OrglistItemContract.Present
             @Override
             public void run() {
                 smartRefreshLayout.finishLoadmore();
+//                smartRefreshLayout.setRefreshing(false);
                 adapter.setListData(items);
                 adapter.notifyDataSetChanged();
             }
@@ -120,6 +134,7 @@ public class OrglistItemFragment extends MVPFragment<OrglistItemContract.Present
             @Override
             public void run() {
                 smartRefreshLayout.finishRefresh();
+//                smartRefreshLayout.setRefreshing(false);
                 adapter.setListData(items);
                 adapter.notifyDataSetChanged();
             }

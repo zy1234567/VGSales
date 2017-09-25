@@ -152,7 +152,7 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
 
         tvLocation.setText(locationStr.toString());
         tvMate.setText("销售伙伴\n" + mainPageBean.info.firstcnt);
-        tvIntroducer.setText(mainPageBean.info.fname);
+        tvIntroducer.setText("介绍人 " + mainPageBean.info.fname);
         tvOrg.setText("区县机构\n" + String.valueOf(mainPageBean.info.rbinum));
 
     }
