@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             app:titleEnabled="false"
             android:fitsSystemWindows="false"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            app:layout_scrollFlags="scroll">
 
             <RelativeLayout
                 android:layout_width="match_parent"
