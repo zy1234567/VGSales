@@ -8,6 +8,7 @@ import com.ztstech.vgmate.utils.PresenterSubscriber;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Subscriber;
 import rx.functions.Action1;
 
 /**
@@ -34,9 +35,18 @@ public class OrglistitemPresenter extends PresenterImpl<OrglistItemContract.View
     public void refreshList(String locationId, String status) {
         //刷新
         pageNo = 1;
-        requestData(locationId, status, pageNo,new Action1<GetOrgListItemsBean>() {
+        requestData(locationId, status, pageNo,new Subscriber<GetOrgListItemsBean>() {
             @Override
-            public void call(GetOrgListItemsBean getOrgListItemsBean) {
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.onRefreshFinish(listItems, e.getLocalizedMessage());
+            }
+
+            @Override
+            public void onNext(GetOrgListItemsBean getOrgListItemsBean) {
                 if (getOrgListItemsBean.isSucceed()) {
                     listItems.clear();
                     listItems.addAll(getOrgListItemsBean.list);
@@ -47,6 +57,7 @@ public class OrglistitemPresenter extends PresenterImpl<OrglistItemContract.View
                     mView.onRefreshFinish(listItems, getOrgListItemsBean.getErrmsg());
                 }
             }
+
         });
 
     }
@@ -62,9 +73,19 @@ public class OrglistitemPresenter extends PresenterImpl<OrglistItemContract.View
         }
 
 
-        requestData(locationId, status, pageNo + 1,new Action1<GetOrgListItemsBean>() {
+        requestData(locationId, status, pageNo + 1,new Subscriber<GetOrgListItemsBean>() {
             @Override
-            public void call(GetOrgListItemsBean getOrgListItemsBean) {
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mView.onLoadMoreFinish(listItems, e.getLocalizedMessage());
+            }
+
+            @Override
+            public void onNext(GetOrgListItemsBean getOrgListItemsBean) {
                 if (getOrgListItemsBean.isSucceed()) {
                     listItems.addAll(getOrgListItemsBean.list);
                     pageNo = getOrgListItemsBean.pager.currentPage;
@@ -74,20 +95,28 @@ public class OrglistitemPresenter extends PresenterImpl<OrglistItemContract.View
                     mView.onLoadMoreFinish(listItems, getOrgListItemsBean.getErrmsg());
                 }
             }
+
         });
-
-
 
     }
 
-    private void requestData(String locationId, String status, int page, Action1<GetOrgListItemsBean>
-            doOnNext) {
+    private void requestData(String locationId, String status, int page,
+                             final Subscriber<GetOrgListItemsBean>
+            action1) {
         getOrgListItems.setQueryInfo(status, locationId, page);
         new PresenterSubscriber<GetOrgListItemsBean>(mView){
 
             @Override
-            public void onNext(GetOrgListItemsBean getOrgListItemsBean) {}
+            public void onNext(GetOrgListItemsBean getOrgListItemsBean) {
+                action1.onNext(getOrgListItemsBean);
+            }
 
-        }.run(getOrgListItems.run().doOnNext(doOnNext));
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                action1.onError(e);
+            }
+
+        }.run(getOrgListItems.run());
     }
 }

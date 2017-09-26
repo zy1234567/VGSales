@@ -126,10 +126,11 @@ public class OrglistItemFragment extends MVPFragment<OrglistItemContract.Present
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                smartRefreshLayout.finishLoadmore();
 //                smartRefreshLayout.setRefreshing(false);
                 adapter.setListData(items);
                 adapter.notifyDataSetChanged();
+                smartRefreshLayout.finishLoadmore();
+
             }
         });
     }
@@ -139,10 +140,11 @@ public class OrglistItemFragment extends MVPFragment<OrglistItemContract.Present
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                smartRefreshLayout.finishRefresh();
 //                smartRefreshLayout.setRefreshing(false);
                 adapter.setListData(items);
                 adapter.notifyDataSetChanged();
+                smartRefreshLayout.finishRefresh();
+
             }
         });
     }

@@ -33,12 +33,16 @@ public class OrgAuditDialogPresenter extends PresenterImpl<OrgAuditDialogContrac
         load(1, new Action1<RepeatOrgBean>() {
             @Override
             public void call(RepeatOrgBean bean) {
-                if (bean.isSucceed()) {
-                    mDatas.clear();
-                    mDatas.addAll(bean.list);
-                    mView.loadRepeatDataFinish(mDatas, null);
+                if (bean == null) {
+                    mView.appendFinish(mDatas, "网络请求失败");
                 }else {
-                    mView.loadRepeatDataFinish(mDatas, bean.getErrmsg());
+                    if (bean.isSucceed()) {
+                        mDatas.clear();
+                        mDatas.addAll(bean.list);
+                        mView.loadRepeatDataFinish(mDatas, null);
+                    }else {
+                        mView.loadRepeatDataFinish(mDatas, bean.getErrmsg());
+                    }
                 }
             }
         }, bean);
@@ -50,12 +54,17 @@ public class OrgAuditDialogPresenter extends PresenterImpl<OrgAuditDialogContrac
             load(pageNo + 1, new Action1<RepeatOrgBean>() {
                 @Override
                 public void call(RepeatOrgBean bean) {
-                    if (bean.isSucceed()) {
-                        mDatas.addAll(bean.list);
-                        mView.appendFinish(mDatas, null);
+                    if (bean == null) {
+                        mView.appendFinish(mDatas, "网络请求失败");
                     }else {
-                        mView.appendFinish(mDatas, bean.getErrmsg());
+                        if (bean.isSucceed()) {
+                            mDatas.addAll(bean.list);
+                            mView.appendFinish(mDatas, null);
+                        }else {
+                            mView.appendFinish(mDatas, bean.getErrmsg());
+                        }
                     }
+
                 }
             }, bean);
         }else {
@@ -72,6 +81,12 @@ public class OrgAuditDialogPresenter extends PresenterImpl<OrgAuditDialogContrac
                     maxPage = bean.pager.totalPages;
                 }
                 action1.call(bean);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                action1.call(null);
             }
         }.run(new GetRepeatOrg(bean.rbidistrict, bean.rbioname, bean.rbiid, page).run());
 
