@@ -226,6 +226,7 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
         tvLocation.setText(model.location);
         tvBirthday.setText(model.birthday);
         tvSex.setText(model.sex);
+
     }
 
     @Override
@@ -364,11 +365,14 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
         }else if (model.id.isEmpty()) {
             ToastUtil.toastCenter(this, "请填写身份证号");
             return;
-        }else if (model.name.isEmpty()) {
+        }else if (TextUtils.isEmpty(model.name)) {
             ToastUtil.toastCenter(this, "请填写姓名");
             return;
         }else if (TextUtils.isEmpty(model.sex)) {
             ToastUtil.toastCenter(this, "请填写性别");
+            return;
+        }else if (model.name.contains(" ")) {
+            ToastUtil.toastCenter(this, "姓名不能包含空格");
             return;
         }
 

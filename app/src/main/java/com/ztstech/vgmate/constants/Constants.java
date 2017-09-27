@@ -6,5 +6,6 @@ package com.ztstech.vgmate.constants;
 
 public interface Constants {
 
-
+    /**销售伙伴*/
+    String MATE_LIST_URL = "jsp/webh5/salePartner.jsp";
 }

@@ -49,6 +49,7 @@
         <activity android:name=".activitys.create_share_add_desc.CreateShareAddDescActivity" />
         <activity android:name=".activitys.create_share_add_cover.CreateShareAddCoverActivity" />
         <activity android:name=".activitys.org_detail.OrgDetailActivity" />
+        <activity android:name=".activitys.sell_mate_list.SellMateListActivity"></activity>
     </application>
 
 </manifest>

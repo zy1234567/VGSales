@@ -16,6 +16,7 @@ import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.add_sell_mate.AddSellMateActivity;
 import com.ztstech.vgmate.activitys.main_fragment.adapter.MainFragmentPagerAdapter;
 import com.ztstech.vgmate.activitys.org_list.OrgListActivity;
+import com.ztstech.vgmate.activitys.sell_mate_list.SellMateListActivity;
 import com.ztstech.vgmate.data.beans.MainPageBean;
 import com.ztstech.vgmate.data.beans.UserBean;
 import com.ztstech.vgmate.utils.LocationUtils;
@@ -96,15 +97,11 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
 
     }
 
-//    @OnClick(R.id.fl_sell_chance)
-//    public void onSellChanceClick(View v) {
-//        startActivity(new Intent(getActivity(), SellChanceActivity.class));
-//    }
 
     @OnClick(R.id.tv_mate)
     public void onAddSellMateClick(View v) {
         //点击增加销售伙伴
-        startActivity(new Intent(getActivity(), AddSellMateActivity.class));
+        startActivity(new Intent(getActivity(), SellMateListActivity.class));
     }
 
     @OnClick(R.id.tv_org)
