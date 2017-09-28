@@ -2,6 +2,7 @@ package com.ztstech.vgmate.activitys.category_info;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -95,7 +96,9 @@ public class CategoryTagsPresenter implements CategoryTagsContract.IPresenter, E
     private void initListViews() {
         fatAdapter = new FatCategoriesAdapter(fatDatas, context);
         subAdapter = new SubCategoriesAdapter(subDatas, context, this);
-        subAdapter.initTags(selectedIds);
+        if (!TextUtils.isEmpty(selectedIds)) {
+            subAdapter.initTags(selectedIds);
+        }
         listViewLeft.setAdapter(fatAdapter);
         listViewRight.setAdapter(subAdapter);
 
@@ -179,12 +182,14 @@ public class CategoryTagsPresenter implements CategoryTagsContract.IPresenter, E
         }
         if (!builder.toString().isEmpty()){
             feedBackIds = builder.toString().substring(0, builder.length() - 1);
-            feedBackNames = builder.toString().substring(0, builder.length() - 1);
         }
         builder.delete(0, builder.length());
         for (String name : subAdapter.getSelectedNames()) {
             builder.append(name);
             builder.append("、");
+        }
+        if (!builder.toString().isEmpty()) {
+            feedBackNames = builder.toString().substring(0, builder.length() - 1);
         }
         feedBackIntent.putExtra(PARAM_ID, feedBackIds);
         feedBackIntent.putExtra(PARAM_NAME, feedBackNames);
