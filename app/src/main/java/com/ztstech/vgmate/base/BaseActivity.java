@@ -27,6 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         onSuperCreateFinish(savedInstanceState);
         setContentView(getLayoutRes());
         unbinder = ButterKnife.bind(this);
+        onViewBindFinish(savedInstanceState);
         onViewBindFinish();
     }
 
@@ -41,7 +42,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void onSuperCreateFinish(@Nullable Bundle savedInstanceState) {}
 
+    protected void onViewBindFinish(@Nullable Bundle savedInstanceState) {}
+
     protected void onViewBindFinish() {}
+
 
 
     protected abstract int getLayoutRes();
