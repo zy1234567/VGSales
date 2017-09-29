@@ -288,6 +288,7 @@
                     android:enabled="true"
                     android:hint="请输入"
                     android:lines="1"
+                    android:ellipsize="end"
                     android:textColorHint="@color/color_103"
                     android:textCursorDrawable="@null"
                     android:textSize="@dimen/text_5" />
