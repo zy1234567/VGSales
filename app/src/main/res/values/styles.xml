@@ -34,4 +34,10 @@
         <item name="android:backgroundDimEnabled">false</item><!--activity不变暗-->
     </style>
 
+    <style name="EditListTitle">
+        <item name="android:textColorHint">@color/color_103</item>
+        <item name="android:textColor">@color/color_100</item>
+        <item name="android:textSize">@dimen/text_5</item>
+    </style>
+
 </resources>
