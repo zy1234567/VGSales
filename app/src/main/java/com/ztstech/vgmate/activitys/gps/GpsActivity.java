@@ -259,14 +259,15 @@ public class GpsActivity extends BaseActivity implements  GeocodeSearch.OnGeocod
             public void onClick(View view) {
                 if (la == 0 && lo == 0) {
                     setResult(RESULT_CANCELED);
+                    finish();
                 }else {
                     Intent it = new Intent();
                     it.putExtra(RESULT_LATITUDE, la);
                     it.putExtra(RESULT_LONGITUDE, lo);
                     it.putExtra(RESULT_LOCATION, location);
                     setResult(RESULT_OK, it);
+                    finish();
                 }
-                onBackPressed();
             }
         });
 

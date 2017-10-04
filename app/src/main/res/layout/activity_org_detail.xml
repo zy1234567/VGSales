@@ -9,18 +9,18 @@
 
 
     <android.support.design.widget.AppBarLayout
-        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
         <com.ztstech.vgmate.weigets.TopBar
-            app:backgroundColor="@color/color_001"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:backgroundColor="@color/color_001"
             app:barTitle=""
-            app:showBackNav="true"
+            app:colorLeft="@color/color_109"
             app:layout_collapseMode="pin"
-            app:colorLeft="@color/color_109">
+            app:showBackNav="true">
 
         </com.ztstech.vgmate.weigets.TopBar>
 
@@ -29,68 +29,126 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <RelativeLayout
-                android:background="#fff"
-                android:layout_alignParentBottom="true"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:id="@+id/rl_bottom"
                 android:layout_width="match_parent"
-                android:layout_height="55dp">
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/color_005">
+                
+                <TextView
+                    android:id="@+id/tv_complete_info"
+                    android:text="完善资料"
+                    android:drawablePadding="3dp"
+                    android:paddingBottom="6dp"
+                    android:gravity="bottom|center_horizontal"
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/color_100"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
 
                 <View
-                    android:layout_alignParentTop="true"
-                    android:background="@color/color_104"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp" />
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_109" />
+                <TextView
+                    android:id="@+id/tv_connect_time"
+                    android:text="沟通记录"
+                    android:drawablePadding="3dp"
+                    android:paddingBottom="6dp"
+                    android:gravity="bottom|center_horizontal"
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/color_100"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_109" />
+                <TextView
+                    android:id="@+id/tv_confirm"
+                    android:text="审核通过"
+                    android:drawablePadding="3dp"
+                    android:paddingBottom="6dp"
+                    android:gravity="bottom|center_horizontal"
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/color_100"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_109" />
+                <TextView
+                    android:id="@+id/tv_delete"
+                    android:text="删除机构"
+                    android:drawablePadding="3dp"
+                    android:paddingBottom="6dp"
+                    android:gravity="bottom|center_horizontal"
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/color_100"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_marginRight="12dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_centerVertical="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0.5dp"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:background="@color/color_104" />-->
 
-                    <TextView
-                        android:id="@+id/tv_complete_info"
-                        android:textColor="@color/color_100"
-                        android:textSize="@dimen/text_3"
-                        android:layout_weight="1"
-                        android:text="完善资料"
-                        android:background="@drawable/bg_c_2_s_104"
-                        android:layout_marginRight="6dp"
-                        android:gravity="center"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp" />
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="12dp"-->
+                    <!--android:layout_marginRight="12dp"-->
+                    <!--android:orientation="horizontal">-->
 
-                    <TextView
-                        android:id="@+id/tv_confirm"
-                        android:textColor="@color/color_100"
-                        android:textSize="@dimen/text_3"
-                        android:layout_weight="1"
-                        android:text="确认审核"
-                        android:background="@drawable/bg_c_2_f_005"
-                        android:layout_marginLeft="6dp"
-                        android:gravity="center"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp" />
+                    <!--<TextView-->
+                        <!--android:id="@+id/tv_complete_info"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="40dp"-->
+                        <!--android:layout_marginRight="6dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:background="@drawable/bg_c_2_s_104"-->
+                        <!--android:gravity="center"-->
+                        <!--android:text="完善资料"-->
+                        <!--android:textColor="@color/color_100"-->
+                        <!--android:textSize="@dimen/text_3" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/tv_confirm"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="40dp"-->
+                        <!--android:layout_marginLeft="6dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:background="@drawable/bg_c_2_f_005"-->
+                        <!--android:gravity="center"-->
+                        <!--android:text="确认审核"-->
+                        <!--android:textColor="@color/color_100"-->
+                        <!--android:textSize="@dimen/text_3" />-->
 
 
-                </LinearLayout>
+                <!--</LinearLayout>-->
 
 
-            </RelativeLayout>
-            
+            </LinearLayout>
+
             <WebView
-                android:layout_above="@id/rl_bottom"
                 android:id="@+id/web_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_above="@id/rl_bottom" />
 
         </RelativeLayout>
 
 
     </android.support.design.widget.AppBarLayout>
-
 
 
 </android.support.design.widget.CoordinatorLayout>

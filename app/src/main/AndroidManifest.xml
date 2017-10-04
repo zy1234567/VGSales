@@ -8,15 +8,15 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!--允许程序设置内置sd卡的写权限-->
+    <!-- 允许程序设置内置sd卡的写权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--允许程序获取网络状态-->
+    <!-- 允许程序获取网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--允许程序访问WiFi网络信息-->
+    <!-- 允许程序访问WiFi网络信息 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!--允许程序读写手机状态和身份-->
+    <!-- 允许程序读写手机状态和身份 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
+    <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
@@ -61,11 +61,26 @@
         <activity android:name=".activitys.create_share_add_cover.CreateShareAddCoverActivity" />
         <activity android:name=".activitys.org_detail.OrgDetailActivity" />
         <activity android:name=".activitys.sell_mate_list.SellMateListActivity" />
-        <activity android:name=".activitys.gps.GpsActivity"
-            android:hardwareAccelerated="false"/>
+        <activity
+            android:name=".activitys.gps.GpsActivity"
+            android:hardwareAccelerated="false" />
 
-        <meta-data android:name="com.amap.api.v2.apikey" android:value="2eef75224613462feb1dcd80b26409ee">
-        </meta-data>
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="2eef75224613462feb1dcd80b26409ee" />
+
+        <activity android:name=".activitys.complete_org_info.CompleteOrgInfoActivity" />
+        <activity android:name=".activitys.complete_org_info.subview.basic_info.CompleteOrgInfoBasicInfoActivity" />
+        <activity android:name=".activitys.complete_org_info.subview.pic_video.CompleteOrgInfoPicVideoActivity" />
+        <activity android:name=".activitys.complete_org_info.subview.tag.CompleteOrgInfoTagActivity" />
+        <activity android:name=".activitys.complete_org_info.subview.org_info.CompleteOrgInfoOrgInfoActivity" />
+        <activity android:name=".activitys.complete_org_info.subview.class_info.CompleteOrgInfoClassInfoActivity" />
+        <activity android:name=".activitys.complete_org_info.subview.charge.CompleteOrgInfoChargeActivity" />
+        <activity android:name=".activitys.complete_org_info.subview.teacher.CompleteOrgInfoTeacherActivity" />
+        <activity android:name=".activitys.complete_org_info.subview.phone.CompleteOrgInfoPhoneActivity" />
+        <activity android:name=".activitys.complete_org_info.subview.contact.CompleteOrgInfoContactActivity" />
+        <activity android:name=".activitys.complete_org_info_v2.CompleteOrgInfoV2Activity" />
+        <activity android:name=".activitys.org_edit_history.OrgEditHistoryActivity"></activity>
     </application>
 
 </manifest>
