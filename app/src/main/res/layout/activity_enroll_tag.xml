@@ -45,6 +45,7 @@
             android:layout_height="match_parent" />
 
         <EditText
+            android:lines="1"
             android:id="@+id/et_1"
             android:hint="请输入（6字以内）"
             android:layout_marginLeft="15dp"
@@ -86,6 +87,7 @@
             android:layout_height="match_parent" />
 
         <EditText
+            android:lines="1"
             android:id="@+id/et_2"
             android:hint="请输入（6字以内）"
             android:layout_marginLeft="15dp"
@@ -127,6 +129,7 @@
             android:layout_height="match_parent" />
 
         <EditText
+            android:lines="1"
             android:id="@+id/et_3"
             android:hint="请输入（6字以内）"
             android:layout_marginLeft="15dp"
@@ -168,6 +171,7 @@
             android:layout_height="match_parent" />
 
         <EditText
+            android:lines="1"
             android:id="@+id/et_4"
             android:hint="请输入（6字以内）"
             android:layout_marginLeft="15dp"
@@ -209,6 +213,7 @@
             android:layout_height="match_parent" />
 
         <EditText
+            android:lines="1"
             android:id="@+id/et_5"
             android:hint="请输入（6字以内）"
             android:layout_marginLeft="15dp"
@@ -250,6 +255,7 @@
             android:layout_height="match_parent" />
 
         <EditText
+            android:lines="1"
             android:id="@+id/et_6"
             android:hint="请输入（6字以内）"
             android:layout_marginLeft="15dp"
@@ -291,6 +297,7 @@
             android:layout_height="match_parent" />
 
         <EditText
+            android:lines="1"
             android:id="@+id/et_7"
             android:hint="请输入（6字以内）"
             android:layout_marginLeft="15dp"
@@ -332,6 +339,7 @@
             android:layout_height="match_parent" />
 
         <EditText
+            android:lines="1"
             android:id="@+id/et_8"
             android:hint="请输入（6字以内）"
             android:layout_marginLeft="15dp"
@@ -373,6 +381,7 @@
             android:layout_height="match_parent" />
 
         <EditText
+            android:lines="1"
             android:id="@+id/et_9"
             android:hint="请输入（6字以内）"
             android:layout_marginLeft="15dp"

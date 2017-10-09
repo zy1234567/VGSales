@@ -10,6 +10,7 @@
 
 
     <com.ztstech.vgmate.weigets.TopBar
+        android:id="@+id/top_bar"
         android:background="#fff"
         app:barTitle="完善机构资料"
         app:showBackNav="true"
@@ -39,6 +40,7 @@
                 android:layout_height="35dp">
                 
                 <TextView
+                    android:id="@+id/tv_last_update"
                     android:textColor="@color/color_100"
                     android:textSize="@dimen/text_7"
                     android:gravity="center_horizontal"
@@ -46,6 +48,7 @@
                     android:layout_height="match_parent" />
                 
                 <TextView
+                    android:id="@+id/tv_more"
                     android:textColor="@color/color_004"
                     android:textSize="@dimen/text_7"
                     android:text="更多记录"
@@ -120,6 +123,7 @@
                     android:layout_height="wrap_content" />
 
                 <ImageView
+                    android:id="@+id/img_logo"
                     android:layout_marginEnd="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_toLeftOf="@id/img_arrow"
@@ -307,7 +311,7 @@
                     android:layout_height="match_parent" />
 
                 <EditText
-                    android:id="@+id/tv_phone"
+                    android:id="@+id/et_phone"
                     android:drawablePadding="5dp"
                     android:drawableRight="@mipmap/arrow_right_choice"
                     android:ellipsize="end"
@@ -399,7 +403,7 @@
                 android:background="@color/color_106" />
 
             <LinearLayout
-                android:id="@+id/ll_org_info"
+                android:id="@+id/ll_org_desc"
                 android:paddingRight="12dp"
                 android:paddingLeft="12dp"
                 android:background="#fff"
@@ -416,7 +420,7 @@
                     android:layout_height="match_parent" />
 
                 <TextView
-                    android:id="@+id/tv_org_info"
+                    android:id="@+id/tv_org_desc"
                     android:drawablePadding="5dp"
                     android:drawableRight="@mipmap/arrow_right_choice"
                     android:ellipsize="end"
@@ -435,7 +439,7 @@
                 android:background="@color/color_106" />
 
             <LinearLayout
-                android:id="@+id/ll_class_info"
+                android:id="@+id/ll_class_desc"
                 android:paddingRight="12dp"
                 android:paddingLeft="12dp"
                 android:background="#fff"
@@ -452,7 +456,7 @@
                     android:layout_height="match_parent" />
 
                 <TextView
-                    android:id="@+id/tv_class_info"
+                    android:id="@+id/tv_class_desc"
                     android:drawablePadding="5dp"
                     android:drawableRight="@mipmap/arrow_right_choice"
                     android:ellipsize="end"
@@ -472,7 +476,7 @@
                 android:background="@color/color_106" />
 
             <LinearLayout
-                android:id="@+id/ll_charge_info"
+                android:id="@+id/ll_charge_desc"
                 android:paddingRight="12dp"
                 android:paddingLeft="12dp"
                 android:background="#fff"
@@ -489,7 +493,7 @@
                     android:layout_height="match_parent" />
 
                 <TextView
-                    android:id="@+id/tv_charge_info"
+                    android:id="@+id/tv_charge_desc"
                     android:drawablePadding="5dp"
                     android:drawableRight="@mipmap/arrow_right_choice"
                     android:ellipsize="end"
