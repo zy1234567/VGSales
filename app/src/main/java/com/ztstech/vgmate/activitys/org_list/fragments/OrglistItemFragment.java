@@ -3,6 +3,7 @@ package com.ztstech.vgmate.activitys.org_list.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -77,6 +78,9 @@ public class OrglistItemFragment extends MVPFragment<OrglistItemContract.Present
         if (TextUtils.isEmpty(status)) {
             throw new IllegalArgumentException("状态不能为空");
         }
+
+        smartRefreshLayout.setBackgroundColor(ContextCompat.getColor(getActivity(),
+                R.color.color_107));
 
         smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override

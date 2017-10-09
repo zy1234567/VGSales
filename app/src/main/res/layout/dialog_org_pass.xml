@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="339dp"
+    android:layout_height="wrap_content"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+    <TextView
+        android:textStyle="bold"
+        android:id="@+id/tv_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="@dimen/text_1"
+        android:textColor="@color/color_100"
+        android:text="审核通过"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_org_name"
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_8"
+        android:layout_below="@id/tv_title"
+        android:text="* 机构名称"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/et_org_name"
+        android:background="@color/color_107"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_5"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/tv_org_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_8"
+        android:id="@+id/tv_category_title"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/et_org_name"
+        android:text="* 分类标签"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_category"
+        android:background="@color/color_107"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="6dp"
+        android:paddingLeft="8dp"
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_5"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/tv_category_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@mipmap/arrow_right_choice" />
+
+    <TextView
+        android:id="@+id/tv_area_title"
+        android:layout_marginTop="10dp"
+        android:text="* 所在区县"
+        android:layout_below="@id/tv_category"
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_area"
+        android:background="@color/color_107"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="6dp"
+        android:paddingLeft="8dp"
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_5"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/tv_area_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@mipmap/arrow_right_choice" />
+
+    <TextView
+        android:id="@+id/tv_gps_title"
+        android:layout_marginTop="10dp"
+        android:text="* GPS定位"
+        android:layout_below="@id/tv_area"
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_gps"
+        android:background="@color/color_107"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="6dp"
+        android:paddingLeft="8dp"
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_5"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/tv_gps_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@mipmap/arrow_right_choice" />
+
+    <TextView
+        android:id="@+id/tv_location_title"
+        android:layout_marginTop="10dp"
+        android:text="* 详细地址"
+        android:layout_below="@id/tv_gps"
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/et_location"
+        android:background="@color/color_107"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="6dp"
+        android:paddingLeft="8dp"
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_5"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/tv_location_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@mipmap/arrow_right_choice" />
+
+    <TextView
+        android:id="@+id/tv_phone_title"
+        android:layout_marginTop="10dp"
+        android:text="* 详细地址"
+        android:layout_below="@id/et_location"
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/rl_phone"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/tv_phone_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:textColorHint="@color/color_103"
+            android:hint="请输入"
+            android:id="@+id/et_phone"
+            android:background="@color/color_107"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="6dp"
+            android:paddingLeft="8dp"
+            android:textColor="@color/color_100"
+            android:textSize="@dimen/text_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@mipmap/arrow_right_choice" />
+        
+        <TextView
+            android:textColor="@color/color_109"
+            android:textSize="@dimen/text_7"
+            android:gravity="center"
+            android:text="手机通讯录"
+            android:background="@drawable/bg_c_2_f_sel_ben_login"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="80dp"
+            android:layout_height="30dp" />
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:background="@drawable/bg_c_2_f_sel_ben_login"
+        android:text="提交"
+        android:gravity="center"
+        android:textSize="@dimen/text_3"
+        android:textColor="@color/color_109"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/rl_phone"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+
+
+</RelativeLayout>
