@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+     android:layout_width="339dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:id="@+id/img_close"
+            android:src="@mipmap/ico_close"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:text="删除机构"
+            android:textStyle="bold"
+            android:textColor="@color/color_100"
+            android:textSize="@dimen/text_1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/tv_title"
+            android:id="@+id/tv_section_title"
+            android:text="请选择删除原因"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/cb_repeat"
+            android:text="重复机构"
+            android:textSize="@dimen/text_6"
+            android:textColor="@color/color_100"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/tv_section_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/cb_closed"
+            android:layout_toRightOf="@id/cb_repeat"
+            android:text="已关闭／暂停营业"
+            android:textSize="@dimen/text_6"
+            android:textColor="@color/color_100"
+            android:layout_marginLeft="88dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/tv_section_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/cb_un_start"
+            android:text="尚未营业"
+            android:textSize="@dimen/text_6"
+            android:textColor="@color/color_100"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/cb_repeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/cb_not_exist"
+            android:layout_toRightOf="@id/cb_repeat"
+            android:text="机构不存在"
+            android:textSize="@dimen/text_6"
+            android:textColor="@color/color_100"
+            android:layout_marginLeft="88dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/cb_closed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/rl_other"
+            android:background="@color/color_107"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_below="@id/cb_not_exist"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp">
+
+        <EditText
+            android:gravity="top"
+            android:hint="其他补充原因"
+            android:textSize="@dimen/text_5"
+            android:textColorHint="@color/color_103"
+            android:background="@color/color_107"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+
+            <TextView
+                android:layout_marginBottom="8dp"
+                android:layout_marginRight="6dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:text="0/100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/bg_c_2_f_sel_ben_login"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/rl_other"
+            android:gravity="center"
+            android:text="确认删除"
+            android:textSize="@dimen/text_3"
+            android:textColor="@color/color_109"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>
