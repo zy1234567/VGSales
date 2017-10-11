@@ -1,4 +1,6 @@
-package com.ztstech.vgmate.activitys.sell_chance.subview.all;
+package com.ztstech.vgmate.activitys.sell_chance.subview;
+
+import android.support.annotation.Nullable;
 
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.BaseView;
@@ -15,6 +17,9 @@ interface SellChanceAllContract {
 
     interface Presenter extends BasePresenter<View> {
 
+        void refreshData();
+
+        void appendData();
     }
 
 }

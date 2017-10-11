@@ -20,6 +20,5 @@ public interface CommunicateHistoryApi {
     @GET("exempt/AppSaleQueryOrgLogByComid")
     Observable<CommunicationHistoryBean> getCommunicationHistory(@Query("comid") String comid,
                                                                  @Query("currentPage") int currentPage,
-                                                                 @Query("pageMethod") String pageMethod,
                                                                  @Query(NetConstants.PARAM_AUTHID) String authId);
 }

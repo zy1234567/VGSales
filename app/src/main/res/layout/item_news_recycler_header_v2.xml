@@ -235,6 +235,7 @@
             android:layout_height="25dp">
 
             <TextView
+                android:id="@+id/tv_get_chance"
                 android:gravity="center"
                 android:drawableLeft="@mipmap/ico_grab_home"
                 android:text="抢机会"

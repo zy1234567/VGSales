@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.sell_chance.subview.all.adapter;
+package com.ztstech.vgmate.activitys.sell_chance.subview.adapter;
 
 import android.support.annotation.Nullable;
 import android.view.View;

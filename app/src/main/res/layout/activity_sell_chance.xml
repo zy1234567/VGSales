@@ -9,6 +9,8 @@
     tools:context="com.ztstech.vgmate.activitys.sell_chance.SellChanceActivity">
 
     <com.ztstech.vgmate.weigets.TopBar
+        app:barTitle="销售机会"
+        app:showBackNav="true"
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_bar_height">
@@ -27,6 +29,8 @@
         app:tabSelectedTextColor="@color/color_001"
         app:tabGravity="fill"
         android:paddingBottom="2dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         />
     <View
         android:background="@color/color_106"

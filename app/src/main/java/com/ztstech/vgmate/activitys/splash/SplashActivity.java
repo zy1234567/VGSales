@@ -22,6 +22,10 @@ public class SplashActivity extends BaseActivity {
         LocationUtils.init(new Runnable() {
             @Override
             public void run() {
+                if (UserRepository.getInstance().isUserLogined()) {
+                    //刷新登录
+                    UserRepository.getInstance().refreshLogin();
+                }
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

@@ -36,8 +36,8 @@
     </RelativeLayout>
 
     <android.support.design.widget.TabLayout
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:fitsSystemWindows="true"
         android:layout_toRightOf="@id/iv_left"
         android:id="@+id/tab_layout"

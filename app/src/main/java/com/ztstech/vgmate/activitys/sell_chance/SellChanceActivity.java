@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.ztstech.vgmate.R;
+import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.sell_chance.widget.SellChancePagerAdapter;
 import com.ztstech.vgmate.base.BaseActivity;
 
@@ -14,7 +15,10 @@ import butterknife.BindView;
 /**
  * 销售机会界面
  */
-public class SellChanceActivity extends BaseActivity {
+public class SellChanceActivity extends MVPActivity<SellChanceContract.Presenter> implements
+        SellChanceContract.View {
+
+    private final String[] TITLES = new String[] {"已抢到", "已注册", "全部"};
 
     @BindView(R.id.viewpager)
     ViewPager viewPager;
@@ -36,7 +40,14 @@ public class SellChanceActivity extends BaseActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         pagerAdapter = new SellChancePagerAdapter(getSupportFragmentManager());
+        pagerAdapter.setTitles(TITLES);
+
         viewPager.setAdapter(pagerAdapter);
 
+    }
+
+    @Override
+    protected SellChanceContract.Presenter initPresenter() {
+        return new SellChancePresenter(this);
     }
 }

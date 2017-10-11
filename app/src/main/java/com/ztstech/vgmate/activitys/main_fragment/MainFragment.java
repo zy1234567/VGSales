@@ -16,6 +16,7 @@ import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.add_sell_mate.AddSellMateActivity;
 import com.ztstech.vgmate.activitys.main_fragment.adapter.MainFragmentPagerAdapter;
 import com.ztstech.vgmate.activitys.org_list.OrgListActivity;
+import com.ztstech.vgmate.activitys.sell_chance.SellChanceActivity;
 import com.ztstech.vgmate.activitys.sell_mate_list.SellMateListActivity;
 import com.ztstech.vgmate.data.beans.MainPageBean;
 import com.ztstech.vgmate.data.beans.UserBean;
@@ -108,6 +109,11 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
     public void onSelfOrganizationClick(View v) {
         //点击自拓机构
         startActivity(new Intent(getActivity(), OrgListActivity.class));
+    }
+
+    @OnClick(R.id.tv_get_chance)
+    public void onHandleChanceClick(View v) {
+        startActivity(new Intent(getActivity(), SellChanceActivity.class));
     }
 
     @Override

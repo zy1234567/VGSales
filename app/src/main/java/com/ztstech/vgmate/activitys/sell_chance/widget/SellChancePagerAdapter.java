@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.ztstech.vgmate.activitys.sell_chance.subview.all.SellChanceAllFragment;
+import com.ztstech.vgmate.activitys.sell_chance.subview.SellChanceAllFragment;
 
 /**
  * Created by zhiyuan on 2017/8/24.
@@ -12,7 +12,7 @@ import com.ztstech.vgmate.activitys.sell_chance.subview.all.SellChanceAllFragmen
 
 public class SellChancePagerAdapter extends FragmentPagerAdapter {
 
-    private final String[] titles = new String[] {"全部", "可抢数", "已抢到", "已注册"};
+    private String[] titles;
 
     public SellChancePagerAdapter(FragmentManager fm) {
         super(fm);
@@ -21,6 +21,10 @@ public class SellChancePagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         return new SellChanceAllFragment();
+    }
+
+    public void setTitles(String[] titles) {
+        this.titles = titles;
     }
 
     @Override

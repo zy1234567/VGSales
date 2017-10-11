@@ -81,7 +81,7 @@
         <activity android:name=".activitys.complete_org_info.subview.contact.CompleteOrgInfoContactActivity" />
         <activity android:name=".activitys.complete_org_info_v2.CompleteOrgInfoV2Activity" />
         <activity android:name=".activitys.org_edit_history.OrgEditHistoryActivity" />
-        <activity android:name=".activitys.enroll_tag.EnrollTagActivity"></activity>
+        <activity android:name=".activitys.enroll_tag.EnrollTagActivity" />
     </application>
 
 </manifest>
