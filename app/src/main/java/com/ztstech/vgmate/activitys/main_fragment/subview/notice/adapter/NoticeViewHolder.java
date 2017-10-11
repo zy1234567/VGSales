@@ -30,6 +30,12 @@ public class NoticeViewHolder extends SimpleViewHolder<MainListBean.ListBean> {
     @BindView(R.id.tv_content)
     TextView tvContent;
 
+    @BindView(R.id.tv_time)
+    TextView tvTime;
+
+    @BindView(R.id.tv_comment_count)
+    TextView tvCommentCount;
+
     private ClickListener clickListener;
 
 
@@ -44,6 +50,10 @@ public class NoticeViewHolder extends SimpleViewHolder<MainListBean.ListBean> {
     protected void refreshView(MainListBean.ListBean data) {
         Glide.with(getContext()).load(data.picurl).into(ivTitle);
         tvTitle.setText(data.title);
+        tvContent.setText(data.summary);
+        tvTime.setText("最后更新：" + data.updatetime);
+        tvCommentCount.setText(String.valueOf(data.evacnt));
+
         clickListener.bean = data;
     }
 

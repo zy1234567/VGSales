@@ -53,5 +53,7 @@ public class MainListBean extends BaseRespBean{
         public String praflg;
         public String url;
         public String picurl;
+        public String summary;
+        public String updatetime;
     }
 }

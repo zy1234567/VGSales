@@ -20,7 +20,7 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 通告
  */
 public class NoticeFragment extends MVPFragment<NoticeContract.Presenter> implements
         NoticeContract.View {
@@ -35,7 +35,6 @@ public class NoticeFragment extends MVPFragment<NoticeContract.Presenter> implem
     private NoticeRecyclerAdapter recyclerAdapter;
 
     public NoticeFragment() {
-        // Required empty public constructor
     }
 
     public static NoticeFragment newInstance() {
@@ -82,8 +81,6 @@ public class NoticeFragment extends MVPFragment<NoticeContract.Presenter> implem
 
 
         mPresenter.loadData();
-
-
     }
 
 
