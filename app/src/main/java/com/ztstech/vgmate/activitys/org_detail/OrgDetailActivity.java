@@ -13,6 +13,7 @@ import com.ztstech.vgmate.activitys.complete_org_info_v2.CompleteOrgInfoV2Activi
 import com.ztstech.vgmate.activitys.get_chance.GetChanceActivity;
 import com.ztstech.vgmate.activitys.org_detail.dialog.org_audit.OrgAuditDialog;
 import com.ztstech.vgmate.activitys.org_detail.dialog.org_confirm.OrgConfirmDialog;
+import com.ztstech.vgmate.activitys.org_detail.dialog.org_delete.OrgDeleteDialog;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
 
 import butterknife.BindView;
@@ -84,6 +85,8 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
     @OnClick(R.id.tv_delete)
     public void onDeleteOrgClick(View v) {
         //删除机构
+        Dialog dialog = new OrgDeleteDialog(this, bean);
+        dialog.show();
     }
 
 
