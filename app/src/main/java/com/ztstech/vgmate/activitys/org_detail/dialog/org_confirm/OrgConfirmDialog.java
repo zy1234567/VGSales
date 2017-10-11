@@ -18,6 +18,9 @@ import com.tbruyelle.rxpermissions.RxPermissions;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.ViewImpl;
 import com.ztstech.vgmate.activitys.add_sell_mate.AddSellMateActivity;
+import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
+import com.ztstech.vgmate.utils.LocationUtils;
+import com.ztstech.vgmate.utils.ViewUtils;
 
 import rx.functions.Action1;
 
@@ -40,12 +43,20 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
     private ViewImpl<OrgConfirmContract.Presenter> viewImpl;
     private OrgConfirmContract.Presenter presenter;
 
+    private Activity activityContext;
+    private GetOrgListItemsBean.ListBean bean;
 
-    public OrgConfirmDialog(@NonNull Context context) {
+
+    public OrgConfirmDialog(@NonNull Context context, final GetOrgListItemsBean.ListBean bean) {
         super(context);
+
+        activityContext = (Activity) context;
+        this.bean = bean;
 
         viewImpl = new ViewImpl<>(context);
         presenter = new OrgConfirmPresenter(this);
+
+        ViewUtils.setDialogFullScreen(this);
 
         contentView = getLayoutInflater().inflate(R.layout.dialog_org_pass, null, false);
 
@@ -72,6 +83,19 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
         tvSubmit.setOnClickListener(this);
 
         setCancelable(false);
+
+
+
+
+        //设置数据
+        etOrgName.setText(bean.rbioname);
+        tvCategory.setText(bean.rbiotype);
+        tvArea.setText(LocationUtils.getLocationNameByCode(bean.rbidistrict));
+        // TODO: 2017/10/11 后台没有gps信息
+        etLocation.setText(bean.rbiaddress);
+        etPhone.setText(bean.rbiphone);
+
+
     }
 
     @Override
@@ -80,7 +104,7 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
             dismiss();
         }else if (view == tvContact) {
             //打开联系人
-            RxPermissions rxPermissions = new RxPermissions((Activity) getContext());
+            RxPermissions rxPermissions = new RxPermissions(activityContext);
             rxPermissions
                     .request(Manifest.permission.READ_CONTACTS)
                     .subscribe(new Action1<Boolean>() {
@@ -89,7 +113,7 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
 
                             if (aBoolean) {
                                 Intent i = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-                                ((Activity) getContext()).startActivityForResult(i , REQ_CONTACT);
+                                activityContext.startActivityForResult(i , REQ_CONTACT);
                             }else {
                                 Toast.makeText(getContext(), "无权限", Toast.LENGTH_SHORT).show();
                             }
