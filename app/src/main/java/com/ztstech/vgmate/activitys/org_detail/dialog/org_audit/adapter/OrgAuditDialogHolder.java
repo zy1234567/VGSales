@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.org_detail.dialog.adapter;
+package com.ztstech.vgmate.activitys.org_detail.dialog.org_audit.adapter;
 
 import android.view.View;
 import android.widget.ImageView;

@@ -1,19 +1,13 @@
-package com.ztstech.vgmate.activitys.org_detail.dialog;
+package com.ztstech.vgmate.activitys.org_detail.dialog.org_audit;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.StyleRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -25,14 +19,12 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.ViewImpl;
-import com.ztstech.vgmate.activitys.org_detail.dialog.adapter.OrgAuditDialogRecyclerAdapter;
+import com.ztstech.vgmate.activitys.org_detail.dialog.org_audit.adapter.OrgAuditDialogRecyclerAdapter;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
 import com.ztstech.vgmate.data.beans.RepeatOrgBean;
 import com.ztstech.vgmate.utils.ViewUtils;
 
 import java.util.List;
-
-import butterknife.BindView;
 
 /**
  * Created by zhiyuan on 2017/9/21.

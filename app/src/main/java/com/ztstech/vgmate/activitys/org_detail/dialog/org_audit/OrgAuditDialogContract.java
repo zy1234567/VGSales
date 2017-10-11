@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.org_detail.dialog;
+package com.ztstech.vgmate.activitys.org_detail.dialog.org_audit;
 
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.BaseView;

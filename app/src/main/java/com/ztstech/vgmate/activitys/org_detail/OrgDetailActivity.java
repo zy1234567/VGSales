@@ -11,7 +11,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.complete_org_info_v2.CompleteOrgInfoV2Activity;
 import com.ztstech.vgmate.activitys.get_chance.GetChanceActivity;
-import com.ztstech.vgmate.activitys.org_detail.dialog.OrgAuditDialog;
+import com.ztstech.vgmate.activitys.org_detail.dialog.org_audit.OrgAuditDialog;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
 
 import butterknife.BindView;
@@ -78,6 +78,11 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
     public void onConnectTimesClick(View v) {
         //沟通记录
         startActivity(new Intent(this, GetChanceActivity.class));
+    }
+
+    @OnClick(R.id.tv_delete)
+    public void onDeleteOrgClick(View v) {
+        //删除机构
     }
 
 

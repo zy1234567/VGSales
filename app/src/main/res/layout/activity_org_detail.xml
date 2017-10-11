@@ -95,48 +95,6 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
 
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="0.5dp"-->
-                    <!--android:layout_alignParentTop="true"-->
-                    <!--android:background="@color/color_104" />-->
-
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_centerVertical="true"-->
-                    <!--android:layout_marginLeft="12dp"-->
-                    <!--android:layout_marginRight="12dp"-->
-                    <!--android:orientation="horizontal">-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/tv_complete_info"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="40dp"-->
-                        <!--android:layout_marginRight="6dp"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:background="@drawable/bg_c_2_s_104"-->
-                        <!--android:gravity="center"-->
-                        <!--android:text="完善资料"-->
-                        <!--android:textColor="@color/color_100"-->
-                        <!--android:textSize="@dimen/text_3" />-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/tv_confirm"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="40dp"-->
-                        <!--android:layout_marginLeft="6dp"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:background="@drawable/bg_c_2_f_005"-->
-                        <!--android:gravity="center"-->
-                        <!--android:text="确认审核"-->
-                        <!--android:textColor="@color/color_100"-->
-                        <!--android:textSize="@dimen/text_3" />-->
-
-
-                <!--</LinearLayout>-->
-
-
             </LinearLayout>
 
             <WebView

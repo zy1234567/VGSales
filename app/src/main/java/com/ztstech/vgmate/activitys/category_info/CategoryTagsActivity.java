@@ -20,6 +20,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 分类标签
+ */
 public class CategoryTagsActivity extends AppCompatActivity implements CategoryTagsContract.IView{
 
     @BindView(R.id.img_back)

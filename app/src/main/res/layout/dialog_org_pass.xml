@@ -160,6 +160,7 @@
             android:textColorHint="@color/color_103"
             android:hint="请输入"
             android:id="@+id/et_phone"
+            android:inputType="phone"
             android:background="@color/color_107"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
@@ -172,6 +173,7 @@
             android:drawableRight="@mipmap/arrow_right_choice" />
         
         <TextView
+            android:id="@+id/tv_contact"
             android:textColor="@color/color_109"
             android:textSize="@dimen/text_7"
             android:gravity="center"
@@ -186,6 +188,7 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/tv_submit"
         android:background="@drawable/bg_c_2_f_sel_ben_login"
         android:text="提交"
         android:gravity="center"
