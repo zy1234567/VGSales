@@ -17,9 +17,13 @@
     </com.ztstech.vgmate.weigets.TopBar>
 
     <WebView
+        android:layout_weight="1"
         android:id="@+id/web_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp">
     </WebView>
+
+    <include
+        layout="@layout/layout_comment_bar" />
 
 </LinearLayout>
