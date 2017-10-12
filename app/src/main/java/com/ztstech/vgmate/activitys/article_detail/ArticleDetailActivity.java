@@ -2,6 +2,8 @@ package com.ztstech.vgmate.activitys.article_detail;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
@@ -23,6 +25,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.comment.CommentActivity;
 import com.ztstech.vgmate.data.beans.MainListBean;
+import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.utils.ViewUtils;
 import com.ztstech.vgmate.weigets.TopBar;
 
@@ -202,7 +205,21 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
             startActivity(it);
         }else if (view == tvSubmit) {
             //提交评论
+            if (etComment.getText().length() == 0) {
+                ToastUtil.toastCenter(this, "评论不能为空");
+                return;
+            }
+            mPresenter.comment(etComment.getText().toString(), data);
+        }
+    }
 
+    @Override
+    public void onCommentFinish(@Nullable String errmsg) {
+        hideLoading(null);
+        if (errmsg == null) {
+            ToastUtil.toastCenter(this, "评论成功");
+        }else {
+            ToastUtil.toastCenter(this, "评论失败：" + errmsg);
         }
     }
 }
