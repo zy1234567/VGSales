@@ -11,6 +11,8 @@
         android:background="@color/color_104" />
 
     <EditText
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_5"
         android:layout_marginTop="6.5dp"
         android:layout_marginBottom="6.5dp"
         android:id="@+id/et_comment"
@@ -56,6 +58,16 @@
             android:paddingLeft="6dp"
             android:layout_width="wrap_content"
             android:layout_height="12dp" />
+
+        <TextView
+            android:visibility="invisible"
+            android:id="@+id/tv_submit"
+            android:textColor="@drawable/bg_color_enable_001_disable_103"
+            android:textSize="@dimen/text_4"
+            android:text="发布"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
 
     </RelativeLayout>
