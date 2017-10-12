@@ -17,21 +17,7 @@ public class RepeatOrgBean extends BaseRespBean {
     public PagerBean pager;
     public List<ListBean> list;
 
-    public static class PagerBean {
-        /**
-         * totalRows : 0
-         * pageSize : 10
-         * currentPage : 1
-         * totalPages : 0
-         * startRow : 0
-         */
 
-        public int totalRows;
-        public int pageSize;
-        public int currentPage;
-        public int totalPages;
-        public int startRow;
-    }
 
     public static class ListBean {
 

@@ -18,21 +18,6 @@ public class MainListBean extends BaseRespBean{
     public PagerBean pager;
     public List<ListBean> list;
 
-    public static class PagerBean {
-        /**
-         * totalRows : 16
-         * pageSize : 10
-         * currentPage : 1
-         * totalPages : 2
-         * startRow : 0
-         */
-
-        public int totalRows;
-        public int pageSize;
-        public int currentPage;
-        public int totalPages;
-        public int startRow;
-    }
 
     public static class ListBean {
         /**

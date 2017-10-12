@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.activitys.comment.CommentActivity;
 import com.ztstech.vgmate.data.beans.MainListBean;
 import com.ztstech.vgmate.utils.ViewUtils;
 import com.ztstech.vgmate.weigets.TopBar;
@@ -169,7 +170,7 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
         if (isEdit) {
             //如果获取到焦点
             etComment.setHintTextColor(ContextCompat.getColor(ArticleDetailActivity.this,
-                    R.color.color_107));
+                    R.color.color_103));
             etComment.setHint("写评论...");
         }else {
             SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder("   写评论...");
@@ -196,7 +197,9 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
     public void onClick(View view) {
         if (view == imgComment) {
             //跳转评论界面
-
+            Intent it = new Intent(this, CommentActivity.class);
+            it.putExtra(CommentActivity.ARG_NEWSID, data.nid);
+            startActivity(it);
         }else if (view == tvSubmit) {
             //提交评论
 

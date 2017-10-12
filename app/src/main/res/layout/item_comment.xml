@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp">
+    
+    <ImageView
+        android:id="@+id/img_title"
+        android:background="#f00"
+        android:layout_marginTop="10dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp" />
+
+    <TextView
+        android:text="现在"
+        android:id="@+id/tv_name"
+        android:textColor="@color/color_004"
+        android:textSize="@dimen/text_4"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="18dp"
+        android:layout_toRightOf="@id/img_title"
+        android:singleLine="true"
+        android:lines="1"
+        android:maxLines="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
+    <TextView
+        android:id="@+id/tv_comment"
+        android:text="佳佳送哦啊"
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_4"
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/tv_name"
+        android:layout_alignLeft="@id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:textColor="@color/color_104"
+        android:textSize="@dimen/text_7"
+        android:id="@+id/tv_re_comment"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:paddingRight="6dp"
+        android:paddingLeft="6dp"
+        android:background="@color/color_107"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@id/tv_name"
+        android:layout_below="@id/tv_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    
+    <TextView
+        android:textColor="@color/color_102"
+        android:textSize="@dimen/text_9"
+        android:id="@+id/tv_date"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/tv_re_comment"
+        android:layout_alignLeft="@id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:background="@color/color_106"
+        android:layout_marginRight="-12dp"
+        android:layout_marginLeft="-12dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/tv_date" />
+
+</RelativeLayout>

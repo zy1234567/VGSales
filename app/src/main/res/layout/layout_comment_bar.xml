@@ -60,6 +60,7 @@
             android:layout_height="12dp" />
 
         <TextView
+            android:enabled="false"
             android:visibility="invisible"
             android:id="@+id/tv_submit"
             android:textColor="@drawable/bg_color_enable_001_disable_103"
