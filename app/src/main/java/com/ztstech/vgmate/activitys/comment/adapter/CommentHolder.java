@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.CommentBean;
+import com.ztstech.vgmate.utils.TimeUtil;
 import com.ztstech.vgmate.utils.ViewUtils;
 
 import butterknife.BindView;
@@ -50,7 +51,7 @@ public class CommentHolder extends SimpleViewHolder<CommentBean.ListBean> {
 
         tvName.setText(data.name);
         tvComment.setText(data.comment);
-        tvDate.setText(data.createtime);
+        tvDate.setText(TimeUtil.InformationTime(data.createtime));
 
         if (TextUtils.isEmpty(data.touid)) {
             //如果不是回复某人

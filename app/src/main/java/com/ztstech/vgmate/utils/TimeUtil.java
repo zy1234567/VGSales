@@ -1,5 +1,7 @@
 package com.ztstech.vgmate.utils;
 
+import android.text.TextUtils;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -60,16 +62,17 @@ public class TimeUtil {
      * @return
      */
     public static String InformationTime(String time) {
+        if (TextUtils.isEmpty(time)) {
+            return time;
+        }
         Calendar current = Calendar.getInstance();
         int year = current.get(Calendar.YEAR);
         int month = current.get(Calendar.MONTH) + 1;
         int day = current.get(Calendar.DATE);
         int hournow = current.get(Calendar.HOUR_OF_DAY);
         int minutenow = current.get(Calendar.MINUTE);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        if(time == null || "".equals(time)){
-            return "";
-        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+
         try {
             Date date = sdf.parse(time);
             Calendar trueTime = Calendar.getInstance();
