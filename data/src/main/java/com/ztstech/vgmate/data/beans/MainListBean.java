@@ -27,7 +27,6 @@ public class MainListBean extends BaseRespBean{
          * nid : 1
          * favflg : 00
          * praflg : 00
-         * url : http://static.verygrow.com/bucea/html/20170823/518357.html
          */
 
         public String createtime;
@@ -36,7 +35,6 @@ public class MainListBean extends BaseRespBean{
         public String nid;
         public String favflg;
         public String praflg;
-        public String url;
         public String picurl;
         public String summary;
         public String updatetime;

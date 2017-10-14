@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingLeft="12dp"
     android:paddingRight="12dp">
     
     <ImageView
         android:id="@+id/img_title"
-        android:background="#f00"
+        android:background="#fff"
         android:layout_marginTop="10dp"
         android:layout_width="35dp"
         android:layout_height="35dp" />
@@ -56,6 +56,9 @@
         android:textColor="@color/color_102"
         android:textSize="@dimen/text_9"
         android:id="@+id/tv_date"
+        android:drawablePadding="3dp"
+        android:gravity="center_vertical"
+        android:drawableLeft="@mipmap/ic_time"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:layout_below="@id/tv_re_comment"

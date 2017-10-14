@@ -25,6 +25,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.comment.CommentActivity;
 import com.ztstech.vgmate.data.beans.MainListBean;
+import com.ztstech.vgmate.data.constants.NetConstants;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.utils.ViewUtils;
 import com.ztstech.vgmate.weigets.TopBar;
@@ -87,12 +88,12 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
         }
 
         webView.setWebChromeClient(new WebChromeClient());
-
         webView.getSettings().setJavaScriptEnabled(true);
 
-        if (!TextUtils.isEmpty(data.url)) {
-            webView.loadUrl(data.url);
-        }
+
+        webView.loadUrl(NetConstants.BASE_URL
+                .concat("jsp/webh5/inforDetails.jsp?type=01"
+                        .concat("&nid=").concat(data.nid)));
 
 
         webView.setOnTouchListener(new View.OnTouchListener() {
