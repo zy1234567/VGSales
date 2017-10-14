@@ -73,6 +73,12 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
                     mView.showError(mainListBean.getErrmsg());
                 }
             }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                mView.showError("网络访问出错".concat(e.getLocalizedMessage()));
+            }
         }.run(mainListRepository.queryInformation(page));
     }
 }

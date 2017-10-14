@@ -66,6 +66,12 @@ public class NoticePresenter extends PresenterImpl<NoticeContract.View> implemen
                     mView.showError(mainListBean.getErrmsg());
                 }
             }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                mView.showError("网络请求出错".concat(e.getLocalizedMessage()));
+            }
         }.run(repository.queryNotice(page));
     }
 

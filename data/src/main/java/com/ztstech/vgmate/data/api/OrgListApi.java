@@ -3,6 +3,7 @@ package com.ztstech.vgmate.data.api;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.GetOrgListCountBean;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
+import com.ztstech.vgmate.data.beans.OrglistUnApproveBean;
 import com.ztstech.vgmate.data.constants.NetConstants;
 
 import retrofit2.http.GET;
@@ -39,5 +40,17 @@ public interface OrgListApi {
                                                   @Query("rbidistrict") String rbidistrict,
                                                   @Query("pageNo") int pageNo,
                                                   @Query(NetConstants.PARAM_AUTHID) String authId);
+
+
+    /**
+     * 加载待审批
+     * @param district
+     * @param authId
+     * @return
+     */
+    @GET("exempt/AppSaleQueryClaimapplication")
+    Observable<OrglistUnApproveBean> loadUnApproveItems(@Query("district") String district,
+                                                        @Query("pageNo") int pageNo,
+                                                        @Query(NetConstants.PARAM_AUTHID) String authId);
 
 }

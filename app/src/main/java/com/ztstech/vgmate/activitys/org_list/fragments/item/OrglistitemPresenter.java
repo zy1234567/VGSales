@@ -33,8 +33,7 @@ public class OrglistitemPresenter extends PresenterImpl<OrglistItemContract.View
     @Override
     public void refreshList(String locationId, String status) {
         //刷新
-        pageNo = 1;
-        requestData(locationId, status, pageNo,new Subscriber<GetOrgListItemsBean>() {
+        requestData(locationId, status, 1,new Subscriber<GetOrgListItemsBean>() {
             @Override
             public void onCompleted() {
             }

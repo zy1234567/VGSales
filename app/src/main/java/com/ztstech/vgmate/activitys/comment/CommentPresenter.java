@@ -27,8 +27,7 @@ public class CommentPresenter extends PresenterImpl<CommentContract.View> implem
 
     @Override
     public void getCommentList(String newsid) {
-        currentPage = 1;
-        requestData(newsid);
+        requestData(1, newsid);
     }
 
     @Override
@@ -36,13 +35,22 @@ public class CommentPresenter extends PresenterImpl<CommentContract.View> implem
         if (currentPage == totalPage) {
             mView.onAppendFinish(listBeanList, null);
         }else {
-            currentPage++;
-            requestData(newsid);
+            requestData(currentPage + 1, newsid);
         }
     }
 
-    private void requestData(String newsid) {
+    private void requestData(final int page, String newsid) {
         new PresenterSubscriber<CommentBean>() {
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                if (page == 1) {
+                    mView.onLoadFinish(listBeanList, "网路访问出错".concat(e.getLocalizedMessage()));
+                }else {
+                    mView.onAppendFinish(listBeanList, "网络访问出错".concat(e.getLocalizedMessage()));
+                }
+            }
 
             @Override
             public void onNext(CommentBean commentBean) {
@@ -70,6 +78,6 @@ public class CommentPresenter extends PresenterImpl<CommentContract.View> implem
                 }
 
             }
-        }.run(new GetCommentList(newsid, currentPage).run());
+        }.run(new GetCommentList(newsid, page).run());
     }
 }
