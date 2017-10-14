@@ -11,7 +11,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.article_detail.ArticleDetailActivity;
 import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.MainListBean;
-import com.ztstech.vgmate.utils.TimeUtil;
+import com.ztstech.vgmate.utils.TimeUtils;
 
 import butterknife.BindView;
 
@@ -52,7 +52,7 @@ public class NoticeViewHolder extends SimpleViewHolder<MainListBean.ListBean> {
         Glide.with(getContext()).load(data.picurl).into(ivTitle);
         tvTitle.setText(data.title);
         tvContent.setText(data.summary);
-        tvTime.setText("最后更新：" + TimeUtil.InformationTime(data.updatetime));
+        tvTime.setText("最后更新：" + TimeUtils.InformationTime(data.updatetime));
         tvCommentCount.setText(String.valueOf(data.evacnt));
 
         clickListener.bean = data;

@@ -14,7 +14,7 @@ import java.util.Locale;
  * 时间格式转换工具类
  */
 
-public class TimeUtil {
+public class TimeUtils {
     /**
      * 根据格式获取时间
      * @param pattern

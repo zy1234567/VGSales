@@ -13,7 +13,7 @@ import com.ztstech.vgmate.activitys.article_detail.ArticleDetailActivity;
 import com.ztstech.vgmate.base.SimpleRecyclerAdapter;
 import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.MainListBean;
-import com.ztstech.vgmate.model.information.InformationModel;
+import com.ztstech.vgmate.utils.TimeUtils;
 
 import butterknife.BindView;
 
@@ -52,7 +52,7 @@ public class InformationViewHolder extends SimpleViewHolder<MainListBean.ListBea
         tvCommentCount.setText(String.valueOf(data.evacnt));
         tvTitle.setText(data.title);
         Glide.with(getContext()).load(data.picurl).into(ivTitle);
-        tvDate.setText(data.createtime);
+        tvDate.setText(TimeUtils.InformationTime(data.createtime));
 
         clickListener.bean = data;
     }

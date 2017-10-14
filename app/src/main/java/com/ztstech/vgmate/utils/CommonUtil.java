@@ -18,9 +18,6 @@ import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.renderscript.Element;
 import android.support.annotation.RequiresApi;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -38,8 +35,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -210,7 +205,7 @@ public class CommonUtil {
             return "";
         }
         try {
-            String nowYear = TimeUtil.getDateWithFormater("yyyy");
+            String nowYear = TimeUtils.getDateWithFormater("yyyy");
             String birthday = birth.substring(0,4);
             int age = Integer.parseInt(nowYear) - Integer.parseInt(birthday);
             return String.valueOf(age);
@@ -228,7 +223,7 @@ public class CommonUtil {
             return "";
         }
         try {
-            String nowYear = TimeUtil.getDateWithFormater("yyyy");
+            String nowYear = TimeUtils.getDateWithFormater("yyyy");
             int birth = Integer.parseInt(nowYear) - Integer.parseInt(age);
             return String.valueOf(birth);
         }catch (Exception e){
