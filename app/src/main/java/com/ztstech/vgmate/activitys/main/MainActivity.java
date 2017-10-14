@@ -16,6 +16,7 @@ import com.ztstech.vgmate.activitys.create_share_info.CreateShareInfoActivity;
 import com.ztstech.vgmate.activitys.edit_info.EditInfoActivity;
 import com.ztstech.vgmate.activitys.main.adapter.MainPagerAdapter;
 import com.ztstech.vgmate.activitys.main.widget.BottomBar;
+import com.ztstech.vgmate.activitys.setting.SettingActivity;
 import com.ztstech.vgmate.data.api.CreateShareApi;
 import com.ztstech.vgmate.weigets.TopBar;
 
@@ -58,7 +59,7 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
         topBar.getLeftImage().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, EditInfoActivity.class));
+                startActivity(new Intent(MainActivity.this, SettingActivity.class));
             }
         });
 

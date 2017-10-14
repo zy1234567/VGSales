@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.activitys.edit_info.EditInfoActivity;
 import com.ztstech.vgmate.activitys.login.LoginActivity;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.ToastUtil;
@@ -28,6 +29,9 @@ public class SettingActivity extends MVPActivity<SettingContract.Presenter> impl
     @BindView(R.id.tv_phone)
     TextView tvPhone;
 
+    @BindView(R.id.rl_id)
+    View rlId;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_setting;
@@ -43,6 +47,7 @@ public class SettingActivity extends MVPActivity<SettingContract.Presenter> impl
         super.onViewBindFinish();
 
         tvLogout.setOnClickListener(this);
+        rlId.setOnClickListener(this);
         tvVersion.setText(CommonUtil.getVersion());
         tvPhone.setText(mPresenter.getPhone());
 
@@ -62,6 +67,8 @@ public class SettingActivity extends MVPActivity<SettingContract.Presenter> impl
     public void onClick(View view) {
         if (view == tvLogout) {
             mPresenter.logout();
+        }else if (view == rlId) {
+            startActivity(new Intent(this, EditInfoActivity.class));
         }
     }
 }

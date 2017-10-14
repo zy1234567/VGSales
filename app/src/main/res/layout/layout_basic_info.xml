@@ -461,6 +461,7 @@
 
 
         <LinearLayout
+            android:layout_marginBottom="20dp"
             android:layout_marginRight="12dp"
             android:orientation="vertical"
             android:layout_weight="1"
