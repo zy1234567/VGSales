@@ -4,7 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.ztstech.vgmate.activitys.org_list.fragments.OrglistItemFragment;
+import com.ztstech.vgmate.activitys.org_list.fragments.comfirmed.OrglistConfirmedFragment;
+import com.ztstech.vgmate.activitys.org_list.fragments.item.OrglistItemFragment;
 
 /**
  * Created by zhiyuan on 2017/9/8.
@@ -35,7 +36,7 @@ public class OrgListPageAdapter extends FragmentPagerAdapter{
         }else if (position == 1) {
             return OrglistItemFragment.newInstance("00");
         }else if (position == 2) {
-            return OrglistItemFragment.newInstance("03");
+            return new OrglistConfirmedFragment();
         }else if (position == 3) {
             return OrglistItemFragment.newInstance("04");
         }

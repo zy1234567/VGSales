@@ -1,5 +1,6 @@
 package com.ztstech.vgmate.utils;
 
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
@@ -110,5 +111,71 @@ public class LocationUtils {
     public static String getProvinceNameByAreaCode(String areaCode) {
         String provinceCode = areaCode.substring(0, 2) + "0000";
         return getLocationNameByCode(provinceCode);
+    }
+
+    /**
+     * 获取省
+     * @param areaCode 区
+     * @return
+     */
+    public static String getPName(@NonNull String areaCode) {
+        String pCode = areaCode.substring(0, 2).concat("0000");
+        for (LocationBean bean : locationBeanList) {
+            if (bean.getSid().equals(pCode)) {
+                return bean.getSname();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 获取市
+     * @param areaCode 区
+     * @return
+     */
+    public static String getCName(@NonNull String areaCode) {
+        String pCode = areaCode.substring(0, 2).concat("0000");
+        String cCode = areaCode.substring(0, 4).concat("00");
+        for (LocationBean locationBean : locationBeanList) {
+            if (locationBean.getSid().equals(pCode)) {
+                //得到所在省
+                for (LocationBean.CityBean city : locationBean.getCity()) {
+                    //匹配市
+                    if (cCode.equals(city.getSid())) {
+                        //获取市名
+                        return city.getSname();
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 获取区位置
+     * @param areaCode
+     * @return
+     */
+    public static String getAName(@NonNull String areaCode) {
+        String pCode = areaCode.substring(0, 2).concat("0000");
+        String cCode = areaCode.substring(0, 4).concat("00");
+        for (LocationBean locationBean : locationBeanList) {
+            if (locationBean.getSid().equals(pCode)) {
+                //得到所在省
+                for (LocationBean.CityBean city : locationBean.getCity()) {
+                    //匹配市
+                    if (cCode.equals(city.getSid())) {
+                        //获取市名
+                        for (LocationBean.CityBean.SiteBean siteBean : city.getSite()) {
+                            //匹配区
+                            if (areaCode.equals(siteBean.getSid())) {
+                                return siteBean.getSname();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null;
     }
 }

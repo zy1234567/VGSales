@@ -14,5 +14,7 @@ import rx.Observable;
 public interface MainPageApi {
 
     @GET("exempt/AppSaleCountHomeMsg")
-    Observable<MainPageBean> loadMainPageInfo(@Query("authId") String authId);
+    Observable<MainPageBean> loadMainPageInfo(@Query("authId") String authId,
+                                              @Query("district") String district);
+
 }

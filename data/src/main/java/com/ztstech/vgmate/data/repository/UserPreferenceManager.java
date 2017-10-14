@@ -19,6 +19,8 @@ import rx.functions.Action1;
 public class UserPreferenceManager {
 
     private static final String USER = "pref_user_";
+    /**用户筛选的地区*/
+    public static final String USER_SELECT_AREA = "pref_user_select_area_";
 
     private static UserPreferenceManager instance;
 
@@ -97,6 +99,34 @@ public class UserPreferenceManager {
         return null;
     }
 
+
+    /**
+     * 保存用户区县机构，在筛选界面区县机构进行更改后需要保存
+     * @param area
+     */
+    public void saveUserSelectArea(String area) {
+        if (UserRepository.getInstance().getUser() == null) {
+            throw new NullPointerException("用户不能为空!!");
+        }
+        String uid = UserRepository.getInstance().getUser().info.uid;
+        preferences.edit().putString(USER_SELECT_AREA.concat(uid), area).apply();
+    }
+
+    /**
+     * 获取用户在筛选界面保存的区划，如果没有选择地址返回用户默认地址
+     * @return
+     */
+    public String getUserSelectArea() {
+        if (UserRepository.getInstance().getUser() == null) {
+            throw new NullPointerException("用户不能为空!!");
+        }
+        String uid = UserRepository.getInstance().getUser().info.uid;
+        String loc = preferences.getString(USER_SELECT_AREA.concat(uid), null);
+        if (loc == null) {
+            loc = UserRepository.getInstance().getUser().info.wdistrict;
+        }
+        return loc;
+    }
 
 
 }

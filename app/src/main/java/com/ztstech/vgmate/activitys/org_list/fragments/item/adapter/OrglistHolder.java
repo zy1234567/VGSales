@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.org_list.fragments.adapter;
+package com.ztstech.vgmate.activitys.org_list.fragments.item.adapter;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -12,7 +12,6 @@ import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
-import com.ztstech.vgmate.utils.TransHelper;
 
 import butterknife.BindView;
 

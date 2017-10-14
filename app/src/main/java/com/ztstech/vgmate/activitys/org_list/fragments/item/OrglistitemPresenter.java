@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.org_list.fragments;
+package com.ztstech.vgmate.activitys.org_list.fragments.item;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Subscriber;
-import rx.functions.Action1;
 
 /**
  * Created by zhiyuan on 2017/9/23.

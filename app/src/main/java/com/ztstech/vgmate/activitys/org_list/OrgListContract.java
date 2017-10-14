@@ -27,5 +27,11 @@ interface OrgListContract {
          * 加载数量信息
          */
         void loadCount(String locId);
+
+        /**
+         * 获取用户默认筛选地址
+         * @return
+         */
+        String getUserSelectedLocation();
     }
 }

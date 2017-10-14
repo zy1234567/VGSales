@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.org_list.fragments;
+package com.ztstech.vgmate.activitys.org_list.fragments.item;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,8 +17,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.org_detail.OrgDetailActivity;
 import com.ztstech.vgmate.activitys.org_list.OrgListActivity;
-import com.ztstech.vgmate.activitys.org_list.adapter.OrgListPageAdapter;
-import com.ztstech.vgmate.activitys.org_list.fragments.adapter.OrglistRecyclerAdapter;
+import com.ztstech.vgmate.activitys.org_list.fragments.item.adapter.OrglistRecyclerAdapter;
 import com.ztstech.vgmate.base.SimpleRecyclerAdapter;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
 
@@ -27,7 +26,7 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * item
+ * 待确认、已确认、网页端
  */
 public class OrglistItemFragment extends MVPFragment<OrglistItemContract.Presenter> implements
         OrglistItemContract.View {

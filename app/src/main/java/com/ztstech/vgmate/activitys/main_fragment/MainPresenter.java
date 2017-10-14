@@ -3,7 +3,8 @@ package com.ztstech.vgmate.activitys.main_fragment;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.MainPageBean;
 import com.ztstech.vgmate.data.beans.UserBean;
-import com.ztstech.vgmate.data.repository.MainRepository;
+import com.ztstech.vgmate.data.repository.UserPreferenceManager;
+import com.ztstech.vgmate.data.user_case.GetMainPageBean;
 import com.ztstech.vgmate.data.repository.UserRepository;
 import com.ztstech.vgmate.utils.PresenterSubscriber;
 
@@ -14,12 +15,10 @@ import com.ztstech.vgmate.utils.PresenterSubscriber;
 public class MainPresenter extends PresenterImpl<MainContract.View> implements
         MainContract.Presenter{
 
-    private MainRepository repository;
     private UserRepository userRepository;
 
     public MainPresenter(MainContract.View view) {
         super(view);
-        repository = new MainRepository();
         userRepository = UserRepository.getInstance();
     }
 
@@ -37,12 +36,20 @@ public class MainPresenter extends PresenterImpl<MainContract.View> implements
                     mView.loadError(mainPageBean.getErrmsg());
                 }
             }
-        }.run(repository.loadMainPageInfo());
+        }.run(new GetMainPageBean(getUserDistrict()).run());
 
         //加载用户信息
         UserBean userBean = userRepository.getUser();
         if (userBean != null) {
             mView.setUserInfo(userBean);
         }
+    }
+
+    /**
+     * 获取默认请求地址
+     * @return
+     */
+    private String getUserDistrict() {
+        return UserPreferenceManager.getInstance().getUserSelectArea();
     }
 }

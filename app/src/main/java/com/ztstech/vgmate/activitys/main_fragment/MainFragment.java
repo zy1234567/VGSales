@@ -1,5 +1,6 @@
 package com.ztstech.vgmate.activitys.main_fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -31,6 +32,8 @@ import butterknife.OnClick;
  */
 public class MainFragment extends MVPFragment<MainContract.Presenter> implements MainContract.View {
 
+    /**请求机构列表，如果机构列表重新筛选，需要重新刷新数字*/
+    public static final int REQ_ORG_LIST = 1;
 
     @BindView(R.id.viewpager)
     ViewPager viewPager;
@@ -98,6 +101,16 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if (requestCode == REQ_ORG_LIST) {
+            mPresenter.loadData();
+        }
+    }
 
     @OnClick(R.id.tv_mate)
     public void onAddSellMateClick(View v) {
@@ -108,7 +121,7 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
     @OnClick(R.id.tv_org)
     public void onSelfOrganizationClick(View v) {
         //点击自拓机构
-        startActivity(new Intent(getActivity(), OrgListActivity.class));
+        startActivityForResult(new Intent(getActivity(), OrgListActivity.class), REQ_ORG_LIST);
     }
 
     @OnClick(R.id.tv_get_chance)
@@ -134,18 +147,18 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
         tvName.setText(mainPageBean.info.uname);
 
         StringBuilder locationStr = new StringBuilder();
-        String p = LocationUtils.getProvinceNameByAreaCode(mainPageBean.info.district);
+        String p = LocationUtils.getPName(mainPageBean.info.district);
         if (!TextUtils.isEmpty(p)) {
             locationStr.append(p);
         }
-        String c = LocationUtils.getCityNameByAreaCode(mainPageBean.info.district);
+        String c = LocationUtils.getCName(mainPageBean.info.district);
         if (!TextUtils.isEmpty(c)) {
             if (locationStr.length() != 0) {
                 locationStr.append(" ");
             }
             locationStr.append(c);
         }
-        String a = LocationUtils.getLocationNameByCode(mainPageBean.info.district);
+        String a = LocationUtils.getAName(mainPageBean.info.district);
         if (!TextUtils.isEmpty(a)) {
             if (locationStr.length() != 0) {
                 locationStr.append(" ");

@@ -14,6 +14,7 @@ import com.ztstech.vgmate.activitys.location_select.LocationSelectDialog;
 import com.ztstech.vgmate.activitys.org_list.adapter.OrgListPageAdapter;
 import com.ztstech.vgmate.activitys.self_organization_detail.adapter.SelfOrganizationDetailPagerAdapter;
 import com.ztstech.vgmate.data.beans.GetOrgListCountBean;
+import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 
 import butterknife.BindView;
@@ -40,7 +41,7 @@ public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> impl
     private LocationSelectDialog locationSelectDialog;
 
     /**筛选地址*/
-    private String mDefaultLocation = "110101";
+    private String mDefaultLocation;
 
     /**标题*/
     private String[] titles = new String[] {"待确认", "已定位", "已认领", "网站端"};
@@ -49,16 +50,30 @@ public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> impl
     private LocationSelectDialog.OnLocationSelectListener onLocationSelectListener =
             new LocationSelectDialog.OnLocationSelectListener() {
                 @Override
-                public void onLocationSelected(String locationName, String locP, String locC, String locA) {
+                public void onLocationSelected(String locationName, String locP, String locC,
+                                               String locA) {
                     tvTitle.setText(locationName);
                     if (locA != null) {
+                        if (!mDefaultLocation.equals(locA)) {
+                            //已经更改地址，主页面刷新
+                            setResult(RESULT_OK);
+                        }
                         mDefaultLocation = locA;
                     }else if (locC != null) {
+                        if (!mDefaultLocation.equals(locC)) {
+                            //已经更改地址，主页面刷新
+                            setResult(RESULT_OK);
+                        }
                         mDefaultLocation = locC;
                     }else if (locP != null) {
+                        if (!mDefaultLocation.equals(locP)) {
+                            //已经更改地址，主页面刷新
+                            setResult(RESULT_OK);
+                        }
                         mDefaultLocation = locP;
                     }
                     mPresenter.loadCount(mDefaultLocation);
+                    // TODO: 2017/10/14 刷新fragment
                 }
             };
 
@@ -85,7 +100,13 @@ public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> impl
 
         ivLeft.setOnClickListener(this);
 
+        mDefaultLocation = mPresenter.getUserSelectedLocation();
+
         mPresenter.loadCount(mDefaultLocation);
+
+        tvTitle.setText(LocationUtils.getPName(mDefaultLocation) + "-"
+                + LocationUtils.getCName(mDefaultLocation) + "-"
+                + LocationUtils.getAName(mDefaultLocation));
     }
 
     @OnClick(R.id.tv_title)

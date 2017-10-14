@@ -2,7 +2,9 @@ package com.ztstech.vgmate.activitys.org_list;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.GetOrgListCountBean;
+import com.ztstech.vgmate.data.repository.UserPreferenceManager;
 import com.ztstech.vgmate.data.user_case.GetOrgListCount;
+import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.PresenterSubscriber;
 
 /**
@@ -28,6 +30,7 @@ public class OrglistPresenter extends PresenterImpl<OrgListContract.View> implem
         }
         isLoadingCount = true;
         getOrgListCount = new GetOrgListCount(locId);
+        UserPreferenceManager.getInstance().saveUserSelectArea(locId);  //保存用户筛选的地址
         new PresenterSubscriber<GetOrgListCountBean>(mView){
 
             @Override
@@ -43,5 +46,10 @@ public class OrglistPresenter extends PresenterImpl<OrgListContract.View> implem
 
         }.run(getOrgListCount.run());
 
+    }
+
+    @Override
+    public String getUserSelectedLocation() {
+        return UserPreferenceManager.getInstance().getUserSelectArea();
     }
 }

@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.org_list.fragments;
+package com.ztstech.vgmate.activitys.org_list.fragments.item;
 
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.BaseView;
