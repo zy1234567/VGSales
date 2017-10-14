@@ -52,7 +52,18 @@ public class TakePhotoHelper {
      */
     private CropOptions mCropOptions;
 
+    /**宽高比*/
+    private int widthPercent = 1;
+    private int heightPercent = 1;
+
     public TakePhotoHelper(Activity activity, TakePhoto takePhoto, boolean iscrop) {
+        this(activity, takePhoto, iscrop, -1, -1);
+    }
+
+    public TakePhotoHelper(Activity activity, TakePhoto takePhoto, boolean iscrop, int widthPercent,
+                           int heightPercent) {
+        this.widthPercent = widthPercent;
+        this.heightPercent = heightPercent;
         this.activity = activity;
         this.takePhoto = takePhoto;
         this.iscrop = iscrop;
@@ -123,7 +134,7 @@ public class TakePhotoHelper {
 
             //设置默认裁剪配置
             if (mCropOptions == null) {
-                mCropOptions = getCropOptions(1, 1, 500, 500);
+                mCropOptions = getCropOptions(widthPercent, heightPercent, 500, 500);
             }
 
             /*其他图片*/
@@ -151,7 +162,7 @@ public class TakePhotoHelper {
     public void selectFromAlbum(){
         //设置默认裁剪配置
         if (mCropOptions == null) {
-            mCropOptions = getCropOptions(1, 1, 500, 500);
+            mCropOptions = getCropOptions(widthPercent, heightPercent, 500, 500);
         }
         if (iscrop) {
             takePhoto.onPickFromGalleryWithCrop(imageUri, mCropOptions);

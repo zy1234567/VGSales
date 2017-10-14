@@ -208,7 +208,7 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
             tvHeader.setText("已上传");
         }
         if (!TextUtils.isEmpty(model.cardUrl)) {
-            Glide.with(this).load(model.headUrl).into(ivCard);
+            Glide.with(this).load(model.cardUrl).into(ivCard);
         }
         if (!TextUtils.isEmpty(model.idUrl)) {
             Glide.with(this).load(model.idUrl).into(ivId);
@@ -264,7 +264,7 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
                 return;
             }
             currentImageView = (ImageView) view;
-            new TakePhotoHelper(this, takePhoto, true).show();
+            new TakePhotoHelper(this, takePhoto, true, 56, 35).show();
         }else if (view == imgHeader) {
             currentImageView = (ImageView) view;
             new TakePhotoHelper(this, takePhoto, true).show();
