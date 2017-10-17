@@ -11,7 +11,6 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.complete_org_info_v2.CompleteOrgInfoV2Activity;
 import com.ztstech.vgmate.activitys.get_chance.GetChanceActivity;
-import com.ztstech.vgmate.activitys.org_detail.dialog.org_audit.OrgAuditDialog;
 import com.ztstech.vgmate.activitys.org_detail.dialog.org_confirm.OrgConfirmDialog;
 import com.ztstech.vgmate.activitys.org_detail.dialog.org_delete.OrgDeleteDialog;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
@@ -73,7 +72,9 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
 
     @OnClick(R.id.tv_complete_info)
     public void onCompleteInfoClick(View v) {
-        startActivityForResult(new Intent(this, CompleteOrgInfoV2Activity.class), REQ_COMPLETE_INFO);
+        Intent it = new Intent(this, CompleteOrgInfoV2Activity.class);
+        it.putExtra(CompleteOrgInfoV2Activity.ARG_RBIID, bean.rbiid);
+        startActivityForResult(it, REQ_COMPLETE_INFO);
     }
 
     @OnClick(R.id.tv_connect_time)

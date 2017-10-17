@@ -1,6 +1,9 @@
 package com.ztstech.vgmate.activitys.complete_org_info_v2;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
+import com.ztstech.vgmate.data.beans.OrgInfoBean;
+import com.ztstech.vgmate.data.user_case.GetOrgInfo;
+import com.ztstech.vgmate.utils.PresenterSubscriber;
 
 /**
  * Created by zhiyuan on 2017/10/9.
@@ -11,5 +14,21 @@ public class CompleteOrgInfoV2Presenter extends PresenterImpl<CompleteOrgInfoV2C
 
     public CompleteOrgInfoV2Presenter(CompleteOrgInfoV2Contract.View view) {
         super(view);
+    }
+
+    @Override
+    public void loadOrgInfo(int rbiid) {
+        new PresenterSubscriber<OrgInfoBean>(mView){
+
+            @Override
+            public void onNext(OrgInfoBean orgInfoBean) {
+                if (orgInfoBean.isSucceed()) {
+                    mView.showOrgInfo(orgInfoBean);
+                }else {
+                    mView.onLoadOrgInfoError(orgInfoBean.getErrmsg());
+                }
+            }
+
+        }.run(new GetOrgInfo(rbiid).run());
     }
 }

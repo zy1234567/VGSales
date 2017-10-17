@@ -40,10 +40,11 @@
                 android:layout_height="35dp">
                 
                 <TextView
+
                     android:id="@+id/tv_last_update"
                     android:textColor="@color/color_100"
                     android:textSize="@dimen/text_7"
-                    android:gravity="center_horizontal"
+                    android:gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
                 
@@ -77,8 +78,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
 
-                <EditText
-                    android:id="@+id/et_org_name"
+                <TextView
+                    android:id="@+id/tv_org_name"
                     android:drawablePadding="5dp"
                     android:drawableRight="@mipmap/arrow_right_choice"
                     android:singleLine="true"
@@ -272,9 +273,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
 
-                <EditText
+                <TextView
                     android:lines="1"
-                    android:id="@+id/et_detail_location"
+                    android:id="@+id/tv_detail_location"
                     android:drawablePadding="5dp"
                     android:drawableRight="@mipmap/arrow_right_choice"
                     android:ellipsize="end"
@@ -310,8 +311,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
 
-                <EditText
-                    android:id="@+id/et_phone"
+                <TextView
+                    android:id="@+id/tv_phone"
                     android:drawablePadding="5dp"
                     android:drawableRight="@mipmap/arrow_right_choice"
                     android:ellipsize="end"
@@ -347,8 +348,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
 
-                <EditText
-                    android:id="@+id/et_user"
+                <TextView
+                    android:id="@+id/tv_user"
                     android:drawablePadding="5dp"
                     android:drawableRight="@mipmap/arrow_right_choice"
                     android:ellipsize="end"

@@ -178,4 +178,13 @@ public class LocationUtils {
         }
         return null;
     }
+
+    /**
+     * 获取使用 - 链接的地址
+     * @param area
+     * @return
+     */
+    public static String getFormedString(String area) {
+        return getPName(area) + "-" + getCName(area) + "-" + getAName(area);
+    }
 }
