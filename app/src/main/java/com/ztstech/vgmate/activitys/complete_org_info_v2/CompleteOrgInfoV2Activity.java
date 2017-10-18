@@ -265,7 +265,7 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
         }else if (REQ_ORG_NAME == requestCode) {
             infoBean.oname = data.getStringExtra(EditOrgInfoSignleInputActivity.RESULT_TEXT);
         }else if (REQ_LOGO == requestCode) {
-//            infoBean.logo = data.getStringExtra()
+            infoBean.localLogoPath = data.getStringExtra(EditOrgLogoActivity.RESULT_IMAGE_PATH);
         }else if (REQ_LOCATION == requestCode) {
             infoBean.district = data.getStringExtra(LocationSelectActivity.RESULT_A);
         }else if (REQ_PHONE == requestCode) {
@@ -297,7 +297,12 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
         }
 
         tvOrgName.setText(infoBean.oname);
-        Glide.with(this).load(infoBean.logosurl).into(imgLogo);
+        if (TextUtils.isEmpty(infoBean.localLogoPath)) {
+            Glide.with(this).load(infoBean.logosurl).into(imgLogo);
+        }else {
+            Glide.with(this).load(infoBean.localLogoPath).into(imgLogo);
+        }
+
         tvPhone.setText(infoBean.phone);
         tvArea.setText(LocationUtils.getFormedString(infoBean.district));
 

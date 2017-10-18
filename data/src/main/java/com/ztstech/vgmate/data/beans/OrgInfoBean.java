@@ -31,6 +31,10 @@ public class OrgInfoBean extends BaseRespBean {
          * introduction : TqywieuytwuyiquwoidsfygahkdvgakjLdkfgjshajk
          */
 
+
+        /**本地选择图片的地址*/
+        public String localLogoPath;
+
         public String phone;
         public String logourl;
         public String oname;

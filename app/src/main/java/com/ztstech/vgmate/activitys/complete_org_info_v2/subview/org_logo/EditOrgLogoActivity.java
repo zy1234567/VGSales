@@ -5,6 +5,7 @@ import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -78,6 +79,11 @@ public class EditOrgLogoActivity extends BaseActivity {
                 finish();
             }
         });
+
+        String url = getIntent().getStringExtra(ARG_LOGO_URL);
+        if (!TextUtils.isEmpty(url)) {
+            Glide.with(this).load(url).into(imgLogo);
+        }
     }
 
     @Override
