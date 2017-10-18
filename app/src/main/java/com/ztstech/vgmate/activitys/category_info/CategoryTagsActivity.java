@@ -25,6 +25,11 @@ import butterknife.OnClick;
  */
 public class CategoryTagsActivity extends AppCompatActivity implements CategoryTagsContract.IView{
 
+    /**传入默认选中的id*/
+    public static final String ARG_IDS = "selectedIds";
+    /**传入默认选中的名称*/
+    public static final String ARG_NAMES = "selectedNames";
+
     @BindView(R.id.img_back)
     ImageView imgBack;
     @BindView(R.id.title)
@@ -63,8 +68,8 @@ public class CategoryTagsActivity extends AppCompatActivity implements CategoryT
         title.setText("课程标签");
         lpScrollview = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
 
-        String selectedIds = getIntent().getStringExtra("selectedIds");
-        String selectedNames = getIntent().getStringExtra("selectedNames");
+        String selectedIds = getIntent().getStringExtra(ARG_IDS);
+        String selectedNames = getIntent().getStringExtra(ARG_NAMES);
         presenter = new CategoryTagsPresenter(this, this, selectedIds, selectedNames);
 
         /** 使scrollView自动滑动到底部*/

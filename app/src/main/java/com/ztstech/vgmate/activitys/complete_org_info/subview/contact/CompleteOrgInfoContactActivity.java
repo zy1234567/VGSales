@@ -8,6 +8,7 @@ import com.ztstech.vgmate.R;
 /**
  * 负责人
  */
+
 public class CompleteOrgInfoContactActivity extends AppCompatActivity {
 
     @Override

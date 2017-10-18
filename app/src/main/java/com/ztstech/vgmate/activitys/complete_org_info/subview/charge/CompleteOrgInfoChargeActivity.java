@@ -8,6 +8,7 @@ import com.ztstech.vgmate.R;
 /**
  * 收费简介
  */
+@Deprecated
 public class CompleteOrgInfoChargeActivity extends AppCompatActivity {
 
     @Override

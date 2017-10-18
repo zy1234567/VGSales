@@ -3,6 +3,7 @@ package com.ztstech.vgmate.activitys.location_select;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -45,6 +46,10 @@ import rx.schedulers.Schedulers;
  */
 
 public class LocationSelectActivity extends AppCompatActivity {
+
+    /**传入默认区划*/
+    public static final String ARG_DEFAULT_AREA = "arg_default";
+
 
     /**返回结果代码*/
     public static final String RESULT_CODE = "code";
@@ -147,14 +152,16 @@ public class LocationSelectActivity extends AppCompatActivity {
                 initListener();
             }
         });
+
+        String defaultLocationId = getIntent().getStringExtra(ARG_DEFAULT_AREA);
+        if (!TextUtils.isEmpty(defaultLocationId)) {
+            tvCuerrentSelect.setText(LocationUtils.getFormedString(defaultLocationId));
+        }
     }
 
     private void initData() {
         tvSave.setText("确认");
         title.setText("地区选择");
-//        String s = CommonUtil.getDataFromAssets(this, "location.txt");
-//        list_province = new Gson().fromJson(s, new TypeToken<List<LocationBean>>() {
-//        }.getType());
         list_province = LocationUtils.getLocationList();
         updateOrgInfo = getIntent().getBooleanExtra("updateOrgInfo", false);
 

@@ -23,7 +23,7 @@ public class CompleteOrgInfoV2Presenter extends PresenterImpl<CompleteOrgInfoV2C
             @Override
             public void onNext(OrgInfoBean orgInfoBean) {
                 if (orgInfoBean.isSucceed()) {
-                    mView.showOrgInfo(orgInfoBean);
+                    mView.showOrgInfo(orgInfoBean.info);
                 }else {
                     mView.onLoadOrgInfoError(orgInfoBean.getErrmsg());
                 }

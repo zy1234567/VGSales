@@ -19,6 +19,9 @@ import butterknife.BindView;
 public class EnrollTagActivity extends MVPActivity<EnrollTagContract.Presenter> implements
         EnrollTagContract.View, TextWatcher {
 
+    /**传入标签信息*/
+    public static final String ARG_TAG = "arg_tag";
+
     /**长度限制*/
     public static final int LENGTH_LIMIT = 6;
 

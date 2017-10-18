@@ -8,6 +8,7 @@ import com.ztstech.vgmate.R;
 /**
  * 机构基本资料
  */
+@Deprecated
 public class CompleteOrgInfoBasicInfoActivity extends AppCompatActivity {
 
     @Override

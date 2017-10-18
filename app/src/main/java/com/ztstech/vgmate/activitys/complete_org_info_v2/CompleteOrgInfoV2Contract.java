@@ -12,7 +12,7 @@ interface CompleteOrgInfoV2Contract {
 
     interface View extends BaseView {
 
-        void showOrgInfo(OrgInfoBean bean);
+        void showOrgInfo(OrgInfoBean.InfoBean bean);
 
         void onLoadOrgInfoError(String errmsg);
 

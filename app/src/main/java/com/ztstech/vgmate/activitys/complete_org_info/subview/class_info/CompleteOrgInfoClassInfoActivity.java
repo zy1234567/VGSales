@@ -8,6 +8,7 @@ import com.ztstech.vgmate.R;
 /**
  * 课程简介
  */
+@Deprecated
 public class CompleteOrgInfoClassInfoActivity extends AppCompatActivity {
 
     @Override
