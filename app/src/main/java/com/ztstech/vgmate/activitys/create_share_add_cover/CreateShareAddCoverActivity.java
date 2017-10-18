@@ -1,6 +1,7 @@
 package com.ztstech.vgmate.activitys.create_share_add_cover;
 
 import android.content.Intent;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.view.View;
@@ -113,6 +114,12 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
             tvContent.setText(getDate());
             imgCover.setImageResource(R.mipmap.img_uploadcover1);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        takePhoto.onSaveInstanceState(outState);
     }
 
     @Override
