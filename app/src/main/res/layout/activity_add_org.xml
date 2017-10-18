@@ -9,6 +9,7 @@
     tools:context="com.ztstech.vgmate.activitys.add_org.AddOrgActivity">
 
     <com.ztstech.vgmate.weigets.TopBar
+        android:background="#fff"
         android:id="@+id/top_bar"
         app:barTitle="添加机构"
         app:showBackNav="true"

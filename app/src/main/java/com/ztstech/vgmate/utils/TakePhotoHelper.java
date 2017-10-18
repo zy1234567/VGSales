@@ -87,7 +87,7 @@ public class TakePhotoHelper {
     public void show() {
         AlertDialog.Builder buider = new AlertDialog.Builder(activity);
         View view = LayoutInflater.from(activity).inflate(
-                R.layout.mine_collection_dialog, null);
+                R.layout.mine_collection_dialog, null, false);
         LinearLayout xiangji = (LinearLayout) view
                 .findViewById(R.id.layout_fengxiang);
         LinearLayout xiangce = (LinearLayout) view
@@ -96,6 +96,7 @@ public class TakePhotoHelper {
         TextView tv2 = (TextView) view.findViewById(R.id.collection_delete);
         buider.setView(view);
         dialog = buider.create();
+        ViewUtils.setDialogFullScreen(dialog);
         dialog.setCanceledOnTouchOutside(true);
         xiangji.setOnClickListener(new MyClickListener());
         xiangce.setOnClickListener(new MyClickListener());
