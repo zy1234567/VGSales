@@ -15,7 +15,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.category_info.CategoryTagsActivity;
 import com.ztstech.vgmate.activitys.category_info.CategoryTagsPresenter;
-import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.charge_person.EditOrgManagerActivity;
+import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.manager.EditOrgManagerActivity;
 import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.multiple_line.EditOrgInfoMultipleInputActivity;
 import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.org_logo.EditOrgLogoActivity;
 import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.pic_video.EditOrgPicVideoActivity;
@@ -175,7 +175,11 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
             startActivityForResult(it, REQ_ORG_NAME);
         }else if (view == imgLogo) {
             Intent it = new Intent(this, EditOrgLogoActivity.class);
-            it.putExtra(EditOrgLogoActivity.ARG_LOGO_URL, infoBean.logourl);
+            if (!TextUtils.isEmpty(infoBean.localLogoPath)) {
+                it.putExtra(EditOrgLogoActivity.ARG_LOGO_URL, infoBean.localLogoPath);
+            }else {
+                it.putExtra(EditOrgLogoActivity.ARG_LOGO_URL, infoBean.logourl);
+            }
             startActivityForResult(it, REQ_LOGO);
         }else if (view == tvDetailLocation) {
             Intent it = new Intent(this, EditOrgInfoMultipleInputActivity.class);
@@ -194,7 +198,12 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
             startActivityForResult(it, REQ_MANAGER);
         }else if (view == tvPicVideo) {
             Intent it = new Intent(this, EditOrgPicVideoActivity.class);
-            it.putExtra(EditOrgPicVideoActivity.ARG_PIC_URLS, infoBean.advertisingwallsurl);
+            if (TextUtils.isEmpty(infoBean.localWallPath)) {
+                it.putExtra(EditOrgPicVideoActivity.ARG_PIC_URLS, infoBean.advertisingwallsurl);
+            }else {
+                it.putExtra(EditOrgPicVideoActivity.ARG_PIC_URLS, infoBean.localWallPath);
+            }
+            it.putExtra(EditOrgPicVideoActivity.ARG_PIC_DESCS, infoBean.walldescribe);
             startActivityForResult(it, REQ_PIC_VIDEO);
         }else if (view == tvOrgDesc) {
             Intent it = new Intent(this, EditOrgInfoMultipleInputActivity.class);
@@ -271,13 +280,18 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
         }else if (REQ_PHONE == requestCode) {
             infoBean.phone = data.getStringExtra(EditOrgInfoSignleInputActivity.RESULT_TEXT);
         }else if (REQ_MANAGER == requestCode) {
-
+            infoBean.manager = data.getStringExtra(EditOrgManagerActivity.RESULT_NAME);
+            infoBean.managerphone = data.getStringExtra(EditOrgManagerActivity.RESULT_PHONE);
+            infoBean.manageruid = null;
         }else if (REQ_PIC_VIDEO == requestCode) {
-
+            infoBean.localWallPath = data.getStringExtra(EditOrgPicVideoActivity.RESULT_IMG_FILE_PATH);
+            infoBean.walldescribe = data.getStringExtra(EditOrgPicVideoActivity.RESULT_IMG_DESC);
         }else if (REQ_ORG_DESC == requestCode) {
             infoBean.introduction = data.getStringExtra(EditOrgInfoMultipleInputActivity.RESULT_TEXT);
         }else if (REQ_TEACHERS == requestCode) {
 
+        }else if (REQ_TAG == requestCode) {
+            infoBean.tag = data.getStringExtra(EnrollTagActivity.RESULT_TAG);
         }
 
         showOrgInfo(infoBean);
@@ -339,7 +353,11 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
             }
         }
 
-        if (!TextUtils.isEmpty(infoBean.advertisingwallsurl)) {
+        if (!TextUtils.isEmpty(infoBean.localWallPath)) {
+            //如果筛选的本地数据不为空
+            String[] pics = infoBean.localWallPath.split(",");
+            tvPicVideo.setText(pics.length + "图片，0视频");
+        }else if (!TextUtils.isEmpty(infoBean.advertisingwallsurl)) {
             String[] pics = infoBean.advertisingwallsurl.split(",");
             tvPicVideo.setText(pics.length + "图片，0视频");
         }else {

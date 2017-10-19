@@ -86,7 +86,7 @@
         <activity android:name=".activitys.complete_org_info_v2.subview.multiple_line.EditOrgInfoMultipleInputActivity" />
         <activity android:name=".activitys.complete_org_info_v2.subview.signle_line.EditOrgInfoSignleInputActivity" />
         <activity android:name=".activitys.complete_org_info_v2.subview.org_logo.EditOrgLogoActivity" />
-        <activity android:name=".activitys.complete_org_info_v2.subview.charge_person.EditOrgManagerActivity" />
+        <activity android:name=".activitys.complete_org_info_v2.subview.manager.EditOrgManagerActivity" />
         <activity android:name=".activitys.complete_org_info_v2.subview.pic_video.EditOrgPicVideoActivity" />
         <activity android:name=".activitys.complete_org_info_v2.subview.teacher.EditOrgInfoTeacherActivity"></activity>
     </application>

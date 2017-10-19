@@ -1,9 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ztstech.vgmate.activitys.complete_org_info_v2.subview.charge_person.EditOrgManagerActivity">
+    android:orientation="vertical"
+    android:background="@color/color_107"
+    tools:context="com.ztstech.vgmate.activitys.complete_org_info_v2.subview.manager.EditOrgManagerActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <com.ztstech.vgmate.weigets.TopBar
+        android:id="@+id/top_bar"
+        app:showBackNav="true"
+        app:barTitle="负责人"
+        android:background="#fff"
+        app:textRight="保存"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.ztstech.vgmate.weigets.TopBar>
+
+
+    <RelativeLayout
+        android:paddingRight="12dp"
+        android:paddingLeft="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/color_109">
+
+        <TextView
+            android:id="@+id/tv_name_title"
+            android:textColor="@color/color_100"
+            android:textSize="@dimen/text_7"
+            android:text="姓名"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <EditText
+            android:lines="1"
+            android:textSize="@dimen/text_7"
+            android:hint="请输入"
+            android:textColor="@color/color_100"
+            android:textColorHint="@color/color_103"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/tv_name_title"
+            android:singleLine="true"
+            android:height="45dp"
+            android:background="@color/color_109"
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:paddingRight="12dp"
+        android:paddingLeft="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/color_109">
+
+        <TextView
+            android:id="@+id/tv_phone_title"
+            android:textColor="@color/color_100"
+            android:textSize="@dimen/text_7"
+            android:text="手机"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <EditText
+            android:inputType="phone"
+            android:lines="1"
+            android:textSize="@dimen/text_7"
+            android:hint="请输入"
+            android:textColor="@color/color_100"
+            android:textColorHint="@color/color_103"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/tv_phone_title"
+            android:singleLine="true"
+            android:height="45dp"
+            android:background="@color/color_109"
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

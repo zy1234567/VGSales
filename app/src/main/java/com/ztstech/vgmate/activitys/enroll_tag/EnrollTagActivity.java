@@ -1,8 +1,10 @@
 package com.ztstech.vgmate.activitys.enroll_tag;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -10,6 +12,12 @@ import android.widget.TextView;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.weigets.TopBar;
+
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -22,8 +30,14 @@ public class EnrollTagActivity extends MVPActivity<EnrollTagContract.Presenter> 
     /**传入标签信息*/
     public static final String ARG_TAG = "arg_tag";
 
+    /**获取结果*/
+    public static final String RESULT_TAG = "result_tag";
+
     /**长度限制*/
     public static final int LENGTH_LIMIT = 6;
+
+    @BindView(R.id.top_bar)
+    TopBar topBar;
 
     @BindView(R.id.et_1)
     EditText et1;
@@ -87,6 +101,38 @@ public class EnrollTagActivity extends MVPActivity<EnrollTagContract.Presenter> 
         for (EditText et : ets) {
             et.addTextChangedListener(this);
         }
+
+        String defaultTags = getIntent().getStringExtra(ARG_TAG);
+        if (!TextUtils.isEmpty(defaultTags)) {
+            try {
+                JSONArray jsonArray = new JSONArray(defaultTags);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    if (i < ets.length) {
+                        ets[i].setText(jsonArray.get(i).toString());
+
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        topBar.getRightTextView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                JSONArray jsonArray = new JSONArray();
+                for (int i = 0; i < ets.length; i++) {
+                    if (!TextUtils.isEmpty(ets[i].getText().toString())) {
+                        jsonArray.put(ets[i].getText().toString());
+                    }
+                }
+                Intent it = new Intent();
+                it.putExtra(RESULT_TAG, jsonArray.toString());
+                setResult(RESULT_OK, it);
+                finish();
+            }
+        });
+
     }
 
     @Override
