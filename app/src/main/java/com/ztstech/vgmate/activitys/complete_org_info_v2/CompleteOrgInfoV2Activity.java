@@ -20,7 +20,7 @@ import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.multiple_line.E
 import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.org_logo.EditOrgLogoActivity;
 import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.pic_video.EditOrgPicVideoActivity;
 import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.signle_line.EditOrgInfoSignleInputActivity;
-import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.teacher.EditOrgInfoTeacherActivity;
+import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.teacher.list.EditOrgInfoTeacherActivity;
 import com.ztstech.vgmate.activitys.enroll_tag.EnrollTagActivity;
 import com.ztstech.vgmate.activitys.gps.GpsActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
@@ -115,6 +115,7 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
     LinearLayout llUpdate;
 
 
+    private int rbiid;
     private OrgInfoBean.InfoBean infoBean;
 
     @Override
@@ -147,7 +148,7 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
         tvOrgDesc.setOnClickListener(this);
         tvDetailLocation.setOnClickListener(this);
 
-        int rbiid = getIntent().getIntExtra(ARG_RBIID, 0);
+        rbiid = getIntent().getIntExtra(ARG_RBIID, 0);
 
         mPresenter.loadOrgInfo(rbiid);
 
@@ -222,6 +223,7 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
             startActivityForResult(it, REQ_CHARGE_DESC);
         }else if (view == tvTeacher) {
             Intent it = new Intent(this, EditOrgInfoTeacherActivity.class);
+            it.putExtra(EditOrgInfoTeacherActivity.ARG_RBIID, rbiid);
             startActivityForResult(it, REQ_TEACHERS);
         }else if (view == tvCategory) {
             Intent it = new Intent(this, CategoryTagsActivity.class);

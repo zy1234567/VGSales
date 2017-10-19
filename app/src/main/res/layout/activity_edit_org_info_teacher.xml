@@ -1,9 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ztstech.vgmate.activitys.complete_org_info_v2.subview.teacher.EditOrgInfoTeacherActivity">
+    android:orientation="vertical"
+    android:background="@color/color_107"
+    tools:context="com.ztstech.vgmate.activitys.complete_org_info_v2.subview.teacher.list.EditOrgInfoTeacherActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <com.ztstech.vgmate.weigets.TopBar
+        android:background="#fff"
+        app:barTitle="教师／教练"
+        app:showBackNav="true"
+        app:textRight="添加"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.ztstech.vgmate.weigets.TopBar>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+</LinearLayout>
