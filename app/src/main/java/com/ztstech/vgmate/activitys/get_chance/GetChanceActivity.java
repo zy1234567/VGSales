@@ -21,8 +21,16 @@ import butterknife.BindView;
 public class GetChanceActivity extends MVPActivity<GetChanceContract.Presenter> implements
         GetChanceContract.View {
 
+    /**
+     * 传入机构id
+     */
+    public static final String ARG_ID = "arg_id";
+
+
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
+
+    private int id;
 
     private GetChanceRecyclerAdapter recyclerAdapter;
 
@@ -40,15 +48,22 @@ public class GetChanceActivity extends MVPActivity<GetChanceContract.Presenter> 
     protected void onViewBindFinish() {
         super.onViewBindFinish();
 
+        this.id = getIntent().getIntExtra(ARG_ID, -1);
+        if (id == -1) {
+            throw new RuntimeException("id 不能为空");
+        }
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerAdapter = new GetChanceRecyclerAdapter();
         recyclerView.setAdapter(recyclerAdapter);
 
-        List<String> mFakeData = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            mFakeData.add("");
-        }
-        recyclerAdapter.setListData(mFakeData);
-        recyclerAdapter.notifyDataSetChanged();
+        mPresenter.refreshData(String.valueOf(id));
+
+//        List<String> mFakeData = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            mFakeData.add("");
+//        }
+//        recyclerAdapter.setListData(mFakeData);
+//        recyclerAdapter.notifyDataSetChanged();
     }
 }

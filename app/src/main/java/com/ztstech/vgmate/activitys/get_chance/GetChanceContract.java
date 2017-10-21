@@ -10,10 +10,12 @@ import com.ztstech.vgmate.activitys.BaseView;
 interface GetChanceContract {
 
     interface View extends BaseView {
-
     }
 
     interface Presenter extends BasePresenter<View> {
 
+        void refreshData(String comid);
+
+        void loadData(String comid);
     }
 }

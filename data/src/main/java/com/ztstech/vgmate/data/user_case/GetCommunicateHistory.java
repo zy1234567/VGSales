@@ -20,7 +20,7 @@ public class GetCommunicateHistory implements UserCase<Observable<CommunicationH
     private int page;
     private String comid;
 
-    public GetCommunicateHistory(int page, String comid, String pageMethod) {
+    public GetCommunicateHistory(int page, String comid) {
         api = RetrofitUtils.createService(CommunicateHistoryApi.class);
 
         this.page = page;

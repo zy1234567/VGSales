@@ -149,8 +149,7 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
     }
 
     @Override
-    public void onReplay(String id) {
-//        ((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE)).showSoftInput(etComment, 0);
+    public void onReplay(CommentBean.ListBean bean) {
         etComment.requestFocus();
         etComment.setSelection(etComment.getText().length());
         InputMethodManager inputManager =
@@ -165,4 +164,5 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
             etComment.clearComposingText();
         }
     }
+
 }

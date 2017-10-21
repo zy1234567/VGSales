@@ -80,7 +80,9 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
     @OnClick(R.id.tv_connect_time)
     public void onConnectTimesClick(View v) {
         //沟通记录
-        startActivity(new Intent(this, GetChanceActivity.class));
+        Intent it = new Intent(this, GetChanceActivity.class);
+        it.putExtra(GetChanceActivity.ARG_ID, bean.rbiid);
+        startActivity(it);
     }
 
     @OnClick(R.id.tv_delete)
