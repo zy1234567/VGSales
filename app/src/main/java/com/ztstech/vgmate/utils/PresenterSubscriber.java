@@ -29,6 +29,8 @@ public abstract class PresenterSubscriber<E> extends Subscriber<E> {
     public final void onNext(E e) {
         if (mView != null && !mView.isViewFinish()) {
             next(e);
+        }else if (mView == null){
+            next(e);
         }
     }
 

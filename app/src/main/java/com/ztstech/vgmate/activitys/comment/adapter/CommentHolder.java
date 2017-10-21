@@ -37,35 +37,28 @@ public class CommentHolder extends SimpleViewHolder<CommentBean.ListBean> {
     @BindView(R.id.tv_date)
     TextView tvDate;
 
-    private int[] colors;
+
+
+    public int[] colors;
+
+    private CommentRecyclerAdapter.CommentRecyclerCallback callback;
 
     public CommentHolder(View itemView) {
         super(itemView);
         colors = new int[] {ContextCompat.getColor(getContext(), R.color.color_004),
                 ContextCompat.getColor(getContext(), R.color.color_100)};
+
+    }
+
+    public void setCallback(CommentRecyclerAdapter.CommentRecyclerCallback callback) {
+        this.callback = callback;
     }
 
     @Override
     protected void refreshView(CommentBean.ListBean data) {
         super.refreshView(data);
 
-        tvName.setText(data.name);
-        tvComment.setText(data.comment);
-        tvDate.setText(TimeUtils.InformationTime(data.createtime));
-
-        if (TextUtils.isEmpty(data.touid)) {
-            //如果不是回复某人
-            tvReComment.setVisibility(View.GONE);
-        }else {
-            String[] strs = new String[] {"@".concat(data.touname).concat("："), data.lastcomment};
-
-            SpannableStringBuilder spannableStringBuilder =
-                    ViewUtils.getDiffColorSpan(null, strs, colors);
-            tvReComment.setText(spannableStringBuilder);
-            tvReComment.setVisibility(View.VISIBLE);
-        }
-
-
-        Glide.with(getContext()).load(data.picsurl).into(imgHeader);
     }
+
+
 }

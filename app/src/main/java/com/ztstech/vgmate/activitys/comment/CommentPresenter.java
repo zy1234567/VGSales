@@ -65,7 +65,7 @@ public class CommentPresenter extends PresenterImpl<CommentContract.View> implem
                         mView.onLoadFinish(listBeanList, null);
                     }else {
                         listBeanList.addAll(commentBean.list);
-                        mView.onLoadFinish(listBeanList, null);
+                        mView.onAppendFinish(listBeanList, null);
                     }
 
                 }else {
