@@ -85,7 +85,7 @@ public class InfoPresenter extends PresenterImpl<InfoContract.View> implements
                                                         //上传资料
                                                         new PresenterSubscriber<BaseRespBean>() {
                                                             @Override
-                                                            public void onNext(BaseRespBean baseRespBean) {
+                                                            public void next(BaseRespBean baseRespBean) {
                                                                 mView.hideLoading(null);
                                                                 if (baseRespBean.isSucceed()) {
                                                                     mView.onSubmitSucceed();
@@ -188,7 +188,7 @@ public class InfoPresenter extends PresenterImpl<InfoContract.View> implements
             new PresenterSubscriber<UploadImageBean>(){
 
                 @Override
-                public void onNext(UploadImageBean uploadImageBean) {
+                public void next(UploadImageBean uploadImageBean) {
 
                     callback.call(uploadImageBean);
                 }

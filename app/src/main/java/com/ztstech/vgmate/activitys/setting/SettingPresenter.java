@@ -26,7 +26,7 @@ public class SettingPresenter extends PresenterImpl<SettingContract.View> implem
         new PresenterSubscriber<BaseRespBean>(mView) {
 
             @Override
-            public void onNext(BaseRespBean baseRespBean) {
+            public void next(BaseRespBean baseRespBean) {
                 mView.hideLoading(null);
                 if (baseRespBean.isSucceed()) {
                     mView.onLogoutFinish(null);

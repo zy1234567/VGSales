@@ -28,7 +28,7 @@ public class MainPresenter extends PresenterImpl<MainContract.View> implements
         new PresenterSubscriber<MainPageBean>(mView) {
 
             @Override
-            public void onNext(MainPageBean mainPageBean) {
+            public void next(MainPageBean mainPageBean) {
                 if (mainPageBean.isSucceed()) {
                     mView.hideLoading(null);
                     mView.setData(mainPageBean);

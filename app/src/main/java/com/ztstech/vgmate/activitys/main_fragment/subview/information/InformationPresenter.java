@@ -55,7 +55,7 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
         new PresenterSubscriber<MainListBean>(mView){
 
             @Override
-            public void onNext(MainListBean mainListBean) {
+            public void next(MainListBean mainListBean) {
                 if (mainListBean.isSucceed()) {
                     maxPage = mainListBean.pager.totalPages;
                     currentPage = mainListBean.pager.currentPage;

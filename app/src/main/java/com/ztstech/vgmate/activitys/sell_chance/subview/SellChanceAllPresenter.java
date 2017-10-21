@@ -37,7 +37,7 @@ public class SellChanceAllPresenter extends PresenterImpl<SellChanceAllContract.
         new PresenterSubscriber<SellChanceBean>() {
 
             @Override
-            public void onNext(SellChanceBean sellChanceBean) {
+            public void next(SellChanceBean sellChanceBean) {
 
                 if (currentPage == 1) {
                     //刷新成功

@@ -41,7 +41,7 @@ public class FillInfoPresenter extends PresenterImpl<FillInfoContract.View> impl
         new PresenterSubscriber<UploadImageBean>(mView){
 
             @Override
-            public void onNext(UploadImageBean baseRespBean) {
+            public void next(UploadImageBean baseRespBean) {
 
                 //上传图片成功上传数据
                 Log.d("", "" + baseRespBean);
@@ -60,7 +60,7 @@ public class FillInfoPresenter extends PresenterImpl<FillInfoContract.View> impl
                         //上传资料
                         new PresenterSubscriber<BaseRespBean>() {
                             @Override
-                            public void onNext(BaseRespBean baseRespBean) {
+                            public void next(BaseRespBean baseRespBean) {
                                 mView.hideLoading(null);
                                 if (baseRespBean.isSucceed()) {
                                     mView.onSubmitSucceed();

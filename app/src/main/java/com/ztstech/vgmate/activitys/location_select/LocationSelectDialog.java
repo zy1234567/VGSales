@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -120,6 +121,11 @@ public class LocationSelectDialog extends Dialog implements View.OnClickListener
         lvCity = content.findViewById(R.id.listview_city);
         lvArea = content.findViewById(R.id.listview_area);
         llParent = content.findViewById(R.id.ll_parent);
+
+        Window window = getWindow();
+        if (window != null) {
+            window.setWindowAnimations(0);
+        }
 
 
 

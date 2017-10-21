@@ -26,7 +26,7 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
         new PresenterSubscriber<UploadImageBean>() {
 
             @Override
-            public void onNext(UploadImageBean uploadImageBean) {
+            public void next(UploadImageBean uploadImageBean) {
                 //上传头像结束
                 if (uploadImageBean.isSucceed()) {
                     createShareData.picurl = uploadImageBean.urls;
@@ -63,7 +63,7 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
         new PresenterSubscriber<UploadImageBean>() {
 
             @Override
-            public void onNext(UploadImageBean uploadImageBean) {
+            public void next(UploadImageBean uploadImageBean) {
                 if (uploadImageBean.isSucceed()) {
                     createShareData.contentpicurl = uploadImageBean.urls;
                     createShareData.contentpicsurl = uploadImageBean.suourls;
@@ -91,7 +91,7 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
         new PresenterSubscriber<BaseRespBean>() {
 
             @Override
-            public void onNext(BaseRespBean baseRespBean) {
+            public void next(BaseRespBean baseRespBean) {
                 mView.submitFinish(baseRespBean.getErrmsg());
             }
 

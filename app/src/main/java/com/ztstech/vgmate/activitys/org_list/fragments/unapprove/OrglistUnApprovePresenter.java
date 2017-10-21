@@ -46,7 +46,7 @@ public class OrglistUnApprovePresenter extends PresenterImpl<OrglistUnApproveCon
         new PresenterSubscriber<OrglistUnApproveBean>() {
 
             @Override
-            public void onNext(OrglistUnApproveBean orglistUnApproveBean) {
+            public void next(OrglistUnApproveBean orglistUnApproveBean) {
                 if (orglistUnApproveBean.isSucceed()) {
                     totalPage = orglistUnApproveBean.pager.totalPages;
                     pageNo = orglistUnApproveBean.pager.currentPage;

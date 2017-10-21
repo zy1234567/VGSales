@@ -47,7 +47,7 @@ public class NoticePresenter extends PresenterImpl<NoticeContract.View> implemen
         new PresenterSubscriber<MainListBean>(mView) {
 
             @Override
-            public void onNext(MainListBean mainListBean) {
+            public void next(MainListBean mainListBean) {
                 if (mainListBean.isSucceed()) {
 
                     currentPager = mainListBean.pager.currentPage;

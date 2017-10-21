@@ -105,7 +105,7 @@ public class OrglistitemPresenter extends PresenterImpl<OrglistItemContract.View
         new PresenterSubscriber<GetOrgListItemsBean>(mView){
 
             @Override
-            public void onNext(GetOrgListItemsBean getOrgListItemsBean) {
+            public void next(GetOrgListItemsBean getOrgListItemsBean) {
                 action1.onNext(getOrgListItemsBean);
             }
 

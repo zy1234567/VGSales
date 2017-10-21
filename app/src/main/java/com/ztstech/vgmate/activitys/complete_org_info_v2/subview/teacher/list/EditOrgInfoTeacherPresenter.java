@@ -47,7 +47,7 @@ public class EditOrgInfoTeacherPresenter extends PresenterImpl<EditOrgInfoTeache
         new PresenterSubscriber<TeacherListBean>(mView) {
 
             @Override
-            public void onNext(TeacherListBean bean) {
+            public void next(TeacherListBean bean) {
                 if (bean.isSucceed()) {
                     EditOrgInfoTeacherPresenter.this.pageNo = bean.pager.currentPage;
                     maxPage = bean.pager.totalPages;

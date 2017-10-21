@@ -38,7 +38,7 @@ public class LoginPresenter extends PresenterImpl<LoginContract.View> implements
         new PresenterSubscriber<BaseRespBean>(mView) {
 
             @Override
-            public void onNext(BaseRespBean baseRespBean) {
+            public void next(BaseRespBean baseRespBean) {
                 mView.hideLoading(null);
                 if (baseRespBean.messageCode == 0) {
                     mView.sendCodeFinish(null);
@@ -64,7 +64,7 @@ public class LoginPresenter extends PresenterImpl<LoginContract.View> implements
         new PresenterSubscriber<UserBean>() {
 
             @Override
-            public void onNext(UserBean baseRespBean) {
+            public void next(UserBean baseRespBean) {
                 mView.hideLoading(null);
                 if (baseRespBean.isSucceed()) {
                     mView.loginFinish(null);

@@ -75,7 +75,7 @@ public class OrgAuditDialogPresenter extends PresenterImpl<OrgAuditDialogContrac
     private void load(int page, final Action1<RepeatOrgBean> action1, GetOrgListItemsBean.ListBean bean) {
         new PresenterSubscriber<RepeatOrgBean>(null){
             @Override
-            public void onNext(RepeatOrgBean bean) {
+            public void next(RepeatOrgBean bean) {
                 if (bean.isSucceed()) {
                     pageNo = bean.pager.currentPage;
                     maxPage = bean.pager.totalPages;

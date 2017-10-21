@@ -26,6 +26,13 @@ public abstract class PresenterSubscriber<E> extends Subscriber<E> {
     public PresenterSubscriber() {}
 
     @Override
+    public final void onNext(E e) {
+        if (mView != null && !mView.isViewFinish()) {
+            next(e);
+        }
+    }
+
+    @Override
     public void onCompleted() {
         if (mView == null) {
             return;
@@ -62,5 +69,7 @@ public abstract class PresenterSubscriber<E> extends Subscriber<E> {
         }
         mView = null;
     }
+
+    protected abstract void next(E e);
 
 }

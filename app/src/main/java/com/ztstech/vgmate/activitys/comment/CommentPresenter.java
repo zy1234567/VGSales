@@ -53,7 +53,7 @@ public class CommentPresenter extends PresenterImpl<CommentContract.View> implem
             }
 
             @Override
-            public void onNext(CommentBean commentBean) {
+            public void next(CommentBean commentBean) {
                 if (commentBean.isSucceed()) {
                     currentPage = commentBean.pager.currentPage;
                     totalPage = commentBean.pager.totalPages;

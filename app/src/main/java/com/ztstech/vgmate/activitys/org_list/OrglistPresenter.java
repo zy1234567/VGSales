@@ -34,7 +34,7 @@ public class OrglistPresenter extends PresenterImpl<OrgListContract.View> implem
         new PresenterSubscriber<GetOrgListCountBean>(mView){
 
             @Override
-            public void onNext(GetOrgListCountBean getOrgListCountBean) {
+            public void next(GetOrgListCountBean getOrgListCountBean) {
                 mView.hideLoading(null);
                 if (getOrgListCountBean.isSucceed()) {
                     mView.onLoadCountFinish(getOrgListCountBean, null);

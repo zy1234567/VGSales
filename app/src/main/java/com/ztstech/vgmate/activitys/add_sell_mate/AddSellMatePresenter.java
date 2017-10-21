@@ -23,7 +23,7 @@ public class AddSellMatePresenter extends PresenterImpl<AddSellMateContract.View
         new PresenterSubscriber<BaseRespBean>() {
 
             @Override
-            public void onNext(BaseRespBean baseRespBean) {
+            public void next(BaseRespBean baseRespBean) {
                 mView.hideLoading(null);
 
                 if (baseRespBean.isSucceed()) {
