@@ -3,6 +3,7 @@ package com.ztstech.vgmate.activitys.complete_org_info_v2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ import com.ztstech.vgmate.data.beans.OrgInfoBean;
 import com.ztstech.vgmate.utils.CategoryUtil;
 import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.TimeUtils;
+import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import org.json.JSONArray;
@@ -408,6 +410,13 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
 
     @Override
     public void onLoadOrgInfoError(String errmsg) {
+        ToastUtil.toastCenter(this, "获取机构资料失败：" + errmsg);
+    }
 
+    @Override
+    public void editOrgInfoFinish(@Nullable String errmsg) {
+        if (errmsg != null) {
+            ToastUtil.toastCenter(this, "编辑机构资料失败：" + errmsg);
+        }
     }
 }

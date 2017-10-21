@@ -2,11 +2,9 @@ package com.ztstech.vgmate.activitys.complete_org_info_v2.subview.teacher.list;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
+import android.view.View;
 
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -15,12 +13,12 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
-import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.teacher.EditOrgInfoAddTeacherActivity;
+import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.teacher.add.EditOrgInfoAddTeacherActivity;
 import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.teacher.list.adapter.EditInfoTeacherRecyclerAdapter;
-import com.ztstech.vgmate.base.BaseActivity;
 import com.ztstech.vgmate.base.SimpleRecyclerAdapter;
 import com.ztstech.vgmate.data.beans.TeacherListBean;
 import com.ztstech.vgmate.utils.ToastUtil;
+import com.ztstech.vgmate.weigets.TopBar;
 
 import java.util.List;
 
@@ -46,7 +44,12 @@ public class EditOrgInfoTeacherActivity extends MVPActivity<EditOrgInfoTeacherCo
     @BindView(R.id.srl)
     SmartRefreshLayout smartRefreshLayout;
 
+    @BindView(R.id.top_bar)
+    TopBar topBar;
+
     private EditInfoTeacherRecyclerAdapter recyclerAdapter;
+
+    private int rbiid;
 
     @Override
     protected int getLayoutRes() {
@@ -63,7 +66,7 @@ public class EditOrgInfoTeacherActivity extends MVPActivity<EditOrgInfoTeacherCo
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
-        final int rbiid = getIntent().getIntExtra(ARG_RBIID, -1);
+        rbiid = getIntent().getIntExtra(ARG_RBIID, -1);
         if (rbiid == -1) {
             throw new RuntimeException("必须传入rbiid");
         }
@@ -99,7 +102,24 @@ public class EditOrgInfoTeacherActivity extends MVPActivity<EditOrgInfoTeacherCo
             }
         });
 
+        topBar.getRightTextView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(EditOrgInfoTeacherActivity.this,
+                        EditOrgInfoAddTeacherActivity.class);
+                startActivityForResult(it, REQ_ADD);
+            }
+        });
+
         mPresenter.loadTeachers(rbiid);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == REQ_ADD && data != null) {
+            mPresenter.loadTeachers(rbiid);
+        }
     }
 
     @Override

@@ -89,7 +89,7 @@
         <activity android:name=".activitys.complete_org_info_v2.subview.manager.EditOrgManagerActivity" />
         <activity android:name=".activitys.complete_org_info_v2.subview.pic_video.EditOrgPicVideoActivity" />
         <activity android:name=".activitys.complete_org_info_v2.subview.teacher.list.EditOrgInfoTeacherActivity" />
-        <activity android:name=".activitys.complete_org_info_v2.subview.teacher.EditOrgInfoAddTeacherActivity"></activity>
+        <activity android:name=".activitys.complete_org_info_v2.subview.teacher.add.EditOrgInfoAddTeacherActivity"></activity>
     </application>
 
 </manifest>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_107"
     android:orientation="vertical"
-    tools:context="com.ztstech.vgmate.activitys.complete_org_info_v2.subview.teacher.EditOrgInfoAddTeacherActivity">
+    tools:context="com.ztstech.vgmate.activitys.complete_org_info_v2.subview.teacher.add.EditOrgInfoAddTeacherActivity">
 
     <com.ztstech.vgmate.weigets.TopBar
         android:id="@+id/top_bar"
@@ -94,8 +94,9 @@
                     android:layout_width="40dp"
                     android:layout_height="match_parent" />
 
-                <EditText
-                    android:id="@+id/et_class"
+                <TextView
+                    android:gravity="center_vertical"
+                    android:id="@+id/tv_class"
                     android:drawableRight="@mipmap/arrow_right_choice"
                     android:maxLines="1"
                     android:lines="1"
@@ -129,7 +130,9 @@
                     android:layout_width="40dp"
                     android:layout_height="match_parent" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/tv_sex"
+                    android:gravity="center_vertical"
                     android:drawableRight="@mipmap/arrow_right_choice"
                     android:maxLines="1"
                     android:lines="1"
@@ -163,7 +166,9 @@
                     android:layout_width="40dp"
                     android:layout_height="match_parent" />
 
-                <EditText
+                <TextView
+                    android:gravity="center_vertical"
+                    android:id="@+id/tv_age"
                     android:drawableRight="@mipmap/arrow_right_choice"
                     android:maxLines="1"
                     android:lines="1"
@@ -200,6 +205,7 @@
                     android:layout_height="45dp" />
 
                 <EditText
+                    android:id="@+id/et_desc"
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp"
                     android:gravity="top"

@@ -9,6 +9,7 @@
     tools:context="com.ztstech.vgmate.activitys.complete_org_info_v2.subview.teacher.list.EditOrgInfoTeacherActivity">
 
     <com.ztstech.vgmate.weigets.TopBar
+        android:id="@+id/top_bar"
         android:background="#fff"
         app:barTitle="教师／教练"
         app:showBackNav="true"

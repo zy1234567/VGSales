@@ -31,4 +31,9 @@ public class CompleteOrgInfoV2Presenter extends PresenterImpl<CompleteOrgInfoV2C
 
         }.run(new GetOrgInfo(rbiid).run());
     }
+
+    @Override
+    public void editOrgInfo(OrgInfoBean.InfoBean bean) {
+
+    }
 }
