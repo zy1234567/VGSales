@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 
 import com.ztstech.vgmate.activitys.BaseView;
+import com.ztstech.vgmate.data.utils.LogUtils;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -35,6 +36,7 @@ public abstract class PresenterSubscriber<E> extends Subscriber<E> {
     @Override
     public final void onNext(E e) {
         if (mView != null && !mView.isViewFinish()) {
+            mView.hideLoading(null);
             childNext(e);
         }
     }
@@ -47,6 +49,10 @@ public abstract class PresenterSubscriber<E> extends Subscriber<E> {
                 public void run() {
                     if (mView != null && !mView.isViewFinish()) {
                         mView.hideLoading(null);
+                    }else {
+                        if (mView == null) {
+                            LogUtils.log("onCompleted mView为空");
+                        }
                     }
                 }
             });
@@ -67,6 +73,10 @@ public abstract class PresenterSubscriber<E> extends Subscriber<E> {
                     if (mView != null && !mView.isViewFinish()) {
                         mView.hideLoading(e.getLocalizedMessage());
                         childError(e);
+                    }else {
+                        if (mView == null) {
+                            LogUtils.log("onError mView为空");
+                        }
                     }
                 }
             });
