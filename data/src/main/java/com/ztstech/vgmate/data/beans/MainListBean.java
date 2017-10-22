@@ -8,7 +8,6 @@ import java.util.List;
 
 public class MainListBean extends BaseRespBean{
 
-
     /**
      * pager : {"totalRows":16,"pageSize":10,"currentPage":1,"totalPages":2,"startRow":0}
      * status : 0
@@ -36,7 +35,16 @@ public class MainListBean extends BaseRespBean{
         public String favflg;
         public String praflg;
         public String picurl;
+        public String picsurl;
         public String summary;
         public String updatetime;
+        public String type;
+        public String contentpicsurl;
+        public String contentpicurl;
+        public String url;
+        public String picdescribe;
+        /**资讯类型（01纯文字；02纯图；03字加图；04纯网址；05字加网址）*/
+        public String ntype;
+
     }
 }

@@ -45,7 +45,7 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * 分享资讯
+ * 分享资讯，分享资讯模块第一个界面
  */
 public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract.Presenter>
         implements CreateShareInfoContract.View, View.OnClickListener, InvokeListener,
@@ -56,6 +56,9 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
 
     /**分享类型*/
     public static final String ARG_TYPE = "arg_type";
+
+    /**编辑时传入数据*/
+    public static final String ARG_EDIT_DATA = "arg_edit_data";
 
     /**最大内容数*/
     public static final int MAX_CONTENT_COUNT = 10000;
@@ -161,6 +164,12 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
         webView.getSettings().setJavaScriptEnabled(true);
 
         addDefaultImage();
+
+        createShareData = new Gson().fromJson(getIntent().getStringExtra(ARG_EDIT_DATA),
+                CreateShareData.class);
+        if (createShareData != null) {
+            setDataToView(createShareData);
+        }
     }
 
     @Override
@@ -365,9 +374,8 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
         }
         return type;
     }
-//
-//    @Override
-//    public void submitFinish(@Nullable String errorMessage) {
-//
-//    }
+
+    private void setDataToView(CreateShareData data) {
+        // TODO: 2017/10/23 设置编辑数据 
+    }
 }

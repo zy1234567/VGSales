@@ -24,8 +24,11 @@ import com.google.gson.Gson;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.comment.CommentActivity;
+import com.ztstech.vgmate.activitys.create_share_info.CreateShareInfoActivity;
+import com.ztstech.vgmate.constants.Constants;
 import com.ztstech.vgmate.data.beans.MainListBean;
 import com.ztstech.vgmate.data.constants.NetConstants;
+import com.ztstech.vgmate.data.dto.CreateShareData;
 import com.ztstech.vgmate.utils.KeyboardUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.utils.ViewUtils;
@@ -39,6 +42,8 @@ import butterknife.BindView;
 public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Presenter> implements
         ArticleDetailContract.View, View.OnClickListener {
 
+    /**请求编辑资讯*/
+    public static final int REQ_EDIT = 1;
 
     /**是否显示编辑*/
     public static final String ARG_SHOW_EDIT = "arg_show_edit";
@@ -106,6 +111,8 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
             }
         });
 
+
+        topBar.getRightImage().setOnClickListener(this);
 
 
 
@@ -209,6 +216,30 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
                 return;
             }
             mPresenter.comment(etComment.getText().toString(), data);
+        }else if (view == topBar.getRightImage()) {
+            //编辑分享
+//            if (TextUtils.equals(Constants.DATA_TYPE_INFORMATION, data.type)) {
+                //如果是资讯
+                Intent it = new Intent(this, CreateShareInfoActivity.class);
+                CreateShareData createShareData = new CreateShareData();
+                createShareData.contentpicurl = data.contentpicsurl;
+                createShareData.contentpicsurl = data.contentpicurl;
+                createShareData.picurl = data.picurl;
+                createShareData.picsurl = data.picsurl;
+                createShareData.title = data.title;
+                createShareData.url = data.url;
+                createShareData.nid = data.nid;
+                createShareData.picdescribe = data.picdescribe;
+                createShareData.ntype = data.ntype;
+                createShareData.summary = data.summary;
+
+                String jsonStr = new Gson().toJson(createShareData);
+                startActivityForResult(it, REQ_EDIT);
+
+//            }else if (TextUtils.equals(Constants.DATA_TYPE_NOTICE, data.type)) {
+//                //如果是通告
+//
+//            }
         }
     }
 
