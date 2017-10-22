@@ -30,6 +30,9 @@ interface CommentContract {
          */
         void onAppendFinish(List<CommentBean.ListBean> listBeanList, @Nullable String error);
 
+
+        void onCommentFinish(@Nullable String onCommentFinish);
+
     }
 
     interface Presenter extends BasePresenter<View> {
@@ -45,5 +48,8 @@ interface CommentContract {
          * @param newsid
          */
         void appendCommentList(String newsid);
+
+        void comment(String flid, String newid, String touid, String comment);
+
     }
 }

@@ -30,7 +30,6 @@ public interface CommentApi {
 
     /**
      * 评论或者回复某人
-     * @param request 不知道啥玩意
      * @param flid 父uid
      * @param newid 资讯id
      * @param touid 被评论人uid
@@ -38,8 +37,7 @@ public interface CommentApi {
      * @return
      */
     @POST("exempt/AppSalesAddComment")
-    Observable<BaseRespBean> comment(@Query("request") String request,
-                                     @Query("flid") String flid,
+    Observable<BaseRespBean> comment(@Query("flid") String flid,
                                      @Query("newid") String newid,
                                      @Query("touid") String touid,
                                      @Query("comment") String comment,

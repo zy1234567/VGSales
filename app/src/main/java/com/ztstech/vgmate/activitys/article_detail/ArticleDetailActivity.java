@@ -26,6 +26,7 @@ import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.comment.CommentActivity;
 import com.ztstech.vgmate.data.beans.MainListBean;
 import com.ztstech.vgmate.data.constants.NetConstants;
+import com.ztstech.vgmate.utils.KeyboardUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.utils.ViewUtils;
 import com.ztstech.vgmate.weigets.TopBar;
@@ -63,7 +64,6 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
     /**显示编辑*/
     private boolean showEdit;
 
-    private InputMethodManager imm;
 
     @Override
     protected int getLayoutRes() {
@@ -108,17 +108,14 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
 
 
 
-        imm = (InputMethodManager)
-                ArticleDetailActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
 
         etComment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
                 if (b) {
-                    imm.showSoftInputFromInputMethod(etComment.getWindowToken(),0);
-
+                    KeyboardUtils.showKeyBoard(ArticleDetailActivity.this, etComment);
                 }else {
-                    imm.hideSoftInputFromWindow(etComment.getWindowToken() , 0);
+                    KeyboardUtils.hideKeyBoard(ArticleDetailActivity.this, etComment);
                 }
                 setEditTextHint(b);
                 showCommentIconAndCount();
@@ -195,6 +192,7 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
         this.data = new Gson().fromJson(it.getStringExtra(ARG_LIST_DATA),
                 MainListBean.ListBean.class);
         this.showEdit = it.getBooleanExtra(ARG_SHOW_EDIT, false);
+
     }
 
     @Override

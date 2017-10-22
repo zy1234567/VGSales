@@ -1,7 +1,9 @@
 package com.ztstech.vgmate.activitys.comment;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
+import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.CommentBean;
+import com.ztstech.vgmate.data.user_case.Comment;
 import com.ztstech.vgmate.data.user_case.GetCommentList;
 import com.ztstech.vgmate.utils.PresenterSubscriber;
 
@@ -37,6 +39,19 @@ public class CommentPresenter extends PresenterImpl<CommentContract.View> implem
         }else {
             requestData(currentPage + 1, newsid);
         }
+    }
+
+
+    @Override
+    public void comment(String flid, String newid, String touid, String comment) {
+
+        new PresenterSubscriber<BaseRespBean>(mView) {
+
+            @Override
+            protected void childNext(BaseRespBean baseRespBean) {
+                mView.onCommentFinish(baseRespBean.getErrmsg());
+            }
+        }.run(new Comment(flid, newid, touid, comment).run());
     }
 
     private void requestData(final int page, String newsid) {

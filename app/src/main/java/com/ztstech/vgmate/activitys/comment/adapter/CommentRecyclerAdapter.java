@@ -55,6 +55,9 @@ public class CommentRecyclerAdapter extends SimpleRecyclerAdapter<CommentBean.Li
             replayCommentListener = new OnCommentClickListener();
         }
 
+        commentClickListener.isReplay = false;
+        replayCommentListener.isReplay = true;
+
         commentHolder.tvComment.setOnClickListener(commentClickListener);
         commentHolder.tvReComment.setOnClickListener(replayCommentListener);
 
@@ -83,17 +86,19 @@ public class CommentRecyclerAdapter extends SimpleRecyclerAdapter<CommentBean.Li
 
     public interface CommentRecyclerCallback {
 
-        void onReplay(CommentBean.ListBean bean);
+        void onReplay(CommentBean.ListBean bean, boolean isReplay);
     }
 
     public class OnCommentClickListener implements View.OnClickListener {
 
         public CommentBean.ListBean bean;
 
+        public boolean isReplay;
+
         @Override
         public void onClick(View v) {
             if (callback != null) {
-                callback.onReplay(bean);
+                callback.onReplay(bean, isReplay);
             }
         }
     }

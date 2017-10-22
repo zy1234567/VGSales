@@ -34,7 +34,7 @@ public class Comment implements UserCase<Observable<BaseRespBean>> {
 
     @Override
     public Observable<BaseRespBean> run() {
-        return commentApi.comment(null, flid, newid, touid, comment,
+        return commentApi.comment(flid, newid, touid, comment,
                 UserRepository.getInstance().getAuthId());
     }
 }

@@ -131,6 +131,7 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
         mPresenter.loadUserModule();
 
         topBar.getRightTextView().setOnClickListener(this);
+        topBar.requestFocus();
     }
 
     @Override
