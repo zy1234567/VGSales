@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.BasePresenter;
@@ -30,7 +31,7 @@ public class GetChanceActivity extends MVPActivity<GetChanceContract.Presenter> 
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
 
-    private int id;
+    private String id;
 
     private GetChanceRecyclerAdapter recyclerAdapter;
 
@@ -48,8 +49,8 @@ public class GetChanceActivity extends MVPActivity<GetChanceContract.Presenter> 
     protected void onViewBindFinish() {
         super.onViewBindFinish();
 
-        this.id = getIntent().getIntExtra(ARG_ID, -1);
-        if (id == -1) {
+        this.id = getIntent().getStringExtra(ARG_ID);
+        if (TextUtils.isEmpty(id)) {
             throw new RuntimeException("id 不能为空");
         }
 
@@ -57,13 +58,7 @@ public class GetChanceActivity extends MVPActivity<GetChanceContract.Presenter> 
         recyclerAdapter = new GetChanceRecyclerAdapter();
         recyclerView.setAdapter(recyclerAdapter);
 
-        mPresenter.refreshData(String.valueOf(id));
+        mPresenter.refreshData(id);
 
-//        List<String> mFakeData = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
-//            mFakeData.add("");
-//        }
-//        recyclerAdapter.setListData(mFakeData);
-//        recyclerAdapter.notifyDataSetChanged();
     }
 }

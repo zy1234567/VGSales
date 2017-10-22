@@ -28,7 +28,11 @@ public class BaseRespBean {
      * @return
      */
     public String getErrmsg() {
-        return errmsg;
+        if (isSucceed()) {
+            return null;
+        }else {
+            return errmsg;
+        }
     }
 
 }

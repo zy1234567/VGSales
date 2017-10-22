@@ -83,9 +83,9 @@ public class InfoPresenter extends PresenterImpl<InfoContract.View> implements
                                                         UpdateUserInfoData updateUserInfoData =  new UserInfoBeanMapper().transform(model);
 
                                                         //上传资料
-                                                        new PresenterSubscriber<BaseRespBean>() {
+                                                        new PresenterSubscriber<BaseRespBean>(mView) {
                                                             @Override
-                                                            public void next(BaseRespBean baseRespBean) {
+                                                            public void childNext(BaseRespBean baseRespBean) {
                                                                 mView.hideLoading(null);
                                                                 if (baseRespBean.isSucceed()) {
                                                                     mView.onSubmitSucceed();
@@ -185,10 +185,10 @@ public class InfoPresenter extends PresenterImpl<InfoContract.View> implements
 
     private void uploadIfExist(File file,final Action1<UploadImageBean> callback) {
         if (file != null) {
-            new PresenterSubscriber<UploadImageBean>(){
+            new PresenterSubscriber<UploadImageBean>(mView){
 
                 @Override
-                public void next(UploadImageBean uploadImageBean) {
+                public void childNext(UploadImageBean uploadImageBean) {
 
                     callback.call(uploadImageBean);
                 }

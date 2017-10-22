@@ -40,10 +40,10 @@ public class CommentPresenter extends PresenterImpl<CommentContract.View> implem
     }
 
     private void requestData(final int page, String newsid) {
-        new PresenterSubscriber<CommentBean>() {
+        new PresenterSubscriber<CommentBean>(mView) {
 
             @Override
-            public void onError(Throwable e) {
+            protected void childError(Throwable e) {
                 super.onError(e);
                 if (page == 1) {
                     mView.onLoadFinish(listBeanList, "网路访问出错".concat(e.getLocalizedMessage()));
@@ -53,7 +53,7 @@ public class CommentPresenter extends PresenterImpl<CommentContract.View> implem
             }
 
             @Override
-            public void next(CommentBean commentBean) {
+            public void childNext(CommentBean commentBean) {
                 if (commentBean.isSucceed()) {
                     currentPage = commentBean.pager.currentPage;
                     totalPage = commentBean.pager.totalPages;

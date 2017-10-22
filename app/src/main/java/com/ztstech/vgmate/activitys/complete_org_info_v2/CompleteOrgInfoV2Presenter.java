@@ -21,7 +21,7 @@ public class CompleteOrgInfoV2Presenter extends PresenterImpl<CompleteOrgInfoV2C
         new PresenterSubscriber<OrgInfoBean>(mView){
 
             @Override
-            public void next(OrgInfoBean orgInfoBean) {
+            public void childNext(OrgInfoBean orgInfoBean) {
                 if (orgInfoBean.isSucceed()) {
                     mView.showOrgInfo(orgInfoBean.info);
                 }else {

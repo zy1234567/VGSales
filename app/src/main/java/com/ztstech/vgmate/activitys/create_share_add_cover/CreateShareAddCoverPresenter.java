@@ -23,10 +23,10 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
     @Override
     public void submit(final CreateShareData createShareData) {
         mView.showLoading("请稍等");
-        new PresenterSubscriber<UploadImageBean>() {
+        new PresenterSubscriber<UploadImageBean>(mView) {
 
             @Override
-            public void next(UploadImageBean uploadImageBean) {
+            public void childNext(UploadImageBean uploadImageBean) {
                 //上传头像结束
                 if (uploadImageBean.isSucceed()) {
                     createShareData.picurl = uploadImageBean.urls;
@@ -46,7 +46,7 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
             }
 
             @Override
-            public void onError(Throwable e) {
+            protected void childError(Throwable e) {
                 super.onError(e);
                 mView.hideLoading(e.getMessage());
             }
@@ -60,10 +60,10 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
      */
     private void uploadContentPic(final CreateShareData createShareData) {
         //上传内容图片
-        new PresenterSubscriber<UploadImageBean>() {
+        new PresenterSubscriber<UploadImageBean>(mView) {
 
             @Override
-            public void next(UploadImageBean uploadImageBean) {
+            public void childNext(UploadImageBean uploadImageBean) {
                 if (uploadImageBean.isSucceed()) {
                     createShareData.contentpicurl = uploadImageBean.urls;
                     createShareData.contentpicsurl = uploadImageBean.suourls;
@@ -88,10 +88,10 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
      */
     private void uploadData(CreateShareData createShareData) {
         //上传数据
-        new PresenterSubscriber<BaseRespBean>() {
+        new PresenterSubscriber<BaseRespBean>(mView) {
 
             @Override
-            public void next(BaseRespBean baseRespBean) {
+            public void childNext(BaseRespBean baseRespBean) {
                 mView.submitFinish(baseRespBean.getErrmsg());
             }
 

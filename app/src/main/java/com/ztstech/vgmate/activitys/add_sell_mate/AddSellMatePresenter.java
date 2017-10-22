@@ -20,10 +20,10 @@ public class AddSellMatePresenter extends PresenterImpl<AddSellMateContract.View
     @Override
     public void submit(AddSellMateData addSellMateData) {
         mView.showLoading("请稍等");
-        new PresenterSubscriber<BaseRespBean>() {
+        new PresenterSubscriber<BaseRespBean>(mView) {
 
             @Override
-            public void next(BaseRespBean baseRespBean) {
+            public void childNext(BaseRespBean baseRespBean) {
                 mView.hideLoading(null);
 
                 if (baseRespBean.isSucceed()) {

@@ -47,7 +47,7 @@ public class NoticePresenter extends PresenterImpl<NoticeContract.View> implemen
         new PresenterSubscriber<MainListBean>(mView) {
 
             @Override
-            public void next(MainListBean mainListBean) {
+            public void childNext(MainListBean mainListBean) {
                 if (mainListBean.isSucceed()) {
 
                     currentPager = mainListBean.pager.currentPage;
@@ -68,7 +68,7 @@ public class NoticePresenter extends PresenterImpl<NoticeContract.View> implemen
             }
 
             @Override
-            public void onError(Throwable e) {
+            protected void childError(Throwable e) {
                 super.onError(e);
                 mView.showError("网络请求出错".concat(e.getLocalizedMessage()));
             }

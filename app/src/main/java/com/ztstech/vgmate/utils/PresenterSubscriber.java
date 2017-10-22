@@ -1,6 +1,9 @@
 package com.ztstech.vgmate.utils;
 
 
+import android.os.Handler;
+import android.support.annotation.NonNull;
+
 import com.ztstech.vgmate.activitys.BaseView;
 
 import rx.Observable;
@@ -19,47 +22,63 @@ public abstract class PresenterSubscriber<E> extends Subscriber<E> {
 
     private Subscription subscription;
 
-    public PresenterSubscriber(BaseView view) {
+    private Handler handler = new Handler();
+
+    public PresenterSubscriber(@NonNull BaseView view) {
         this.mView = view;
+        if (this.mView == null) {
+            throw new NullPointerException("参数不能为空");
+        }
     }
 
-    public PresenterSubscriber() {}
 
     @Override
     public final void onNext(E e) {
         if (mView != null && !mView.isViewFinish()) {
-            next(e);
-        }else if (mView == null){
-            next(e);
+            childNext(e);
         }
     }
 
     @Override
     public void onCompleted() {
-        if (mView == null) {
-            return;
+        try {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (mView != null && !mView.isViewFinish()) {
+                        mView.hideLoading(null);
+                    }
+                }
+            });
+        }catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            mView = null;
         }
-        if (!mView.isViewFinish()) {
-            mView.hideLoading(null);
-        }
-        mView = null;
+
     }
 
     @Override
-    public void onError(Throwable e) {
-        if (mView == null) {
-            return;
+    public final void onError(final Throwable e) {
+        try {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (mView != null && !mView.isViewFinish()) {
+                        mView.hideLoading(e.getLocalizedMessage());
+                        childError(e);
+                    }
+                }
+            });
+        }catch (Exception e1) {
+            e1.printStackTrace();
+        }finally {
+            mView = null;
         }
-        if (!mView.isViewFinish()) {
-            mView.hideLoading(e.getLocalizedMessage());
-        }
-        mView = null;
     }
 
     public void run(Observable<E> observable) {
-        if (mView != null) {
-            mView.showLoading(null);
-        }
+        mView.showLoading(null);
         subscription = observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this);
@@ -72,6 +91,8 @@ public abstract class PresenterSubscriber<E> extends Subscriber<E> {
         mView = null;
     }
 
-    protected abstract void next(E e);
+    protected abstract void childNext(E e);
+
+    protected void childError(Throwable e) {};
 
 }

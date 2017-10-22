@@ -43,10 +43,10 @@ public class OrglistUnApprovePresenter extends PresenterImpl<OrglistUnApproveCon
     }
 
     private void loadData(final int page) {
-        new PresenterSubscriber<OrglistUnApproveBean>() {
+        new PresenterSubscriber<OrglistUnApproveBean>(mView) {
 
             @Override
-            public void next(OrglistUnApproveBean orglistUnApproveBean) {
+            public void childNext(OrglistUnApproveBean orglistUnApproveBean) {
                 if (orglistUnApproveBean.isSucceed()) {
                     totalPage = orglistUnApproveBean.pager.totalPages;
                     pageNo = orglistUnApproveBean.pager.currentPage;
@@ -72,7 +72,7 @@ public class OrglistUnApprovePresenter extends PresenterImpl<OrglistUnApproveCon
             }
 
             @Override
-            public void onError(Throwable e) {
+            protected void childError(Throwable e) {
                 super.onError(e);
                 mView.onLoadFinsh(listItems, "网络访问出错".concat(e.getLocalizedMessage()));
             }

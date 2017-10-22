@@ -33,10 +33,10 @@ public class GetChancePresenter extends PresenterImpl<GetChanceContract.View> im
 
     private void request(int pageNo, String comid) {
 
-        new PresenterSubscriber<CommunicationHistoryBean>() {
+        new PresenterSubscriber<CommunicationHistoryBean>(mView) {
 
             @Override
-            protected void next(CommunicationHistoryBean baseRespBean) {
+            protected void childNext(CommunicationHistoryBean baseRespBean) {
 
             }
         }.run(new GetCommunicateHistory(pageNo, comid).run());

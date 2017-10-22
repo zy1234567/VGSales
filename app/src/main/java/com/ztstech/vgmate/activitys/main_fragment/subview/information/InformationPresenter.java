@@ -55,7 +55,7 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
         new PresenterSubscriber<MainListBean>(mView){
 
             @Override
-            public void next(MainListBean mainListBean) {
+            public void childNext(MainListBean mainListBean) {
                 if (mainListBean.isSucceed()) {
                     maxPage = mainListBean.pager.totalPages;
                     currentPage = mainListBean.pager.currentPage;
@@ -75,7 +75,7 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
             }
 
             @Override
-            public void onError(Throwable e) {
+            protected void childError(Throwable e) {
                 super.onError(e);
                 mView.showError("网络访问出错".concat(e.getLocalizedMessage()));
             }
