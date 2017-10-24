@@ -88,6 +88,7 @@ public class SellChanceAllFragment extends MVPFragment<SellChanceAllContract.Pre
             public void onItemClick(SellChanceBean.ListBean item, int index) {
                 Intent it = new Intent(getActivity(), GetChanceActivity.class);
                 it.putExtra(GetChanceActivity.ARG_ID, item.comid);
+                it.putExtra(GetChanceActivity.ARG_TITLE, item.oname);
                 startActivity(it);
             }
         });

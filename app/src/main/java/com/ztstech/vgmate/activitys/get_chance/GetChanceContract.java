@@ -1,5 +1,7 @@
 package com.ztstech.vgmate.activitys.get_chance;
 
+import android.support.annotation.Nullable;
+
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.BaseView;
 
@@ -10,6 +12,8 @@ import com.ztstech.vgmate.activitys.BaseView;
 interface GetChanceContract {
 
     interface View extends BaseView {
+
+        void onAddCommunicateFinish(@Nullable String errmsg);
     }
 
     interface Presenter extends BasePresenter<View> {
@@ -17,5 +21,10 @@ interface GetChanceContract {
         void refreshData(String comid);
 
         void loadData(String comid);
+
+        /**
+         * 增加沟通记录
+         */
+        void addCommunicate(String rbiid, String msg);
     }
 }

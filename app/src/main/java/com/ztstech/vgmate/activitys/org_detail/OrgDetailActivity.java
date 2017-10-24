@@ -101,6 +101,7 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
         //沟通记录
         Intent it = new Intent(this, GetChanceActivity.class);
         it.putExtra(GetChanceActivity.ARG_ID, String.valueOf(bean.rbiid));
+        it.putExtra(GetChanceActivity.ARG_TITLE, bean.rbioname);
         startActivity(it);
     }
 
