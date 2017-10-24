@@ -73,7 +73,6 @@ public class OrglistUnApprovePresenter extends PresenterImpl<OrglistUnApproveCon
 
             @Override
             protected void childError(Throwable e) {
-                super.onError(e);
                 mView.onLoadFinsh(listItems, "网络访问出错".concat(e.getLocalizedMessage()));
             }
         }.run(new GetUnApproveList(getCurrentSelectedLocation(), page).run());

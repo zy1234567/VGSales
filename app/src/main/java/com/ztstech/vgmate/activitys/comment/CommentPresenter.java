@@ -59,7 +59,6 @@ public class CommentPresenter extends PresenterImpl<CommentContract.View> implem
 
             @Override
             protected void childError(Throwable e) {
-                super.onError(e);
                 if (page == 1) {
                     mView.onLoadFinish(listBeanList, "网路访问出错".concat(e.getLocalizedMessage()));
                 }else {

@@ -85,7 +85,6 @@ public class OrgAuditDialogPresenter extends PresenterImpl<OrgAuditDialogContrac
 
             @Override
             protected void childError(Throwable e) {
-                super.onError(e);
                 action1.call(null);
             }
         }.run(new GetRepeatOrg(bean.rbidistrict, bean.rbioname, bean.rbiid, page).run());

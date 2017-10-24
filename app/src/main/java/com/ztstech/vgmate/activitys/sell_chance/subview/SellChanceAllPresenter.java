@@ -62,7 +62,6 @@ public class SellChanceAllPresenter extends PresenterImpl<SellChanceAllContract.
 
             @Override
             protected void childError(final Throwable e) {
-                super.onError(e);
                 if (mView == null || mView.isViewFinish()) {
                     return;
                 }

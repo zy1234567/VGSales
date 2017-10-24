@@ -111,7 +111,6 @@ public class OrglistitemPresenter extends PresenterImpl<OrglistItemContract.View
 
             @Override
             protected void childError(Throwable e) {
-                super.onError(e);
                 action1.onError(e);
             }
 

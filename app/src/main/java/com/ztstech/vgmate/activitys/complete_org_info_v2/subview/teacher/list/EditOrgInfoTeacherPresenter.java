@@ -63,7 +63,6 @@ public class EditOrgInfoTeacherPresenter extends PresenterImpl<EditOrgInfoTeache
 
             @Override
             protected void childError(final Throwable e) {
-                super.onError(e);
                 if (mView == null || mView.isViewFinish()) {
                     return;
                 }

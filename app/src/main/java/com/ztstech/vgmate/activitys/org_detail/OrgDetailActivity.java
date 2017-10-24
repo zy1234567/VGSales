@@ -28,6 +28,9 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
     /**请求完善资料*/
     public static final int REQ_COMPLETE_INFO = 1;
 
+    /**设置刷新result*/
+    public static final String RESULT_REFRESH = "result_refresh";
+
     /**
      * 当前状态
      */
@@ -110,7 +113,16 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
     @OnClick(R.id.tv_delete)
     public void onDeleteOrgClick(View v) {
         //删除机构
-        Dialog dialog = new OrgDeleteDialog(this, bean);
+        OrgDeleteDialog dialog = new OrgDeleteDialog(this, bean);
+        dialog.setOnDeleteListener(new OrgDeleteDialog.OnDeleteListener() {
+            @Override
+            public void onDelete() {
+                Intent it = new Intent();
+                it.putExtra(RESULT_REFRESH, true);
+                setResult(RESULT_OK, it);
+                finish();
+            }
+        });
         dialog.show();
     }
 
