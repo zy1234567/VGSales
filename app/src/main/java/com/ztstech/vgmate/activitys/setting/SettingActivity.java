@@ -11,8 +11,11 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.edit_info.EditInfoActivity;
 import com.ztstech.vgmate.activitys.login.LoginActivity;
+import com.ztstech.vgmate.data.events.LogoutEvent;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 
@@ -58,8 +61,8 @@ public class SettingActivity extends MVPActivity<SettingContract.Presenter> impl
         if (errorMessage != null) {
             ToastUtil.toastCenter(this, "登出失败：" + errorMessage);
         }else {
-            finish();
             startActivity(new Intent(this, LoginActivity.class));
+            EventBus.getDefault().post(new LogoutEvent());
         }
     }
 

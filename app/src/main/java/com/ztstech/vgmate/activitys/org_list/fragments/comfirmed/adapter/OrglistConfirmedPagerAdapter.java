@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.ztstech.vgmate.activitys.org_list.fragments.item.OrglistItemFragment;
 import com.ztstech.vgmate.activitys.org_list.fragments.unapprove.OrglistUnApproveFragment;
+import com.ztstech.vgmate.constants.Constants;
 
 /**
  * Created by zhiyuan on 2017/10/14.
@@ -21,7 +22,7 @@ public class OrglistConfirmedPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return OrglistItemFragment.newInstance("03");
+            return OrglistItemFragment.newInstance(Constants.ORG_STATUS_UN_APPROVE);
         }else {
             return new OrglistUnApproveFragment();
         }

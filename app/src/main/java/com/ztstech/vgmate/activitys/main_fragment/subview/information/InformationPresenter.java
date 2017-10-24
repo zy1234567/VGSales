@@ -3,8 +3,7 @@ package com.ztstech.vgmate.activitys.main_fragment.subview.information;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.MainListBean;
 import com.ztstech.vgmate.data.repository.MainListRepository;
-import com.ztstech.vgmate.model.information.InformationModel;
-import com.ztstech.vgmate.utils.PresenterSubscriber;
+import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +51,7 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
      * @param page
      */
     private void loadDataWithPage(int page) {
-        new PresenterSubscriber<MainListBean>(mView){
+        new BasePresenterSubscriber<MainListBean>(mView){
 
             @Override
             public void childNext(MainListBean mainListBean) {
@@ -76,7 +75,6 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
 
             @Override
             protected void childError(Throwable e) {
-                super.onError(e);
                 mView.showError("网络访问出错".concat(e.getLocalizedMessage()));
             }
         }.run(mainListRepository.queryInformation(page));

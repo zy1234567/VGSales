@@ -37,7 +37,7 @@ public class CreateShareInfoPresenter extends PresenterImpl<CreateShareInfoContr
 //            }
 //        }
 //        if (uploadImageBeanObservable != null) {
-//            new PresenterSubscriber<UploadImageBean>(){
+//            new BasePresenterSubscriber<UploadImageBean>(){
 //                @Override
 //                public void onNext(UploadImageBean uploadImageBean) {
 //                    //上传图片成功

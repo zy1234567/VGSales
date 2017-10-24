@@ -5,7 +5,7 @@ import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.CommentBean;
 import com.ztstech.vgmate.data.user_case.Comment;
 import com.ztstech.vgmate.data.user_case.GetCommentList;
-import com.ztstech.vgmate.utils.PresenterSubscriber;
+import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,7 @@ public class CommentPresenter extends PresenterImpl<CommentContract.View> implem
     @Override
     public void comment(String flid, String newid, String touid, String comment) {
 
-        new PresenterSubscriber<BaseRespBean>(mView) {
+        new BasePresenterSubscriber<BaseRespBean>(mView) {
 
             @Override
             protected void childNext(BaseRespBean baseRespBean) {
@@ -55,7 +55,7 @@ public class CommentPresenter extends PresenterImpl<CommentContract.View> implem
     }
 
     private void requestData(final int page, String newsid) {
-        new PresenterSubscriber<CommentBean>(mView) {
+        new BasePresenterSubscriber<CommentBean>(mView) {
 
             @Override
             protected void childError(Throwable e) {

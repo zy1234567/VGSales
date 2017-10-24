@@ -6,7 +6,7 @@ import com.ztstech.vgmate.data.beans.UserBean;
 import com.ztstech.vgmate.data.repository.UserPreferenceManager;
 import com.ztstech.vgmate.data.user_case.GetMainPageBean;
 import com.ztstech.vgmate.data.repository.UserRepository;
-import com.ztstech.vgmate.utils.PresenterSubscriber;
+import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 /**
  * Created by zhiyuan on 2017/8/1.
@@ -25,7 +25,7 @@ public class MainPresenter extends PresenterImpl<MainContract.View> implements
     @Override
     public void loadData() {
         //加载主界面数据
-        new PresenterSubscriber<MainPageBean>(mView) {
+        new BasePresenterSubscriber<MainPageBean>(mView) {
 
             @Override
             public void childNext(MainPageBean mainPageBean) {

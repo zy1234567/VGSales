@@ -17,7 +17,7 @@ import rx.schedulers.Schedulers;
  * Created by zhiyuan on 2017/8/21.
  */
 
-public abstract class PresenterSubscriber<E> extends Subscriber<E> {
+public abstract class BasePresenterSubscriber<E> extends Subscriber<E> {
 
     private BaseView mView;
 
@@ -25,7 +25,7 @@ public abstract class PresenterSubscriber<E> extends Subscriber<E> {
 
     private Handler handler = new Handler();
 
-    public PresenterSubscriber(@NonNull BaseView view) {
+    public BasePresenterSubscriber(@NonNull BaseView view) {
         this.mView = view;
         if (this.mView == null) {
             throw new NullPointerException("参数不能为空");
@@ -58,8 +58,6 @@ public abstract class PresenterSubscriber<E> extends Subscriber<E> {
             });
         }catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            mView = null;
         }
 
     }
@@ -82,12 +80,13 @@ public abstract class PresenterSubscriber<E> extends Subscriber<E> {
             });
         }catch (Exception e1) {
             e1.printStackTrace();
-        }finally {
-            mView = null;
         }
     }
 
     public void run(Observable<E> observable) {
+        if (mView.isViewFinish()) {
+            return;
+        }
         mView.showLoading(null);
         subscription = observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.ztstech.vgmate.activitys.org_list.fragments.comfirmed.OrglistConfirmedFragment;
 import com.ztstech.vgmate.activitys.org_list.fragments.item.OrglistItemFragment;
+import com.ztstech.vgmate.constants.Constants;
 
 /**
  * Created by zhiyuan on 2017/9/8.
@@ -32,13 +33,13 @@ public class OrgListPageAdapter extends FragmentPagerAdapter{
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return OrglistItemFragment.newInstance("02");
+            return OrglistItemFragment.newInstance(Constants.ORG_STATUS_UN_CONFIRM);
         }else if (position == 1) {
-            return OrglistItemFragment.newInstance("00");
+            return OrglistItemFragment.newInstance(Constants.ORG_STATUS_LOCATED);
         }else if (position == 2) {
             return new OrglistConfirmedFragment();
         }else if (position == 3) {
-            return OrglistItemFragment.newInstance("04");
+            return OrglistItemFragment.newInstance(Constants.ORG_STATUS_WEB);
         }
         return null;
     }

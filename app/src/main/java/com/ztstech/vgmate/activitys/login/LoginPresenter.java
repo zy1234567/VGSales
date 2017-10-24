@@ -1,13 +1,12 @@
 package com.ztstech.vgmate.activitys.login;
 
 import android.os.Handler;
-import android.text.TextUtils;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.UserBean;
 import com.ztstech.vgmate.data.repository.UserRepository;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
-import com.ztstech.vgmate.utils.PresenterSubscriber;
+import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.lang.ref.WeakReference;
 
@@ -35,7 +34,7 @@ public class LoginPresenter extends PresenterImpl<LoginContract.View> implements
     @Override
     public void sendCode(String phone) {
         mView.showLoading(null);
-        new PresenterSubscriber<BaseRespBean>(mView) {
+        new BasePresenterSubscriber<BaseRespBean>(mView) {
 
             @Override
             public void childNext(BaseRespBean baseRespBean) {
@@ -61,7 +60,7 @@ public class LoginPresenter extends PresenterImpl<LoginContract.View> implements
     @Override
     public void login(String phone, String code) {
         mView.showLoading(null);
-        new PresenterSubscriber<UserBean>(mView) {
+        new BasePresenterSubscriber<UserBean>(mView) {
 
             @Override
             public void childNext(UserBean baseRespBean) {

@@ -13,6 +13,7 @@ import com.ztstech.vgmate.activitys.complete_org_info_v2.CompleteOrgInfoV2Activi
 import com.ztstech.vgmate.activitys.get_chance.GetChanceActivity;
 import com.ztstech.vgmate.activitys.org_detail.dialog.org_confirm.OrgConfirmDialog;
 import com.ztstech.vgmate.activitys.org_detail.dialog.org_delete.OrgDeleteDialog;
+import com.ztstech.vgmate.constants.Constants;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
 
 import butterknife.BindView;
@@ -27,6 +28,11 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
     /**请求完善资料*/
     public static final int REQ_COMPLETE_INFO = 1;
 
+    /**
+     * 当前状态
+     */
+    public static final String ARG_STATUS = "arg_status";
+
 
     /**
      * intent传入参数，使用gson格式化
@@ -35,12 +41,20 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
 
     @BindView(R.id.tv_confirm)
     TextView tvConfirm;
+
+    /**完善资料*/
     @BindView(R.id.tv_complete_info)
     TextView tvCompleteInfo;
+
+    /**沟通次数*/
     @BindView(R.id.tv_connect_time)
-    TextView tvConnectTimes;            //沟通次数
+    TextView tvConnectTimes;
+    /**删除机构*/
     @BindView(R.id.tv_delete)
     TextView tvDelete;
+    /**审批*/
+    @BindView(R.id.tv_approval)
+    TextView tvApproval;
 
     private GetOrgListItemsBean.ListBean bean;
 
@@ -62,6 +76,8 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
             throw new IllegalArgumentException("参数不能为空");
         }
         this.bean = new Gson().fromJson(json, GetOrgListItemsBean.ListBean.class);
+
+        checkBottomButtons();
     }
 
     @OnClick(R.id.tv_confirm)
@@ -85,6 +101,12 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
         startActivity(it);
     }
 
+    @OnClick(R.id.tv_approval)
+    public void onApprovalClick(View v) {
+        //点击认领审批
+
+    }
+
     @OnClick(R.id.tv_delete)
     public void onDeleteOrgClick(View v) {
         //删除机构
@@ -92,5 +114,30 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
         dialog.show();
     }
 
+    /**
+     * 根据传入状态，设置底部按钮
+     */
+    private void checkBottomButtons() {
+        String status = getIntent().getStringExtra(ARG_STATUS);
+        if (TextUtils.isEmpty(status)) {
+            throw new RuntimeException("未传入状态");
+        }
 
+        if (Constants.ORG_STATUS_LOCATED.equals(status)) {
+            //已确定
+            tvConfirm.setVisibility(View.GONE);
+        }else if (Constants.ORG_STATUS_UN_CONFIRM.equals(status)) {
+            //待确认
+            tvApproval.setVisibility(View.GONE);
+        }else if (Constants.ORG_STATUS_WEB.equals(status)) {
+            //网页端
+            tvApproval.setVisibility(View.GONE);
+            tvConfirm.setVisibility(View.GONE);
+            tvDelete.setVisibility(View.GONE);
+        }else if (Constants.ORG_STATUS_UN_APPROVE.equals(status)) {
+            //待审批
+            tvConfirm.setVisibility(View.GONE);
+        }
+
+    }
 }

@@ -1,10 +1,9 @@
 package com.ztstech.vgmate.activitys.get_chance;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
-import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.CommunicationHistoryBean;
 import com.ztstech.vgmate.data.user_case.GetCommunicateHistory;
-import com.ztstech.vgmate.utils.PresenterSubscriber;
+import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 /**
  * Created by zhiyuan on 2017/8/25.
@@ -33,7 +32,7 @@ public class GetChancePresenter extends PresenterImpl<GetChanceContract.View> im
 
     private void request(int pageNo, String comid) {
 
-        new PresenterSubscriber<CommunicationHistoryBean>(mView) {
+        new BasePresenterSubscriber<CommunicationHistoryBean>(mView) {
 
             @Override
             protected void childNext(CommunicationHistoryBean baseRespBean) {

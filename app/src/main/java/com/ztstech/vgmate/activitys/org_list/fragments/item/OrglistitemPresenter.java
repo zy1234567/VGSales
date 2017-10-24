@@ -3,7 +3,7 @@ package com.ztstech.vgmate.activitys.org_list.fragments.item;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
 import com.ztstech.vgmate.data.user_case.GetOrgListItems;
-import com.ztstech.vgmate.utils.PresenterSubscriber;
+import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +102,7 @@ public class OrglistitemPresenter extends PresenterImpl<OrglistItemContract.View
                              final Subscriber<GetOrgListItemsBean>
             action1) {
         getOrgListItems.setQueryInfo(status, locationId, page);
-        new PresenterSubscriber<GetOrgListItemsBean>(mView){
+        new BasePresenterSubscriber<GetOrgListItemsBean>(mView){
 
             @Override
             public void childNext(GetOrgListItemsBean getOrgListItemsBean) {

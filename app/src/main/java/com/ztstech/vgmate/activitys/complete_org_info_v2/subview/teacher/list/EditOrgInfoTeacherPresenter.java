@@ -5,7 +5,7 @@ import android.os.Handler;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.TeacherListBean;
 import com.ztstech.vgmate.data.user_case.GetTeacherList;
-import com.ztstech.vgmate.utils.PresenterSubscriber;
+import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +44,7 @@ public class EditOrgInfoTeacherPresenter extends PresenterImpl<EditOrgInfoTeache
     }
 
     private void load(int rbiid, final int pageNo) {
-        new PresenterSubscriber<TeacherListBean>(mView) {
+        new BasePresenterSubscriber<TeacherListBean>(mView) {
 
             @Override
             public void childNext(TeacherListBean bean) {

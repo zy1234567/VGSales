@@ -5,7 +5,7 @@ import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.dto.CreateShareData;
 import com.ztstech.vgmate.data.beans.UploadImageBean;
 import com.ztstech.vgmate.data.utils.RetrofitUtils;
-import com.ztstech.vgmate.utils.PresenterSubscriber;
+import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.io.File;
 
@@ -23,7 +23,7 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
     @Override
     public void submit(final CreateShareData createShareData) {
         mView.showLoading("请稍等");
-        new PresenterSubscriber<UploadImageBean>(mView) {
+        new BasePresenterSubscriber<UploadImageBean>(mView) {
 
             @Override
             public void childNext(UploadImageBean uploadImageBean) {
@@ -60,7 +60,7 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
      */
     private void uploadContentPic(final CreateShareData createShareData) {
         //上传内容图片
-        new PresenterSubscriber<UploadImageBean>(mView) {
+        new BasePresenterSubscriber<UploadImageBean>(mView) {
 
             @Override
             public void childNext(UploadImageBean uploadImageBean) {
@@ -88,7 +88,7 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
      */
     private void uploadData(CreateShareData createShareData) {
         //上传数据
-        new PresenterSubscriber<BaseRespBean>(mView) {
+        new BasePresenterSubscriber<BaseRespBean>(mView) {
 
             @Override
             public void childNext(BaseRespBean baseRespBean) {

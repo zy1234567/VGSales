@@ -3,7 +3,6 @@ package com.ztstech.vgmate.activitys.complete_info;
 import android.util.Log;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
-import com.ztstech.vgmate.constants.Constants;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.UserBean;
 import com.ztstech.vgmate.data.dto.UpdateUserInfoData;
@@ -13,7 +12,7 @@ import com.ztstech.vgmate.data.utils.RetrofitUtils;
 import com.ztstech.vgmate.mapper.FillInfoModelMapper;
 import com.ztstech.vgmate.mapper.UserInfoBeanMapper;
 import com.ztstech.vgmate.model.fill_info.FillInfoModel;
-import com.ztstech.vgmate.utils.PresenterSubscriber;
+import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.io.File;
 
@@ -38,7 +37,7 @@ public class FillInfoPresenter extends PresenterImpl<FillInfoContract.View> impl
         //上传图片，然后上传资料
         File[] images = new File[] {model.headerFile, model.cardFile, model.idFile,
                 model.idBackFile};
-        new PresenterSubscriber<UploadImageBean>(mView){
+        new BasePresenterSubscriber<UploadImageBean>(mView){
 
             @Override
             public void childNext(UploadImageBean baseRespBean) {
@@ -58,7 +57,7 @@ public class FillInfoPresenter extends PresenterImpl<FillInfoContract.View> impl
                         updateUserInfoData.didurl = urls[2] + "," + urls[3];
 
                         //上传资料
-                        new PresenterSubscriber<BaseRespBean>(mView) {
+                        new BasePresenterSubscriber<BaseRespBean>(mView) {
                             @Override
                             public void childNext(BaseRespBean baseRespBean) {
                                 mView.hideLoading(null);

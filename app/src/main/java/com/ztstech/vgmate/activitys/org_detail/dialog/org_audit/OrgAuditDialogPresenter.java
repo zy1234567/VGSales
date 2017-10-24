@@ -4,7 +4,7 @@ import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
 import com.ztstech.vgmate.data.beans.RepeatOrgBean;
 import com.ztstech.vgmate.data.user_case.GetRepeatOrg;
-import com.ztstech.vgmate.utils.PresenterSubscriber;
+import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +73,7 @@ public class OrgAuditDialogPresenter extends PresenterImpl<OrgAuditDialogContrac
     }
 
     private void load(int page, final Action1<RepeatOrgBean> action1, GetOrgListItemsBean.ListBean bean) {
-        new PresenterSubscriber<RepeatOrgBean>(null){
+        new BasePresenterSubscriber<RepeatOrgBean>(null){
             @Override
             public void childNext(RepeatOrgBean bean) {
                 if (bean.isSucceed()) {

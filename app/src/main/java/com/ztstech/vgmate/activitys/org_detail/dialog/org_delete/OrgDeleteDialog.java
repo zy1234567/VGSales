@@ -12,10 +12,12 @@ import android.widget.TextView;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
+import com.ztstech.vgmate.data.user_case.DeleteOrg;
 import com.ztstech.vgmate.utils.ViewUtils;
 
 /**
  * Created by zhiyuan on 2017/10/10.
+ * 删除组织对话框
  */
 
 public class OrgDeleteDialog extends Dialog implements View.OnClickListener{
@@ -59,6 +61,9 @@ public class OrgDeleteDialog extends Dialog implements View.OnClickListener{
     public void onClick(View view) {
         if (view == imgClose) {
             dismiss();
+        }else if (view == tvSubmit) {
+            //提交
+            tvSubmit.setEnabled(false);
         }
     }
 }

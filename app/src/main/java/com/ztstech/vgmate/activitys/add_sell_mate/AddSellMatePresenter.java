@@ -4,7 +4,7 @@ import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.dto.AddSellMateData;
 import com.ztstech.vgmate.data.user_case.AddSellMate;
-import com.ztstech.vgmate.utils.PresenterSubscriber;
+import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 /**
  * Created by zhiyuan on 2017/8/25.
@@ -20,7 +20,7 @@ public class AddSellMatePresenter extends PresenterImpl<AddSellMateContract.View
     @Override
     public void submit(AddSellMateData addSellMateData) {
         mView.showLoading("请稍等");
-        new PresenterSubscriber<BaseRespBean>(mView) {
+        new BasePresenterSubscriber<BaseRespBean>(mView) {
 
             @Override
             public void childNext(BaseRespBean baseRespBean) {

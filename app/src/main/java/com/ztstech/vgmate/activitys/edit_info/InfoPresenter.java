@@ -10,7 +10,7 @@ import com.ztstech.vgmate.data.utils.RetrofitUtils;
 import com.ztstech.vgmate.mapper.FillInfoModelMapper;
 import com.ztstech.vgmate.mapper.UserInfoBeanMapper;
 import com.ztstech.vgmate.model.fill_info.FillInfoModel;
-import com.ztstech.vgmate.utils.PresenterSubscriber;
+import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.io.File;
 
@@ -83,7 +83,7 @@ public class InfoPresenter extends PresenterImpl<InfoContract.View> implements
                                                         UpdateUserInfoData updateUserInfoData =  new UserInfoBeanMapper().transform(model);
 
                                                         //上传资料
-                                                        new PresenterSubscriber<BaseRespBean>(mView) {
+                                                        new BasePresenterSubscriber<BaseRespBean>(mView) {
                                                             @Override
                                                             public void childNext(BaseRespBean baseRespBean) {
                                                                 mView.hideLoading(null);
@@ -140,7 +140,7 @@ public class InfoPresenter extends PresenterImpl<InfoContract.View> implements
 //                model.idBackFile};
 
 
-//        new PresenterSubscriber<UploadImageBean>(mView){
+//        new BasePresenterSubscriber<UploadImageBean>(mView){
 //
 //            @Override
 //            public void onNext(UploadImageBean baseRespBean) {
@@ -160,7 +160,7 @@ public class InfoPresenter extends PresenterImpl<InfoContract.View> implements
 //                        updateUserInfoData.didurl = new String[] {urls[2], urls[3]};
 //
 //                        //上传资料
-//                        new PresenterSubscriber<BaseRespBean>() {
+//                        new BasePresenterSubscriber<BaseRespBean>() {
 //                            @Override
 //                            public void onNext(BaseRespBean baseRespBean) {
 //                                mView.hideLoading(null);
@@ -185,7 +185,7 @@ public class InfoPresenter extends PresenterImpl<InfoContract.View> implements
 
     private void uploadIfExist(File file,final Action1<UploadImageBean> callback) {
         if (file != null) {
-            new PresenterSubscriber<UploadImageBean>(mView){
+            new BasePresenterSubscriber<UploadImageBean>(mView){
 
                 @Override
                 public void childNext(UploadImageBean uploadImageBean) {

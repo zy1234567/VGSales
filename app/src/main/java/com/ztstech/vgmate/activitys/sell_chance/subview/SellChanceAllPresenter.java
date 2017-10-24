@@ -3,10 +3,9 @@ package com.ztstech.vgmate.activitys.sell_chance.subview;
 import android.os.Handler;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
-import com.ztstech.vgmate.data.api.SellChanceApi;
 import com.ztstech.vgmate.data.beans.SellChanceBean;
 import com.ztstech.vgmate.data.user_case.GetSellChance;
-import com.ztstech.vgmate.utils.PresenterSubscriber;
+import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +44,7 @@ public class SellChanceAllPresenter extends PresenterImpl<SellChanceAllContract.
     }
 
     private void loadData(final int pageNo, String status) {
-        new PresenterSubscriber<SellChanceBean>(mView) {
+        new BasePresenterSubscriber<SellChanceBean>(mView) {
 
             @Override
             public void childNext(SellChanceBean sellChanceBean) {

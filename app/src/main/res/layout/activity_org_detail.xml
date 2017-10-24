@@ -29,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:id="@+id/rl_bottom"
@@ -36,6 +37,20 @@
                 android:layout_height="50dp"
                 android:layout_alignParentBottom="true"
                 android:background="@color/color_005">
+
+                <TextView
+                    android:background="@color/color_003"
+                    android:id="@+id/tv_approval"
+                    android:text="认领审批"
+                    android:drawablePadding="3dp"
+                    android:paddingBottom="6dp"
+                    android:gravity="bottom|center_horizontal"
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/color_109"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
                 
                 <TextView
                     android:id="@+id/tv_complete_info"

@@ -104,6 +104,7 @@ public class OrglistItemFragment extends MVPFragment<OrglistItemContract.Present
             public void onItemClick(GetOrgListItemsBean.ListBean item, int index) {
                 Intent it = new Intent(getActivity(), OrgDetailActivity.class);
                 it.putExtra(OrgDetailActivity.ARG_ORG_BEAN, new Gson().toJson(item));
+                it.putExtra(OrgDetailActivity.ARG_STATUS, status);
                 startActivityForResult(it, REQ_DETAIL);
             }
         });
@@ -129,7 +130,6 @@ public class OrglistItemFragment extends MVPFragment<OrglistItemContract.Present
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-//                smartRefreshLayout.setRefreshing(false);
                 adapter.setListData(items);
                 adapter.notifyDataSetChanged();
                 smartRefreshLayout.finishLoadmore();
@@ -143,7 +143,6 @@ public class OrglistItemFragment extends MVPFragment<OrglistItemContract.Present
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-//                smartRefreshLayout.setRefreshing(false);
                 adapter.setListData(items);
                 adapter.notifyDataSetChanged();
                 smartRefreshLayout.finishRefresh();

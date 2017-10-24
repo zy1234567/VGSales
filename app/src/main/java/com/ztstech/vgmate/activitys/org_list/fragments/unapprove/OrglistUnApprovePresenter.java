@@ -4,7 +4,7 @@ import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.OrglistUnApproveBean;
 import com.ztstech.vgmate.data.repository.UserPreferenceManager;
 import com.ztstech.vgmate.data.user_case.GetUnApproveList;
-import com.ztstech.vgmate.utils.PresenterSubscriber;
+import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class OrglistUnApprovePresenter extends PresenterImpl<OrglistUnApproveCon
     }
 
     private void loadData(final int page) {
-        new PresenterSubscriber<OrglistUnApproveBean>(mView) {
+        new BasePresenterSubscriber<OrglistUnApproveBean>(mView) {
 
             @Override
             public void childNext(OrglistUnApproveBean orglistUnApproveBean) {

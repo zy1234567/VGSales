@@ -3,7 +3,7 @@ package com.ztstech.vgmate.activitys.complete_org_info_v2;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.OrgInfoBean;
 import com.ztstech.vgmate.data.user_case.GetOrgInfo;
-import com.ztstech.vgmate.utils.PresenterSubscriber;
+import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 /**
  * Created by zhiyuan on 2017/10/9.
@@ -18,7 +18,7 @@ public class CompleteOrgInfoV2Presenter extends PresenterImpl<CompleteOrgInfoV2C
 
     @Override
     public void loadOrgInfo(int rbiid) {
-        new PresenterSubscriber<OrgInfoBean>(mView){
+        new BasePresenterSubscriber<OrgInfoBean>(mView){
 
             @Override
             public void childNext(OrgInfoBean orgInfoBean) {

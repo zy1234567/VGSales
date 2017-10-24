@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.ztstech.vgmate.activitys.login.LoginActivity;
 import com.ztstech.vgmate.data.events.LogoutEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -51,9 +53,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract int getLayoutRes();
 
 
-    @Subscribe
+    @Subscribe (threadMode = ThreadMode.MAIN)
     public void onLogout(LogoutEvent logoutEvent) {
-        if (!isFinishing()) {
+        if (!isFinishing() && !(this instanceof LoginActivity)) {
             finish();
         }
     }

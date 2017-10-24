@@ -3,7 +3,7 @@ package com.ztstech.vgmate.activitys.setting;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.repository.UserRepository;
-import com.ztstech.vgmate.utils.PresenterSubscriber;
+import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 /**
  * Created by zhiyuan on 2017/9/9.
@@ -23,11 +23,10 @@ public class SettingPresenter extends PresenterImpl<SettingContract.View> implem
 
     @Override
     public void logout() {
-        new PresenterSubscriber<BaseRespBean>(mView) {
+        new BasePresenterSubscriber<BaseRespBean>(mView) {
 
             @Override
             public void childNext(BaseRespBean baseRespBean) {
-                mView.hideLoading(null);
                 if (baseRespBean.isSucceed()) {
                     mView.onLogoutFinish(null);
                 }else {

@@ -102,7 +102,6 @@ public class UserRepository {
             public void call(BaseRespBean baseRespBean) {
                 if (baseRespBean.isSucceed()) {
                     clearUserInfo();
-                    EventBus.getDefault().post(new LogoutEvent());
                 }
             }
         });
