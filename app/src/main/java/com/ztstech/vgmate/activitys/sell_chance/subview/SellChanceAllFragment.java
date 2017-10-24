@@ -21,7 +21,6 @@ import com.ztstech.vgmate.base.SimpleRecyclerAdapter;
 import com.ztstech.vgmate.data.beans.SellChanceBean;
 import com.ztstech.vgmate.utils.ToastUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -87,8 +86,10 @@ public class SellChanceAllFragment extends MVPFragment<SellChanceAllContract.Pre
             @Override
             public void onItemClick(SellChanceBean.ListBean item, int index) {
                 Intent it = new Intent(getActivity(), GetChanceActivity.class);
-                it.putExtra(GetChanceActivity.ARG_ID, item.comid);
+                it.putExtra(GetChanceActivity.ARG_COMID, item.comid);
                 it.putExtra(GetChanceActivity.ARG_TITLE, item.oname);
+                // TODO: 2017/10/24 查找orgid
+                it.putExtra(GetChanceActivity.ARG_ORGID, "");
                 startActivity(it);
             }
         });

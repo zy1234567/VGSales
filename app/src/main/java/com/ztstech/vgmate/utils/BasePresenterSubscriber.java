@@ -102,6 +102,6 @@ public abstract class BasePresenterSubscriber<E> extends Subscriber<E> {
 
     protected abstract void childNext(E e);
 
-    protected void childError(Throwable e) {};
+    protected void childError(Throwable e) {}
 
 }

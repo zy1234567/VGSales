@@ -1,5 +1,6 @@
 package com.ztstech.vgmate.utils;
 
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import java.text.DateFormat;
@@ -24,6 +25,46 @@ public class TimeUtils {
         Date date = new Date();
         DateFormat format = new SimpleDateFormat(pattern, Locale.getDefault());
         return format.format(date);
+    }
+
+    /**
+     * 获取年
+     * @param time
+     * @return
+     */
+    public static String getYear(@NonNull String time) {
+        if (time.length() != 19) {
+            return time;
+        }
+        return time.substring(0, 4);
+    }
+
+    public static String getMonth(@NonNull String time) {
+        if (time.length() != 19) {
+            return time;
+        }
+        return time.substring(5, 7);
+    }
+
+    public static String getDay(@NonNull String time) {
+        if (time.length() != 19) {
+            return time;
+        }
+        return time.substring(8, 10);
+    }
+
+    public static String getHours(@NonNull String time) {
+        if (time.length() != 19) {
+            return time;
+        }
+        return time.substring(11, 13);
+    }
+
+    public static String getMinutes(@NonNull String time) {
+        if (time.length() != 19) {
+            return time;
+        }
+        return time.substring(14, 16);
     }
 
     /**

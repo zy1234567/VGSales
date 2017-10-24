@@ -100,7 +100,7 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
     public void onConnectTimesClick(View v) {
         //沟通记录
         Intent it = new Intent(this, GetChanceActivity.class);
-        it.putExtra(GetChanceActivity.ARG_ID, String.valueOf(bean.rbiid));
+        it.putExtra(GetChanceActivity.ARG_RBIID, String.valueOf(bean.rbiid));
         it.putExtra(GetChanceActivity.ARG_TITLE, bean.rbioname);
         startActivity(it);
     }

@@ -7,12 +7,13 @@ import android.view.ViewGroup;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.base.SimpleRecyclerAdapter;
 import com.ztstech.vgmate.base.SimpleViewHolder;
+import com.ztstech.vgmate.data.beans.CommunicationHistoryBean;
 
 /**
  * Created by zhiyuan on 2017/8/25.
  */
 
-public class GetChanceRecyclerAdapter extends SimpleRecyclerAdapter<String> {
+public class GetChanceRecyclerAdapter extends SimpleRecyclerAdapter<CommunicationHistoryBean.ListBean> {
 
     public static final int TYPE_HEADER = 0;
     public static final int TYPE_ITEM = 1;
@@ -20,7 +21,7 @@ public class GetChanceRecyclerAdapter extends SimpleRecyclerAdapter<String> {
 
 
     @Override
-    public SimpleViewHolder<String> onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SimpleViewHolder<CommunicationHistoryBean.ListBean> onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         View v = null;

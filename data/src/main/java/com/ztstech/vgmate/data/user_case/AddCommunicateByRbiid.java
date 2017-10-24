@@ -12,14 +12,14 @@ import rx.Observable;
  * 增加交流记录
  */
 
-public class AddCommunicate implements UserCase<Observable<BaseRespBean>>{
+public class AddCommunicateByRbiid implements UserCase<Observable<BaseRespBean>>{
 
     private CommunicateHistoryApi communicateHistoryApi;
 
     private String rbiid;
     private String msg;
 
-    public AddCommunicate(String rbiid, String msg) {
+    public AddCommunicateByRbiid(String rbiid, String msg) {
         this.rbiid = rbiid;
         this.msg = msg;
 
@@ -28,7 +28,7 @@ public class AddCommunicate implements UserCase<Observable<BaseRespBean>>{
 
     @Override
     public Observable<BaseRespBean> run() {
-        return communicateHistoryApi.addCommunication(msg, rbiid,
+        return communicateHistoryApi.addCommunicationByRibid(msg, rbiid,
                 UserRepository.getInstance().getAuthId());
     }
 }

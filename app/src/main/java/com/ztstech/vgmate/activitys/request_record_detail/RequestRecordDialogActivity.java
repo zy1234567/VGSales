@@ -50,20 +50,5 @@ public class RequestRecordDialogActivity extends MVPActivity<RequestRecordDialog
         GetChanceRecyclerAdapter recyclerAdapter = new GetChanceRecyclerAdapter();
         recyclerView.setAdapter(recyclerAdapter);
 
-        List<String> items = new ArrayList<>();
-        items.add("");
-        items.add("");
-        items.add("");
-        items.add("");
-        items.add("");
-        items.add("");
-        items.add("");
-        items.add("");
-        items.add("");
-        items.add("");
-        items.add("");
-        recyclerAdapter.setListData(items);
-        recyclerAdapter.notifyDataSetChanged();
-
     }
 }
