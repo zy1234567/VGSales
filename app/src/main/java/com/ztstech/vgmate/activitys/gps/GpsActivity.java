@@ -204,7 +204,30 @@ public class GpsActivity extends BaseActivity implements  GeocodeSearch.OnGeocod
         aMap.setMyLocationStyle(myLocationStyle);//设置定位蓝点的Style
         aMap.getUiSettings().setMyLocationButtonEnabled(true); //设置默认定位按钮是否显示，非必需设置。
         aMap.setMyLocationEnabled(true);// 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
+        aMap.setInfoWindowAdapter(new AMap.InfoWindowAdapter() {
+            TextView infoWindow = null;
+            @Override
+            public View getInfoWindow(Marker marker) {
+                if(infoWindow == null) {
+                    infoWindow = new TextView(GpsActivity.this);
+                }
+                render(marker, infoWindow);
+                return infoWindow;
+            }
 
+            @Override
+            public View getInfoContents(Marker marker) {
+                return null;
+            }
+
+            /**
+             * 自定义infowinfow窗口
+             */
+            public void render(Marker marker, View view) {
+                String title = marker.getTitle();
+                ((TextView) view).setText(title);
+            }
+        });
 
 
         aMap.setAMapGestureListener(new AMapGestureListener() {

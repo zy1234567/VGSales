@@ -11,10 +11,12 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.complete_org_info_v2.CompleteOrgInfoV2Activity;
 import com.ztstech.vgmate.activitys.get_chance.GetChanceActivity;
+import com.ztstech.vgmate.activitys.gps.GpsActivity;
 import com.ztstech.vgmate.activitys.org_detail.dialog.org_confirm.OrgConfirmDialog;
 import com.ztstech.vgmate.activitys.org_detail.dialog.org_delete.OrgDeleteDialog;
 import com.ztstech.vgmate.constants.Constants;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
+import com.ztstech.vgmate.utils.ContractUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -59,6 +61,8 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
     @BindView(R.id.tv_approval)
     TextView tvApproval;
 
+    private OrgConfirmDialog confirmDialog;
+
     private GetOrgListItemsBean.ListBean bean;
 
     @Override
@@ -83,10 +87,35 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
         checkBottomButtons();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK ) {
+            return;
+        }
+        if (requestCode == OrgConfirmDialog.REQ_CONTACT) {
+            ContractUtils.ContractUser user = ContractUtils.readContract(this, data);
+            if (confirmDialog != null && confirmDialog.isShowing()) {
+                confirmDialog.setPhone(user.phone);
+            }
+        }else if (requestCode == OrgConfirmDialog.REQ_GPS) {
+            if (confirmDialog != null && confirmDialog.isShowing()) {
+                double lat = data.getDoubleExtra(GpsActivity.RESULT_LATITUDE, 0);
+                double lot = data.getDoubleExtra(GpsActivity.RESULT_LONGITUDE, 0);
+                String location = data.getStringExtra(GpsActivity.RESULT_LOCATION);
+
+                String gps = String.valueOf(lat) + "," + String.valueOf(lot);
+                confirmDialog.setGps(gps);
+                confirmDialog.setDetailLocationByGps(location);
+            }
+
+        }
+    }
+
     @OnClick(R.id.tv_confirm)
     public void onConfirmClick(View v) {
-        Dialog dialog = new OrgConfirmDialog(this, bean);
-        dialog.show();
+        confirmDialog = new OrgConfirmDialog(this, bean);
+        confirmDialog.show();
     }
 
     @OnClick(R.id.tv_complete_info)

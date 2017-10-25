@@ -1,14 +1,6 @@
 package com.ztstech.vgmate.activitys.add_sell_mate;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PermissionInfo;
-import android.database.Cursor;
-import android.net.Uri;
-import android.provider.ContactsContract;
-import android.support.v4.content.PermissionChecker;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -17,14 +9,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tbruyelle.rxpermissions.RxPermissions;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
 import com.ztstech.vgmate.data.dto.AddSellMateData;
+import com.ztstech.vgmate.utils.ContractUtils;
 
 import butterknife.BindView;
-import rx.functions.Action1;
 
 /**
  * 添加销售伙伴
@@ -87,28 +78,10 @@ public class AddSellMateActivity extends MVPActivity<AddSellMateContract.Present
 
         }else if (requestCode == REQ_CONTACT && resultCode == RESULT_OK) {
             //得到联系人
-            Uri contract = data.getData();
-            Cursor c = this.getContentResolver().query(contract, null, null, null, null);
-            if (c != null && c.moveToFirst()) {
-                String suspect = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));        //通过Cursor c获得联系人名字
-                String id = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID));
-
-                Cursor c2 = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + id, null, null);
-                if (c2 != null) {
-                    c2.moveToFirst();
-                    String phonenum = c2.getString(c2.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    etPhone.setText(phonenum);
-                    if (TextUtils.isEmpty(etName.getText().toString())) {
-                        etName.setText(suspect);
-                    }
-                    addSellMateData.phone = phonenum;
-                    c2.close();
-                }
-
-            }
-            if (c != null) {
-                c.close();
+            ContractUtils.ContractUser user = ContractUtils.readContract(this, data);
+            etPhone.setText(user.phone);
+            if (TextUtils.isEmpty(etName.getText().toString())) {
+                etName.setText(user.name);
             }
         }
 
@@ -123,23 +96,7 @@ public class AddSellMateActivity extends MVPActivity<AddSellMateContract.Present
             checkToSubmit();
         }else if (view == tvContract) {
             //打开联系人
-            RxPermissions rxPermissions = new RxPermissions(this);
-            rxPermissions
-                    .request(Manifest.permission.READ_CONTACTS)
-                    .subscribe(new Action1<Boolean>() {
-                        @Override
-                        public void call(Boolean aBoolean) {
-
-                            if (aBoolean) {
-                                Intent i = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-                                startActivityForResult(i , REQ_CONTACT);
-                            }else {
-                                Toast.makeText(AddSellMateActivity.this, "无权限", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
- 
+            ContractUtils.toContract(this, REQ_CONTACT);
         }
     }
 

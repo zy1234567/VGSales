@@ -1,37 +1,36 @@
 package com.ztstech.vgmate.activitys.org_detail.dialog.org_confirm;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.tbruyelle.rxpermissions.RxPermissions;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.ViewImpl;
-import com.ztstech.vgmate.activitys.add_sell_mate.AddSellMateActivity;
+import com.ztstech.vgmate.activitys.gps.GpsActivity;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
+import com.ztstech.vgmate.utils.ContractUtils;
 import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.ViewUtils;
 
-import rx.functions.Action1;
-
 /**
  * Created by zhiyuan on 2017/10/10.
+ * 审核通过
  */
 
 public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
         OrgConfirmContract.View {
 
     public static final int REQ_CONTACT = 1;
+    public static final int REQ_GPS = 2;
 
     private View contentView;
 
@@ -85,7 +84,16 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
         setCancelable(false);
 
 
-
+        //设置为红色 *
+        TextView[] titles = new TextView[] {tvOrgNameTitle, tvCategoryTitle, tvAreaTitle, tvGpsTitle,
+                tvLocationTitle, tvPhoneTitle};
+        for (TextView tv: titles) {
+            tv.setText(ViewUtils.getDiffColorSpan(null,
+                    new String[] {tv.getText().toString().substring(0, 1),
+                            tv.getText().toString().substring(1, tv.getText().length())},
+                    new int[] {ContextCompat.getColor(context, R.color.color_006),
+                            ContextCompat.getColor(context, R.color.color_100)}));
+        }
 
         //设置数据
         etOrgName.setText(bean.rbioname);
@@ -95,7 +103,22 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
         etLocation.setText(bean.rbiaddress);
         etPhone.setText(bean.rbiphone);
 
+    }
 
+    public void setPhone(String text) {
+        if (!TextUtils.isEmpty(text)) {
+            etPhone.setText(text.trim());
+        }
+    }
+
+    public void setGps(String gps) {
+        tvGps.setText(gps);
+    }
+
+    public void setDetailLocationByGps(String gpsLocation) {
+        if (etLocation.getText().length() == 0) {
+            etLocation.setText(gpsLocation);
+        }
     }
 
     @Override
@@ -104,24 +127,12 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
             dismiss();
         }else if (view == tvContact) {
             //打开联系人
-            RxPermissions rxPermissions = new RxPermissions(activityContext);
-            rxPermissions
-                    .request(Manifest.permission.READ_CONTACTS)
-                    .subscribe(new Action1<Boolean>() {
-                        @Override
-                        public void call(Boolean aBoolean) {
-
-                            if (aBoolean) {
-                                Intent i = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-                                activityContext.startActivityForResult(i , REQ_CONTACT);
-                            }else {
-                                Toast.makeText(getContext(), "无权限", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
+            ContractUtils.toContract(activityContext, REQ_CONTACT);
         }else if (view == tvSubmit) {
 
+        }else if (view == tvGps) {
+            Intent it = new Intent(activityContext, GpsActivity.class);
+            activityContext.startActivityForResult(it, REQ_GPS);
         }
     }
 

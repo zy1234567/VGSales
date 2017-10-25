@@ -1,31 +1,20 @@
 package com.ztstech.vgmate.activitys.add_org;
 
-import android.Manifest;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
-import android.provider.ContactsContract;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.tbruyelle.rxpermissions.RxPermissions;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
-import com.ztstech.vgmate.activitys.add_sell_mate.AddSellMateActivity;
 import com.ztstech.vgmate.activitys.category_info.CategoryTagsActivity;
 import com.ztstech.vgmate.activitys.category_info.CategoryTagsPresenter;
 import com.ztstech.vgmate.activitys.gps.GpsActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
+import com.ztstech.vgmate.utils.ContractUtils;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import butterknife.BindView;
-import rx.functions.Action1;
 
 /**
  * 增加机构
@@ -111,24 +100,9 @@ public class AddOrgActivity extends MVPActivity<AddOrgContract.Presenter> implem
             tvLocation.setTag(locationId);
         }else if (REQ_CONTACT == requestCode) {
             //得到联系人
-            Uri contract = data.getData();
-            Cursor c = this.getContentResolver().query(contract, null, null, null, null);
-            if (c != null && c.moveToFirst()) {
-                String id = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID));
+            ContractUtils.ContractUser user = ContractUtils.readContract(this, data);
+            etPhone.setText(user.phone);
 
-                Cursor c2 = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + id, null, null);
-                if (c2 != null) {
-                    c2.moveToFirst();
-                    String phonenum = c2.getString(c2.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    etPhone.setText(phonenum);
-                    c2.close();
-                }
-
-            }
-            if (c != null) {
-                c.close();
-            }
         }
     }
 
@@ -151,22 +125,7 @@ public class AddOrgActivity extends MVPActivity<AddOrgContract.Presenter> implem
             submit();
         }else if (view == tvContact) {
             //通讯录
-            RxPermissions rxPermissions = new RxPermissions(this);
-            rxPermissions
-                    .request(Manifest.permission.READ_CONTACTS)
-                    .subscribe(new Action1<Boolean>() {
-                        @Override
-                        public void call(Boolean aBoolean) {
-
-                            if (aBoolean) {
-                                Intent i = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-                                startActivityForResult(i , REQ_CONTACT);
-                            }else {
-                                Toast.makeText(AddOrgActivity.this, "无权限", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
+            ContractUtils.toContract(this, REQ_CONTACT);
         }
     }
 
