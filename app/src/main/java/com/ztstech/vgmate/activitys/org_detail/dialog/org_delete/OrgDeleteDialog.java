@@ -113,6 +113,8 @@ public class OrgDeleteDialog extends Dialog implements View.OnClickListener, Org
             sbMsg.subSequence(0, sbMsg.length() - 1);
 
             tvSubmit.setEnabled(false);
+            imgClose.setClickable(false);
+            tvSubmit.setText("提交中");
             presenter.deleteOrg(String.valueOf(bean.rbiid), sbMsg.toString());
         }
     }
@@ -135,6 +137,8 @@ public class OrgDeleteDialog extends Dialog implements View.OnClickListener, Org
     @Override
     public void onFinish(@Nullable String message) {
         tvSubmit.setEnabled(true);
+        imgClose.setClickable(true);
+        tvSubmit.setText("确定删除");
         if (message != null) {
             ToastUtil.toastCenter(getContext(), "删除机构失败：" + message);
         }else {

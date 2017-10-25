@@ -115,6 +115,12 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
     @OnClick(R.id.tv_confirm)
     public void onConfirmClick(View v) {
         confirmDialog = new OrgConfirmDialog(this, bean);
+        confirmDialog.setOnConfirmListener(new OrgConfirmDialog.OnConfirmListener() {
+            @Override
+            public void onConfirm() {
+                finishAndRefresh();
+            }
+        });
         confirmDialog.show();
     }
 
@@ -147,13 +153,20 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
         dialog.setOnDeleteListener(new OrgDeleteDialog.OnDeleteListener() {
             @Override
             public void onDelete() {
-                Intent it = new Intent();
-                it.putExtra(RESULT_REFRESH, true);
-                setResult(RESULT_OK, it);
-                finish();
+                finishAndRefresh();
             }
         });
         dialog.show();
+    }
+
+    /**
+     * 关闭当前页面，刷新上一个界面列表
+     */
+    public void finishAndRefresh() {
+        Intent it = new Intent();
+        it.putExtra(RESULT_REFRESH, true);
+        setResult(RESULT_OK, it);
+        finish();
     }
 
     /**

@@ -23,4 +23,22 @@ public interface OrgInfoApi {
     Observable<BaseRespBean> deleteOrgInfo(@Query("rbiid") String rbiid,
                                            @Query("delmsg") String delmsg,
                                            @Query(NetConstants.PARAM_AUTHID) String authId);
+
+    /**
+     * 审核通过
+     * @return
+     */
+    @POST("exempt/AppSaleAuditRBI")
+    Observable<BaseRespBean> confirmOrgInfo(@Query("repeatrbiid") String repeatrbiid,
+                                            @Query("rbiid") String rbiid,
+                                            @Query("rbibackmsg") String rbibackmsg,
+                                            @Query("rbiostatus") String rbiostatus,
+                                            @Query("oname") String oname,
+                                            @Query("otype") String otype,
+                                            @Query("district") String district,
+                                            @Query("address") String address,
+                                            @Query("gps") String gps,
+                                            @Query("contphone") String contphone,
+                                            @Query(NetConstants.PARAM_AUTHID) String authId);
+
 }

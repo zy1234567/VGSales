@@ -17,8 +17,10 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.ViewImpl;
 import com.ztstech.vgmate.activitys.gps.GpsActivity;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
+import com.ztstech.vgmate.utils.CategoryUtil;
 import com.ztstech.vgmate.utils.ContractUtils;
 import com.ztstech.vgmate.utils.LocationUtils;
+import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.utils.ViewUtils;
 
 /**
@@ -45,12 +47,15 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
     private Activity activityContext;
     private GetOrgListItemsBean.ListBean bean;
 
+    private OnConfirmListener listener;
+
 
     public OrgConfirmDialog(@NonNull Context context, final GetOrgListItemsBean.ListBean bean) {
         super(context);
 
         activityContext = (Activity) context;
         this.bean = bean;
+
 
         viewImpl = new ViewImpl<>(context);
         presenter = new OrgConfirmPresenter(this);
@@ -80,6 +85,7 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
         imgClose.setOnClickListener(this);
         tvContact.setOnClickListener(this);
         tvSubmit.setOnClickListener(this);
+        tvGps.setOnClickListener(this);
 
         setCancelable(false);
 
@@ -97,12 +103,16 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
 
         //设置数据
         etOrgName.setText(bean.rbioname);
-        tvCategory.setText(bean.rbiotype);
+        tvCategory.setText(CategoryUtil.getCategoryId(bean.rbiotype));
         tvArea.setText(LocationUtils.getLocationNameByCode(bean.rbidistrict));
         // TODO: 2017/10/11 后台没有gps信息
         etLocation.setText(bean.rbiaddress);
         etPhone.setText(bean.rbiphone);
 
+    }
+
+    public void setOnConfirmListener(OnConfirmListener listener) {
+        this.listener = listener;
     }
 
     public void setPhone(String text) {
@@ -129,7 +139,7 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
             //打开联系人
             ContractUtils.toContract(activityContext, REQ_CONTACT);
         }else if (view == tvSubmit) {
-
+            submit();
         }else if (view == tvGps) {
             Intent it = new Intent(activityContext, GpsActivity.class);
             activityContext.startActivityForResult(it, REQ_GPS);
@@ -149,5 +159,70 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
     @Override
     public boolean isViewFinish() {
         return !isShowing();
+    }
+
+    private void submit() {
+        String oname = etOrgName.getText().toString();
+        String otype = bean.rbiotype;
+        String district = bean.rbidistrict;
+        String gps = tvGps.getText().toString();
+        String detailLocation = etLocation.getText().toString();
+        String phone = etPhone.getText().toString();
+
+        if (TextUtils.isEmpty(oname)) {
+            ToastUtil.toastCenter(activityContext, "请输入机构名称！");
+            return;
+        }
+        if (TextUtils.isEmpty(otype)) {
+            ToastUtil.toastCenter(activityContext, "请选择分类标签！");
+            return;
+        }
+        if (TextUtils.isEmpty(district)) {
+            ToastUtil.toastCenter(activityContext, "请选择所在区县！");
+            return;
+        }
+        if (TextUtils.isEmpty(gps)) {
+            ToastUtil.toastCenter(activityContext, "请选择gps位置！");
+            return;
+        }
+        if (TextUtils.isEmpty(detailLocation)) {
+            ToastUtil.toastCenter(activityContext, "请输入详细地址！");
+            return;
+        }
+        if (TextUtils.isEmpty(phone)) {
+            ToastUtil.toastCenter(activityContext, "请输入资讯电话！");
+            return;
+        }
+
+        presenter.submit(String.valueOf(bean.rbiid), oname, otype, district, detailLocation,
+                gps, phone);
+        tvSubmit.setText("提交中");
+        tvSubmit.setEnabled(false);
+        imgClose.setClickable(false);
+
+    }
+
+    @Override
+    public void onFinish(@Nullable String errmsg) {
+        if (!isShowing() || activityContext.isFinishing()) {
+            return;
+        }
+        imgClose.setClickable(true);
+        tvSubmit.setEnabled(true);
+        tvSubmit.setText("提交");
+        if (errmsg == null) {
+            dismiss();
+            ToastUtil.toastCenter(activityContext, "提交成功！");
+            if (listener != null) {
+                listener.onConfirm();
+            }
+        }else {
+            ToastUtil.toastCenter(activityContext, "提交失败：" + errmsg);
+        }
+    }
+
+    public interface OnConfirmListener {
+
+        void onConfirm();
     }
 }

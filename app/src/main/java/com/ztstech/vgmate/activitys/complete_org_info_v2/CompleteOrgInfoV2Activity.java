@@ -305,6 +305,9 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
     @Override
     public void showOrgInfo(OrgInfoBean.InfoBean bean) {
         infoBean = bean;
+        if (infoBean == null) {
+            return;
+        }
 
         if (!TextUtils.isEmpty(infoBean.updatename) && !TextUtils.isEmpty(infoBean.updatename)) {
             tvLastUpdate.setText("最后更新：" +
@@ -394,15 +397,17 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
         tvChargeDesc.setText(chargeInfo);
 
         try {
-            JSONArray jsonArray = new JSONArray(infoBean.tag);
-            String tagStr = "";
-            for (int i = 0; i < jsonArray.length(); i++) {
-                tagStr = tagStr + jsonArray.get(i).toString() + ",";
+            if (!TextUtils.isEmpty(infoBean.tag)) {
+                JSONArray jsonArray = new JSONArray(infoBean.tag);
+                String tagStr = "";
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    tagStr = tagStr + jsonArray.get(i).toString() + ",";
+                }
+                if (tagStr.length() > 0) {
+                    tagStr = tagStr.substring(0, tagStr.length() - 1);
+                }
+                tvTag.setText(tagStr);
             }
-            if (tagStr.length() > 0) {
-                tagStr = tagStr.substring(0, tagStr.length() - 1);
-            }
-            tvTag.setText(tagStr);
         } catch (Exception e) {
             e.printStackTrace();
         }
