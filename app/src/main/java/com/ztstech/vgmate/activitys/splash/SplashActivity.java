@@ -10,8 +10,13 @@ import com.ztstech.vgmate.activitys.complete_info.FillInfoActivity;
 import com.ztstech.vgmate.activitys.login.LoginActivity;
 import com.ztstech.vgmate.activitys.main.MainActivity;
 import com.ztstech.vgmate.base.BaseActivity;
+import com.ztstech.vgmate.data.beans.UserBean;
 import com.ztstech.vgmate.data.repository.UserRepository;
 import com.ztstech.vgmate.utils.LocationUtils;
+
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 public class SplashActivity extends BaseActivity {
 
@@ -24,7 +29,14 @@ public class SplashActivity extends BaseActivity {
             public void run() {
                 if (UserRepository.getInstance().isUserLogined()) {
                     //刷新登录
-                    UserRepository.getInstance().refreshLogin();
+                    UserRepository.getInstance().refreshLogin().observeOn(AndroidSchedulers.mainThread())
+                            .subscribeOn(Schedulers.io())
+                            .subscribe(new Action1<UserBean>() {
+                                @Override
+                                public void call(UserBean userBean) {
+
+                                }
+                            });
                 }
                 runOnUiThread(new Runnable() {
                     @Override
