@@ -9,9 +9,11 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.activitys.category_info.CategoryTagsActivity;
 import com.ztstech.vgmate.activitys.complete_org_info_v2.CompleteOrgInfoV2Activity;
 import com.ztstech.vgmate.activitys.get_chance.GetChanceActivity;
 import com.ztstech.vgmate.activitys.gps.GpsActivity;
+import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
 import com.ztstech.vgmate.activitys.org_detail.dialog.org_confirm.OrgConfirmDialog;
 import com.ztstech.vgmate.activitys.org_detail.dialog.org_delete.OrgDeleteDialog;
 import com.ztstech.vgmate.constants.Constants;
@@ -109,6 +111,18 @@ public class OrgDetailActivity extends MVPActivity<OrgDetailContract.Presenter> 
                 confirmDialog.setDetailLocationByGps(location);
             }
 
+        }else if (requestCode == OrgConfirmDialog.REQ_CATEGORY) {
+            if (confirmDialog != null && confirmDialog.isShowing()) {
+                String category = data.getStringExtra(CategoryTagsActivity.PARAM_ID);
+                String categoryText = data.getStringExtra(CategoryTagsActivity.PARAM_NAME);
+                confirmDialog.setCategory(category, categoryText);
+            }
+        }else if (requestCode == OrgConfirmDialog.REQ_LOCATION) {
+            if (confirmDialog != null && confirmDialog.isShowing()) {
+                String area = data.getStringExtra(LocationSelectActivity.RESULT_A);
+                String name = data.getStringExtra(LocationSelectActivity.RESULT_NAME);
+                confirmDialog.setDistrict(area, name);
+            }
         }
     }
 

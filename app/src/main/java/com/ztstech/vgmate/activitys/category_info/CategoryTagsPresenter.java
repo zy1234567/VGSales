@@ -30,17 +30,7 @@ import rx.Subscriber;
  */
 public class CategoryTagsPresenter implements CategoryTagsContract.IPresenter, ExpandableLayout.LinesChangedListener {
 
-    /**
-     * intent key id
-     * activity result id 用 "," 隔开
-     */
-    public static final String PARAM_ID = "feedBackIds";
 
-    /**
-     * intent key name
-     * activity result name 用"、"隔开
-     */
-    public static final String PARAM_NAME = "feedBackNames";
 
     Context context;
     ExpandableLayout layoutTags;
@@ -191,8 +181,8 @@ public class CategoryTagsPresenter implements CategoryTagsContract.IPresenter, E
         if (!builder.toString().isEmpty()) {
             feedBackNames = builder.toString().substring(0, builder.length() - 1);
         }
-        feedBackIntent.putExtra(PARAM_ID, feedBackIds);
-        feedBackIntent.putExtra(PARAM_NAME, feedBackNames);
+        feedBackIntent.putExtra(CategoryTagsActivity.PARAM_ID, feedBackIds);
+        feedBackIntent.putExtra(CategoryTagsActivity.PARAM_NAME, feedBackNames);
         return feedBackIntent;
     }
 

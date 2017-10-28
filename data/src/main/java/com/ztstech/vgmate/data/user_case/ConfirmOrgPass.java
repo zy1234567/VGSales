@@ -3,6 +3,7 @@ package com.ztstech.vgmate.data.user_case;
 import com.ztstech.vgmate.data.api.OrgInfoApi;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.repository.UserRepository;
+import com.ztstech.vgmate.data.utils.RetrofitUtils;
 
 import rx.Observable;
 
@@ -26,11 +27,12 @@ public class ConfirmOrgPass implements UserCase<Observable<BaseRespBean>>{
         this.address = address;
         this.gps = gps;
         this.contphone = contphone;
+        api = RetrofitUtils.createService(OrgInfoApi.class);
     }
 
     @Override
     public Observable<BaseRespBean> run() {
-        return api.confirmOrgInfo(null, rbiid, null, "00", oname, otype, district, address, gps,
+        return api.confirmOrgInfo("", rbiid, "", "00", oname, otype, district, address, gps,
                 contphone, UserRepository.getInstance().getAuthId());
     }
 }

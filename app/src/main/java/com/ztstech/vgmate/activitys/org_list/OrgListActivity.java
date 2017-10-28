@@ -1,6 +1,7 @@
 package com.ztstech.vgmate.activitys.org_list;
 
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -146,5 +147,10 @@ public class OrgListActivity extends MVPActivity<OrgListContract.Presenter> impl
      */
     public String getLocationId() {
         return mDefaultLocation;
+    }
+
+    private void refreshFragment() {
+        int currentItem = viewPager.getCurrentItem();
+
     }
 }

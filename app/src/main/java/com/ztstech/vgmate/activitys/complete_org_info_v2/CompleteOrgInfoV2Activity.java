@@ -262,7 +262,7 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
             infoBean = new OrgInfoBean.InfoBean();
         }
         if (REQ_CATEGORY == requestCode) {
-            infoBean.otype = data.getStringExtra(CategoryTagsPresenter.PARAM_ID);
+            infoBean.otype = data.getStringExtra(CategoryTagsActivity.PARAM_ID);
         }else if (REQ_CHARGE_DESC == requestCode) {
             infoBean.tollintroduction =
                     data.getStringExtra(EditOrgInfoMultipleInputActivity.RESULT_TEXT);

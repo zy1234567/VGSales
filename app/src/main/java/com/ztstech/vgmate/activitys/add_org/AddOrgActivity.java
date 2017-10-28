@@ -79,8 +79,8 @@ public class AddOrgActivity extends MVPActivity<AddOrgContract.Presenter> implem
             return;
         }
         if (REQ_TAG == requestCode) {
-            String name = data.getStringExtra(CategoryTagsPresenter.PARAM_NAME);
-            String ids = data.getStringExtra(CategoryTagsPresenter.PARAM_ID);
+            String name = data.getStringExtra(CategoryTagsActivity.PARAM_NAME);
+            String ids = data.getStringExtra(CategoryTagsActivity.PARAM_ID);
             tvTag.setText(name);
             tvTag.setTag(ids);
         }else if (REQ_GPS == requestCode) {

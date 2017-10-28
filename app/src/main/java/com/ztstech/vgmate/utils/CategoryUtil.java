@@ -1,5 +1,7 @@
 package com.ztstech.vgmate.utils;
 
+import android.text.TextUtils;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ztstech.vgmate.base.BaseApplication;
@@ -57,6 +59,28 @@ public class CategoryUtil {
     public static String getCategoryName(String cateId) {
 
         return categoryMaps.get(cateId);
+    }
+
+    /**
+     * 根据id获取名称
+     * @param cateIds 以,隔开的多个id
+     * @return
+     */
+    public static String getCategoryNames(String cateIds) {
+        if (TextUtils.isEmpty(cateIds)) {
+            return cateIds;
+        }
+        String[] ids = cateIds.split(",");
+        StringBuilder sb = new StringBuilder();
+        for (String id : ids) {
+            sb.append(categoryMaps.get(id));
+            sb.append("、");
+        }
+        String result = sb.toString();
+        if (result.length() != 0) {
+            result = result.substring(0, result.length() - 1);
+        }
+        return result;
     }
 
     /**

@@ -15,7 +15,9 @@ import android.widget.TextView;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.ViewImpl;
+import com.ztstech.vgmate.activitys.category_info.CategoryTagsActivity;
 import com.ztstech.vgmate.activitys.gps.GpsActivity;
+import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
 import com.ztstech.vgmate.utils.CategoryUtil;
 import com.ztstech.vgmate.utils.ContractUtils;
@@ -32,7 +34,12 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
         OrgConfirmContract.View {
 
     public static final int REQ_CONTACT = 1;
+
     public static final int REQ_GPS = 2;
+
+    public static final int REQ_CATEGORY = 3;
+
+    public static final int REQ_LOCATION = 4;
 
     private View contentView;
 
@@ -86,6 +93,8 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
         tvContact.setOnClickListener(this);
         tvSubmit.setOnClickListener(this);
         tvGps.setOnClickListener(this);
+        tvArea.setOnClickListener(this);
+        tvCategory.setOnClickListener(this);
 
         setCancelable(false);
 
@@ -103,7 +112,8 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
 
         //设置数据
         etOrgName.setText(bean.rbioname);
-        tvCategory.setText(CategoryUtil.getCategoryId(bean.rbiotype));
+
+        tvCategory.setText(CategoryUtil.getCategoryNames(bean.rbiotype));
         tvArea.setText(LocationUtils.getLocationNameByCode(bean.rbidistrict));
         // TODO: 2017/10/11 后台没有gps信息
         etLocation.setText(bean.rbiaddress);
@@ -115,20 +125,49 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
         this.listener = listener;
     }
 
+    /**
+     * 设置电话
+     * @param text
+     */
     public void setPhone(String text) {
         if (!TextUtils.isEmpty(text)) {
             etPhone.setText(text.trim());
         }
     }
 
+    /**
+     * 设置gps信息
+     * @param gps
+     */
     public void setGps(String gps) {
         tvGps.setText(gps);
     }
 
+    /**
+     * 根据gps信息设置详细地址
+     * @param gpsLocation
+     */
     public void setDetailLocationByGps(String gpsLocation) {
         if (etLocation.getText().length() == 0) {
             etLocation.setText(gpsLocation);
         }
+    }
+
+    /**
+     * 设置标签
+     */
+    public void setCategory(String categoryId, String categoryName) {
+        tvCategory.setText(categoryName);
+        bean.rbiotype = categoryId;
+    }
+
+    /**
+     * 设置区号
+     * @param district
+     */
+    public void setDistrict(String district, String name) {
+        tvArea.setText(name);
+        bean.rbidistrict = district;
     }
 
     @Override
@@ -143,6 +182,15 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
         }else if (view == tvGps) {
             Intent it = new Intent(activityContext, GpsActivity.class);
             activityContext.startActivityForResult(it, REQ_GPS);
+        }else if (view == tvArea) {
+            Intent it = new Intent(activityContext, LocationSelectActivity.class);
+            it.putExtra(LocationSelectActivity.ARG_DEFAULT_AREA, bean.rbidistrict);
+            activityContext.startActivityForResult(it, REQ_LOCATION);
+        }else if (view == tvCategory) {
+            Intent it = new Intent(activityContext, CategoryTagsActivity.class);
+            it.putExtra(CategoryTagsActivity.ARG_IDS, bean.rbiotype);
+            it.putExtra(CategoryTagsActivity.ARG_NAMES, CategoryUtil.getCategoryName(bean.rbiotype));
+            activityContext.startActivityForResult(it, REQ_CATEGORY);
         }
     }
 

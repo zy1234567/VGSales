@@ -30,6 +30,18 @@ public class CategoryTagsActivity extends AppCompatActivity implements CategoryT
     /**传入默认选中的名称*/
     public static final String ARG_NAMES = "selectedNames";
 
+    /**
+     * intent key id
+     * activity result id 用 "," 隔开
+     */
+    public static final String PARAM_ID = "feedBackIds";
+
+    /**
+     * intent key name
+     * activity result name 用"、"隔开
+     */
+    public static final String PARAM_NAME = "feedBackNames";
+
     @BindView(R.id.img_back)
     ImageView imgBack;
     @BindView(R.id.title)
