@@ -21,6 +21,7 @@
             android:src="@mipmap/return_nav"/>
 
         <TextView
+            android:lines="1"
             android:ellipsize="middle"
             android:drawableRight="@drawable/sel_drop_down"
             android:textColor="@color/color_100"

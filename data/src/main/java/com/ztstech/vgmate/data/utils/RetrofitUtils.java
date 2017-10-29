@@ -28,6 +28,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Emitter;
 import rx.Observable;
+import rx.Subscriber;
 import rx.functions.Action1;
 
 /**
@@ -68,6 +69,30 @@ public class RetrofitUtils {
 
         }
         return createService(UploadApi.class).uploadFile("savetype", parts);
+    }
+
+    /**
+     * 如果文件存在就上传，否则直接回调，url为""
+     * @param files 文件列表
+     * @return
+     */
+    public static Observable<UploadImageBean> uploadIfExist(File[] files) {
+        if (files == null || files.length == 0) {
+            return new Observable<UploadImageBean>(new Observable.OnSubscribe<UploadImageBean>() {
+                @Override
+                public void call(Subscriber<? super UploadImageBean> subscriber) {
+                    UploadImageBean fakeResult = new UploadImageBean();
+                    fakeResult.status = NetConstants.STATUS_SUCCEED;
+                    fakeResult.errmsg = null;
+                    fakeResult.suourls = "";
+                    fakeResult.urls = "";
+                    subscriber.onNext(fakeResult);
+                    subscriber.onCompleted();
+                }
+            }){};
+        }else {
+            return uploadFile(files);
+        }
     }
 
     /**

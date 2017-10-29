@@ -23,6 +23,7 @@ import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.pic_video.EditO
 import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.signle_line.EditOrgInfoSignleInputActivity;
 import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.teacher.list.EditOrgInfoTeacherActivity;
 import com.ztstech.vgmate.activitys.enroll_tag.EnrollTagActivity;
+import com.ztstech.vgmate.activitys.get_chance.GetChanceActivity;
 import com.ztstech.vgmate.activitys.gps.GpsActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
 import com.ztstech.vgmate.data.beans.OrgInfoBean;
@@ -74,6 +75,8 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
     public static final int REQ_CHARGE_DESC = 13;
     /**请求老师、教练*/
     public static final int REQ_TEACHERS = 14;
+    /**请求沟通记录*/
+    public static final int REQ_COMMUNICATE = 15;
 
     /**保存的数据*/
     public static final String KEY_SAVED_INSTANCE = "key_saved_instance";
@@ -149,6 +152,8 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
         tvTeacher.setOnClickListener(this);
         tvOrgDesc.setOnClickListener(this);
         tvDetailLocation.setOnClickListener(this);
+        topBar.getRightTextView().setOnClickListener(this);
+
 
         rbiid = getIntent().getIntExtra(ARG_RBIID, 0);
 
@@ -232,6 +237,13 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
             it.putExtra(CategoryTagsActivity.ARG_IDS, infoBean.otype);
             it.putExtra(CategoryTagsActivity.ARG_NAMES, tvCategory.getText().toString());
             startActivityForResult(it, REQ_CATEGORY);
+        }else if (view == topBar.getRightTextView()) {
+            mPresenter.editOrgInfo(rbiid, infoBean);
+        }else if (view == tvMore) {
+            Intent it = new Intent(this, GetChanceActivity.class);
+            it.putExtra(GetChanceActivity.ARG_TITLE, infoBean.rbioname);
+            it.putExtra(GetChanceActivity.ARG_RBIID, String.valueOf(rbiid));
+            startActivityForResult(it, REQ_COMMUNICATE);
         }
     }
 
@@ -293,7 +305,6 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
         }else if (REQ_ORG_DESC == requestCode) {
             infoBean.introduction = data.getStringExtra(EditOrgInfoMultipleInputActivity.RESULT_TEXT);
         }else if (REQ_TEACHERS == requestCode) {
-
         }else if (REQ_TAG == requestCode) {
             infoBean.tag = data.getStringExtra(EnrollTagActivity.RESULT_TAG);
         }
@@ -341,7 +352,9 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
             }
         }
 
-        tvManager.setText(infoBean.manager + " " + infoBean.managerphone);
+        if (!TextUtils.isEmpty(infoBean.manager) && !TextUtils.isEmpty(infoBean.managerphone)) {
+            tvManager.setText(infoBean.manager + " " + infoBean.managerphone);
+        }
         tvDetailLocation.setText(infoBean.address);
 
         if (!TextUtils.isEmpty(infoBean.otype)) {
@@ -422,6 +435,8 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
     public void editOrgInfoFinish(@Nullable String errmsg) {
         if (errmsg != null) {
             ToastUtil.toastCenter(this, "编辑机构资料失败：" + errmsg);
+        }else {
+            ToastUtil.toastCenter(this, "编辑机构成功");
         }
     }
 }

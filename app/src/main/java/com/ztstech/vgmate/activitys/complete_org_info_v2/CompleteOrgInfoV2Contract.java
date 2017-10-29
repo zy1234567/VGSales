@@ -28,9 +28,8 @@ interface CompleteOrgInfoV2Contract {
 
         /**
          * 编辑机构资料
-         * @param bean
          */
-        void editOrgInfo(OrgInfoBean.InfoBean bean);
+        void editOrgInfo(int rbiid, OrgInfoBean.InfoBean bean);
 
     }
 }
