@@ -16,7 +16,6 @@ public interface Constants {
     String DATA_TYPE_INFORMATION = "00";
 
 
-//     00以生效打点(待认领)，01无效打点，02待审核打点(待确定),03以认领机构（即是以生效打点并且有机构id）,04管理端
     /**待确认*/
     String ORG_STATUS_UN_CONFIRM = "02";
     /**已确定*/
@@ -25,5 +24,49 @@ public interface Constants {
     String ORG_STATUS_WEB = "04";
     /**待审批*/
     String ORG_STATUS_UN_APPROVE = "03";
+
+
+    /**
+     * 用户身份通过
+     */
+    String USER_ID_PASS = "00";
+    /**
+     * 用户身份审核中
+     */
+    String USER_ID_CHECKING = "01";
+    /**
+     * 用户身份拒绝
+     */
+    String USER_ID_REFUSE = "02";
+    /**
+     * 用户身份冻结
+     */
+    String USER_ID_FREEZE = "03";
+    /**
+     * 用户身份将要审核
+     */
+    String USER_ID_WILL_CHECK = "04";
+
+
+    /**
+     * 分享类型，纯文字
+     */
+    String SHARE_TYPE_TEXT = "01";
+    /**
+     * 分享类型，纯图片s
+     */
+    String SHARE_TYPE_IMG = "02";
+    /**
+     * 分享类型，文字加图片
+     */
+    String SHARE_TYPE_TEXT_IMG = "03";
+    /**
+     * 分享类型，纯网址
+     */
+    String SHARE_TYPE_URL = "04";
+    /**
+     * 文字加网址
+     */
+    String SHARE_TYPE_TEXT_URL = "05";
 
 }

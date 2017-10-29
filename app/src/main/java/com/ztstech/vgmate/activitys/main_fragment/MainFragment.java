@@ -19,8 +19,10 @@ import com.ztstech.vgmate.activitys.main_fragment.adapter.MainFragmentPagerAdapt
 import com.ztstech.vgmate.activitys.org_list.OrgListActivity;
 import com.ztstech.vgmate.activitys.sell_chance.SellChanceActivity;
 import com.ztstech.vgmate.activitys.sell_mate_list.SellMateListActivity;
+import com.ztstech.vgmate.constants.Constants;
 import com.ztstech.vgmate.data.beans.MainPageBean;
 import com.ztstech.vgmate.data.beans.UserBean;
+import com.ztstech.vgmate.data.repository.UserRepository;
 import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 
@@ -49,6 +51,10 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
 
     @BindView(R.id.tv_location)
     TextView tvLocation;
+
+    /**身份状态*/
+    @BindView(R.id.tv_id_status)
+    ImageView imgIdStatus;
 
     /**预计到账*/
     @BindView(R.id.tv_money_ready)
@@ -102,6 +108,12 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        mPresenter.loadUserInfo();
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
@@ -145,6 +157,13 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
         tvMoneyAlready.setText("¥" + String.valueOf(mainPageBean.info.realmoney));
         tvNewChance.setText("销售机会：+" + mainPageBean.info.comnum);
         tvName.setText(mainPageBean.info.uname);
+
+        if (Constants.USER_ID_CHECKING.equals(UserRepository.getInstance().getUser().info.status)) {
+            //身份审核中
+            imgIdStatus.setVisibility(View.VISIBLE);
+        }else {
+            imgIdStatus.setVisibility(View.GONE);
+        }
 
         StringBuilder locationStr = new StringBuilder();
         String p = LocationUtils.getPName(mainPageBean.info.district);

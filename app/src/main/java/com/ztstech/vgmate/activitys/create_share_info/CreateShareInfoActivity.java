@@ -34,6 +34,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.create_share_add_cover.CreateShareAddCoverActivity;
 import com.ztstech.vgmate.activitys.create_share_add_desc.CreateShareAddDescActivity;
+import com.ztstech.vgmate.constants.Constants;
 import com.ztstech.vgmate.data.dto.CreateShareData;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.weigets.CustomGridView;
@@ -89,6 +90,7 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
 
     private TakePhoto takePhoto;
     private InvokeParam invokeParam;
+
 
     private CreateShareData createShareData;
 
@@ -324,38 +326,7 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
         if (result != null) {
             String uri = result.getImage().getOriginalPath();
             final File f = new File(uri);
-            final View itemView = LayoutInflater.from(this).inflate(R.layout.item_img_with_del,
-                    customGridView, false);
-            ImageView img = itemView.findViewById(R.id.img);
-            Glide.with(this).load(f).into(img);
-            View del = itemView.findViewById(R.id.del);
-            final TextView tvAddDesc = itemView.findViewById(R.id.tv_desc);
-
-            tvAddDesc.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    tvCurrentReqDesc = tvAddDesc;       //记录当前textView
-                    //请求图片描述
-                    Intent it = new Intent(CreateShareInfoActivity.this,
-                            CreateShareAddDescActivity.class);
-                    it.putExtra(CreateShareAddDescActivity.ARG_DESC, tvAddDesc.getText());
-                    //存储当前描述位置，在请求成功返回时更新view
-                    startActivityForResult(it, REQ_DESC);
-                }
-            });
-
-            imageFiles.add(0, f);
-            customGridView.addView(itemView, 0);
-
-            del.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    customGridView.removeView(itemView);
-                    imageFiles.remove(f);
-                }
-            });
-
-
+            addImage(f);
         }
     }
 
@@ -375,7 +346,55 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
         return type;
     }
 
+    /**
+     * 增加一张图片
+     * @param f
+     */
+    private void addImage(final File f) {
+        final View itemView = LayoutInflater.from(this).inflate(R.layout.item_img_with_del,
+                customGridView, false);
+        ImageView img = itemView.findViewById(R.id.img);
+        Glide.with(this).load(f).into(img);
+        View del = itemView.findViewById(R.id.del);
+        final TextView tvAddDesc = itemView.findViewById(R.id.tv_desc);
+
+        tvAddDesc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tvCurrentReqDesc = tvAddDesc;       //记录当前textView
+                //请求图片描述
+                Intent it = new Intent(CreateShareInfoActivity.this,
+                        CreateShareAddDescActivity.class);
+                it.putExtra(CreateShareAddDescActivity.ARG_DESC, tvAddDesc.getText());
+                //存储当前描述位置，在请求成功返回时更新view
+                startActivityForResult(it, REQ_DESC);
+            }
+        });
+
+        imageFiles.add(0, f);
+        customGridView.addView(itemView, 0);
+
+        del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                customGridView.removeView(itemView);
+                imageFiles.remove(f);
+            }
+        });
+    }
+
+
+
+
     private void setDataToView(CreateShareData data) {
-        // TODO: 2017/10/23 设置编辑数据 
+        etTitle.setText(data.title);
+        if (Constants.SHARE_TYPE_TEXT.equals(data.ntype)) {
+            etContent.setText(data.summary);
+        }else if (Constants.SHARE_TYPE_IMG.equals(data.ntype)) {
+            String[] imgUrls = data.contentpicsurl.split(",");
+            for (String imgUrl: imgUrls) {
+
+            }
+        }
     }
 }

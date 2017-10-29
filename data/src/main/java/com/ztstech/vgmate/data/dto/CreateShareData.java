@@ -7,6 +7,8 @@ import java.io.File;
  * 创建分享bean
  */
 public class CreateShareData {
+
+
 //    @param title 标题
 //  * @param summary 内容
 //  * @param contentpicurl 内容图片地址

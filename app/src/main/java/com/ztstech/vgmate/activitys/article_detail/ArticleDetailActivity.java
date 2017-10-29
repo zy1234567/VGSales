@@ -114,7 +114,8 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
 
         topBar.getRightImage().setOnClickListener(this);
 
-
+        //隐藏右侧编辑按钮
+        topBar.getRightImage().setVisibility(View.GONE);
 
         etComment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -218,28 +219,24 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
             mPresenter.comment(etComment.getText().toString(), data);
         }else if (view == topBar.getRightImage()) {
             //编辑分享
-//            if (TextUtils.equals(Constants.DATA_TYPE_INFORMATION, data.type)) {
-                //如果是资讯
-                Intent it = new Intent(this, CreateShareInfoActivity.class);
-                CreateShareData createShareData = new CreateShareData();
-                createShareData.contentpicurl = data.contentpicsurl;
-                createShareData.contentpicsurl = data.contentpicurl;
-                createShareData.picurl = data.picurl;
-                createShareData.picsurl = data.picsurl;
-                createShareData.title = data.title;
-                createShareData.url = data.url;
-                createShareData.nid = data.nid;
-                createShareData.picdescribe = data.picdescribe;
-                createShareData.ntype = data.ntype;
-                createShareData.summary = data.summary;
+            Intent it = new Intent(this, CreateShareInfoActivity.class);
+            CreateShareData createShareData = new CreateShareData();
+            createShareData.contentpicurl = data.contentpicsurl;
+            createShareData.contentpicsurl = data.contentpicurl;
+            createShareData.picurl = data.picurl;
+            createShareData.picsurl = data.picsurl;
+            createShareData.title = data.title;
+            createShareData.url = data.url;
+            createShareData.nid = data.nid;
+            createShareData.picdescribe = data.picdescribe;
+            createShareData.ntype = data.ntype;
+            createShareData.type = data.type;
+            createShareData.summary = data.summary;
 
-                String jsonStr = new Gson().toJson(createShareData);
-                startActivityForResult(it, REQ_EDIT);
+            String jsonStr = new Gson().toJson(createShareData);
+            it.putExtra(CreateShareInfoActivity.ARG_EDIT_DATA, jsonStr);
+            startActivityForResult(it, REQ_EDIT);
 
-//            }else if (TextUtils.equals(Constants.DATA_TYPE_NOTICE, data.type)) {
-//                //如果是通告
-//
-//            }
         }
     }
 

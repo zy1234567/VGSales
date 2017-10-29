@@ -38,6 +38,10 @@ public class MainPresenter extends PresenterImpl<MainContract.View> implements
             }
         }.run(new GetMainPageBean(getUserDistrict()).run());
 
+    }
+
+    @Override
+    public void loadUserInfo() {
         //加载用户信息
         UserBean userBean = userRepository.getUser();
         if (userBean != null) {
