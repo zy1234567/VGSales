@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.ztstech.vgmate.base.BaseApplication;
+import com.ztstech.vgmate.base.BaseApplicationLike;
 
 /**
  * Created by zhiyuan on 2017/7/28.
@@ -32,14 +33,14 @@ public class ViewUtils {
      * dp转px
      */
     public static int dp2px(float dpValue) {
-        return dp2px(BaseApplication.getApplicationInstance(), dpValue);
+        return dp2px(BaseApplicationLike.getApplicationInstance(), dpValue);
     }
 
     /**
      * px转dp
      */
     public static int px2dp(float pxValue) {
-        return px2dp(BaseApplication.getApplicationInstance(), pxValue);
+        return px2dp(BaseApplicationLike.getApplicationInstance(), pxValue);
     }
 
     public static int dp2px(Context context, float dpValue) {

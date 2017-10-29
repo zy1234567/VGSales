@@ -3,6 +3,7 @@ package com.ztstech.vgmate.activitys.main;
 
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,9 @@ import com.ztstech.vgmate.activitys.edit_info.EditInfoActivity;
 import com.ztstech.vgmate.activitys.main.adapter.MainPagerAdapter;
 import com.ztstech.vgmate.activitys.main.widget.BottomBar;
 import com.ztstech.vgmate.activitys.setting.SettingActivity;
+import com.ztstech.vgmate.constants.Constants;
 import com.ztstech.vgmate.data.api.CreateShareApi;
+import com.ztstech.vgmate.data.repository.UserRepository;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import butterknife.BindView;
@@ -83,12 +86,27 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
         View tvShareInfo = dialog.findViewById(R.id.tv_share_info);
         View tvShareNotice = dialog.findViewById(R.id.tv_share_notice);
 
+        View line1 = dialog.findViewById(R.id.line1);
+        View line2 = dialog.findViewById(R.id.line2);
+        View line3 = dialog.findViewById(R.id.line3);
+
 
         tvAddMate.setOnClickListener(this);
         dialogContainer.setOnClickListener(this);
         tvShareInfo.setOnClickListener(this);
         tvAddOrg.setOnClickListener(this);
         tvShareNotice.setOnClickListener(this);
+
+        if (!TextUtils.equals(Constants.USER_ID_PASS,
+                UserRepository.getInstance().getUser().info.status)) {
+            //未审核通过
+            tvAddMate.setVisibility(View.GONE);
+            tvShareInfo.setVisibility(View.GONE);
+            tvShareNotice.setVisibility(View.GONE);
+            line1.setVisibility(View.GONE);
+            line2.setVisibility(View.GONE);
+            line3.setVisibility(View.GONE);
+        }
 
 
         addContentView(dialog, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,

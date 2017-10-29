@@ -27,6 +27,7 @@ import android.widget.ListView;
 
 
 import com.ztstech.vgmate.base.BaseApplication;
+import com.ztstech.vgmate.base.BaseApplicationLike;
 
 
 import java.io.BufferedOutputStream;
@@ -136,8 +137,8 @@ public class CommonUtil {
      */
     public static String getVersion() {
         try {
-            PackageManager manager = BaseApplication.getApplicationInstance().getPackageManager();
-            PackageInfo info = manager.getPackageInfo(BaseApplication.getApplicationInstance()
+            PackageManager manager = BaseApplicationLike.getApplicationInstance().getPackageManager();
+            PackageInfo info = manager.getPackageInfo(BaseApplicationLike.getApplicationInstance()
                     .getPackageName(), 0);
             String version = info.versionName;
             return version;

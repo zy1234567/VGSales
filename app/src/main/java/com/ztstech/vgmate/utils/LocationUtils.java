@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ztstech.vgmate.base.BaseApplication;
+import com.ztstech.vgmate.base.BaseApplicationLike;
 import com.ztstech.vgmate.data.beans.LocationBean;
 
 import java.util.HashMap;
@@ -33,7 +34,7 @@ public class LocationUtils {
             public void run() {
                 nameCodeMap = new HashMap<>();
                 String locationJson = CommonUtil.getDataFromAssets(
-                        BaseApplication.getApplicationInstance().getApplicationContext(), "location.txt");
+                        BaseApplicationLike.getApplicationInstance().getApplicationContext(), "location.txt");
                 locationBeanList = new Gson().fromJson(locationJson,
                         new TypeToken<List<LocationBean>>() {
                         }.getType());

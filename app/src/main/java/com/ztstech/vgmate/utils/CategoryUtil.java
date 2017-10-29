@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ztstech.vgmate.base.BaseApplication;
+import com.ztstech.vgmate.base.BaseApplicationLike;
 import com.ztstech.vgmate.data.beans.CategoriesBean;
 
 import java.io.BufferedReader;
@@ -181,13 +182,14 @@ public class CategoryUtil {
      */
     public static String getJsonFromAssets(String fileName) {
         try {
-            InputStreamReader inputReader = new InputStreamReader(BaseApplication.getApplicationInstance()
+            InputStreamReader inputReader = new InputStreamReader(BaseApplicationLike.getApplicationInstance()
                     .getResources().getAssets().open(fileName));
             BufferedReader bufReader = new BufferedReader(inputReader);
             String line = "";
             String Result = "";
-            while ((line = bufReader.readLine()) != null)
+            while ((line = bufReader.readLine()) != null) {
                 Result += line;
+            }
             return Result;
         } catch (Exception e) {
             e.printStackTrace();

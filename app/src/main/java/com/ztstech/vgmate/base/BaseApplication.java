@@ -12,7 +12,12 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.tinker.loader.app.TinkerApplication;
+import com.tencent.tinker.loader.shareutil.ShareConstants;
 import com.ztstech.vgmate.R;
+import com.ztstech.vgmate.data.BuildConfig;
 import com.ztstech.vgmate.data.repository.UserPreferenceManager;
 
 /**
@@ -20,7 +25,7 @@ import com.ztstech.vgmate.data.repository.UserPreferenceManager;
  * app 实例
  */
 
-public class BaseApplication extends MultiDexApplication {
+public class BaseApplication extends TinkerApplication {
 
     static {
         //设置全局的Header构建器
@@ -41,16 +46,22 @@ public class BaseApplication extends MultiDexApplication {
         });
     }
 
-    private static BaseApplication applicationInstance;
 
-    public static BaseApplication getApplicationInstance() {
-        return applicationInstance;
+    public BaseApplication() {
+        super(ShareConstants.TINKER_ENABLE_ALL, "com.ztstech.vgmate.base.BaseApplicationLike",
+                "com.tencent.tinker.loader.TinkerLoader", false);
     }
+
+
 
     @Override
     public void onCreate() {
         super.onCreate();
-        applicationInstance = this;
-        UserPreferenceManager.getInstance().initPreference(this);
+
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
     }
 }

@@ -251,14 +251,14 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
                 return;
             }
             currentImageView = (ImageView) view;
-            new TakePhotoHelper(this, takePhoto, true).show();
+            new TakePhotoHelper(this, takePhoto, true, 56, 35).show();
         }else if (view == ivIdBack) {
             if (!privateInfoEditEnabled) {
                 showPrivateInfoDisabled();
                 return;
             }
             currentImageView = (ImageView) view;
-            new TakePhotoHelper(this, takePhoto, true).show();
+            new TakePhotoHelper(this, takePhoto, true, 56, 35).show();
         }else if (view == ivCard) {
             if (!privateInfoEditEnabled) {
                 showPrivateInfoDisabled();
