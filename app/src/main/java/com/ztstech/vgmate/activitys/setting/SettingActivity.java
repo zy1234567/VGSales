@@ -1,9 +1,7 @@
 package com.ztstech.vgmate.activitys.setting;
 
-import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,6 +9,9 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.edit_info.EditInfoActivity;
 import com.ztstech.vgmate.activitys.login.LoginActivity;
+import com.ztstech.vgmate.activitys.setting.change_phone.ChangePhoneDialog;
+import com.ztstech.vgmate.weigets.IOSStyleDialog;
+import com.ztstech.vgmate.activitys.setting.send_code.ChangePhoneSendCodeDialog;
 import com.ztstech.vgmate.data.events.LogoutEvent;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.ToastUtil;
@@ -54,6 +55,8 @@ public class SettingActivity extends MVPActivity<SettingContract.Presenter> impl
         tvVersion.setText(CommonUtil.getVersion());
         tvPhone.setText(mPresenter.getPhone());
 
+        tvPhone.setOnClickListener(this);
+
     }
 
     @Override
@@ -72,6 +75,47 @@ public class SettingActivity extends MVPActivity<SettingContract.Presenter> impl
             mPresenter.logout();
         }else if (view == rlId) {
             startActivity(new Intent(this, EditInfoActivity.class));
+        }else if (view == tvPhone) {
+            new IOSStyleDialog(this, "您要修改手机号吗？", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    showChangePhoneSendCodeDialog();
+                }
+            }).show();
         }
     }
+
+
+    /**
+     * 显示更改手机发送验证码对话框
+     */
+    private void showChangePhoneSendCodeDialog() {
+        ChangePhoneSendCodeDialog dialog = new ChangePhoneSendCodeDialog(this,
+                mPresenter.getPhone());
+        dialog.setCallback(new ChangePhoneSendCodeDialog.ChangePhoneCallback() {
+            @Override
+            public void onCheckSucceed(String code) {
+                showChangePhoneDialog( mPresenter.getPhone());
+            }
+        });
+        dialog.show();
+    }
+
+    /**
+     * 显示更改手机号
+     * @param oldPhone
+     */
+    private void showChangePhoneDialog(final String oldPhone) {
+        ChangePhoneDialog dialog = new ChangePhoneDialog(this, oldPhone);
+        dialog.setListener(new ChangePhoneDialog.OnChangePhoneListener() {
+            @Override
+            public void onSucceed(String phone) {
+                tvPhone.setText(oldPhone);
+            }
+        });
+        dialog.show();
+    }
+
+    
 }

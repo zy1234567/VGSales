@@ -23,9 +23,17 @@ import rx.Observable;
 
 public interface LoginApi {
 
-
-    @POST("exempt/sendLogincode.do")
-    Observable<BaseRespBean> sendLoginCode(@Query("phone") String phone);
+    /**
+     * 发送验证码
+     * @param phone
+     * @param type  00：手机登录发送验证码或者修改手机号给旧手机发送验证码
+     *              01: 修改手机号给新手机发送验证码
+     *
+     * @return
+     */
+    @Headers("user-agent: Android")
+    @POST("code/sendLogincode.do")
+    Observable<BaseRespBean> sendLoginCode(@Query("phone") String phone, @Query("type") String type);
 
     @Headers("user-agent: Android")
     @POST("exempt/saleCheckCodeByPhone")
@@ -33,6 +41,7 @@ public interface LoginApi {
                                @Query("type") String type);
 
 
+    @Headers("user-agent: Android")
     @POST("exempt/saleUpdateUserMsg")
     Observable<BaseRespBean> updateUserInfo(@Query("authId") String authId,
                                             @Query("picurl") String picurl,
@@ -49,23 +58,6 @@ public interface LoginApi {
                                             @Query("uid") String uid,
                                             @Query("uname") String uname);
 
-//     data.put("banks", bean.banks);
-//        data.put("picurl", bean.picurl);
-//        data.put("didurl", bean.didurl[0] + "," + bean.didurl[1]);
-//        data.put("cardurl", bean.cardUrl);
-//        data.put("wdistrict", bean.wdistrict);
-//        data.put("sex", bean.sex);
-//        data.put("did", bean.did);
-//        data.put("bname", bean.bname);
-//        data.put("cardNo", bean.cardNo);
-//        data.put("birthday", bean.birthday);
-//        data.put("uname", bean.uname);
-
-//    @POST("exempt/saleUpdateUserMsg")
-//    Observable<BaseRespBean> updateUserInfo(@Body UpdateUserInfoData data);
-//
-//    @POST("exempt/saleUpdateUserMsg")
-//    Observable<BaseRespBean> updateUserInfo(@QueryMap Map<String, Object> data);
     /**
      * 刷新登录
      * @return
@@ -74,7 +66,23 @@ public interface LoginApi {
     @POST("exempt/AppSaleUpdateLoginStatus")
     Observable<UserBean> refreshLogin(@Query("phone") String phone,
                                       @Query("authId") String authId);
-
+    @Headers("user-agent: Android")
     @POST("exempt/AppSaleLoginout")
     Observable<BaseRespBean> logout(@Query("authId") String authId);
+
+
+    /**
+     * 更新手机号
+     * @param phone 旧手机
+     * @param code 验证码
+     * @param type 00仅验证，01验证并根据结果修改手机号
+     * @param newPhone 新手机号
+     * @return
+     */
+    @Headers("user-agent: Android")
+    @POST("exempt/AppSaleUpdateSauserPhone")
+    Observable<UserBean> updatePhone(@Query("phone") String phone,
+                                     @Query("code") String code,
+                                     @Query("type") String type,
+                                     @Query("newphone") String newPhone);
 }

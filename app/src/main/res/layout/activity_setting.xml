@@ -10,6 +10,7 @@
 
 
     <com.ztstech.vgmate.weigets.TopBar
+        android:background="@color/color_109"
         app:showBackNav="true"
         app:barTitle="设置"
         android:layout_width="match_parent"
@@ -46,6 +47,11 @@
             android:layout_height="wrap_content" />
 
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/color_106" />
 
     <RelativeLayout
         android:paddingRight="12dp"

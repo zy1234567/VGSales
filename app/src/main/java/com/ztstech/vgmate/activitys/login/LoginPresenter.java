@@ -6,6 +6,7 @@ import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.UserBean;
 import com.ztstech.vgmate.data.repository.UserRepository;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
+import com.ztstech.vgmate.manager.CountDown;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.lang.ref.WeakReference;
@@ -26,9 +27,16 @@ public class LoginPresenter extends PresenterImpl<LoginContract.View> implements
         super(view);
         userRepository = UserRepository.getInstance();
         if (mCountDown == null) {
-            mCountDown = new CountDown();
+            mCountDown = new CountDown(60);
         }
-        mCountDown.setView(view);
+        mCountDown.setListener(new CountDown.CountdownListener() {
+            @Override
+            public void updateSeconds(int seconds) {
+                if (!mView.isViewFinish()) {
+                    mView.updateSeconds(seconds);
+                }
+            }
+        });
     }
 
     @Override
@@ -79,45 +87,4 @@ public class LoginPresenter extends PresenterImpl<LoginContract.View> implements
         return userRepository.isUserInfoCompleted();
     }
 
-
-    /**
-     * 倒计时控制器
-     */
-    private static class CountDown implements Runnable {
-
-        private Handler handler;
-
-        private int seconds = 60;
-
-        private WeakReference<LoginContract.View> viewRef;
-
-        private boolean isCounting;
-
-        public CountDown() {
-            handler = new Handler();
-        }
-
-        public void start() {
-            isCounting = true;
-            handler.postDelayed(this, 1000);
-        }
-
-        public void setView(LoginContract.View view) {
-            this.viewRef = new WeakReference<LoginContract.View>(view);
-        }
-
-        @Override
-        public void run() {
-            seconds--;
-            if (seconds >= 0) {
-                handler.postDelayed(this, 1000);
-                if (this.viewRef.get() != null) {
-                    this.viewRef.get().updateSeconds(seconds);
-                }
-            }else {
-                seconds = 60;
-            }
-
-        }
-    }
 }

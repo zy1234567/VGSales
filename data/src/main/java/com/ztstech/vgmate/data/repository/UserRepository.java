@@ -70,7 +70,42 @@ public class UserRepository {
      * @return
      */
     public Observable<BaseRespBean> sendLoginCode(@NonNull String phone) {
-        return loginApi.sendLoginCode(phone);
+        return loginApi.sendLoginCode(phone, "00");
+    }
+
+    /**
+     * 发送修改手机号验证码
+     * @param phone
+     * @return
+     */
+    public Observable<BaseRespBean> sendChangePhoneCode(@NonNull String phone) {
+        return loginApi.sendLoginCode(phone, "01");
+    }
+
+
+    /**
+     * 检查更换手机验证码是否正确
+     * @param phone
+     * @param code
+     * @return
+     */
+    public Observable<UserBean> checkChangePhoneCode(@NonNull String phone,
+                                                         @NonNull String code) {
+        return loginApi.updatePhone(phone, code, "00", null);
+    }
+
+    /**
+     * 更换手机号
+     * @param phone
+     * @param code
+     * @param newPhone
+     * @return
+     */
+    public Observable<UserBean> updatePhone(@NonNull String phone,
+                                            @NonNull String code,
+                                            @NonNull String newPhone) {
+
+        return loginApi.updatePhone(phone, code, "01", newPhone);
     }
 
     /**
@@ -150,58 +185,6 @@ public class UserRepository {
      * @return
      */
     public Observable<BaseRespBean> updateUserInfo(final UpdateUserInfoData bean) {
-//        Map<String, Object> data = new HashMap<String, Object>();
-//        data.put("banks", bean.banks);
-//        data.put("picurl", bean.picurl);
-//        data.put("didurl", bean.didurl[0] + "," + bean.didurl[1]);
-//        data.put("cardurl", bean.cardUrl);
-//        data.put("wdistrict", bean.wdistrict);
-//        data.put("sex", bean.sex);
-//        data.put("did", bean.did);
-//        data.put("bname", bean.bname);
-//        data.put("cardNo", bean.cardNo);
-//        data.put("birthday", bean.birthday);
-//        data.put("uname", bean.uname);
-//        return loginApi.updateUserInfo(data).doOnNext(new Action1<BaseRespBean>() {
-//            @Override
-//            public void call(BaseRespBean baseRespBean) {
-//                if (baseRespBean.isSucceed()) {
-//                    user.info.banks = bean.banks;
-//                    user.info.picurl = bean.picurl;
-//                    user.info.didurl = bean.didurl[0] + "," + bean.didurl[1];
-//                    user.info.cardImg = bean.cardUrl;
-//                    user.info.wdistrict = bean.wdistrict;
-//                    user.info.sex = bean.sex;
-//                    user.info.did = bean.did;
-//                    user.info.bname = bean.bname;
-//                    user.info.cardNo = bean.cardNo;
-//                    user.info.birthday = bean.birthday;
-//                    user.info.uname = bean.uname;
-//                    UserPreferenceManager.getInstance().cacheUser(user);
-//                }
-//            }
-//        });
-
-//        return loginApi.updateUserInfo(bean).doOnNext(new Action1<BaseRespBean>() {
-//            @Override
-//            public void call(BaseRespBean baseRespBean) {
-//                if (baseRespBean.isSucceed()) {
-//                    user.info.banks = bean.banks;
-//                    user.info.picurl = bean.picurl;
-//                    user.info.didurl = bean.didurl[0] + "," + bean.didurl[1];
-//                    user.info.cardImg = bean.cardUrl;
-//                    user.info.wdistrict = bean.wdistrict;
-//                    user.info.sex = bean.sex;
-//                    user.info.did = bean.did;
-//                    user.info.bname = bean.bname;
-//                    user.info.cardNo = bean.cardNo;
-//                    user.info.birthday = bean.birthday;
-//                    user.info.uname = bean.uname;
-//                    UserPreferenceManager.getInstance().cacheUser(user);
-//                }
-//            }
-//        });
-
         return loginApi.updateUserInfo(getAuthId(), bean.picurl, bean.didurl, bean.cardUrl, bean.sex, bean.did,
                 bean.bname, bean.banks, bean.status, bean.cardNo, bean.wdistrict, bean.birthday,
                 bean.uid, bean.uname)
