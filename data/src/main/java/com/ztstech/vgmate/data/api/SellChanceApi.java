@@ -1,6 +1,7 @@
 package com.ztstech.vgmate.data.api;
 
 import com.ztstech.vgmate.data.beans.SellChanceBean;
+import com.ztstech.vgmate.data.beans.SellChanceCountBean;
 import com.ztstech.vgmate.data.constants.NetConstants;
 
 import retrofit2.http.GET;
@@ -20,8 +21,18 @@ public interface SellChanceApi {
     String STATUS_SUCCEED = "02";
     String STATUS_CHANCE = "03";
 
+    /**
+     * 销售机会列表查询
+     * @param status
+     * @param currentPage
+     * @param authId
+     * @return
+     */
     @GET("exempt/AppSaleQueryCommendListBySale")
     Observable<SellChanceBean> getSellChance(@Query("status") String status,
                                              @Query("currentPage") int currentPage,
                                              @Query(NetConstants.PARAM_AUTHID) String authId);
+
+    @GET("exempt/saleQueryNewCommendBigData")
+    Observable<SellChanceCountBean> getSellChanceCount(@Query(NetConstants.PARAM_AUTHID) String authId);
 }

@@ -9,6 +9,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.sell_chance.widget.SellChancePagerAdapter;
 import com.ztstech.vgmate.base.BaseActivity;
+import com.ztstech.vgmate.data.beans.SellChanceCountBean;
 
 import butterknife.BindView;
 
@@ -44,10 +45,23 @@ public class SellChanceActivity extends MVPActivity<SellChanceContract.Presenter
 
         viewPager.setAdapter(pagerAdapter);
 
+        mPresenter.loadTitleCount();
+
     }
 
     @Override
     protected SellChanceContract.Presenter initPresenter() {
         return new SellChancePresenter(this);
+    }
+
+    @Override
+    public void onLoadCountFinish(SellChanceCountBean bean) {
+        if (bean.isSucceed() && bean.info != null) {
+            TITLES[0] = "已抢到 " + bean.info.getnum;
+            TITLES[1] = "已注册 " + bean.info.successnum;
+            TITLES[2] = "全部 " + bean.info.sumnum;
+            pagerAdapter.setTitles(TITLES);
+            tabLayout.setupWithViewPager(viewPager);
+        }
     }
 }

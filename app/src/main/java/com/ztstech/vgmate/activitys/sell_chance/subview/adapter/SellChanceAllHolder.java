@@ -11,6 +11,7 @@ import com.ztstech.vgmate.base.SimpleRecyclerAdapter;
 import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.SellChanceBean;
 import com.ztstech.vgmate.utils.LocationUtils;
+import com.ztstech.vgmate.utils.TimeUtils;
 
 import butterknife.BindView;
 
@@ -52,6 +53,8 @@ public class SellChanceAllHolder extends SimpleViewHolder<SellChanceBean.ListBea
         super.refreshView(data);
         tvTitle.setText(data.oname);
         tvLocation.setText(LocationUtils.getFormedString(data.district));
+        tvTime.setText(TimeUtils.InformationTime(data.createtime));
+        tvSectionTitle.setText(data.salename);
         Glide.with(getContext()).load(data.picurl).into(img);
     }
 }
