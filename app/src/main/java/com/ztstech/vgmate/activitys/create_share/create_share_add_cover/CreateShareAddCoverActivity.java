@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -105,14 +106,25 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
         tvNext.setOnClickListener(this);
 
         tvTitle.setText(createShareData.title);
+        tvContent.setText(getDate());
 
         if (createShareData.type.equals(CreateShareApi.SHARE_INFO)) {
             //信息
-            tvContent.setText(createShareData.summary);
             imgCover.setImageResource(R.mipmap.img_uploadcover);
+            if (!TextUtils.isEmpty(createShareData.picurl)) {
+                Glide.with(this).load(createShareData.picurl)
+                        .placeholder(R.mipmap.img_uploadcover)
+                        .into(imgCover);
+                tvNext.setEnabled(true);
+            }
         }else {
-            tvContent.setText(getDate());
             imgCover.setImageResource(R.mipmap.img_uploadcover1);
+            if (!TextUtils.isEmpty(createShareData.picurl)) {
+                Glide.with(this).load(createShareData.picurl)
+                        .placeholder(R.mipmap.img_uploadcover1)
+                        .into(imgCover);
+                tvNext.setEnabled(true);
+            }
         }
     }
 

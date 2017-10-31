@@ -179,6 +179,8 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
         if (createShareData != null) {
             setDataToView(createShareData);
             createShareType = createShareData.type;
+        }else {
+            createShareData = new CreateShareData();
         }
 
 
@@ -203,7 +205,6 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
             }
 
             //实例化存储数据类
-            createShareData = new CreateShareData();
             //类型
             createShareData.type = createShareType;
             createShareData.title = etTitle.getText().toString();
