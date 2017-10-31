@@ -1,10 +1,8 @@
 package com.ztstech.vgmate.activitys.login;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -13,7 +11,7 @@ import android.widget.TextView;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
-import com.ztstech.vgmate.activitys.complete_info.FillInfoActivity;
+import com.ztstech.vgmate.activitys.user_info.complete_info.FillInfoActivity;
 import com.ztstech.vgmate.activitys.main.MainActivity;
 import com.ztstech.vgmate.data.events.LogoutEvent;
 import com.ztstech.vgmate.utils.ToastUtil;

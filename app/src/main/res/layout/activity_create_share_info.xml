@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ztstech.vgmate.activitys.create_share_info.CreateShareInfoActivity">
+    tools:context=".activitys.create_share.create_share_info.CreateShareInfoActivity">
 
 
     <RelativeLayout

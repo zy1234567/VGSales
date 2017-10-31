@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.create_share_add_cover;
+package com.ztstech.vgmate.activitys.create_share.create_share_add_cover;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;

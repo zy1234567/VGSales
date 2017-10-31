@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
-import com.ztstech.vgmate.activitys.edit_info.EditInfoActivity;
+import com.ztstech.vgmate.activitys.user_info.edit_info.EditInfoActivity;
 import com.ztstech.vgmate.activitys.login.LoginActivity;
 import com.ztstech.vgmate.activitys.setting.change_phone.ChangePhoneDialog;
 import com.ztstech.vgmate.weigets.IOSStyleDialog;

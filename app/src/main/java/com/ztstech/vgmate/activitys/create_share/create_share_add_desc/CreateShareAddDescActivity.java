@@ -1,8 +1,6 @@
-package com.ztstech.vgmate.activitys.create_share_add_desc;
+package com.ztstech.vgmate.activitys.create_share.create_share_add_desc;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 

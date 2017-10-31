@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.view.View;
 
 import com.ztstech.vgmate.R;
-import com.ztstech.vgmate.activitys.complete_info.FillInfoActivity;
+import com.ztstech.vgmate.activitys.user_info.complete_info.FillInfoActivity;
 import com.ztstech.vgmate.activitys.login.LoginActivity;
 import com.ztstech.vgmate.activitys.main.MainActivity;
 import com.ztstech.vgmate.base.BaseActivity;

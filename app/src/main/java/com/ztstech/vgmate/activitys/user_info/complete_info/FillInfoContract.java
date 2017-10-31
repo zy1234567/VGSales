@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.complete_info;
+package com.ztstech.vgmate.activitys.user_info.complete_info;
 
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.BaseView;

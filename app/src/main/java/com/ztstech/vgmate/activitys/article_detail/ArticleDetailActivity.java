@@ -1,19 +1,15 @@
 package com.ztstech.vgmate.activitys.article_detail;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ImageSpan;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.EditText;
@@ -24,14 +20,12 @@ import com.google.gson.Gson;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.comment.CommentActivity;
-import com.ztstech.vgmate.activitys.create_share_info.CreateShareInfoActivity;
-import com.ztstech.vgmate.constants.Constants;
+import com.ztstech.vgmate.activitys.create_share.create_share_info.CreateShareInfoActivity;
 import com.ztstech.vgmate.data.beans.MainListBean;
 import com.ztstech.vgmate.data.constants.NetConstants;
 import com.ztstech.vgmate.data.dto.CreateShareData;
 import com.ztstech.vgmate.utils.KeyboardUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
-import com.ztstech.vgmate.utils.ViewUtils;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import butterknife.BindView;

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ztstech.vgmate.activitys.complete_info.FillInfoActivity">
+    tools:context=".activitys.user_info.complete_info.FillInfoActivity">
 
     <com.ztstech.vgmate.weigets.TopBar
         android:id="@+id/top_bar"

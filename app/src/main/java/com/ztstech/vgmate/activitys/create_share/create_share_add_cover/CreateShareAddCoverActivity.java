@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.create_share_add_cover;
+package com.ztstech.vgmate.activitys.create_share.create_share_add_cover;
 
 import android.content.Intent;
 import android.os.PersistableBundle;

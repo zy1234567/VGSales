@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.edit_info;
+package com.ztstech.vgmate.activitys.user_info.edit_info;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -6,12 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +30,6 @@ import com.ztstech.vgmate.model.fill_info.FillInfoModel;
 import com.ztstech.vgmate.utils.SexUtils;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.utils.ToastUtil;
-import com.ztstech.vgmate.utils.TransHelper;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import java.io.File;

@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.create_share_info;
+package com.ztstech.vgmate.activitys.create_share.create_share_info;
 
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.BaseView;

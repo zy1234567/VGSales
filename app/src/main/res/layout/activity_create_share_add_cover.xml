@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/color_107"
-    tools:context="com.ztstech.vgmate.activitys.create_share_add_cover.CreateShareAddCoverActivity">
+    tools:context=".activitys.create_share.create_share_add_cover.CreateShareAddCoverActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

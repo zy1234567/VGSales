@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.create_share_info;
+package com.ztstech.vgmate.activitys.create_share.create_share_info;
 
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -32,8 +32,8 @@ import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
-import com.ztstech.vgmate.activitys.create_share_add_cover.CreateShareAddCoverActivity;
-import com.ztstech.vgmate.activitys.create_share_add_desc.CreateShareAddDescActivity;
+import com.ztstech.vgmate.activitys.create_share.create_share_add_cover.CreateShareAddCoverActivity;
+import com.ztstech.vgmate.activitys.create_share.create_share_add_desc.CreateShareAddDescActivity;
 import com.ztstech.vgmate.constants.Constants;
 import com.ztstech.vgmate.data.dto.CreateShareData;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
@@ -47,6 +47,7 @@ import butterknife.BindView;
 
 /**
  * 分享资讯，分享资讯模块第一个界面
+ * @author zhiyuan
  */
 public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract.Presenter>
         implements CreateShareInfoContract.View, View.OnClickListener, InvokeListener,

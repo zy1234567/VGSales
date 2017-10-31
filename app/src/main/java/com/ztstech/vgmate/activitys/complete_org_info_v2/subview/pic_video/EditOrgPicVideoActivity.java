@@ -3,7 +3,6 @@ package com.ztstech.vgmate.activitys.complete_org_info_v2.subview.pic_video;
 import android.content.Intent;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -15,15 +14,13 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.jph.takephoto.model.TResult;
 import com.ztstech.vgmate.R;
-import com.ztstech.vgmate.activitys.create_share_add_desc.CreateShareAddDescActivity;
-import com.ztstech.vgmate.activitys.create_share_info.CreateShareInfoActivity;
+import com.ztstech.vgmate.activitys.create_share.create_share_add_desc.CreateShareAddDescActivity;
 import com.ztstech.vgmate.base.BaseActivity;
 import com.ztstech.vgmate.utils.TakePhotoHelperWapper;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.CustomGridView;
 import com.ztstech.vgmate.weigets.TopBar;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 

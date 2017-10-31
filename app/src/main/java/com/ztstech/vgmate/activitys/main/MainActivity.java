@@ -13,7 +13,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.add_org.AddOrgActivity;
 import com.ztstech.vgmate.activitys.add_sell_mate.AddSellMateActivity;
-import com.ztstech.vgmate.activitys.create_share_info.CreateShareInfoActivity;
+import com.ztstech.vgmate.activitys.create_share.create_share_info.CreateShareInfoActivity;
 import com.ztstech.vgmate.activitys.main.adapter.MainPagerAdapter;
 import com.ztstech.vgmate.activitys.main.widget.BottomBar;
 import com.ztstech.vgmate.activitys.setting.SettingActivity;
@@ -154,6 +154,8 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
                 itNotice.putExtra(CreateShareInfoActivity.ARG_TYPE, CreateShareApi.SHARE_NOTICE);
                 startActivity(itNotice);
                 dialog.setVisibility(View.GONE);
+                break;
+            default:
                 break;
         }
     }

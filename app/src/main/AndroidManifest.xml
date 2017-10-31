@@ -40,7 +40,7 @@
         <activity
             android:name=".activitys.login.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".activitys.complete_info.FillInfoActivity" />
+        <activity android:name=".activitys.user_info.complete_info.FillInfoActivity" />
         <activity android:name=".activitys.provide_chance.ProvideChanceActivity" />
         <activity android:name=".activitys.location_select.LocationInfoActivity" />
         <activity android:name=".activitys.location_select.LocationSelectActivity" />
@@ -54,13 +54,13 @@
             android:name=".activitys.request_record_detail.RequestRecordDialogActivity"
             android:theme="@style/DialogActivity" />
         <activity android:name=".activitys.org_list.OrgListActivity" />
-        <activity android:name=".activitys.edit_info.EditInfoActivity" />
+        <activity android:name=".activitys.user_info.edit_info.EditInfoActivity" />
         <activity android:name=".activitys.setting.SettingActivity" />
         <activity android:name=".activitys.article_detail.ArticleDetailActivity" />
-        <activity android:name=".activitys.create_share_info.CreateShareInfoActivity" />
+        <activity android:name=".activitys.create_share.create_share_info.CreateShareInfoActivity" />
         <activity android:name=".activitys.add_org.AddOrgActivity" />
-        <activity android:name=".activitys.create_share_add_desc.CreateShareAddDescActivity" />
-        <activity android:name=".activitys.create_share_add_cover.CreateShareAddCoverActivity" />
+        <activity android:name=".activitys.create_share.create_share_add_desc.CreateShareAddDescActivity" />
+        <activity android:name=".activitys.create_share.create_share_add_cover.CreateShareAddCoverActivity" />
         <activity android:name=".activitys.org_detail.OrgDetailActivity" />
         <activity android:name=".activitys.sell_mate_list.SellMateListActivity" />
         <activity
