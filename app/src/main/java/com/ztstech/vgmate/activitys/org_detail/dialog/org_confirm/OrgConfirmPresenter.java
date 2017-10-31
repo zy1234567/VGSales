@@ -2,7 +2,7 @@ package com.ztstech.vgmate.activitys.org_detail.dialog.org_confirm;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
-import com.ztstech.vgmate.data.user_case.ConfirmOrgPass;
+import com.ztstech.appdomain.user_case.ConfirmOrgPass;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 /**

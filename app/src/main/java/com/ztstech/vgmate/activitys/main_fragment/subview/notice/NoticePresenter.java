@@ -2,7 +2,7 @@ package com.ztstech.vgmate.activitys.main_fragment.subview.notice;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.MainListBean;
-import com.ztstech.vgmate.data.repository.MainListRepository;
+import com.ztstech.appdomain.repository.MainListRepository;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.util.ArrayList;

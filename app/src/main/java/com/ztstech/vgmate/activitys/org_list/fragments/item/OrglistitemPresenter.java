@@ -2,7 +2,7 @@ package com.ztstech.vgmate.activitys.org_list.fragments.item;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
-import com.ztstech.vgmate.data.user_case.GetOrgListItems;
+import com.ztstech.appdomain.user_case.GetOrgListItems;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.util.ArrayList;

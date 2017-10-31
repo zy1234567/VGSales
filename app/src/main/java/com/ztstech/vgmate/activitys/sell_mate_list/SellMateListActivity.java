@@ -1,14 +1,12 @@
 package com.ztstech.vgmate.activitys.sell_mate_list;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.webkit.WebView;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.base.BaseActivity;
 import com.ztstech.vgmate.constants.Constants;
 import com.ztstech.vgmate.data.constants.NetConstants;
-import com.ztstech.vgmate.data.repository.UserRepository;
+import com.ztstech.appdomain.repository.UserRepository;
 
 import butterknife.BindView;
 

@@ -11,7 +11,7 @@ import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.tinker.loader.app.DefaultApplicationLike;
 import com.ztstech.vgmate.BuildConfig;
-import com.ztstech.vgmate.data.repository.UserPreferenceManager;
+import com.ztstech.appdomain.repository.UserPreferenceManager;
 
 /**
  * Created by zhiyuan on 2017/10/29.

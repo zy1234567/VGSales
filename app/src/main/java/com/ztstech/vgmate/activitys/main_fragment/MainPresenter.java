@@ -3,9 +3,9 @@ package com.ztstech.vgmate.activitys.main_fragment;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.MainPageBean;
 import com.ztstech.vgmate.data.beans.UserBean;
-import com.ztstech.vgmate.data.repository.UserPreferenceManager;
-import com.ztstech.vgmate.data.user_case.GetMainPageBean;
-import com.ztstech.vgmate.data.repository.UserRepository;
+import com.ztstech.appdomain.repository.UserPreferenceManager;
+import com.ztstech.appdomain.user_case.GetMainPageBean;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 /**
@@ -43,7 +43,7 @@ public class MainPresenter extends PresenterImpl<MainContract.View> implements
     @Override
     public void loadUserInfo() {
         //加载用户信息
-        UserBean userBean = userRepository.getUser();
+        UserBean userBean = userRepository.getUser().getUserBean();
         if (userBean != null) {
             mView.setUserInfo(userBean);
         }

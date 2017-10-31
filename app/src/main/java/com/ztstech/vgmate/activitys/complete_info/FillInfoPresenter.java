@@ -7,8 +7,8 @@ import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.UserBean;
 import com.ztstech.vgmate.data.dto.UpdateUserInfoData;
 import com.ztstech.vgmate.data.beans.UploadImageBean;
-import com.ztstech.vgmate.data.repository.UserRepository;
-import com.ztstech.vgmate.data.utils.RetrofitUtils;
+import com.ztstech.appdomain.repository.UserRepository;
+import com.ztstech.appdomain.utils.RetrofitUtils;
 import com.ztstech.vgmate.mapper.FillInfoModelMapper;
 import com.ztstech.vgmate.mapper.UserInfoBeanMapper;
 import com.ztstech.vgmate.model.fill_info.FillInfoModel;
@@ -87,7 +87,7 @@ public class FillInfoPresenter extends PresenterImpl<FillInfoContract.View> impl
 
     @Override
     public void loadUserModule() {
-        UserBean userBean = userRepository.getUser();
+        UserBean userBean = userRepository.getUser().getUserBean();
         FillInfoModel model = new FillInfoModelMapper().transform(userBean);
         mView.setUserModule(model);
     }

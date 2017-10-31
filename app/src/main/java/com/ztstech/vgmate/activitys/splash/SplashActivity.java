@@ -11,7 +11,7 @@ import com.ztstech.vgmate.activitys.login.LoginActivity;
 import com.ztstech.vgmate.activitys.main.MainActivity;
 import com.ztstech.vgmate.base.BaseActivity;
 import com.ztstech.vgmate.data.beans.UserBean;
-import com.ztstech.vgmate.data.repository.UserRepository;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.utils.LocationUtils;
 
 import rx.android.schedulers.AndroidSchedulers;

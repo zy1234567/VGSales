@@ -14,13 +14,12 @@ import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.add_org.AddOrgActivity;
 import com.ztstech.vgmate.activitys.add_sell_mate.AddSellMateActivity;
 import com.ztstech.vgmate.activitys.create_share_info.CreateShareInfoActivity;
-import com.ztstech.vgmate.activitys.edit_info.EditInfoActivity;
 import com.ztstech.vgmate.activitys.main.adapter.MainPagerAdapter;
 import com.ztstech.vgmate.activitys.main.widget.BottomBar;
 import com.ztstech.vgmate.activitys.setting.SettingActivity;
 import com.ztstech.vgmate.constants.Constants;
 import com.ztstech.vgmate.data.api.CreateShareApi;
-import com.ztstech.vgmate.data.repository.UserRepository;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import butterknife.BindView;
@@ -98,7 +97,7 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
         tvShareNotice.setOnClickListener(this);
 
         if (!TextUtils.equals(Constants.USER_ID_PASS,
-                UserRepository.getInstance().getUser().info.status)) {
+                UserRepository.getInstance().getUser().getUserBean().info.status)) {
             //未审核通过
             tvAddMate.setVisibility(View.GONE);
             tvShareInfo.setVisibility(View.GONE);

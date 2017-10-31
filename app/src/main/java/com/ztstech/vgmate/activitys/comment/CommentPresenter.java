@@ -3,8 +3,8 @@ package com.ztstech.vgmate.activitys.comment;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.CommentBean;
-import com.ztstech.vgmate.data.user_case.Comment;
-import com.ztstech.vgmate.data.user_case.GetCommentList;
+import com.ztstech.appdomain.user_case.Comment;
+import com.ztstech.appdomain.user_case.GetCommentList;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.util.ArrayList;

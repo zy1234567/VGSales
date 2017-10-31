@@ -3,7 +3,7 @@ package com.ztstech.vgmate.activitys.org_detail.dialog.org_audit;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
 import com.ztstech.vgmate.data.beans.RepeatOrgBean;
-import com.ztstech.vgmate.data.user_case.GetRepeatOrg;
+import com.ztstech.appdomain.user_case.GetRepeatOrg;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.util.ArrayList;

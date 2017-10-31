@@ -2,7 +2,7 @@ package com.ztstech.vgmate.activitys.org_detail.dialog.org_delete;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
-import com.ztstech.vgmate.data.user_case.DeleteOrg;
+import com.ztstech.appdomain.user_case.DeleteOrg;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 /**

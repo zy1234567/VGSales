@@ -4,7 +4,7 @@ import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.dto.CreateShareData;
 import com.ztstech.vgmate.data.beans.UploadImageBean;
-import com.ztstech.vgmate.data.utils.RetrofitUtils;
+import com.ztstech.appdomain.utils.RetrofitUtils;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.io.File;

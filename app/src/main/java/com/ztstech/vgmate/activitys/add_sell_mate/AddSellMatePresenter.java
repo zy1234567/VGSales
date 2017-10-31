@@ -3,7 +3,7 @@ package com.ztstech.vgmate.activitys.add_sell_mate;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.dto.AddSellMateData;
-import com.ztstech.vgmate.data.user_case.AddSellMate;
+import com.ztstech.appdomain.user_case.AddSellMate;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 /**

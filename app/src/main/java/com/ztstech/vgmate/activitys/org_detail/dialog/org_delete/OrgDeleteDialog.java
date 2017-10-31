@@ -14,10 +14,7 @@ import android.widget.TextView;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.ViewImpl;
-import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
-import com.ztstech.vgmate.data.user_case.DeleteOrg;
-import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.utils.ViewUtils;
 

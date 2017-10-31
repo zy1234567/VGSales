@@ -2,7 +2,7 @@ package com.ztstech.vgmate.activitys.setting.change_phone;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.UserBean;
-import com.ztstech.vgmate.data.repository.UserRepository;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 /**

@@ -1,9 +1,8 @@
 package com.ztstech.vgmate.mapper;
 
 import com.ztstech.vgmate.data.dto.UpdateUserInfoData;
-import com.ztstech.vgmate.data.repository.UserRepository;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.model.fill_info.FillInfoModel;
-import com.ztstech.vgmate.utils.LocationUtils;
 
 /**
  * Created by zhiyuan on 2017/8/23.
@@ -22,7 +21,7 @@ public class UserInfoBeanMapper implements Mapper<FillInfoModel, UpdateUserInfoD
         result.sex = bean.sex;
         result.wdistrict = bean.locationId;
         result.birthday = bean.birthday;
-        result.uid = UserRepository.getInstance().getUser().info.uid;
+        result.uid = UserRepository.getInstance().getUser().getUserBean().info.uid;
         result.uname = bean.name;
 
         result.picurl = bean.headUrl;

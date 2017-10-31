@@ -3,9 +3,9 @@ package com.ztstech.vgmate.activitys.get_chance;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.CommunicationHistoryBean;
-import com.ztstech.vgmate.data.user_case.AddCommunicateByComid;
-import com.ztstech.vgmate.data.user_case.AddCommunicateByRbiid;
-import com.ztstech.vgmate.data.user_case.GetCommunicateHistory;
+import com.ztstech.appdomain.user_case.AddCommunicateByComid;
+import com.ztstech.appdomain.user_case.AddCommunicateByRbiid;
+import com.ztstech.appdomain.user_case.GetCommunicateHistory;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.util.ArrayList;

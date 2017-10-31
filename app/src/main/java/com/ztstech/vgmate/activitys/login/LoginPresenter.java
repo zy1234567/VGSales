@@ -1,15 +1,11 @@
 package com.ztstech.vgmate.activitys.login;
 
-import android.os.Handler;
-
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.UserBean;
-import com.ztstech.vgmate.data.repository.UserRepository;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.manager.CountDown;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
-
-import java.lang.ref.WeakReference;
 
 /**
  * Created by zhiyuan on 2017/8/22.

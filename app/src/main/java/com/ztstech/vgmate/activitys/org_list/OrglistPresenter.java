@@ -2,8 +2,8 @@ package com.ztstech.vgmate.activitys.org_list;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.GetOrgListCountBean;
-import com.ztstech.vgmate.data.repository.UserPreferenceManager;
-import com.ztstech.vgmate.data.user_case.GetOrgListCount;
+import com.ztstech.appdomain.repository.UserPreferenceManager;
+import com.ztstech.appdomain.user_case.GetOrgListCount;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 /**

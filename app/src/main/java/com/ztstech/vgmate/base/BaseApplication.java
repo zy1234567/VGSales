@@ -1,7 +1,6 @@
 package com.ztstech.vgmate.base;
 
 import android.content.Context;
-import android.support.multidex.MultiDexApplication;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
@@ -12,13 +11,9 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-import com.tencent.bugly.Bugly;
-import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.tinker.loader.app.TinkerApplication;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
 import com.ztstech.vgmate.R;
-import com.ztstech.vgmate.data.BuildConfig;
-import com.ztstech.vgmate.data.repository.UserPreferenceManager;
 
 /**
  * Created by zhiyuan on 2017/7/27.

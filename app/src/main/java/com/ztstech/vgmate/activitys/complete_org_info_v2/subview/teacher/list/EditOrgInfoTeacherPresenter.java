@@ -4,7 +4,7 @@ import android.os.Handler;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.TeacherListBean;
-import com.ztstech.vgmate.data.user_case.GetTeacherList;
+import com.ztstech.appdomain.user_case.GetTeacherList;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.util.ArrayList;

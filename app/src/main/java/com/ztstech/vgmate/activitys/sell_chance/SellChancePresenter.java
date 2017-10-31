@@ -2,7 +2,7 @@ package com.ztstech.vgmate.activitys.sell_chance;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.SellChanceCountBean;
-import com.ztstech.vgmate.data.user_case.GetSellChanceCount;
+import com.ztstech.appdomain.user_case.GetSellChanceCount;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 /**

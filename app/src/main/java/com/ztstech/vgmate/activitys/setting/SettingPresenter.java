@@ -2,7 +2,7 @@ package com.ztstech.vgmate.activitys.setting;
 
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
-import com.ztstech.vgmate.data.repository.UserRepository;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 /**
@@ -38,6 +38,6 @@ public class SettingPresenter extends PresenterImpl<SettingContract.View> implem
 
     @Override
     public String getPhone() {
-        return userRepository.getUser().info.phone;
+        return userRepository.getUser().getUserBean().info.phone;
     }
 }

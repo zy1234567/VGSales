@@ -6,14 +6,12 @@ import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.OrgInfoBean;
 import com.ztstech.vgmate.data.beans.UploadImageBean;
-import com.ztstech.vgmate.data.user_case.EditOrgInfo;
-import com.ztstech.vgmate.data.user_case.GetOrgInfo;
-import com.ztstech.vgmate.data.utils.RetrofitUtils;
+import com.ztstech.appdomain.user_case.EditOrgInfo;
+import com.ztstech.appdomain.user_case.GetOrgInfo;
+import com.ztstech.appdomain.utils.RetrofitUtils;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.io.File;
-
-import rx.Observable;
 
 /**
  * Created by zhiyuan on 2017/10/9.

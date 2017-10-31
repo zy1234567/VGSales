@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
-import com.ztstech.vgmate.activitys.add_sell_mate.AddSellMateActivity;
 import com.ztstech.vgmate.activitys.main_fragment.adapter.MainFragmentPagerAdapter;
 import com.ztstech.vgmate.activitys.org_list.OrgListActivity;
 import com.ztstech.vgmate.activitys.sell_chance.SellChanceActivity;
@@ -22,7 +21,7 @@ import com.ztstech.vgmate.activitys.sell_mate_list.SellMateListActivity;
 import com.ztstech.vgmate.constants.Constants;
 import com.ztstech.vgmate.data.beans.MainPageBean;
 import com.ztstech.vgmate.data.beans.UserBean;
-import com.ztstech.vgmate.data.repository.UserRepository;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 
@@ -158,7 +157,8 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
         tvNewChance.setText("销售机会：+" + mainPageBean.info.comnum);
         tvName.setText(mainPageBean.info.uname);
 
-        if (Constants.USER_ID_CHECKING.equals(UserRepository.getInstance().getUser().info.status)) {
+        if (Constants.USER_ID_CHECKING.equals(UserRepository.getInstance().getUser().getUserBean()
+                .info.status)) {
             //身份审核中
             imgIdStatus.setVisibility(View.VISIBLE);
         }else {
