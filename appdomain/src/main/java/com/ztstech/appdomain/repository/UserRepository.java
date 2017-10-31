@@ -231,7 +231,18 @@ public class UserRepository {
      * @return
      */
     public boolean isUserInfoCompleted() {
-        return !TextUtils.isEmpty(user.getUserBean().info.picurl);
+        UserBean userBean = user.getUserBean();
+        return !TextUtils.isEmpty(userBean.info.picurl)
+                && !TextUtils.isEmpty(userBean.info.birthday)
+                && !TextUtils.isEmpty(userBean.info.uname)
+                && !TextUtils.isEmpty(userBean.info.didurl)
+                && !TextUtils.isEmpty(userBean.info.cardImg)
+                && !TextUtils.isEmpty(userBean.info.sex)
+                && !TextUtils.isEmpty(userBean.info.bname)
+                && !TextUtils.isEmpty(userBean.info.did)
+                && !TextUtils.isEmpty(userBean.info.banks)
+                && !TextUtils.isEmpty(userBean.info.cardNo)
+                && !TextUtils.isEmpty(userBean.info.wdistrict);
     }
 
 
