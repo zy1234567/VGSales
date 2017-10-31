@@ -18,7 +18,7 @@ public class FillInfoModelMapper implements Mapper<UserBean, FillInfoModel> {
         FillInfoModel model = new FillInfoModel();
         model.birthday = bean.info.birthday;
         model.id = bean.info.did;
-        model.sex = SexUtils.getNameById(bean.info.sex);
+        model.sex = bean.info.sex;
         model.cardBank = bean.info.banks;
         model.cardMaster = bean.info.bname;
         model.cardNo = bean.info.cardNo;

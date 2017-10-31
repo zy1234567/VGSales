@@ -52,7 +52,7 @@ public interface LoginApi {
                                             @Query("bname") String bname,
                                             @Query("banks") String banks,
                                             @Query("status") String status,
-                                            @Query("cardNo") String cardNo,
+                                            @Query("cardno") String cardNo,
                                             @Query("wdistrict") String wdistrict,
                                             @Query("birthday") String birthday,
                                             @Query("uid") String uid,

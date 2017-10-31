@@ -32,6 +32,7 @@ import com.ztstech.vgmate.model.fill_info.FillInfoModel;
 import com.ztstech.vgmate.utils.SexUtils;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.utils.ToastUtil;
+import com.ztstech.vgmate.utils.TransHelper;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import java.io.File;
@@ -226,7 +227,7 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
         etName.setText(model.name);
         tvLocation.setText(model.location);
         tvBirthday.setText(model.birthday);
-        tvSex.setText(model.sex);
+        tvSex.setText(SexUtils.getNameById(model.sex));
 
     }
 

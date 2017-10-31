@@ -58,7 +58,7 @@ public class InfoPresenter extends PresenterImpl<InfoContract.View> implements
                         public void call(UploadImageBean uploadImageBean2) {
                             if (uploadImageBean2 == null || uploadImageBean2.isSucceed()) {
                                 if (uploadImageBean2 != null && uploadImageBean2.isSucceed()) {
-                                    model.cardUrl = uploadImageBean.urls;
+                                    model.cardUrl = uploadImageBean2.urls;
                                 }
 
 
