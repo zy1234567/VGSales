@@ -109,7 +109,7 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
         topBar.getRightImage().setOnClickListener(this);
 
         //隐藏右侧编辑按钮
-        topBar.getRightImage().setVisibility(View.GONE);
+//        topBar.getRightImage().setVisibility(View.GONE);
 
         etComment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

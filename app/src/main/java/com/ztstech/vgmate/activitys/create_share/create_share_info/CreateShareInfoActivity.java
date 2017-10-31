@@ -35,9 +35,12 @@ import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.create_share.create_share_add_cover.CreateShareAddCoverActivity;
 import com.ztstech.vgmate.activitys.create_share.create_share_add_desc.CreateShareAddDescActivity;
 import com.ztstech.vgmate.constants.Constants;
+import com.ztstech.vgmate.data.constants.NetConstants;
 import com.ztstech.vgmate.data.dto.CreateShareData;
+import com.ztstech.vgmate.utils.StringUtils;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.weigets.CustomGridView;
+import com.ztstech.vgmate.weigets.TopBar;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -47,7 +50,6 @@ import butterknife.BindView;
 
 /**
  * 分享资讯，分享资讯模块第一个界面
- * @author zhiyuan
  */
 public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract.Presenter>
         implements CreateShareInfoContract.View, View.OnClickListener, InvokeListener,
@@ -86,6 +88,8 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
     TextView tvNoneLink;
     @BindView(R.id.web_view)
     WebView webView;
+    @BindView(R.id.top_bar)
+    TopBar topBar;
 
     private ImageView imgAddImg;
 
@@ -94,6 +98,9 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
 
 
     private CreateShareData createShareData;
+
+    /**资讯或者公告内容*/
+    private String createShareType;
 
     /**图片文件*/
     private List<File> imageFiles = new ArrayList<>();
@@ -115,11 +122,10 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
     protected void onViewBindFinish() {
         super.onViewBindFinish();
 
-
+        createShareType = getIntent().getStringExtra(ARG_TYPE);
 
         tvNext.setOnClickListener(this);
         btInsertLink.setOnClickListener(this);
-
 
         webView.setWebViewClient(new WebViewClient() {
 
@@ -172,6 +178,14 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
                 CreateShareData.class);
         if (createShareData != null) {
             setDataToView(createShareData);
+            createShareType = createShareData.type;
+        }
+
+
+        if (Constants.DATA_TYPE_NOTICE.equals(createShareType)) {
+            topBar.setTitle("通告内容编辑");
+        }else if (Constants.DATA_TYPE_INFORMATION.equals(createShareType)) {
+            topBar.setTitle("资讯内容编辑");
         }
     }
 
@@ -189,7 +203,7 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
             //实例化存储数据类
             createShareData = new CreateShareData();
             //类型
-            createShareData.type = getIntent().getStringExtra(ARG_TYPE);
+            createShareData.type = createShareType;
             createShareData.title = etTitle.getText().toString();
             createShareData.summary = etContent.getText().toString();
 
@@ -384,18 +398,122 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
         });
     }
 
+    /**
+     * 增加一张图片
+     * @param imageUrl 图片网址
+     * @param desc 图片描述
+     */
+    private void addImage(final String imageUrl, String desc) {
+        final View itemView = LayoutInflater.from(this).inflate(R.layout.item_img_with_del,
+                customGridView, false);
+        ImageView img = itemView.findViewById(R.id.img);
+        Glide.with(this).load(imageUrl).into(img);
+        View del = itemView.findViewById(R.id.del);
+        final TextView tvAddDesc = itemView.findViewById(R.id.tv_desc);
+        if (!TextUtils.isEmpty(desc)) {
+            tvAddDesc.setText(desc);
+        }
+        img.setTag(imageUrl);
+
+        tvAddDesc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tvCurrentReqDesc = tvAddDesc;       //记录当前textView
+                //请求图片描述
+                Intent it = new Intent(CreateShareInfoActivity.this,
+                        CreateShareAddDescActivity.class);
+                it.putExtra(CreateShareAddDescActivity.ARG_DESC, tvAddDesc.getText());
+                //存储当前描述位置，在请求成功返回时更新view
+                startActivityForResult(it, REQ_DESC);
+            }
+        });
+        customGridView.addView(itemView, 0);
+
+        del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                customGridView.removeView(itemView);
+
+                //删除网络图片，包括原图与缩略图
+                String[] orignUrls = createShareData.contentpicsurl.split(",");
+                String[] orignSUrls = createShareData.contentpicsurl.split(",");
+                List<String> imgUrllist = new ArrayList<String>();
+                List<String> imgSUrllist = new ArrayList<String>();
+                for (int i = 0; i < orignUrls.length; i++) {
+                    if (TextUtils.equals(orignUrls[i], imageUrl)) {
+                        //如果当前图片为传入图片
+                        continue;
+                    }
+                    imgUrllist.add(orignUrls[i]);
+                    imgSUrllist.add(orignSUrls[i]);
+                }
+                createShareData.contentpicurl = StringUtils.concatWith(imgUrllist, ",");
+                createShareData.contentpicsurl = StringUtils.concatWith(imgSUrllist, ",");
+            }
+        });
+    }
 
 
-
+    /**
+     * 将data设置到view
+     * @param data
+     */
     private void setDataToView(CreateShareData data) {
         etTitle.setText(data.title);
         if (Constants.SHARE_TYPE_TEXT.equals(data.ntype)) {
+            //类型为文本
             etContent.setText(data.summary);
         }else if (Constants.SHARE_TYPE_IMG.equals(data.ntype)) {
+            //类型为图片
             String[] imgUrls = data.contentpicsurl.split(",");
-            for (String imgUrl: imgUrls) {
-
+            String[] descs = new Gson().fromJson(data.picdescribe, String[].class);
+            for (int i = 0; i < imgUrls.length; i++) {
+                if (TextUtils.isEmpty(imgUrls[i])) {
+                    continue;
+                }
+                String desc = "添加描述";
+                if (i < descs.length) {
+                    if (!TextUtils.isEmpty(descs[i])) {
+                        //如果当前描述不为空
+                        desc = descs[i];
+                    }
+                }
+                addImage(imgUrls[i], desc);
             }
+        }else if (Constants.SHARE_TYPE_URL.equals(data.ntype)) {
+            //url类型
+            //切换到url模式
+            toggleUrlMode();
+            webView.loadUrl(NetConstants.BASE_URL
+                    .concat("jsp/webh5/inforDetails.jsp?type=01"
+                            .concat("&nid=").concat(data.nid)));
+        }else if (Constants.SHARE_TYPE_TEXT_IMG.equals(data.ntype)) {
+            //文本图片
+            etContent.setText(data.summary);
+
+            String[] imgUrls = data.contentpicsurl.split(",");
+            String[] descs = new Gson().fromJson(data.picdescribe, String[].class);
+            for (int i = 0; i < imgUrls.length; i++) {
+                if (TextUtils.isEmpty(imgUrls[i])) {
+                    continue;
+                }
+                String desc = "添加描述";
+                if (i < descs.length) {
+                    if (!TextUtils.isEmpty(descs[i])) {
+                        //如果当前描述不为空
+                        desc = descs[i];
+                    }
+                }
+                addImage(imgUrls[i], desc);
+            }
+        }else if (Constants.SHARE_TYPE_TEXT_URL.equals(data.ntype)) {
+            etContent.setText(data.summary);
+
+            toggleUrlMode();
+            webView.loadUrl(NetConstants.BASE_URL
+                    .concat("jsp/webh5/inforDetails.jsp?type=01"
+                            .concat("&nid=").concat(data.nid)));
         }
+
     }
 }

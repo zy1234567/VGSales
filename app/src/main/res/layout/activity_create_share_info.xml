@@ -13,6 +13,7 @@
         android:layout_height="wrap_content">
 
         <com.ztstech.vgmate.weigets.TopBar
+            android:id="@+id/top_bar"
             app:barTitle="资讯内容编辑"
             app:showBackNav="true"
             android:layout_width="match_parent"
