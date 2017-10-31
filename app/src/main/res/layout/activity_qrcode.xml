@@ -58,6 +58,7 @@
             android:layout_height="45dp" />
 
         <ImageView
+            android:scaleType="centerCrop"
             android:id="@+id/img_close"
             android:src="@mipmap/close_map"
             android:layout_width="wrap_content"

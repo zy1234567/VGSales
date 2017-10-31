@@ -72,6 +72,7 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:scaleType="centerCrop"
             android:id="@+id/img"
             android:background="#f00"
             android:layout_width="73dp"

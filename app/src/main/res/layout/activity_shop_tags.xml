@@ -81,6 +81,7 @@
         android:paddingTop="12dp">
 
         <ImageView
+            android:scaleType="centerCrop"
             android:id="@+id/img_redtip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

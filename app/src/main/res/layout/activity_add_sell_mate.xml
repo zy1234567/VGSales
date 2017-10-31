@@ -162,6 +162,7 @@
             android:textSize="@dimen/text_5" />
 
         <ImageView
+            android:scaleType="centerCrop"
             android:id="@+id/img_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

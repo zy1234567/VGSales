@@ -31,6 +31,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:scaleType="centerCrop"
                     android:src="@mipmap/expect_income_home"
                     android:id="@+id/img_top_left"
                     android:layout_centerVertical="true"
@@ -69,6 +70,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:scaleType="centerCrop"
                     android:src="@mipmap/completed_income_home"
                     android:id="@+id/img_top_center"
                     android:layout_centerVertical="true"
@@ -106,6 +108,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:scaleType="centerCrop"
                     android:src="@mipmap/real_income_home"
                     android:id="@+id/img_top_right"
                     android:layout_centerVertical="true"
@@ -207,6 +210,7 @@
         </FrameLayout>
 
         <ImageView
+            android:scaleType="centerCrop"
             android:id="@+id/img_notice"
             android:src="@mipmap/notice_home"
             android:layout_marginLeft="12dp"
@@ -273,6 +277,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:scaleType="centerCrop"
                 android:src="@mipmap/institution_self_home"
                 android:id="@+id/img_bottom_0"
                 android:layout_centerHorizontal="true"
@@ -310,6 +315,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:scaleType="centerCrop"
                 android:src="@mipmap/institution_partner_home"
                 android:id="@+id/img_bottom_1"
                 android:layout_centerHorizontal="true"
@@ -347,6 +353,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:scaleType="centerCrop"
                 android:src="@mipmap/parters_home"
                 android:id="@+id/img_bottom_2"
                 android:layout_centerHorizontal="true"
@@ -384,6 +391,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:scaleType="centerCrop"
                 android:src="@mipmap/add_partners"
                 android:id="@+id/img_bottom_3"
                 android:layout_centerHorizontal="true"

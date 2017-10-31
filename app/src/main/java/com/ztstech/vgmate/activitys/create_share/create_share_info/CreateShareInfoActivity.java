@@ -187,6 +187,8 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
         }else if (Constants.DATA_TYPE_INFORMATION.equals(createShareType)) {
             topBar.setTitle("资讯内容编辑");
         }
+
+        topBar.getCenterTextView().requestFocus();
     }
 
     @Override

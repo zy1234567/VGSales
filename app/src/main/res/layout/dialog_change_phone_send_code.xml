@@ -11,6 +11,7 @@
         android:layout_height="270dp">
 
         <ImageView
+            android:scaleType="centerCrop"
             android:padding="8dp"
             android:id="@+id/img_close"
             android:layout_marginRight="2dp"

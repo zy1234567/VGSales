@@ -51,6 +51,7 @@
                     android:textSize="@dimen/text_size_9" />
 
                 <ImageView
+                    android:scaleType="centerCrop"
                     android:id="@+id/img_identify"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -102,6 +103,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:scaleType="centerCrop"
                     android:id="@+id/img_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -204,6 +206,7 @@
             android:background="@color/weilai_color_006" />
 
         <ImageView
+            android:scaleType="centerCrop"
             android:id="@+id/img_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

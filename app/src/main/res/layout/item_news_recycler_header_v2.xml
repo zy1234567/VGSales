@@ -31,6 +31,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:scaleType="centerCrop"
                     android:src="@mipmap/expect_income_home"
                     android:id="@+id/img_top_left"
                     android:layout_centerVertical="true"
@@ -72,6 +73,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:scaleType="centerCrop"
                     android:src="@mipmap/completed_income_home"
                     android:id="@+id/img_top_center"
                     android:layout_centerVertical="true"
@@ -112,6 +114,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:scaleType="centerCrop"
                     android:src="@mipmap/real_income_home"
                     android:id="@+id/img_top_right"
                     android:layout_centerVertical="true"
@@ -178,6 +181,7 @@
             android:textStyle="bold"/>
 
         <ImageView
+            android:scaleType="centerCrop"
             android:layout_alignBottom="@id/tv_name"
             android:layout_alignTop="@id/tv_name"
             android:id="@+id/tv_id_status"
@@ -215,6 +219,7 @@
         android:layout_height="42dp">
 
         <ImageView
+            android:scaleType="centerCrop"
             android:id="@+id/img_notice"
             android:src="@mipmap/notice_home"
             android:layout_marginLeft="12dp"

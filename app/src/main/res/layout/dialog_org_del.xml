@@ -16,6 +16,7 @@
 
 
         <ImageView
+            android:scaleType="centerCrop"
             android:layout_marginRight="20dp"
             android:id="@+id/img_close"
             android:src="@mipmap/ico_close"

@@ -20,7 +20,7 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * 通告
+ * 公告
  */
 public class NoticeFragment extends MVPFragment<NoticeContract.Presenter> implements
         NoticeContract.View {

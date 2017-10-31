@@ -94,6 +94,7 @@
                         android:textSize="@dimen/text_5" />
 
                     <ImageView
+                        android:scaleType="centerCrop"
                         android:id="@+id/img_tag_arrow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -139,6 +140,7 @@
                         android:textSize="@dimen/text_5" />
 
                     <ImageView
+                        android:scaleType="centerCrop"
                         android:id="@+id/img_location_arrow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -184,6 +186,7 @@
                         android:textSize="@dimen/text_5" />
 
                     <ImageView
+                        android:scaleType="centerCrop"
                         android:id="@+id/img_header_arrow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

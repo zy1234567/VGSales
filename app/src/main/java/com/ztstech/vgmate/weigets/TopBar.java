@@ -149,6 +149,10 @@ public class TopBar extends FrameLayout {
         }
     }
 
+    public TextView getCenterTextView() {
+        return tvTitle;
+    }
+
     public void setLeftText(String leftText) {
         this.leftText = leftText;
         if (tvLeft != null) {

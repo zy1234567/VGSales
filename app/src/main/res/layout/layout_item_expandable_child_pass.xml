@@ -20,6 +20,7 @@
         android:textSize="14sp" />
 
     <ImageView
+        android:scaleType="centerCrop"
         android:id="@+id/img_delete"
         android:layout_width="14dp"
         android:layout_height="14dp"
@@ -30,6 +31,7 @@
         android:src="@mipmap/delete_classlabel" />
 
     <ImageView
+        android:scaleType="centerCrop"
         android:id="@+id/img_certified"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

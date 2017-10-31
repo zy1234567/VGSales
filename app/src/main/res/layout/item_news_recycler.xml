@@ -8,6 +8,7 @@
 
 
     <ImageView
+        android:scaleType="centerCrop"
         android:id="@+id/iv_item_recycler_news"
         android:background="#f00"
         android:layout_centerVertical="true"
