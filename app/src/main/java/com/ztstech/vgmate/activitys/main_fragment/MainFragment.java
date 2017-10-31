@@ -18,7 +18,7 @@ import com.ztstech.vgmate.activitys.main_fragment.adapter.MainFragmentPagerAdapt
 import com.ztstech.vgmate.activitys.org_list.OrgListActivity;
 import com.ztstech.vgmate.activitys.sell_chance.SellChanceActivity;
 import com.ztstech.vgmate.activitys.sell_mate_list.SellMateListActivity;
-import com.ztstech.vgmate.constants.Constants;
+import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.vgmate.data.beans.MainPageBean;
 import com.ztstech.vgmate.data.beans.UserBean;
 import com.ztstech.appdomain.repository.UserRepository;

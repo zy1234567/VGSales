@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.ztstech.vgmate.activitys.org_list.fragments.item.OrglistItemFragment;
 import com.ztstech.vgmate.activitys.org_list.fragments.unapprove.OrglistUnApproveFragment;
-import com.ztstech.vgmate.constants.Constants;
+import com.ztstech.appdomain.constants.Constants;
 
 /**
  * Created by zhiyuan on 2017/10/14.

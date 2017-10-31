@@ -46,5 +46,7 @@ public class MainListBean extends BaseRespBean{
         /**资讯类型（01纯文字；02纯图；03字加图；04纯网址；05字加网址）*/
         public String ntype;
 
+        public String createuid;
+
     }
 }

@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.comment.CommentActivity;
@@ -109,7 +110,12 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
         topBar.getRightImage().setOnClickListener(this);
 
         //隐藏右侧编辑按钮
-//        topBar.getRightImage().setVisibility(View.GONE);
+        if (UserRepository.getInstance().getUser().getUserBean().info.uid.equals(data.createuid)
+                || UserRepository.getInstance().getUser().canEditArticle()) {
+            topBar.getRightImage().setVisibility(View.VISIBLE);
+        }else {
+            topBar.getRightImage().setVisibility(View.GONE);
+        }
 
         etComment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

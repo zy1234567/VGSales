@@ -4,7 +4,7 @@ import android.webkit.WebView;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.base.BaseActivity;
-import com.ztstech.vgmate.constants.Constants;
+import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.vgmate.data.constants.NetConstants;
 import com.ztstech.appdomain.repository.UserRepository;
 

@@ -6,11 +6,11 @@ import com.ztstech.vgmate.data.beans.UserBean;
  * Created by zhiyuan on 2017/10/31.
  */
 
-public class NormalUser implements User {
+public class AdminUser implements User {
 
     private UserBean userBean;
 
-    public NormalUser(UserBean userBean) {
+    public AdminUser(UserBean userBean) {
         this.userBean = userBean;
     }
 
@@ -21,8 +21,6 @@ public class NormalUser implements User {
 
     @Override
     public boolean canEditArticle() {
-        return false;
+        return true;
     }
-
-
 }

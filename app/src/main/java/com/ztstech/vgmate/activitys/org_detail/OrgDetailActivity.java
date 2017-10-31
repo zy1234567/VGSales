@@ -1,6 +1,5 @@
 package com.ztstech.vgmate.activitys.org_detail;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,7 +15,7 @@ import com.ztstech.vgmate.activitys.gps.GpsActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
 import com.ztstech.vgmate.activitys.org_detail.dialog.org_confirm.OrgConfirmDialog;
 import com.ztstech.vgmate.activitys.org_detail.dialog.org_delete.OrgDeleteDialog;
-import com.ztstech.vgmate.constants.Constants;
+import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.vgmate.data.beans.GetOrgListItemsBean;
 import com.ztstech.vgmate.utils.ContractUtils;
 

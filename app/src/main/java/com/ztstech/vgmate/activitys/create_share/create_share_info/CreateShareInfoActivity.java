@@ -34,7 +34,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.create_share.create_share_add_cover.CreateShareAddCoverActivity;
 import com.ztstech.vgmate.activitys.create_share.create_share_add_desc.CreateShareAddDescActivity;
-import com.ztstech.vgmate.constants.Constants;
+import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.vgmate.data.constants.NetConstants;
 import com.ztstech.vgmate.data.dto.CreateShareData;
 import com.ztstech.vgmate.utils.StringUtils;

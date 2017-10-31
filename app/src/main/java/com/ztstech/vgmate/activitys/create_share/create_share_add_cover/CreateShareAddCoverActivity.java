@@ -186,6 +186,6 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
         Calendar calendar = Calendar.getInstance();
         int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        return month + "月" + day + "日";
+        return "最后更新：" + month + "月" + day + "日";
     }
 }

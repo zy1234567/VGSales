@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.constants;
+package com.ztstech.appdomain.constants;
 
 /**
  * Created by zhiyuan on 2017/8/29.
@@ -68,5 +68,10 @@ public interface Constants {
      * 文字加网址
      */
     String SHARE_TYPE_TEXT_URL = "05";
+
+    /**
+     * 管理员等级
+     */
+    int LEV_ADMIN = 1;
 
 }

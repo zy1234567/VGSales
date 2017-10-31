@@ -77,6 +77,9 @@ public class UserBean extends BaseRespBean{
         public String sex;
         public String phone;
         public int otherscnt;
+        /**
+         * 为1表示为超级管理员
+         */
         public int salelev;
         public int fifthbudgets;
         public int loginnum;

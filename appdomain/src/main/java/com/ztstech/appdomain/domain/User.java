@@ -8,6 +8,16 @@ import com.ztstech.vgmate.data.beans.UserBean;
 
 public interface User {
 
+    /**
+     * 获取用户信息
+     * @return
+     */
     UserBean getUserBean();
+
+    /**
+     * 允许编辑文章
+     * @return
+     */
+    boolean canEditArticle();
 
 }

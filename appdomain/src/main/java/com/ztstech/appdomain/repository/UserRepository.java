@@ -3,6 +3,8 @@ package com.ztstech.appdomain.repository;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import com.ztstech.appdomain.constants.Constants;
+import com.ztstech.appdomain.domain.AdminUser;
 import com.ztstech.appdomain.domain.NormalUser;
 import com.ztstech.appdomain.domain.User;
 import com.ztstech.vgmate.data.api.LoginApi;
@@ -251,7 +253,15 @@ public class UserRepository {
     }
 
 
+    /**
+     * 初始化用户
+     * @param userBean
+     */
     private void initUser(UserBean userBean) {
-        user = new NormalUser(userBean);
+        if (userBean.info != null && userBean.info.salelev == Constants.LEV_ADMIN) {
+            user = new AdminUser(userBean);
+        }else {
+            user = new NormalUser(userBean);
+        }
     }
 }
