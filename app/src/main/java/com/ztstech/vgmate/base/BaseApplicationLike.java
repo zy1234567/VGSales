@@ -10,7 +10,7 @@ import android.support.multidex.MultiDex;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.tinker.loader.app.DefaultApplicationLike;
-import com.ztstech.vgmate.data.BuildConfig;
+import com.ztstech.vgmate.BuildConfig;
 import com.ztstech.vgmate.data.repository.UserPreferenceManager;
 
 /**

@@ -62,6 +62,13 @@ public class LoginPresenter extends PresenterImpl<LoginContract.View> implements
                     mView.sendCodeFinish("未知错误");
                 }
             }
+
+            @Override
+            protected void childError(Throwable e) {
+                super.childError(e);
+                mView.sendCodeFinish("网络链接错误，请稍后重试");
+            }
+
         }.run(userRepository.sendLoginCode(phone));
     }
 
@@ -79,6 +86,13 @@ public class LoginPresenter extends PresenterImpl<LoginContract.View> implements
                     mView.loginFinish(baseRespBean.getErrmsg());
                 }
             }
+
+            @Override
+            protected void childError(Throwable e) {
+                super.childError(e);
+                mView.sendCodeFinish("网络链接错误，请稍后重试");
+            }
+
         }.run(userRepository.login(phone, code));
     }
 

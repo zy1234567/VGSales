@@ -87,6 +87,10 @@ public class LoginActivity extends MVPActivity<LoginContract.Presenter> implemen
     public void sendCodeFinish(@Nullable String errorMessage) {
         if (errorMessage == null) {
             tvGetCode.setEnabled(false);
+        }else {
+            ToastUtil.toastCenter(this, errorMessage);
+            tvGetCode.setEnabled(true);
+            etPhone.setEnabled(true);
         }
     }
 

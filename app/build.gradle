@@ -41,7 +41,7 @@ android {
         debug {
             signingConfig signingConfigs.config
             debuggable true
-            jniDebuggable false
+            jniDebuggable true
             applicationIdSuffix 'dev'
             versionNameSuffix 'dev'
         }
