@@ -258,6 +258,9 @@ public class UserRepository {
      * @param userBean
      */
     private void initUser(UserBean userBean) {
+        if (userBean == null) {
+            return;
+        }
         if (userBean.info != null && userBean.info.salelev == Constants.LEV_ADMIN) {
             user = new AdminUser(userBean);
         }else {
