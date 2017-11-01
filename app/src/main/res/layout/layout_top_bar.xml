@@ -2,15 +2,35 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/top_bar_height"
+    android:background="#fff"
     >
 
     <ImageView
-        android:id="@+id/btn_new_top_bar_left"
+        android:id="@+id/iv_left"
         android:layout_width="50dp"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:scaleType="centerInside" />
+
+    <TextView
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_4"
+        android:id="@+id/tv_left"
+        android:layout_marginLeft="12dp"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_4"
+        android:id="@+id/tv_right"
+        android:layout_marginRight="12dp"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
 
     <RelativeLayout
         android:id="@+id/rl_total_search"
@@ -22,21 +42,31 @@
          >
 
         <TextView
-            android:id="@+id/txt_title"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:textColor="@color/color_100"
+            android:textSize="@dimen/text_2"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="@string/app_name"
-            android:textSize="14dp" />
+            />
 
     </RelativeLayout>
 
     <ImageView
-        android:id="@+id/btn_new_top_bar_right"
+        android:id="@+id/iv_right"
         android:layout_width="50dp"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:scaleType="centerInside" />
+
+    <View
+        android:background="@color/color_106"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
 </RelativeLayout>

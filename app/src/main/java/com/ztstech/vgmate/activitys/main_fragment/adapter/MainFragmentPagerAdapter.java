@@ -13,7 +13,7 @@ import com.ztstech.vgmate.activitys.main_fragment.subview.notice.NoticeFragment;
 
 public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    public static final String[] TITLES = new String[] {"资讯", "通告"};
+    public static final String[] TITLES = new String[] {"资讯", "公告"};
 
     public MainFragmentPagerAdapter(FragmentManager fm) {
         super(fm);

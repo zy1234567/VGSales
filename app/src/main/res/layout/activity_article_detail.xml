@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ztstech.vgmate.activitys.article_detail.ArticleDetailActivity">
+
+    <com.ztstech.vgmate.weigets.TopBar
+        app:showBackNav="true"
+        android:id="@+id/top_bar"
+        app:srcRight="@mipmap/ico_edit_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.ztstech.vgmate.weigets.TopBar>
+
+    <WebView
+        android:layout_weight="1"
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+    </WebView>
+
+    <include
+        layout="@layout/layout_comment_bar" />
+
+</LinearLayout>

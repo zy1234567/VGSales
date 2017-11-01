@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_107"
+    tools:context="com.ztstech.vgmate.activitys.add_org.AddOrgActivity">
+
+    <com.ztstech.vgmate.weigets.TopBar
+        android:background="#fff"
+        android:id="@+id/top_bar"
+        app:barTitle="添加机构"
+        app:showBackNav="true"
+        app:textRight="提交"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.ztstech.vgmate.weigets.TopBar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="@color/color_107"
+                android:gravity="center_vertical"
+                android:paddingLeft="12dp"
+                android:text="请编辑机构基本资料"
+                android:textColor="@color/color_102"
+                android:textSize="@dimen/text_7" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="#fff">
+
+                <TextView
+                    android:id="@+id/tv_name_title"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="机构名称"
+                    android:textColor="@color/color_100"
+                    android:textSize="@dimen/text_5" />
+
+                <TextView
+                    android:layout_width="12dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="right"
+                    android:text="*"
+                    android:textColor="@color/color_006"
+                    android:textSize="@dimen/text_7" />
+
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_org_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/tv_name_title"
+                    android:background="@null"
+                    android:enabled="true"
+                    android:hint="请输入机构名称"
+                    android:lines="1"
+                    android:textColorHint="@color/color_103"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/text_5" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/color_106" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="#fff">
+
+                <TextView
+                    android:id="@+id/tv_location_title"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="所在地区"
+                    android:textColor="@color/color_100"
+                    android:textSize="@dimen/text_5" />
+
+                <TextView
+                    android:layout_width="12dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="right"
+                    android:text="*"
+                    android:textColor="@color/color_006"
+                    android:textSize="@dimen/text_7" />
+
+                <TextView
+                    android:id="@+id/tv_check"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/bg_c_2_f_001"
+                    android:gravity="center"
+                    android:text="检测重复"
+                    android:textColor="#fff" />
+
+
+                <TextView
+                    android:drawableRight="@mipmap/arrow_right_choice"
+                    android:id="@+id/tv_location"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="8dp"
+                    android:layout_toLeftOf="@id/tv_check"
+                    android:layout_toRightOf="@id/tv_location_title"
+                    android:background="@null"
+                    android:enabled="true"
+                    android:hint="请选择机构的所在地区"
+                    android:lines="1"
+                    android:textColorHint="@color/color_103"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/text_5" />
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/color_106" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="#fff">
+
+                <TextView
+                    android:id="@+id/tv_tag_title"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="分类标签"
+                    android:textColor="@color/color_100"
+                    android:textSize="@dimen/text_5" />
+
+                <TextView
+                    android:layout_width="12dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="right"
+                    android:text="*"
+                    android:textColor="@color/color_006"
+                    android:textSize="@dimen/text_7" />
+
+
+                <TextView
+                    android:id="@+id/tv_tag"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="12dp"
+                    android:layout_toRightOf="@id/tv_tag_title"
+                    android:background="@null"
+                    android:drawableRight="@mipmap/arrow_right_choice"
+                    android:enabled="true"
+                    android:hint="请选择机构标签"
+                    android:lines="1"
+                    android:textColorHint="@color/color_103"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/text_5" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/color_106" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="#fff">
+
+                <TextView
+                    android:id="@+id/tv_gps_title"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="GPS定位"
+                    android:textColor="@color/color_100"
+                    android:textSize="@dimen/text_5" />
+
+                <TextView
+                    android:layout_width="12dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="right"
+                    android:text="*"
+                    android:textColor="@color/color_006"
+                    android:textSize="@dimen/text_7" />
+
+
+                <TextView
+                    android:id="@+id/tv_gps"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="12dp"
+                    android:layout_toRightOf="@id/tv_gps_title"
+                    android:background="@null"
+                    android:drawableRight="@mipmap/arrow_right_choice"
+                    android:enabled="true"
+                    android:hint="请选择"
+                    android:lines="1"
+                    android:textColorHint="@color/color_103"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/text_5" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/color_106" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="#fff">
+
+                <TextView
+                    android:id="@+id/tv_detail_location_title"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="详细地址"
+                    android:textColor="@color/color_100"
+                    android:textSize="@dimen/text_5" />
+
+                <TextView
+                    android:layout_width="12dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="right"
+                    android:text="*"
+                    android:textColor="@color/color_006"
+                    android:textSize="@dimen/text_7" />
+
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_detail_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="12dp"
+                    android:layout_toRightOf="@id/tv_detail_location_title"
+                    android:background="@null"
+                    android:enabled="true"
+                    android:hint="请输入"
+                    android:lines="1"
+                    android:ellipsize="end"
+                    android:textColorHint="@color/color_103"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/text_5" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/color_106" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="#fff">
+
+                <TextView
+                    android:id="@+id/tv_phone_title"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="资讯电话"
+                    android:textColor="@color/color_100"
+                    android:textSize="@dimen/text_5" />
+
+                <TextView
+                    android:layout_width="12dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="right"
+                    android:text="*"
+                    android:textColor="@color/color_006"
+                    android:textSize="@dimen/text_7" />
+
+                <TextView
+                    android:id="@+id/tv_contact"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/bg_c_2_f_001"
+                    android:gravity="center"
+                    android:text="手机通讯录"
+                    android:textColor="#fff" />
+
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="8dp"
+                    android:layout_toLeftOf="@id/tv_contact"
+                    android:layout_toRightOf="@id/tv_phone_title"
+                    android:background="@null"
+                    android:enabled="true"
+                    android:hint="请输入"
+                    android:id="@+id/et_phone"
+                    android:inputType="phone"
+                    android:lines="1"
+                    android:textColorHint="@color/color_103"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/text_5" />
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/color_106" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff">
+
+                <TextView
+                    android:id="@+id/tv_desc_title"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_vertical"
+                    android:text="机构简介"
+                    android:textColor="@color/color_100"
+                    android:textSize="@dimen/text_5" />
+
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="85dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@id/tv_desc_title"
+                    android:background="@null"
+                    android:enabled="true"
+                    android:gravity="top"
+                    android:id="@+id/et_desc"
+                    android:hint="请输入机构简介（选填）"
+                    android:textColorHint="@color/color_103"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/text_5" />
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

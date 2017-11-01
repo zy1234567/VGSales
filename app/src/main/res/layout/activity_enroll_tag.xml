@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_107"
+    tools:context="com.ztstech.vgmate.activitys.enroll_tag.EnrollTagActivity">
+
+    <com.ztstech.vgmate.weigets.TopBar
+        android:id="@+id/top_bar"
+        app:barTitle="招生标签"
+        app:showBackNav="true"
+        android:background="#fff"
+        app:textRight="保存"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.ztstech.vgmate.weigets.TopBar>
+
+    <TextView
+        android:textSize="@dimen/text_7"
+        android:textColor="@color/color_102"
+        android:layout_marginRight="12dp"
+        android:layout_marginLeft="12dp"
+        android:text="添加短标签更加全面展示机构优势。例如：一对一指导／资深教师团队等。"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:background="#fff"
+                android:paddingRight="12dp"
+                android:paddingLeft="12dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <TextView
+                    android:text="标签1"
+                    style="@style/EditListTitle"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:lines="1"
+                    android:id="@+id/et_1"
+                    android:hint="请输入（6字以内）"
+                    android:layout_marginLeft="15dp"
+                    style="@style/EditListTitle"
+                    android:background="@null"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/tv_limit_1"
+                    android:visibility="gone"
+                    android:drawablePadding="4dp"
+                    android:textColor="@color/color_006"
+                    android:textSize="@dimen/text_8"
+                    android:text="6字以内"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_106" />
+            <LinearLayout
+                android:background="#fff"
+                android:paddingRight="12dp"
+                android:paddingLeft="12dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <TextView
+                    android:text="标签2"
+                    style="@style/EditListTitle"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:lines="1"
+                    android:id="@+id/et_2"
+                    android:hint="请输入（6字以内）"
+                    android:layout_marginLeft="15dp"
+                    style="@style/EditListTitle"
+                    android:background="@null"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/tv_limit_2"
+                    android:visibility="gone"
+                    android:drawablePadding="4dp"
+                    android:textColor="@color/color_006"
+                    android:textSize="@dimen/text_8"
+                    android:text="6字以内"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_106" />
+            <LinearLayout
+                android:background="#fff"
+                android:paddingRight="12dp"
+                android:paddingLeft="12dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <TextView
+                    android:text="标签3"
+                    style="@style/EditListTitle"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:lines="1"
+                    android:id="@+id/et_3"
+                    android:hint="请输入（6字以内）"
+                    android:layout_marginLeft="15dp"
+                    style="@style/EditListTitle"
+                    android:background="@null"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/tv_limit_3"
+                    android:visibility="gone"
+                    android:drawablePadding="4dp"
+                    android:textColor="@color/color_006"
+                    android:textSize="@dimen/text_8"
+                    android:text="6字以内"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_106" />
+            <LinearLayout
+                android:background="#fff"
+                android:paddingRight="12dp"
+                android:paddingLeft="12dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <TextView
+                    android:text="标签4"
+                    style="@style/EditListTitle"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:lines="1"
+                    android:id="@+id/et_4"
+                    android:hint="请输入（6字以内）"
+                    android:layout_marginLeft="15dp"
+                    style="@style/EditListTitle"
+                    android:background="@null"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/tv_limit_4"
+                    android:visibility="gone"
+                    android:drawablePadding="4dp"
+                    android:textColor="@color/color_006"
+                    android:textSize="@dimen/text_8"
+                    android:text="6字以内"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_106" />
+            <LinearLayout
+                android:background="#fff"
+                android:paddingRight="12dp"
+                android:paddingLeft="12dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <TextView
+                    android:text="标签5"
+                    style="@style/EditListTitle"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:lines="1"
+                    android:id="@+id/et_5"
+                    android:hint="请输入（6字以内）"
+                    android:layout_marginLeft="15dp"
+                    style="@style/EditListTitle"
+                    android:background="@null"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/tv_limit_5"
+                    android:visibility="gone"
+                    android:drawablePadding="4dp"
+                    android:textColor="@color/color_006"
+                    android:textSize="@dimen/text_8"
+                    android:text="6字以内"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_106" />
+            <LinearLayout
+                android:background="#fff"
+                android:paddingRight="12dp"
+                android:paddingLeft="12dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <TextView
+                    android:text="标签6"
+                    style="@style/EditListTitle"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:lines="1"
+                    android:id="@+id/et_6"
+                    android:hint="请输入（6字以内）"
+                    android:layout_marginLeft="15dp"
+                    style="@style/EditListTitle"
+                    android:background="@null"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/tv_limit_6"
+                    android:visibility="gone"
+                    android:drawablePadding="4dp"
+                    android:textColor="@color/color_006"
+                    android:textSize="@dimen/text_8"
+                    android:text="6字以内"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_106" />
+            <LinearLayout
+                android:background="#fff"
+                android:paddingRight="12dp"
+                android:paddingLeft="12dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <TextView
+                    android:text="标签7"
+                    style="@style/EditListTitle"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:lines="1"
+                    android:id="@+id/et_7"
+                    android:hint="请输入（6字以内）"
+                    android:layout_marginLeft="15dp"
+                    style="@style/EditListTitle"
+                    android:background="@null"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/tv_limit_7"
+                    android:visibility="gone"
+                    android:drawablePadding="4dp"
+                    android:textColor="@color/color_006"
+                    android:textSize="@dimen/text_8"
+                    android:text="6字以内"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_106" />
+            <LinearLayout
+                android:background="#fff"
+                android:paddingRight="12dp"
+                android:paddingLeft="12dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <TextView
+                    android:text="标签8"
+                    style="@style/EditListTitle"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:lines="1"
+                    android:id="@+id/et_8"
+                    android:hint="请输入（6字以内）"
+                    android:layout_marginLeft="15dp"
+                    style="@style/EditListTitle"
+                    android:background="@null"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/tv_limit_8"
+                    android:visibility="gone"
+                    android:drawablePadding="4dp"
+                    android:textColor="@color/color_006"
+                    android:textSize="@dimen/text_8"
+                    android:text="6字以内"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_106" />
+            <LinearLayout
+                android:background="#fff"
+                android:paddingRight="12dp"
+                android:paddingLeft="12dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <TextView
+                    android:text="标签9"
+                    style="@style/EditListTitle"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:lines="1"
+                    android:id="@+id/et_9"
+                    android:hint="请输入（6字以内）"
+                    android:layout_marginLeft="15dp"
+                    style="@style/EditListTitle"
+                    android:background="@null"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/tv_limit_9"
+                    android:visibility="gone"
+                    android:drawablePadding="4dp"
+                    android:textColor="@color/color_006"
+                    android:textSize="@dimen/text_8"
+                    android:text="6字以内"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_106" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

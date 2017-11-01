@@ -6,6 +6,19 @@ package com.ztstech.vgmate.data.constants;
 
 public interface NetConstants {
 
-    String BASE_URL = "https://api.douban.com/v2/movie/";
+//    String BASE_URL = "http://192.168.1.142/tom/";
+    String BASE_URL = "http://bucea.verygrow.com/";
+
+    /**
+     * 上传文件
+     */
+    String UPLOAD_FILES = BASE_URL + "static/uploadFiles";
+
+
+    int STATUS_SUCCEED = 0;
+
+    String PARAM_AUTHID = "authId";
+
+
 
 }

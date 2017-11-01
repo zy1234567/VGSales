@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:background="@null"
+    android:paddingRight="12dp">
+
+    <TextView
+        android:id="@+id/tv_right"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:paddingLeft="40dp"
+        android:text="国际象棋"
+        android:textColor="@color/weilai_color_101"
+        android:textSize="13dp" />
+
+    <TextView
+        android:id="@+id/tv_added"
+        android:layout_width="48dp"
+        android:layout_height="22dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/bg_c_2_f_007"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="已添加"
+        android:textColor="@color/weilai_color_001"
+        android:textSize="11dp" />
+
+    <TextView
+        android:id="@+id/tv_add"
+        android:layout_width="48dp"
+        android:layout_height="22dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/bg_c_2_s_105_f_002"
+        android:drawableLeft="@mipmap/add_classlabel"
+        android:gravity="center"
+        android:drawablePadding="-5dp"
+        android:paddingLeft="8dp"
+        android:text="添加"
+        android:textColor="@color/weilai_color_105"
+        android:textSize="11dp" />
+
+</RelativeLayout>

@@ -28,7 +28,7 @@
                 android:id="@+id/line_province"
                 android:layout_width="30dp"
                 android:layout_height="2dp"
-                android:background="@drawable/bg_blue_line_h"
+                android:background="@drawable/bg_c_2_f_w003"
                 android:layout_alignParentBottom="true"/>
         </RelativeLayout>
         <RelativeLayout
@@ -47,7 +47,7 @@
                 android:id="@+id/line_city"
                 android:layout_width="30dp"
                 android:layout_height="2dp"
-                android:background="@drawable/bg_blue_line_h"
+                android:background="@drawable/bg_c_2_f_w003"
                 android:visibility="invisible"
                 android:layout_alignParentBottom="true"/>
         </RelativeLayout>
@@ -67,7 +67,7 @@
                 android:id="@+id/line_area"
                 android:layout_width="30dp"
                 android:layout_height="2dp"
-                android:background="@drawable/bg_blue_line_h"
+                android:background="@drawable/bg_c_2_f_w003"
                 android:visibility="invisible"
                 android:layout_alignParentBottom="true"/>
         </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.ztstech.vgmate.base;
 
+import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,6 +15,7 @@ public class SimpleViewHolder<T> extends RecyclerView.ViewHolder{
 
     private ItemViewClickListener itemViewClickListener;
     private SimpleRecyclerAdapter<T> adapter;
+    private View itemView;
 
     public SimpleViewHolder(View itemView) {
         this(itemView, null);
@@ -26,6 +28,7 @@ public class SimpleViewHolder<T> extends RecyclerView.ViewHolder{
      */
     public SimpleViewHolder(View itemView, @Nullable SimpleRecyclerAdapter<T> adapter) {
         super(itemView);
+        this.itemView = itemView;
         ButterKnife.bind(this, itemView);
         if (adapter != null) {
             itemViewClickListener = new ItemViewClickListener();
@@ -40,6 +43,10 @@ public class SimpleViewHolder<T> extends RecyclerView.ViewHolder{
             itemViewClickListener.position = position;
         }
         refreshView(data);
+    }
+
+    protected Context getContext() {
+        return itemView.getContext();
     }
 
     protected void refreshView(T data) {};

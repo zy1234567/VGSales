@@ -18,7 +18,7 @@ public abstract class MVPFragment<P extends BasePresenter> extends BaseFragment 
 
     @CallSuper
     @Override
-    protected void onCreateViewFinish(@Nullable Bundle savedInstanceState) {
+    protected void onViewBindFinish(@Nullable Bundle savedInstanceState) {
         if (mPresenter == null) {
             mPresenter = initPresenter();
         }else {

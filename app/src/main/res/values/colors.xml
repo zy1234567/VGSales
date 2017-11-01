@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorAccent">#ffffff</color>
+    <color name="colorAccent">#1aa1fb</color>
     <color name="colorPrimary">#fff</color>
     <color name="colorPrimaryDark">#ff000000</color>
+
+    <color name="datePicker_colorAccent">#1aa1fb</color>
+    <color name="datePicker_colorPrimary">#ff9700</color>
+    <color name="datePicker_colorPrimaryDark">#ff000000</color>
 
     <color name="color_001">#1aa1fb</color>
     <color name="color_002">#ff9700</color>
@@ -23,10 +27,15 @@
     <color name="color_106">#e5e5e5</color>
     <color name="color_107">#f2f3f4</color>
     <color name="color_108">#f7f7f7</color>
-    <color name="color_109">#ffffff</color>
+    <color name="color_109">#ffffffff</color>
+
+    <color name="color_50_109">#7fffffff</color>
+    <color name="color_05_001">#f0f9ff</color>
 
 
-
+    <color name="color_50_000">#7f000000</color>
+    <color name="color_30_000">#4c000000</color>
+    <color name="color_40_000">#99000000</color>
 
 
 

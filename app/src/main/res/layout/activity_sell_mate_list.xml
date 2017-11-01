@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ztstech.vgmate.activitys.sell_mate_list.SellMateListActivity">
+
+    <com.ztstech.vgmate.weigets.TopBar
+        android:id="@+id/top_bar"
+        app:barTitle="销售伙伴"
+        app:showBackNav="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </com.ztstech.vgmate.weigets.TopBar>
+
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </WebView>
+</LinearLayout>

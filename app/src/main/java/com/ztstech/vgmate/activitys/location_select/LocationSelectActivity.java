@@ -3,6 +3,7 @@ package com.ztstech.vgmate.activitys.location_select;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ import com.ztstech.vgmate.activitys.location_select.adapter.ProvinceAdapter;
 import com.ztstech.vgmate.data.beans.LocationBean;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.HUDUtils;
+import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 
 
@@ -31,6 +33,12 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Emitter;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by smm on 2017/6/23.
@@ -39,10 +47,20 @@ import butterknife.OnClick;
 
 public class LocationSelectActivity extends AppCompatActivity {
 
+    /**传入默认区划*/
+    public static final String ARG_DEFAULT_AREA = "arg_default";
+
+
     /**返回结果代码*/
     public static final String RESULT_CODE = "code";
     /**返回结果名称*/
     public static final String RESULT_NAME = "value";
+    /**省*/
+    public static final String RESULT_P = "result_p";
+    /**市*/
+    public static final String RESULT_C = "result_c";
+    /**区*/
+    public static final String RESULT_A = "result_A";
 
 
     @BindView(R.id.img_back)
@@ -112,29 +130,40 @@ public class LocationSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_select);
         ButterKnife.bind(this);
-        initData();
-        initListener();
+
+        kProgressHUD = HUDUtils.create(this);
+        kProgressHUD.setLabel("正在初始化");
+        kProgressHUD.show();
+
+        Observable.create(new Action1<Emitter<Void>>() {
+            @Override
+            public void call(Emitter<Void> emitter) {
+                initData();
+                emitter.onNext(null);
+                emitter.onCompleted();
+            }
+        }, Emitter.BackpressureMode.NONE)
+                .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+        .subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                kProgressHUD.dismiss();
+                initListener();
+            }
+        });
+
+        String defaultLocationId = getIntent().getStringExtra(ARG_DEFAULT_AREA);
+        if (!TextUtils.isEmpty(defaultLocationId)) {
+            tvCuerrentSelect.setText(LocationUtils.getFormedString(defaultLocationId));
+        }
     }
 
     private void initData() {
         tvSave.setText("确认");
         title.setText("地区选择");
-        String s = CommonUtil.getDataFromAssets(this, "location.txt");
-        list_province = new Gson().fromJson(s, new TypeToken<List<LocationBean>>() {
-        }.getType());
+        list_province = LocationUtils.getLocationList();
         updateOrgInfo = getIntent().getBooleanExtra("updateOrgInfo", false);
-        if (updateOrgInfo) {
-            kProgressHUD = HUDUtils.create(this);
-        }
-
-        list_city = new ArrayList<>();
-        list_area = new ArrayList<>();
-        adapterProvince = new ProvinceAdapter(list_province, this);
-        adapterCity = new CityAdapter(list_city, this);
-        adapterArea = new AreaApapter(list_area, this);
-        lvProvince.setAdapter(adapterProvince);
-        lvCity.setAdapter(adapterCity);
-        lvArea.setAdapter(adapterArea);
 
     }
 
@@ -172,6 +201,9 @@ public class LocationSelectActivity extends AppCompatActivity {
                 || province.contains("台湾")) {
             intent.putExtra(RESULT_NAME, province);
             intent.putExtra(RESULT_CODE, psid);
+            intent.putExtra(RESULT_P, psid);
+            intent.putExtra(RESULT_C, csid);
+            intent.putExtra(RESULT_A, asid);
             setResult(RESULT_OK, intent);
         } else {
             if (cPosition == -1) {
@@ -184,6 +216,9 @@ public class LocationSelectActivity extends AppCompatActivity {
             }
             intent.putExtra(RESULT_NAME, province + "-" + city + "-" + area);
             intent.putExtra(RESULT_CODE, asid);
+            intent.putExtra(RESULT_P, psid);
+            intent.putExtra(RESULT_C, csid);
+            intent.putExtra(RESULT_A, asid);
             setResult(RESULT_OK, intent);
         }
         if (updateOrgInfo) {
@@ -195,6 +230,16 @@ public class LocationSelectActivity extends AppCompatActivity {
 
 
     private void initListener() {
+
+        list_city = new ArrayList<>();
+        list_area = new ArrayList<>();
+        adapterProvince = new ProvinceAdapter(list_province, this);
+        adapterCity = new CityAdapter(list_city, this);
+        adapterArea = new AreaApapter(list_area, this);
+        lvProvince.setAdapter(adapterProvince);
+        lvCity.setAdapter(adapterCity);
+        lvArea.setAdapter(adapterArea);
+
         lvProvince.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

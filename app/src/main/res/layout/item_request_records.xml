@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_107">
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:text="申请时间 2016-09-09 12:00"
+        android:layout_marginTop="15dp"
+        android:includeFontPadding="false"
+        android:textSize="@dimen/text_7"
+        android:textColor="@color/color_101"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
+    <RelativeLayout
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginLeft="12dp"
+        android:background="@drawable/bg_c_10_s_104_f_fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <TextView
+            android:gravity="center"
+            android:textSize="@dimen/text_9"
+            android:text="已通过"
+            android:textColor="#fff"
+            android:background="@drawable/bg_c_10_0_10_0_f_001"
+            android:layout_alignParentRight="true"
+            android:layout_width="45dp"
+            android:layout_height="18dp" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:drawableLeft="@mipmap/ico_entryname"
+            android:text="添加机构申请"
+            android:drawablePadding="6dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/color_100"
+            android:textSize="@dimen/text_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="14dp"
+            android:text="标签"
+            android:textColor="@color/color_102"
+            android:textSize="@dimen/text_7"
+            android:layout_alignLeft="@id/tv_title"
+            android:layout_below="@id/tv_title"
+            android:id="@+id/tv_tag_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textColor="@color/color_002"
+            android:textSize="@dimen/text_7"
+            android:id="@+id/tv_tag"
+            android:layout_marginRight="10dp"
+            android:layout_alignTop="@id/tv_tag_title"
+            android:layout_marginLeft="54dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_prop_title"
+            android:text="性质"
+            android:layout_marginTop="8dp"
+            android:layout_alignLeft="@id/tv_title"
+            android:layout_below="@id/tv_tag"
+            android:textColor="@color/color_102"
+            android:textSize="@dimen/text_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_prop"
+            android:textColor="@color/color_102"
+            android:textSize="@dimen/text_7"
+            android:layout_alignTop="@id/tv_prop_title"
+            android:layout_alignRight="@id/tv_tag"
+            android:layout_alignLeft="@id/tv_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_name_title"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/tv_prop"
+            android:layout_alignLeft="@id/tv_title"
+            android:textColor="@color/color_102"
+            android:textSize="@dimen/text_7"
+            android:text="申请人"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:textColor="@color/color_004"
+            android:textSize="@dimen/text_7"
+            android:layout_alignTop="@id/tv_name_title"
+            android:layout_alignRight="@id/tv_tag"
+            android:layout_alignLeft="@id/tv_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_desc_title"
+            android:text="附言"
+            android:textColor="@color/color_102"
+            android:textSize="@dimen/text_7"
+            android:layout_marginTop="8dp"
+            android:layout_alignLeft="@id/tv_title"
+            android:layout_below="@id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textColor="@color/color_102"
+            android:textSize="@dimen/text_7"
+            android:layout_alignTop="@id/tv_desc_title"
+            android:layout_alignRight="@id/tv_tag"
+            android:layout_alignLeft="@id/tv_tag"
+            android:id="@+id/tv_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        
+        <View
+            android:id="@+id/v"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_104"
+            android:layout_below="@id/tv_desc"
+            android:layout_marginTop="15dp"/>
+
+        <RelativeLayout
+            android:layout_below="@id/v"
+            android:layout_width="match_parent"
+            android:layout_height="54dp">
+
+            <LinearLayout
+                android:id="@+id/ll_date_container"
+                android:orientation="vertical"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="@dimen/text_8"
+                android:textColor="@color/color_100"
+                android:text="23:32"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/tv_time_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="08-11"
+                    android:textSize="@dimen/text_8"
+                    android:textColor="@color/color_100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_gap"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@id/ll_date_container"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+
+                <com.ztstech.vgmate.weigets.CircleGapView
+                    android:id="@+id/cgv"
+                    android:layout_centerVertical="true"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp" />
+
+                <View
+                    android:layout_centerHorizontal="true"
+                    android:layout_above="@id/cgv"
+                    android:background="@color/color_103"
+                    android:layout_width="1dp"
+                    android:layout_height="15dp" />
+
+
+                <View
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/cgv"
+                    android:background="@color/color_103"
+                    android:layout_width="1dp"
+                    android:layout_height="15dp" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:lines="1"
+                android:textSize="@dimen/text_5"
+                android:textColor="@color/color_100"
+                android:text="该机构申请添加标签：七天在线学习，趣味数学测试"
+                android:ellipsize="end"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@id/rl_gap"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+        
+    </RelativeLayout>
+    
+    <TextView
+        android:id="@+id/tv_full"
+        android:gravity="center"
+        android:background="@drawable/bg_c_2_s_100"
+        android:text="完整记录"
+        android:textSize="@dimen/text_7"
+        android:textColor="@color/color_100"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="end"
+        android:layout_width="67dp"
+        android:layout_height="27dp" />
+    
+</LinearLayout>

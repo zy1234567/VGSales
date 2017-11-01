@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ztstech.vgmate.activitys.org_detail.OrgDetailActivity">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <com.ztstech.vgmate.weigets.TopBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backgroundColor="@color/color_001"
+            app:barTitle=""
+            app:colorLeft="@color/color_109"
+            app:layout_collapseMode="pin"
+            app:showBackNav="true">
+
+        </com.ztstech.vgmate.weigets.TopBar>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/rl_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/color_005">
+
+                <TextView
+                    android:paddingTop="5dp"
+                    android:drawableTop="@mipmap/shenpi"
+                    android:background="@color/color_003"
+                    android:id="@+id/tv_approval"
+                    android:text="认领审批"
+                    android:drawablePadding="3dp"
+                    android:paddingBottom="6dp"
+                    android:gravity="bottom|center_horizontal"
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/color_109"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+                
+                <TextView
+                    android:paddingTop="5dp"
+                    android:drawableTop="@mipmap/wanshan"
+                    android:id="@+id/tv_complete_info"
+                    android:text="完善资料"
+                    android:drawablePadding="3dp"
+                    android:paddingBottom="6dp"
+                    android:gravity="bottom|center_horizontal"
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/color_100"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_109" />
+                <TextView
+                    android:paddingTop="5dp"
+                    android:drawableTop="@mipmap/goutong"
+                    android:id="@+id/tv_connect_time"
+                    android:text="沟通记录"
+                    android:drawablePadding="3dp"
+                    android:paddingBottom="6dp"
+                    android:gravity="bottom|center_horizontal"
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/color_100"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_109" />
+                <TextView
+                    android:paddingTop="5dp"
+                    android:drawableTop="@mipmap/queren"
+                    android:id="@+id/tv_confirm"
+                    android:text="审核通过"
+                    android:drawablePadding="3dp"
+                    android:paddingBottom="6dp"
+                    android:gravity="bottom|center_horizontal"
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/color_100"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_109" />
+                <TextView
+                    android:drawableTop="@mipmap/delete_agency"
+                    android:paddingTop="5dp"
+                    android:id="@+id/tv_delete"
+                    android:text="删除机构"
+                    android:drawablePadding="3dp"
+                    android:paddingBottom="6dp"
+                    android:gravity="bottom|center_horizontal"
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/color_100"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <WebView
+                android:id="@+id/web_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/rl_bottom" />
+
+        </RelativeLayout>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

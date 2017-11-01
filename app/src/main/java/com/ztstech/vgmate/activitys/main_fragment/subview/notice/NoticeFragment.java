@@ -6,21 +6,21 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.main_fragment.subview.notice.adapter.NoticeRecyclerAdapter;
-import com.ztstech.vgmate.model.notice.NoticeModel;
+import com.ztstech.vgmate.data.beans.MainListBean;
 
 import java.util.List;
 
 import butterknife.BindView;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 公告
  */
 public class NoticeFragment extends MVPFragment<NoticeContract.Presenter> implements
         NoticeContract.View {
@@ -28,10 +28,13 @@ public class NoticeFragment extends MVPFragment<NoticeContract.Presenter> implem
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
 
+
+    @BindView(R.id.refresh_layout)
+    RefreshLayout refreshLayout;
+
     private NoticeRecyclerAdapter recyclerAdapter;
 
     public NoticeFragment() {
-        // Required empty public constructor
     }
 
     public static NoticeFragment newInstance() {
@@ -55,19 +58,50 @@ public class NoticeFragment extends MVPFragment<NoticeContract.Presenter> implem
     }
 
     @Override
-    protected void onCreateViewFinish(@Nullable Bundle savedInstanceState) {
-        super.onCreateViewFinish(savedInstanceState);
+    protected void onViewBindFinish(@Nullable Bundle savedInstanceState) {
+        super.onViewBindFinish(savedInstanceState);
         recyclerAdapter = new NoticeRecyclerAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(recyclerAdapter);
 
+        refreshLayout.setEnableRefresh(false);  //禁止下拉刷新
+
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+            }
+        });
+
+        refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                mPresenter.appendData();
+            }
+        });
+
+
         mPresenter.loadData();
+    }
+
+
+
+
+    @Override
+    public void setData(List<MainListBean.ListBean> listData) {
+        if (refreshLayout.isLoading()) {
+            refreshLayout.finishLoadmore();
+        }
+        recyclerAdapter.setListData(listData);
+        recyclerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showError(String errorMessage) {
 
     }
 
     @Override
-    public void setData(List<NoticeModel> items) {
-        recyclerAdapter.setListData(items);
-        recyclerAdapter.notifyDataSetChanged();
+    public void setNoreMoreData(boolean noreMoreData) {
+
     }
 }

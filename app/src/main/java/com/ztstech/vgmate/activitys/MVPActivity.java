@@ -24,6 +24,11 @@ public abstract class MVPActivity<P extends BasePresenter> extends BaseActivity 
         mvpView.setPresenter(mPresenter);
     }
 
+    @Override
+    protected void onDestroy() {
+        mvpView.hideLoading(null);
+        super.onDestroy();
+    }
 
     public boolean isViewFinish() {
         return isFinishing();
@@ -32,7 +37,9 @@ public abstract class MVPActivity<P extends BasePresenter> extends BaseActivity 
     protected abstract P initPresenter();
 
     public void showLoading(String message) {
-        mvpView.showLoading(message);
+        if (!isFinishing()) {
+            mvpView.showLoading(message);
+        }
     }
 
     public void hideLoading(@Nullable String errorMessage) {

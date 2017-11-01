@@ -1,5 +1,7 @@
 package com.ztstech.vgmate.model.fill_info;
 
+import android.graphics.Bitmap;
+
 import java.io.File;
 
 /**
@@ -9,7 +11,7 @@ import java.io.File;
 
 public class FillInfoModel {
 
-    public File headFile;
+    public File headerFile;
 
     public String name;
 
@@ -30,11 +32,18 @@ public class FillInfoModel {
 
     public String cardBank;
 
+
     public File idFile;
 
     public File idBackFile;
 
     public File cardFile;
+
+    /**服务器返回url*/
+    public String headUrl;
+    public String idUrl;
+    public String idBackUrl;
+    public String cardUrl;
 
 
 }

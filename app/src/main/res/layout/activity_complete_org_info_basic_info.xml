@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_107"
+    tools:context="com.ztstech.vgmate.activitys.complete_org_info.subview.basic_info.CompleteOrgInfoBasicInfoActivity">
+
+    <com.ztstech.vgmate.weigets.TopBar
+        android:background="#fff"
+        android:id="@+id/top_bar"
+        app:showBackNav="true"
+        app:barTitle="基本资料"
+        app:textRight="保存"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.ztstech.vgmate.weigets.TopBar>
+
+
+
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:paddingRight="12dp"
+        android:paddingLeft="12dp"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:textSize="@dimen/text_7"
+            android:textColor="@color/color_100"
+            android:text="机构名称"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:drawablePadding="5dp"
+            android:drawableRight="@mipmap/arrow_right_choice"
+            android:ellipsize="end"
+            android:textColor="@color/color_102"
+            android:textSize="@dimen/text_7"
+            android:background="@null"
+            android:layout_marginLeft="20dp"
+            android:gravity="right|center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_106" />
+
+    <RelativeLayout
+        android:paddingRight="12dp"
+        android:paddingLeft="12dp"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:textSize="@dimen/text_7"
+            android:textColor="@color/color_100"
+            android:text="机构logo"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+
+        <ImageView
+            android:id="@+id/img_arrow"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/arrow_right_choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:scaleType="centerCrop"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/img_arrow"
+            android:layout_toStartOf="@id/img_arrow"
+            android:layout_centerVertical="true"
+            android:drawablePadding="5dp"
+            android:drawableRight="@mipmap/arrow_right_choice"
+            android:ellipsize="end"
+            android:textColor="@color/color_102"
+            android:textSize="@dimen/text_7"
+            android:background="#f00"
+            android:layout_marginLeft="20dp"
+            android:gravity="right|center_vertical"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_106" />
+
+    <LinearLayout
+        android:paddingRight="12dp"
+        android:paddingLeft="12dp"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:textSize="@dimen/text_7"
+            android:textColor="@color/color_100"
+            android:text="分类标签"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:drawablePadding="5dp"
+            android:drawableRight="@mipmap/arrow_right_choice"
+            android:ellipsize="end"
+            android:textColor="@color/color_102"
+            android:textSize="@dimen/text_7"
+            android:background="@null"
+            android:layout_marginLeft="20dp"
+            android:gravity="right|center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:paddingRight="12dp"
+        android:paddingLeft="12dp"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:textSize="@dimen/text_7"
+            android:textColor="@color/color_100"
+            android:text="所在区县"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:drawablePadding="5dp"
+            android:drawableRight="@mipmap/arrow_right_choice"
+            android:ellipsize="end"
+            android:textColor="@color/color_102"
+            android:textSize="@dimen/text_7"
+            android:background="@null"
+            android:layout_marginLeft="20dp"
+            android:gravity="right|center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_106" />
+
+    <LinearLayout
+    android:paddingRight="12dp"
+    android:paddingLeft="12dp"
+    android:background="#fff"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="45dp">
+
+    <TextView
+        android:textSize="@dimen/text_7"
+        android:textColor="@color/color_100"
+        android:text="GPS定位"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:drawablePadding="5dp"
+        android:drawableRight="@mipmap/arrow_right_choice"
+        android:ellipsize="end"
+        android:textColor="@color/color_102"
+        android:textSize="@dimen/text_7"
+        android:background="@null"
+        android:layout_marginLeft="20dp"
+        android:gravity="right|center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_106" />
+
+    <LinearLayout
+        android:paddingRight="12dp"
+        android:paddingLeft="12dp"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:textSize="@dimen/text_7"
+            android:textColor="@color/color_100"
+            android:text="详细地址"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:drawablePadding="5dp"
+            android:drawableRight="@mipmap/arrow_right_choice"
+            android:ellipsize="end"
+            android:textColor="@color/color_102"
+            android:textSize="@dimen/text_7"
+            android:background="@null"
+            android:layout_marginLeft="20dp"
+            android:gravity="right|center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</LinearLayout>

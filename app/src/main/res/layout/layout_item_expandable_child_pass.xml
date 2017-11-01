@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="43dp">
+
+    <TextView
+        android:id="@+id/tv_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="7.5dp"
+        android:layout_marginRight="7.5dp"
+        android:background="@drawable/bg_c_2_s_003_f_0d197ce"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="舞蹈表演"
+        android:textColor="@color/weilai_color_003"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:scaleType="centerCrop"
+        android:id="@+id/img_delete"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_alignRight="@id/tv_tag"
+        android:layout_alignTop="@id/tv_tag"
+        android:layout_marginRight="-7dp"
+        android:layout_marginTop="-7dp"
+        android:src="@mipmap/delete_classlabel" />
+
+    <ImageView
+        android:scaleType="centerCrop"
+        android:id="@+id/img_certified"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_tag"
+        android:layout_alignRight="@id/tv_tag"
+        android:src="@mipmap/certified_classlabel" />
+
+</RelativeLayout>

@@ -10,7 +10,7 @@ import java.util.List;
 
 public abstract class SimpleRecyclerAdapter<T> extends RecyclerView.Adapter<SimpleViewHolder<T>> {
 
-    private List<T> mListData;
+    protected List<T> mListData;
 
     private SimpleRecyclerAdapter.OnItemClickListener<T> onItemClickListener;
 

@@ -52,11 +52,23 @@ public class TakePhotoHelper {
      */
     private CropOptions mCropOptions;
 
+    /**宽高比*/
+    private int widthPercent = 1;
+    private int heightPercent = 1;
+
     public TakePhotoHelper(Activity activity, TakePhoto takePhoto, boolean iscrop) {
+        this(activity, takePhoto, iscrop, -1, -1);
+    }
+
+    public TakePhotoHelper(Activity activity, TakePhoto takePhoto, boolean iscrop, int widthPercent,
+                           int heightPercent) {
+        this.widthPercent = widthPercent;
+        this.heightPercent = heightPercent;
         this.activity = activity;
         this.takePhoto = takePhoto;
         this.iscrop = iscrop;
-        File file = new File(Environment.getExternalStorageDirectory(), "/ztstechDown/" + System.currentTimeMillis() + ".jpg");
+        File file = new File(activity.getCacheDir(), "/ztstechDown/" +
+                System.currentTimeMillis() + ".jpg");
         if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
         imageUri = Uri.fromFile(file);
     }
@@ -66,28 +78,31 @@ public class TakePhotoHelper {
         this.takePhoto = takePhoto;
         this.iscrop = iscrop;
         this.mCropOptions = mCropOptions;
-        File file = new File(Environment.getExternalStorageDirectory(), "/ztstechDown/" + System.currentTimeMillis() + ".jpg");
+        File file = new File(activity.getCacheDir(), "/ztstechDown/" +
+                System.currentTimeMillis() + ".jpg");
         if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
         imageUri = Uri.fromFile(file);
     }
 
     public void show() {
-        AlertDialog.Builder buider = new AlertDialog.Builder(activity);
         View view = LayoutInflater.from(activity).inflate(
-                R.layout.mine_collection_dialog, null);
+                R.layout.mine_collection_dialog, null, false);
         LinearLayout xiangji = (LinearLayout) view
                 .findViewById(R.id.layout_fengxiang);
         LinearLayout xiangce = (LinearLayout) view
                 .findViewById(R.id.layout_delete);
         TextView tv1 = (TextView) view.findViewById(R.id.collection_fenxing);
         TextView tv2 = (TextView) view.findViewById(R.id.collection_delete);
-        buider.setView(view);
-        dialog = buider.create();
+        dialog = new Dialog(activity);
+        ViewUtils.setDialogFullScreen(dialog);
+        dialog.setContentView(view);
+
         dialog.setCanceledOnTouchOutside(true);
         xiangji.setOnClickListener(new MyClickListener());
         xiangce.setOnClickListener(new MyClickListener());
         tv1.setText("相机");
         tv2.setText("相册");
+
         dialog.show();
     }
 
@@ -121,7 +136,7 @@ public class TakePhotoHelper {
 
             //设置默认裁剪配置
             if (mCropOptions == null) {
-                mCropOptions = getCropOptions(1, 1, 500, 500);
+                mCropOptions = getCropOptions(widthPercent, heightPercent, 500, 500);
             }
 
             /*其他图片*/
@@ -149,7 +164,7 @@ public class TakePhotoHelper {
     public void selectFromAlbum(){
         //设置默认裁剪配置
         if (mCropOptions == null) {
-            mCropOptions = getCropOptions(1, 1, 500, 500);
+            mCropOptions = getCropOptions(widthPercent, heightPercent, 500, 500);
         }
         if (iscrop) {
             takePhoto.onPickFromGalleryWithCrop(imageUri, mCropOptions);
@@ -179,7 +194,8 @@ public class TakePhotoHelper {
      * 创建自定义裁剪配置 cropOptions
      */
     public CropOptions getCropOptions(int aspectX, int aspectY, int outPutX, int outPutY) {
-        return new CropOptions.Builder().setWithOwnCrop(true).setAspectX(aspectX).setAspectY(aspectY).setOutputX(outPutX).setOutputY(outPutY).create();
+        return new CropOptions.Builder().setWithOwnCrop(true).setAspectX(aspectX)
+                .setAspectY(aspectY).setOutputX(outPutX).setOutputY(outPutY).create();
     }
 
     /**

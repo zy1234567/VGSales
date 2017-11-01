@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_107"
+    tools:context="com.ztstech.vgmate.activitys.complete_org_info.subview.contact.CompleteOrgInfoContactActivity">
+
+    <com.ztstech.vgmate.weigets.TopBar
+        android:background="#fff"
+        app:showBackNav="true"
+        app:barTitle="负责人"
+        app:textRight="保存"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.ztstech.vgmate.weigets.TopBar>
+
+    <LinearLayout
+
+    android:layout_marginTop="8dp"
+    android:paddingRight="12dp"
+    android:paddingLeft="12dp"
+    android:orientation="horizontal"
+    android:background="#fff"
+    android:layout_width="match_parent"
+    android:layout_height="45dp">
+
+    <TextView
+        android:textSize="@dimen/text_7"
+        android:textColor="@color/color_100"
+        android:text="姓名"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:textColor="@color/color_103"
+        android:textColorHint="@color/color_103"
+        android:textSize="@dimen/text_7"
+        android:hint="请输入"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:background="@null"/>
+
+</LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_106" />
+
+
+    <LinearLayout
+
+        android:paddingRight="12dp"
+        android:paddingLeft="12dp"
+        android:orientation="horizontal"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:textSize="@dimen/text_7"
+            android:textColor="@color/color_100"
+            android:text="手机"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:textColor="@color/color_103"
+            android:textColorHint="@color/color_103"
+            android:textSize="@dimen/text_7"
+            android:hint="请输入"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:background="@null"/>
+
+    </LinearLayout>
+</LinearLayout>

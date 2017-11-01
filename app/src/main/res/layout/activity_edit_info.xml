@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/color_107"
+    android:layout_height="match_parent">
+
+
+    <com.ztstech.vgmate.weigets.TopBar
+        android:id="@+id/top_bar"
+        app:showBackNav="true"
+        app:barTitle="个人资料"
+        app:textRight="保存"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.ztstech.vgmate.weigets.TopBar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/layout_basic_info" />
+
+            <TextView
+                android:visibility="gone"
+                android:background="#fff"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="15dp"
+                android:id="@+id/tv_setting"
+                android:gravity="center_vertical"
+                android:paddingLeft="12dp"
+                android:drawablePadding="8dp"
+                android:text="设置"
+                android:drawableLeft="@mipmap/ico_me_setting"
+                android:layout_width="match_parent"
+                android:layout_height="45dp" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>

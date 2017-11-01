@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#88abcd">
 
@@ -29,6 +31,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:scaleType="centerCrop"
                     android:src="@mipmap/expect_income_home"
                     android:id="@+id/img_top_left"
                     android:layout_centerVertical="true"
@@ -67,6 +70,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:scaleType="centerCrop"
                     android:src="@mipmap/completed_income_home"
                     android:id="@+id/img_top_center"
                     android:layout_centerVertical="true"
@@ -104,6 +108,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:scaleType="centerCrop"
                     android:src="@mipmap/real_income_home"
                     android:id="@+id/img_top_right"
                     android:layout_centerVertical="true"
@@ -142,66 +147,70 @@
 
 
     <RelativeLayout
-        android:layout_marginTop="16pt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="16pt">
 
-        <ImageView
+        <com.ztstech.vgmate.weigets.CircleImageView
+            app:drawBorder="true"
+            app:borderColor="@color/color_50_109"
+            app:borderWidth="1dp"
             android:id="@+id/img_header"
-            android:background="#f00"
-            android:layout_centerHorizontal="true"
             android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            />
 
         <TextView
             android:id="@+id/tv_name"
-            android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/img_header"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:text="吕晓梦"
             android:textColor="@color/color_109"
-            android:textSize="@dimen/text_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textSize="@dimen/text_2" />
 
         <TextView
             android:id="@+id/tv_introducer"
-            android:layout_marginTop="8dp"
-            android:textSize="@dimen/text_7"
-            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/tv_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
             android:text="介绍人：王珊珊"
             android:textColor="@color/color_109"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textSize="@dimen/text_7" />
 
         <TextView
             android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/tv_introducer"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/color_109"
-            android:text="北京市 市辖区 西城区"
             android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:text="北京市 市辖区 西城区"
+            android:textColor="@color/color_109" />
 
 
     </RelativeLayout>
-    
+
     <RelativeLayout
         android:background="#fff"
         android:layout_width="match_parent"
         android:layout_height="42dp">
         <FrameLayout
+            android:id="@+id/fl_sell_chance"
             android:alpha="0.08"
             android:background="@color/color_006"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
         </FrameLayout>
 
         <ImageView
+            android:scaleType="centerCrop"
             android:id="@+id/img_notice"
             android:src="@mipmap/notice_home"
             android:layout_marginLeft="12dp"
@@ -222,7 +231,7 @@
 
 
         <RelativeLayout
-            android:background="@drawable/bg_main_chance"
+            android:background="@drawable/bg_c_2_sz_70_25_f_002"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:layout_alignParentRight="true"
@@ -231,8 +240,7 @@
 
             <TextView
                 android:gravity="center"
-                android:drawableLeft="@mipmap/ico_grab_home"
-                android:text="抢机会"
+                android:text="去处理"
                 android:textColor="@color/color_109"
                 android:textSize="@dimen/text_6"
                 android:layout_centerInParent="true"
@@ -269,6 +277,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:scaleType="centerCrop"
                 android:src="@mipmap/institution_self_home"
                 android:id="@+id/img_bottom_0"
                 android:layout_centerHorizontal="true"
@@ -306,6 +315,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:scaleType="centerCrop"
                 android:src="@mipmap/institution_partner_home"
                 android:id="@+id/img_bottom_1"
                 android:layout_centerHorizontal="true"
@@ -343,6 +353,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:scaleType="centerCrop"
                 android:src="@mipmap/parters_home"
                 android:id="@+id/img_bottom_2"
                 android:layout_centerHorizontal="true"
@@ -380,6 +391,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:scaleType="centerCrop"
                 android:src="@mipmap/add_partners"
                 android:id="@+id/img_bottom_3"
                 android:layout_centerHorizontal="true"

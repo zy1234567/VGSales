@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="28dp"
+    android:layout_marginLeft="7.5dp"
+    android:layout_marginTop="2.5dp"
+    android:background="@drawable/bg_c_2_s_006_f_002"
+    android:gravity="center"
+    android:paddingLeft="7.5dp"
+    android:paddingRight="7.5dp"
+    android:text="标签项"
+    android:textColor="@color/weilai_color_104"
+    android:textSize="14sp">
+
+</TextView>

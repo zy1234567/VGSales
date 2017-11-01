@@ -3,10 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="103dp"
     android:paddingLeft="12dp"
+    android:paddingRight="12dp"
     android:paddingTop="15dp">
 
 
     <ImageView
+        android:scaleType="centerCrop"
         android:id="@+id/iv_item_recycler_news"
         android:background="#f00"
         android:layout_centerVertical="true"
@@ -14,10 +16,8 @@
         android:layout_height="73dp" />
 
     <TextView
-        android:text="蔚来伙伴2017年全国风采展示很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长"
         android:lines="2"
         android:ellipsize="end"
-        android:layout_marginRight="12dp"
         android:textColor="@color/color_100"
         android:textSize="@dimen/text_4"
         android:id="@+id/tv_item_recycler_notice_title"
@@ -39,16 +39,16 @@
         android:layout_height="14dp" />
 
     <TextView
-        android:layout_marginBottom="15dp"
+        android:id="@+id/tv_comment_count"
         android:drawablePadding="5dp"
         android:drawableLeft="@mipmap/comment_home"
         android:textSize="@dimen/text_8"
         android:textColor="@color/color_102"
-        android:text="13"
-        android:layout_alignRight="@id/tv_item_recycler_notice_title"
-        android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_date"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
     <View
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
