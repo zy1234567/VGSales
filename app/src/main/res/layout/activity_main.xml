@@ -11,7 +11,8 @@
         android:layout_alignParentTop="true"
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
-        app:srcLeft="@mipmap/setting_home"
+        app:srcLeft="@mipmap/ico_saoyisao"
+        app:backgroundColor="@color/color_001"
         app:srcRight="@mipmap/add_opportunity"
         android:layout_height="@dimen/top_bar_height">
     </com.ztstech.vgmate.weigets.TopBar>

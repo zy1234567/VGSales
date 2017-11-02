@@ -3,6 +3,7 @@ package com.ztstech.vgmate.activitys;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.ztstech.vgmate.base.BaseFragment;
 
@@ -26,6 +27,7 @@ public abstract class MVPFragment<P extends BasePresenter> extends BaseFragment 
         }
         mvpView = new ViewImpl<>(getActivity());
         mvpView.setPresenter(mPresenter);
+        Log.e("currentClass",getClass().getSimpleName());
     }
 
     public void showLoading(String message) {
