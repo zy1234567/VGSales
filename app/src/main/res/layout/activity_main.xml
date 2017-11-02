@@ -14,6 +14,7 @@
         app:srcLeft="@mipmap/ico_saoyisao"
         app:backgroundColor="@color/color_001"
         app:srcRight="@mipmap/add_opportunity"
+        app:showSearch="true"
         android:layout_height="@dimen/top_bar_height">
     </com.ztstech.vgmate.weigets.TopBar>
 

@@ -62,20 +62,10 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
     /**已经完成*/
     @BindView(R.id.tv_money_finish)
     TextView tvMoneyFinish;
-//    /**新机会+ */
-//    @BindView(R.id.tv_new_chance)
-//    TextView tvNewChance;
-
-//    /**销售伙伴数*/
-//    @BindView(R.id.tv_mate)
-//    TextView tvMate;
-
     /**介绍人*/
     @BindView(R.id.tv_introducer)
     TextView tvIntroducer;
-//    /**机构名录*/
-//    @BindView(R.id.tv_org)
-//    TextView tvOrg;
+
 
 
     public static MainFragment newInstance() {
@@ -123,26 +113,9 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
 
     @OnClick(R.id.img_setting)
     public void onSettingClick(View v) {
-        //点击跳转到销售
+        //点击跳转到设置
         startActivity(new Intent(getActivity(), SettingActivity.class));
     }
-
-//    @OnClick(R.id.tv_mate)
-//    public void onAddSellMateClick(View v) {
-//        //点击增加销售伙伴
-//        startActivity(new Intent(getActivity(), SellMateListActivity.class));
-//    }
-
-//    @OnClick(R.id.tv_org)
-//    public void onSelfOrganizationClick(View v) {
-//        //点击自拓机构
-//        startActivityForResult(new Intent(getActivity(), OrgListActivity.class), REQ_ORG_LIST);
-//    }
-
-//    @OnClick(R.id.tv_get_chance)
-//    public void onHandleChanceClick(View v) {
-//        startActivity(new Intent(getActivity(), SellChanceActivity.class));
-//    }
 
     @Override
     public void loadError(String errorMessage) {
@@ -158,7 +131,6 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
         tvMoneyReady.setText("¥" + String.valueOf(mainPageBean.info.maxmoney));
         tvMoneyFinish.setText("¥" + String.valueOf(mainPageBean.info.finalmoney));
         tvMoneyAlready.setText("¥" + String.valueOf(mainPageBean.info.realmoney));
-//        tvNewChance.setText("销售机会：+" + mainPageBean.info.comnum);
         tvName.setText(mainPageBean.info.uname);
 
         if (Constants.USER_ID_CHECKING.equals(UserRepository.getInstance().getUser().getUserBean()
@@ -190,9 +162,7 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
         }
 
         tvLocation.setText(locationStr.toString());
-//        tvMate.setText("销售伙伴\n" + mainPageBean.info.firstcnt);
         tvIntroducer.setText("介绍人 " + mainPageBean.info.fname);
-//        tvOrg.setText("区县机构\n" + String.valueOf(mainPageBean.info.rbinum));
 
     }
 

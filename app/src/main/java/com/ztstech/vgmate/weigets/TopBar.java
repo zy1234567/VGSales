@@ -23,19 +23,19 @@ import com.ztstech.vgmate.R;
 
 public class TopBar extends FrameLayout {
 
-    private View topView;
+    private View topView, searchView;
     private ImageView imgRight, imgLeft;
-    private TextView tvTitle, tvLeft, tvRight;
+    private TextView tvTitle, tvLeft, tvRight, tvSearch;
 
-    private String title, leftText, rightText;
+    private String title, leftText, rightText, searchText;
 
     private int backgroundColor = -1;
     private int colorLeft;
     private int colorRight;
 
 
-
     private boolean showBackNav = false;
+    private boolean showSearch = false;
 
     public TopBar(@NonNull Context context) {
         this(context, null, 0);
@@ -55,6 +55,9 @@ public class TopBar extends FrameLayout {
         imgLeft = topView.findViewById(R.id.iv_left);
         tvLeft = topView.findViewById(R.id.tv_left);
         tvRight = topView.findViewById(R.id.tv_right);
+        searchView = topView.findViewById(R.id.rl_total_search);
+        tvSearch = topView.findViewById(R.id.tv_search);
+
 
 
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.TopBar);
@@ -65,9 +68,11 @@ public class TopBar extends FrameLayout {
         colorLeft = typedArray.getColor(R.styleable.TopBar_colorLeft, 0);
         colorRight = typedArray.getColor(R.styleable.TopBar_colorRight, 0);
         showBackNav = typedArray.getBoolean(R.styleable.TopBar_showBackNav, false);
+        showSearch = typedArray.getBoolean(R.styleable.TopBar_showSearch, false);
 
         leftText = typedArray.getString(R.styleable.TopBar_textLeft);
         rightText = typedArray.getString(R.styleable.TopBar_textRight);
+        searchText = typedArray.getString(R.styleable.TopBar_textSearch);
 
         title = typedArray.getString(R.styleable.TopBar_barTitle);
 
@@ -87,6 +92,10 @@ public class TopBar extends FrameLayout {
 
         if (rightText != null) {
             tvRight.setText(rightText);
+        }
+
+        if (searchText != null) {
+            tvSearch.setText(searchText);
         }
 
         if (leftDrawableId != -1) {
@@ -117,7 +126,10 @@ public class TopBar extends FrameLayout {
             });
         }
 
-
+        if (showSearch) {
+            searchView.setVisibility(VISIBLE);
+            tvTitle.setVisibility(INVISIBLE);
+        }
 
 
         addView(topView);
@@ -142,6 +154,15 @@ public class TopBar extends FrameLayout {
         return tvLeft;
     }
 
+
+    public TextView getCenterTextView() {
+        return tvTitle;
+    }
+
+    public View getSearchView() {
+        return searchView;
+    }
+
     public void setTitle(String title) {
         this.title = title;
         if (tvTitle != null) {
@@ -149,9 +170,14 @@ public class TopBar extends FrameLayout {
         }
     }
 
-    public TextView getCenterTextView() {
-        return tvTitle;
+    public void setSearchText(String searchText) {
+        this.searchText = searchText;
+        if (tvSearch != null) {
+            tvSearch.setText(searchText);
+        }
     }
+
+
 
     public void setLeftText(String leftText) {
         this.leftText = leftText;
