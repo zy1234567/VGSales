@@ -2,7 +2,6 @@ package com.ztstech.vgmate.activitys.provide_chance;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,6 @@ import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.category_info.CategoryTagsActivity;
-import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.weigets.CustomGridView;
 
@@ -135,7 +133,7 @@ public class ProvideChanceActivity extends MVPActivity<ProvideChanceContract.Pre
      * 显示选取图片
      */
     private void showPickImage() {
-        new TakePhotoHelper(this, takePhoto, true).show();
+        new TakePhotoHelper(this, takePhoto, true).showPickDialog();
 
     }
 

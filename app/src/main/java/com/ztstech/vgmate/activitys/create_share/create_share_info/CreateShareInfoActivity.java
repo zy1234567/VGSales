@@ -320,7 +320,7 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
      * 显示选取图片
      */
     private void showPickImage() {
-        new TakePhotoHelper(this, takePhoto, true).show();
+        new TakePhotoHelper(this, takePhoto, true).showPickDialog();
     }
 
     /**

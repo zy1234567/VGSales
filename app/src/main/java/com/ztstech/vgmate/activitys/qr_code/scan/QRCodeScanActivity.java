@@ -48,6 +48,9 @@ public class QRCodeScanActivity extends MVPActivity<QRCodeScanContract.Presenter
 
     private boolean enableCamera;
 
+    /**
+     * 拍照包装类
+     */
     private TakePhotoHelperWapper takePhotoHelperWapper;
 
     @Override
@@ -153,7 +156,7 @@ public class QRCodeScanActivity extends MVPActivity<QRCodeScanContract.Presenter
     public void onClick(View v) {
         if (v == topBar.getRightTextView()) {
             //相册
-            takePhotoHelperWapper.showPickImage();
+            takePhotoHelperWapper.pickFromGallery();
         }else if (v == tvOpenLight) {
             //开灯
             if ("开灯".equals(tvOpenLight.getText().toString())) {

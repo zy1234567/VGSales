@@ -147,7 +147,7 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
      * 显示选取图片
      */
     private void showPickImage() {
-        new TakePhotoHelper(this, takePhoto, true).show();
+        new TakePhotoHelper(this, takePhoto, true).showPickDialog();
     }
 
     @Override

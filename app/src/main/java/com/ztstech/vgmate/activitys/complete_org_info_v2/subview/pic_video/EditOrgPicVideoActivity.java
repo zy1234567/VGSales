@@ -146,7 +146,7 @@ public class EditOrgPicVideoActivity extends BaseActivity implements View.OnClic
     @Override
     public void onClick(View view) {
         if (view == imgAddImg) {
-            takePhotoHelperWapper.showPickImage();
+            takePhotoHelperWapper.showPickDialog();
         }else if (view == topBar.getRightTextView()) {
             //点击保存
             save();

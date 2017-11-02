@@ -249,24 +249,24 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
                 return;
             }
             currentImageView = (ImageView) view;
-            new TakePhotoHelper(this, takePhoto, true, 56, 35).show();
+            new TakePhotoHelper(this, takePhoto, true, 56, 35).showPickDialog();
         }else if (view == ivIdBack) {
             if (!privateInfoEditEnabled) {
                 showPrivateInfoDisabled();
                 return;
             }
             currentImageView = (ImageView) view;
-            new TakePhotoHelper(this, takePhoto, true, 56, 35).show();
+            new TakePhotoHelper(this, takePhoto, true, 56, 35).showPickDialog();
         }else if (view == ivCard) {
             if (!privateInfoEditEnabled) {
                 showPrivateInfoDisabled();
                 return;
             }
             currentImageView = (ImageView) view;
-            new TakePhotoHelper(this, takePhoto, true, 56, 35).show();
+            new TakePhotoHelper(this, takePhoto, true, 56, 35).showPickDialog();
         }else if (view == imgHeader) {
             currentImageView = (ImageView) view;
-            new TakePhotoHelper(this, takePhoto, true).show();
+            new TakePhotoHelper(this, takePhoto, true).showPickDialog();
         }else if (view == tvLocation) {
             startActivityForResult(new Intent(this, LocationSelectActivity.class), REQ_LOCATION);
         }else if (view == tvBirthday) {

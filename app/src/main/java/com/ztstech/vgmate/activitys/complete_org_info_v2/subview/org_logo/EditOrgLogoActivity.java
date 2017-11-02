@@ -3,7 +3,6 @@ package com.ztstech.vgmate.activitys.complete_org_info_v2.subview.org_logo;
 import android.content.Intent;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -66,7 +65,7 @@ public class EditOrgLogoActivity extends BaseActivity {
         imgLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                takePhotoHelperWapper.showPickImage();
+                takePhotoHelperWapper.showPickDialog();
             }
         });
 

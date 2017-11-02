@@ -173,16 +173,16 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
             startActivityForResult(new Intent(this, LocationSelectActivity.class), REQ_LOCATION);
         }else if (view == ivIdBack || view == tvHeader) {
             currentImageView = ivIdBack;
-            new TakePhotoHelper(this, takePhoto, true).show();
+            new TakePhotoHelper(this, takePhoto, true).showPickDialog();
         }else if (view == imgIdBack) {
             currentImageView = imgIdBack;
-            new TakePhotoHelper(this, takePhoto, true).show();
+            new TakePhotoHelper(this, takePhoto, true).showPickDialog();
         }else if (view == ivCard) {
             currentImageView = ivCard;
-            new TakePhotoHelper(this, takePhoto, true).show();
+            new TakePhotoHelper(this, takePhoto, true).showPickDialog();
         }else if (view == ivId) {
             currentImageView = ivId;
-            new TakePhotoHelper(this, takePhoto, true).show();
+            new TakePhotoHelper(this, takePhoto, true).showPickDialog();
         }else if (view == tvSex) {
             //选择性别
             new AlertDialog.Builder(this).setTitle("选择性别").setItems(SexUtils.NAME,
