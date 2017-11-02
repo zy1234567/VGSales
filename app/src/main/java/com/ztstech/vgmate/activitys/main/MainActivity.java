@@ -16,6 +16,7 @@ import com.ztstech.vgmate.activitys.add_sell_mate.AddSellMateActivity;
 import com.ztstech.vgmate.activitys.create_share.create_share_info.CreateShareInfoActivity;
 import com.ztstech.vgmate.activitys.main.adapter.MainPagerAdapter;
 import com.ztstech.vgmate.activitys.main.widget.BottomBar;
+import com.ztstech.vgmate.activitys.qr_code.scan.QRCodeScanActivity;
 import com.ztstech.vgmate.activitys.setting.SettingActivity;
 import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.vgmate.data.api.CreateShareApi;
@@ -61,7 +62,17 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
         topBar.getLeftImage().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, SettingActivity.class));
+                startActivity(new Intent(MainActivity.this, QRCodeScanActivity.class));
+            }
+        });
+
+        topBar.getRightImage().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (View.GONE == dialog.getVisibility()) {
+                    dialog.setVisibility(View.VISIBLE);
+                }
+
             }
         });
 
@@ -107,20 +118,16 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
             line3.setVisibility(View.GONE);
         }
 
+        if (!UserRepository.getInstance().getUser().enableShare()) {
+            tvAddMate.setVisibility(View.GONE);
+            line1.setVisibility(View.GONE);
+        }
+
 
         addContentView(dialog, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
 
-        topBar.getRightImage().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //跳转提供销售机会
-                if (View.GONE == dialog.getVisibility()) {
-                    dialog.setVisibility(View.VISIBLE);
-                }
 
-            }
-        });
     }
 
 

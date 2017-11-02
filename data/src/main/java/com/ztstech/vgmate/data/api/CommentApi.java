@@ -42,4 +42,14 @@ public interface CommentApi {
                                      @Query("touid") String touid,
                                      @Query("comment") String comment,
                                      @Query(NetConstants.PARAM_AUTHID) String authid);
+
+    /**
+     * 删除评论
+     * @param request 鬼知道这是什么
+     * @param lid
+     * @return
+     */
+    @POST("exempt/AppSalesDelComment")
+    Observable<BaseRespBean> deleteComment(@Query("request") String request,
+                                           @Query("lid") String lid);
 }

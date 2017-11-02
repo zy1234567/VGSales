@@ -20,4 +20,10 @@ public interface User {
      */
     boolean canEditArticle();
 
+    /**
+     * 是否允许分享
+     * @return
+     */
+    boolean enableShare();
+
 }

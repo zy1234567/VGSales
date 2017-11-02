@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ztstech.vgmate.activitys.qr_code.scan.QRCodeScanActivity">
+
+
+
+    <cn.bingoogolapple.qrcode.zxing.ZXingView
+        android:id="@+id/zxingview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:qrcv_animTime="1000"
+        app:qrcv_borderColor="@android:color/white"
+        app:qrcv_borderSize="1dp"
+        app:qrcv_cornerColor="@color/color_001"
+        app:qrcv_cornerLength="20dp"
+        app:qrcv_cornerSize="3dp"
+        app:qrcv_maskColor="#33FFFFFF"
+        app:qrcv_rectWidth="200dp"
+        app:qrcv_scanLineColor="@color/color_001"
+        app:qrcv_scanLineSize="1dp"
+        app:qrcv_topOffset="120dp" />
+
+    <com.ztstech.vgmate.weigets.TopBar
+        app:colorLeft="@color/color_109"
+        app:colorTitle="@color/color_109"
+        android:layout_alignParentTop="true"
+        app:showBackNav="true"
+        app:textRight="相册"
+        app:colorRight="@color/color_109"
+        android:id="@+id/top_bar"
+        app:barTitle="扫一扫"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.ztstech.vgmate.weigets.TopBar>
+
+
+    <RelativeLayout
+        android:background="@color/color_30_000"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+
+        <TextView
+            android:id="@+id/tv_open_light"
+            android:drawableTop="@mipmap/setting_home"
+            android:gravity="center_horizontal|bottom"
+            android:text="开灯"
+            android:layout_centerInParent="true"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

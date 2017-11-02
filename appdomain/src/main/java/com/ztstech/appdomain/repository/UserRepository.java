@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.appdomain.domain.AdminUser;
+import com.ztstech.appdomain.domain.Lev1User;
 import com.ztstech.appdomain.domain.NormalUser;
 import com.ztstech.appdomain.domain.User;
 import com.ztstech.vgmate.data.api.LoginApi;
@@ -258,11 +259,13 @@ public class UserRepository {
      * @param userBean
      */
     private void initUser(UserBean userBean) {
-        if (userBean == null) {
+        if (userBean == null || userBean.info == null) {
             return;
         }
-        if (userBean.info != null && userBean.info.salelev == Constants.LEV_ADMIN) {
+        if (Constants.LEV_ADMIN == userBean.info.salelev) {
             user = new AdminUser(userBean);
+        }else if (Constants.LEV_1 == userBean.info.salelev){
+            user = new Lev1User(userBean);
         }else {
             user = new NormalUser(userBean);
         }

@@ -4,6 +4,7 @@ import com.ztstech.vgmate.data.beans.UserBean;
 
 /**
  * Created by zhiyuan on 2017/10/31.
+ * 管理员用户
  */
 
 public class AdminUser implements User {
@@ -21,6 +22,11 @@ public class AdminUser implements User {
 
     @Override
     public boolean canEditArticle() {
+        return true;
+    }
+
+    @Override
+    public boolean enableShare() {
         return true;
     }
 }

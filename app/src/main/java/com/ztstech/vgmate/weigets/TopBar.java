@@ -32,6 +32,7 @@ public class TopBar extends FrameLayout {
     private int backgroundColor = -1;
     private int colorLeft;
     private int colorRight;
+    private int colorTitle;
 
 
     private boolean showBackNav = false;
@@ -67,6 +68,7 @@ public class TopBar extends FrameLayout {
         backgroundColor = typedArray.getColor(R.styleable.TopBar_backgroundColor, 0);
         colorLeft = typedArray.getColor(R.styleable.TopBar_colorLeft, 0);
         colorRight = typedArray.getColor(R.styleable.TopBar_colorRight, 0);
+        colorTitle = typedArray.getColor(R.styleable.TopBar_colorTitle, 0);
         showBackNav = typedArray.getBoolean(R.styleable.TopBar_showBackNav, false);
         showSearch = typedArray.getBoolean(R.styleable.TopBar_showSearch, false);
 
@@ -113,6 +115,10 @@ public class TopBar extends FrameLayout {
         if (colorRight != 0) {
             imgRight.setColorFilter(colorRight);
             tvRight.setTextColor(colorRight);
+        }
+
+        if (colorTitle != 0) {
+            tvTitle.setTextColor(colorTitle);
         }
 
 

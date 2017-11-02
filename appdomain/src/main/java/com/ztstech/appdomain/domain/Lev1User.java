@@ -3,14 +3,14 @@ package com.ztstech.appdomain.domain;
 import com.ztstech.vgmate.data.beans.UserBean;
 
 /**
- * Created by zhiyuan on 2017/10/31.
+ * Created by zhiyuan on 2017/11/2.
  */
 
-public class NormalUser implements User {
+public class Lev1User implements User {
 
     private UserBean userBean;
 
-    public NormalUser(UserBean userBean) {
+    public Lev1User(UserBean userBean) {
         this.userBean = userBean;
     }
 
@@ -26,8 +26,6 @@ public class NormalUser implements User {
 
     @Override
     public boolean enableShare() {
-        return false;
+        return true;
     }
-
-
 }

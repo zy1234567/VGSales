@@ -13,6 +13,7 @@
         <attr name="colorRight" format="color" />
         <attr name="textSearch" format="string" />
         <attr name="showSearch" format="boolean" />
+        <attr name="colorTitle" format="color" />
     </declare-styleable>
 
     <declare-styleable name="CircleImageView">
