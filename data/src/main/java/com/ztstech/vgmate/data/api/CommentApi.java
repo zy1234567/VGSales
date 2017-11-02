@@ -45,11 +45,9 @@ public interface CommentApi {
 
     /**
      * 删除评论
-     * @param request 鬼知道这是什么
      * @param lid
      * @return
      */
     @POST("exempt/AppSalesDelComment")
-    Observable<BaseRespBean> deleteComment(@Query("request") String request,
-                                           @Query("lid") String lid);
+    Observable<BaseRespBean> deleteComment(@Query("lid") String lid);
 }

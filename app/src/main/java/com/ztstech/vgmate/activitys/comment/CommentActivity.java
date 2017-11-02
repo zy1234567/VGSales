@@ -191,6 +191,15 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
     }
 
     @Override
+    public void deleteCommentFinish(@Nullable String errmsg) {
+        if (errmsg == null) {
+            ToastUtil.toastCenter(this, "删除成功");
+        }else {
+            ToastUtil.toastCenter(this, "删除失败：" + errmsg);
+        }
+    }
+
+    @Override
     public void onReplay(CommentBean.ListBean bean, boolean isReplay) {
         etComment.requestFocus();
         etComment.setText("");
@@ -199,22 +208,17 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
         etComment.setTag(R.id.tag_0, isReplay);
         etComment.setTag(R.id.tag_1, bean);
 
-//        if (etComment.getTag() != null && etComment.getTag() instanceof CommentBean.ListBean) {
-//            CommentBean.ListBean lastBean = (CommentBean.ListBean) etComment.getTag();
-//            if (lastBean.lid == bean.lid &&
-//                    lastBean.flid == bean.flid &&
-//                    TextUtils.equals(bean.uid,lastBean.uid) &&
-//                    TextUtils.equals(bean.comment, lastBean.comment)) {
-//
-//            }
-//        }
-
         if (isReplay) {
             etComment.setHint("@" + bean.touname + "：");
         }else {
             etComment.setHint("@" + bean.name + "：");
         }
 
+    }
+
+    @Override
+    public void onDelete(CommentBean.ListBean bean) {
+        mPresenter.deleteComment(String.valueOf(bean.lid));
     }
 
     @Override
@@ -228,11 +232,6 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
             etComment.clearFocus();
             etComment.clearComposingText();
 
-//            * @param request
-//                    * @param flid 父id
-//                    * @param newid 资讯id
-//                    * @param touid 被评论人id
-//                    * @param comment 评论内容
             Object tag = etComment.getTag(R.id.tag_1);
             if (tag != null && tag instanceof CommentBean.ListBean) {
                 //回复某人

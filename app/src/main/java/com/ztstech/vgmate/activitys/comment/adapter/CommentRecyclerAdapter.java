@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.base.SimpleRecyclerAdapter;
 import com.ztstech.vgmate.base.SimpleViewHolder;
@@ -28,8 +29,6 @@ public class CommentRecyclerAdapter extends SimpleRecyclerAdapter<CommentBean.Li
 
     public OnCommentClickListener commentClickListener;
     public OnCommentClickListener replayCommentListener;
-
-
 
     @Override
     public SimpleViewHolder<CommentBean.ListBean> onCreateViewHolder(ViewGroup parent,
@@ -79,6 +78,11 @@ public class CommentRecyclerAdapter extends SimpleRecyclerAdapter<CommentBean.Li
             commentHolder.tvReComment.setText(spannableStringBuilder);
             commentHolder.tvReComment.setVisibility(View.VISIBLE);
         }
+        
+        if (UserRepository.getInstance().getUser().enableDeleteComment()) {
+            // TODO: 2017/11/2 显示删除按钮，目前不确定删除按钮长啥样！！！点击删除，调用callback的delete方法
+
+        }
 
 
         Glide.with(context).load(data.picsurl).into(commentHolder.imgHeader);
@@ -86,7 +90,19 @@ public class CommentRecyclerAdapter extends SimpleRecyclerAdapter<CommentBean.Li
 
     public interface CommentRecyclerCallback {
 
+        /**
+         * 回复某疼
+         * @param bean 数据
+         * @param isReplay 回复的是否为该条评论的回复
+         */
         void onReplay(CommentBean.ListBean bean, boolean isReplay);
+
+
+        /**
+         * 删除评论
+         * @param bean 数据
+         */
+        void onDelete(CommentBean.ListBean bean);
     }
 
     public class OnCommentClickListener implements View.OnClickListener {
