@@ -14,13 +14,14 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.main_fragment.subview.notice.adapter.NoticeRecyclerAdapter;
 import com.ztstech.vgmate.data.beans.MainListBean;
+import com.ztstech.vgmate.utils.ToastUtil;
 
 import java.util.List;
 
 import butterknife.BindView;
 
 /**
- * 公告
+ * 公告tab
  */
 public class NoticeFragment extends MVPFragment<NoticeContract.Presenter> implements
         NoticeContract.View {
@@ -103,5 +104,14 @@ public class NoticeFragment extends MVPFragment<NoticeContract.Presenter> implem
     @Override
     public void setNoreMoreData(boolean noreMoreData) {
 
+    }
+
+    @Override
+    public void deleteArticleFinish(@Nullable String errmsg) {
+        if (errmsg == null) {
+            ToastUtil.toastCenter(getActivity(), "删除成功");
+        }else {
+            ToastUtil.toastCenter(getActivity(), "删除失败：" + errmsg);
+        }
     }
 }

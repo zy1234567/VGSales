@@ -1,6 +1,8 @@
 package com.ztstech.vgmate.activitys.main_fragment.subview.notice;
 
+import com.ztstech.appdomain.user_case.DeleteArticle;
 import com.ztstech.vgmate.activitys.PresenterImpl;
+import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.MainListBean;
 import com.ztstech.appdomain.repository.MainListRepository;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
@@ -41,6 +43,18 @@ public class NoticePresenter extends PresenterImpl<NoticeContract.View> implemen
         }else {
             mView.setData(mListData);
         }
+    }
+
+    @Override
+    public void deleteNotice(String nid) {
+        new BasePresenterSubscriber<BaseRespBean>(mView) {
+
+            @Override
+            protected void childNext(BaseRespBean mainListBean) {
+                mView.deleteArticleFinish(mainListBean.getErrmsg());
+            }
+
+        }.run(new DeleteArticle(nid).run());
     }
 
     private void queryDataWithPage(int page) {

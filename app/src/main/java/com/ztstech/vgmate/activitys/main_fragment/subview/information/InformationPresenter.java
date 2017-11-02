@@ -1,9 +1,13 @@
 package com.ztstech.vgmate.activitys.main_fragment.subview.information;
 
+import com.ztstech.appdomain.repository.UserRepository;
+import com.ztstech.appdomain.user_case.DeleteArticle;
 import com.ztstech.vgmate.activitys.PresenterImpl;
+import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.MainListBean;
 import com.ztstech.appdomain.repository.MainListRepository;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
+import com.ztstech.vgmate.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +47,18 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
         }else {
             mView.setListData(listData);
         }
+    }
+
+    @Override
+    public void deleteArticle(String nid) {
+        new BasePresenterSubscriber<BaseRespBean>(mView){
+
+            @Override
+            protected void childNext(BaseRespBean baseRespBean) {
+                mView.deleteArticleFinish(baseRespBean.getErrmsg());
+            }
+
+        }.run(new DeleteArticle(nid).run());
     }
 
 

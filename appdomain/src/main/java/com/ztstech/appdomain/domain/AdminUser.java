@@ -29,4 +29,14 @@ public class AdminUser implements User {
     public boolean enableShare() {
         return true;
     }
+
+    @Override
+    public boolean enableDeleteArticle() {
+        return true;
+    }
+
+    @Override
+    public boolean enableDeleteComment() {
+        return true;
+    }
 }

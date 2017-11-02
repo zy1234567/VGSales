@@ -26,4 +26,15 @@ public interface User {
      */
     boolean enableShare();
 
+    /**
+     * 允许删除文章
+     * @return
+     */
+    boolean enableDeleteArticle();
+
+    /**
+     * 允许删除评论
+     * @return
+     */
+    boolean enableDeleteComment();
 }

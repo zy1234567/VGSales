@@ -28,4 +28,14 @@ public class Lev1User implements User {
     public boolean enableShare() {
         return true;
     }
+
+    @Override
+    public boolean enableDeleteArticle() {
+        return false;
+    }
+
+    @Override
+    public boolean enableDeleteComment() {
+        return false;
+    }
 }
