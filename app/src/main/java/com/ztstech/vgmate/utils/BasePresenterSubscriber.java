@@ -15,17 +15,40 @@ import rx.schedulers.Schedulers;
 
 /**
  * Created by zhiyuan on 2017/8/21.
+ * presenter执行userCase类
  */
 
 public abstract class BasePresenterSubscriber<E> extends Subscriber<E> {
 
+    /**
+     * 获取view引用
+     */
     private BaseView mView;
 
     private Subscription subscription;
 
     private Handler handler = new Handler();
 
+    /**
+     * 显示进度条
+     */
+    private boolean showLoading = true;
+
+    /**
+     * 默认构造器，显示loading
+     * @param view
+     */
     public BasePresenterSubscriber(@NonNull BaseView view) {
+        this(view, true);
+    }
+
+    /**
+     * 自定义是否显示loading
+     * @param view
+     * @param showLoading
+     */
+    public BasePresenterSubscriber(@NonNull BaseView view, boolean showLoading) {
+        this.showLoading = showLoading;
         this.mView = view;
         if (this.mView == null) {
             throw new NullPointerException("参数不能为空");
@@ -36,7 +59,9 @@ public abstract class BasePresenterSubscriber<E> extends Subscriber<E> {
     @Override
     public final void onNext(E e) {
         if (mView != null && !mView.isViewFinish()) {
-            mView.hideLoading(null);
+            if (showLoading) {
+                mView.hideLoading(null);
+            }
             childNext(e);
         }
     }
@@ -48,7 +73,9 @@ public abstract class BasePresenterSubscriber<E> extends Subscriber<E> {
                 @Override
                 public void run() {
                     if (mView != null && !mView.isViewFinish()) {
-                        mView.hideLoading(null);
+                        if (showLoading) {
+                            mView.hideLoading(null);
+                        }
                     }else {
                         if (mView == null) {
                             LogUtils.log("onCompleted mView为空");
@@ -87,7 +114,9 @@ public abstract class BasePresenterSubscriber<E> extends Subscriber<E> {
         if (mView.isViewFinish()) {
             return;
         }
-        mView.showLoading(null);
+        if (showLoading) {
+            mView.showLoading(null);
+        }
         subscription = observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this);
