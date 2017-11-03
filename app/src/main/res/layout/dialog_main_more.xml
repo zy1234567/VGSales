@@ -19,11 +19,13 @@
             android:id="@+id/tv_add_friend"
             android:textColor="@color/color_100"
             android:textSize="@dimen/text_5"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:text="添加伙伴"
-            android:paddingRight="13dp"
-            android:paddingLeft="13dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:drawableLeft="@mipmap/add_mate"
+            android:layout_marginRight="12dp"
+            android:layout_gravity="center"
+            android:drawablePadding="5dp"
             android:layout_height="50dp" />
 
         <View
@@ -36,11 +38,13 @@
             android:id="@+id/tv_add_org"
             android:textColor="@color/color_100"
             android:textSize="@dimen/text_5"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:text="添加机构"
-            android:paddingRight="13dp"
-            android:paddingLeft="13dp"
-            android:layout_width="match_parent"
+            android:layout_marginRight="12dp"
+            android:drawableLeft="@mipmap/add_org"
+            android:drawablePadding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
             android:layout_height="50dp" />
 
         <View
@@ -55,9 +59,11 @@
             android:textSize="@dimen/text_5"
             android:gravity="center"
             android:text="发布资讯"
-            android:paddingRight="13dp"
-            android:paddingLeft="13dp"
-            android:layout_width="match_parent"
+            android:layout_marginRight="12dp"
+            android:drawableLeft="@mipmap/create_info"
+            android:drawablePadding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
             android:layout_height="50dp" />
 
         <View
@@ -72,9 +78,11 @@
             android:textSize="@dimen/text_5"
             android:gravity="center"
             android:text="发布公告"
-            android:paddingRight="13dp"
-            android:paddingLeft="13dp"
-            android:layout_width="match_parent"
+            android:layout_marginRight="12dp"
+            android:drawableLeft="@mipmap/create_notice"
+            android:drawablePadding="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
             android:layout_height="50dp" />
 
 

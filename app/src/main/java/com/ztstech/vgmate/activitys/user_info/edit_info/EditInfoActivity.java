@@ -171,6 +171,7 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
     public void onSubmitSucceed() {
         hideLoading(null);
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override
