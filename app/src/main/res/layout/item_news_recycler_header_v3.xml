@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="15dp"
     android:background="@color/color_001">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="55dp">
+        android:layout_height="55dp"
+        android:id="@+id/lt_money">
 
 
         <RelativeLayout
@@ -137,68 +137,86 @@
         </RelativeLayout>
 
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/color_109"
+        android:layout_alignParentBottom="true"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_c_10"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="6dp">
+        android:background="@mipmap/card_bg"
+        android:layout_below="@+id/lt_money"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp">
         <de.hdodenhof.circleimageview.CircleImageView
             app:civ_border_color="@color/color_50_109"
             app:civ_border_width="1dp"
             android:id="@+id/img_header"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="12dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
             />
-        <TextView
-            android:id="@+id/tv_name"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/img_header"
-            android:textColor="@color/weilai_color_101"
-            android:textSize="@dimen/text_3"
-            android:layout_marginLeft="10dp"
-            android:textStyle="bold"
-            android:layout_toRightOf="@+id/img_header"/>
-        <TextView
-            android:id="@+id/tv_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/img_header"
             android:layout_alignBottom="@+id/img_header"
-            android:layout_alignLeft="@+id/tv_name"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/weilai_color_105"
-            android:textSize="@dimen/text_7"/>
-        <TextView
-            android:id="@+id/tv_introducer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_name"
-            android:layout_centerVertical="true"
-            android:textColor="@color/weilai_color_105"
-            android:textSize="@dimen/text_7" />
-        <ImageView
-            android:scaleType="centerCrop"
-            android:layout_alignTop="@+id/tv_name"
-            android:layout_marginBottom="2dp"
-            android:id="@+id/tv_id_status"
-            android:src="@mipmap/shenhezhong"
-            android:layout_toRightOf="@id/tv_name"
-            android:layout_marginLeft="3dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/weilai_color_101"
+                android:textSize="@dimen/text_3"
+                android:textStyle="bold"
+                android:text=""
+                />
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignLeft="@+id/tv_name"
+                android:layout_below="@+id/tv_name"
+                android:layout_above="@+id/tv_introducer"
+                android:gravity="center_vertical"
+                android:text=""
+                android:layout_centerVertical="true"
+                android:textColor="@color/weilai_color_105"
+                android:textSize="@dimen/text_7"/>
+            <TextView
+                android:id="@+id/tv_introducer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tv_name"
+                android:textColor="@color/weilai_color_105"
+                android:layout_alignParentBottom="true"
+                android:textSize="@dimen/text_7" />
+            <ImageView
+                android:scaleType="centerCrop"
+                android:id="@+id/tv_id_status"
+                android:layout_marginTop="5dp"
+                android:src="@mipmap/shenhezhong"
+                android:layout_toRightOf="@id/tv_name"
+                android:layout_marginLeft="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
         <ImageView
             android:id="@+id/img_setting"
             android:layout_width="45dp"
             android:layout_height="44dp"
             android:src="@mipmap/setting"
             android:padding="15dp"
+            android:layout_marginTop="5dp"
             android:layout_alignParentRight="true"/>
     </RelativeLayout>
-</LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_107"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

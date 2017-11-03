@@ -7,6 +7,7 @@ import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import com.tbruyelle.rxpermissions.RxPermissions;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.qr_code.confirm.QRCodeLoginActivity;
+import com.ztstech.vgmate.utils.AESUtil;
 import com.ztstech.vgmate.utils.TakePhotoHelperWapper;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.TopBar;
@@ -66,7 +68,6 @@ public class QRCodeScanActivity extends MVPActivity<QRCodeScanContract.Presenter
     @Override
     protected void onViewBindFinish(@Nullable Bundle savedInstanceState) {
         super.onViewBindFinish(savedInstanceState);
-
         tvOpenLight.setOnClickListener(this);
         topBar.getRightTextView().setOnClickListener(this);
 
@@ -176,8 +177,6 @@ public class QRCodeScanActivity extends MVPActivity<QRCodeScanContract.Presenter
 
     @Override
     public void checkUUIDFinish(String uuid, @Nullable String errmsg) {
-        // 返回了个这么个玩意，成功同时失败？？？？
-        // {"status":0,"loginUrl":"/code/phoneLogin?uuid=","errmsg":"出错java.lang.NullPointerException"}
         if (errmsg == null) {
             Intent it = new Intent(QRCodeScanActivity.this, QRCodeLoginActivity.class);
             it.putExtra(QRCodeLoginActivity.ARG_UUID, uuid);

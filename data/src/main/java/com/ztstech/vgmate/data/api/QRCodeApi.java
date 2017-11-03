@@ -17,9 +17,7 @@ public interface QRCodeApi {
 
     @POST("/code/phonescan")
     Observable<BaseRespBean> checkUUID(
-            @Query("phone") String phone,
-            @Query("uuid") String uuid,
-            @Query(NetConstants.PARAM_AUTHID) String authId);
+            @Query("info") String phone);
 
     @POST("code/phoneLogin")
     Observable<BaseRespBean> login(@Query("phone") String phone,
