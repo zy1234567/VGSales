@@ -7,7 +7,9 @@ import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +18,7 @@ import com.tbruyelle.rxpermissions.RxPermissions;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.qr_code.confirm.QRCodeLoginActivity;
+import com.ztstech.vgmate.utils.AESUtil;
 import com.ztstech.vgmate.utils.TakePhotoHelperWapper;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.TopBar;
@@ -36,8 +39,8 @@ public class QRCodeScanActivity extends MVPActivity<QRCodeScanContract.Presenter
 
     public static final int REQ_LOGIN = 1;
 
-    @BindView(R.id.tv_open_light)
-    TextView tvOpenLight;
+    @BindView(R.id.img_light)
+    ImageView imgLight;
 
     @BindView(R.id.zxingview)
     ZXingView zXingView;
@@ -47,6 +50,9 @@ public class QRCodeScanActivity extends MVPActivity<QRCodeScanContract.Presenter
 
 
     private boolean enableCamera;
+
+    /** 是否开灯 */
+    private boolean lightFlg;
 
     /**
      * 拍照包装类
@@ -66,8 +72,7 @@ public class QRCodeScanActivity extends MVPActivity<QRCodeScanContract.Presenter
     @Override
     protected void onViewBindFinish(@Nullable Bundle savedInstanceState) {
         super.onViewBindFinish(savedInstanceState);
-
-        tvOpenLight.setOnClickListener(this);
+        imgLight.setOnClickListener(this);
         topBar.getRightTextView().setOnClickListener(this);
 
         takePhotoHelperWapper = new TakePhotoHelperWapper(this) {
@@ -118,8 +123,6 @@ public class QRCodeScanActivity extends MVPActivity<QRCodeScanContract.Presenter
                 ToastUtil.toastCenter(QRCodeScanActivity.this, "打开相机失败");
             }
         });
-
-        // TODO: 2017/11/2 没有打开手电筒图片，暂时随意找了个图片
     }
 
     @Override
@@ -157,16 +160,16 @@ public class QRCodeScanActivity extends MVPActivity<QRCodeScanContract.Presenter
         if (v == topBar.getRightTextView()) {
             //相册
             takePhotoHelperWapper.pickFromGallery();
-        }else if (v == tvOpenLight) {
+        }else if (v == imgLight) {
             //开灯
-            if ("开灯".equals(tvOpenLight.getText().toString())) {
-                zXingView.openFlashlight();
-                tvOpenLight.setText("关灯");
-            }else {
+            if (lightFlg) {
                 zXingView.closeFlashlight();
-                tvOpenLight.setText("开灯");
+                imgLight.setImageResource(R.mipmap.open_light);
+            }else {
+                zXingView.openFlashlight();
+                imgLight.setImageResource(R.mipmap.close_light);
             }
-
+            lightFlg = !lightFlg;
         }
     }
 
@@ -176,8 +179,6 @@ public class QRCodeScanActivity extends MVPActivity<QRCodeScanContract.Presenter
 
     @Override
     public void checkUUIDFinish(String uuid, @Nullable String errmsg) {
-        // 返回了个这么个玩意，成功同时失败？？？？
-        // {"status":0,"loginUrl":"/code/phoneLogin?uuid=","errmsg":"出错java.lang.NullPointerException"}
         if (errmsg == null) {
             Intent it = new Intent(QRCodeScanActivity.this, QRCodeLoginActivity.class);
             it.putExtra(QRCodeLoginActivity.ARG_UUID, uuid);

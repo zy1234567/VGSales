@@ -181,12 +181,14 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
     }
 
     @Override
+
     public void onCommentFinish(@Nullable String onCommentFinish) {
         if (onCommentFinish != null) {
             ToastUtil.toastCenter(this, "评论失败：" + onCommentFinish);
         }else {
             ToastUtil.toastCenter(this, "评论成功");
             etComment.clearFocus();
+            etComment.setText("");
         }
     }
 
@@ -241,12 +243,12 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
                     mPresenter.comment(String.valueOf(listBean.flid), newsId,
                             listBean.touid, comment);
                 }else {
-                    mPresenter.comment(String.valueOf(listBean.lid), newsId,
+                    mPresenter.comment(null, newsId,
                             listBean.uid, comment);
                 }
             }else {
                 //直接回复新闻
-                mPresenter.comment("", newsId, "", comment);
+                mPresenter.comment(null, newsId, "", comment);
             }
         }
     }

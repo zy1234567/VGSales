@@ -24,8 +24,6 @@ public class CheckLoginWebUUID implements UserCase<Observable<BaseRespBean>> {
 
     @Override
     public Observable<BaseRespBean> run() {
-        return api.checkUUID(UserRepository.getInstance().getUser().getUserBean().info.phone,
-                uuid,
-                UserRepository.getInstance().getAuthId());
+        return api.checkUUID(uuid);
     }
 }

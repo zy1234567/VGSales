@@ -27,6 +27,7 @@
         android:layout_height="wrap_content" />
     
     <RelativeLayout
+        android:id="@+id/rl_comment"
         android:layout_centerVertical="true"
         android:layout_alignTop="@id/et_comment"
         android:layout_alignBottom="@id/et_comment"

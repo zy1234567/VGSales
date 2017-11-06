@@ -10,7 +10,7 @@
     <ImageView
         android:scaleType="centerCrop"
         android:id="@+id/iv_item_recycler_news"
-        android:background="#f00"
+        android:background="#f2f2f2"
         android:layout_centerVertical="true"
         android:layout_width="112dp"
         android:layout_height="73dp" />

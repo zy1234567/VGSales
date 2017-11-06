@@ -78,4 +78,9 @@ public interface Constants {
      */
     int LEV_1 = 2;
 
+    /**
+     * AES加密用的key
+     */
+    String AES_KEY = "v7l27ffb9xamti4igqa308ju";
+
 }
