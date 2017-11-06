@@ -41,6 +41,7 @@ public class FillInfoModel {
 
     /**服务器返回url*/
     public String headUrl;
+    public String headsUrl;
     public String idUrl;
     public String idBackUrl;
     public String cardUrl;

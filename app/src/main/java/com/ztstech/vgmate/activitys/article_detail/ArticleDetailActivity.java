@@ -14,6 +14,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -58,6 +59,8 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
     TextView tvCommentCount;
     @BindView(R.id.img_comment)
     ImageView imgComment;
+    @BindView(R.id.rl_comment)
+    RelativeLayout rlComment;
 
     /**传入的数据*/
     private MainListBean.ListBean data;
@@ -145,7 +148,7 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
             }
         });
 
-        imgComment.setOnClickListener(this);
+        rlComment.setOnClickListener(this);
         tvSubmit.setOnClickListener(this);
 
         //初始化状态
@@ -205,7 +208,7 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
 
     @Override
     public void onClick(View view) {
-        if (view == imgComment) {
+        if (view == rlComment) {
             //跳转评论界面
             Intent it = new Intent(this, CommentActivity.class);
             it.putExtra(CommentActivity.ARG_NEWSID, data.nid);

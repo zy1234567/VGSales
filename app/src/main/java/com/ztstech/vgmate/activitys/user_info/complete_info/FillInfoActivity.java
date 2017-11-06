@@ -368,6 +368,6 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
         etName.setText(model.name);
         tvLocation.setText(model.location);
         tvBirthday.setText(model.birthday);
-        tvSex.setText(model.sex);
+        tvSex.setText(SexUtils.getNameById(model.sex));
     }
 }

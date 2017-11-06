@@ -1,9 +1,11 @@
 package com.ztstech.vgmate.activitys.add_org;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
@@ -11,6 +13,7 @@ import com.ztstech.vgmate.activitys.category_info.CategoryTagsActivity;
 import com.ztstech.vgmate.activitys.category_info.CategoryTagsPresenter;
 import com.ztstech.vgmate.activitys.gps.GpsActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
+import com.ztstech.vgmate.data.dto.AddOrgData;
 import com.ztstech.vgmate.utils.ContractUtils;
 import com.ztstech.vgmate.weigets.TopBar;
 
@@ -51,6 +54,8 @@ public class AddOrgActivity extends MVPActivity<AddOrgContract.Presenter> implem
     @BindView(R.id.top_bar)
     TopBar topBar;
 
+    AddOrgData data = new AddOrgData();
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_add_org;
@@ -90,6 +95,7 @@ public class AddOrgActivity extends MVPActivity<AddOrgContract.Presenter> implem
             String location = data.getStringExtra(GpsActivity.RESULT_LOCATION);
 
             tvGps.setText(la + "," + lo);
+            tvGps.setTag(la + "," + lo);
             etDetailLocation.setText(location);
         }else if (REQ_LOCATION == requestCode) {
             //请求地址
@@ -130,6 +136,49 @@ public class AddOrgActivity extends MVPActivity<AddOrgContract.Presenter> implem
     }
 
     private void submit() {
+        data.rbioname = etName.getText().toString();
+        data.rbiotype = (String) tvTag.getTag();
+        data.rbiphone = etPhone.getText().toString().replace(" ","");
+        data.rbidistrict = (String) tvLocation.getTag();
+        data.rbiaddress = etDetailLocation.getText().toString();
+        data.rbigps = (String) tvGps.getTag();
+        data.rbiintroduction = etDesc.getText().toString();
+        if (TextUtils.isEmpty(data.rbioname)){
+            Toast.makeText(this, "请填写机构名", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(data.rbiotype)){
+            Toast.makeText(this, "请选择机构标签", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(data.rbiphone)){
+            Toast.makeText(this, "请填写联系人电话", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(data.rbidistrict)){
+            Toast.makeText(this, "请选择所在地区", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(data.rbiaddress)){
+            Toast.makeText(this, "请填写详细地址", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(data.rbigps)){
+            Toast.makeText(this, "请获取定位", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+
+        mPresenter.commit(data);
+
+    }
+
+    @Override
+    public void onSubmitFinish(String msg) {
+        if (msg == null) {
+            finish();
+        }else {
+            Toast.makeText(this, "添加失败：" + msg, Toast.LENGTH_SHORT).show();
+        }
     }
 }

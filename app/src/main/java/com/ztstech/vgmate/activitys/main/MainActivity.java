@@ -91,35 +91,35 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
         dialog.setVisibility(View.GONE);
 
         View dialogContainer = dialog.findViewById(R.id.rl_container);
-        View tvAddMate = dialog.findViewById(R.id.tv_add_friend);
-        View tvAddOrg = dialog.findViewById(R.id.tv_add_org);
-        View tvShareInfo = dialog.findViewById(R.id.tv_share_info);
-        View tvShareNotice = dialog.findViewById(R.id.tv_share_notice);
+        View rlAddMate = dialog.findViewById(R.id.rl_add_friend);
+        View rlAddOrg = dialog.findViewById(R.id.rl_add_org);
+        View rlShareInfo = dialog.findViewById(R.id.rl_share_info);
+        View rlShareNotice = dialog.findViewById(R.id.rl_share_notice);
 
         View line1 = dialog.findViewById(R.id.line1);
         View line2 = dialog.findViewById(R.id.line2);
         View line3 = dialog.findViewById(R.id.line3);
 
 
-        tvAddMate.setOnClickListener(this);
+        rlAddMate.setOnClickListener(this);
         dialogContainer.setOnClickListener(this);
-        tvShareInfo.setOnClickListener(this);
-        tvAddOrg.setOnClickListener(this);
-        tvShareNotice.setOnClickListener(this);
+        rlShareInfo.setOnClickListener(this);
+        rlAddOrg.setOnClickListener(this);
+        rlShareNotice.setOnClickListener(this);
 
         if (!TextUtils.equals(Constants.USER_ID_PASS,
                 UserRepository.getInstance().getUser().getUserBean().info.status)) {
             //未审核通过
-            tvAddMate.setVisibility(View.GONE);
-            tvShareInfo.setVisibility(View.GONE);
-            tvShareNotice.setVisibility(View.GONE);
+            rlAddMate.setVisibility(View.GONE);
+            rlShareInfo.setVisibility(View.GONE);
+            rlShareNotice.setVisibility(View.GONE);
             line1.setVisibility(View.GONE);
             line2.setVisibility(View.GONE);
             line3.setVisibility(View.GONE);
         }
 
         if (!UserRepository.getInstance().getUser().enableShare()) {
-            tvAddMate.setVisibility(View.GONE);
+            rlAddMate.setVisibility(View.GONE);
             line1.setVisibility(View.GONE);
         }
 
@@ -138,24 +138,24 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
             case R.id.rl_container:
                 dialog.setVisibility(View.GONE);
                 break;
-            case R.id.tv_add_friend:
+            case R.id.rl_add_friend:
                 //添加销售伙伴
                 startActivity(new Intent(this, AddSellMateActivity.class));
                 dialog.setVisibility(View.GONE);
                 break;
-            case R.id.tv_add_org:
+            case R.id.rl_add_org:
                 //添加机构
                 startActivity(new Intent(this, AddOrgActivity.class));
                 dialog.setVisibility(View.GONE);
                 break;
-            case R.id.tv_share_info:
+            case R.id.rl_share_info:
                 //分享资讯
                 Intent itInfo = new Intent(this, CreateShareInfoActivity.class);
                 itInfo.putExtra(CreateShareInfoActivity.ARG_TYPE, CreateShareApi.SHARE_INFO);
                 startActivity(itInfo);
                 dialog.setVisibility(View.GONE);
                 break;
-            case R.id.tv_share_notice:
+            case R.id.rl_share_notice:
                 //分享公告
                 Intent itNotice = new Intent(this, CreateShareInfoActivity.class);
                 itNotice.putExtra(CreateShareInfoActivity.ARG_TYPE, CreateShareApi.SHARE_NOTICE);

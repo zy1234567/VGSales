@@ -87,5 +87,11 @@ public class QRCodeLoginActivity extends MVPActivity<QRCodeLoginContract.Present
                 finish();
             }
         });
+        imgClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

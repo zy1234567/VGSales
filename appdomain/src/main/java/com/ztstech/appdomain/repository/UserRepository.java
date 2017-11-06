@@ -185,7 +185,7 @@ public class UserRepository {
      * @return
      */
     public Observable<BaseRespBean> updateUserInfo(final UpdateUserInfoData bean) {
-        return loginApi.updateUserInfo(getAuthId(), bean.picurl, bean.didurl, bean.cardUrl, bean.sex, bean.did,
+        return loginApi.updateUserInfo(getAuthId(), bean.picurl,bean.picsurl, bean.didurl, bean.cardUrl, bean.sex, bean.did,
                 bean.bname, bean.banks, bean.status, bean.cardNo, bean.wdistrict, bean.birthday,
                 bean.uid, bean.uname)
                 .doOnNext(new Action1<BaseRespBean>() {
@@ -194,6 +194,7 @@ public class UserRepository {
                 if (baseRespBean.isSucceed()) {
                     user.getUserBean().info.banks = bean.banks;
                     user.getUserBean().info.picurl = bean.picurl;
+                    user.getUserBean().info.picsurl = bean.picsurl;
                     user.getUserBean().info.didurl = bean.didurl;
                     user.getUserBean().info.cardImg = bean.cardUrl;
                     user.getUserBean().info.wdistrict = bean.wdistrict;
