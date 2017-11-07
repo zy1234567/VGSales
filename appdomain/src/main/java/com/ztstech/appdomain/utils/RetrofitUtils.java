@@ -113,6 +113,25 @@ public class RetrofitUtils {
                 createShareData.url,
                 UserRepository.getInstance().getAuthId());
     }
+    /**
+     * 编辑分享
+     * @return
+     */
+    public static Observable<BaseRespBean> editShare(CreateShareData createShareData) {
+        CreateShareApi createShareApi = RetrofitUtils.createService(CreateShareApi.class);
+        return createShareApi.editShare(
+                createShareData.nid,
+                createShareData.title,
+                createShareData.summary,
+                createShareData.contentpicurl,
+                createShareData.contentpicsurl,
+                createShareData.picurl,
+                createShareData.picsurl,
+                createShareData.picdescribe,
+                createShareData.type,
+                createShareData.url,
+                UserRepository.getInstance().getAuthId());
+    }
 
 
 

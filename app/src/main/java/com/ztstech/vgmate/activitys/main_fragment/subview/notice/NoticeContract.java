@@ -21,6 +21,8 @@ interface NoticeContract {
 
         void showError(String errorMessage);
 
+        void resendFinish(String errorMessage);
+
         /**
          * 设置为没有更多数据
          * @param noreMoreData
@@ -45,5 +47,10 @@ interface NoticeContract {
          * @param nid
          */
         void deleteNotice(String nid);
+
+        /**
+         * 重新发送
+         */
+        void resendArticle(MainListBean.ListBean bean);
     }
 }

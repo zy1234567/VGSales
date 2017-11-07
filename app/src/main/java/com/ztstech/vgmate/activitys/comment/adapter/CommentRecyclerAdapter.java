@@ -82,6 +82,7 @@ public class CommentRecyclerAdapter extends SimpleRecyclerAdapter<CommentBean.Li
         if (UserRepository.getInstance().getUser().enableDeleteComment()) {
             // TODO: 2017/11/2 显示删除按钮，目前不确定删除按钮长啥样！！！点击删除，调用callback的delete方法
 
+
         }
 
 
