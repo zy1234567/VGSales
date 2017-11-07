@@ -57,7 +57,8 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
             protected void childError(Throwable e) {
                 mView.hideLoading(e.getMessage());
             }
-        }.run(RetrofitUtils.uploadIfExist(new File[] {createShareData.headFile}));
+        }.run(RetrofitUtils.uploadIfExist(createShareData.headFile == null ? new File[0] :
+                new File[] {createShareData.headFile}));
 
     }
 

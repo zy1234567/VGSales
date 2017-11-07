@@ -38,6 +38,12 @@ interface InformationContract {
          * 显示没有更多数据
          */
         void showNomoreData(boolean nomore);
+
+        /**
+         * 重新发送完成
+         * @param errorMessage
+         */
+        void resendFinish(String errorMessage);
     }
 
     interface Presenter extends BasePresenter<InformationContract.View> {
@@ -57,6 +63,11 @@ interface InformationContract {
          * @param nid
          */
         void deleteArticle(String nid);
+
+        /**
+         * 重新发送
+         */
+        void resendArticle(MainListBean.ListBean bean);
     }
 
 }

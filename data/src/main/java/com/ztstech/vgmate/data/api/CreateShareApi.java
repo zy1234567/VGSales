@@ -35,4 +35,22 @@ public interface CreateShareApi {
                                          @Field("type") String type,
                                          @Field("url") String url,
                                          @Field("authId") String authId);
+    /**
+     * 创建分享
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("exempt/AppSaleUpdateNews")
+    Observable<BaseRespBean> editShare(@Field("nid") String nid,
+                                       @Field("title") String title,
+                                       @Field("summary") String summary,
+                                       @Field("contentpicurl") String contentpicurl,
+                                       @Field("contentpicsurl") String contentpicsurl,
+                                       @Field("picurl") String picurl,
+                                       @Field("picsurl") String picsurl,
+                                       @Field("picdescribe") String picdescribe,
+                                       @Field("type") String type,
+                                       @Field("url") String url,
+                                       @Field("authId") String authId);
+
 }

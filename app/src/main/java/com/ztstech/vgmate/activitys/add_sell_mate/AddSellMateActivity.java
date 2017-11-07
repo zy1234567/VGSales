@@ -114,9 +114,6 @@ public class AddSellMateActivity extends MVPActivity<AddSellMateContract.Present
         if (TextUtils.isEmpty(addSellMateData.wprovince)) {
             Toast.makeText(this, "请选择地址", Toast.LENGTH_SHORT).show();
             return;
-        }else if (TextUtils.isEmpty(addSellMateData.did)) {
-            Toast.makeText(this, "请填写身份证号", Toast.LENGTH_SHORT).show();
-            return;
         }else if (TextUtils.isEmpty(addSellMateData.phone)) {
             Toast.makeText(this, "请填写手机号码", Toast.LENGTH_SHORT).show();
             return;

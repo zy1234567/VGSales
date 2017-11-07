@@ -26,6 +26,7 @@ import com.ztstech.vgmate.activitys.create_share.create_share_info.CreateShareIn
 import com.ztstech.vgmate.data.beans.MainListBean;
 import com.ztstech.vgmate.data.constants.NetConstants;
 import com.ztstech.vgmate.data.dto.CreateShareData;
+import com.ztstech.vgmate.utils.Go2EditShareUtils;
 import com.ztstech.vgmate.utils.KeyboardUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.TopBar;
@@ -222,24 +223,7 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
             mPresenter.comment(etComment.getText().toString(), data);
         }else if (view == topBar.getRightImage()) {
             //编辑分享
-            Intent it = new Intent(this, CreateShareInfoActivity.class);
-            CreateShareData createShareData = new CreateShareData();
-            createShareData.contentpicurl = data.contentpicsurl;
-            createShareData.contentpicsurl = data.contentpicurl;
-            createShareData.picurl = data.picurl;
-            createShareData.picsurl = data.picsurl;
-            createShareData.title = data.title;
-            createShareData.url = data.url;
-            createShareData.nid = data.nid;
-            createShareData.picdescribe = data.picdescribe;
-            createShareData.ntype = data.ntype;
-            createShareData.type = data.type;
-            createShareData.summary = data.summary;
-
-            String jsonStr = new Gson().toJson(createShareData);
-            it.putExtra(CreateShareInfoActivity.ARG_EDIT_DATA, jsonStr);
-            startActivityForResult(it, REQ_EDIT);
-
+            Go2EditShareUtils.editShareInfo(this,data);
         }
     }
 
