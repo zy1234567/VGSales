@@ -19,6 +19,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.qr_code.confirm.QRCodeLoginActivity;
 import com.ztstech.vgmate.utils.AESUtil;
+import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.TakePhotoHelperWapper;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.TopBar;
@@ -174,6 +175,7 @@ public class QRCodeScanActivity extends MVPActivity<QRCodeScanContract.Presenter
     }
 
     private void checkUUID(String uuid) {
+        CommonUtil.startCodeSuccessMusic(QRCodeScanActivity.this);
         mPresenter.checkUUID(uuid);
     }
 

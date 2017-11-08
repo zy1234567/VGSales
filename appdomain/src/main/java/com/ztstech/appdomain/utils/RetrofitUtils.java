@@ -113,6 +113,18 @@ public class RetrofitUtils {
                 createShareData.url,
                 UserRepository.getInstance().getAuthId());
     }
+
+    /**
+     * 重新发送分享
+     * @param nid
+     * @return
+     */
+    public static Observable<BaseRespBean> resendShare(String nid) {
+        CreateShareApi createShareApi = RetrofitUtils.createService(CreateShareApi.class);
+        return createShareApi.resendShare(nid,
+                UserRepository.getInstance().getAuthId());
+    }
+
     /**
      * 编辑分享
      * @return

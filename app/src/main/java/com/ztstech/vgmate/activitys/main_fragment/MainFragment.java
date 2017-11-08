@@ -132,9 +132,9 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
         tvMoneyFinish.setText("¥" + String.valueOf(mainPageBean.info.finalmoney));
         tvMoneyAlready.setText("¥" + String.valueOf(mainPageBean.info.realmoney));
         tvName.setText(mainPageBean.info.uname);
-
-        if (Constants.USER_ID_CHECKING.equals(UserRepository.getInstance().getUser().getUserBean()
-                .info.status)) {
+        String status = UserRepository.getInstance().getUser().getUserBean()
+                .info.status;
+        if (Constants.USER_ID_CHECKING.equals(status) || Constants.USER_ID_WILL_CHECK.equals(status)) {
             //身份审核中
             imgIdStatus.setVisibility(View.VISIBLE);
         }else {

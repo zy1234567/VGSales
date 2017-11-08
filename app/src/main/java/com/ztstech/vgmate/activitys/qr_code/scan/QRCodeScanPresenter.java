@@ -32,7 +32,7 @@ public class QRCodeScanPresenter extends PresenterImpl<QRCodeScanContract.View> 
             protected void childNext(BaseRespBean baseRespBean) {
                 mView.checkUUIDFinish(splitUuid(uuid), baseRespBean.getErrmsg());
             }
-        }.run(new CheckLoginWebUUID(getRequestParams(uuid)).run());
+        }.run(new CheckLoginWebUUID(splitUuid(uuid)).run());
     }
 
     /**
@@ -51,6 +51,7 @@ public class QRCodeScanPresenter extends PresenterImpl<QRCodeScanContract.View> 
     }
 
     /**
+     * @deprecated
      * 拼接、加密上传到服务器的参数
      * phone，authid，uuid,uid拼接成json加密后以参数info传过去
      * @param uuid

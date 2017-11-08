@@ -1,6 +1,7 @@
 package com.ztstech.vgmate.data.api;
 
 import com.ztstech.vgmate.data.beans.BaseRespBean;
+import com.ztstech.vgmate.data.constants.NetConstants;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -36,7 +37,7 @@ public interface CreateShareApi {
                                          @Field("url") String url,
                                          @Field("authId") String authId);
     /**
-     * 创建分享
+     * 编辑分享
      * @return
      */
     @FormUrlEncoded
@@ -52,5 +53,15 @@ public interface CreateShareApi {
                                        @Field("type") String type,
                                        @Field("url") String url,
                                        @Field("authId") String authId);
+
+    /***
+     * 分享重新发送
+     * @param nid
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("exempt/AppSaleUpdateNews")
+    Observable<BaseRespBean> resendShare(@Field("nid") String nid,
+                                         @Field(NetConstants.PARAM_AUTHID) String authId);
 
 }

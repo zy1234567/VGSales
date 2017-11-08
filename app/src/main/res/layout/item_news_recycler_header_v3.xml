@@ -201,6 +201,7 @@
                 android:src="@mipmap/shenhezhong"
                 android:layout_toRightOf="@id/tv_name"
                 android:layout_marginLeft="3dp"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

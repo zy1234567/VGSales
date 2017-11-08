@@ -79,7 +79,7 @@ public class NoticePresenter extends PresenterImpl<NoticeContract.View> implemen
                 mView.hideLoading(null);
             }
 
-        }.run(RetrofitUtils.createShare(Go2EditShareUtils.transData(bean)));
+        }.run(RetrofitUtils.resendShare(bean.nid));
     }
 
     private void queryDataWithPage(int page) {

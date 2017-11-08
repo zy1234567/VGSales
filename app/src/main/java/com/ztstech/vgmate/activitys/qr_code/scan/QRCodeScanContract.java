@@ -19,6 +19,6 @@ class QRCodeScanContract {
     interface Presenter extends BasePresenter<View> {
 
 
-        void checkUUID(String uuid);
+        void checkUUID(String uuidm);
     }
 }

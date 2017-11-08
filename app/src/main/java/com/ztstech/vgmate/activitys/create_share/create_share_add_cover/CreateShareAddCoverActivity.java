@@ -182,6 +182,7 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
     @Override
     public void submitFinish(@Nullable String errorMessage) {
         if (errorMessage == null) {
+            setResult(RESULT_OK);
             //成功
             finish();
         }else {
