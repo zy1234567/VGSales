@@ -695,4 +695,17 @@ public class CommonUtil {
         MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.code);
         mediaPlayer.start();
     }
+
+    /**
+     * 月日个位数的不带0填上0
+     */
+    public static String handleZero(String data) {
+        StringBuffer result = new StringBuffer();
+        if (data.length() == 1 && !data.equals("0")) {
+            result.append("0");
+
+        }
+        result.append(data);
+        return result.toString();
+    }
 }

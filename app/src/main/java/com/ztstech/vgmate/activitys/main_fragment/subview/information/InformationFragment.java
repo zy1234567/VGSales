@@ -12,11 +12,16 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.main_fragment.subview.information.adapter.InformationRecyclerAdapter;
+import com.ztstech.vgmate.data.api.CreateShareApi;
 import com.ztstech.vgmate.data.beans.MainListBean;
+import com.ztstech.vgmate.data.events.CreateShareEvent;
 import com.ztstech.vgmate.utils.DialogUtils;
 import com.ztstech.vgmate.utils.Go2EditShareUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.IOSStyleDialog;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -58,6 +63,7 @@ public class InformationFragment extends MVPFragment<InformationContract.Present
     @Override
     protected void onViewBindFinish(@Nullable Bundle savedInstanceState) {
         super.onViewBindFinish(savedInstanceState);
+        EventBus.getDefault().register(this);
         recyclerAdapter = new InformationRecyclerAdapter(editInfoCallBack);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -152,4 +158,18 @@ public class InformationFragment extends MVPFragment<InformationContract.Present
         }
     }
 
+    @Subscribe
+    public void refresh(Object object){
+        if (object instanceof CreateShareEvent){
+            if (((CreateShareEvent) object).type.equals(CreateShareApi.SHARE_INFO)){
+                mPresenter.loadListData();
+            }
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+    }
 }

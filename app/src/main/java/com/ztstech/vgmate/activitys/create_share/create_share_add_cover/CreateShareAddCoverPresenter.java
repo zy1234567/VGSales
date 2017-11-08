@@ -26,8 +26,20 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
 
     @Override
     public void submit(final CreateShareData createShareData) {
-        mView.showLoading("请稍等");
 
+        mView.showLoading("请稍等");
+        if (createShareData.headFile == null){
+            //如果是编辑分享且没上传新的封面
+            //TODO 这个判断还不确定对不对
+            if (createShareData.contentpicfiles != null &&
+                    createShareData.contentpicfiles.length > 0) {
+                uploadContentPic(createShareData);
+            }else {
+                uploadData(createShareData);
+            }
+            return;
+
+        }
         new BasePresenterSubscriber<UploadImageBean>(mView) {
 
             @Override
@@ -109,6 +121,13 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
      * @param createShareData
      */
     private void uploadData(CreateShareData createShareData) {
+        Observable<BaseRespBean> observable;
+        // nid为空说明是创建，不为空说明是编辑之前的
+        if (TextUtils.isEmpty(createShareData.nid)){
+            observable = RetrofitUtils.createShare(createShareData);
+        }else {
+            observable = RetrofitUtils.editShare(createShareData);
+        }
         //上传数据
         new BasePresenterSubscriber<BaseRespBean>(mView) {
 
@@ -123,6 +142,6 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
                 mView.hideLoading(null);
             }
 
-        }.run(RetrofitUtils.createShare(createShareData));
+        }.run(observable);
     }
 }

@@ -116,7 +116,7 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
 
             @Override
             protected void childError(Throwable e) {
-                mView.showError("网络访问出错".concat(e.getLocalizedMessage()));
+                mView.showError("网络访问出错".concat(e.getMessage()));
             }
         }.run(mainListRepository.queryInformation(page));
     }
