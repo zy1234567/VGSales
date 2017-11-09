@@ -31,7 +31,7 @@ public interface MainListApi {
      * @param authId
      * @return
      */
-    @POST("exempt/AppSalesDelComment")
+    @POST("exempt/AppSalesDelNews")
     Observable<BaseRespBean> deleteArticle(@Query("nid") String nid,
                                            @Query(NetConstants.PARAM_AUTHID) String authId);
 }

@@ -15,9 +15,14 @@ public interface QRCodeApi {
 
 
 
+//    @POST("/code/phonescan")
+//    Observable<BaseRespBean> checkUUID(
+//            @Query("info") String phone);
+
     @POST("/code/phonescan")
     Observable<BaseRespBean> checkUUID(
-            @Query("info") String phone);
+            @Query("uuid") String uuid,
+            @Query("phone") String phone);
 
     @POST("code/phoneLogin")
     Observable<BaseRespBean> login(@Query("phone") String phone,

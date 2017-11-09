@@ -58,6 +58,9 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
     /**请求图片描述*/
     public static final int REQ_DESC = 1;
 
+    /**请求跳转到封面*/
+    public static final int REQ_ADD_COVER = 2;
+
     /**分享类型*/
     public static final String ARG_TYPE = "arg_type";
 
@@ -244,7 +247,7 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
             Intent it = new Intent(this, CreateShareAddCoverActivity.class);
             it.putExtra(CreateShareAddCoverActivity.ARG_CREATE_SHARE_BEAN,
                     new Gson().toJson(createShareData));
-            startActivity(it);
+            startActivityForResult(it,REQ_ADD_COVER);
         }else if (view == btInsertLink) {
             //点击插入链接
             toggleUrlMode();
@@ -264,6 +267,10 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
             }
         }else {
             takePhoto.onActivityResult(requestCode, resultCode, data);
+        }
+        // 发布资讯公告成功
+        if (requestCode == REQ_ADD_COVER){
+            finish();
         }
     }
 
@@ -320,7 +327,7 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
      * 显示选取图片
      */
     private void showPickImage() {
-        new TakePhotoHelper(this, takePhoto, true).showPickDialog();
+        new TakePhotoHelper(this, takePhoto, false).showPickDialog();
     }
 
     /**

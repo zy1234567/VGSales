@@ -23,8 +23,11 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.data.api.CreateShareApi;
 import com.ztstech.vgmate.data.dto.CreateShareData;
+import com.ztstech.vgmate.data.events.CreateShareEvent;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.utils.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.util.Calendar;
@@ -147,7 +150,11 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
      * 显示选取图片
      */
     private void showPickImage() {
-        new TakePhotoHelper(this, takePhoto, true).showPickDialog();
+        TakePhotoHelper helper = new TakePhotoHelper(this, takePhoto, true);
+        if (createShareData.type.equals(CreateShareApi.SHARE_INFO)) {
+            helper.setCropOptions(112,73,672,438);
+        }
+        helper.showPickDialog();
     }
 
     @Override
@@ -183,6 +190,9 @@ public class CreateShareAddCoverActivity extends MVPActivity<CreateShareAddCover
     public void submitFinish(@Nullable String errorMessage) {
         if (errorMessage == null) {
             //成功
+            // 发送事件刷新列表
+            EventBus.getDefault().post(new CreateShareEvent(createShareData.type));
+            setResult(RESULT_OK);
             finish();
         }else {
             //失败

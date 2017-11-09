@@ -2,11 +2,14 @@ package com.ztstech.vgmate.activitys.main_fragment.subview.information;
 
 import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.appdomain.user_case.DeleteArticle;
+import com.ztstech.appdomain.utils.RetrofitUtils;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.MainListBean;
 import com.ztstech.appdomain.repository.MainListRepository;
+import com.ztstech.vgmate.data.dto.CreateShareData;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
+import com.ztstech.vgmate.utils.Go2EditShareUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -61,6 +64,28 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
         }.run(new DeleteArticle(nid).run());
     }
 
+    /**
+     * 重新上传
+     * @param bean
+     */
+    @Override
+    public void resendArticle(MainListBean.ListBean bean) {
+        //上传数据
+        new BasePresenterSubscriber<BaseRespBean>(mView) {
+
+            @Override
+            public void childNext(BaseRespBean baseRespBean) {
+                mView.resendFinish(baseRespBean.getErrmsg());
+            }
+
+            @Override
+            public void onCompleted() {
+                super.onCompleted();
+                mView.hideLoading(null);
+            }
+
+        }.run(RetrofitUtils.createShare(Go2EditShareUtils.transData(bean)));
+    }
 
     /**
      * 根据页数加载数据
@@ -91,7 +116,7 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
 
             @Override
             protected void childError(Throwable e) {
-                mView.showError("网络访问出错".concat(e.getLocalizedMessage()));
+                mView.showError("网络访问出错".concat(e.getMessage()));
             }
         }.run(mainListRepository.queryInformation(page));
     }

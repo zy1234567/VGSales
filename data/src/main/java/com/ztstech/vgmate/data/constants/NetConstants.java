@@ -1,15 +1,21 @@
 package com.ztstech.vgmate.data.constants;
 
+import com.ztstech.vgmate.data.BuildConfig;
+
 /**
  * Created by zhiyuan on 2017/7/27.
  */
 
 public interface NetConstants {
 
-//    String BASE_URL = "http://192.168.1.113:80/tom/";
-    String BASE_URL = "http://bucea.verygrow.com/";
-//    String BASE_URL = "http://192.168.1.180/tom/";
+    /**服务器地址，debug时使用测试服务器，release使用正式服务器*/
+//    String BASE_URL = BuildConfig.URL_BASE;
 
+//    String BASE_URL = "http://bigc.verygrow.com";
+
+    String BASE_URL = "http://bucea.verygrow.com/";
+
+//    String BASE_URL = "http://192.168.1.180/tom/";
     /**
      * 上传文件
      */
