@@ -49,5 +49,6 @@ public interface CommentApi {
      * @return
      */
     @POST("exempt/AppSalesDelComment")
-    Observable<BaseRespBean> deleteComment(@Query("lid") String lid);
+    Observable<BaseRespBean> deleteComment(@Query("lid") String lid,
+                                           @Query(NetConstants.PARAM_AUTHID) String authid);
 }

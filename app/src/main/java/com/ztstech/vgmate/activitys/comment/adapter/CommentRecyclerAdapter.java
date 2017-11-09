@@ -15,6 +15,7 @@ import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.CommentBean;
 import com.ztstech.vgmate.utils.TimeUtils;
 import com.ztstech.vgmate.utils.ViewUtils;
+import com.ztstech.vgmate.weigets.IOSStyleDialog;
 
 /**
  * Created by zhiyuan on 2017/10/12.
@@ -29,6 +30,7 @@ public class CommentRecyclerAdapter extends SimpleRecyclerAdapter<CommentBean.Li
 
     public OnCommentClickListener commentClickListener;
     public OnCommentClickListener replayCommentListener;
+    public OnCommentLongClickListener deleteListener;
 
     @Override
     public SimpleViewHolder<CommentBean.ListBean> onCreateViewHolder(ViewGroup parent,
@@ -56,10 +58,10 @@ public class CommentRecyclerAdapter extends SimpleRecyclerAdapter<CommentBean.Li
 
         commentClickListener.isReplay = false;
         replayCommentListener.isReplay = true;
+        commentHolder.body.setOnClickListener(replayCommentListener);
 
-        commentHolder.tvComment.setOnClickListener(commentClickListener);
-        commentHolder.tvReComment.setOnClickListener(replayCommentListener);
-
+//        commentHolder.tvComment.setOnClickListener(commentClickListener);
+//        commentHolder.tvReComment.setOnClickListener(replayCommentListener);
         commentClickListener.bean = data;
         replayCommentListener.bean = data;
 
@@ -71,7 +73,7 @@ public class CommentRecyclerAdapter extends SimpleRecyclerAdapter<CommentBean.Li
             //如果不是回复某人
             commentHolder.tvReComment.setVisibility(View.GONE);
         }else {
-            String[] strs = new String[] {"@".concat(data.touname).concat("："), data.lastcomment};
+            String[] strs = new String[] {"@".concat(data.touname).concat("："), data.comment};
 
             SpannableStringBuilder spannableStringBuilder =
                     ViewUtils.getDiffColorSpan(null, strs, commentHolder.colors);
@@ -79,10 +81,13 @@ public class CommentRecyclerAdapter extends SimpleRecyclerAdapter<CommentBean.Li
             commentHolder.tvReComment.setVisibility(View.VISIBLE);
         }
         
-        if (UserRepository.getInstance().getUser().enableDeleteComment()) {
-            // TODO: 2017/11/2 显示删除按钮，目前不确定删除按钮长啥样！！！点击删除，调用callback的delete方法
-
-
+        if (UserRepository.getInstance().getUser().getUserBean().info.uid.equals(data.uid) ||
+                UserRepository.getInstance().getUser().enableDeleteComment()) {
+            if (deleteListener == null){
+                deleteListener = new OnCommentLongClickListener();
+            }
+            commentHolder.body.setOnLongClickListener(deleteListener);
+            deleteListener.bean = data;
         }
 
 
@@ -117,6 +122,19 @@ public class CommentRecyclerAdapter extends SimpleRecyclerAdapter<CommentBean.Li
             if (callback != null) {
                 callback.onReplay(bean, isReplay);
             }
+        }
+    }
+
+    public class OnCommentLongClickListener implements View.OnLongClickListener {
+
+        public CommentBean.ListBean bean;
+
+        @Override
+        public boolean onLongClick(View view) {
+            if (callback != null) {
+                callback.onDelete(bean);
+            }
+            return false;
         }
     }
 }

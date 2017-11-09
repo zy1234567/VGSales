@@ -30,48 +30,46 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
         mView.showLoading("请稍等");
         if (createShareData.headFile == null){
             //如果是编辑分享且没上传新的封面
-            //TODO 这个判断还不确定对不对
+            //TODO: 这个判断还不确定对不对
             if (createShareData.contentpicfiles != null &&
                     createShareData.contentpicfiles.length > 0) {
                 uploadContentPic(createShareData);
             }else {
                 uploadData(createShareData);
             }
-            return;
+        }else {
+            new BasePresenterSubscriber<UploadImageBean>(mView) {
 
-        }
-        new BasePresenterSubscriber<UploadImageBean>(mView) {
+                @Override
+                public void childNext(UploadImageBean uploadImageBean) {
+                    //上传头像结束
+                    if (uploadImageBean == null || uploadImageBean.isSucceed()) {
+                        //如果没有上传头像或者上传成功
+                        if (uploadImageBean != null) {
+                            createShareData.picurl = uploadImageBean.urls;
+                            createShareData.picsurl = uploadImageBean.suourls;
+                        }
 
-            @Override
-            public void childNext(UploadImageBean uploadImageBean) {
-                //上传头像结束
-                if (uploadImageBean == null || uploadImageBean.isSucceed()) {
-                    //如果没有上传头像或者上传成功
-                    if (uploadImageBean != null) {
-                        createShareData.picurl = uploadImageBean.urls;
-                        createShareData.picsurl = uploadImageBean.suourls;
+                        if (createShareData.contentpicfiles != null &&
+                                createShareData.contentpicfiles.length > 0) {
+                            uploadContentPic(createShareData);
+                        } else {
+                            uploadData(createShareData);
+                        }
+
+                    } else {
+                        mView.hideLoading(uploadImageBean.getErrmsg());
                     }
 
-                    if (createShareData.contentpicfiles != null &&
-                            createShareData.contentpicfiles.length > 0) {
-                        uploadContentPic(createShareData);
-                    }else {
-                        uploadData(createShareData);
-                    }
-
-                }else {
-                    mView.hideLoading(uploadImageBean.getErrmsg());
                 }
 
-            }
-
-            @Override
-            protected void childError(Throwable e) {
-                mView.hideLoading(e.getMessage());
-            }
-        }.run(RetrofitUtils.uploadIfExist(createShareData.headFile == null ? new File[0] :
-                new File[] {createShareData.headFile}));
-
+                @Override
+                protected void childError(Throwable e) {
+                    mView.hideLoading(e.getMessage());
+                }
+            }.run(RetrofitUtils.uploadIfExist(createShareData.headFile == null ? new File[0] :
+                    new File[]{createShareData.headFile}));
+        }
     }
 
 

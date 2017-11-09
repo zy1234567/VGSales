@@ -1,5 +1,6 @@
 package com.ztstech.vgmate.activitys.comment;
 
+import android.content.DialogInterface;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +25,7 @@ import com.ztstech.vgmate.data.beans.CommentBean;
 import com.ztstech.vgmate.manager.SoftKeyboardStateHelper;
 import com.ztstech.vgmate.utils.KeyboardUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
+import com.ztstech.vgmate.weigets.IOSStyleDialog;
 
 import java.util.List;
 
@@ -187,6 +189,7 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
             ToastUtil.toastCenter(this, "评论失败：" + onCommentFinish);
         }else {
             ToastUtil.toastCenter(this, "评论成功");
+            smartRefreshLayout.autoRefresh();
             etComment.clearFocus();
             etComment.setText("");
         }
@@ -196,6 +199,7 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
     public void deleteCommentFinish(@Nullable String errmsg) {
         if (errmsg == null) {
             ToastUtil.toastCenter(this, "删除成功");
+            smartRefreshLayout.autoRefresh();
         }else {
             ToastUtil.toastCenter(this, "删除失败：" + errmsg);
         }
@@ -209,18 +213,19 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
         KeyboardUtils.showKeyBoard(this, etComment);
         etComment.setTag(R.id.tag_0, isReplay);
         etComment.setTag(R.id.tag_1, bean);
-
-        if (isReplay) {
-            etComment.setHint("@" + bean.touname + "：");
-        }else {
-            etComment.setHint("@" + bean.name + "：");
-        }
+        etComment.setHint("@" + bean.name + "：");
 
     }
 
     @Override
-    public void onDelete(CommentBean.ListBean bean) {
-        mPresenter.deleteComment(String.valueOf(bean.lid));
+    public void onDelete(final CommentBean.ListBean bean) {
+        new IOSStyleDialog(this, "确认删除这条评论吗?", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mPresenter.deleteComment(String.valueOf(bean.lid));
+            }
+        }).show();
+
     }
 
     @Override
@@ -231,17 +236,17 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
                 ToastUtil.toastCenter(this, "请输入评论内容！");
                 return;
             }
+            Object tag = etComment.getTag(R.id.tag_1);
+            Boolean isReplay = (Boolean) etComment.getTag(R.id.tag_0);
+            // TODO: clearFocus会清除掉tag 把clear操作写到获取tag后边
             etComment.clearFocus();
             etComment.clearComposingText();
-
-            Object tag = etComment.getTag(R.id.tag_1);
             if (tag != null && tag instanceof CommentBean.ListBean) {
                 //回复某人
                 CommentBean.ListBean listBean = (CommentBean.ListBean) tag;
-                Boolean isReplay = (Boolean) etComment.getTag(R.id.tag_0);
                 if (isReplay) {
                     mPresenter.comment(String.valueOf(listBean.flid), newsId,
-                            listBean.touid, comment);
+                            listBean.uid, comment);
                 }else {
                     mPresenter.comment(null, newsId,
                             listBean.uid, comment);

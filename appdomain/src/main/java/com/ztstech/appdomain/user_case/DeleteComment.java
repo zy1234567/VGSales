@@ -1,5 +1,6 @@
 package com.ztstech.appdomain.user_case;
 
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.appdomain.utils.RetrofitUtils;
 import com.ztstech.vgmate.data.api.CommentApi;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
@@ -23,6 +24,6 @@ public class DeleteComment implements UserCase<Observable<BaseRespBean>> {
 
     @Override
     public Observable<BaseRespBean> run() {
-        return commentApi.deleteComment(lid);
+        return commentApi.deleteComment(lid, UserRepository.getInstance().getAuthId());
     }
 }
