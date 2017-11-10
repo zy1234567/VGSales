@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -111,7 +112,7 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
         }
     }
 
-    @OnClick(R.id.img_setting)
+    @OnClick(R.id.rl_info)
     public void onSettingClick(View v) {
         //点击跳转到设置
         startActivity(new Intent(getActivity(), SettingActivity.class));

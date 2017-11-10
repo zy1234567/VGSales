@@ -5,16 +5,18 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.ztstech.appdomain.constants.Constants;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
-import com.ztstech.vgmate.activitys.user_info.edit_info.EditInfoActivity;
 import com.ztstech.vgmate.activitys.login.LoginActivity;
 import com.ztstech.vgmate.activitys.setting.change_phone.ChangePhoneDialog;
-import com.ztstech.vgmate.weigets.IOSStyleDialog;
 import com.ztstech.vgmate.activitys.setting.send_code.ChangePhoneSendCodeDialog;
+import com.ztstech.vgmate.activitys.user_info.edit_info.EditInfoActivity;
 import com.ztstech.vgmate.data.events.LogoutEvent;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.ToastUtil;
+import com.ztstech.vgmate.weigets.IOSStyleDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -35,6 +37,8 @@ public class SettingActivity extends MVPActivity<SettingContract.Presenter> impl
 
     @BindView(R.id.rl_id)
     View rlId;
+    @BindView(R.id.tv_status)
+    TextView tvStatus;
 
     @Override
     protected int getLayoutRes() {
@@ -56,6 +60,13 @@ public class SettingActivity extends MVPActivity<SettingContract.Presenter> impl
         tvPhone.setText(mPresenter.getPhone());
 
         tvPhone.setOnClickListener(this);
+        String status = UserRepository.getInstance().getUser().getUserBean()
+                .info.status;
+        if (Constants.USER_ID_CHECKING.equals(status) || Constants.USER_ID_WILL_CHECK.equals(status)) {
+            tvStatus.setText("身份审核中");
+        }else {
+            tvStatus.setText("已审核通过");
+        }
 
     }
 
@@ -63,7 +74,7 @@ public class SettingActivity extends MVPActivity<SettingContract.Presenter> impl
     public void onLogoutFinish(String errorMessage) {
         if (errorMessage != null) {
             ToastUtil.toastCenter(this, "登出失败：" + errorMessage);
-        }else {
+        } else {
             startActivity(new Intent(this, LoginActivity.class));
             EventBus.getDefault().post(new LogoutEvent());
         }
@@ -73,9 +84,9 @@ public class SettingActivity extends MVPActivity<SettingContract.Presenter> impl
     public void onClick(View view) {
         if (view == tvLogout) {
             mPresenter.logout();
-        }else if (view == rlId) {
+        } else if (view == rlId) {
             startActivity(new Intent(this, EditInfoActivity.class));
-        }else if (view == tvPhone) {
+        } else if (view == tvPhone) {
             new IOSStyleDialog(this, "您要修改手机号吗？", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -96,7 +107,7 @@ public class SettingActivity extends MVPActivity<SettingContract.Presenter> impl
         dialog.setCallback(new ChangePhoneSendCodeDialog.ChangePhoneCallback() {
             @Override
             public void onCheckSucceed(String code) {
-                showChangePhoneDialog( mPresenter.getPhone());
+                showChangePhoneDialog(mPresenter.getPhone());
             }
         });
         dialog.show();
@@ -104,6 +115,7 @@ public class SettingActivity extends MVPActivity<SettingContract.Presenter> impl
 
     /**
      * 显示更改手机号
+     *
      * @param oldPhone
      */
     private void showChangePhoneDialog(final String oldPhone) {
@@ -117,5 +129,4 @@ public class SettingActivity extends MVPActivity<SettingContract.Presenter> impl
         dialog.show();
     }
 
-    
 }

@@ -151,10 +151,10 @@ public class AddOrgActivity extends MVPActivity<AddOrgContract.Presenter> implem
             Toast.makeText(this, "请选择机构标签", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (TextUtils.isEmpty(data.rbiphone)){
-            Toast.makeText(this, "请填写联系人电话", Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        if (TextUtils.isEmpty(data.rbiphone)){
+//            Toast.makeText(this, "请填写联系人电话", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
         if (TextUtils.isEmpty(data.rbidistrict)){
             Toast.makeText(this, "请选择所在地区", Toast.LENGTH_SHORT).show();
             return;

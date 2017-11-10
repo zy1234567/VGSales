@@ -97,7 +97,7 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
      */
     private int mCurYear;
     /**
-     * 当前月
+     * 当前月M
      */
     private int mCurMon;
     /**
