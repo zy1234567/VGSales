@@ -5,6 +5,7 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -36,6 +37,9 @@ public class CommentHolder extends SimpleViewHolder<CommentBean.ListBean> {
 
     @BindView(R.id.tv_date)
     TextView tvDate;
+
+    @BindView(R.id.body)
+    RelativeLayout body;
 
 
 

@@ -1,5 +1,6 @@
 package com.ztstech.vgmate.activitys.user_info.edit_info;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -27,16 +28,15 @@ import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
 import com.ztstech.vgmate.activitys.setting.SettingActivity;
 import com.ztstech.vgmate.model.fill_info.FillInfoModel;
+import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.SexUtils;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.TopBar;
+import com.ztstech.vgmate.weigets.dateTimePicker.DatePickerDialog;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -88,6 +88,22 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
 
     private InvokeParam invokeParam;
     private TakePhoto takePhoto;
+
+    /** 年龄选择dialog */
+    private Dialog birthPickerDialog;
+
+    /**
+     * 年龄选择当前年
+     */
+    private int mCurYear;
+    /**
+     * 当前月M
+     */
+    private int mCurMon;
+    /**
+     * 当前日
+     */
+    private int mCurDay;
 
     /**
      * 隐私信息是否允许编辑
@@ -171,6 +187,7 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
     public void onSubmitSucceed() {
         hideLoading(null);
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override
@@ -223,9 +240,14 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
         etId.setText(model.id);
         etName.setText(model.name);
         tvLocation.setText(model.location);
+        if (model.birthday != null) {
+            String[] birthArray = model.birthday.split("-");
+            mCurYear = Integer.valueOf(birthArray[0]);
+            mCurMon = Integer.valueOf(birthArray[1]);
+            mCurDay = Integer.valueOf(birthArray[2]);
+        }
         tvBirthday.setText(model.birthday);
         tvSex.setText(SexUtils.getNameById(model.sex));
-
     }
 
     @Override
@@ -249,45 +271,47 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
                 return;
             }
             currentImageView = (ImageView) view;
-            new TakePhotoHelper(this, takePhoto, true, 56, 35).show();
+            new TakePhotoHelper(this, takePhoto, false).showPickDialog();
         }else if (view == ivIdBack) {
             if (!privateInfoEditEnabled) {
                 showPrivateInfoDisabled();
                 return;
             }
             currentImageView = (ImageView) view;
-            new TakePhotoHelper(this, takePhoto, true, 56, 35).show();
+            new TakePhotoHelper(this, takePhoto, false).showPickDialog();
         }else if (view == ivCard) {
             if (!privateInfoEditEnabled) {
                 showPrivateInfoDisabled();
                 return;
             }
             currentImageView = (ImageView) view;
-            new TakePhotoHelper(this, takePhoto, true, 56, 35).show();
+            new TakePhotoHelper(this, takePhoto, false).showPickDialog();
         }else if (view == imgHeader) {
             currentImageView = (ImageView) view;
-            new TakePhotoHelper(this, takePhoto, true).show();
+            new TakePhotoHelper(this, takePhoto, true).showPickDialog();
         }else if (view == tvLocation) {
             startActivityForResult(new Intent(this, LocationSelectActivity.class), REQ_LOCATION);
         }else if (view == tvBirthday) {
-            final DatePicker datePicker = new DatePicker(this);
-            datePicker.setMaxDate(new Date().getTime());
-
-            new AlertDialog.Builder(this).setView(datePicker)
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            DatePickerDialog.Builder builder = new DatePickerDialog.Builder(this);
+            birthPickerDialog = builder.setSelectYear(mCurYear - 1).setSelectMonth(mCurMon - 1)
+                    .setSelectDay(mCurDay - 1).
+                    setMaxYear(2017).setMaxMonth(12).setMaxDay(31).
+                    setMinYear(1920).setMinMonth(1).setMinDay(1).setOnDateSelectedListener(new DatePickerDialog.OnDateSelectedListener() {
                         @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.set(datePicker.getYear(), datePicker.getMonth(),
-                                    datePicker.getDayOfMonth());
-                            Date date = calendar.getTime();
-                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd",
-                                    Locale.getDefault());
-                            String text = simpleDateFormat.format(date);
-                            tvBirthday.setText(text);
-                            model.birthday = text;
+                        public void onDateSelected(int[] dates) {
+                            mCurYear = dates[0];
+                            mCurMon = dates[1];
+                            mCurDay = dates[2];
+                            String result = mCurYear + "-" + CommonUtil.handleZero(mCurMon+"") + "-" + CommonUtil.handleZero(mCurDay + "");
+                            tvBirthday.setText(result);
+                            model.birthday = result;
                         }
-                    }).create().show();
+
+                        @Override
+                        public void onCancel() {
+                        }
+                    }).create();
+            birthPickerDialog.show();
         }else if (view == topBar.getRightTextView()) {
             //点击保存
             onSubmitClick();

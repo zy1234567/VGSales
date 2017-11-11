@@ -1,9 +1,13 @@
 package com.ztstech.vgmate.activitys.main_fragment.subview.notice;
 
+import com.ztstech.appdomain.user_case.DeleteArticle;
+import com.ztstech.appdomain.utils.RetrofitUtils;
 import com.ztstech.vgmate.activitys.PresenterImpl;
+import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.MainListBean;
 import com.ztstech.appdomain.repository.MainListRepository;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
+import com.ztstech.vgmate.utils.Go2EditShareUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +45,41 @@ public class NoticePresenter extends PresenterImpl<NoticeContract.View> implemen
         }else {
             mView.setData(mListData);
         }
+    }
+
+    @Override
+    public void deleteNotice(String nid) {
+        new BasePresenterSubscriber<BaseRespBean>(mView) {
+
+            @Override
+            protected void childNext(BaseRespBean mainListBean) {
+                mView.deleteArticleFinish(mainListBean.getErrmsg());
+            }
+
+        }.run(new DeleteArticle(nid).run());
+    }
+
+    /**
+     * 重新上传
+     * @param bean
+     */
+    @Override
+    public void resendArticle(MainListBean.ListBean bean) {
+        //上传数据
+        new BasePresenterSubscriber<BaseRespBean>(mView) {
+
+            @Override
+            public void childNext(BaseRespBean baseRespBean) {
+                mView.resendFinish(baseRespBean.getErrmsg());
+            }
+
+            @Override
+            public void onCompleted() {
+                super.onCompleted();
+                mView.hideLoading(null);
+            }
+
+        }.run(RetrofitUtils.resendShare(bean.nid));
     }
 
     private void queryDataWithPage(int page) {

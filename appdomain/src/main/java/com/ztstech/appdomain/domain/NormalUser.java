@@ -24,5 +24,20 @@ public class NormalUser implements User {
         return false;
     }
 
+    @Override
+    public boolean enableShare() {
+        return false;
+    }
+
+    @Override
+    public boolean enableDeleteArticle() {
+        return false;
+    }
+
+    @Override
+    public boolean enableDeleteComment() {
+        return false;
+    }
+
 
 }

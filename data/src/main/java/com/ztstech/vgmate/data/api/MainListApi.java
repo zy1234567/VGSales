@@ -1,8 +1,11 @@
 package com.ztstech.vgmate.data.api;
 
+import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.MainListBean;
+import com.ztstech.vgmate.data.constants.NetConstants;
 
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -21,4 +24,14 @@ public interface MainListApi {
     @GET("exempt/AppSalesQueryNewList")
     Observable<MainListBean> queryList(@Query("authId") String authId, @Query("type") String type,
                                        @Query("currentPage") int currentPage);
+
+    /**
+     * 删除文章
+     * @param nid 文章内容
+     * @param authId
+     * @return
+     */
+    @POST("exempt/AppSalesDelNews")
+    Observable<BaseRespBean> deleteArticle(@Query("nid") String nid,
+                                           @Query(NetConstants.PARAM_AUTHID) String authId);
 }

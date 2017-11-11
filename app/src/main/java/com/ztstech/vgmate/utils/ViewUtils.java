@@ -120,7 +120,7 @@ public class ViewUtils {
 
         int currentIndex = 0;
         for (int i = 0; i < strs.length; i++) {
-            if (strs[i].isEmpty()) {
+            if (strs[i] == null || strs[i].isEmpty()) {
                 continue;
             }
             builder.setSpan(new ForegroundColorSpan(colors[i]), currentIndex, currentIndex + strs[i].length(),

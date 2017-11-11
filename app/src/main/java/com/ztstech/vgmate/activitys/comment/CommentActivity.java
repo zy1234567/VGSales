@@ -1,5 +1,6 @@
 package com.ztstech.vgmate.activitys.comment;
 
+import android.content.DialogInterface;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +25,7 @@ import com.ztstech.vgmate.data.beans.CommentBean;
 import com.ztstech.vgmate.manager.SoftKeyboardStateHelper;
 import com.ztstech.vgmate.utils.KeyboardUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
+import com.ztstech.vgmate.weigets.IOSStyleDialog;
 
 import java.util.List;
 
@@ -181,12 +183,25 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
     }
 
     @Override
+
     public void onCommentFinish(@Nullable String onCommentFinish) {
         if (onCommentFinish != null) {
             ToastUtil.toastCenter(this, "评论失败：" + onCommentFinish);
         }else {
             ToastUtil.toastCenter(this, "评论成功");
+            smartRefreshLayout.autoRefresh();
             etComment.clearFocus();
+            etComment.setText("");
+        }
+    }
+
+    @Override
+    public void deleteCommentFinish(@Nullable String errmsg) {
+        if (errmsg == null) {
+            ToastUtil.toastCenter(this, "删除成功");
+            smartRefreshLayout.autoRefresh();
+        }else {
+            ToastUtil.toastCenter(this, "删除失败：" + errmsg);
         }
     }
 
@@ -198,22 +213,18 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
         KeyboardUtils.showKeyBoard(this, etComment);
         etComment.setTag(R.id.tag_0, isReplay);
         etComment.setTag(R.id.tag_1, bean);
+        etComment.setHint("@" + bean.name + "：");
 
-//        if (etComment.getTag() != null && etComment.getTag() instanceof CommentBean.ListBean) {
-//            CommentBean.ListBean lastBean = (CommentBean.ListBean) etComment.getTag();
-//            if (lastBean.lid == bean.lid &&
-//                    lastBean.flid == bean.flid &&
-//                    TextUtils.equals(bean.uid,lastBean.uid) &&
-//                    TextUtils.equals(bean.comment, lastBean.comment)) {
-//
-//            }
-//        }
+    }
 
-        if (isReplay) {
-            etComment.setHint("@" + bean.touname + "：");
-        }else {
-            etComment.setHint("@" + bean.name + "：");
-        }
+    @Override
+    public void onDelete(final CommentBean.ListBean bean) {
+        new IOSStyleDialog(this, "确认删除这条评论吗?", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mPresenter.deleteComment(String.valueOf(bean.lid));
+            }
+        }).show();
 
     }
 
@@ -225,29 +236,24 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
                 ToastUtil.toastCenter(this, "请输入评论内容！");
                 return;
             }
+            Object tag = etComment.getTag(R.id.tag_1);
+            Boolean isReplay = (Boolean) etComment.getTag(R.id.tag_0);
+            // TODO: clearFocus会清除掉tag 把clear操作写到获取tag后边
             etComment.clearFocus();
             etComment.clearComposingText();
-
-//            * @param request
-//                    * @param flid 父id
-//                    * @param newid 资讯id
-//                    * @param touid 被评论人id
-//                    * @param comment 评论内容
-            Object tag = etComment.getTag(R.id.tag_1);
             if (tag != null && tag instanceof CommentBean.ListBean) {
                 //回复某人
                 CommentBean.ListBean listBean = (CommentBean.ListBean) tag;
-                Boolean isReplay = (Boolean) etComment.getTag(R.id.tag_0);
                 if (isReplay) {
                     mPresenter.comment(String.valueOf(listBean.flid), newsId,
-                            listBean.touid, comment);
+                            listBean.uid, comment);
                 }else {
-                    mPresenter.comment(String.valueOf(listBean.lid), newsId,
+                    mPresenter.comment(null, newsId,
                             listBean.uid, comment);
                 }
             }else {
                 //直接回复新闻
-                mPresenter.comment("", newsId, "", comment);
+                mPresenter.comment(null, newsId, "", comment);
             }
         }
     }

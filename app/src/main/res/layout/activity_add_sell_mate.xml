@@ -10,7 +10,10 @@
 
     <com.ztstech.vgmate.weigets.TopBar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:barTitle="添加伙伴"
+        app:backgroundColor="@color/color_109"
+        app:showBackNav="true">
 
     </com.ztstech.vgmate.weigets.TopBar>
 
@@ -120,7 +123,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="12dp"
             android:gravity="center_vertical"
-            android:text="身份证"
+            android:text="身份证号"
             android:textColor="@color/color_100"
             android:textSize="@dimen/text_5" />
 
@@ -196,7 +199,7 @@
         android:id="@+id/cb_send_code"
         android:drawablePadding="5dp"
         android:gravity="center_vertical"
-        android:layout_marginLeft="12dp"
+        android:layout_marginLeft="6dp"
         android:layout_marginTop="8dp"
         android:text="发送短信通知"
         android:textColor="@color/color_102"

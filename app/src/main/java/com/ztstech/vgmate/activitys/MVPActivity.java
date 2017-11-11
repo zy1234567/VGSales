@@ -3,6 +3,7 @@ package com.ztstech.vgmate.activitys;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.ztstech.vgmate.base.BaseActivity;
 
@@ -22,6 +23,7 @@ public abstract class MVPActivity<P extends BasePresenter> extends BaseActivity 
         mPresenter = initPresenter();
         mvpView = new ViewImpl<>(this);
         mvpView.setPresenter(mPresenter);
+        Log.e("currentClass",getLocalClassName());
     }
 
     @Override
