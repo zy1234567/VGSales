@@ -107,20 +107,24 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
         rlAddOrg.setOnClickListener(this);
         rlShareNotice.setOnClickListener(this);
 
+        /**
+         * 显示规则
+         * 是否能添加伙伴：看身份是否审核过
+         是否能添加机构：都可以添加机构
+         是否能发布资讯和公告：是否是王总或一级销售
+         */
         if (!TextUtils.equals(Constants.USER_ID_PASS,
                 UserRepository.getInstance().getUser().getUserBean().info.status)) {
             //未审核通过
             rlAddMate.setVisibility(View.GONE);
-            rlShareInfo.setVisibility(View.GONE);
-            rlShareNotice.setVisibility(View.GONE);
             line1.setVisibility(View.GONE);
-            line2.setVisibility(View.GONE);
-            line3.setVisibility(View.GONE);
         }
 
         if (!UserRepository.getInstance().getUser().enableShare()) {
-            rlAddMate.setVisibility(View.GONE);
-            line1.setVisibility(View.GONE);
+            rlShareInfo.setVisibility(View.GONE);
+            line2.setVisibility(View.GONE);
+            rlShareNotice.setVisibility(View.GONE);
+            line3.setVisibility(View.GONE);
         }
 
 
