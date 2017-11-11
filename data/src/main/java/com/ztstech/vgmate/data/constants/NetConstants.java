@@ -9,11 +9,11 @@ import com.ztstech.vgmate.data.BuildConfig;
 public interface NetConstants {
 
     /**服务器地址，debug时使用测试服务器，release使用正式服务器*/
-//    String BASE_URL = BuildConfig.URL_BASE;
+    String BASE_URL = BuildConfig.URL_BASE;
 
 //    String BASE_URL = "http://bigc.verygrow.com";
 
-    String BASE_URL = "http://bucea.verygrow.com/";
+//    String BASE_URL = "http://bucea.verygrow.com/";
 
 //    String BASE_URL = "http://192.168.1.180/tom/";
     /**
@@ -23,6 +23,9 @@ public interface NetConstants {
 
 
     int STATUS_SUCCEED = 0;
+
+    /** 身份过期 */
+    int STATUS_IDENTIFY_OUT_DATE = 2;
 
     String PARAM_AUTHID = "authId";
 

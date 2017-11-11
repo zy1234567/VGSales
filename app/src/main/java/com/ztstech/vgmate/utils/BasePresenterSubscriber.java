@@ -1,11 +1,22 @@
 package com.ztstech.vgmate.utils;
 
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.activitys.BaseView;
+import com.ztstech.vgmate.activitys.login.LoginActivity;
+import com.ztstech.vgmate.base.BaseApplication;
+import com.ztstech.vgmate.base.BaseApplicationLike;
+import com.ztstech.vgmate.data.beans.BaseRespBean;
+import com.ztstech.vgmate.data.constants.NetConstants;
+import com.ztstech.vgmate.data.events.LogoutEvent;
 import com.ztstech.vgmate.data.utils.LogUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -62,7 +73,18 @@ public abstract class BasePresenterSubscriber<E> extends Subscriber<E> {
             if (showLoading) {
                 mView.hideLoading(null);
             }
-            childNext(e);
+            int status = ((BaseRespBean) e).status;
+            if (status == NetConstants.STATUS_IDENTIFY_OUT_DATE){
+                // 如果是身份过期强行登出
+                Intent it = new Intent(BaseApplicationLike.getApplicationInstance(),
+                        LoginActivity.class);
+                it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                it.putExtra(LoginActivity.ARG_MESSAGE, ((BaseRespBean) e).errmsg);
+                BaseApplicationLike.getApplicationInstance().startActivity(it);
+                UserRepository.getInstance().clearUserInfo();
+            }else {
+                childNext(e);
+            }
         }
     }
 

@@ -64,8 +64,10 @@ public class SettingActivity extends MVPActivity<SettingContract.Presenter> impl
                 .info.status;
         if (Constants.USER_ID_CHECKING.equals(status) || Constants.USER_ID_WILL_CHECK.equals(status)) {
             tvStatus.setText("身份审核中");
+        }else if (Constants.USER_ID_REFUSE.equals(status)){
+            tvStatus.setText("审核被拒绝");
         }else {
-            tvStatus.setText("已审核通过");
+            tvStatus.setText("审核通过");
         }
 
     }
