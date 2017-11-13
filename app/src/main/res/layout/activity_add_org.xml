@@ -120,6 +120,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="12dp"
+                    android:visibility="gone"
                     android:background="@drawable/bg_c_2_f_001"
                     android:gravity="center"
                     android:text="检测重复"
@@ -315,7 +316,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
                     android:gravity="center_vertical"
-                    android:text="资讯电话"
+                    android:text="咨询电话"
                     android:textColor="@color/color_100"
                     android:textSize="@dimen/text_5" />
 
@@ -325,6 +326,7 @@
                     android:layout_centerVertical="true"
                     android:gravity="right"
                     android:text="*"
+                    android:visibility="invisible"
                     android:textColor="@color/color_006"
                     android:textSize="@dimen/text_7" />
 

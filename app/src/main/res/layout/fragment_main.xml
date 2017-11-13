@@ -18,6 +18,7 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:elevation="0dp"
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -34,7 +35,7 @@
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0">
 
-                <include layout="@layout/item_news_recycler_header_v2" />
+                <include layout="@layout/item_news_recycler_header_v3" />
 
             </RelativeLayout>
 
@@ -52,14 +53,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="1dp"
-                android:paddingBottom="2dp"
                 app:tabGravity="fill"
                 app:tabIndicatorColor="@color/color_001"
                 app:tabIndicatorHeight="3dp"
                 app:tabSelectedTextColor="@color/color_001"
                 app:tabTextColor="@color/color_100" />
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/color_104"/>
         </LinearLayout>
 
     </android.support.design.widget.AppBarLayout>

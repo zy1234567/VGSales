@@ -36,6 +36,7 @@ public class IOSStyleDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 confirmListener.onClick(IOSStyleDialog.this, 1);
+                dismiss();
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {

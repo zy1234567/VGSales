@@ -50,6 +50,7 @@ public class InfoPresenter extends PresenterImpl<InfoContract.View> implements
                     //没有图片，或者上传成功
                     if (uploadImageBean != null && uploadImageBean.isSucceed()) {
                         model.headUrl = uploadImageBean.urls;
+                        model.headsUrl = uploadImageBean.suourls;
                     }
 
 

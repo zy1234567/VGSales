@@ -3,7 +3,6 @@ package com.ztstech.vgmate.utils;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 
 import com.jph.takephoto.app.TakePhoto;
@@ -49,8 +48,15 @@ public abstract class TakePhotoHelperWapper implements InvokeListener,
     /**
      * 显示选取图片
      */
-    public void showPickImage() {
-        new TakePhotoHelper(activity, takePhoto, true).show();
+    public void showPickDialog() {
+        new TakePhotoHelper(activity, takePhoto, true).showPickDialog();
+    }
+
+    /**
+     * 从相册选择图片
+     */
+    public void pickFromGallery() {
+        new TakePhotoHelper(activity, takePhoto, true).pickFromGallery();
     }
 
     @Override

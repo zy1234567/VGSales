@@ -1,12 +1,10 @@
 package com.ztstech.vgmate.utils;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -84,7 +82,10 @@ public class TakePhotoHelper {
         imageUri = Uri.fromFile(file);
     }
 
-    public void show() {
+    /**
+     * 显示选择对话框
+     */
+    public void showPickDialog() {
         View view = LayoutInflater.from(activity).inflate(
                 R.layout.mine_collection_dialog, null, false);
         LinearLayout xiangji = (LinearLayout) view
@@ -107,13 +108,20 @@ public class TakePhotoHelper {
     }
 
     /**
+     * 从相册选择图片
+     */
+    public void pickFromGallery() {
+        takePhoto.onPickFromGallery();
+    }
+
+    /**
      * 显示照片选择dialog
      *
      * @param imgTag 多张图片位置标记
      */
     public void showForOthers(int imgTag) {
         this.imgTag = imgTag;
-        show();
+        showPickDialog();
     }
 
     class MyClickListener implements View.OnClickListener {
@@ -121,18 +129,6 @@ public class TakePhotoHelper {
         @Override
         public void onClick(View view) {
 
-            /*身份证裁剪*/
-/*            if (imgTag == 11 || imgTag == 12) {
-                mCropOptions = getCropOptions(56, 35, 500, 500);
-                if (view.getId() == R.id.layout_fengxiang) {
-                    takePhoto.onPickFromCaptureWithCrop(imageUri, mCropOptions);
-                } else {
-                    takePhoto.onPickFromGalleryWithCrop(imageUri, mCropOptions);
-                }
-                dialog.dismiss();
-                mCropOptions = null;
-                return;
-            }*/
 
             //设置默认裁剪配置
             if (mCropOptions == null) {

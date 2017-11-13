@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:paddingLeft="5dp"
             android:paddingRight="12dp"
-            android:src="@mipmap/back_black" />
+            android:src="@mipmap/return_nav" />
 
         <TextView
             android:id="@+id/title"

@@ -45,6 +45,7 @@ public interface LoginApi {
     @POST("exempt/saleUpdateUserMsg")
     Observable<BaseRespBean> updateUserInfo(@Query("authId") String authId,
                                             @Query("picurl") String picurl,
+                                            @Query("picsurl") String picsurl,
                                             @Query("didurl") String didurl,
                                             @Query("cardurl") String cardUrl,
                                             @Query("sex") String sex,

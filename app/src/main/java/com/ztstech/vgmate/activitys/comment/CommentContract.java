@@ -33,6 +33,12 @@ interface CommentContract {
 
         void onCommentFinish(@Nullable String onCommentFinish);
 
+        /**
+         * 删除评论结束
+         * @param errmsg
+         */
+        void deleteCommentFinish(@Nullable String errmsg);
+
     }
 
     interface Presenter extends BasePresenter<View> {
@@ -50,6 +56,12 @@ interface CommentContract {
         void appendCommentList(String newsid);
 
         void comment(String flid, String newid, String touid, String comment);
+
+        /**
+         * 删除评论
+         * @param lid
+         */
+        void deleteComment(String lid);
 
     }
 }

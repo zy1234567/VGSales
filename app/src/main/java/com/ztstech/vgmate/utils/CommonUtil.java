@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -26,6 +27,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 
+import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.base.BaseApplication;
 import com.ztstech.vgmate.base.BaseApplicationLike;
 
@@ -684,5 +686,26 @@ public class CommonUtil {
         rotate.setFillAfter(true);
         rotate.setDuration(200);
         view.startAnimation(rotate);
+    }
+
+    /**
+     * 播放扫码成功的声音
+     */
+    public static void startCodeSuccessMusic(Context context){
+        MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.code);
+        mediaPlayer.start();
+    }
+
+    /**
+     * 月日个位数的不带0填上0
+     */
+    public static String handleZero(String data) {
+        StringBuffer result = new StringBuffer();
+        if (data.length() == 1 && !data.equals("0")) {
+            result.append("0");
+
+        }
+        result.append(data);
+        return result.toString();
     }
 }

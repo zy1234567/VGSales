@@ -8,6 +8,7 @@ package com.ztstech.vgmate.data.dto;
 public class UpdateUserInfoData {
 
     public String picurl;
+    public String picsurl;
 
     /**身份证，正反用,隔开*/
     public String didurl;

@@ -42,7 +42,7 @@ public class ToastUtil {
 //		toast.setView(view);
 //		toast.setDuration(Toast.LENGTH_LONG);
 //		toast.setGravity(Gravity.TOP,0,ViewUtils.dp2px(232));
-//		toast.show();
+//		toast.showPickDialog();
 //	}
 //	public static void sendGroupMessageSuccess(Context context, String hint){
 //		if (ContextUtils.isContextFinishing(context)) {
@@ -57,7 +57,7 @@ public class ToastUtil {
 //		toast.setView(view);
 //		toast.setDuration(Toast.LENGTH_LONG);
 //		toast.setGravity(Gravity.TOP,0,ViewUtils.dp2px(232));
-//		toast.show();
+//		toast.showPickDialog();
 //	}
 
 }

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_001">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:id="@+id/lt_money">
+
+
+        <RelativeLayout
+            android:paddingLeft="15dp"
+            android:paddingStart="15dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:scaleType="centerCrop"
+                android:src="@mipmap/expect_income_home"
+                android:id="@+id/img_top_left"
+                android:layout_centerVertical="true"
+                android:layout_width="35dp"
+                android:layout_height="35dp" />
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/tv_top_left_top"
+                android:text="预计到账"
+                android:textSize="@dimen/text_7"
+                android:textColor="@color/color_109"
+                android:layout_marginLeft="7dp"
+                android:layout_toRightOf="@id/img_top_left"
+                android:layout_alignTop="@id/img_top_left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_money_ready"
+                android:gravity="center"
+                android:textSize="@dimen/text_7"
+                android:textColor="@color/color_109"
+                android:text="¥0"
+                android:layout_alignLeft="@id/tv_top_left_top"
+                android:layout_alignBottom="@id/img_top_left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingLeft="15dp"
+            android:paddingStart="15dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:scaleType="centerCrop"
+                android:src="@mipmap/completed_income_home"
+                android:id="@+id/img_top_center"
+                android:layout_centerVertical="true"
+                android:layout_width="35dp"
+                android:layout_height="35dp" />
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/tv_top_center_top"
+                android:text="已经完成"
+                android:textSize="@dimen/text_7"
+                android:textColor="@color/color_109"
+                android:layout_marginLeft="7dp"
+                android:layout_toRightOf="@id/img_top_center"
+                android:layout_alignTop="@id/img_top_center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_money_finish"
+                android:gravity="center"
+                android:textSize="@dimen/text_7"
+                android:textColor="@color/color_109"
+                android:text="¥0"
+                android:layout_alignLeft="@id/tv_top_center_top"
+                android:layout_alignBottom="@id/img_top_center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingLeft="15dp"
+            android:paddingStart="15dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:scaleType="centerCrop"
+                android:src="@mipmap/real_income_home"
+                android:id="@+id/img_top_right"
+                android:layout_centerVertical="true"
+                android:layout_width="35dp"
+                android:layout_height="35dp" />
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/tv_top_right_top"
+                android:text="实际到账"
+                android:textSize="@dimen/text_7"
+                android:textColor="@color/color_109"
+                android:layout_marginLeft="7dp"
+                android:layout_toRightOf="@id/img_top_right"
+                android:layout_alignTop="@id/img_top_right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_money_already"
+                android:gravity="center"
+                android:textSize="@dimen/text_7"
+                android:textColor="@color/color_109"
+                android:text="¥0"
+                android:layout_alignLeft="@id/tv_top_right_top"
+                android:layout_alignBottom="@id/img_top_right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/color_109"
+        android:layout_alignParentBottom="true"/>
+    <RelativeLayout
+        android:id="@+id/rl_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/card_bg"
+        android:layout_below="@+id/lt_money"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            app:civ_border_color="@color/color_50_109"
+            app:civ_border_width="1dp"
+            android:id="@+id/img_header"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/img_header"
+            android:layout_toRightOf="@+id/img_header"
+            android:layout_alignBottom="@+id/img_header"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/weilai_color_101"
+                    android:textSize="@dimen/text_3"
+                    android:textStyle="bold"
+                    android:singleLine="true"
+                    android:text=""
+                    />
+                <ImageView
+                    android:scaleType="centerCrop"
+                    android:id="@+id/tv_id_status"
+                    android:layout_marginTop="4dp"
+                    android:src="@mipmap/shenhezhong"
+                    android:layout_marginLeft="3dp"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_introducer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/weilai_color_105"
+                android:layout_marginTop="1dp"
+                android:text=""
+                android:textSize="@dimen/text_7" />
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text=""
+                android:paddingTop="2dp"
+                android:gravity="bottom"
+                android:textColor="@color/weilai_color_105"
+                android:textSize="@dimen/text_7"/>
+
+
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/img_setting"
+            android:layout_width="45dp"
+            android:layout_height="44dp"
+            android:src="@mipmap/setting"
+            android:padding="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_107"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

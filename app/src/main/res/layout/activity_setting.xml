@@ -38,8 +38,8 @@
         <TextView
             android:drawablePadding="5dp"
             android:drawableRight="@mipmap/arrow_right_choice"
-            android:id="@+id/tv_id"
-            android:textColor="@color/color_100"
+            android:id="@+id/tv_status"
+            android:textColor="@color/color_104"
             android:textSize="@dimen/text_5"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

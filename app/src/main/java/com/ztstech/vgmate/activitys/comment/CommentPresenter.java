@@ -1,5 +1,6 @@
 package com.ztstech.vgmate.activitys.comment;
 
+import com.ztstech.appdomain.user_case.DeleteComment;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.CommentBean;
@@ -52,6 +53,17 @@ public class CommentPresenter extends PresenterImpl<CommentContract.View> implem
                 mView.onCommentFinish(baseRespBean.getErrmsg());
             }
         }.run(new Comment(flid, newid, touid, comment).run());
+    }
+
+    @Override
+    public void deleteComment(String lid) {
+        new BasePresenterSubscriber<BaseRespBean>(mView) {
+
+            @Override
+            protected void childNext(BaseRespBean baseRespBean) {
+                mView.deleteCommentFinish(baseRespBean.getErrmsg());
+            }
+        }.run(new DeleteComment(lid).run());
     }
 
     private void requestData(final int page, String newsid) {

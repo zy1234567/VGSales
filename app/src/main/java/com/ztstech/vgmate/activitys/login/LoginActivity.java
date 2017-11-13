@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,11 @@ import butterknife.BindView;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends MVPActivity<LoginContract.Presenter> implements LoginContract.View {
+
+    /**
+     * 登出时传入提示消息
+     */
+    public static final String ARG_MESSAGE = "arg_message";
 
     @BindView(R.id.btn_next)
     Button btNext;
@@ -79,6 +85,10 @@ public class LoginActivity extends MVPActivity<LoginContract.Presenter> implemen
             }
         });
 
+        String msg = getIntent().getStringExtra(ARG_MESSAGE);
+        if (!TextUtils.isEmpty(msg)) {
+            ToastUtil.toastCenter(this, msg);
+        }
     }
 
     @Override

@@ -20,4 +20,21 @@ public interface User {
      */
     boolean canEditArticle();
 
+    /**
+     * 是否允许分享
+     * @return
+     */
+    boolean enableShare();
+
+    /**
+     * 允许删除文章
+     * @return
+     */
+    boolean enableDeleteArticle();
+
+    /**
+     * 允许删除评论
+     * @return
+     */
+    boolean enableDeleteComment();
 }

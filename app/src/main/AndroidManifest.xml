@@ -108,7 +108,8 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".activitys.qr_code.QRCodeActivity"></activity>
+        <activity android:name=".activitys.qr_code.confirm.QRCodeLoginActivity" />
+        <activity android:name=".activitys.qr_code.scan.QRCodeScanActivity"></activity>
     </application>
 
 </manifest>

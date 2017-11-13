@@ -124,6 +124,9 @@ public class LocationSelectActivity extends AppCompatActivity {
      */
     boolean updateOrgInfo = false;
 
+    /** 所选择的市是否有三级区县 */
+    boolean isHasThree = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,7 +208,13 @@ public class LocationSelectActivity extends AppCompatActivity {
             intent.putExtra(RESULT_C, csid);
             intent.putExtra(RESULT_A, asid);
             setResult(RESULT_OK, intent);
-        } else {
+        } else if (!isHasThree){  //部分市没有三级区
+            intent.putExtra(RESULT_NAME, province + "-" + city);
+            intent.putExtra(RESULT_CODE, csid);
+            intent.putExtra(RESULT_P, psid);
+            intent.putExtra(RESULT_C, csid);
+            setResult(RESULT_OK, intent);
+        }else {
             if (cPosition == -1) {
                 ToastUtil.toastCenter(this, "请选择城市!");
                 return;
@@ -283,7 +292,6 @@ public class LocationSelectActivity extends AppCompatActivity {
                 cBean.setSelected(true);
                 cPosition = position;
                 adapterCity.notifyDataSetChanged();
-                list_area.addAll(cBean.getSite());
                 adapterArea.notifyDataSetChanged();
                 city = cBean.getSname();
                 csid = cBean.getSid();
@@ -292,6 +300,12 @@ public class LocationSelectActivity extends AppCompatActivity {
                 //重新选择城市把地区置为未选状态
                 area = "";
                 aPosition = -1;
+                if (cBean.getSite() != null) {
+                    list_area.addAll(cBean.getSite());
+                    isHasThree = true;
+                }else {
+                    isHasThree = false;
+                }
             }
         });
         lvArea.setOnItemClickListener(new AdapterView.OnItemClickListener() {

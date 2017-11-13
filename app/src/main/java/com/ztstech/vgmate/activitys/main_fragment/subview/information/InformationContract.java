@@ -1,5 +1,7 @@
 package com.ztstech.vgmate.activitys.main_fragment.subview.information;
 
+import android.support.annotation.Nullable;
+
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.BaseView;
 import com.ztstech.vgmate.data.beans.MainListBean;
@@ -16,6 +18,12 @@ interface InformationContract {
     interface View extends BaseView {
 
         /**
+         * 删除文章结束
+         * @param errmsg
+         */
+        void deleteArticleFinish(@Nullable String errmsg);
+
+        /**
          * 设置列表数据
          */
         void setListData(List<MainListBean.ListBean> listData);
@@ -30,6 +38,12 @@ interface InformationContract {
          * 显示没有更多数据
          */
         void showNomoreData(boolean nomore);
+
+        /**
+         * 重新发送完成
+         * @param errorMessage
+         */
+        void resendFinish(String errorMessage);
     }
 
     interface Presenter extends BasePresenter<InformationContract.View> {
@@ -43,6 +57,17 @@ interface InformationContract {
          * 添加数据
          */
         void appendData();
+
+        /**
+         * 删除文章
+         * @param nid
+         */
+        void deleteArticle(String nid);
+
+        /**
+         * 重新发送
+         */
+        void resendArticle(MainListBean.ListBean bean);
     }
 
 }

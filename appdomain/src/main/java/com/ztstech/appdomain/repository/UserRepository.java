@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.appdomain.domain.AdminUser;
+import com.ztstech.appdomain.domain.Lev1User;
 import com.ztstech.appdomain.domain.NormalUser;
 import com.ztstech.appdomain.domain.User;
 import com.ztstech.vgmate.data.api.LoginApi;
@@ -184,7 +185,7 @@ public class UserRepository {
      * @return
      */
     public Observable<BaseRespBean> updateUserInfo(final UpdateUserInfoData bean) {
-        return loginApi.updateUserInfo(getAuthId(), bean.picurl, bean.didurl, bean.cardUrl, bean.sex, bean.did,
+        return loginApi.updateUserInfo(getAuthId(), bean.picurl,bean.picsurl, bean.didurl, bean.cardUrl, bean.sex, bean.did,
                 bean.bname, bean.banks, bean.status, bean.cardNo, bean.wdistrict, bean.birthday,
                 bean.uid, bean.uname)
                 .doOnNext(new Action1<BaseRespBean>() {
@@ -193,6 +194,7 @@ public class UserRepository {
                 if (baseRespBean.isSucceed()) {
                     user.getUserBean().info.banks = bean.banks;
                     user.getUserBean().info.picurl = bean.picurl;
+                    user.getUserBean().info.picsurl = bean.picsurl;
                     user.getUserBean().info.didurl = bean.didurl;
                     user.getUserBean().info.cardImg = bean.cardUrl;
                     user.getUserBean().info.wdistrict = bean.wdistrict;
@@ -258,11 +260,13 @@ public class UserRepository {
      * @param userBean
      */
     private void initUser(UserBean userBean) {
-        if (userBean == null) {
+        if (userBean == null || userBean.info == null) {
             return;
         }
-        if (userBean.info != null && userBean.info.salelev == Constants.LEV_ADMIN) {
+        if (Constants.LEV_ADMIN == userBean.info.salelev) {
             user = new AdminUser(userBean);
+        }else if (Constants.LEV_1 == userBean.info.salelev){
+            user = new Lev1User(userBean);
         }else {
             user = new NormalUser(userBean);
         }
