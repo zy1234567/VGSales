@@ -56,6 +56,20 @@ android {
             manifest.srcFile 'src/main/AndroidManifestDev.xml'
         }
     }
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def buildType = variant.buildType.name
+                def fileName = "蔚来伙伴-V${defaultConfig.versionName}-${getCurrentTime()}-${buildType}.apk"
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
+        }
+    }
+}
+
+static def getCurrentTime() {
+    new Date().format("yyyyMMdd");
 }
 
 dependencies {
