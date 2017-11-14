@@ -1,6 +1,7 @@
 package com.ztstech.vgmate.activitys.article_detail;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
@@ -11,9 +12,12 @@ import android.text.style.ImageSpan;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -45,7 +49,7 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
     /**是否显示编辑*/
     public static final String ARG_SHOW_EDIT = "arg_show_edit";
 
-    /**传入数据{@link com.ztstech.vgmate.data.beans.MainListBean.ListBean}，转换为json string传入*/
+    /**传入数据{@link MainListBean.ListBean}，转换为json string传入*/
     public static final String ARG_LIST_DATA = "arg_list_data";
 
     @BindView(R.id.web_view)
@@ -62,6 +66,8 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
     ImageView imgComment;
     @BindView(R.id.rl_comment)
     RelativeLayout rlComment;
+    @BindView(R.id.pb)
+    ProgressBar pb;
 
     /**传入的数据*/
     private MainListBean.ListBean data;
@@ -107,6 +113,33 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
                     etComment.clearFocus();
                 }
                 return false;
+            }
+        });
+
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return false;
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                pb.setVisibility(View.VISIBLE);
+                super.onPageStarted(view, url, favicon);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                pb.setVisibility(View.GONE);
+                super.onPageFinished(view, url);
+            }
+
+        });
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                pb.setProgress(newProgress);
+                super.onProgressChanged(view, newProgress);
             }
         });
 

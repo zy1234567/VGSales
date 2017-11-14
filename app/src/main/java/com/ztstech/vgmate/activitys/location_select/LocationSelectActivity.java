@@ -188,6 +188,8 @@ public class LocationSelectActivity extends AppCompatActivity {
             case R.id.rl_area:
                 selectArea();
                 break;
+            default:
+                break;
         }
     }
 
@@ -275,6 +277,10 @@ public class LocationSelectActivity extends AppCompatActivity {
                 cPosition = -1;
                 aPosition = -1;
                 selectCity();
+                if (province.contains("香港") || province.contains("澳门")  //港澳台目前只有一级选择
+                        || province.contains("台湾")){
+                    commit();
+                }
             }
         });
         lvCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -305,6 +311,7 @@ public class LocationSelectActivity extends AppCompatActivity {
                     isHasThree = true;
                 }else {
                     isHasThree = false;
+                    commit();
                 }
             }
         });
@@ -322,6 +329,7 @@ public class LocationSelectActivity extends AppCompatActivity {
                 area = aBean.getSname();
                 asid = aBean.getSid();
                 tvCuerrentSelect.setText(province + city + area);
+                commit();
             }
         });
     }

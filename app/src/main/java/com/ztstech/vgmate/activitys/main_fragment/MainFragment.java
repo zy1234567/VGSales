@@ -7,9 +7,11 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -18,6 +20,9 @@ import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.main_fragment.adapter.MainFragmentPagerAdapter;
+import com.ztstech.vgmate.activitys.mate_approve.WaitApproveMateListActivity;
+import com.ztstech.vgmate.activitys.org_follow.OrgFollowActivity;
+import com.ztstech.vgmate.activitys.sell_mate_list.SellMateListActivity;
 import com.ztstech.vgmate.activitys.setting.SettingActivity;
 import com.ztstech.vgmate.data.beans.MainPageBean;
 import com.ztstech.vgmate.data.beans.UserBean;
@@ -25,14 +30,18 @@ import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * 资讯
  */
 public class MainFragment extends MVPFragment<MainContract.Presenter> implements MainContract.View {
 
-    /**请求机构列表，如果机构列表重新筛选，需要重新刷新数字*/
+    /**
+     * 请求机构列表，如果机构列表重新筛选，需要重新刷新数字
+     */
     public static final int REQ_ORG_LIST = 1;
 
     @BindView(R.id.viewpager)
@@ -50,23 +59,59 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
     @BindView(R.id.tv_location)
     TextView tvLocation;
 
-    /**身份状态*/
+    /**
+     * 身份状态
+     */
     @BindView(R.id.tv_id_status)
     ImageView imgIdStatus;
 
-    /**预计到账*/
+    /**
+     * 编辑按钮
+     */
+    @BindView(R.id.img_setting)
+    ImageView imgSetting;
+
+    /**
+     * 预计到账
+     */
     @BindView(R.id.tv_money_ready)
     TextView tvMoneyReady;
-    /**实际到账*/
+    /**
+     * 实际到账
+     */
     @BindView(R.id.tv_money_already)
     TextView tvMoneyAlready;
-    /**已经完成*/
+    /**
+     * 已经完成
+     */
     @BindView(R.id.tv_money_finish)
     TextView tvMoneyFinish;
-    /**介绍人*/
+    /**
+     * 介绍人
+     */
     @BindView(R.id.tv_introducer)
     TextView tvIntroducer;
-
+    /**
+     * 待审批数
+     */
+    @BindView(R.id.tv_wait_num)
+    TextView tvWaitNum;
+    /**
+     * 待审批
+     */
+    @BindView(R.id.ll_wait)
+    LinearLayout llWait;
+    /**
+     * 销售伙伴数
+     */
+    @BindView(R.id.tv_mate_num)
+    TextView tvMateNum;
+    /**
+     * 跟进客户数
+     */
+    @BindView(R.id.tv_custom_num)
+    TextView tvCustomNum;
+    Unbinder unbinder;
 
 
     public static MainFragment newInstance() {
@@ -112,10 +157,28 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
         }
     }
 
-    @OnClick(R.id.rl_info)
+    @OnClick({R.id.rl_info,R.id.ll_wait,R.id.rl_mate,R.id.rl_custom})
     public void onSettingClick(View v) {
-        //点击跳转到设置
-        startActivity(new Intent(getActivity(), SettingActivity.class));
+        switch (v.getId()){
+            case R.id.rl_info:
+                //点击跳转到设置
+                startActivity(new Intent(getActivity(), SettingActivity.class));
+                break;
+            case R.id.ll_wait:
+                //点击跳转到待审批
+                startActivity(new Intent(getActivity(), WaitApproveMateListActivity.class));
+                break;
+            case R.id.rl_mate:
+                //销售伙伴
+                startActivity(new Intent(getActivity(), SellMateListActivity.class));
+                break;
+            case R.id.rl_custom:
+                //客户跟进
+                startActivity(new Intent(getActivity(), OrgFollowActivity.class));
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -132,13 +195,25 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
         tvMoneyReady.setText("¥" + String.valueOf(mainPageBean.info.maxmoney));
         tvMoneyFinish.setText("¥" + String.valueOf(mainPageBean.info.finalmoney));
         tvMoneyAlready.setText("¥" + String.valueOf(mainPageBean.info.realmoney));
+        tvMateNum.setText(String.valueOf(mainPageBean.info.firstcnt));
+        tvCustomNum.setText(String.valueOf(mainPageBean.info.followOrgNum));
+        int waitNum = mainPageBean.info.waitAuditNum;
+        if (waitNum > 0){
+            llWait.setVisibility(View.VISIBLE);
+            tvWaitNum.setText(String.valueOf(waitNum));
+            imgSetting.setVisibility(View.GONE);
+        }else {
+            llWait.setVisibility(View.GONE);
+            imgSetting.setVisibility(View.VISIBLE);
+        }
         tvName.setText(mainPageBean.info.uname);
         String status = UserRepository.getInstance().getUser().getUserBean()
                 .info.status;
         if (Constants.USER_ID_CHECKING.equals(status) || Constants.USER_ID_WILL_CHECK.equals(status)) {
             //身份审核中
             imgIdStatus.setVisibility(View.VISIBLE);
-        }else {
+        } else {
+
             imgIdStatus.setVisibility(View.GONE);
         }
 
@@ -173,5 +248,13 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
                 .load(userBean.info.picurl)
                 .into(imgHeader);
         tvName.setText(userBean.info.uname);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
     }
 }

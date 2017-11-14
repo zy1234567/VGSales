@@ -14,7 +14,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </com.ztstech.vgmate.weigets.TopBar>
-
+    <ProgressBar
+        android:id="@+id/pb"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/progress_bar_h_1"
+        android:max="100"
+        android:progressDrawable="@drawable/webview_pb_states" />
     <WebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"

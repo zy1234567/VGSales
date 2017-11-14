@@ -23,7 +23,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp">
     </WebView>
-
+    <ProgressBar
+        android:id="@+id/pb"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/progress_bar_h_1"
+        android:max="100"
+        android:progressDrawable="@drawable/webview_pb_states" />
     <include
         layout="@layout/layout_comment_bar" />
 

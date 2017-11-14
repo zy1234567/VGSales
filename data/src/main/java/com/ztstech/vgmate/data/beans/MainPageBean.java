@@ -28,5 +28,7 @@ public class MainPageBean extends BaseRespBean{
         public int budgets;
         public int rbinum;
         public String fname;
+        public int waitAuditNum;
+        public int followOrgNum;
     }
 }
