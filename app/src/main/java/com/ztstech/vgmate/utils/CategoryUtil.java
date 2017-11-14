@@ -10,6 +10,7 @@ import com.ztstech.vgmate.data.beans.CategoriesBean;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -196,4 +197,53 @@ public class CategoryUtil {
         }
         return null;
     }
+
+    /**
+     * 根据机构的otype返回相应的大类小类显示
+     */
+    public static String findCategoryByOtype(String otype){
+        if (TextUtils.isEmpty(otype)){
+            return "";
+        }
+        String category = "";
+        String array[] = otype.split(",");
+        List<String> bigNanmeList = new ArrayList<>();//存放大类名字的list
+        List<String> bigIdList = new ArrayList<>();//存放所有大类id的list（前两位数）
+        List<String> smallNameList = new ArrayList<>();//存放所有小类名字的list
+        List<String> smallIdList = new ArrayList<>();//存放小类类名字的list(四位数)
+        for (int i = 0;i < array.length; i++){
+            CategoriesBean fatCateBean = getFatherCategoryByChildId(array[i]);
+            if(fatCateBean == null){
+                continue;
+            }
+            String fatCateName = fatCateBean.getLname();  //得到大类名字
+            smallIdList.add(array[i]);  //小类id加到list中
+            smallNameList.add(getCategoryName(array[i]));//小类名字加到list中
+            if (bigNanmeList.indexOf(fatCateName) == -1){  //大类名字和id去重后加到list中
+                bigNanmeList.add(fatCateName);
+                bigIdList.add(array[i].substring(0,2));
+            }
+        }
+        for (int i = 0; i < bigIdList.size(); i++){  //for循环大类list
+            String bigId = bigIdList.get(i);
+            for (int j = 0; j < smallIdList.size(); j++ ){   //内循环小类list
+                if (smallIdList.get(j).startsWith(bigId)){   //如果这个小类是这个大类下的则拼接到category中
+                    if (category.isEmpty()){  //以下是拼接方法
+                        category = bigNanmeList.get(i) + " | " + smallNameList.get(j);
+                    }else {
+                        if (category.contains(bigNanmeList.get(i))){
+                            category = category + " " + smallNameList.get(j);
+                        }else {
+                            category = category + "；" + bigNanmeList.get(i) + " | " + smallNameList.get(j);
+                        }
+                    }
+                }
+            }
+        }
+        if (category != null && category.length() > 16){
+            category = category.substring(0,15) + "...";
+        }
+        return category;
+    }
+
 }

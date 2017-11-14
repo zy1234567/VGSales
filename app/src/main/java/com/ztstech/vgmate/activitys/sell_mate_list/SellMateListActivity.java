@@ -7,19 +7,17 @@ import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import com.ztstech.appdomain.constants.Constants;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.base.BaseActivity;
-import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.vgmate.data.constants.NetConstants;
-import com.ztstech.appdomain.repository.UserRepository;
 
 import butterknife.BindView;
 

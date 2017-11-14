@@ -263,10 +263,10 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/color_104"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="10dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -286,7 +286,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_4"
+                    android:textSize="@dimen/text_5"
                     android:textColor="@color/color_001"
                     android:layout_toRightOf="@+id/img_mate"
                     android:layout_marginLeft="8dp"
@@ -295,7 +295,7 @@
                     android:id="@+id/tv_mate_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_4"
+                    android:textSize="@dimen/text_5"
                     android:textColor="@color/color_100"
                     android:layout_toRightOf="@+id/img_mate"
                     android:layout_marginLeft="8dp"
@@ -321,7 +321,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_4"
+                    android:textSize="@dimen/text_5"
                     android:textColor="@color/color_002"
                     android:layout_toRightOf="@+id/img_custom"
                     android:layout_marginLeft="8dp"
@@ -330,7 +330,7 @@
                     android:id="@+id/tv_custom_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_4"
+                    android:textSize="@dimen/text_5"
                     android:textColor="@color/color_100"
                     android:layout_toRightOf="@+id/img_custom"
                     android:layout_marginLeft="8dp"
