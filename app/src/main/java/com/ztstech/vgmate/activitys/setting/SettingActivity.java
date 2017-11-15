@@ -87,7 +87,9 @@ public class SettingActivity extends MVPActivity<SettingContract.Presenter> impl
         if (view == tvLogout) {
             mPresenter.logout();
         } else if (view == rlId) {
-            startActivity(new Intent(this, EditInfoActivity.class));
+            Intent intent = new Intent(this, EditInfoActivity.class);
+            intent.putExtra(EditInfoActivity.SHOW_TYPE,EditInfoActivity.FROM_EDIT_SELF);
+            startActivity(intent);
         } else if (view == tvPhone) {
             new IOSStyleDialog(this, "您要修改手机号吗？", new DialogInterface.OnClickListener() {
                 @Override

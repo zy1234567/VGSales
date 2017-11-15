@@ -92,7 +92,7 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
      * @param page
      */
     private void loadDataWithPage(int page) {
-        new BasePresenterSubscriber<MainListBean>(mView){
+        new BasePresenterSubscriber<MainListBean>(mView,false){
 
             @Override
             public void childNext(MainListBean mainListBean) {

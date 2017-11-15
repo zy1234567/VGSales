@@ -83,8 +83,8 @@ public class NoticePresenter extends PresenterImpl<NoticeContract.View> implemen
     }
 
     private void queryDataWithPage(int page) {
-        boolean isShowLoading = (page == 1);
-        new BasePresenterSubscriber<MainListBean>(mView,isShowLoading) {
+
+        new BasePresenterSubscriber<MainListBean>(mView,false) {
 
             @Override
             public void childNext(MainListBean mainListBean) {

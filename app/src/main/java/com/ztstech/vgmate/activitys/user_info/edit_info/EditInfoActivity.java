@@ -3,14 +3,14 @@ package com.ztstech.vgmate.activitys.user_info.edit_info;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,23 +32,34 @@ import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.SexUtils;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.utils.ToastUtil;
+import com.ztstech.vgmate.weigets.IOSStyleDialog;
 import com.ztstech.vgmate.weigets.TopBar;
 import com.ztstech.vgmate.weigets.dateTimePicker.DatePickerDialog;
 
 import java.io.File;
 
-
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 编辑个人资料
+ * 编辑个人资料和审批销售界面用的同一界面
  */
 public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implements
-        InfoContract.View, View.OnClickListener, InvokeListener, TakePhoto.TakeResultListener  {
+        InfoContract.View, View.OnClickListener, InvokeListener, TakePhoto.TakeResultListener {
 
-    /**请求获取地址*/
+    /**
+     * 请求获取地址
+     */
     private static final int REQ_LOCATION = 1;
+
+    /**
+     * 用来判断判断要显示的是审批界面还是编辑自己资料界面的两个value和传值key
+     */
+    public static final String FROM_EDIT_SELF = "from_edit_self";
+    public static final String FROM_APPROVE_MATE = "from_approve_mate";
+
+    public static final String SHOW_TYPE = "show_type";
 
     @BindView(R.id.top_bar)
     TopBar topBar;
@@ -78,18 +89,30 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
     ImageView ivCard;
     @BindView(R.id.tv_header)
     TextView tvHeader;
+    @BindView(R.id.tv_pass)
+    TextView tvPass;
+    @BindView(R.id.tv_refuse)
+    TextView tvRefuse;
+    @BindView(R.id.ll_approve)
+    LinearLayout llApprove;
 
-    /**界面数据*/
+    /**
+     * 界面数据
+     */
     private FillInfoModel model;
 
-    /**当前imageView*/
+    /**
+     * 当前imageView
+     */
     private ImageView currentImageView;
 
 
     private InvokeParam invokeParam;
     private TakePhoto takePhoto;
 
-    /** 年龄选择dialog */
+    /**
+     * 年龄选择dialog
+     */
     private Dialog birthPickerDialog;
 
     /**
@@ -110,6 +133,11 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
      */
     private boolean privateInfoEditEnabled;
 
+    /**
+     * 用来判断判断要显示的是审批界面还是编辑自己资料界面
+     */
+    private String showType;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_edit_info;
@@ -123,6 +151,12 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
+        showType = getIntent().getStringExtra(SHOW_TYPE);
+
+        if (TextUtils.equals(showType,FROM_APPROVE_MATE)){
+            topBar.getRightTextView().setVisibility(View.GONE);
+            llApprove.setVisibility(View.VISIBLE);
+        }
 
         ivCard.setOnClickListener(this);
         ivId.setOnClickListener(this);
@@ -152,7 +186,7 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
     protected void onSuperCreateFinish(@Nullable Bundle savedInstanceState) {
         super.onSuperCreateFinish(savedInstanceState);
         takePhoto = (TakePhoto) TakePhotoInvocationHandler.of(this)
-                .bind(new TakePhotoImpl(this,this));
+                .bind(new TakePhotoImpl(this, this));
         takePhoto.onCreate(savedInstanceState);
     }
 
@@ -173,7 +207,7 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
             tvLocation.setText(locationName);
             model.locationId = locationCode;
             model.location = locationName;
-        }else {
+        } else {
             takePhoto.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -259,50 +293,50 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
                         public void onClick(DialogInterface dialogInterface, int i) {
                             if (i == 0) {
                                 model.sex = "01";
-                            }else {
+                            } else {
                                 model.sex = "02";
                             }
                             tvSex.setText(SexUtils.getNameById(model.sex));
                         }
                     }).create().show();
-        }else if (view == ivId) {
+        } else if (view == ivId) {
             if (!privateInfoEditEnabled) {
                 showPrivateInfoDisabled();
                 return;
             }
             currentImageView = (ImageView) view;
             new TakePhotoHelper(this, takePhoto, false).showPickDialog();
-        }else if (view == ivIdBack) {
+        } else if (view == ivIdBack) {
             if (!privateInfoEditEnabled) {
                 showPrivateInfoDisabled();
                 return;
             }
             currentImageView = (ImageView) view;
             new TakePhotoHelper(this, takePhoto, false).showPickDialog();
-        }else if (view == ivCard) {
+        } else if (view == ivCard) {
             if (!privateInfoEditEnabled) {
                 showPrivateInfoDisabled();
                 return;
             }
             currentImageView = (ImageView) view;
             new TakePhotoHelper(this, takePhoto, false).showPickDialog();
-        }else if (view == imgHeader) {
+        } else if (view == imgHeader) {
             currentImageView = (ImageView) view;
             new TakePhotoHelper(this, takePhoto, true).showPickDialog();
-        }else if (view == tvLocation) {
+        } else if (view == tvLocation) {
             startActivityForResult(new Intent(this, LocationSelectActivity.class), REQ_LOCATION);
-        }else if (view == tvBirthday) {
+        } else if (view == tvBirthday) {
             DatePickerDialog.Builder builder = new DatePickerDialog.Builder(this);
             birthPickerDialog = builder.setSelectYear(mCurYear - 1).setSelectMonth(mCurMon - 1)
                     .setSelectDay(mCurDay - 1).
-                    setMaxYear(2017).setMaxMonth(12).setMaxDay(31).
-                    setMinYear(1920).setMinMonth(1).setMinDay(1).setOnDateSelectedListener(new DatePickerDialog.OnDateSelectedListener() {
+                            setMaxYear(2017).setMaxMonth(12).setMaxDay(31).
+                            setMinYear(1920).setMinMonth(1).setMinDay(1).setOnDateSelectedListener(new DatePickerDialog.OnDateSelectedListener() {
                         @Override
                         public void onDateSelected(int[] dates) {
                             mCurYear = dates[0];
                             mCurMon = dates[1];
                             mCurDay = dates[2];
-                            String result = mCurYear + "-" + CommonUtil.handleZero(mCurMon+"") + "-" + CommonUtil.handleZero(mCurDay + "");
+                            String result = mCurYear + "-" + CommonUtil.handleZero(mCurMon + "") + "-" + CommonUtil.handleZero(mCurDay + "");
                             tvBirthday.setText(result);
                             model.birthday = result;
                         }
@@ -312,10 +346,10 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
                         }
                     }).create();
             birthPickerDialog.show();
-        }else if (view == topBar.getRightTextView()) {
+        } else if (view == topBar.getRightTextView()) {
             //点击保存
             onSubmitClick();
-        }else if (view == etCardNumber || view == etCardMaster || view == etId || view == etBank) {
+        } else if (view == etCardNumber || view == etCardMaster || view == etId || view == etBank) {
             if (!privateInfoEditEnabled) {
                 showPrivateInfoDisabled();
             }
@@ -331,11 +365,11 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
             Glide.with(this).load(f).into(currentImageView);
             if (currentImageView == ivCard) {
                 model.cardFile = f;
-            }else if (currentImageView == ivIdBack) {
+            } else if (currentImageView == ivIdBack) {
                 model.idBackFile = f;
-            }else if (currentImageView == imgHeader) {
+            } else if (currentImageView == imgHeader) {
                 model.headerFile = f;
-            }else if (currentImageView == ivId) {
+            } else if (currentImageView == ivId) {
                 model.idFile = f;
             }
         }
@@ -353,8 +387,8 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
 
     @Override
     public PermissionManager.TPermissionType invoke(InvokeParam invokeParam) {
-        PermissionManager.TPermissionType type=PermissionManager.checkPermission(TContextWrap.of(this),invokeParam.getMethod());
-        if(PermissionManager.TPermissionType.WAIT.equals(type)){
+        PermissionManager.TPermissionType type = PermissionManager.checkPermission(TContextWrap.of(this), invokeParam.getMethod());
+        if (PermissionManager.TPermissionType.WAIT.equals(type)) {
             this.invokeParam = invokeParam;
         }
         return type;
@@ -373,28 +407,28 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
         if (model.location.isEmpty()) {
             ToastUtil.toastCenter(this, "请填写地址");
             return;
-        }else if (model.birthday.isEmpty()) {
+        } else if (model.birthday.isEmpty()) {
             ToastUtil.toastCenter(this, "请填写出生日期");
             return;
-        }else if (model.cardBank.isEmpty()) {
+        } else if (model.cardBank.isEmpty()) {
             ToastUtil.toastCenter(this, "请填写开户银行");
             return;
-        }else if (model.cardMaster.isEmpty()) {
+        } else if (model.cardMaster.isEmpty()) {
             ToastUtil.toastCenter(this, "请填写持卡人");
             return;
-        }else if (model.cardNo.isEmpty()) {
+        } else if (model.cardNo.isEmpty()) {
             ToastUtil.toastCenter(this, "请填写银行卡号");
             return;
-        }else if (model.id.isEmpty()) {
+        } else if (model.id.isEmpty()) {
             ToastUtil.toastCenter(this, "请填写身份证号");
             return;
-        }else if (TextUtils.isEmpty(model.name)) {
+        } else if (TextUtils.isEmpty(model.name)) {
             ToastUtil.toastCenter(this, "请填写姓名");
             return;
-        }else if (TextUtils.isEmpty(model.sex)) {
+        } else if (TextUtils.isEmpty(model.sex)) {
             ToastUtil.toastCenter(this, "请填写性别");
             return;
-        }else if (model.name.contains(" ")) {
+        } else if (model.name.contains(" ")) {
             ToastUtil.toastCenter(this, "姓名不能包含空格");
             return;
         }
@@ -405,5 +439,33 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
 
     private void showPrivateInfoDisabled() {
         ToastUtil.toastCenter(this, "您提交的资料正在审核，审核完成后可以继续修改");
+    }
+
+
+    @OnClick({R.id.tv_pass, R.id.tv_refuse})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_pass:
+                //通过
+                new IOSStyleDialog(this, "您确定要通过吗？", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                break;
+            case R.id.tv_refuse:
+                //拒绝
+                new IOSStyleDialog(this, "您确定要拒绝吗？", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                break;
+            default:
+                break;
+        }
     }
 }

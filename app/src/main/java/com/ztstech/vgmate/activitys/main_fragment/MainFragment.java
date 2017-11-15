@@ -135,7 +135,7 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
 
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(new MainFragmentPagerAdapter(getChildFragmentManager()));
-
+        mPresenter.loadUserInfo();
         mPresenter.loadData();
 
     }
@@ -143,7 +143,7 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
     @Override
     public void onStart() {
         super.onStart();
-        mPresenter.loadUserInfo();
+
     }
 
     @Override

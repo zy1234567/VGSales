@@ -25,7 +25,7 @@ public class MainPresenter extends PresenterImpl<MainContract.View> implements
     @Override
     public void loadData() {
         //加载主界面数据
-        new BasePresenterSubscriber<MainPageBean>(mView) {
+        new BasePresenterSubscriber<MainPageBean>(mView,false) {
 
             @Override
             public void childNext(MainPageBean mainPageBean) {

@@ -77,6 +77,7 @@ public class BottomBar extends FrameLayout implements View.OnClickListener{
         rlTab1.setOnClickListener(this);
         rlTab2.setOnClickListener(this);
         rlTab3.setOnClickListener(this);
+        rlTab3.setVisibility(GONE);
         updateTabView(0);
     }
 
@@ -109,7 +110,7 @@ public class BottomBar extends FrameLayout implements View.OnClickListener{
     }
 
 
-    private void updateTabView(int index) {
+    public void updateTabView(int index) {
         if (index == 0) {
             tvTab0.setSelected(true);
             tvTab1.setSelected(false);

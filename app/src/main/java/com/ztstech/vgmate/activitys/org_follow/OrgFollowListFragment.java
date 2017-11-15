@@ -29,10 +29,7 @@ import butterknife.Unbinder;
 
 public class OrgFollowListFragment extends MVPFragment<OrgFollowContact.Presenter> implements OrgFollowContact.View {
 
-    /**
-     * 接受要显示哪个fragment的key
-     */
-    public static final String KEY_INDEX = "key_index";
+
     @BindView(R.id.recycler)
     RecyclerView recycler;
 
