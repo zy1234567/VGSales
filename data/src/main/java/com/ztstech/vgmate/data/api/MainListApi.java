@@ -23,7 +23,7 @@ public interface MainListApi {
      */
     @GET("exempt/AppSalesQueryNewList")
     Observable<MainListBean> queryList(@Query("authId") String authId, @Query("type") String type,
-                                       @Query("currentPage") int currentPage);
+                                       @Query("pageNo") int currentPage);
 
     /**
      * 删除文章

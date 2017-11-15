@@ -1,0 +1,77 @@
+package com.ztstech.vgmate.activitys.org_follow;
+
+import com.ztstech.appdomain.user_case.GetOrgFollow;
+import com.ztstech.vgmate.activitys.PresenterImpl;
+import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
+import com.ztstech.vgmate.utils.BasePresenterSubscriber;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+/**
+ *
+ * @author smm
+ * @date 2017/11/14
+ */
+
+public class OrgFollowPresenter extends PresenterImpl<OrgFollowContact.View> implements OrgFollowContact.Presenter {
+
+    private int currentPage;
+    private int totalPage;
+
+    private int status;
+
+    private List<OrgFollowlistBean.ListBean> listBeanList = new ArrayList<>();
+
+    public OrgFollowPresenter(OrgFollowContact.View view,int status) {
+        super(view);
+        this.status = status;
+    }
+
+
+    @Override
+    public void loadData() {
+        requestData(1,status);
+    }
+
+    @Override
+    public void appendData() {
+        if (totalPage == currentPage){
+
+        }else {
+            requestData(currentPage + 1,status);
+        }
+    }
+
+    private void requestData(final int page, int status) {
+        new BasePresenterSubscriber<OrgFollowlistBean>(mView) {
+
+            @Override
+            protected void childError(Throwable e) {
+                mView.showError("查询跟进机构列表出错：".concat(e.getMessage()));
+            }
+
+            @Override
+            public void childNext(OrgFollowlistBean bean) {
+                if (bean.isSucceed()) {
+                    currentPage = bean.pager.currentPage;
+                    totalPage = bean.pager.totalPages;
+
+                    if (currentPage == 1) {
+                        //刷新
+                        listBeanList.clear();
+                        listBeanList.addAll(bean.list);
+                        mView.setData(listBeanList);
+                    }
+
+                }else {
+                    //如果失败
+                    mView.showError(bean.getErrmsg());
+                }
+
+            }
+        }.run(new GetOrgFollow(status, page).run());
+    }
+
+}

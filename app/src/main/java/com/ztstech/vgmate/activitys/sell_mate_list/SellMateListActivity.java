@@ -99,8 +99,8 @@ public class SellMateListActivity extends BaseActivity {
     private void setCookie() {
         CookieSyncManager.createInstance(this);
         CookieManager cookieManager = CookieManager.getInstance();
-        cookieManager.setCookie(NetConstants.BASE_URL, NetConstants.PARAM_AUTHID + UserRepository.getInstance().getAuthId());
-        cookieManager.setCookie(NetConstants.BASE_URL, "type=02");
+        cookieManager.setCookie(NetConstants.BASE_URL, NetConstants.PARAM_AUTHID.concat("=").concat(UserRepository.getInstance().getAuthId()));
+        cookieManager.setCookie(NetConstants.BASE_URL, "type=01");
         CookieSyncManager.getInstance().sync();
     }
 
