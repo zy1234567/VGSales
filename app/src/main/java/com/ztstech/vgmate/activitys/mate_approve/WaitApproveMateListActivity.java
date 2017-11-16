@@ -1,15 +1,21 @@
 package com.ztstech.vgmate.activitys.mate_approve;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.mate_approve.adapter.WaitApproveMateAdapter;
 import com.ztstech.vgmate.data.beans.MainListBean;
 import com.ztstech.vgmate.data.beans.WaitApproveMateListBean;
+import com.ztstech.vgmate.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,16 +30,18 @@ import butterknife.ButterKnife;
  * @date 2017/11/13
  */
 
-public class WaitApproveMateListActivity extends MVPActivity implements WaitApproveMateContact.View{
+public class WaitApproveMateListActivity extends MVPActivity<WaitApproveMateContact.Presenter> implements WaitApproveMateContact.View{
 
 
     WaitApproveMateAdapter adapter;
     @BindView(R.id.recycler)
     RecyclerView recycler;
+    @BindView(R.id.srl)
+    SmartRefreshLayout refreshLayout;
 
     @Override
-    protected BasePresenter initPresenter() {
-        return new WaitApproveMatePresenter();
+    protected WaitApproveMateContact.Presenter initPresenter() {
+        return new WaitApproveMatePresenter(this);
     }
 
     @Override
@@ -47,28 +55,33 @@ public class WaitApproveMateListActivity extends MVPActivity implements WaitAppr
         adapter = new WaitApproveMateAdapter();
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setAdapter(adapter);
-        setData(new ArrayList<WaitApproveMateListBean.ListBean>());
+        refreshLayout.autoRefresh();
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                mPresenter.loadData();
+            }
+        });
+
+        refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                mPresenter.appendData();
+            }
+        });
     }
 
     @Override
     public void setData(List<WaitApproveMateListBean.ListBean> listData) {
-
-        listData.add(new WaitApproveMateListBean.ListBean());
-        listData.add(new WaitApproveMateListBean.ListBean());
-        listData.add(new WaitApproveMateListBean.ListBean());
-        listData.add(new WaitApproveMateListBean.ListBean());
-        listData.add(new WaitApproveMateListBean.ListBean());
-        listData.add(new WaitApproveMateListBean.ListBean());
-        listData.add(new WaitApproveMateListBean.ListBean());
-        listData.add(new WaitApproveMateListBean.ListBean());
-
         adapter.setListData(listData);
         adapter.notifyDataSetChanged();
+        refreshLayout.finishRefresh();
+        refreshLayout.finishLoadmore();
     }
 
     @Override
     public void showError(String errorMessage) {
-
+        ToastUtil.toastCenter(this,errorMessage);
     }
 
     @Override

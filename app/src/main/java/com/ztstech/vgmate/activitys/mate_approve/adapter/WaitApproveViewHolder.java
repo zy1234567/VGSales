@@ -7,10 +7,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.user_info.edit_info.EditInfoActivity;
 import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.WaitApproveMateListBean;
+import com.ztstech.vgmate.utils.SexUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -57,6 +59,22 @@ public class WaitApproveViewHolder extends SimpleViewHolder<WaitApproveMateListB
         }
         tvDetail.setOnClickListener(clickListener);
         tvPhone.setOnClickListener(clickListener);
+        tvName.setText(data.uname);
+        tvPhone.setText(data.phone);
+        tvAge.setText(String.valueOf(data.age));
+        tvDutyName.setText(data.responsible);
+        tvIntroName.setText(data.fname);
+        Glide.with(getContext())
+                .load(data.picurl)
+                .error(R.mipmap.ic_launcher)
+                .into(imgHead);
+       if ("01".equals(data.sex)){
+           imgAge.setImageResource(R.mipmap.space_man);
+           ageLayout.setBackgroundResource(R.drawable.zts_alter_sex_man);
+       }else {
+           imgAge.setImageResource(R.mipmap.space_woman);
+           ageLayout.setBackgroundResource(R.drawable.zts_alter_sex_women);
+       }
     }
 
 

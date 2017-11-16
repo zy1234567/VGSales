@@ -470,6 +470,9 @@ public class CreateShareInfoActivity extends MVPActivity<CreateShareInfoContract
      */
     private void setDataToView(CreateShareData data) {
         etTitle.setText(data.title);
+        if (data.summary != null) {
+            etContent.setText(data.summary);
+        }
         if (Constants.SHARE_TYPE_TEXT.equals(data.ntype)) {
             //类型为文本
             etContent.setText(data.summary);
