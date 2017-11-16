@@ -61,7 +61,7 @@ android {
             def outputFile = output.outputFile
             if (outputFile != null && outputFile.name.endsWith('.apk')) {
                 def buildType = variant.buildType.name
-                def fileName = "蔚来伙伴-V${defaultConfig.versionName}-${getCurrentTime()}-${buildType}.apk"
+                def fileName = "蔚来伙伴-V${defaultConfig.versionName}-${buildType}.apk"
                 output.outputFile = new File(outputFile.parent, fileName)
             }
         }

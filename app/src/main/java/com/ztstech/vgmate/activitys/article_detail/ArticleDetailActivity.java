@@ -39,6 +39,7 @@ import butterknife.BindView;
 
 /**
  * 文章详情界面
+ * @author smm
  */
 public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Presenter> implements
         ArticleDetailContract.View, View.OnClickListener {

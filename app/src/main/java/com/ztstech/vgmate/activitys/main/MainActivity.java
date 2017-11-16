@@ -84,6 +84,11 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
 
             @Override
             public void onPageSelected(int position) {
+                if (position == 0){
+                    topBar.setVisibility(View.VISIBLE);
+                }else {
+                    topBar.setVisibility(View.GONE);
+                }
                 bottomBar.updateTabView(position);
             }
 

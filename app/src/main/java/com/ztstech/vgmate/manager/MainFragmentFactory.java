@@ -3,6 +3,7 @@ package com.ztstech.vgmate.manager;
 import android.support.v4.app.Fragment;
 
 import com.ztstech.vgmate.activitys.main_fragment.MainFragment;
+import com.ztstech.vgmate.activitys.question.QuestionFragment;
 import com.ztstech.vgmate.activitys.share.ShareFragment;
 
 /**
@@ -31,7 +32,7 @@ public class MainFragmentFactory {
         }else if (index == 1) {
             return ShareFragment.newInstance();
         }else if (index == 2) {
-            return ShareFragment.newInstance();
+            return QuestionFragment.newInstance();
         }else {
             return ShareFragment.newInstance();
         }

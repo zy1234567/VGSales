@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_107">
+
+    <com.ztstech.vgmate.weigets.TopBar
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:showBackNav="true"
+        app:textRight="提交"
+        app:barTitle="我要提问"
+        app:colorRight="@color/color_103"
+        app:backgroundColor="@color/color_109">
+
+    </com.ztstech.vgmate.weigets.TopBar>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_109"
+        android:text="问题描述"
+        android:textSize="@dimen/text_7"
+        android:textColor="@color/color_100"
+        android:paddingLeft="12dp"
+        android:paddingTop="5dp" />
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/color_109"
+        android:gravity="top|left"
+        android:hint="请尽量在此描述清楚"
+        android:textColorHint="@color/color_103"
+        android:textSize="@dimen/text_4"
+        android:textColor="@color/color_100"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="12dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_106"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"/>
+
+    <EditText
+        android:id="@+id/et_other"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="@color/color_109"
+        android:gravity="top|left"
+        android:hint="补充说明（可选）"
+        android:textColorHint="@color/color_103"
+        android:textSize="@dimen/text_4"
+        android:textColor="@color/color_100"
+        android:paddingTop="5dp"
+        android:paddingLeft="12dp"
+        android:layout_marginBottom="20dp"/>
+</LinearLayout>

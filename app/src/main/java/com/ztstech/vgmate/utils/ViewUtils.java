@@ -8,6 +8,7 @@ import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -18,6 +19,7 @@ import android.text.style.ImageSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.ztstech.vgmate.base.BaseApplication;
 import com.ztstech.vgmate.base.BaseApplicationLike;
@@ -207,6 +209,24 @@ public class ViewUtils {
             ds.setUnderlineText(false); //去掉下划线
         }
 
+    }
+
+    /**
+     * 自动匹配搜索的关键字并标红
+     */
+    public static void setKeyWordLight(String keyword, String allText, TextView tvContent){
+        if (allText != null && allText.contains(keyword)) {
+            int index = allText.indexOf(keyword);
+            int len = keyword.length();
+            Spanned temp = Html.fromHtml(allText.substring(0, index)
+                    + "<font color=#FF4443>"
+                    + allText.substring(index, index + len) + "</font>"
+                    + allText.substring(index + len, allText.length()));
+
+            tvContent.setText(temp);
+        } else {
+            tvContent.setText(allText);
+        }
     }
 
 }

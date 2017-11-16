@@ -62,7 +62,7 @@
         <activity android:name=".activitys.create_share.create_share_add_desc.CreateShareAddDescActivity" />
         <activity android:name=".activitys.create_share.create_share_add_cover.CreateShareAddCoverActivity" />
         <activity android:name=".activitys.org_detail.OrgDetailActivity" />
-        <activity android:name=".activitys.sell_mate_list.SellMateListActivity" />
+        <activity android:name=".activitys.sell_mate_list.SellMateListActivity"/>
         <activity
             android:name=".activitys.gps.GpsActivity"
             android:hardwareAccelerated="false" />
@@ -93,6 +93,11 @@
         <activity android:name=".activitys.complete_org_info_v2.subview.teacher.list.EditOrgInfoTeacherActivity" />
         <activity android:name=".activitys.complete_org_info_v2.subview.teacher.add.EditOrgInfoAddTeacherActivity" />
         <activity android:name=".activitys.mate_approve.WaitApproveMateListActivity"/>
+        <activity android:name=".activitys.question.CreateQuestionActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".activitys.question.SearchQuestActivity"/>
+        <activity android:name=".activitys.question.QuestDetailActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
 
         <activity android:name=".activitys.org_follow.OrgFollowActivity"/>
         <activity
