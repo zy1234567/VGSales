@@ -1,13 +1,16 @@
 package com.ztstech.vgmate.activitys.user_info.edit_info;
 
+import com.ztstech.appdomain.repository.UserRepository;
+import com.ztstech.appdomain.user_case.ApproveMate;
+import com.ztstech.appdomain.utils.RetrofitUtils;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
+import com.ztstech.vgmate.data.beans.UnApproveMateBean;
 import com.ztstech.vgmate.data.beans.UploadImageBean;
 import com.ztstech.vgmate.data.beans.UserBean;
 import com.ztstech.vgmate.data.dto.UpdateUserInfoData;
-import com.ztstech.appdomain.repository.UserRepository;
-import com.ztstech.appdomain.utils.RetrofitUtils;
 import com.ztstech.vgmate.mapper.FillInfoModelMapper;
+import com.ztstech.vgmate.mapper.MateInfoModelMapper;
 import com.ztstech.vgmate.mapper.UserInfoBeanMapper;
 import com.ztstech.vgmate.model.fill_info.FillInfoModel;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
@@ -36,6 +39,12 @@ public class InfoPresenter extends PresenterImpl<InfoContract.View> implements
         FillInfoModel model = new FillInfoModelMapper().transform(userBean);
         mView.setUserModule(model);
 
+    }
+
+    @Override
+    public void loadMateModule(UnApproveMateBean bean) {
+        FillInfoModel model = new MateInfoModelMapper().transform(bean);
+        mView.setUserModule(model);
     }
 
     @Override
@@ -183,6 +192,28 @@ public class InfoPresenter extends PresenterImpl<InfoContract.View> implements
 //            }
 //        }.run(RetrofitUtils.uploadFile(images));
     }
+
+    @Override
+    public void approveMate(String uid, String status) {
+        new BasePresenterSubscriber<BaseRespBean>(mView) {
+
+            @Override
+            protected void childError(Throwable e) {
+                mView.showError("审批销售出错：".concat(e.getMessage()));
+            }
+
+            @Override
+            public void childNext(BaseRespBean bean) {
+                if (bean.isSucceed()) {
+                    mView.onApproveSucceed();
+                }else {
+                    //如果失败
+                    mView.showError(bean.getErrmsg());
+                }
+            }
+        }.run(new ApproveMate(uid,status).run());
+    }
+
 
     private void uploadIfExist(File file,final Action1<UploadImageBean> callback) {
         if (file != null) {

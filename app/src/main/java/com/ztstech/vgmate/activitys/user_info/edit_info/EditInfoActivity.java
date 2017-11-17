@@ -23,10 +23,15 @@ import com.jph.takephoto.model.TResult;
 import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
+import com.ztstech.appdomain.constants.Constants;
+import com.ztstech.appdomain.repository.UserRepository;
+import com.ztstech.appdomain.user_case.ApproveMate;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
+import com.ztstech.vgmate.activitys.photo_browser.PhotoBrowserActivity;
 import com.ztstech.vgmate.activitys.setting.SettingActivity;
+import com.ztstech.vgmate.data.beans.UnApproveMateBean;
 import com.ztstech.vgmate.model.fill_info.FillInfoModel;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.SexUtils;
@@ -37,6 +42,8 @@ import com.ztstech.vgmate.weigets.TopBar;
 import com.ztstech.vgmate.weigets.dateTimePicker.DatePickerDialog;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,6 +67,8 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
     public static final String FROM_APPROVE_MATE = "from_approve_mate";
 
     public static final String SHOW_TYPE = "show_type";
+    public static final String KEY_BEAN = "bean";
+    public static final String KEY_SALEID = "sale_id";
 
     @BindView(R.id.top_bar)
     TopBar topBar;
@@ -138,6 +147,21 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
      */
     private String showType;
 
+    /**
+     * 如果是销售审批界面传过来的bean
+     */
+    private UnApproveMateBean bean;
+
+    /**
+     * 是否是销售审批界面
+     */
+    private boolean mateApproveflg;
+
+    /**
+     * 如果是销售审批界面传过来的销售id
+     */
+    private String saleid;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_edit_info;
@@ -152,31 +176,42 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
     protected void onViewBindFinish() {
         super.onViewBindFinish();
         showType = getIntent().getStringExtra(SHOW_TYPE);
-
-        if (TextUtils.equals(showType,FROM_APPROVE_MATE)){
-            topBar.getRightTextView().setVisibility(View.GONE);
-            llApprove.setVisibility(View.VISIBLE);
-        }
-
+        bean = (UnApproveMateBean) getIntent().getSerializableExtra(KEY_BEAN);
+        saleid = getIntent().getStringExtra(KEY_SALEID);
+        mateApproveflg = TextUtils.equals(showType,FROM_APPROVE_MATE);
         ivCard.setOnClickListener(this);
         ivId.setOnClickListener(this);
         ivIdBack.setOnClickListener(this);
-        imgHeader.setOnClickListener(this);
-
-        tvLocation.setOnClickListener(this);
-        tvBirthday.setOnClickListener(this);
-        tvSex.setOnClickListener(this);
+        tvPass.setOnClickListener(this);
+        tvRefuse.setOnClickListener(this);
 
 
-        etId.setOnClickListener(this);
-        etCardMaster.setOnClickListener(this);
-        etBank.setOnClickListener(this);
-        etCardNumber.setOnClickListener(this);
+        if (mateApproveflg){
+            // 如果是审批销售界面
+            topBar.getRightTextView().setVisibility(View.GONE);
+            llApprove.setVisibility(View.VISIBLE);
+            mPresenter.loadMateModule(bean);
+            setEditPrivateInfoEnabled(false);
+        }else {
+            // 如果是完善自己资料界面
+            topBar.getRightTextView().setVisibility(View.VISIBLE);
+            llApprove.setVisibility(View.GONE);
+            mPresenter.loadUserModule();
+            imgHeader.setOnClickListener(this);
 
+            tvLocation.setOnClickListener(this);
+            tvBirthday.setOnClickListener(this);
+            tvSex.setOnClickListener(this);
 
-        setEditPrivateInfoEnabled(true);
+            etId.setOnClickListener(this);
+            etCardMaster.setOnClickListener(this);
+            etBank.setOnClickListener(this);
+            etCardNumber.setOnClickListener(this);
+            if (!Constants.USER_ID_CHECKING.equals(UserRepository.getInstance().getUser().getUserBean().info.status)){
+                setEditPrivateInfoEnabled(true);
+            }
+        }
 
-        mPresenter.loadUserModule();
 
         topBar.getRightTextView().setOnClickListener(this);
         topBar.requestFocus();
@@ -232,23 +267,35 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
     @Override
     public void setUserModule(FillInfoModel model) {
         this.model = model;
-        setModelToView();
+        setUserModelToView();
     }
 
     @Override
     public void setEditPrivateInfoEnabled(boolean enabled) {
         this.privateInfoEditEnabled = enabled;
-
+        etName.setFocusableInTouchMode(enabled);
         etId.setFocusableInTouchMode(enabled);
         etCardMaster.setFocusableInTouchMode(enabled);
         etBank.setFocusableInTouchMode(enabled);
         etCardNumber.setFocusableInTouchMode(enabled);
     }
 
+    @Override
+    public void showError(String errmsg) {
+        ToastUtil.toastCenter(this,errmsg);
+    }
+
+    @Override
+    public void onApproveSucceed() {
+        ToastUtil.toastCenter(this,"操作成功!");
+        finish();
+    }
+
+
     /**
      * 将model数据设置到界面
      */
-    private void setModelToView() {
+    private void setUserModelToView() {
         if (this.model == null) {
             return;
         }
@@ -300,6 +347,10 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
                         }
                     }).create().show();
         } else if (view == ivId) {
+            if (mateApproveflg){
+                toPhotoBrowser(0);
+                return;
+            }
             if (!privateInfoEditEnabled) {
                 showPrivateInfoDisabled();
                 return;
@@ -307,6 +358,10 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
             currentImageView = (ImageView) view;
             new TakePhotoHelper(this, takePhoto, false).showPickDialog();
         } else if (view == ivIdBack) {
+            if (mateApproveflg){
+                toPhotoBrowser(1);
+                return;
+            }
             if (!privateInfoEditEnabled) {
                 showPrivateInfoDisabled();
                 return;
@@ -314,6 +369,10 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
             currentImageView = (ImageView) view;
             new TakePhotoHelper(this, takePhoto, false).showPickDialog();
         } else if (view == ivCard) {
+            if (mateApproveflg){
+                toPhotoBrowser(2);
+                return;
+            }
             if (!privateInfoEditEnabled) {
                 showPrivateInfoDisabled();
                 return;
@@ -353,6 +412,23 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
             if (!privateInfoEditEnabled) {
                 showPrivateInfoDisabled();
             }
+        }else if (view == tvPass){
+            //通过
+            new IOSStyleDialog(this, "您确定要通过吗？", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    mPresenter.approveMate(saleid, ApproveMate.STATUS_PASS);
+                }
+            }).show();
+
+        }else if (view == tvRefuse){
+            //拒绝
+            new IOSStyleDialog(this, "您确定要拒绝吗？", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    mPresenter.approveMate(saleid, ApproveMate.STATUS_REFUSE);
+                }
+            }).show();
         }
 
     }
@@ -441,31 +517,18 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
         ToastUtil.toastCenter(this, "您提交的资料正在审核，审核完成后可以继续修改");
     }
 
-
-    @OnClick({R.id.tv_pass, R.id.tv_refuse})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.tv_pass:
-                //通过
-                new IOSStyleDialog(this, "您确定要通过吗？", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-
-                break;
-            case R.id.tv_refuse:
-                //拒绝
-                new IOSStyleDialog(this, "您确定要拒绝吗？", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                break;
-            default:
-                break;
-        }
+    /**
+     * 跳转至图片浏览器界面查看身份证和银行卡
+     */
+    private void toPhotoBrowser(int postiion){
+        List<String> list = new ArrayList<>();
+        list.add(model.idUrl);
+        list.add(model.idBackUrl);
+        list.add(model.cardUrl);
+        Intent intent = new Intent(this, PhotoBrowserActivity.class);
+        intent.putExtra(PhotoBrowserActivity.KEY_POSITION,postiion);
+        intent.putStringArrayListExtra(PhotoBrowserActivity.KEY_LIST, (ArrayList<String>) list);
+        startActivity(intent);
     }
+
 }

@@ -45,10 +45,14 @@ public class WaitApproveViewHolder extends SimpleViewHolder<WaitApproveMateListB
     @BindView(R.id.tv_detail)
     TextView tvDetail;
 
-    MyClickListener clickListener;
+    private MyClickListener clickListener;
 
-    public WaitApproveViewHolder(View itemView) {
+    private ClickDetailCallBack callBack;
+
+
+    public WaitApproveViewHolder(View itemView,ClickDetailCallBack callBack) {
         super(itemView);
+        this.callBack = callBack;
     }
 
     @Override
@@ -57,6 +61,7 @@ public class WaitApproveViewHolder extends SimpleViewHolder<WaitApproveMateListB
         if (clickListener == null){
             clickListener = new MyClickListener();
         }
+        clickListener.bean = data;
         tvDetail.setOnClickListener(clickListener);
         tvPhone.setOnClickListener(clickListener);
         tvName.setText(data.uname);
@@ -85,15 +90,17 @@ public class WaitApproveViewHolder extends SimpleViewHolder<WaitApproveMateListB
         @Override
         public void onClick(View v) {
             if (v == tvDetail){
-                Intent intent = new Intent(getContext(), EditInfoActivity.class);
-                intent.putExtra(EditInfoActivity.SHOW_TYPE, EditInfoActivity.FROM_APPROVE_MATE);
-                getContext().startActivity(intent);
+                callBack.clickDetail(bean.uid);
             }else if (v == tvPhone){
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:".concat("15901088314")));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getContext().startActivity(intent);
             }
         }
+    }
+
+    public interface ClickDetailCallBack{
+        void clickDetail(String saleid);
     }
 
 }

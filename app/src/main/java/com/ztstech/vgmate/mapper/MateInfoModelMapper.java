@@ -2,21 +2,19 @@ package com.ztstech.vgmate.mapper;
 
 import android.text.TextUtils;
 
-import com.ztstech.vgmate.data.beans.UserBean;
+import com.ztstech.vgmate.data.beans.UnApproveMateBean;
 import com.ztstech.vgmate.model.fill_info.FillInfoModel;
 import com.ztstech.vgmate.utils.LocationUtils;
-import com.ztstech.vgmate.utils.SexUtils;
 
 /**
  *
- * @author zhiyuan
- * @date 2017/9/17
+ * @author smm
+ * @date 2017/11/17
  */
 
-public class FillInfoModelMapper implements Mapper<UserBean, FillInfoModel> {
-
+public class MateInfoModelMapper implements Mapper<UnApproveMateBean,FillInfoModel> {
     @Override
-    public FillInfoModel transform(UserBean bean) {
+    public FillInfoModel transform(UnApproveMateBean bean) {
         FillInfoModel model = new FillInfoModel();
         model.birthday = bean.info.birthday;
         model.id = bean.info.did;

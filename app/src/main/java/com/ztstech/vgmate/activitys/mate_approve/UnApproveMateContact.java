@@ -3,6 +3,7 @@ package com.ztstech.vgmate.activitys.mate_approve;
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.BaseView;
 import com.ztstech.vgmate.data.beans.MainListBean;
+import com.ztstech.vgmate.data.beans.UnApproveMateBean;
 import com.ztstech.vgmate.data.beans.WaitApproveMateListBean;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by smm on 2017/11/13.
  */
 
-public interface WaitApproveMateContact {
+public interface UnApproveMateContact {
 
     interface View extends BaseView{
 
@@ -25,6 +26,8 @@ public interface WaitApproveMateContact {
          */
         void setNoreMoreData(boolean noreMoreData);
 
+        void getMateDetailFinish(UnApproveMateBean bean);
+
     }
 
     interface Presenter extends BasePresenter<View>{
@@ -32,6 +35,8 @@ public interface WaitApproveMateContact {
         void loadData();
 
         void appendData();
+
+        void findMateDetail(String saleid);
     }
 
 }

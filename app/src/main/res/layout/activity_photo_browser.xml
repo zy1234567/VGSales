@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000">
+
+
+
+    <com.ztstech.vgmate.weigets.PhotoViewViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+    </com.ztstech.vgmate.weigets.PhotoViewViewPager>
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/back_to_share" />
+    <TextView
+        android:id="@+id/tv_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="12dp"
+        android:text="2/20"
+        android:textColor="#ffffff"
+        android:textSize="15sp"/>
+</RelativeLayout>

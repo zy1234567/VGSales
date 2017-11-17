@@ -58,7 +58,7 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
                 .into(imgOrg);
         tvFrom.setText("来源：".concat(data.comefrom));
         tvOtype.setText(CategoryUtil.findCategoryByOtype(data.rbiotype));
-        tvAddress.setText(LocationUtils.getCName(data.rbicity).
+        tvAddress.setText(LocationUtils.getPName(data.rbiprovince).concat(LocationUtils.getCName(data.rbicity)).
                 concat(LocationUtils.getAName(data.rbidistrict))
                 .concat(data.rbiaddress));
         String[] strs = new String[] {"咨询电话：",data.rbicontphone};

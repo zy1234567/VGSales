@@ -1,7 +1,6 @@
 package com.ztstech.vgmate.activitys.mate_approve;
 
-import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -10,18 +9,17 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ztstech.vgmate.R;
-import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.mate_approve.adapter.WaitApproveMateAdapter;
-import com.ztstech.vgmate.data.beans.MainListBean;
+import com.ztstech.vgmate.activitys.mate_approve.adapter.WaitApproveViewHolder;
+import com.ztstech.vgmate.activitys.user_info.edit_info.EditInfoActivity;
+import com.ztstech.vgmate.data.beans.UnApproveMateBean;
 import com.ztstech.vgmate.data.beans.WaitApproveMateListBean;
 import com.ztstech.vgmate.utils.ToastUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 伙伴待审批列表
@@ -30,7 +28,8 @@ import butterknife.ButterKnife;
  * @date 2017/11/13
  */
 
-public class WaitApproveMateListActivity extends MVPActivity<WaitApproveMateContact.Presenter> implements WaitApproveMateContact.View{
+public class UnApproveMateListActivity extends MVPActivity<UnApproveMateContact.Presenter>
+        implements UnApproveMateContact.View,WaitApproveViewHolder.ClickDetailCallBack{
 
 
     WaitApproveMateAdapter adapter;
@@ -39,9 +38,12 @@ public class WaitApproveMateListActivity extends MVPActivity<WaitApproveMateCont
     @BindView(R.id.srl)
     SmartRefreshLayout refreshLayout;
 
+    /** 所点击的查看详情的销售id */
+    private String saleid;
+
     @Override
-    protected WaitApproveMateContact.Presenter initPresenter() {
-        return new WaitApproveMatePresenter(this);
+    protected UnApproveMateContact.Presenter initPresenter() {
+        return new UnApproveMatePresenter(this);
     }
 
     @Override
@@ -52,7 +54,7 @@ public class WaitApproveMateListActivity extends MVPActivity<WaitApproveMateCont
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
-        adapter = new WaitApproveMateAdapter();
+        adapter = new WaitApproveMateAdapter(this);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setAdapter(adapter);
         refreshLayout.autoRefresh();
@@ -85,7 +87,24 @@ public class WaitApproveMateListActivity extends MVPActivity<WaitApproveMateCont
     }
 
     @Override
-    public void setNoreMoreData(boolean noreMoreData) {
+    public void setNoreMoreData(boolean noMoreData) {
+        if (noMoreData){
+            refreshLayout.finishLoadmore();
+        }
+    }
 
+    @Override
+    public void getMateDetailFinish(UnApproveMateBean bean) {
+        Intent intent = new Intent(this, EditInfoActivity.class);
+        intent.putExtra(EditInfoActivity.KEY_BEAN,bean);
+        intent.putExtra(EditInfoActivity.SHOW_TYPE, EditInfoActivity.FROM_APPROVE_MATE);
+        intent.putExtra(EditInfoActivity.KEY_SALEID, saleid);
+        startActivity(intent);
+    }
+
+    @Override
+    public void clickDetail(String saleid) {
+        this.saleid = saleid;
+        mPresenter.findMateDetail(saleid);
     }
 }

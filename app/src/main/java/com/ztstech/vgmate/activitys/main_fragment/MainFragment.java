@@ -7,9 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,7 +18,7 @@ import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.main_fragment.adapter.MainFragmentPagerAdapter;
-import com.ztstech.vgmate.activitys.mate_approve.WaitApproveMateListActivity;
+import com.ztstech.vgmate.activitys.mate_approve.UnApproveMateListActivity;
 import com.ztstech.vgmate.activitys.org_follow.OrgFollowActivity;
 import com.ztstech.vgmate.activitys.sell_mate_list.SellMateListActivity;
 import com.ztstech.vgmate.activitys.setting.SettingActivity;
@@ -30,7 +28,6 @@ import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -166,7 +163,7 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
                 break;
             case R.id.ll_wait:
                 //点击跳转到待审批
-                startActivity(new Intent(getActivity(), WaitApproveMateListActivity.class));
+                startActivity(new Intent(getActivity(), UnApproveMateListActivity.class));
                 break;
             case R.id.rl_mate:
                 //销售伙伴

@@ -15,14 +15,16 @@ import com.ztstech.vgmate.data.beans.WaitApproveMateListBean;
 
 public class WaitApproveMateAdapter extends SimpleRecyclerAdapter<WaitApproveMateListBean.ListBean> {
 
-    public WaitApproveMateAdapter(){
+    private WaitApproveViewHolder.ClickDetailCallBack callBack;
 
+    public WaitApproveMateAdapter(WaitApproveViewHolder.ClickDetailCallBack callBack){
+        this.callBack = callBack;
     }
 
     @Override
     public WaitApproveViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new WaitApproveViewHolder((LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_wait_approve_mate, parent, false)));
+                .inflate(R.layout.item_wait_approve_mate, parent, false)),callBack);
     }
 
 }
