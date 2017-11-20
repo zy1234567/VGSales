@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -204,6 +205,7 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
             imgSetting.setVisibility(View.VISIBLE);
         }
         tvName.setText(mainPageBean.info.uname);
+
         String status = UserRepository.getInstance().getUser().getUserBean()
                 .info.status;
         if (Constants.USER_ID_CHECKING.equals(status) || Constants.USER_ID_WILL_CHECK.equals(status)) {

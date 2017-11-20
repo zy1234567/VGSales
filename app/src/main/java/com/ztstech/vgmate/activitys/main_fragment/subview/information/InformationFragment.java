@@ -83,7 +83,7 @@ public class InformationFragment extends MVPFragment<InformationContract.Present
                 mPresenter.appendData();
             }
         });
-
+        mPresenter.loadCache();
         mPresenter.loadListData();
 
 

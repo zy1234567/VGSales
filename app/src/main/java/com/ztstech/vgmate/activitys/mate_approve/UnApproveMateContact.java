@@ -36,6 +36,8 @@ public interface UnApproveMateContact {
 
         void appendData();
 
+        void loadCacheData();
+
         void findMateDetail(String saleid);
     }
 

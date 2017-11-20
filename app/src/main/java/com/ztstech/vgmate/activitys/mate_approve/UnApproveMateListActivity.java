@@ -3,6 +3,8 @@ package com.ztstech.vgmate.activitys.mate_approve;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -37,6 +39,8 @@ public class UnApproveMateListActivity extends MVPActivity<UnApproveMateContact.
     RecyclerView recycler;
     @BindView(R.id.srl)
     SmartRefreshLayout refreshLayout;
+    @BindView(R.id.ll_no_data)
+    LinearLayout llNoData;
 
     /** 所点击的查看详情的销售id */
     private String saleid;
@@ -57,6 +61,7 @@ public class UnApproveMateListActivity extends MVPActivity<UnApproveMateContact.
         adapter = new WaitApproveMateAdapter(this);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setAdapter(adapter);
+        mPresenter.loadCacheData();
         refreshLayout.autoRefresh();
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -79,6 +84,13 @@ public class UnApproveMateListActivity extends MVPActivity<UnApproveMateContact.
         adapter.notifyDataSetChanged();
         refreshLayout.finishRefresh();
         refreshLayout.finishLoadmore();
+        if (listData.size() == 0){
+            llNoData.setVisibility(View.VISIBLE);
+            refreshLayout.setVisibility(View.GONE);
+        }else {
+            llNoData.setVisibility(View.GONE);
+            refreshLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

@@ -31,6 +31,8 @@ public interface OrgFollowContact {
     interface Presenter extends BasePresenter<View>{
         void loadData();
 
+        void loadCacheData();
+
         void appendData();
     }
 

@@ -68,6 +68,8 @@ interface InformationContract {
          * 重新发送
          */
         void resendArticle(MainListBean.ListBean bean);
+
+        void loadCache();
     }
 
 }

@@ -7,7 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.org_follow.adapter.OrgFollowListAdapter;
@@ -32,7 +36,10 @@ public class OrgFollowListFragment extends MVPFragment<OrgFollowContact.Presente
 
     @BindView(R.id.recycler)
     RecyclerView recycler;
-
+    @BindView(R.id.srl)
+    SmartRefreshLayout smartRefreshLayout;
+    @BindView(R.id.ll_no_data)
+    LinearLayout llNoData;
 
     /**
      * 所要显示的是哪个列表
@@ -55,7 +62,15 @@ public class OrgFollowListFragment extends MVPFragment<OrgFollowContact.Presente
         adapter = new OrgFollowListAdapter(statusIndex);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         recycler.setAdapter(adapter);
+        mPresenter.loadCacheData();
         mPresenter.loadData();
+        smartRefreshLayout.setEnableRefresh(false);
+        smartRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                mPresenter.appendData();
+            }
+        });
     }
 
     @Override
@@ -73,6 +88,13 @@ public class OrgFollowListFragment extends MVPFragment<OrgFollowContact.Presente
     public void setData(List<OrgFollowlistBean.ListBean> listData) {
         adapter.setListData(listData);
         adapter.notifyDataSetChanged();
+        if (listData.size() == 0){
+            llNoData.setVisibility(View.VISIBLE);
+            smartRefreshLayout.setVisibility(View.GONE);
+        }else {
+            llNoData.setVisibility(View.GONE);
+            smartRefreshLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

@@ -1,13 +1,17 @@
 package com.ztstech.vgmate.activitys.main_fragment.subview.notice;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import com.google.gson.Gson;
 import com.ztstech.appdomain.user_case.DeleteArticle;
 import com.ztstech.appdomain.utils.RetrofitUtils;
 import com.ztstech.vgmate.activitys.PresenterImpl;
+import com.ztstech.vgmate.base.BaseApplicationLike;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.MainListBean;
 import com.ztstech.appdomain.repository.MainListRepository;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
-import com.ztstech.vgmate.utils.Go2EditShareUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +23,10 @@ import java.util.List;
 public class NoticePresenter extends PresenterImpl<NoticeContract.View> implements
         NoticeContract.Presenter {
 
+    private static String NOTICE_LIST = "notice_list";
+
+    private SharedPreferences preferences;
+
     private MainListRepository repository;
 
     private int currentPager = 1;
@@ -29,7 +37,7 @@ public class NoticePresenter extends PresenterImpl<NoticeContract.View> implemen
 
     public NoticePresenter(NoticeContract.View view) {
         super(view);
-
+        preferences = PreferenceManager.getDefaultSharedPreferences(BaseApplicationLike.getApplicationInstance());
         repository = MainListRepository.getInstance();
     }
 
@@ -43,6 +51,15 @@ public class NoticePresenter extends PresenterImpl<NoticeContract.View> implemen
         if (currentPager < maxPage) {
             queryDataWithPage(currentPager + 1);
         }else {
+            mView.setData(mListData);
+        }
+    }
+
+    @Override
+    public void loadCacheData() {
+        MainListBean mainListBean = new Gson().fromJson(preferences.getString(NOTICE_LIST,""),MainListBean.class);
+        if (mainListBean != null){
+            mListData.addAll(mainListBean.list);
             mView.setData(mListData);
         }
     }
@@ -95,6 +112,7 @@ public class NoticePresenter extends PresenterImpl<NoticeContract.View> implemen
 
                     if (currentPager == 1) {
                         mListData.clear();
+                        preferences.edit().putString(NOTICE_LIST,new Gson().toJson(mainListBean)).apply();
                     }
 
                     mListData.addAll(mainListBean.list);

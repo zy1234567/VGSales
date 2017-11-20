@@ -42,6 +42,7 @@ interface NoticeContract {
 
         void appendData();
 
+        void loadCacheData();
         /**
          * 删除文章
          * @param nid

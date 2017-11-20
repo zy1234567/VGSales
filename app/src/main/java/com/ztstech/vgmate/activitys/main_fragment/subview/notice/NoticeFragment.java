@@ -90,7 +90,7 @@ public class NoticeFragment extends MVPFragment<NoticeContract.Presenter> implem
             }
         });
 
-
+        mPresenter.loadCacheData();
         mPresenter.loadData();
     }
 

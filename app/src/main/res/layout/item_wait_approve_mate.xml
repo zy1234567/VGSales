@@ -8,7 +8,7 @@
         android:id="@+id/img_head"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@mipmap/pre_default_image"
         android:layout_centerVertical="true"
         android:layout_marginLeft="12dp"/>
 

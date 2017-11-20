@@ -1,9 +1,13 @@
 package com.ztstech.vgmate.activitys.mate_approve;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import com.google.gson.Gson;
 import com.ztstech.appdomain.user_case.GetUnApproveMateDetail;
 import com.ztstech.appdomain.user_case.GetUnApproveMateList;
 import com.ztstech.vgmate.activitys.PresenterImpl;
-import com.ztstech.vgmate.data.beans.BaseRespBean;
+import com.ztstech.vgmate.base.BaseApplicationLike;
 import com.ztstech.vgmate.data.beans.UnApproveMateBean;
 import com.ztstech.vgmate.data.beans.WaitApproveMateListBean;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
@@ -19,6 +23,10 @@ import java.util.List;
 
 public class UnApproveMatePresenter extends PresenterImpl<UnApproveMateContact.View> implements UnApproveMateContact.Presenter {
 
+    private static String UN_APPROVE_MATE_LIST = "un_approve_mate_list";
+
+    private SharedPreferences preferences;
+
     private int currentPage;
     private int totalPage;
 
@@ -26,6 +34,7 @@ public class UnApproveMatePresenter extends PresenterImpl<UnApproveMateContact.V
 
     public UnApproveMatePresenter(UnApproveMateContact.View view){
         super(view);
+        preferences = PreferenceManager.getDefaultSharedPreferences(BaseApplicationLike.getApplicationInstance());
     }
 
     @Override
@@ -39,6 +48,15 @@ public class UnApproveMatePresenter extends PresenterImpl<UnApproveMateContact.V
             mView.setNoreMoreData(true);
         }else {
             requestData(currentPage + 1);
+        }
+    }
+
+    @Override
+    public void loadCacheData() {
+        WaitApproveMateListBean mainListBean = new Gson().fromJson(preferences.getString(UN_APPROVE_MATE_LIST,""),WaitApproveMateListBean.class);
+        if (mainListBean != null){
+            listBeanList.addAll(mainListBean.list);
+            mView.setData(listBeanList);
         }
     }
 
@@ -73,7 +91,7 @@ public class UnApproveMatePresenter extends PresenterImpl<UnApproveMateContact.V
 
             @Override
             protected void childError(Throwable e) {
-                mView.showError("查询跟进机构列表出错：".concat(e.getMessage()));
+                mView.showError("查询待审批销售列表出错：".concat(e.getMessage()));
             }
 
             @Override
@@ -84,6 +102,7 @@ public class UnApproveMatePresenter extends PresenterImpl<UnApproveMateContact.V
                     if (currentPage == 1) {
                         //刷新
                         listBeanList.clear();
+                        preferences.edit().putString(UN_APPROVE_MATE_LIST,new Gson().toJson(bean)).apply();
                     }
                     listBeanList.addAll(bean.list);
                     mView.setData(listBeanList);
