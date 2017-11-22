@@ -40,6 +40,7 @@ public class QuestionListPresenter extends PresenterImpl<QuestionListContact.Vie
      */
     @Override
     public void loadData(String keyword,boolean myflg) {
+        currentpage = 1;
         this.keyword = keyword;
         this.myflg = myflg;
         new BasePresenterSubscriber<QuestionListBean>(mView,false){
@@ -80,7 +81,7 @@ public class QuestionListPresenter extends PresenterImpl<QuestionListContact.Vie
             @Override
             protected void childNext(BaseRespBean baseRespBean) {
                 if (baseRespBean.isSucceed()){
-
+                    mView.onDeleteSucceed();
                 }else {
                     mView.showError(baseRespBean.errmsg);
                 }
