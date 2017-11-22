@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.question;
+package com.ztstech.vgmate.activitys.question.question_list;
 
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.BaseView;
@@ -25,12 +25,16 @@ public interface QuestionListContact {
          * @param noreMoreData
          */
         void setNoreMoreData(boolean noreMoreData);
+
+        void onDeleteSucceed();
     }
 
     interface Presenter extends BasePresenter<View> {
-        void loadData();
+        void loadData(String keyword,boolean myflg);
 
         void appendData();
+
+        void deleteQuestion(String qid);
     }
 
 }

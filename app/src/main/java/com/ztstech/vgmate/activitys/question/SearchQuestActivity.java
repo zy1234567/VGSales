@@ -58,25 +58,25 @@ public class SearchQuestActivity extends MVPActivity implements QuestionViewHold
         return R.layout.activity_search;
     }
 
+
+    @OnClick(R.id.tv_cancel)
+    public void onViewClicked() {
+        finish();
+    }
+
     @Override
-    public void onItemClick() {
+    public void onItemClick(String qid) {
         Intent intent = new Intent(this,QuestDetailActivity.class);
         startActivity(intent);
     }
 
     @Override
-    public void onItemLongClick() {
+    public void onItemLongClick(String qid) {
         new IOSStyleDialog(this, "确认删除此条问答？", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 ToastUtil.toastCenter(SearchQuestActivity.this,"删除成功!");
             }
         }).show();
-    }
-
-
-    @OnClick(R.id.tv_cancel)
-    public void onViewClicked() {
-        finish();
     }
 }

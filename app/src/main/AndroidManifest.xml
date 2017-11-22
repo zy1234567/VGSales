@@ -93,7 +93,7 @@
         <activity android:name=".activitys.complete_org_info_v2.subview.teacher.list.EditOrgInfoTeacherActivity" />
         <activity android:name=".activitys.complete_org_info_v2.subview.teacher.add.EditOrgInfoAddTeacherActivity" />
         <activity android:name=".activitys.mate_approve.UnApproveMateListActivity"/>
-        <activity android:name=".activitys.question.CreateQuestionActivity"
+        <activity android:name=".activitys.question.create_question.CreateQuestionActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".activitys.question.SearchQuestActivity"/>
         <activity android:name=".activitys.question.QuestDetailActivity"

@@ -38,8 +38,10 @@ public class QuestionViewHolder extends SimpleViewHolder<QuestionListBean.ListBe
     }
 
     @Override
-    protected void refreshView(QuestionListBean.ListBean data) {
+    protected void refreshView(final QuestionListBean.ListBean data) {
         super.refreshView(data);
+        tvTitle.setText(data.descrption);
+        tvAnswerNum.setText(String.valueOf(data.answerCnt));
         if (!TextUtils.isEmpty(searchText)){
             //不为空则是搜索列表
             ViewUtils.setKeyWordLight(searchText,tvTitle.getText().toString(),tvTitle);
@@ -47,21 +49,21 @@ public class QuestionViewHolder extends SimpleViewHolder<QuestionListBean.ListBe
         rlBody.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callBack.onItemClick();
+                callBack.onItemClick(data.queid);
             }
         });
         rlBody.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                callBack.onItemLongClick();
+                callBack.onItemLongClick(data.queid);
                 return false;
             }
         });
     }
 
     public interface ClickCallBack{
-        void onItemClick();
-        void onItemLongClick();
+        void onItemClick(String qid);
+        void onItemLongClick(String qid);
     }
 
 }

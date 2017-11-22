@@ -5,25 +5,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.ztstech.vgmate.R;
-import com.ztstech.vgmate.activitys.BasePresenter;
-import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.question.adapter.QuestionViewPgerAdapter;
+import com.ztstech.vgmate.activitys.question.create_question.CreateQuestionActivity;
 import com.ztstech.vgmate.base.BaseFragment;
-import com.ztstech.vgmate.data.beans.QuestionListBean;
-
-import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  *

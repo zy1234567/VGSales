@@ -1,6 +1,5 @@
-package com.ztstech.vgmate.activitys.question;
+package com.ztstech.vgmate.activitys.question.create_question;
 
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -13,14 +12,15 @@ import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author smm
  * @date 2017/11/16
  */
 
-public class CreateQuestionActivity extends MVPActivity {
+public class CreateQuestionActivity extends MVPActivity<CreateQuestionContact.Presenter> implements CreateQuestionContact.View {
+
+    public static final int RESULT_CREATE = 0x002;
 
     @BindView(R.id.et_content)
     EditText etContent;
@@ -57,7 +57,7 @@ public class CreateQuestionActivity extends MVPActivity {
             @Override
             public void onClick(View v) {
                 if (etContent.getText().length() != 0){
-                    finish();
+                    mPresenter.submit(etContent.getText().toString(),etOther.getText().toString());
                 }else {
                     ToastUtil.toastCenter(CreateQuestionActivity.this,"您还没有添加问题描述");
                 }
@@ -66,8 +66,8 @@ public class CreateQuestionActivity extends MVPActivity {
     }
 
     @Override
-    protected BasePresenter initPresenter() {
-        return null;
+    protected CreateQuestionContact.Presenter initPresenter() {
+        return new CreateQuestionPresenter(this);
     }
 
     @Override
@@ -75,4 +75,15 @@ public class CreateQuestionActivity extends MVPActivity {
         return R.layout.activity_create_question;
     }
 
+    @Override
+    public void onSubmitSucceed() {
+        ToastUtil.toastCenter(this,"提交成功!");
+        setResult(RESULT_CREATE);
+        finish();
+    }
+
+    @Override
+    public void onSubmitFailed(String errmsg) {
+        ToastUtil.toastCenter(this,"创建问题失败:".concat(errmsg));
+    }
 }

@@ -2,6 +2,7 @@ package com.ztstech.vgmate.activitys.mate_approve.adapter;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,6 +14,7 @@ import com.ztstech.vgmate.activitys.user_info.edit_info.EditInfoActivity;
 import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.WaitApproveMateListBean;
 import com.ztstech.vgmate.utils.SexUtils;
+import com.ztstech.vgmate.utils.TimeUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -44,6 +46,8 @@ public class WaitApproveViewHolder extends SimpleViewHolder<WaitApproveMateListB
     TextView tvIntroName;
     @BindView(R.id.tv_detail)
     TextView tvDetail;
+    @BindView(R.id.tv_time)
+    TextView tvTime;
 
     private MyClickListener clickListener;
 
@@ -69,6 +73,13 @@ public class WaitApproveViewHolder extends SimpleViewHolder<WaitApproveMateListB
         tvAge.setText(String.valueOf(data.age));
         tvDutyName.setText(data.responsible);
         tvIntroName.setText(data.fname);
+        if (!TextUtils.isEmpty(data.lastuptime)){
+            tvTime.setText(TimeUtils.InformationTime(data.lastuptime));
+            tvTime.setVisibility(View.VISIBLE);
+        }else {
+            tvTime.setVisibility(View.GONE);
+        }
+
         Glide.with(getContext())
                 .load(data.picurl)
                 .error(R.mipmap.ic_launcher)

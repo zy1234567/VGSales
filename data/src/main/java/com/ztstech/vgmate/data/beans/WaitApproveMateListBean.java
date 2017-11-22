@@ -57,5 +57,6 @@ public class WaitApproveMateListBean extends BaseRespBean {
         public int age;
         public String picurl;
         public String sex;
+        public String lastuptime;
     }
 }

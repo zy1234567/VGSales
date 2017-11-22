@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.ztstech.vgmate.activitys.question.QuestionListFragment;
+import com.ztstech.vgmate.activitys.question.question_list.QuestionListFragment;
 
 /**
  * Created by smm on 2017/11/16.
@@ -22,9 +22,11 @@ public class QuestionViewPgerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if (position == 0) {
             QuestionListFragment fragment = QuestionListFragment.newInstance();
+            fragment.setShowType(false);
             return fragment;
         }else {
             QuestionListFragment fragment = QuestionListFragment.newInstance();
+            fragment.setShowType(true);
             return fragment;
         }
     }

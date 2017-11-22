@@ -87,6 +87,7 @@
         android:layout_toRightOf="@+id/tv_duty_hint"
         android:layout_alignParentBottom="true"/>
 
+
     <TextView
         android:id="@+id/tv_intro_hint"
         android:layout_width="wrap_content"
@@ -108,18 +109,34 @@
         android:layout_marginBottom="10dp"
         android:layout_toRightOf="@+id/tv_intro_hint"
         android:layout_alignParentBottom="true"/>
-    <TextView
-        android:id="@+id/tv_detail"
-        android:layout_width="54dp"
-        android:layout_height="22dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:gravity="center"
-        android:text="查看详情"
-        android:background="@drawable/bg_c_2_s_100_f_109"
-        android:textSize="@dimen/text_8"
-        android:textColor="@color/color_100"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="12dp"/>
+        android:layout_marginRight="12dp">
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/text_7"
+            android:textColor="@color/color_102"
+            android:layout_marginBottom="10dp" />
+        <TextView
+            android:id="@+id/tv_detail"
+            android:layout_width="54dp"
+            android:layout_height="22dp"
+            android:gravity="center"
+            android:text="查看详情"
+            android:background="@drawable/bg_c_2_s_100_f_109"
+            android:textSize="@dimen/text_8"
+            android:textColor="@color/color_100"
+            />
+    </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
