@@ -14,7 +14,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
-import com.ztstech.vgmate.activitys.question.QuestDetailActivity;
+import com.ztstech.vgmate.activitys.question.question_detail.QuestDetailActivity;
 import com.ztstech.vgmate.activitys.question.adapter.QuestionListAdapter;
 import com.ztstech.vgmate.activitys.question.adapter.QuestionViewHolder;
 import com.ztstech.vgmate.activitys.question.create_question.CreateQuestionActivity;
@@ -22,7 +22,6 @@ import com.ztstech.vgmate.data.beans.QuestionListBean;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.IOSStyleDialog;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -122,8 +121,9 @@ public class QuestionListFragment extends MVPFragment<QuestionListContact.Presen
     }
 
     @Override
-    public void onItemClick(String quid) {
+    public void onItemClick(QuestionListBean.ListBean bean) {
         Intent intent = new Intent(getActivity(),QuestDetailActivity.class);
+        intent.putExtra(QuestDetailActivity.KEY_BEAN,bean);
         startActivity(intent);
     }
 

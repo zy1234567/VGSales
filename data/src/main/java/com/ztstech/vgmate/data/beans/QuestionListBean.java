@@ -1,5 +1,6 @@
 package com.ztstech.vgmate.data.beans;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  * @date 2017/11/16
  */
 
-public class QuestionListBean extends BaseRespBean {
+public class QuestionListBean extends BaseRespBean implements Serializable{
 
 
     /**
@@ -35,7 +36,7 @@ public class QuestionListBean extends BaseRespBean {
         public int startRow;
     }
 
-    public static class ListBean {
+    public static class ListBean implements Serializable{
         /**
          * delflg : 00
          * uid : 0a8822da7cb84ebe9ece458dc909a6b1

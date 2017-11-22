@@ -15,9 +15,11 @@
 
     </com.ztstech.vgmate.weigets.TopBar>
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/top_bar"
+        android:fillViewport="true"
         android:scrollbars="none">
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,7 +32,7 @@
                 android:orientation="vertical"
                 android:layout_marginTop="10dp">
                 <TextView
-                    android:id="@+id/tv_title"
+                    android:id="@+id/tv_describe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="在跟机构沟通中，大家遇到了什么困难都是如何解决的呢？跟大家取点儿经。"
@@ -60,67 +62,12 @@
                 android:textColor="@color/color_102"
                 android:layout_marginTop="12dp"
                 android:layout_marginLeft="12dp"/>
-            <RelativeLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/img_head"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@mipmap/ic_launcher"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginTop="10dp"/>
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="名字"
-                    android:textSize="@dimen/text_5"
-                    android:textColor="@color/color_100"
-                    android:layout_toRightOf="@+id/img_head"
-                    android:layout_alignTop="@+id/img_head"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="4dp"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2017-07-21  18:24"
-                    android:textSize="@dimen/text_8"
-                    android:textColor="@color/color_102"
-                    android:layout_toRightOf="@+id/img_head"
-                    android:layout_alignBottom="@+id/img_head"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginLeft="10dp"/>
-                <TextView
-                    android:id="@+id/tv_prise_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5"
-                    android:textSize="@dimen/text_8"
-                    android:layout_alignBottom="@+id/tv_name"
-                    android:layout_marginRight="12dp"
-                    android:textColor="@color/color_102"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="5dp"/>
-                <ImageView
-                    android:id="@+id/img_prise"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/zan_g"
-                    android:layout_toLeftOf="@+id/tv_prise_num"
-                    android:layout_alignBottom="@+id/tv_prise_num"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="每个城市或区县务必具备一定用户基础才具备收费可能，相对于尽快获得收益，最重要是让当地的用户都使用起来，有了用户基础，客户才有交钱的积极性，才有用户粘性和不可或缺性。"
-                    android:textSize="@dimen/text_6"
-                    android:textColor="@color/color_101"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginLeft="64dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_below="@+id/img_head"/>
-            </RelativeLayout>
+
+            </android.support.v7.widget.RecyclerView>
         </LinearLayout>
 
     </ScrollView>
@@ -128,8 +75,59 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
-        <include
-            layout="@layout/layout_comment_bar" />
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="45dp"
+            android:background="@color/color_108">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_104" />
+
+            <EditText
+                android:textColor="@color/color_100"
+                android:textSize="@dimen/text_5"
+                android:layout_marginTop="6.5dp"
+                android:layout_marginBottom="6.5dp"
+                android:id="@+id/et_comment"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_c_16_f_109"
+                android:minHeight="32dp"
+                android:layout_marginRight="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <RelativeLayout
+                android:id="@+id/rl_comment"
+                android:layout_centerVertical="true"
+                android:layout_alignTop="@id/et_comment"
+                android:layout_alignBottom="@id/et_comment"
+                android:minHeight="32dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:visibility="visible"
+                    android:id="@+id/tv_submit"
+                    android:textColor="@drawable/bg_color_enable_001_disable_103"
+                    android:textSize="@dimen/text_4"
+                    android:text="发布"
+                    android:layout_centerInParent="true"
+                    android:padding="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
     </LinearLayout>
 
 </RelativeLayout>

@@ -192,6 +192,7 @@ public class EditInfoActivity extends MVPActivity<InfoContract.Presenter> implem
             llApprove.setVisibility(View.VISIBLE);
             mPresenter.loadMateModule(bean);
             setEditPrivateInfoEnabled(false);
+            topBar.setTitle("销售审批");
         }else {
             // 如果是完善自己资料界面
             topBar.getRightTextView().setVisibility(View.VISIBLE);

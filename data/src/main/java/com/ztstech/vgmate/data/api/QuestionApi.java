@@ -1,5 +1,6 @@
 package com.ztstech.vgmate.data.api;
 
+import com.ztstech.vgmate.data.beans.AnwserListBean;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.QuestionListBean;
 import com.ztstech.vgmate.data.constants.NetConstants;
@@ -42,9 +43,10 @@ public interface QuestionApi {
      * 查询问题答案列表
      * @param queid (问题id)
      */
-    @POST("exempt/AppSaleGetQuestionDetail")
-    Observable<BaseRespBean> getQuestionAnwserList(
+    @GET("exempt/AppSaleGetQuestionDetail")
+    Observable<AnwserListBean> getQuestionAnwserList(
             @Query("queid") String queid,
+            @Query("pageNo") int pageNo,
             @Query(NetConstants.PARAM_AUTHID) String authId);
 
     /**
@@ -85,6 +87,20 @@ public interface QuestionApi {
     @POST("exempt/AppSaleDeleteAnswer")
     Observable<BaseRespBean> deleteAnswer(
             @Query("ansid") String ansid,
+            @Query(NetConstants.PARAM_AUTHID) String authId);
+
+    /**
+     * 删除答案
+     * @param queid (回答的问题id),
+      @param queuid (被回答人的uid),
+      @param content (内容),
+     * @return
+     */
+    @POST("exempt/AppSaleSaveAnswer")
+    Observable<BaseRespBean> createAnswer(
+            @Query("queid") String queid,
+            @Query("queuid") String queuid,
+            @Query("content") String content,
             @Query(NetConstants.PARAM_AUTHID) String authId);
 
 }

@@ -2,7 +2,6 @@ package com.ztstech.vgmate.activitys.question;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
@@ -14,11 +13,12 @@ import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.question.adapter.QuestionListAdapter;
 import com.ztstech.vgmate.activitys.question.adapter.QuestionViewHolder;
+import com.ztstech.vgmate.activitys.question.question_detail.QuestDetailActivity;
+import com.ztstech.vgmate.data.beans.QuestionListBean;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.IOSStyleDialog;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -65,8 +65,9 @@ public class SearchQuestActivity extends MVPActivity implements QuestionViewHold
     }
 
     @Override
-    public void onItemClick(String qid) {
+    public void onItemClick(QuestionListBean.ListBean bean) {
         Intent intent = new Intent(this,QuestDetailActivity.class);
+        intent.putExtra(QuestDetailActivity.KEY_BEAN,bean);
         startActivity(intent);
     }
 

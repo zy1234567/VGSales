@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.QuestionListBean;
@@ -49,20 +50,23 @@ public class QuestionViewHolder extends SimpleViewHolder<QuestionListBean.ListBe
         rlBody.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callBack.onItemClick(data.queid);
+                callBack.onItemClick(data);
             }
         });
         rlBody.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                callBack.onItemLongClick(data.queid);
+                if(UserRepository.getInstance().getUser().canEditArticle()
+                        || TextUtils.equals(data.uid,UserRepository.getInstance().getUser().getUserBean().info.uid)){
+                    callBack.onItemLongClick(data.queid);
+                }
                 return false;
             }
         });
     }
 
     public interface ClickCallBack{
-        void onItemClick(String qid);
+        void onItemClick(QuestionListBean.ListBean bean);
         void onItemLongClick(String qid);
     }
 
