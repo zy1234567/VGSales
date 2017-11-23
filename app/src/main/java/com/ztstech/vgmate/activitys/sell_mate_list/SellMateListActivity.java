@@ -1,35 +1,46 @@
 package com.ztstech.vgmate.activitys.sell_mate_list;
 
-import android.annotation.TargetApi;
-import android.graphics.Bitmap;
-import android.os.Build;
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.webkit.CookieManager;
-import android.webkit.CookieSyncManager;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 
-import com.ztstech.appdomain.constants.Constants;
-import com.ztstech.appdomain.repository.UserRepository;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 import com.ztstech.vgmate.R;
-import com.ztstech.vgmate.base.BaseActivity;
-import com.ztstech.vgmate.data.constants.NetConstants;
+import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.activitys.sell_mate_list.adapter.MateListAdapter;
+import com.ztstech.vgmate.data.beans.MatelistBean;
+import com.ztstech.vgmate.utils.ToastUtil;
+import com.ztstech.vgmate.weigets.BottomDoubleSelectDialog;
+import com.ztstech.vgmate.weigets.TopBar;
+
+import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * 销售伙伴列表
+ *
+ * @author smm
  */
-public class SellMateListActivity extends BaseActivity {
+public class SellMateListActivity extends MVPActivity<SellMateContact.Presenter> implements SellMateContact.View {
 
-    @BindView(R.id.web_view)
-    WebView webView;
-    @BindView(R.id.pb)
-    ProgressBar pb;
+    public static final String KEY_MATE_NUM = "key_mate_num";
+
+    @BindView(R.id.recycler)
+    RecyclerView recyclerView;
+    @BindView(R.id.top_bar)
+    TopBar topBar;
+
+    MateListAdapter adapter;
+    @BindView(R.id.srl)
+    SmartRefreshLayout srl;
+    @BindView(R.id.ll_no_data)
+    LinearLayout llNoData;
 
     @Override
     protected int getLayoutRes() {
@@ -39,69 +50,74 @@ public class SellMateListActivity extends BaseActivity {
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
-        initWebView();
-        webView.loadUrl(NetConstants.BASE_URL + Constants.MATE_LIST_URL);
-        setCookie();
+        topBar.setTitle("销售伙伴".concat("(").concat(getIntent().getStringExtra(KEY_MATE_NUM)).concat(")"));
+        adapter = new MateListAdapter();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+        mPresenter.loadCacheData();
+        srl.autoRefresh();
+        topBar.getRightImage().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFilterDialog();
+            }
+        });
+        srl.setOnRefreshListener(new OnRefreshLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                mPresenter.appendData();
+            }
+
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                mPresenter.loadNetData();
+            }
+        });
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void initWebView() {
-        WebSettings settings = webView.getSettings();
-        settings.setDomStorageEnabled(true);
-        settings.setJavaScriptEnabled(true);
-        settings.setLoadWithOverviewMode(true);
-        settings.setUseWideViewPort(true);
-        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
-        settings.setSaveFormData(false);
-        settings.setBuiltInZoomControls(true);
-        settings.setSavePassword(false);
-        settings.setSupportZoom(false);
-        settings.setDefaultTextEncodingName("utf-8");
-        webView.setVerticalScrollBarEnabled(false);
-        webView.setHorizontalScrollBarEnabled(false);
-        settings.setBlockNetworkImage(false);
-        webView.setInitialScale(99); //这句话是解决s8上左右晃动的问题
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+
+    @Override
+    protected SellMateContact.Presenter initPresenter() {
+        return new SellMatePresenter(this);
+    }
+
+    private void showFilterDialog() {
+        new BottomDoubleSelectDialog(this, "查看全部", "只看我的直属伙伴", new BottomDoubleSelectDialog.ClickListener() {
+            @Override
+            public void onClickOne() {
+
+            }
+
+            @Override
+            public void onClickTwo() {
+
+            }
+        });
+    }
+
+    @Override
+    public void setListData(List<MatelistBean.ListBean> listData) {
+        srl.finishLoadmore();
+        srl.finishRefresh();
+        adapter.setListData(listData);
+        adapter.notifyDataSetChanged();
+        if (listData.size() == 0){
+            srl.setVisibility(View.GONE);
+            llNoData.setVisibility(View.VISIBLE);
+        }else {
+            srl.setVisibility(View.VISIBLE);
+            llNoData.setVisibility(View.GONE);
         }
-
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                return false;
-            }
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                pb.setVisibility(View.VISIBLE);
-                super.onPageStarted(view, url, favicon);
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                pb.setVisibility(View.GONE);
-                super.onPageFinished(view, url);
-            }
-
-        });
-        webView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                pb.setProgress(newProgress);
-                super.onProgressChanged(view, newProgress);
-            }
-        });
     }
 
-    /**
-     * 设置访问h5的加密cookie
-     */
-    private void setCookie() {
-        CookieSyncManager.createInstance(this);
-        CookieManager cookieManager = CookieManager.getInstance();
-        cookieManager.setCookie(NetConstants.BASE_URL, NetConstants.PARAM_AUTHID.concat("=").concat(UserRepository.getInstance().getAuthId()));
-        cookieManager.setCookie(NetConstants.BASE_URL, "type=01");
-        CookieSyncManager.getInstance().sync();
+    @Override
+    public void setNoMoreData(boolean noMoreData) {
+        srl.setEnableAutoLoadmore(!noMoreData);
+    }
+
+    @Override
+    public void showError(String msg) {
+        ToastUtil.toastCenter(this,msg);
     }
 
 }

@@ -5,6 +5,7 @@
         <attr name="barTitle" format="string" />
         <attr name="srcLeft" format="reference" />
         <attr name="srcRight" format="reference" />
+        <attr name="srcRightTwo" format="reference" />
         <attr name="showBackNav" format="boolean" />
         <attr name="textLeft" format="string" />
         <attr name="textRight" format="string" />

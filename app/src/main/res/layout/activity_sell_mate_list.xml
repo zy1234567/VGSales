@@ -11,20 +11,42 @@
         android:id="@+id/top_bar"
         app:barTitle="销售伙伴"
         app:showBackNav="true"
+        app:backgroundColor="@color/color_109"
+        app:srcRight="@mipmap/shaixuan_ico"
+        app:srcRightTwo="@mipmap/search_ico_sales"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </com.ztstech.vgmate.weigets.TopBar>
-    <ProgressBar
-        android:id="@+id/pb"
-        style="?android:attr/progressBarStyleHorizontal"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/progress_bar_h_1"
-        android:max="100"
-        android:progressDrawable="@drawable/webview_pb_states" />
-    <WebView
-        android:id="@+id/web_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:background="@color/color_109">
 
-    </WebView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    <LinearLayout
+        android:id="@+id/ll_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/no_share"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_5"
+            android:textColor="@color/color_103"
+            android:text="暂无数据"/>
+    </LinearLayout>
 </LinearLayout>

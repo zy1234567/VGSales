@@ -66,6 +66,7 @@ public class QuestionListFragment extends MVPFragment<QuestionListContact.Presen
         adapter = new QuestionListAdapter(this);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         recycler.setAdapter(adapter);
+        mPresenter.loadCacheData(myflg);
         requestNewData();
         smartRefreshLayout.setEnableRefresh(false);
         smartRefreshLayout.setOnRefreshListener(new OnRefreshLoadmoreListener() {

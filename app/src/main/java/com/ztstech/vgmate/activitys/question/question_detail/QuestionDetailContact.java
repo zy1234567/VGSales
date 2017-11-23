@@ -24,13 +24,16 @@ public class QuestionDetailContact {
         String getQuid();
 
         void onReplySuccess();
+
+        void onDeleteSuccess();
     }
 
     interface Presenter extends BasePresenter<View>{
         void loadListData();
         void appendData();
         void reply();
-        void deleteAnwser();
+        void deleteAnwser(String ansid);
+        void priseAnwser(AnwserListBean.ListBean data);
     }
 
 }

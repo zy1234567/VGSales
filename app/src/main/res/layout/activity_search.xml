@@ -36,6 +36,8 @@
                 android:background="@drawable/bg_c_15_f_107"
                 android:textColor="@color/color_100"
                 android:hint="请输入问题关键字"
+                android:singleLine="true"
+                android:imeOptions="actionSearch"
                 android:textSize="@dimen/text_6"/>
         </LinearLayout>
         <TextView
@@ -56,4 +58,23 @@
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/ll_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/no_share"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_5"
+            android:textColor="@color/color_103"
+            android:text="没有搜索结果"/>
+    </LinearLayout>
 </LinearLayout>

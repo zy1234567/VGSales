@@ -1,5 +1,6 @@
 package com.ztstech.vgmate.activitys.question.question_detail;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -13,12 +14,14 @@ import android.widget.TextView;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.activitys.question.adapter.AnwserViewHolder;
 import com.ztstech.vgmate.activitys.question.adapter.AnwsetListAdapter;
 import com.ztstech.vgmate.data.beans.AnwserListBean;
 import com.ztstech.vgmate.data.beans.QuestionListBean;
 import com.ztstech.vgmate.utils.TimeUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.AutoLinearLayoutManager;
+import com.ztstech.vgmate.weigets.IOSStyleDialog;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import java.util.List;
@@ -34,7 +37,7 @@ import butterknife.OnClick;
  * @date 2017/11/16
  */
 
-public class QuestDetailActivity extends MVPActivity<QuestionDetailContact.Presenter> implements QuestionDetailContact.View {
+public class QuestDetailActivity extends MVPActivity<QuestionDetailContact.Presenter> implements QuestionDetailContact.View,AnwserViewHolder.ClickCallBack {
 
     public static final String KEY_BEAN = "bean";
 
@@ -71,7 +74,7 @@ public class QuestDetailActivity extends MVPActivity<QuestionDetailContact.Prese
             tvDes.setText(bean.descrption);
             tvTime.setText(TimeUtils.InformationTime(bean.createtime));
         }
-        adapter = new AnwsetListAdapter();
+        adapter = new AnwsetListAdapter(this);
         recycler.setLayoutManager(new AutoLinearLayoutManager(this));
         recycler.setAdapter(adapter);
         recycler.setNestedScrollingEnabled(false);
@@ -145,7 +148,30 @@ public class QuestDetailActivity extends MVPActivity<QuestionDetailContact.Prese
 
     @Override
     public void onReplySuccess() {
+        etComment.setText("");
+        etComment.clearFocus();
         ToastUtil.toastCenter(this,"回复成功");
         mPresenter.loadListData();
+    }
+
+    @Override
+    public void onDeleteSuccess() {
+        ToastUtil.toastCenter(this,"删除成功");
+        mPresenter.loadListData();
+    }
+
+    @Override
+    public void onLongClick(final AnwserListBean.ListBean data) {
+        new IOSStyleDialog(this, "确认删除此条回复？", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mPresenter.deleteAnwser(data.ansid);
+            }
+        }).show();
+    }
+
+    @Override
+    public void onClickPrise(AnwserListBean.ListBean data) {
+        mPresenter.priseAnwser(data);
     }
 }

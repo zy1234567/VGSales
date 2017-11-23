@@ -19,6 +19,8 @@ public class QuestionListAdapter extends SimpleRecyclerAdapter<QuestionListBean.
 
     private QuestionViewHolder.ClickCallBack callBack;
 
+    private QuestionViewHolder questionViewHolder;
+
     /** 搜索列表搜索的词 */
     private String searchText;
 
@@ -38,5 +40,9 @@ public class QuestionListAdapter extends SimpleRecyclerAdapter<QuestionListBean.
                 .inflate(R.layout.item_question,parent,false),searchText,callBack);
     }
 
+    public void setSearchText(String keyword){
+        this.searchText = keyword;
+//        questionViewHolder.setSearchText(keyword);
+    }
 
 }

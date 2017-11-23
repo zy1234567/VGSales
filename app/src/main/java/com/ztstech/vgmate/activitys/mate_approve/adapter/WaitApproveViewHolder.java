@@ -103,7 +103,7 @@ public class WaitApproveViewHolder extends SimpleViewHolder<WaitApproveMateListB
             if (v == tvDetail){
                 callBack.clickDetail(bean.uid);
             }else if (v == tvPhone){
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:".concat("15901088314")));
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:".concat(bean.phone)));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getContext().startActivity(intent);
             }

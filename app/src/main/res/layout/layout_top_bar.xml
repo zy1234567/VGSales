@@ -87,9 +87,16 @@
 
     <ImageView
         android:id="@+id/iv_right"
-        android:layout_width="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerInside" />
+    <ImageView
+        android:id="@+id/iv_right_two"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/iv_right"
         android:layout_centerVertical="true"
         android:scaleType="centerInside" />
 

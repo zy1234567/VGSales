@@ -56,7 +56,7 @@ public interface QuestionApi {
      * @param myquestion 我的问题 传"01"
      * @return
      */
-    @GET("exempt/AppSaleListQuestion")
+    @POST("exempt/AppSaleListQuestion")
     Observable<QuestionListBean> getQuestionList(
             @Query("keyword") String keyword,
             @Query("myquestion") String myquestion,

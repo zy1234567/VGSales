@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/top_bar"
+        android:layout_marginBottom="45dp"
         android:fillViewport="true"
         android:scrollbars="none">
         <LinearLayout
@@ -35,7 +36,7 @@
                     android:id="@+id/tv_describe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="在跟机构沟通中，大家遇到了什么困难都是如何解决的呢？跟大家取点儿经。"
+                    android:text=""
                     android:textSize="@dimen/text_3"
                     android:textColor="@color/color_100"
                     android:layout_marginTop="12dp"
@@ -119,10 +120,12 @@
                     android:textColor="@drawable/bg_color_enable_001_disable_103"
                     android:textSize="@dimen/text_4"
                     android:text="发布"
+                    android:gravity="center"
                     android:layout_centerInParent="true"
-                    android:padding="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent" />
 
 
             </RelativeLayout>

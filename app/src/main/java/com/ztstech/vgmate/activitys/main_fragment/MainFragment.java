@@ -168,7 +168,9 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
                 break;
             case R.id.rl_mate:
                 //销售伙伴
-                startActivity(new Intent(getActivity(), SellMateListActivity.class));
+                Intent intent = new Intent(getActivity(), SellMateListActivity.class);
+                intent.putExtra(SellMateListActivity.KEY_MATE_NUM,tvMateNum.getText().toString());
+                startActivity(intent);
                 break;
             case R.id.rl_custom:
                 //客户跟进

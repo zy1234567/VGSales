@@ -5,14 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_109">
-    <com.ztstech.vgmate.weigets.TopBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff"
-        android:id="@+id/top_bar"
-        app:barTitle="销售审批"
-        app:showBackNav="true"
-        ></com.ztstech.vgmate.weigets.TopBar>
+        <com.ztstech.vgmate.weigets.TopBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:id="@+id/top_bar"
+            app:srcRight="@mipmap/shaixuan_ico"
+            app:barTitle="销售审批"
+            app:showBackNav="true">
+        </com.ztstech.vgmate.weigets.TopBar>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="25dp"

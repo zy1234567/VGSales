@@ -1,8 +1,15 @@
 package com.ztstech.vgmate.activitys.question.question_list;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.text.TextUtils;
+
+import com.google.gson.Gson;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.appdomain.user_case.DeleteQuestion;
 import com.ztstech.appdomain.user_case.GetQuestionList;
 import com.ztstech.vgmate.activitys.PresenterImpl;
+import com.ztstech.vgmate.base.BaseApplicationLike;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.QuestionListBean;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
@@ -18,6 +25,8 @@ import java.util.List;
 
 public class QuestionListPresenter extends PresenterImpl<QuestionListContact.View> implements QuestionListContact.Presenter{
 
+    public static final String QUESTION_LIST = "question_list";
+
     private int currentpage = 1;
 
     private String keyword;
@@ -27,10 +36,25 @@ public class QuestionListPresenter extends PresenterImpl<QuestionListContact.Vie
 
     private List<QuestionListBean.ListBean> listBeen;
 
+    private SharedPreferences preferences;
 
     public QuestionListPresenter(QuestionListContact.View view) {
         super(view);
         listBeen = new ArrayList<>();
+        preferences = PreferenceManager.getDefaultSharedPreferences(BaseApplicationLike.getApplicationInstance());
+    }
+
+    @Override
+    public void loadCacheData(boolean myflg) {
+        String cachejson = preferences.getString(QUESTION_LIST + myflg +
+                UserRepository.getInstance().getUser().getUserBean().info.uid,"");
+        if (!TextUtils.isEmpty(cachejson)){
+            QuestionListBean questionListBean = new Gson().fromJson(cachejson,QuestionListBean.class);
+            if (questionListBean != null){
+                listBeen.addAll(questionListBean.list);
+                mView.setData(listBeen);
+            }
+        }
     }
 
     /**
@@ -39,7 +63,7 @@ public class QuestionListPresenter extends PresenterImpl<QuestionListContact.Vie
      * @param myflg 是否是查需那我的列表
      */
     @Override
-    public void loadData(String keyword,boolean myflg) {
+    public void loadData(final String keyword, final boolean myflg) {
         currentpage = 1;
         this.keyword = keyword;
         this.myflg = myflg;
@@ -50,6 +74,11 @@ public class QuestionListPresenter extends PresenterImpl<QuestionListContact.Vie
                 if (baseRespBean.isSucceed()){
                     if (currentpage == 1){
                         listBeen.clear();
+                        // 如果不是搜索界面就加入缓存
+                        if (!TextUtils.isEmpty(keyword)){
+                            preferences.edit().putString(QUESTION_LIST + myflg
+                                    + UserRepository.getInstance().getUser().getUserBean().info.uid,new Gson().toJson(baseRespBean)).apply();
+                        }
                     }
                     listBeen.addAll(baseRespBean.list);
                     mView.setData(listBeen);

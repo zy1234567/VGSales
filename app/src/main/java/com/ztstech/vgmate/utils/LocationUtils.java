@@ -74,6 +74,9 @@ public class LocationUtils {
      * @return
      */
     public static String getLocationNameByCode(String locationCode) {
+        if (nameCodeMap == null){
+            return "";
+        }
         for (Map.Entry<String, String> item : nameCodeMap.entrySet()) {
             if (TextUtils.equals(locationCode, item.getValue())) {
                 return item.getKey();
@@ -121,6 +124,9 @@ public class LocationUtils {
      */
     public static String getPName(@NonNull String areaCode) {
         String pCode = areaCode.substring(0, 2).concat("0000");
+        if (locationBeanList == null){
+            return "";
+        }
         for (LocationBean bean : locationBeanList) {
             if (bean.getSid().equals(pCode)) {
                 return bean.getSname();
@@ -137,6 +143,9 @@ public class LocationUtils {
     public static String getCName(@NonNull String areaCode) {
         String pCode = areaCode.substring(0, 2).concat("0000");
         String cCode = areaCode.substring(0, 4).concat("00");
+        if (locationBeanList == null){
+            return "";
+        }
         for (LocationBean locationBean : locationBeanList) {
             if (locationBean.getSid().equals(pCode)) {
                 //得到所在省
@@ -160,6 +169,9 @@ public class LocationUtils {
     public static String getAName(@NonNull String areaCode) {
         String pCode = areaCode.substring(0, 2).concat("0000");
         String cCode = areaCode.substring(0, 4).concat("00");
+        if (locationBeanList == null){
+            return "";
+        }
         for (LocationBean locationBean : locationBeanList) {
             if (locationBean.getSid().equals(pCode)) {
                 //得到所在省

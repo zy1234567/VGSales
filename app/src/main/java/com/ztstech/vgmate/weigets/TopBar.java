@@ -24,7 +24,7 @@ import com.ztstech.vgmate.R;
 public class TopBar extends FrameLayout {
 
     private View topView, searchView;
-    private ImageView imgRight, imgLeft;
+    private ImageView imgRight, imgRightTwo,imgLeft;
     private TextView tvTitle, tvLeft, tvRight, tvSearch;
 
     private String title, leftText, rightText, searchText;
@@ -52,6 +52,7 @@ public class TopBar extends FrameLayout {
         topView = LayoutInflater.from(getContext()).inflate(R.layout.layout_top_bar,
                 this, false);
         imgRight = topView.findViewById(R.id.iv_right);
+        imgRightTwo = topView.findViewById(R.id.iv_right_two);
         tvTitle = topView.findViewById(R.id.tv_title);
         imgLeft = topView.findViewById(R.id.iv_left);
         tvLeft = topView.findViewById(R.id.tv_left);
@@ -65,6 +66,7 @@ public class TopBar extends FrameLayout {
 
         int leftDrawableId = typedArray.getResourceId(R.styleable.TopBar_srcLeft, -1);
         int rightDrawableId = typedArray.getResourceId(R.styleable.TopBar_srcRight, -1);
+        int rightTwoDrawableId = typedArray.getResourceId(R.styleable.TopBar_srcRightTwo, -1);
         backgroundColor = typedArray.getColor(R.styleable.TopBar_backgroundColor, 0);
         colorLeft = typedArray.getColor(R.styleable.TopBar_colorLeft, 0);
         colorRight = typedArray.getColor(R.styleable.TopBar_colorRight, 0);
@@ -107,6 +109,10 @@ public class TopBar extends FrameLayout {
             imgRight.setImageResource(rightDrawableId);
         }
 
+        if (rightTwoDrawableId != -1) {
+            imgRightTwo.setImageResource(rightTwoDrawableId);
+        }
+
         //颜色为纯白色暂时无法显示
         if (colorLeft != 0) {
             imgLeft.setColorFilter(colorLeft);
@@ -114,6 +120,7 @@ public class TopBar extends FrameLayout {
         }
         if (colorRight != 0) {
             imgRight.setColorFilter(colorRight);
+            imgRightTwo.setColorFilter(colorRight);
             tvRight.setTextColor(colorRight);
         }
 
@@ -146,6 +153,10 @@ public class TopBar extends FrameLayout {
 
     public ImageView getRightImage() {
         return imgRight;
+    }
+
+    public ImageView getRightTwoImage() {
+        return imgRightTwo;
     }
 
     public ImageView getLeftImage() {

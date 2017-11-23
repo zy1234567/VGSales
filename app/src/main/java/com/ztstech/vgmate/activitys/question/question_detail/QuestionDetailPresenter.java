@@ -1,8 +1,15 @@
 package com.ztstech.vgmate.activitys.question.question_detail;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import com.ztstech.appdomain.user_case.CreateAnwser;
+import com.ztstech.appdomain.user_case.DeleteAnwser;
 import com.ztstech.appdomain.user_case.GetAnwserList;
+import com.ztstech.appdomain.user_case.PriseAnwser;
 import com.ztstech.vgmate.activitys.PresenterImpl;
+import com.ztstech.vgmate.activitys.question.adapter.AnwserViewHolder;
+import com.ztstech.vgmate.base.BaseApplicationLike;
 import com.ztstech.vgmate.data.beans.AnwserListBean;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
@@ -11,7 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by smm on 2017/11/22.
+ *
+ * @author smm
+ * @date 2017/11/22
  */
 
 public class QuestionDetailPresenter extends PresenterImpl<QuestionDetailContact.View> implements QuestionDetailContact.Presenter{
@@ -76,7 +85,45 @@ public class QuestionDetailPresenter extends PresenterImpl<QuestionDetailContact
     }
 
     @Override
-    public void deleteAnwser() {
+    public void deleteAnwser(String ansid) {
+        new BasePresenterSubscriber<BaseRespBean>(mView){
 
+            @Override
+            protected void childNext(BaseRespBean baseRespBean) {
+                if (baseRespBean.isSucceed()){
+                    mView.onDeleteSuccess();
+                }else {
+                    mView.showError("删除回复出错：".concat(baseRespBean.errmsg));
+                }
+            }
+
+            @Override
+            protected void childError(Throwable e) {
+                mView.showError("删除回复出错：".concat(e.getMessage()));
+            }
+        }.run(new DeleteAnwser(ansid).run());
     }
+
+    @Override
+    public void priseAnwser(AnwserListBean.ListBean data) {
+        String status = AnwserViewHolder.STATUS_PRISE.equals(data.likeStatus) ? "00" : "01";
+        new BasePresenterSubscriber<BaseRespBean>(mView,false){
+
+            @Override
+            protected void childNext(BaseRespBean baseRespBean) {
+                if (baseRespBean.isSucceed()){
+
+                }else {
+                    mView.showError(baseRespBean.errmsg);
+                }
+            }
+
+            @Override
+            protected void childError(Throwable e) {
+                mView.showError("点赞出错：".concat(e.getMessage()));
+            }
+        }.run(new PriseAnwser(status,data.ansid,data.ansPublishUid).run());
+    }
+
+
 }

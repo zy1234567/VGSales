@@ -18,6 +18,8 @@ import com.ztstech.vgmate.activitys.user_info.edit_info.EditInfoActivity;
 import com.ztstech.vgmate.data.beans.UnApproveMateBean;
 import com.ztstech.vgmate.data.beans.WaitApproveMateListBean;
 import com.ztstech.vgmate.utils.ToastUtil;
+import com.ztstech.vgmate.weigets.BottomDoubleSelectDialog;
+import com.ztstech.vgmate.weigets.TopBar;
 
 import java.util.List;
 
@@ -41,6 +43,8 @@ public class UnApproveMateListActivity extends MVPActivity<UnApproveMateContact.
     SmartRefreshLayout refreshLayout;
     @BindView(R.id.ll_no_data)
     LinearLayout llNoData;
+    @BindView(R.id.top_bar)
+    TopBar topBar;
 
     /** 所点击的查看详情的销售id */
     private String saleid;
@@ -74,6 +78,13 @@ public class UnApproveMateListActivity extends MVPActivity<UnApproveMateContact.
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
                 mPresenter.appendData();
+            }
+        });
+
+        topBar.getRightImage().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFilterDialog();
             }
         });
     }
@@ -119,4 +130,19 @@ public class UnApproveMateListActivity extends MVPActivity<UnApproveMateContact.
         this.saleid = saleid;
         mPresenter.findMateDetail(saleid);
     }
+
+    private void showFilterDialog(){
+        new BottomDoubleSelectDialog(this, "查看全部", "只看我的直属伙伴", new BottomDoubleSelectDialog.ClickListener() {
+            @Override
+            public void onClickOne() {
+
+            }
+
+            @Override
+            public void onClickTwo() {
+
+            }
+        });
+    }
+
 }

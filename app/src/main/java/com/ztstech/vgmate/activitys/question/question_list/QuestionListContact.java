@@ -30,6 +30,9 @@ public interface QuestionListContact {
     }
 
     interface Presenter extends BasePresenter<View> {
+
+        void loadCacheData(boolean myflg);
+
         void loadData(String keyword,boolean myflg);
 
         void appendData();
