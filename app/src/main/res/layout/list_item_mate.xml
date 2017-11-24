@@ -62,7 +62,7 @@
             android:textSize="@dimen/text_4"
             android:textColor="@color/color_100"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="11dp"
             android:layout_toRightOf="@+id/img_head"/>
         <LinearLayout
             android:id="@+id/age_layout"
@@ -71,7 +71,7 @@
             android:background="@drawable/zts_alter_sex_man"
             android:gravity="center_vertical"
             android:layout_toRightOf="@+id/tv_name"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="14dp"
             android:layout_marginLeft="4dp"
             android:orientation="horizontal">
 
@@ -100,8 +100,8 @@
             android:layout_height="wrap_content"
             android:text="常驻地："
             android:layout_marginLeft="10dp"
-            android:layout_below="@+id/tv_name"
-            android:layout_marginTop="-1.5dp"
+            android:layout_above="@+id/tv_duty_hint"
+            android:layout_marginBottom="1dp"
             android:layout_toRightOf="@+id/img_head"
             android:textColor="@color/color_102"
             android:textSize="@dimen/text_7" />
@@ -110,8 +110,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="北京市"
-            android:layout_marginTop="-1.5dp"
-            android:layout_below="@+id/tv_name"
+            android:layout_marginBottom="1dp"
+            android:layout_above="@+id/tv_duty_hint"
             android:layout_toRightOf="@+id/tv_address_hint"
             android:textColor="@color/color_100"
             android:textSize="@dimen/text_7" />
@@ -167,7 +167,7 @@
             android:textSize="@dimen/text_9"
             android:textColor="@color/color_004"
             android:layout_marginLeft="4dp"
-            android:layout_marginTop="15.5dp"
+            android:layout_marginTop="14.5dp"
             android:layout_alignBaseline="@+id/age_layout"
             android:layout_toRightOf="@+id/age_layout" />
     </RelativeLayout>

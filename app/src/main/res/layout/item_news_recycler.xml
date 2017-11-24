@@ -4,7 +4,8 @@
     android:layout_height="103dp"
     android:paddingLeft="12dp"
     android:paddingRight="12dp"
-    android:paddingTop="15dp">
+    android:paddingTop="15dp"
+    android:background="@drawable/ll_select_normal_001_to_006">
 
 
     <ImageView

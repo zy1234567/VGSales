@@ -86,6 +86,10 @@ public class OrgFollowListFragment extends MVPFragment<OrgFollowContact.Presente
 
     @Override
     public void setData(List<OrgFollowlistBean.ListBean> listData) {
+        if (smartRefreshLayout.isLoading()){
+            smartRefreshLayout.finishLoadmore();
+            smartRefreshLayout.finishRefresh();
+        }
         adapter.setListData(listData);
         adapter.notifyDataSetChanged();
         if (listData.size() == 0){

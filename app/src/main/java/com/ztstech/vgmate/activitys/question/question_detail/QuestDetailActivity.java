@@ -7,10 +7,15 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.MVPActivity;
@@ -57,6 +62,8 @@ public class QuestDetailActivity extends MVPActivity<QuestionDetailContact.Prese
     RelativeLayout rlComment;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
+    @BindView(R.id.ll_no_data)
+    LinearLayout llNoData;
 
     /** 所要显示的问题id */
     private String qid;
@@ -93,6 +100,20 @@ public class QuestDetailActivity extends MVPActivity<QuestionDetailContact.Prese
                 }
             }
         });
+
+//        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+//            @Override
+//            public void onRefresh(RefreshLayout refreshlayout) {
+//                mPresenter.loadListData();
+//            }
+//        });
+
+//        smartRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+//            @Override
+//            public void onLoadmore(RefreshLayout refreshlayout) {
+//                mPresenter.appendData();
+//            }
+//        });
     }
 
     @Override
@@ -118,6 +139,13 @@ public class QuestDetailActivity extends MVPActivity<QuestionDetailContact.Prese
     public void setListData(List<AnwserListBean.ListBean> listData) {
         adapter.setListData(listData);
         adapter.notifyDataSetChanged();
+        if (listData.size() == 0){
+            recycler.setVisibility(View.GONE);
+            llNoData.setVisibility(View.VISIBLE);
+        }else {
+            recycler.setVisibility(View.VISIBLE);
+            llNoData.setVisibility(View.GONE);
+        }
     }
 
     @Override

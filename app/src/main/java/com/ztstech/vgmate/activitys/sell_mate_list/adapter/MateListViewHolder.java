@@ -88,13 +88,19 @@ public class MateListViewHolder extends SimpleViewHolder<MatelistBean.ListBean> 
         tvPhone.setText(data.phone);
         tvAddress.setText(LocationUtils.getFormedString(data.district));
         tvTime.setText("最近登录:".concat(TimeUtils.InformationTime(data.lastlogintime)));
-        tvDutyName.setText(data.zerenren);
+        /** 责任人 */
+        tvDutyName.setText(data.principal);
+        /** 介绍人 */
         tvIntroName.setText(data.oname);
         tvDegree.setText("周登录:".concat(String.valueOf(data.weeklogdays).concat("次")));
         tvDay.setText("成为伙伴:".concat(String.valueOf(data.todays).concat("天")));
+        /** 客户跟进 */
         tvNumOrg.setText(String.valueOf(data.budgets).concat("家"));
-        tvNumMateFollow.setText(String.valueOf(data.firstcnt).concat("人"));
-        tvNumMateFollow.setText(String.valueOf(data.firstbudgets).concat("家"));
+        /** 邀请伙伴 */
+        tvNumInviteMate.setText(String.valueOf(data.firstcnt).concat("人"));
+        /** 伙伴跟进 */
+        tvNumMateFollow.setText(String.valueOf(data.firstbudgets).concat("人"));
+        /** 预计收入 */
         tvNumMoney.setText("¥".concat(String.valueOf(data.maxmoney)));
         tvPhone.setOnClickListener(new View.OnClickListener() {
             @Override

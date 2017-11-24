@@ -61,7 +61,27 @@ public class QuestionDetailPresenter extends PresenterImpl<QuestionDetailContact
 
     @Override
     public void appendData() {
+        currentpage ++;
+        new BasePresenterSubscriber<AnwserListBean>(mView){
 
+            @Override
+            protected void childNext(AnwserListBean anwserListBean) {
+                if (anwserListBean.isSucceed()){
+                    if (currentpage == 1){
+                        listBeen.clear();
+                    }
+                    listBeen.addAll(anwserListBean.list);
+                    mView.setListData(listBeen);
+                }else {
+                    mView.showError(anwserListBean.errmsg);
+                }
+            }
+
+            @Override
+            protected void childError(Throwable e) {
+                mView.showError(e.getMessage());
+            }
+        }.run(new GetAnwserList(mView.getqid(),currentpage).run());
     }
 
     @Override

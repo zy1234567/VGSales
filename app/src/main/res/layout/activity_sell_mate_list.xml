@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/color_107"
     tools:context="com.ztstech.vgmate.activitys.sell_mate_list.SellMateListActivity">
 
     <com.ztstech.vgmate.weigets.TopBar

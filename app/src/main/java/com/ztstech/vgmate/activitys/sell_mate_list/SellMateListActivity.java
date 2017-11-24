@@ -7,7 +7,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
@@ -62,17 +65,21 @@ public class SellMateListActivity extends MVPActivity<SellMateContact.Presenter>
                 showFilterDialog();
             }
         });
-        srl.setOnRefreshListener(new OnRefreshLoadmoreListener() {
+        srl.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
                 mPresenter.appendData();
             }
+        });
 
+        srl.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 mPresenter.loadNetData();
             }
         });
+
+
     }
 
 

@@ -78,8 +78,6 @@ public class MatelistBean extends BaseRespBean{
         public int firstbudgets;
         public String salelevel;
         public String district;
-        public String zerenrenuid;
-        public String zerenren;
         public String status;
         public String principaluid;
         public String principal;

@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
@@ -68,16 +70,16 @@ public class QuestionListFragment extends MVPFragment<QuestionListContact.Presen
         recycler.setAdapter(adapter);
         mPresenter.loadCacheData(myflg);
         requestNewData();
-        smartRefreshLayout.setEnableRefresh(false);
-        smartRefreshLayout.setOnRefreshListener(new OnRefreshLoadmoreListener() {
+        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                requestNewData();
+            }
+        });
+        smartRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
                 mPresenter.appendData();
-            }
-
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-
             }
         });
     }

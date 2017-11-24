@@ -27,7 +27,7 @@ public class QuestionListPresenter extends PresenterImpl<QuestionListContact.Vie
 
     public static final String QUESTION_LIST = "question_list";
 
-    private int currentpage = 1;
+    private int currentpage = 1,totalpage;
 
     private String keyword;
 
@@ -67,40 +67,17 @@ public class QuestionListPresenter extends PresenterImpl<QuestionListContact.Vie
         currentpage = 1;
         this.keyword = keyword;
         this.myflg = myflg;
-        new BasePresenterSubscriber<QuestionListBean>(mView,false){
-
-            @Override
-            protected void childNext(QuestionListBean baseRespBean) {
-                if (baseRespBean.isSucceed()){
-                    if (currentpage == 1){
-                        listBeen.clear();
-                        // 如果不是搜索界面就加入缓存
-                        if (!TextUtils.isEmpty(keyword)){
-                            preferences.edit().putString(QUESTION_LIST + myflg
-                                    + UserRepository.getInstance().getUser().getUserBean().info.uid,new Gson().toJson(baseRespBean)).apply();
-                        }
-                    }
-                    listBeen.addAll(baseRespBean.list);
-                    mView.setData(listBeen);
-                    if (baseRespBean.pager.totalPages == currentpage){
-                        mView.setNoreMoreData(true);
-                    }
-                }else {
-                    mView.showError(baseRespBean.errmsg);
-                }
-            }
-
-            @Override
-            protected void childError(Throwable e) {
-                 mView.showError(e.getMessage());
-            }
-        }.run(new GetQuestionList(keyword,currentpage,myflg ? "01" :"").run());
+        requestListData();
     }
 
     @Override
     public void appendData() {
-        currentpage ++;
-        loadData(keyword,myflg);
+        if (currentpage == totalpage){
+            mView.setData(listBeen);
+        }else {
+            currentpage++;
+            requestListData();
+        }
     }
 
     @Override
@@ -122,4 +99,40 @@ public class QuestionListPresenter extends PresenterImpl<QuestionListContact.Vie
             }
         }.run(new DeleteQuestion(qid).run());
     }
+
+    /**
+     * 请求网络数据
+     */
+    private void requestListData(){
+        new BasePresenterSubscriber<QuestionListBean>(mView,false){
+
+            @Override
+            protected void childNext(QuestionListBean baseRespBean) {
+                if (baseRespBean.isSucceed()){
+                    totalpage = baseRespBean.pager.totalPages;
+                    if (currentpage == 1){
+                        listBeen.clear();
+                        // 如果不是搜索界面就加入缓存
+                        if (!TextUtils.isEmpty(keyword)){
+                            preferences.edit().putString(QUESTION_LIST + myflg
+                                    + UserRepository.getInstance().getUser().getUserBean().info.uid,new Gson().toJson(baseRespBean)).apply();
+                        }
+                    }
+                    listBeen.addAll(baseRespBean.list);
+                    mView.setData(listBeen);
+                    if (baseRespBean.pager.totalPages == currentpage){
+                        mView.setNoreMoreData(true);
+                    }
+                }else {
+                    mView.showError(baseRespBean.errmsg);
+                }
+            }
+
+            @Override
+            protected void childError(Throwable e) {
+                mView.showError(e.getMessage());
+            }
+        }.run(new GetQuestionList(keyword,currentpage,myflg ? "01" :"").run());
+    }
+
 }

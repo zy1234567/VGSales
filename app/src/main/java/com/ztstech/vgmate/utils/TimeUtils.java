@@ -104,7 +104,7 @@ public class TimeUtils {
      */
     public static String InformationTime(String time) {
         if (TextUtils.isEmpty(time)) {
-            return time;
+            return "";
         }
         Calendar current = Calendar.getInstance();
         int year = current.get(Calendar.YEAR);

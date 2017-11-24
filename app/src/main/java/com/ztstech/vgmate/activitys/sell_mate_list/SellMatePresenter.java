@@ -9,7 +9,6 @@ import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.appdomain.user_case.GetMateList;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.base.BaseApplicationLike;
-import com.ztstech.vgmate.data.beans.MainListBean;
 import com.ztstech.vgmate.data.beans.MatelistBean;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
@@ -24,7 +23,7 @@ public class SellMatePresenter extends PresenterImpl<SellMateContact.View> imple
 
     private static final String SELL_MATE_LIST = "sell_mate_list";
 
-    private int currrntPage = 1;
+    private int currrntPage = 1,totalpage;
 
     private SharedPreferences preferences;
 
@@ -50,15 +49,31 @@ public class SellMatePresenter extends PresenterImpl<SellMateContact.View> imple
 
     @Override
     public void loadNetData() {
+        currrntPage = 1;
+        requestListData();
+    }
+
+    @Override
+    public void appendData() {
+        if (currrntPage == totalpage){
+            mView.setListData(listBeen);
+        }else {
+            currrntPage++;
+            requestListData();
+        }
+    }
+
+    private void requestListData(){
         new BasePresenterSubscriber<MatelistBean>(mView,false){
 
             @Override
             protected void childNext(MatelistBean matelistBean) {
                 if (matelistBean.isSucceed()){
-                    mView.setNoMoreData(matelistBean.pager.totalPages == currrntPage);
+                    totalpage = matelistBean.pager.totalPages;
                     if (currrntPage == 1){
                         listBeen.clear();
-                        preferences.edit().putString(SELL_MATE_LIST + UserRepository.getInstance().getUser().getUserBean().info.uid,new Gson().toJson(matelistBean));
+                        preferences.edit().putString(SELL_MATE_LIST +
+                                UserRepository.getInstance().getUser().getUserBean().info.uid,new Gson().toJson(matelistBean)).apply();
                     }
                     listBeen.addAll(matelistBean.list);
                     mView.setListData(listBeen);
@@ -74,9 +89,4 @@ public class SellMatePresenter extends PresenterImpl<SellMateContact.View> imple
         }.run(new GetMateList(currrntPage).run());
     }
 
-    @Override
-    public void appendData() {
-        currrntPage ++;
-        loadNetData();
-    }
 }

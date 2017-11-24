@@ -66,6 +66,7 @@ public class SettingActivity extends MVPActivity<SettingContract.Presenter> impl
             tvStatus.setText("身份审核中");
         }else if (Constants.USER_ID_REFUSE.equals(status)){
             tvStatus.setText("审核被拒绝");
+            tvStatus.setTextColor(getResources().getColor(R.color.weilai_color_109));
         }else {
             tvStatus.setText("审核通过");
         }
