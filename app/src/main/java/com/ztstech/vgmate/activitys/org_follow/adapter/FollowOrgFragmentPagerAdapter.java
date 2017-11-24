@@ -16,10 +16,11 @@ import com.ztstech.vgmate.activitys.org_follow.OrgFollowListFragment;
 
 public class FollowOrgFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    public static final String[] TITLES = new String[] {"已确认", "已认领","管理端"};
+    private String[] TITLES;
 
     public FollowOrgFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
+        TITLES = new String[] {"已确认", "已认领","管理端"};
     }
 
     @Override
@@ -48,4 +49,9 @@ public class FollowOrgFragmentPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         return TITLES[position];
     }
+
+    public void setTitles(String[] TITLES){
+        this.TITLES = TITLES;
+    }
+
 }

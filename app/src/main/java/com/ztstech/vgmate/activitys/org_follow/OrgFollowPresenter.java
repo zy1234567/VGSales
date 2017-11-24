@@ -59,7 +59,7 @@ public class OrgFollowPresenter extends PresenterImpl<OrgFollowContact.View> imp
     @Override
     public void appendData() {
         if (totalPage == currentPage){
-
+            mView.setData(listBeanList);
         }else {
             requestData(currentPage + 1,status);
         }

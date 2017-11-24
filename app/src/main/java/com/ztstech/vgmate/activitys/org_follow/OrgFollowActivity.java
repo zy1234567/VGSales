@@ -1,5 +1,7 @@
 package com.ztstech.vgmate.activitys.org_follow;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
@@ -7,6 +9,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.org_follow.adapter.FollowOrgFragmentPagerAdapter;
+import com.ztstech.vgmate.data.beans.OrgFollowNumBean;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import butterknife.BindView;
@@ -17,7 +20,7 @@ import butterknife.BindView;
  * @date 2017/11/13
  */
 
-public class OrgFollowActivity extends MVPActivity {
+public class OrgFollowActivity extends MVPActivity<OrgFollowNumContact.Presenter> implements OrgFollowNumContact.View{
 
 
     @BindView(R.id.top_bar)
@@ -27,9 +30,17 @@ public class OrgFollowActivity extends MVPActivity {
     @BindView(R.id.viewpager)
     ViewPager viewpager;
 
+    FollowOrgFragmentPagerAdapter adapter;
+
     @Override
-    protected BasePresenter initPresenter() {
-        return null;
+    protected void onViewBindFinish(@Nullable Bundle savedInstanceState) {
+        super.onViewBindFinish(savedInstanceState);
+        mPresenter.loadFollowOrgNum();
+    }
+
+    @Override
+    protected OrgFollowNumContact.Presenter initPresenter() {
+        return new OrgFollowNumPresenter(this);
     }
 
     @Override
@@ -41,7 +52,16 @@ public class OrgFollowActivity extends MVPActivity {
     protected void onViewBindFinish() {
         super.onViewBindFinish();
         tablayout.setupWithViewPager(viewpager);
-        viewpager.setAdapter(new FollowOrgFragmentPagerAdapter(getSupportFragmentManager()));
+        adapter = new FollowOrgFragmentPagerAdapter(getSupportFragmentManager());
+        viewpager.setAdapter(adapter);
     }
 
+    @Override
+    public void onGetFollowNumSucced(OrgFollowNumBean.InfoBean bean) {
+        String[] titles = {"已确认".concat("(").concat(bean.confirmNum).concat(")"),
+                "已认领".concat("(").concat(bean.claimNum).concat(")"),
+                "管理端".concat("(").concat(bean.webNum).concat(")")};
+        adapter.setTitles(titles);
+        adapter.notifyDataSetChanged();
+    }
 }
