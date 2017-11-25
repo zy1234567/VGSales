@@ -29,6 +29,8 @@ public class QuestionDetailPresenter extends PresenterImpl<QuestionDetailContact
 
     private List<AnwserListBean.ListBean> listBeen;
 
+    private boolean isRefresh;
+
     public QuestionDetailPresenter(QuestionDetailContact.View view) {
         super(view);
         listBeen = new ArrayList<>();
@@ -36,11 +38,16 @@ public class QuestionDetailPresenter extends PresenterImpl<QuestionDetailContact
 
     @Override
     public void loadListData() {
+        if (isRefresh){
+            return;
+        }
         currentpage = 1;
+        isRefresh = true;
         new BasePresenterSubscriber<AnwserListBean>(mView){
 
             @Override
             protected void childNext(AnwserListBean anwserListBean) {
+                isRefresh = false;
                 if (anwserListBean.isSucceed()){
                     if (currentpage == 1){
                         listBeen.clear();
@@ -54,6 +61,7 @@ public class QuestionDetailPresenter extends PresenterImpl<QuestionDetailContact
 
             @Override
             protected void childError(Throwable e) {
+                isRefresh = false;
                 mView.showError(e.getMessage());
             }
         }.run(new GetAnwserList(mView.getqid(),currentpage).run());
@@ -61,11 +69,16 @@ public class QuestionDetailPresenter extends PresenterImpl<QuestionDetailContact
 
     @Override
     public void appendData() {
+        if (isRefresh){
+            return;
+        }
         currentpage ++;
-        new BasePresenterSubscriber<AnwserListBean>(mView){
+        isRefresh = true;
+        new BasePresenterSubscriber<AnwserListBean>(mView,false){
 
             @Override
             protected void childNext(AnwserListBean anwserListBean) {
+                isRefresh = false;
                 if (anwserListBean.isSucceed()){
                     if (currentpage == 1){
                         listBeen.clear();
@@ -79,6 +92,7 @@ public class QuestionDetailPresenter extends PresenterImpl<QuestionDetailContact
 
             @Override
             protected void childError(Throwable e) {
+                isRefresh = false;
                 mView.showError(e.getMessage());
             }
         }.run(new GetAnwserList(mView.getqid(),currentpage).run());

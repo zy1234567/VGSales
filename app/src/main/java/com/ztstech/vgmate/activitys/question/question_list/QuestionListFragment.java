@@ -98,6 +98,10 @@ public class QuestionListFragment extends MVPFragment<QuestionListContact.Presen
     public void setData(List<QuestionListBean.ListBean> listData) {
         adapter.setListData(listData);
         adapter.notifyDataSetChanged();
+        if (smartRefreshLayout.isLoading()){
+            smartRefreshLayout.finishLoadmore();
+            smartRefreshLayout.finishRefresh();
+        }
         if (listData.size() == 0){
             llNoData.setVisibility(View.VISIBLE);
             smartRefreshLayout.setVisibility(View.GONE);

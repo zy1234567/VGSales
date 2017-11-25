@@ -113,7 +113,7 @@ public class QuestionListPresenter extends PresenterImpl<QuestionListContact.Vie
                     if (currentpage == 1){
                         listBeen.clear();
                         // 如果不是搜索界面就加入缓存
-                        if (!TextUtils.isEmpty(keyword)){
+                        if (TextUtils.isEmpty(keyword)){
                             preferences.edit().putString(QUESTION_LIST + myflg
                                     + UserRepository.getInstance().getUser().getUserBean().info.uid,new Gson().toJson(baseRespBean)).apply();
                         }

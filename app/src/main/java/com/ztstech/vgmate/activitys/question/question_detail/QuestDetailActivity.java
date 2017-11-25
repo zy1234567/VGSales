@@ -27,6 +27,7 @@ import com.ztstech.vgmate.utils.TimeUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.AutoLinearLayoutManager;
 import com.ztstech.vgmate.weigets.IOSStyleDialog;
+import com.ztstech.vgmate.weigets.MyScrollView;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import java.util.List;
@@ -61,7 +62,7 @@ public class QuestDetailActivity extends MVPActivity<QuestionDetailContact.Prese
     @BindView(R.id.rl_comment)
     RelativeLayout rlComment;
     @BindView(R.id.scrollView)
-    ScrollView scrollView;
+    MyScrollView scrollView;
     @BindView(R.id.ll_no_data)
     LinearLayout llNoData;
 
@@ -77,7 +78,7 @@ public class QuestDetailActivity extends MVPActivity<QuestionDetailContact.Prese
     protected void onViewBindFinish() {
         super.onViewBindFinish();
         bean = (QuestionListBean.ListBean) getIntent().getSerializableExtra(KEY_BEAN);
-        if (bean != null){
+        if (bean != null) {
             tvDes.setText(bean.descrption);
             tvTime.setText(TimeUtils.InformationTime(bean.createtime));
         }
@@ -85,7 +86,7 @@ public class QuestDetailActivity extends MVPActivity<QuestionDetailContact.Prese
         recycler.setLayoutManager(new AutoLinearLayoutManager(this));
         recycler.setAdapter(adapter);
         recycler.setNestedScrollingEnabled(false);
-        scrollView.smoothScrollBy(0,0);
+        scrollView.smoothScrollBy(0, 0);
         mPresenter.loadListData();
 
         etComment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -100,106 +101,104 @@ public class QuestDetailActivity extends MVPActivity<QuestionDetailContact.Prese
                 }
             }
         });
-
-//        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-//            @Override
-//            public void onRefresh(RefreshLayout refreshlayout) {
-//                mPresenter.loadListData();
-//            }
-//        });
-
-//        smartRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
-//            @Override
-//            public void onLoadmore(RefreshLayout refreshlayout) {
-//                mPresenter.appendData();
-//            }
-//        });
-    }
-
-    @Override
-    protected QuestionDetailContact.Presenter initPresenter() {
-        return new QuestionDetailPresenter(this);
-    }
-
-    @Override
-    protected int getLayoutRes() {
-        return R.layout.activity_quest_detail;
-    }
-
-
-    @OnClick(R.id.tv_submit)
-    public void onClick() {
-        String content = etComment.getText().toString();
-        if (!TextUtils.isEmpty(content)){
-            mPresenter.reply();
-        }
-    }
-
-    @Override
-    public void setListData(List<AnwserListBean.ListBean> listData) {
-        adapter.setListData(listData);
-        adapter.notifyDataSetChanged();
-        if (listData.size() == 0){
-            recycler.setVisibility(View.GONE);
-            llNoData.setVisibility(View.VISIBLE);
-        }else {
-            recycler.setVisibility(View.VISIBLE);
-            llNoData.setVisibility(View.GONE);
-        }
-    }
-
-    @Override
-    public void showError(String msg) {
-        ToastUtil.toastCenter(this,msg);
-    }
-
-    @Override
-    public String getqid() {
-        if (bean != null){
-            return bean.queid;
-        }
-        return null;
-    }
-
-    @Override
-    public String getContent() {
-        return etComment.getText().toString();
-    }
-
-    @Override
-    public String getQuid() {
-        if (bean != null){
-            return bean.uid;
-        }
-        return null;
-    }
-
-    @Override
-    public void onReplySuccess() {
-        etComment.setText("");
-        etComment.clearFocus();
-        ToastUtil.toastCenter(this,"回复成功");
-        mPresenter.loadListData();
-    }
-
-    @Override
-    public void onDeleteSuccess() {
-        ToastUtil.toastCenter(this,"删除成功");
-        mPresenter.loadListData();
-    }
-
-    @Override
-    public void onLongClick(final AnwserListBean.ListBean data) {
-        new IOSStyleDialog(this, "确认删除此条回复？", new DialogInterface.OnClickListener() {
+        scrollView.setScrollViewListener(new MyScrollView.IScrollChangedListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mPresenter.deleteAnwser(data.ansid);
+            public void onScrolledToBottom() {
+                //滑动到底部
+                mPresenter.appendData();
             }
-        }).show();
+
+            @Override
+            public void onScrolledToTop() {
+
+            }
+        });
     }
 
-    @Override
-    public void onClickPrise(AnwserListBean.ListBean data) {
-        mPresenter.priseAnwser(data);
+        @Override
+        protected QuestionDetailContact.Presenter initPresenter() {
+            return new QuestionDetailPresenter(this);
+        }
+
+        @Override
+        protected int getLayoutRes() {
+            return R.layout.activity_quest_detail;
+        }
+
+
+        @OnClick(R.id.tv_submit)
+        public void onClick() {
+            String content = etComment.getText().toString();
+            if (!TextUtils.isEmpty(content)){
+                mPresenter.reply();
+            }
+        }
+
+        @Override
+        public void setListData(List<AnwserListBean.ListBean> listData) {
+            adapter.setListData(listData);
+            adapter.notifyDataSetChanged();
+            if (listData.size() == 0){
+                recycler.setVisibility(View.GONE);
+                llNoData.setVisibility(View.VISIBLE);
+            }else {
+                recycler.setVisibility(View.VISIBLE);
+                llNoData.setVisibility(View.GONE);
+            }
+        }
+
+        @Override
+        public void showError(String msg) {
+            ToastUtil.toastCenter(this,msg);
+        }
+
+        @Override
+        public String getqid() {
+            if (bean != null){
+                return bean.queid;
+            }
+            return null;
+        }
+
+        @Override
+        public String getContent() {
+            return etComment.getText().toString();
+        }
+
+        @Override
+        public String getQuid() {
+            if (bean != null){
+                return bean.uid;
+            }
+            return null;
+        }
+
+        @Override
+        public void onReplySuccess() {
+            etComment.setText("");
+            etComment.clearFocus();
+            ToastUtil.toastCenter(this,"回复成功");
+            mPresenter.loadListData();
+        }
+
+        @Override
+        public void onDeleteSuccess() {
+            ToastUtil.toastCenter(this,"删除成功");
+            mPresenter.loadListData();
+        }
+
+        @Override
+        public void onLongClick(final AnwserListBean.ListBean data) {
+            new IOSStyleDialog(this, "确认删除此条回复？", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    mPresenter.deleteAnwser(data.ansid);
+                }
+            }).show();
+        }
+
+        @Override
+        public void onClickPrise(AnwserListBean.ListBean data) {
+            mPresenter.priseAnwser(data);
+        }
     }
-}
