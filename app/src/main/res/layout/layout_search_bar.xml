@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/color_107">
-
+    android:layout_height="wrap_content">
     <RelativeLayout
         android:id="@+id/rl_search"
         android:layout_width="match_parent"
@@ -52,29 +50,4 @@
             android:paddingLeft="12dp"
             android:text="取消"/>
     </RelativeLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </android.support.v7.widget.RecyclerView>
-
-    <LinearLayout
-        android:id="@+id/ll_no_data"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:visibility="gone"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/no_share"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_5"
-            android:textColor="@color/color_103"
-            android:text="没有搜索结果"/>
-    </LinearLayout>
 </LinearLayout>

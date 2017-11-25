@@ -13,10 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ztstech.vgmate.R;
-import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.MVPActivity;
-import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.activitys.question.adapter.QuestionListAdapter;
 import com.ztstech.vgmate.activitys.question.adapter.QuestionViewHolder;
 import com.ztstech.vgmate.activitys.question.question_detail.QuestDetailActivity;
@@ -51,6 +53,8 @@ public class SearchQuestActivity extends MVPActivity<QuestionListContact.Present
     RelativeLayout rlSearch;
     @BindView(R.id.ll_no_data)
     LinearLayout llNoData;
+    @BindView(R.id.srl)
+    SmartRefreshLayout smartRefreshLayout;
 
 
     @Override
@@ -59,6 +63,7 @@ public class SearchQuestActivity extends MVPActivity<QuestionListContact.Present
         adapter = new QuestionListAdapter("",this);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setAdapter(adapter);
+        smartRefreshLayout.setEnableRefresh(false);
         etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -66,10 +71,17 @@ public class SearchQuestActivity extends MVPActivity<QuestionListContact.Present
                     String keyword = etSearch.getText().toString();
                     if (!TextUtils.isEmpty(keyword)) {
                         adapter.setSearchText(keyword);
-                        mPresenter.loadData(etSearch.getText().toString(),false);
+                        mPresenter.loadData(keyword,false);
                     }
                 }
                 return false;
+            }
+        });
+
+        smartRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                mPresenter.appendData();
             }
         });
     }
@@ -81,7 +93,7 @@ public class SearchQuestActivity extends MVPActivity<QuestionListContact.Present
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.activity_search;
+        return R.layout.activity_search_question;
     }
 
 
@@ -115,10 +127,10 @@ public class SearchQuestActivity extends MVPActivity<QuestionListContact.Present
         KeyboardUtils.hideKeyBoard(this,etSearch);
         if (listData.size() == 0){
             llNoData.setVisibility(View.VISIBLE);
-            recycler.setVisibility(View.GONE);
+            smartRefreshLayout.setVisibility(View.GONE);
         }else {
             llNoData.setVisibility(View.GONE);
-            recycler.setVisibility(View.VISIBLE);
+            smartRefreshLayout.setVisibility(View.VISIBLE);
         }
     }
 

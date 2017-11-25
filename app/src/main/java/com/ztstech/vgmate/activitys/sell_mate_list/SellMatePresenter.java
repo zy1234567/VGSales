@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by smm on 2017/11/23.
+ *
+ * @author smm
+ * @date 2017/11/23
  */
 
 public class SellMatePresenter extends PresenterImpl<SellMateContact.View> implements SellMateContact.Presenter{
@@ -28,6 +30,7 @@ public class SellMatePresenter extends PresenterImpl<SellMateContact.View> imple
     private SharedPreferences preferences;
 
     private List<MatelistBean.ListBean> listBeen;
+
 
     public SellMatePresenter(SellMateContact.View view) {
         super(view);
@@ -48,32 +51,36 @@ public class SellMatePresenter extends PresenterImpl<SellMateContact.View> imple
     }
 
     @Override
-    public void loadNetData() {
+    public void loadNetData(String myflg,String filtername) {
         currrntPage = 1;
-        requestListData();
+        requestListData(myflg,filtername);
     }
 
     @Override
-    public void appendData() {
+    public void appendData(String myflg,String filtername) {
         if (currrntPage == totalpage){
             mView.setListData(listBeen);
         }else {
             currrntPage++;
-            requestListData();
+            requestListData(myflg,filtername);
         }
     }
 
-    private void requestListData(){
+    private void requestListData(final String myflg, final String filtername){
         new BasePresenterSubscriber<MatelistBean>(mView,false){
 
             @Override
             protected void childNext(MatelistBean matelistBean) {
                 if (matelistBean.isSucceed()){
                     totalpage = matelistBean.pager.totalPages;
+                    mView.setNoMoreData(totalpage == currrntPage);
                     if (currrntPage == 1){
                         listBeen.clear();
-                        preferences.edit().putString(SELL_MATE_LIST +
-                                UserRepository.getInstance().getUser().getUserBean().info.uid,new Gson().toJson(matelistBean)).apply();
+                        if (GetMateList.FILTER_ALL.equals(myflg) && TextUtils.isEmpty(filtername)) {
+                            // 不是搜索界面且不是筛选自己的才缓存
+                            preferences.edit().putString(SELL_MATE_LIST +
+                                    UserRepository.getInstance().getUser().getUserBean().info.uid, new Gson().toJson(matelistBean)).apply();
+                        }
                     }
                     listBeen.addAll(matelistBean.list);
                     mView.setListData(listBeen);
@@ -86,7 +93,7 @@ public class SellMatePresenter extends PresenterImpl<SellMateContact.View> imple
             protected void childError(Throwable e) {
                 mView.showError("查询销售伙伴列表出错:".concat(e.getMessage()));
             }
-        }.run(new GetMateList(currrntPage).run());
+        }.run(new GetMateList(currrntPage,myflg,filtername).run());
     }
 
 }

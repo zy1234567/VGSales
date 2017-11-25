@@ -38,16 +38,16 @@ public class UnApproveMatePresenter extends PresenterImpl<UnApproveMateContact.V
     }
 
     @Override
-    public void loadData() {
-        requestData(1);
+    public void loadData(String myflg) {
+        requestData(1,myflg);
     }
 
     @Override
-    public void appendData() {
+    public void appendData(String myflg) {
         if (totalPage == currentPage){
             mView.setNoreMoreData(true);
         }else {
-            requestData(currentPage + 1);
+            requestData(currentPage + 1,myflg);
         }
     }
 
@@ -86,7 +86,7 @@ public class UnApproveMatePresenter extends PresenterImpl<UnApproveMateContact.V
      * 请求待审批列表
      * @param page
      */
-    private void requestData(final int page) {
+    private void requestData(final int page, final String myflg) {
         new BasePresenterSubscriber<WaitApproveMateListBean>(mView,false) {
 
             @Override
@@ -102,7 +102,10 @@ public class UnApproveMatePresenter extends PresenterImpl<UnApproveMateContact.V
                     if (currentPage == 1) {
                         //刷新
                         listBeanList.clear();
-                        preferences.edit().putString(UN_APPROVE_MATE_LIST,new Gson().toJson(bean)).apply();
+                        if (GetUnApproveMateList.FILTER_ALL.equals(myflg)) {
+                            // 只缓存不筛选的
+                            preferences.edit().putString(UN_APPROVE_MATE_LIST, new Gson().toJson(bean)).apply();
+                        }
                     }
                     listBeanList.addAll(bean.list);
                     mView.setData(listBeanList);
@@ -111,7 +114,7 @@ public class UnApproveMatePresenter extends PresenterImpl<UnApproveMateContact.V
                     mView.showError(bean.getErrmsg());
                 }
             }
-        }.run(new GetUnApproveMateList(page).run());
+        }.run(new GetUnApproveMateList(page,myflg).run());
     }
 
 

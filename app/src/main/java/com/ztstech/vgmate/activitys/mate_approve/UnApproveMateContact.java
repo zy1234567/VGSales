@@ -32,13 +32,14 @@ public interface UnApproveMateContact {
 
     interface Presenter extends BasePresenter<View>{
 
-        void loadData();
+        void loadData(String myflg);
 
-        void appendData();
+        void appendData(String myflg);
 
         void loadCacheData();
 
         void findMateDetail(String saleid);
+
     }
 
 }

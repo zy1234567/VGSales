@@ -20,8 +20,8 @@ public interface SellMateContact {
     }
     interface Presenter extends BasePresenter<View> {
         void loadCacheData();
-        void loadNetData();
-        void appendData();
+        void loadNetData(String myflg,String filtername);
+        void appendData(String myflg,String filtername);
     }
 
 }

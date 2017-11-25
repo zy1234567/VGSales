@@ -58,9 +58,9 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowNumContact.Presenter
 
     @Override
     public void onGetFollowNumSucced(OrgFollowNumBean.InfoBean bean) {
-        String[] titles = {"已确认".concat("(").concat(bean.confirmNum).concat(")"),
-                "已认领".concat("(").concat(bean.claimNum).concat(")"),
-                "管理端".concat("(").concat(bean.webNum).concat(")")};
+        String[] titles = {"已确认".concat(" ").concat(bean.confirmNum),
+                "已认领".concat(" ").concat(bean.claimNum),
+                "管理端".concat(" ").concat(bean.webNum)};
         adapter.setTitles(titles);
         adapter.notifyDataSetChanged();
     }

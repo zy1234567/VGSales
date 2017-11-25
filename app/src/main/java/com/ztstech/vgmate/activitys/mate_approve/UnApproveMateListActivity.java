@@ -10,6 +10,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.ztstech.appdomain.user_case.GetUnApproveMateList;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.mate_approve.adapter.WaitApproveMateAdapter;
@@ -49,6 +50,9 @@ public class UnApproveMateListActivity extends MVPActivity<UnApproveMateContact.
     /** 所点击的查看详情的销售id */
     private String saleid;
 
+    /** 是否筛选了我的直属 */
+    private String myflg;
+
     @Override
     protected UnApproveMateContact.Presenter initPresenter() {
         return new UnApproveMatePresenter(this);
@@ -62,6 +66,7 @@ public class UnApproveMateListActivity extends MVPActivity<UnApproveMateContact.
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
+        myflg = GetUnApproveMateList.FILTER_ALL;
         adapter = new WaitApproveMateAdapter(this);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setAdapter(adapter);
@@ -70,14 +75,14 @@ public class UnApproveMateListActivity extends MVPActivity<UnApproveMateContact.
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                mPresenter.loadData();
+                mPresenter.loadData(myflg);
             }
         });
 
         refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                mPresenter.appendData();
+                mPresenter.appendData(myflg);
             }
         });
 
@@ -135,12 +140,16 @@ public class UnApproveMateListActivity extends MVPActivity<UnApproveMateContact.
         new BottomDoubleSelectDialog(this, "查看全部", "只看我的直属伙伴", new BottomDoubleSelectDialog.ClickListener() {
             @Override
             public void onClickOne() {
-
+                // 查看全部
+                myflg = GetUnApproveMateList.FILTER_ALL;
+                refreshLayout.autoRefresh();
             }
 
             @Override
             public void onClickTwo() {
-
+                // 只看我的直属伙伴
+                myflg = GetUnApproveMateList.FILTER_MINE;
+                refreshLayout.autoRefresh();
             }
         });
     }

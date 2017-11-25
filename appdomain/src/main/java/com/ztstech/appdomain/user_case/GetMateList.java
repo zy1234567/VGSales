@@ -9,23 +9,36 @@ import com.ztstech.vgmate.data.beans.MatelistBean;
 import rx.Observable;
 
 /**
- * Created by smm on 2017/11/23.
+ *
+ * @author smm
+ * @date 2017/11/23
  * 获取销售伙伴列表
  */
 
 public class GetMateList implements UserCase<Observable<MatelistBean>> {
 
+    public static final String FILTER_ALL = "00";
+
+    public static final String FILTER_MINE = "01";
+
     private int pageNo;
+
+    private String type;
+
+    /** 搜索的伙伴姓名 */
+    private String filtername;
 
     private GetMateListApi api;
 
-    public GetMateList(int pageNo){
+    public GetMateList(int pageNo,String type,String filtername){
         api = RetrofitUtils.createService(GetMateListApi.class);
         this.pageNo = pageNo;
+        this.type = type;
+        this.filtername = filtername;
     }
 
     @Override
     public Observable<MatelistBean> run() {
-        return api.getMateList(UserRepository.getInstance().getAuthId(),pageNo);
+        return api.getMateList(UserRepository.getInstance().getAuthId(),pageNo,type,filtername);
     }
 }

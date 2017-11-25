@@ -109,6 +109,10 @@ public class QuestionListFragment extends MVPFragment<QuestionListContact.Presen
 
     @Override
     public void showError(String errorMessage) {
+        if (smartRefreshLayout.isLoading()){
+            smartRefreshLayout.finishRefresh();
+            smartRefreshLayout.finishLoadmore();
+        }
         ToastUtil.toastCenter(getContext(),"查询问题列表出错:".concat(errorMessage));
     }
 
