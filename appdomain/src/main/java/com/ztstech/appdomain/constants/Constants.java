@@ -83,4 +83,18 @@ public interface Constants {
      */
     String AES_KEY = "v7l27ffb9xamti4igqa308ju";
 
+    /**
+     * 分享的ntype
+     */
+    /** 只有文字 */
+    String SHARE_ONLY_WORD = "01";
+    /** 只有文字 */
+    String SHARE_ONLY_IMAGE = "02";
+    /** 只有文字 */
+    String SHARE_WORD_IMAGE = "03";
+    /** 只有文字 */
+    String SHARE_ONLY_LINK = "04";
+    /** 只有文字 */
+    String SHARE_WORD_LINK = "05";
+
 }

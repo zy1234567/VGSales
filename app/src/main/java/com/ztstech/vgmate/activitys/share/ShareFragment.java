@@ -27,7 +27,7 @@ import butterknife.Unbinder;
  *
  * @author smm
  */
-public class ShareFragment extends MVPFragment {
+public class ShareFragment extends MVPFragment<ShareContact.Presenter> implements ShareContact.View{
 
     @BindView(R.id.recycler)
     RecyclerView recycler;
@@ -56,15 +56,26 @@ public class ShareFragment extends MVPFragment {
         lists.add(new ShareListBean.ListBean());
         adapter.setListData(lists);
         recycler.setAdapter(adapter);
+        mPresenter.loadNetData();
     }
 
     @Override
-    protected BasePresenter initPresenter() {
-        return null;
+    protected ShareContact.Presenter initPresenter() {
+        return new SharePresenter(this);
     }
 
     @Override
     protected int getLayoutRes() {
         return R.layout.fragment_share;
+    }
+
+    @Override
+    public void showError(String msg) {
+
+    }
+
+    @Override
+    public void onDeleteSuccess() {
+
     }
 }
