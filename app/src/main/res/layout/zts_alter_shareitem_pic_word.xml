@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/share_fragment_adapter_word_linearlayout"
+    android:layout_width="match_parent"
+    android:background="#ffffffff"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <include layout="@layout/zts_alter_shareitem_head" />
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:visibility="gone"
+        android:background="@color/weilai_color_001"/>
+    <LinearLayout
+        android:id="@+id/middle_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/share_fragment_adapter_word_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="12dp"
+        >
+
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="62dp"
+            android:includeFontPadding="false"
+            android:text="用优美的肢体语言展示心中的梦想，用优雅的舞步再属于自己的舞台上表达出内心的激情，我喜欢那种自信的感觉。"
+            android:textColor="#FF333333"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_quanwen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_content"
+            android:layout_below="@+id/tv_content"
+            android:layout_marginTop="3dp"
+            android:text="全文"
+            android:textColor="@color/weilai_color_003"
+            android:textSize="14sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/share_fragment_adapter_word_rl2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="62dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="5dp" >
+
+        <com.ztstech.vgmate.weigets.MyGridView
+            android:id="@+id/gv_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="5dp"
+            android:listSelector="@color/transparent"
+            android:numColumns="3"
+            android:verticalSpacing="5dp" >
+        </com.ztstech.vgmate.weigets.MyGridView>
+    </RelativeLayout>
+    </LinearLayout>
+    <include layout="@layout/zts_alter_shareitem_bottom" />
+    <!-- 空间个人分享用来占距离的view -->
+    <View
+        android:id="@+id/space_item_margin"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:visibility="gone"
+        android:background="@color/weilai_color_001"/>
+    <include layout="@layout/listview_share_comment"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="5dp"
+        android:background="#FFe9e9e9" />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:id="@+id/tv_tail_time"
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="right"
+            android:text="10日"
+            android:textColor="@color/weilai_color_003"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_tail_date"
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/tv_tail_time"
+            android:layout_below="@+id/tv_tail_time"
+            android:gravity="right"
+            android:text="2016/07"
+            android:textColor="#FF999999"
+            android:textSize="10sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+</FrameLayout>

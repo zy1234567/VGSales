@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ztstech.vgmate.weigets.SqureLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.ztstech.vgmate.weigets.RecyclerImageView
+        android:id="@+id/share_fragment_adapter_ceshi_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFececec"
+        android:scaleType="centerCrop"/>
+
+     <TextView
+         android:id="@+id/share_fragment_adapter_ceshi_img_number"
+         android:layout_width="40dp"
+         android:layout_height="15dp"
+         android:layout_alignBottom="@+id/share_fragment_adapter_ceshi_iv"
+         android:layout_alignRight="@+id/share_fragment_adapter_ceshi_iv"
+         android:background="@drawable/alter_jobspace_pic"
+         android:gravity="center"
+         android:textColor="#ffffff"
+         android:textSize="10sp" 
+         android:visibility="gone"/>
+
+</com.ztstech.vgmate.weigets.SqureLayout>
+

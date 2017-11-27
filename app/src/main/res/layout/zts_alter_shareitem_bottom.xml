@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/bottom_bar_layout"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:background="@color/weilai_color_001">
+
+
+	<TextView
+		android:id="@+id/tv_trans_num"
+		android:layout_width="27dp"
+		android:layout_height="wrap_content"
+		android:layout_centerVertical="true"
+		android:layout_alignParentRight="true"
+		android:text=""
+		android:visibility="invisible"
+		android:textColor="#FF999999"
+		android:textSize="10sp" />
+
+	<ImageView
+		android:id="@+id/img_write_comment"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+		android:paddingLeft="21dp"
+		android:paddingRight="8dp"
+		android:paddingTop="10dp"
+		android:src="@mipmap/ioc_com"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/tv_trans_num"
+        android:layout_toStartOf="@+id/tv_trans_num" />
+
+	<!--链接数-->
+	<TextView
+		android:id="@+id/tv_comment_num"
+		android:layout_width="10dp"
+		android:layout_height="wrap_content"
+		android:layout_centerVertical="true"
+		android:text="10"
+		android:layout_toLeftOf="@+id/img_prise"
+		android:textColor="#FF999999"
+		android:visibility="invisible"
+		android:textSize="10sp" />
+	<!--链接图标-->
+	<ImageView
+		android:id="@+id/img_comment"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginRight="-7dp"
+		android:layout_toLeftOf="@+id/tv_comment_num"
+		android:paddingBottom="10dp"
+		android:paddingLeft="20dp"
+		android:paddingRight="15dp"
+		android:paddingTop="10dp"
+		android:src="@mipmap/ico_link" />
+
+	<!--点赞数-->
+	<TextView
+		android:id="@+id/tv_prise_num"
+		android:layout_width="10dp"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="5dp"
+		android:layout_marginLeft="-2dp"
+		android:text="+1"
+		android:layout_toLeftOf="@+id/img_write_comment"
+		android:textColor="@color/weilai_color_101"
+		android:visibility="invisible"
+		android:textSize="10sp" />
+	<!--点赞图标-->
+	<ImageView
+		android:id="@+id/img_prise"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginRight="-7dp"
+		android:layout_toLeftOf="@+id/tv_prise_num"
+		android:paddingBottom="10dp"
+		android:paddingLeft="20dp"
+		android:paddingRight="15dp"
+		android:paddingTop="9dp"
+		android:src="@mipmap/ico_zan"/>
+	<!--删除图标-->
+	<ImageView
+		android:id="@+id/img_delete"
+		android:layout_width="45dp"
+		android:layout_height="33dp"
+		android:layout_alignParentLeft="true"
+		android:layout_marginLeft="42dp"
+		android:paddingLeft="20dp"
+		android:paddingRight="10dp"
+		android:paddingTop="9dp"
+		android:paddingBottom="11dp"
+		android:layout_alignBottom="@id/img_write_comment" />
+	<!--删除-->
+	<TextView
+		android:id="@+id/tv_delete"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
+		android:layout_alignBottom="@id/img_write_comment"
+		android:text="删除"
+		android:textColor="@color/list_item_title_txt_color_14_1"
+		android:textSize="12sp"
+		android:layout_centerVertical="true"
+		android:visibility="gone"
+		android:paddingTop="9dp"
+		android:paddingBottom="9dp"
+		android:paddingLeft="20dp"
+		android:layout_marginLeft="42dp"/>
+</RelativeLayout>

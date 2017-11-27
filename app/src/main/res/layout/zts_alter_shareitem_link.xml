@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/share_fragment_adapter_word_rl_tou"
+    android:layout_width="match_parent"
+    android:background="#ffffffff"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <include layout="@layout/zts_alter_shareitem_head" />
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:visibility="gone"
+        android:background="@color/weilai_color_001"/>
+    <LinearLayout
+        android:id="@+id/middle_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            >
+            <TextView
+                android:id="@+id/tv_tail_time"
+                android:layout_width="52dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:gravity="right"
+                android:text="10日"
+                android:textColor="@color/weilai_color_003"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/tv_tail_date"
+                android:layout_width="52dp"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/tv_tail_time"
+                android:layout_below="@+id/tv_tail_time"
+                android:gravity="right"
+                android:text="2016/07"
+                android:textColor="#FF999999"
+                android:textSize="10sp"
+                android:visibility="invisible" />
+            <RelativeLayout
+                android:id="@+id/layout_link"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="62dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/ll_select_normal_001_to_006" >
+
+                <ImageView
+                    android:id="@+id/img_link"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:src="@mipmap/piclink" />
+
+                <TextView
+                    android:id="@+id/tv_link_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_toRightOf="@+id/img_link"
+                    android:text=""
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textColor="#FF333333"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    <include layout="@layout/zts_alter_shareitem_bottom" />
+    <!-- 空间个人分享用来占距离的view -->
+    <View
+        android:id="@+id/space_item_margin"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:visibility="gone"
+        android:background="@color/weilai_color_001"/>
+    <include layout="@layout/listview_share_comment"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="5dp"
+        android:background="#FFe9e9e9" />
+
+</LinearLayout>

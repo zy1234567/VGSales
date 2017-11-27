@@ -98,7 +98,7 @@ public class QuestionListFragment extends MVPFragment<QuestionListContact.Presen
     public void setData(List<QuestionListBean.ListBean> listData) {
         adapter.setListData(listData);
         adapter.notifyDataSetChanged();
-        if (smartRefreshLayout.isLoading()){
+        if (smartRefreshLayout.isRefreshing()){
             smartRefreshLayout.finishLoadmore();
             smartRefreshLayout.finishRefresh();
         }

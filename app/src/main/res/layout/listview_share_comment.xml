@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+	android:background="@color/weilai_color_001">
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/comments_share"
+        android:layout_marginLeft="62dp"
+    	android:layout_marginRight="12dp"
+    	android:layout_marginBottom="12dp"
+    	android:visibility="gone"
+    	>
+	</LinearLayout>
+	<ImageView
+        android:id="@+id/img_arrow"
+		android:layout_width="10dp"
+		android:layout_height="6dp"
+		android:background="@mipmap/talker_horn"
+		android:layout_gravity="right"
+        android:visibility="gone"
+		android:layout_marginRight="39dp"/>
+	<LinearLayout
+	    android:id="@+id/lt_commemt_share"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_c_2_f_107"
+        android:layout_marginLeft="62dp"
+    	android:layout_marginRight="12dp"
+    	android:layout_marginBottom="12dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="7dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="8dp"
+    	android:orientation="vertical"
+    	android:visibility="gone"
+    	>
+   		
+    </LinearLayout>
+</LinearLayout>

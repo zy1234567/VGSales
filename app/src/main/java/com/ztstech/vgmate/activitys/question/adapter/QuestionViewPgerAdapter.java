@@ -12,7 +12,7 @@ import com.ztstech.vgmate.activitys.question.question_list.QuestionListFragment;
 
 public class QuestionViewPgerAdapter extends FragmentPagerAdapter {
 
-    public static final String[] TITLES = new String[] {"问答列表 10", "我的提问 0"};
+    public static final String[] TITLES = new String[] {"问答列表", "我的提问"};
 
     public QuestionViewPgerAdapter(FragmentManager fm) {
         super(fm);

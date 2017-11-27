@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activitys.create_share.create_share_info.CreateShareInfoActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.ztstech.vgmate.weigets.TopBar
+            android:id="@+id/top_bar"
+            app:barTitle="资讯内容编辑"
+            app:showBackNav="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.ztstech.vgmate.weigets.TopBar>
+
+        <TextView
+            android:id="@+id/tv_next"
+            android:enabled="false"
+            android:layout_marginRight="12dp"
+            android:gravity="center"
+            android:background="@drawable/sel_share_next"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="提交"
+            android:textColor="@color/color_109"
+            android:textSize="@dimen/text_7"
+            android:layout_width="51dp"
+            android:layout_height="23dp" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/layout_create_share" />
+
+</LinearLayout>

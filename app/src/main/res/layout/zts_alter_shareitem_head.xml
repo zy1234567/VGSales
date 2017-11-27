@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/share_fragment_adapter_head_rl"
+    android:layout_width="wrap_content"
+    android:background="#ffffffff"
+    android:layout_height="wrap_content" >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_head"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_relation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/img_head"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="李博文"
+        android:textColor="@color/weilai_color_101"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_relation"
+        android:layout_below="@+id/tv_relation"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@+id/img_head"
+        android:text="10:22"
+        android:textColor="#FFaaaaaa"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/tv_right_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_time"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="12dp"
+        android:text=""
+        android:textColor="#FFaaaaaa"
+        android:ellipsize="end"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/tv_right_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tv_right_one"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="2dp"
+        android:layout_marginRight="12dp"
+        android:text=""
+        android:textColor="#FFaaaaaa"
+        android:textSize="10sp" />
+
+</RelativeLayout>

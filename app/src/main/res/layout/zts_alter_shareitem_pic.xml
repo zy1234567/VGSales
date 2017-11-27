@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/share_fragment_adapter_word_linearlayout"
+    android:layout_width="match_parent"
+    android:background="#ffffffff"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <include layout="@layout/zts_alter_shareitem_head" />
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:visibility="gone"
+        android:background="@color/weilai_color_001"/>
+    <LinearLayout
+        android:id="@+id/middle_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/share_fragment_adapter_word_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="5dp" >
+
+        <TextView
+            android:id="@+id/tv_tail_time"
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="right"
+            android:text="10日"
+            android:textColor="@color/weilai_color_003"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tv_tail_date"
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/tv_tail_time"
+            android:layout_below="@+id/tv_tail_time"
+            android:gravity="right"
+            android:text="2016/07"
+            android:textColor="#FF999999"
+            android:textSize="10sp"
+            android:visibility="invisible" />
+
+        <com.ztstech.vgmate.weigets.MyGridView
+            android:id="@+id/gv_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/tv_tail_time"
+            android:horizontalSpacing="5dp"
+            android:listSelector="#00000000"
+            android:numColumns="3"
+            android:verticalSpacing="5dp" >
+        </com.ztstech.vgmate.weigets.MyGridView>
+    </RelativeLayout>
+    </LinearLayout>
+    <include layout="@layout/zts_alter_shareitem_bottom" />
+    <!-- 空间个人分享用来占距离的view -->
+    <View
+        android:id="@+id/space_item_margin"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:visibility="gone"
+        android:background="@color/weilai_color_001"/>
+    <include layout="@layout/listview_share_comment"/>
+
+    <View
+        android:id="@+id/activity_zixun_adapter_view"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="5dp"
+        android:background="#FFe9e9e9" />
+
+</LinearLayout>
