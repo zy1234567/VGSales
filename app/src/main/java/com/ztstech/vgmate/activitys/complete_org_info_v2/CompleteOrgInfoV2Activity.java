@@ -15,7 +15,6 @@ import com.google.gson.Gson;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.category_info.CategoryTagsActivity;
-import com.ztstech.vgmate.activitys.category_info.CategoryTagsPresenter;
 import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.manager.EditOrgManagerActivity;
 import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.multiple_line.EditOrgInfoMultipleInputActivity;
 import com.ztstech.vgmate.activitys.complete_org_info_v2.subview.org_logo.EditOrgLogoActivity;
@@ -322,7 +321,7 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
 
         if (!TextUtils.isEmpty(infoBean.updatename) && !TextUtils.isEmpty(infoBean.updatename)) {
             tvLastUpdate.setText("最后更新：" +
-                    TimeUtils.InformationTime(infoBean.updatetime) + "(" + infoBean.updatename + ")");
+                    TimeUtils.informationTime(infoBean.updatetime) + "(" + infoBean.updatename + ")");
             llUpdate.setVisibility(View.VISIBLE);
         }else {
             llUpdate.setVisibility(View.GONE);

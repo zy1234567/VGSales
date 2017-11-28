@@ -17,10 +17,14 @@ import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import android.text.style.StyleSpan;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.base.BaseApplication;
 import com.ztstech.vgmate.base.BaseApplicationLike;
 
@@ -30,6 +34,74 @@ import com.ztstech.vgmate.base.BaseApplicationLike;
  */
 
 public class ViewUtils {
+
+    /**
+     * 获得屏幕宽度
+     */
+    @SuppressWarnings("deprecation")
+    public static int getPhoneWidth(Context ctx){
+        if (ctx == null){
+            return 0;
+        }
+        WindowManager wm = (WindowManager) ctx
+                .getSystemService(Context.WINDOW_SERVICE);
+
+        int width = wm.getDefaultDisplay().getWidth();
+        return width;
+    }
+    // 获得屏幕宽度
+    public static int getScreenWidth(Context context) {
+        if (context == null){
+            return 0;
+        }
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.widthPixels;
+    }
+
+    /**
+     * 获得屏幕高度
+     */
+    @SuppressWarnings("deprecation")
+    public static int getPhoneHeight(Context ctx){
+        if (ctx == null){
+            return 0;
+        }
+        WindowManager wm = (WindowManager) ctx
+                .getSystemService(Context.WINDOW_SERVICE);
+
+        int height = wm.getDefaultDisplay().getHeight();
+        return height;
+    }
+
+    /**
+     * 获得屏幕高宽比
+     */
+    public static double getPhoneScale(Context context){
+        return getPhoneHeight(context) / getPhoneWidth(context);
+    }
+
+    /**
+     * 计算四张图片时的宽度
+     * @return
+     */
+    public static int messureFourImgWidth(Context ctx){
+        int phoneWidth = getPhoneWidth(ctx);
+        int oneImgWidth = (phoneWidth - dp2px(ctx,84))/3;
+        int width = phoneWidth - dp2px(ctx,79) - oneImgWidth;
+        return width;
+    }
+
+    /**
+     * 计算不是四张图片时的宽度
+     * @return
+     */
+    public static int messureNoFourImgWidth(Context ctx){
+        int phoneWidth = getPhoneWidth(ctx);
+        int width = phoneWidth - dp2px(ctx,84);
+        return width;
+    }
 
     /**
      * dp转px
@@ -227,6 +299,49 @@ public class ViewUtils {
         } else {
             tvContent.setText(allText);
         }
+    }
+
+    //设置单图尺寸
+    public static String setSingleImageSize(Context ctx,String imgs,ImageView iv){
+        String[] str = null;
+        String[] wh  = null;
+        String url = "",width = "",height = "";
+        int w = 0,h = 0;
+        try {
+            str = imgs.split("!@");
+            url = str[0];//截取图片地址
+            wh = str[1].split(":;");
+            width = wh[0];//截取图片宽
+            height = wh[1];//截取图片高
+            w = Integer.parseInt(width);
+            h = Integer.parseInt(height);
+        } catch (Exception e) {
+        }
+        //要设的高宽固定值:屏幕宽度的一半+50
+        int length = (int) (getPhoneWidth(ctx) * 0.5 + 50);
+        if(iv == null){
+            return "";
+        }
+        RelativeLayout.LayoutParams linearParams = (RelativeLayout.LayoutParams) iv.getLayoutParams();
+        if (w > h) {  //宽大于高，宽度设为固定值。
+            float scale = (float)w/(float)h;
+            if (scale<3) { //长图不做处理
+                linearParams.width = length;
+                linearParams.height = (int) (((float)length) / scale);
+            }
+        }else if(w < h) {  //高大于宽，高度设为固定值
+            float scale = (float)h/(float)w;
+            linearParams.height = length;
+            linearParams.width = (int) ((float)length / scale);
+        }else if(w!=0 && w == h){  //正方形图片高宽都设为最大值
+            linearParams.width = length;
+            linearParams.height = length;
+        }
+        if (w!=0 && h!=0 && (h/w)>5) { //扩大长图点击区域
+            iv.setPadding(0, 0, ctx.getResources().getDimensionPixelSize(R.dimen.job_space_share_img_w), 0);
+        }
+        iv.setLayoutParams(linearParams);
+        return url;
     }
 
 }

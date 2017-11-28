@@ -96,7 +96,6 @@ public interface CreateShareApi {
     @FormUrlEncoded
     @POST("exempt/AppSaleSaveLikeForSharing")
     Observable<BaseRespBean> priseShare(@Field("status") String status,
-                                        @Field("likid") String likid,
                                         @Field("likedid") String likedid,
                                         @Field("likeduid") String likeduid,
                                          @Field(NetConstants.PARAM_AUTHID) String authId);

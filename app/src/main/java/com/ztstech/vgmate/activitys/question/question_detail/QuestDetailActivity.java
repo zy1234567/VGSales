@@ -1,23 +1,15 @@
 package com.ztstech.vgmate.activitys.question.question_detail;
 
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ztstech.vgmate.R;
-import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.question.adapter.AnwserViewHolder;
 import com.ztstech.vgmate.activitys.question.adapter.AnwsetListAdapter;
@@ -33,7 +25,6 @@ import com.ztstech.vgmate.weigets.TopBar;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -80,7 +71,7 @@ public class QuestDetailActivity extends MVPActivity<QuestionDetailContact.Prese
         bean = (QuestionListBean.ListBean) getIntent().getSerializableExtra(KEY_BEAN);
         if (bean != null) {
             tvDes.setText(bean.descrption);
-            tvTime.setText(TimeUtils.InformationTime(bean.createtime));
+            tvTime.setText(TimeUtils.informationTime(bean.createtime));
         }
         adapter = new AnwsetListAdapter(this);
         recycler.setLayoutManager(new AutoLinearLayoutManager(this));

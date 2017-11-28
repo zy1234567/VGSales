@@ -28,12 +28,14 @@ public class LinkViewHolder extends BaseShareViewHolder {
     @BindView(R.id.img_arrow)
     ImageView imgArrow;
 
-    public LinkViewHolder(View itemView) {
-        super(itemView);
+    public LinkViewHolder(View itemView,ClickCallback callback) {
+        super(itemView,callback);
     }
 
     @Override
     protected void refreshView(ShareListBean.ListBean data) {
         super.refreshView(data);
+        tvLinkTitle.setText(data.title);
+//        Glide.with(getContext()).load(data.)
     }
 }

@@ -102,7 +102,7 @@ public class TimeUtils {
      * @param time
      * @return
      */
-    public static String InformationTime(String time) {
+    public static String informationTime(String time) {
         if (TextUtils.isEmpty(time)) {
             return "";
         }

@@ -14,7 +14,7 @@
         android:layout_marginTop="10dp"/>
 
     <TextView
-        android:id="@+id/tv_relation"
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -30,8 +30,8 @@
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tv_relation"
-        android:layout_below="@+id/tv_relation"
+        android:layout_alignLeft="@+id/tv_name"
+        android:layout_below="@+id/tv_name"
         android:layout_marginTop="2dp"
         android:layout_toRightOf="@+id/img_head"
         android:text="10:22"

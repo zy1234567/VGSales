@@ -21,12 +21,18 @@ public class PicsViewHolder extends BaseShareViewHolder {
     @BindView(R.id.gv_img)
     MyGridView gvImg;
 
-    public PicsViewHolder(View itemView) {
-        super(itemView);
+    public PicsViewHolder(View itemView,ClickCallback callback) {
+        super(itemView,callback);
     }
 
     @Override
     protected void refreshView(ShareListBean.ListBean data) {
         super.refreshView(data);
+        ShareFragmentPicAdapter adapter = new ShareFragmentPicAdapter(getContext(), data, getPosition());
+        gvImg.setAdapter(adapter);
+        final String imgs[] = data.contentpicsurl.split(",");
+//        initQuanWen(holder, position, bean.getSummary());
+//        holder.tvQuanwen.setOnClickListener(new MyClickListener(position, holder));
+        setGridViewWidth(imgs, gvImg);
     }
 }

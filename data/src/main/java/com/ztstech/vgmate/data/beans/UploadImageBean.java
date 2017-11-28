@@ -1,5 +1,7 @@
 package com.ztstech.vgmate.data.beans;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by zhiyuan on 2017/8/29.
  */
@@ -8,11 +10,15 @@ public class UploadImageBean extends BaseRespBean{
 
 
     /**
+     * width : 2448
+     * height : 3264
      * status : 0
-     * urls : http://static.verygrow.com/bucea/null/20170829/1_0_203324102375null,http://static.verygrow.com/bucea/null/20170829/1_0_203325940602null,http://static.verygrow.com/bucea/null/20170829/1_0_203325324224null,http://static.verygrow.com/bucea/null/20170829/1_0_203326726730null
-     * suourls : http://static.verygrow.com/bucea/null/20170829/0_203324102375null,http://static.verygrow.com/bucea/null/20170829/0_203325940602null,http://static.verygrow.com/bucea/null/20170829/0_203325324224null,http://static.verygrow.com/bucea/null/20170829/0_203326726730null
+     * urls : http://static.verygrow.com/bucea/null/20171128/1_0_132514281772null
+     * suourls : http://static.verygrow.com/bucea/null/20171128/0_132514281772null
      */
 
+    public int width;
+    public int height;
     public String urls;
     public String suourls;
 }

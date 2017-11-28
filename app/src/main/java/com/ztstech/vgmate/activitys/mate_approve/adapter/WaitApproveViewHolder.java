@@ -10,17 +10,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.ztstech.vgmate.R;
-import com.ztstech.vgmate.activitys.user_info.edit_info.EditInfoActivity;
 import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.WaitApproveMateListBean;
-import com.ztstech.vgmate.utils.SexUtils;
 import com.ztstech.vgmate.utils.TimeUtils;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static android.R.attr.data;
 
 /**
  * Created by smm on 2017/11/13.
@@ -74,7 +69,7 @@ public class WaitApproveViewHolder extends SimpleViewHolder<WaitApproveMateListB
         tvDutyName.setText(data.responsible);
         tvIntroName.setText(data.fname);
         if (!TextUtils.isEmpty(data.lastuptime)){
-            tvTime.setText(TimeUtils.InformationTime(data.lastuptime));
+            tvTime.setText(TimeUtils.informationTime(data.lastuptime));
             tvTime.setVisibility(View.VISIBLE);
         }else {
             tvTime.setVisibility(View.GONE);

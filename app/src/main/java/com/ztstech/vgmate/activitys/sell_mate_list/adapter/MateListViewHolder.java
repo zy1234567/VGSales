@@ -87,7 +87,7 @@ public class MateListViewHolder extends SimpleViewHolder<MatelistBean.ListBean> 
         }
         tvPhone.setText(data.phone);
         tvAddress.setText(LocationUtils.getFormedString(data.district));
-        tvTime.setText("最近登录:".concat(TimeUtils.InformationTime(data.lastlogintime)));
+        tvTime.setText("最近登录:".concat(TimeUtils.informationTime(data.lastlogintime)));
         /** 责任人 */
         tvDutyName.setText(data.principal);
         /** 介绍人 */

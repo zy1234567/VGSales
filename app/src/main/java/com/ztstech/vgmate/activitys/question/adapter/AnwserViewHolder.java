@@ -54,7 +54,7 @@ public class AnwserViewHolder extends SimpleViewHolder<AnwserListBean.ListBean> 
         super.refreshView(data);
         tvName.setText(data.uname);
         tvPriseNum.setText(String.valueOf(data.likedCnt));
-        tvTime.setText(TimeUtils.InformationTime(data.ansCreatetime));
+        tvTime.setText(TimeUtils.informationTime(data.ansCreatetime));
         Glide.with(getContext())
                 .load(data.picsurl)
                 .error(R.mipmap.ic_launcher)

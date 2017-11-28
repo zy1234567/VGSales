@@ -1,9 +1,7 @@
 package com.ztstech.vgmate.activitys.main_fragment.subview.information.adapter;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -64,7 +62,7 @@ public class InformationViewHolder extends SimpleViewHolder<MainListBean.ListBea
         tvCommentCount.setText(String.valueOf(data.evacnt));
         tvTitle.setText(data.title);
         Glide.with(getContext()).load(data.picurl).into(ivTitle);
-        tvDate.setText("最后更新：".concat(TimeUtils.InformationTime(data.createtime)));
+        tvDate.setText("最后更新：".concat(TimeUtils.informationTime(data.createtime)));
 
         clickListener.bean = data;
         longClickListener.bean = data;

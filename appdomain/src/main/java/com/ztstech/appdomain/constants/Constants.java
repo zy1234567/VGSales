@@ -88,13 +88,13 @@ public interface Constants {
      */
     /** 只有文字 */
     String SHARE_ONLY_WORD = "01";
-    /** 只有文字 */
+    /** 只有图片 */
     String SHARE_ONLY_IMAGE = "02";
-    /** 只有文字 */
+    /** 文字加图片 */
     String SHARE_WORD_IMAGE = "03";
-    /** 只有文字 */
+    /** 只有链接 */
     String SHARE_ONLY_LINK = "04";
-    /** 只有文字 */
+    /** 连接加文字 */
     String SHARE_WORD_LINK = "05";
 
 }

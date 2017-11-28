@@ -25,12 +25,13 @@ public class WordViewHolder extends BaseShareViewHolder {
     @BindView(R.id.tv_quanwen)
     TextView tvQuanwen;
 
-    public WordViewHolder(View itemView) {
-        super(itemView);
+    public WordViewHolder(View itemView,ClickCallback callback) {
+        super(itemView,callback);
     }
 
     @Override
     protected void refreshView(ShareListBean.ListBean data) {
         super.refreshView(data);
+        tvContent.setText(data.content);
     }
 }

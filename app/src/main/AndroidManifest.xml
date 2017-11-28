@@ -102,6 +102,7 @@
         <activity android:name=".activitys.org_follow.OrgFollowActivity"/>
         <activity android:name=".activitys.photo_browser.PhotoBrowserActivity"/>
         <activity android:name=".activitys.sell_mate_list.SearchMateActivity"/>
+        <activity android:name=".activitys.share.create.CreateMyShareActivity"/>
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"

@@ -10,7 +10,6 @@ import com.google.gson.Gson;
 import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.article_detail.ArticleDetailActivity;
-import com.ztstech.vgmate.activitys.main_fragment.subview.information.adapter.InformationViewHolder;
 import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.MainListBean;
 import com.ztstech.vgmate.utils.DialogUtils;
@@ -63,7 +62,7 @@ public class NoticeViewHolder extends SimpleViewHolder<MainListBean.ListBean> {
         Glide.with(getContext()).load(data.picurl).into(ivTitle);
         tvTitle.setText(data.title);
         tvContent.setText(data.summary);
-        tvTime.setText("最后更新：" + TimeUtils.InformationTime(data.updatetime));
+        tvTime.setText("最后更新：" + TimeUtils.informationTime(data.updatetime));
         tvCommentCount.setText(String.valueOf(data.evacnt));
         longClickListener.bean =data;
         clickListener.bean = data;

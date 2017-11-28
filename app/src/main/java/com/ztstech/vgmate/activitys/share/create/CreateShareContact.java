@@ -16,6 +16,9 @@ public class CreateShareContact {
         String getShareContent();
         String getLinkUrl();
         File[] getImgaeFiles();
+        String getPicdescribe();
+        void onCommitFinsih();
+        void showError(String msg);
     }
 
     interface Presenter extends BasePresenter<View>{

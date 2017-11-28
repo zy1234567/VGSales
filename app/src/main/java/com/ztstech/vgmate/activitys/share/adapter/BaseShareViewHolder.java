@@ -1,15 +1,20 @@
 package com.ztstech.vgmate.activitys.share.adapter;
 
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.ShareListBean;
+import com.ztstech.vgmate.utils.TimeUtils;
+import com.ztstech.vgmate.utils.ViewUtils;
 
 import butterknife.BindView;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -22,10 +27,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BaseShareViewHolder extends SimpleViewHolder<ShareListBean.ListBean>{
 
+    public static final String STATUS_PRISE = "01";
+    public static final String STATUS_UN_PRISE = "00";
+
     @BindView(R.id.img_head)
     CircleImageView imgHead;
-    @BindView(R.id.tv_relation)
-    TextView tvRelation;
+    @BindView(R.id.tv_name)
+    TextView tvName;
     @BindView(R.id.tv_time)
     TextView tvTime;
     @BindView(R.id.tv_right_one)
@@ -59,12 +67,84 @@ public class BaseShareViewHolder extends SimpleViewHolder<ShareListBean.ListBean
     @BindView(R.id.lt_commemt_share)
     LinearLayout ltCommemtShare;
 
-    public BaseShareViewHolder(View itemView) {
+    /**
+     * 四张图片时gridview宽度
+     */
+    private static int FOUR_IMGS_WIDTH;
+
+    /**
+     * 不是四张图片时的gridview宽度
+     */
+    private static int NO_FOUR_IMGS_WIDTH;
+
+    private ClickCallback clickCallback;
+
+    public BaseShareViewHolder(View itemView,ClickCallback callback) {
         super(itemView);
+        this.clickCallback = callback;
+        FOUR_IMGS_WIDTH = ViewUtils.messureFourImgWidth(getContext());
+        NO_FOUR_IMGS_WIDTH = ViewUtils.messureNoFourImgWidth(getContext());
     }
 
     @Override
-    protected void refreshView(ShareListBean.ListBean data) {
+    protected void refreshView(final ShareListBean.ListBean data) {
         super.refreshView(data);
+        Glide.with(getContext()).load(data.userpicsurl).error(R.mipmap.pre_default_image).into(imgHead);
+        tvName.setText(data.uname);
+        tvTime.setText(TimeUtils.informationTime(data.createtime));
+        if (TextUtils.equals(data.likestatus,STATUS_PRISE)){
+            imgPrise.setImageResource(R.mipmap.ico_zan_y);
+        }else {
+            imgPrise.setImageResource(R.mipmap.ico_zan);
+        }
+        if (TextUtils.equals(data.uid, UserRepository.getInstance().getUser().getUserBean().info.uid)
+                || UserRepository.getInstance().getUser().enableDeleteComment()){
+            tvDelete.setVisibility(View.VISIBLE);
+            tvDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clickCallback.onClickDelete(data);
+                }
+            });
+        }
+        imgPrise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCallback.onClickPrise(data);
+                if (TextUtils.equals(data.likestatus,STATUS_PRISE)){
+                    data.likestatus = STATUS_UN_PRISE;
+                    imgPrise.setImageResource(R.mipmap.ico_zan);
+                }else {
+                    data.likestatus = STATUS_PRISE;
+                    imgPrise.setImageResource(R.mipmap.ico_zan_y);
+                }
+            }
+        });
+    }
+
+    /**
+     * 四张图片时需要设置成四格样式gridview
+     */
+    protected void setGridViewWidth(String[] imgs, GridView gridView) {
+        if (imgs == null) {
+            return;
+        }
+        //四张图时的布局
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) gridView.getLayoutParams();
+        if (imgs.length == 4) {
+            gridView.setNumColumns(2);
+            lp.width = FOUR_IMGS_WIDTH;
+            lp.height = FOUR_IMGS_WIDTH;
+        } else {
+            gridView.setNumColumns(3);
+            lp.width = NO_FOUR_IMGS_WIDTH;
+            lp.height = NO_FOUR_IMGS_WIDTH;
+        }
+        gridView.setLayoutParams(lp);
+    }
+
+    public interface ClickCallback{
+        void onClickPrise(ShareListBean.ListBean data);
+        void onClickDelete(ShareListBean.ListBean data);
     }
 }

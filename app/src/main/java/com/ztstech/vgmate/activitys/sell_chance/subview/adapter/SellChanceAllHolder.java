@@ -53,7 +53,7 @@ public class SellChanceAllHolder extends SimpleViewHolder<SellChanceBean.ListBea
         super.refreshView(data);
         tvTitle.setText(data.oname);
         tvLocation.setText(LocationUtils.getFormedString(data.district));
-        tvTime.setText(TimeUtils.InformationTime(data.createtime));
+        tvTime.setText(TimeUtils.informationTime(data.createtime));
         tvSectionTitle.setText(data.salename);
         Glide.with(getContext()).load(data.picurl).into(img);
     }

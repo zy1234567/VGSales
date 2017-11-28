@@ -1,10 +1,12 @@
 package com.ztstech.vgmate.activitys.share.adapter;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.data.beans.ShareListBean;
 
@@ -23,13 +25,23 @@ public class LinkAndWordViewHolder extends BaseShareViewHolder {
     TextView tvContent;
     @BindView(R.id.tv_quanwen)
     TextView tvQuanwen;
+    @BindView(R.id.img_link)
+    ImageView imgLink;
+    @BindView(R.id.tv_link_title)
+    TextView tvLinkTitle;
+    @BindView(R.id.layout_link)
+    RelativeLayout layoutLink;
 
-    public LinkAndWordViewHolder(View itemView) {
-        super(itemView);
+    public LinkAndWordViewHolder(View itemView,ClickCallback callback) {
+        super(itemView,callback);
     }
 
     @Override
     protected void refreshView(ShareListBean.ListBean data) {
         super.refreshView(data);
+        tvContent.setText(data.content);
+//        holder.tvQuanwen.setOnClickListener(new MyClickListener(position, holder));
+        tvLinkTitle.setText(data.title);
+//        Glide.with(getContext()).load(data.)
     }
 }

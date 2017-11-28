@@ -15,7 +15,6 @@ import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.CommentBean;
 import com.ztstech.vgmate.utils.TimeUtils;
 import com.ztstech.vgmate.utils.ViewUtils;
-import com.ztstech.vgmate.weigets.IOSStyleDialog;
 
 /**
  * Created by zhiyuan on 2017/10/12.
@@ -67,7 +66,7 @@ public class CommentRecyclerAdapter extends SimpleRecyclerAdapter<CommentBean.Li
 
         commentHolder.tvName.setText(data.name);
         commentHolder.tvComment.setText(data.comment);
-        commentHolder.tvDate.setText(TimeUtils.InformationTime(data.createtime));
+        commentHolder.tvDate.setText(TimeUtils.informationTime(data.createtime));
 
         if (TextUtils.isEmpty(data.touid)) {
             //如果不是回复某人
