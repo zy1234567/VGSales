@@ -40,7 +40,7 @@ public class LinkAndWordViewHolder extends BaseShareViewHolder {
     protected void refreshView(ShareListBean.ListBean data) {
         super.refreshView(data);
         tvContent.setText(data.content);
-//        holder.tvQuanwen.setOnClickListener(new MyClickListener(position, holder));
+        initQuanWen(data,tvQuanwen, tvContent,getPosition(), data.content);
         tvLinkTitle.setText(data.title);
 //        Glide.with(getContext()).load(data.)
     }

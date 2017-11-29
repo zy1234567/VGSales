@@ -55,13 +55,13 @@ interface CommentContract {
          */
         void appendCommentList(String newsid);
 
-        void comment(String flid, String newid, String touid, String comment);
+        void comment(String flid, String newid, String touid, String comment,String flg);
 
         /**
          * 删除评论
          * @param lid
          */
-        void deleteComment(String lid);
+        void deleteComment(String lid,String flg);
 
     }
 }

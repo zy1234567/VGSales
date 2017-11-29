@@ -15,6 +15,7 @@ public class ShareContact {
     public interface View extends BaseView{
         void showError(String msg);
         void onDeleteSuccess();
+        void onCommentSuccess();
         void setListData(List<ShareListBean.ListBean> listData);
     }
 
@@ -23,6 +24,7 @@ public class ShareContact {
         void loadNetData();
         void appendData();
         void deleteShare(String sid);
+        void comment(ShareListBean.ListBean bean,String content);
         void priseShare(ShareListBean.ListBean data);
     }
 

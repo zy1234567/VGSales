@@ -1,5 +1,6 @@
 package com.ztstech.vgmate.data.beans;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,20 +9,20 @@ import java.util.List;
  * @date 2017/11/27
  */
 
-public class ShareListBean extends BaseRespBean{
+public class ShareListBean extends BaseRespBean implements Serializable{
 
 
     /**
-     * pager : {"totalRows":4,"pageSize":10,"currentPage":1,"totalPages":1,"startRow":0}
-     * list : [{"commentList":[],"ntype":"03","createtime":"2017-11-28 11:50:12","userpicsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","likeList":[],"uname":"王晨曦","contentpicsurl":"","title":"哦www","content":"民工","url":"http://zts-user-pc:8082/static/html/20171128/115008111939.html","sid":"f58442ce84204ad694b8990ef8d4edf0","delflg":"00","userpicurl":"http://static.verygrow.com/bucea/image/20170831/1_0_193958598544.jpg","uid":"0a8822da7cb84ebe9ece458dc909a6b1","contentpicurl":"","linkurl":""},{"picdescribe":"","commentList":[],"createtime":"2017-11-27 17:45:51","userpicsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","likeList":[],"uname":"王晨曦","contentpicsurl":"","title":"","content":"00000","url":"http://zts-user-pc:8082/static/html/20171127/174551715003.html","sid":"078fe08633504c56a346231d3f5c2d80","delflg":"00","userpicurl":"http://static.verygrow.com/bucea/image/20170831/1_0_193958598544.jpg","uid":"0a8822da7cb84ebe9ece458dc909a6b1","contentpicurl":""},{"picdescribe":"","commentList":[],"createtime":"2017-11-27 17:45:30","userpicsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","likeList":[],"uname":"王晨曦","contentpicsurl":"","title":"","content":"00000","url":"http://zts-user-pc:8082/static/html/20171127/174520707301.html","sid":"cf02f97ba3e540e1a416fe6e4de92971","delflg":"00","userpicurl":"http://static.verygrow.com/bucea/image/20170831/1_0_193958598544.jpg","uid":"0a8822da7cb84ebe9ece458dc909a6b1","contentpicurl":""},{"delflg":"00","userpicurl":"http://static.verygrow.com/bucea/image/20170831/1_0_193958598544.jpg","commentList":[{"comuid":"27677c94e420451c914c7fe2c5d84fba","delflg":"00","uid":"2c907e825e41abc4015e41af9d900002","uname":"BellKate","comid":"1","type":"03","content":"不错+1","cid":"asdad122312e"},{"comuid":"27677c94e420451c914c7fe2c5d84fba","delflg":"00","picurl":"http://static.verygrow.com/bucea/image/20170826/1_0_200022866420.jpg","uid":"2c907e825e17044a015e1723fc2d0004","uname":"1312312","picsurl":"http://static.verygrow.com/bucea/image/20170826/1_0_200022866420.jpg","comid":"1","type":"03","content":"不错","cid":"12312312312312"}],"uid":"0a8822da7cb84ebe9ece458dc909a6b1","userpicsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","likeList":[{"delflg":"00","picurl":"http://static.verygrow.com/bucea/image/20170826/1_0_200022866420.jpg","likeduid":"27677c94e420451c914c7fe2c5d84fba","uid":"2c907e825e17044a015e1723fc2d0004","uname":"1312312","likestatus":"00","liketype":"02","likedid":"1","picsurl":"http://static.verygrow.com/bucea/image/20170826/1_0_200022866420.jpg","likid":"1021245dc23123usdas3123uiiosajo1"},{"delflg":"00","likeduid":"27677c94e420451c914c7fe2c5d84fba","uid":"2c907e825e41abc4015e41af9d900002","uname":"BellKate","likestatus":"00","liketype":"02","likedid":"1","likid":"102935fc0ad940d64214affdb994879e"},{"delflg":"00","picurl":"http://static.verygrow.com/bucea/image/20171010/1_0_210744207818.jpg","likeduid":"27677c94e420451c914c7fe2c5d84fba","uid":"2c907e825eac850f015eac9041d50006","uname":"Wang","likestatus":"00","liketype":"02","likedid":"1","picsurl":"http://static.verygrow.com/bucea/image/20171010/0_210744207818.jpg","likid":"123123123214dsssd1231231dasd123"}],"uname":"王晨曦","title":"题目1","content":"内容1","sid":"1"}]
+     * pager : {"totalRows":5,"pageSize":10,"currentPage":1,"totalPages":1,"startRow":0}
+     * list : [{"picdescribe":"","commentList":[{"flid":56,"uid":"0a8822da7cb84ebe9ece458dc909a6b1","lastcomment":"000","createtime":"2017-11-29 15:53:06","touid":"0a8822da7cb84ebe9ece458dc909a6b1","touname":"王晨曦","lid":57,"name":"王晨曦","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","comment":"7777","topicsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg"},{"flid":0,"uid":"0a8822da7cb84ebe9ece458dc909a6b1","createtime":"2017-11-29 15:52:58","lid":56,"name":"王晨曦","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","comment":"000"},{"flid":52,"uid":"0a8822da7cb84ebe9ece458dc909a6b1","lastcomment":"123123","createtime":"2017-11-29 15:41:49","touid":"0a8822da7cb84ebe9ece458dc909a6b1","touname":"王晨曦","lid":55,"name":"王晨曦","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","comment":"000","topicsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg"},{"flid":52,"uid":"0a8822da7cb84ebe9ece458dc909a6b1","lastcomment":"123123","createtime":"2017-11-29 15:41:01","touid":"0a8822da7cb84ebe9ece458dc909a6b1","touname":"王晨曦","lid":54,"name":"王晨曦","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","comment":"1111","topicsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg"},{"flid":0,"uid":"0a8822da7cb84ebe9ece458dc909a6b1","createtime":"2017-11-29 15:40:51","lid":53,"name":"王晨曦","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","comment":"123123"},{"flid":0,"uid":"0a8822da7cb84ebe9ece458dc909a6b1","createtime":"2017-11-29 15:40:10","lid":52,"name":"王晨曦","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","comment":"123123"},{"flid":0,"uid":"0a8822da7cb84ebe9ece458dc909a6b1","createtime":"2017-11-29 15:40:02","lid":51,"name":"王晨曦","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","comment":"123123"}],"createtime":"2017-11-28 17:32:02","userpicsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","likeList":[{"delflg":"00","picurl":"http://static.verygrow.com/bucea/image/20170831/1_0_193958598544.jpg","likeduid":"0a8822da7cb84ebe9ece458dc909a6b1","uid":"0a8822da7cb84ebe9ece458dc909a6b1","createtime":"2017-11-29 16:09:02","uname":"王晨曦","liketype":"02","likedid":"261a5e8b47984c19b1c21046e8b4eb31","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","likid":"27d91a8b1c5d4edfad5a50d9ae9907c4"}],"uname":"王晨曦","likestatus":"01","contentpicsurl":"","title":"","type":"01","ntype":"01","content":"吃的什么时候回来呀去了吗啊的我都会有一个人的生活方式的转变我的心情很好的生活方式的转变我的生活方式的转变我我呃呃呃额额额的你都不想我了呃呃额额的你也不知道我的意思是你的老婆大人你不是我 便是你的生活方式的转变吃的什么时候回来呀去了吗啊的我都会有一个人的生活方式的转变我的心情很好的生活方式的转变我的生活方式的转变我我呃呃呃额额额吃的什么时候回来呀去了吗啊的我都会有一个人的生活方式的转变我的心情很好的生活方式的转变我的生活方式的转变我我呃呃呃额额额的你都不想我了呃呃额额的你也不知道我的意思是你的老婆大人你不是我 便是你的生活方式的转变你都不想我了呃呃额额的你也不知道我的意思是你的老婆大人你不是我 便是你的生活方式的吃的吃的吃的什么时候回来呀去了吗啊的我都会有一个人的生活方式的转变我的心情很好的生活方式的转变我的生活方式的转变我我呃呃呃额额额的你都不想我了呃呃额额的你也不知道我的意思是你的老婆大人你不是我 便是你的生活方式的转变时候回来呀去了吗啊的我都会有一个人的生活方式的转变我的心情很好的生活方式的转变我的生活方式的转变我我呃呃呃额额额的你都不想我了呃呃额额的你也不知道我的意思是你的老婆大人你不是我 便是你的生活方式的转变时候回来呀去了吗啊的我都会有一个人的生活方式的转变我的心情很好的生活方式的转变我的生活方式的转变我我呃呃呃额额额的你都不想我了呃呃额额的你也不知道我的意思是你的老婆大人你不是我 便是你的生活方式的转变吃的什么时候回来呀去了吗啊的我都会有一个人的生活方式的转变我的心情很好的生活方式的转变我的生活方式的转变我我呃呃呃额额额的你都不想我了呃呃额额的你也不知道我的意思是你的老婆大人你不是我 便是你的生活方式的转变","url":"http://zts-user-pc:8082/static/html/20171128/173159187375.html","sid":"261a5e8b47984c19b1c21046e8b4eb31","delflg":"00","userpicurl":"http://static.verygrow.com/bucea/image/20170831/1_0_193958598544.jpg","uid":"0a8822da7cb84ebe9ece458dc909a6b1","contentpicurl":""},{"picdescribe":"[\n  \"\"\n]","commentList":[],"createtime":"2017-11-28 17:29:04","userpicsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","likeList":[{"delflg":"00","picurl":"http://static.verygrow.com/bucea/image/20170831/1_0_193958598544.jpg","likeduid":"0a8822da7cb84ebe9ece458dc909a6b1","uid":"0a8822da7cb84ebe9ece458dc909a6b1","createtime":"2017-11-29 11:49:17","uname":"王晨曦","liketype":"02","likedid":"a6dc7cbdf8644b16aff187d01ae2ec4e","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","likid":"2ea028ebe2ba4e9ebf6e825d51326f19"}],"uname":"王晨曦","likestatus":"01","contentpicsurl":"http://static.verygrow.com/bucea/image/20171128/0_172902527061.jpg!@828:;550","title":"","type":"02","ntype":"02","content":"","url":"http://zts-user-pc:8082/static/html/20171128/172904243431.html","sid":"a6dc7cbdf8644b16aff187d01ae2ec4e","delflg":"00","userpicurl":"http://static.verygrow.com/bucea/image/20170831/1_0_193958598544.jpg","uid":"0a8822da7cb84ebe9ece458dc909a6b1","contentpicurl":"http://static.verygrow.com/bucea/image/20171128/1_0_172902527061.jpg"},{"picdescribe":"","commentList":[],"createtime":"2017-11-28 15:59:31","userpicsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","likeList":[],"uname":"王晨曦","likestatus":"01","contentpicsurl":"","title":"百度一下","type":"05","ntype":"05","content":"链接+文字","url":"","sid":"1ce4c780116f4155bfff7ab41dc50792","picurl":"http://static.txboss.com/matter/txbshare68.jpg","delflg":"00","userpicurl":"http://static.verygrow.com/bucea/image/20170831/1_0_193958598544.jpg","uid":"0a8822da7cb84ebe9ece458dc909a6b1","contentpicurl":"","linkurl":"http://www.baidu.com"},{"picdescribe":"[\"\",\"\",\"\",\"\"]","commentList":[],"createtime":"2017-11-28 15:03:35","userpicsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","likeList":[],"uname":"王晨曦","likestatus":"01","contentpicsurl":"http://static.verygrow.com/bucea/null/20171128/0_150256472345null,http://static.verygrow.com/bucea/null/20171128/0_150256500595null,http://static.verygrow.com/bucea/null/20171128/0_150257368097null,http://static.verygrow.com/bucea/null/20171128/0_150258358260null","title":"","type":"03","ntype":"03","content":"四张图加文字","url":"http://zts-user-pc:8082/static/html/20171128/150335178577.html","sid":"c603071cf38b4f61bc809428e0104532","delflg":"00","userpicurl":"http://static.verygrow.com/bucea/image/20170831/1_0_193958598544.jpg","uid":"0a8822da7cb84ebe9ece458dc909a6b1","contentpicurl":"http://static.verygrow.com/bucea/null/20171128/1_0_150256472345null,http://static.verygrow.com/bucea/null/20171128/1_0_150256500595null,http://static.verygrow.com/bucea/null/20171128/1_0_150257368097null,http://static.verygrow.com/bucea/null/20171128/1_0_150258358260null","linkurl":""},{"commentList":[],"createtime":"2017-11-28 15:02:21","userpicsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","likeList":[{"delflg":"00","picurl":"http://static.verygrow.com/bucea/image/20170831/1_0_193958598544.jpg","likeduid":"0a8822da7cb84ebe9ece458dc909a6b1","uid":"0a8822da7cb84ebe9ece458dc909a6b1","createtime":"2017-11-29 16:10:13","uname":"王晨曦","liketype":"02","likedid":"739adadf487a4f44a3d5cecb509b6425","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","likid":"edfd2d1478e841de963b94a44bbabddc"}],"uname":"王晨曦","likestatus":"01","contentpicsurl":"","title":"","type":"01","ntype":"01","content":"纯文本","url":"http://zts-user-pc:8082/static/html/20171128/150221877572.html","sid":"739adadf487a4f44a3d5cecb509b6425","delflg":"00","userpicurl":"http://static.verygrow.com/bucea/image/20170831/1_0_193958598544.jpg","uid":"0a8822da7cb84ebe9ece458dc909a6b1","contentpicurl":"","linkurl":""}]
      */
 
     public PagerBean pager;
     public List<ListBean> list;
 
-    public static class PagerBean {
+    public static class PagerBean implements Serializable{
         /**
-         * totalRows : 4
+         * totalRows : 5
          * pageSize : 10
          * currentPage : 1
          * totalPages : 1
@@ -35,33 +36,39 @@ public class ShareListBean extends BaseRespBean{
         public int startRow;
     }
 
-    public static class ListBean {
+    public static class ListBean implements Serializable{
         /**
-         * commentList : []
-         * ntype : 03
-         * createtime : 2017-11-28 11:50:12
+         * picdescribe :
+         * commentList : [{"flid":56,"uid":"0a8822da7cb84ebe9ece458dc909a6b1","lastcomment":"000","createtime":"2017-11-29 15:53:06","touid":"0a8822da7cb84ebe9ece458dc909a6b1","touname":"王晨曦","lid":57,"name":"王晨曦","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","comment":"7777","topicsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg"},{"flid":0,"uid":"0a8822da7cb84ebe9ece458dc909a6b1","createtime":"2017-11-29 15:52:58","lid":56,"name":"王晨曦","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","comment":"000"},{"flid":52,"uid":"0a8822da7cb84ebe9ece458dc909a6b1","lastcomment":"123123","createtime":"2017-11-29 15:41:49","touid":"0a8822da7cb84ebe9ece458dc909a6b1","touname":"王晨曦","lid":55,"name":"王晨曦","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","comment":"000","topicsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg"},{"flid":52,"uid":"0a8822da7cb84ebe9ece458dc909a6b1","lastcomment":"123123","createtime":"2017-11-29 15:41:01","touid":"0a8822da7cb84ebe9ece458dc909a6b1","touname":"王晨曦","lid":54,"name":"王晨曦","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","comment":"1111","topicsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg"},{"flid":0,"uid":"0a8822da7cb84ebe9ece458dc909a6b1","createtime":"2017-11-29 15:40:51","lid":53,"name":"王晨曦","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","comment":"123123"},{"flid":0,"uid":"0a8822da7cb84ebe9ece458dc909a6b1","createtime":"2017-11-29 15:40:10","lid":52,"name":"王晨曦","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","comment":"123123"},{"flid":0,"uid":"0a8822da7cb84ebe9ece458dc909a6b1","createtime":"2017-11-29 15:40:02","lid":51,"name":"王晨曦","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","comment":"123123"}]
+         * createtime : 2017-11-28 17:32:02
          * userpicsurl : http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg
-         * likeList : []
+         * likeList : [{"delflg":"00","picurl":"http://static.verygrow.com/bucea/image/20170831/1_0_193958598544.jpg","likeduid":"0a8822da7cb84ebe9ece458dc909a6b1","uid":"0a8822da7cb84ebe9ece458dc909a6b1","createtime":"2017-11-29 16:09:02","uname":"王晨曦","liketype":"02","likedid":"261a5e8b47984c19b1c21046e8b4eb31","picsurl":"http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg","likid":"27d91a8b1c5d4edfad5a50d9ae9907c4"}]
          * uname : 王晨曦
+         * likestatus : 01
          * contentpicsurl :
-         * title : 哦www
-         * content : 民工
-         * url : http://zts-user-pc:8082/static/html/20171128/115008111939.html
-         * sid : f58442ce84204ad694b8990ef8d4edf0
+         * title :
+         * type : 01
+         * ntype : 01
+         * content : 吃的什么时候回来呀去了吗啊的我都会有一个人的生活方式的转变我的心情很好的生活方式的转变我的生活方式的转变我我呃呃呃额额额的你都不想我了呃呃额额的你也不知道我的意思是你的老婆大人你不是我 便是你的生活方式的转变吃的什么时候回来呀去了吗啊的我都会有一个人的生活方式的转变我的心情很好的生活方式的转变我的生活方式的转变我我呃呃呃额额额吃的什么时候回来呀去了吗啊的我都会有一个人的生活方式的转变我的心情很好的生活方式的转变我的生活方式的转变我我呃呃呃额额额的你都不想我了呃呃额额的你也不知道我的意思是你的老婆大人你不是我 便是你的生活方式的转变你都不想我了呃呃额额的你也不知道我的意思是你的老婆大人你不是我 便是你的生活方式的吃的吃的吃的什么时候回来呀去了吗啊的我都会有一个人的生活方式的转变我的心情很好的生活方式的转变我的生活方式的转变我我呃呃呃额额额的你都不想我了呃呃额额的你也不知道我的意思是你的老婆大人你不是我 便是你的生活方式的转变时候回来呀去了吗啊的我都会有一个人的生活方式的转变我的心情很好的生活方式的转变我的生活方式的转变我我呃呃呃额额额的你都不想我了呃呃额额的你也不知道我的意思是你的老婆大人你不是我 便是你的生活方式的转变时候回来呀去了吗啊的我都会有一个人的生活方式的转变我的心情很好的生活方式的转变我的生活方式的转变我我呃呃呃额额额的你都不想我了呃呃额额的你也不知道我的意思是你的老婆大人你不是我 便是你的生活方式的转变吃的什么时候回来呀去了吗啊的我都会有一个人的生活方式的转变我的心情很好的生活方式的转变我的生活方式的转变我我呃呃呃额额额的你都不想我了呃呃额额的你也不知道我的意思是你的老婆大人你不是我 便是你的生活方式的转变
+         * url : http://zts-user-pc:8082/static/html/20171128/173159187375.html
+         * sid : 261a5e8b47984c19b1c21046e8b4eb31
          * delflg : 00
          * userpicurl : http://static.verygrow.com/bucea/image/20170831/1_0_193958598544.jpg
          * uid : 0a8822da7cb84ebe9ece458dc909a6b1
          * contentpicurl :
-         * linkurl :
-         * picdescribe :
+         * picurl : http://static.txboss.com/matter/txbshare68.jpg
+         * linkurl : http://www.baidu.com
          */
 
-        public String ntype;
+        public String picdescribe;
         public String createtime;
         public String userpicsurl;
         public String uname;
+        public String likestatus;
         public String contentpicsurl;
         public String title;
+        public String type;
+        public String ntype;
         public String content;
         public String url;
         public String sid;
@@ -69,61 +76,63 @@ public class ShareListBean extends BaseRespBean{
         public String userpicurl;
         public String uid;
         public String contentpicurl;
+        public String picurl;
         public String linkurl;
-        public String picdescribe;
         public List<CommentListBean> commentList;
         public List<LikeListBean> likeList;
-        public String likestatus;
-        public String picurl;
-    }
 
-    public static class LikeListBean{
+        public static class CommentListBean implements Serializable{
+            /**
+             * flid : 56
+             * uid : 0a8822da7cb84ebe9ece458dc909a6b1
+             * lastcomment : 000
+             * createtime : 2017-11-29 15:53:06
+             * touid : 0a8822da7cb84ebe9ece458dc909a6b1
+             * touname : 王晨曦
+             * lid : 57
+             * name : 王晨曦
+             * picsurl : http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg
+             * comment : 7777
+             * topicsurl : http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg
+             */
 
-        /**
-         * delflg : 00
-         * picurl : http://static.verygrow.com/bucea/image/20170826/1_0_200022866420.jpg
-         * likeduid : 27677c94e420451c914c7fe2c5d84fba
-         * uid : 2c907e825e17044a015e1723fc2d0004
-         * uname : 1312312
-         * likestatus : 00
-         * liketype : 02
-         * likedid : 1
-         * picsurl : http://static.verygrow.com/bucea/image/20170826/1_0_200022866420.jpg
-         * likid : 1021245dc23123usdas3123uiiosajo1
-         */
+            public int flid;
+            public String uid;
+            public String lastcomment;
+            public String createtime;
+            public String touid;
+            public String touname;
+            public int lid;
+            public String name;
+            public String picsurl;
+            public String comment;
+            public String topicsurl;
+        }
 
-        public String delflg;
-        public String picurl;
-        public String likeduid;
-        public String uid;
-        public String uname;
-        public String likestatus;
-        public String liketype;
-        public String likedid;
-        public String picsurl;
-        public String likid;
-    }
+        public static class LikeListBean implements Serializable{
+            /**
+             * delflg : 00
+             * picurl : http://static.verygrow.com/bucea/image/20170831/1_0_193958598544.jpg
+             * likeduid : 0a8822da7cb84ebe9ece458dc909a6b1
+             * uid : 0a8822da7cb84ebe9ece458dc909a6b1
+             * createtime : 2017-11-29 16:09:02
+             * uname : 王晨曦
+             * liketype : 02
+             * likedid : 261a5e8b47984c19b1c21046e8b4eb31
+             * picsurl : http://static.verygrow.com/bucea/image/20170831/0_193958598544.jpg
+             * likid : 27d91a8b1c5d4edfad5a50d9ae9907c4
+             */
 
-    public static class CommentListBean{
-
-        /**
-         * comuid : 27677c94e420451c914c7fe2c5d84fba
-         * delflg : 00
-         * uid : 2c907e825e41abc4015e41af9d900002
-         * uname : BellKate
-         * comid : 1
-         * type : 03
-         * content : 不错+1
-         * cid : asdad122312e
-         */
-
-        public String comuid;
-        public String delflg;
-        public String uid;
-        public String uname;
-        public String comid;
-        public String type;
-        public String content;
-        public String cid;
+            public String delflg;
+            public String picurl;
+            public String likeduid;
+            public String uid;
+            public String createtime;
+            public String uname;
+            public String liketype;
+            public String likedid;
+            public String picsurl;
+            public String likid;
+        }
     }
 }

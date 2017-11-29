@@ -1,4 +1,4 @@
-package com.ztstech.vgmate.activitys.article_detail;
+package com.ztstech.vgmate.activitys.share.detail;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -21,14 +21,14 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.activitys.article_detail.ArticleDetailActivity;
+import com.ztstech.vgmate.activitys.article_detail.ArticleDetailContract;
+import com.ztstech.vgmate.activitys.article_detail.ArticleDetailPresenter;
 import com.ztstech.vgmate.activitys.comment.CommentActivity;
-import com.ztstech.vgmate.data.beans.MainListBean;
+import com.ztstech.vgmate.data.beans.ShareListBean;
 import com.ztstech.vgmate.data.constants.NetConstants;
-import com.ztstech.vgmate.utils.Go2EditShareUtils;
 import com.ztstech.vgmate.utils.KeyboardUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.TopBar;
@@ -36,20 +36,16 @@ import com.ztstech.vgmate.weigets.TopBar;
 import butterknife.BindView;
 
 /**
- * 文章详情界面
+ *
  * @author smm
+ * @date 2017/11/29
+ * 显示分享网页详情的界面
  */
-public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Presenter> implements
-        ArticleDetailContract.View, View.OnClickListener {
 
-    /**请求编辑资讯*/
-    public static final int REQ_EDIT = 1;
+public class ShareDetailActivity extends MVPActivity<ArticleDetailContract.Presenter>
+        implements ArticleDetailContract.View, View.OnClickListener{
 
-    /**是否显示编辑*/
-    public static final String ARG_SHOW_EDIT = "arg_show_edit";
-
-    /**传入数据{@link MainListBean.ListBean}，转换为json string传入*/
-    public static final String ARG_LIST_DATA = "arg_list_data";
+    public static final String KEY_BEAN = "bean";
 
     @BindView(R.id.web_view)
     WebView webView;
@@ -68,16 +64,8 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
     @BindView(R.id.pb)
     ProgressBar pb;
 
-    /**传入的数据*/
-    private MainListBean.ListBean data;
-    /**显示编辑*/
-    private boolean showEdit;
-
-
-    @Override
-    protected int getLayoutRes() {
-        return R.layout.activity_article_detail;
-    }
+    /** 该条分享的实体类 */
+    private ShareListBean.ListBean bean;
 
     @Override
     protected ArticleDetailContract.Presenter initPresenter() {
@@ -87,23 +75,13 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
-
-        initIntentData();
-
-        if (showEdit) {
-            topBar.getRightImage().setVisibility(View.VISIBLE);
-        }else {
-            topBar.getRightImage().setVisibility(View.INVISIBLE);
-        }
-
+        Intent intent = getIntent();
+        bean = (ShareListBean.ListBean) intent.getSerializableExtra(KEY_BEAN);
         webView.setWebChromeClient(new WebChromeClient());
         webView.getSettings().setJavaScriptEnabled(true);
 
 
-        webView.loadUrl(NetConstants.BASE_URL
-                .concat("jsp/webh5/inforDetails.jsp?type=01"
-                        .concat("&nid=").concat(data.nid)));
-
+        webView.loadUrl(bean.url);
 
         webView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -141,25 +119,13 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
                 super.onProgressChanged(view, newProgress);
             }
         });
-
-
-        topBar.getRightImage().setOnClickListener(this);
-
-        //隐藏右侧编辑按钮
-        if (UserRepository.getInstance().getUser().getUserBean().info.uid.equals(data.createuid)
-                || UserRepository.getInstance().getUser().canEditArticle()) {
-            topBar.getRightImage().setVisibility(View.VISIBLE);
-        }else {
-            topBar.getRightImage().setVisibility(View.GONE);
-        }
-
         etComment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
                 if (b) {
-                    KeyboardUtils.showKeyBoard(ArticleDetailActivity.this, etComment);
+                    KeyboardUtils.showKeyBoard(ShareDetailActivity.this, etComment);
                 }else {
-                    KeyboardUtils.hideKeyBoard(ArticleDetailActivity.this, etComment);
+                    KeyboardUtils.hideKeyBoard(ShareDetailActivity.this, etComment);
                 }
                 setEditTextHint(b);
                 showCommentIconAndCount();
@@ -183,10 +149,20 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
 
         rlComment.setOnClickListener(this);
         tvSubmit.setOnClickListener(this);
-
+        topBar.getRightImage().setVisibility(View.GONE);
         //初始化状态
         setEditTextHint(false);
         showCommentIconAndCount();
+    }
+
+    @Override
+    public void onCommentFinish(@Nullable String errmsg) {
+
+    }
+
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_article_detail;
     }
 
     private void showCommentIconAndCount() {
@@ -195,8 +171,8 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
             imgComment.setVisibility(View.INVISIBLE);
             tvSubmit.setVisibility(View.VISIBLE);
         }else {
-            if (data.evacnt > 0) {
-                tvCommentCount.setText(String.valueOf(data.evacnt));
+            if (bean.commentList.size() > 0) {
+                tvCommentCount.setText(String.valueOf(bean.commentList.size()));
                 tvCommentCount.setVisibility(View.VISIBLE);
             }else {
                 tvCommentCount.setVisibility(View.INVISIBLE);
@@ -214,38 +190,28 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
     private void setEditTextHint(boolean isEdit) {
         if (isEdit) {
             //如果获取到焦点
-            etComment.setHintTextColor(ContextCompat.getColor(ArticleDetailActivity.this,
+            etComment.setHintTextColor(ContextCompat.getColor(ShareDetailActivity.this,
                     R.color.color_103));
             etComment.setHint("写评论...");
         }else {
             SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder("   写评论...");
-            ImageSpan imageSpan = new ImageSpan(ArticleDetailActivity.this, R.mipmap.ico_com,
+            ImageSpan imageSpan = new ImageSpan(ShareDetailActivity.this, R.mipmap.ico_com,
                     ImageSpan.ALIGN_BASELINE);
             spannableStringBuilder.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            etComment.setHintTextColor(ContextCompat.getColor(ArticleDetailActivity.this,
+            etComment.setHintTextColor(ContextCompat.getColor(ShareDetailActivity.this,
                     R.color.color_100));
             etComment.setHint(spannableStringBuilder);
         }
     }
 
-    /**
-     * 初始化数据
-     */
-    private void initIntentData() {
-        Intent it = getIntent();
-        this.data = new Gson().fromJson(it.getStringExtra(ARG_LIST_DATA),
-                MainListBean.ListBean.class);
-        this.showEdit = it.getBooleanExtra(ARG_SHOW_EDIT, false);
 
-    }
 
     @Override
     public void onClick(View view) {
         if (view == rlComment) {
             //跳转评论界面
             Intent it = new Intent(this, CommentActivity.class);
-            it.putExtra(CommentActivity.ARG_NEWSID, data.nid);
-            it.putExtra(CommentActivity.FLG_COMMENT_TYPE, CommentActivity.FLG_INFO);
+            it.putExtra(CommentActivity.ARG_NEWSID, bean.sid);
             startActivity(it);
         }else if (view == tvSubmit) {
             //提交评论
@@ -253,20 +219,7 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
                 ToastUtil.toastCenter(this, "评论不能为空");
                 return;
             }
-            mPresenter.comment(etComment.getText().toString(), data);
-        }else if (view == topBar.getRightImage()) {
-            //编辑分享
-            Go2EditShareUtils.editShareInfo(this,data);
-        }
-    }
-
-    @Override
-    public void onCommentFinish(@Nullable String errmsg) {
-        hideLoading(null);
-        if (errmsg == null) {
-            ToastUtil.toastCenter(this, "评论成功");
-        }else {
-            ToastUtil.toastCenter(this, "评论失败：" + errmsg);
+//            mPresenter.comment(etComment.getText().toString(), data);
         }
     }
 }

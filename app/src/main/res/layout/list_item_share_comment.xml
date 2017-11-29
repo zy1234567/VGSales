@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:orientation="horizontal"
+    android:id="@+id/lt_comment">
+    
+<TextView 
+    android:id="@+id/second_message_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text=""
+    android:textSize="13sp"
+    android:includeFontPadding="false"
+    android:textColor="@color/list_item_title_txt_color_14"
+    android:layout_marginBottom="3dp"
+    android:layout_marginLeft="2dp"/>
+<!--<TextView -->
+    <!--android:id="@+id/second_message_content"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="我"-->
+    <!--android:visibility="gone"-->
+    <!--android:textColor="@color/list_item_title_txt_color_1"-->
+    <!--android:textSize="13sp"/>-->
+</LinearLayout>

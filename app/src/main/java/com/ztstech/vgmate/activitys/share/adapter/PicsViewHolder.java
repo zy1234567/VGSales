@@ -10,7 +10,9 @@ import com.ztstech.vgmate.weigets.MyGridView;
 import butterknife.BindView;
 
 /**
- * Created by smm on 2017/11/27.
+ *
+ * @author smm
+ * @date 2017/11/27
  * 多张纯图片
  */
 

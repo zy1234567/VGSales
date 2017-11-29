@@ -34,10 +34,12 @@ public interface CommentApi {
      * @param newid 资讯id
      * @param touid 被评论人uid
      * @param comment 评论内容
+     * @param flg "00"分享 资讯"01"
      * @return
      */
     @POST("exempt/AppSalesAddComment")
     Observable<BaseRespBean> comment(@Query("flid") String flid,
+                                     @Query("flg") String flg,
                                      @Query("newid") String newid,
                                      @Query("touid") String touid,
                                      @Query("comment") String comment,
@@ -50,5 +52,6 @@ public interface CommentApi {
      */
     @POST("exempt/AppSalesDelComment")
     Observable<BaseRespBean> deleteComment(@Query("lid") String lid,
+                                           @Query("flg") String flg,
                                            @Query(NetConstants.PARAM_AUTHID) String authid);
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:gravity="center_vertical"
+    android:id="@+id/comment_layout"
+    android:minHeight="48dp" >
+
+    <Button
+        android:id="@+id/comment_footer_cancel_button"
+        android:layout_width="50dp"
+        android:layout_height="33dp"
+        android:layout_alignBottom="@+id/comment_footer_edittext"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="14dp"
+        android:background="@drawable/selector_dialog_commit"
+        android:enabled="false"
+        android:text="提交"
+        android:textColor="@color/weilai_color_001"
+        android:textSize="@dimen/text_size_4" />
+
+    <com.ztstech.vgmate.weigets.LatsSeletionEditText
+        android:id="@+id/comment_footer_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/comment_footer_cancel_button"
+        android:background="@drawable/comment_footer_edittext"
+        android:hint="说些什么吧~"
+        android:maxLength="140"
+        android:maxHeight="59dp"
+        android:minHeight="33dp"
+        android:paddingLeft="10dp"
+        android:textColor="@color/list_item_title_txt_color_1"
+        android:textSize="@dimen/list_item_title_txt_size_8"
+        android:gravity="center_vertical"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/comment_footer_cancel_button"
+        android:maxHeight="59dp"
+        android:minHeight="48dp"
+        android:visibility="visible" />
+
+</RelativeLayout>

@@ -36,7 +36,7 @@ public class ShareListAdapter extends SimpleRecyclerAdapter<ShareListBean.ListBe
     /** 单张图片+文字 */
     public static final int TYPE_SHARE_SIMPLE_PICANDWOED = 6;
 
-    BaseShareViewHolder.ClickCallback callback;
+    private BaseShareViewHolder.ClickCallback callback;
 
 
     public ShareListAdapter(BaseShareViewHolder.ClickCallback callback){

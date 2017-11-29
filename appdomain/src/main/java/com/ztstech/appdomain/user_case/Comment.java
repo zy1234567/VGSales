@@ -20,19 +20,21 @@ public class Comment implements UserCase<Observable<BaseRespBean>> {
     private String flid;
     private String touid;
     private String comment;
+    private String flg;
 
-    public Comment(String flid, String newid, String touid, String comment) {
+    public Comment(String flid, String newid, String touid, String comment,String flg) {
         this.newid = newid;
         this.flid = flid;
         this.touid = touid;
         this.comment = comment;
+        this.flg = flg;
 
         commentApi = RetrofitUtils.createService(CommentApi.class);
     }
 
     @Override
     public Observable<BaseRespBean> run() {
-        return commentApi.comment(flid, newid, touid, comment,
+        return commentApi.comment(flid, flg,newid, touid, comment,
                 UserRepository.getInstance().getAuthId());
     }
 }

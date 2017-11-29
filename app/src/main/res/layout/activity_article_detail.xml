@@ -12,6 +12,7 @@
         android:id="@+id/top_bar"
         app:barTitle=""
         app:srcRight="@mipmap/ico_edit_notice"
+        app:backgroundColor="@color/color_109"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

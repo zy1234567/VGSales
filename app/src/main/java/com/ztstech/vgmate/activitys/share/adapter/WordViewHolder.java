@@ -33,5 +33,6 @@ public class WordViewHolder extends BaseShareViewHolder {
     protected void refreshView(ShareListBean.ListBean data) {
         super.refreshView(data);
         tvContent.setText(data.content);
+        initQuanWen(data,tvQuanwen, tvContent,getPosition(), data.content);
     }
 }

@@ -15,15 +15,16 @@ import rx.Observable;
 public class DeleteComment implements UserCase<Observable<BaseRespBean>> {
 
     private CommentApi commentApi;
-    private String lid;
+    private String lid,flg;
 
-    public DeleteComment(String lid) {
+    public DeleteComment(String lid,String flg) {
         this.lid = lid;
+        this.flg = flg;
         this.commentApi = RetrofitUtils.createService(CommentApi.class);
     }
 
     @Override
     public Observable<BaseRespBean> run() {
-        return commentApi.deleteComment(lid, UserRepository.getInstance().getAuthId());
+        return commentApi.deleteComment(lid,flg,UserRepository.getInstance().getAuthId());
     }
 }

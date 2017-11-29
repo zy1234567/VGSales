@@ -38,6 +38,12 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
         CommentContract.View, CommentRecyclerAdapter.CommentRecyclerCallback, View.OnClickListener,
         SoftKeyboardStateHelper.SoftKeyboardStateListener{
 
+    public static final String FLG_COMMENT_TYPE = "flg";
+
+    public static final String FLG_INFO = "01";
+
+    public static final String FLG_SHARE = "00";
+
     /**
      * 传入参数，资讯id
      */
@@ -65,6 +71,8 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
 
     private String newsId;
 
+    private String flg;
+
 
 
     @Override
@@ -80,7 +88,7 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
-
+        flg = getIntent().getStringExtra(FLG_COMMENT_TYPE);
         keyboardStateHelper = new SoftKeyboardStateHelper(llRoot);
 
         this.newsId = getIntent().getStringExtra(ARG_NEWSID);
@@ -222,7 +230,7 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
         new IOSStyleDialog(this, "确认删除这条评论吗?", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                mPresenter.deleteComment(String.valueOf(bean.lid));
+                mPresenter.deleteComment(String.valueOf(bean.lid),flg);
             }
         }).show();
 
@@ -246,14 +254,14 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
                 CommentBean.ListBean listBean = (CommentBean.ListBean) tag;
                 if (isReplay) {
                     mPresenter.comment(String.valueOf(listBean.flid), newsId,
-                            listBean.uid, comment);
+                            listBean.uid, comment,flg);
                 }else {
                     mPresenter.comment(null, newsId,
-                            listBean.uid, comment);
+                            listBean.uid, comment,flg);
                 }
             }else {
                 //直接回复新闻
-                mPresenter.comment(null, newsId, "", comment);
+                mPresenter.comment(null, newsId, "", comment,flg);
             }
         }
     }

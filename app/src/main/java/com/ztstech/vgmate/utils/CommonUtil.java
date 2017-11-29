@@ -18,6 +18,7 @@ import android.os.Environment;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.renderscript.Element;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -708,4 +710,20 @@ public class CommonUtil {
         result.append(data);
         return result.toString();
     }
+
+    /**
+     * 将图片地址转化为list（传入到图片浏览器时需要）
+     * @return
+     */
+    public static List<String> imgUrlsToList(@NonNull String picurls){
+        List<String> list = new ArrayList<>();
+        String[] array = picurls.split(",");
+        if(array.length > 0){
+            for (int i = 0; i < array.length; i++){
+                list.add(array[i]);
+            }
+        }
+        return list;
+    }
+
 }

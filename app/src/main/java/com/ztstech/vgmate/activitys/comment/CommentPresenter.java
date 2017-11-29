@@ -44,7 +44,7 @@ public class CommentPresenter extends PresenterImpl<CommentContract.View> implem
 
 
     @Override
-    public void comment(String flid, String newid, String touid, String comment) {
+    public void comment(String flid, String newid, String touid, String comment,String flg) {
 
         new BasePresenterSubscriber<BaseRespBean>(mView) {
 
@@ -52,18 +52,18 @@ public class CommentPresenter extends PresenterImpl<CommentContract.View> implem
             protected void childNext(BaseRespBean baseRespBean) {
                 mView.onCommentFinish(baseRespBean.getErrmsg());
             }
-        }.run(new Comment(flid, newid, touid, comment).run());
+        }.run(new Comment(flid, newid, touid, comment,flg).run());
     }
 
     @Override
-    public void deleteComment(String lid) {
+    public void deleteComment(String lid,String flg) {
         new BasePresenterSubscriber<BaseRespBean>(mView) {
 
             @Override
             protected void childNext(BaseRespBean baseRespBean) {
                 mView.deleteCommentFinish(baseRespBean.getErrmsg());
             }
-        }.run(new DeleteComment(lid).run());
+        }.run(new DeleteComment(lid,flg).run());
     }
 
     private void requestData(final int page, String newsid) {

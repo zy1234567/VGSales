@@ -109,17 +109,29 @@ public interface CreateShareApi {
                                            @Field(NetConstants.PARAM_AUTHID) String authId);
 
     /***
-     * 评论分享或删除评论
-     * status（00:删除评论，01:评论），cid（主键），comid（分享id），
+     * 评论分享
+     * status（00:删除评论，01:评论），comid（分享id），
        comuid（分享发布人uid），content（内容），authId
      */
     @FormUrlEncoded
     @POST("exempt/AppSaleSaveCommentForSharing")
-    Observable<BaseRespBean> editShareComment(@Field("status") String status,
-                                              @Field("cid") String cid,
+    Observable<BaseRespBean> commentShare(@Field("status") String status,
                                               @Field("comid") String comid,
                                               @Field("comuid") String comuid,
                                               @Field("content") String content,
+                                              @Field(NetConstants.PARAM_AUTHID) String authId);
+
+    /***
+     * 删除分享评论
+     * status（00:删除评论，01:评论），cid（主键），comid（分享id），
+     comuid（分享发布人uid），authId
+     */
+    @FormUrlEncoded
+    @POST("exempt/AppSaleSaveCommentForSharing")
+    Observable<BaseRespBean> deleteShareComment(@Field("status") String status,
+                                              @Field("cid") String cid,
+                                              @Field("comid") String comid,
+                                              @Field("comuid") String comuid,
                                               @Field(NetConstants.PARAM_AUTHID) String authId);
 
 }

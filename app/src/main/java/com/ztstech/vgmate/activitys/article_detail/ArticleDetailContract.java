@@ -11,7 +11,7 @@ import com.ztstech.vgmate.data.beans.MainListBean;
  * Created by zhiyuan on 2017/9/9.
  */
 
-interface ArticleDetailContract {
+public interface ArticleDetailContract {
 
     interface View extends BaseView {
 

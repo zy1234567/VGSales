@@ -105,6 +105,11 @@ public class ShareFragment extends MVPFragment<ShareContact.Presenter> implement
     }
 
     @Override
+    public void onCommentSuccess() {
+        ToastUtil.toastCenter(getContext(),"评论成功");
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQ_SHARE && resultCode == CreateMyShareActivity.RES_SHARE){
@@ -140,5 +145,10 @@ public class ShareFragment extends MVPFragment<ShareContact.Presenter> implement
                 mPresenter.deleteShare(data.sid);
             }
         }).show();
+    }
+
+    @Override
+    public void comment(ShareListBean.ListBean data, String content) {
+        mPresenter.comment(data,content);
     }
 }

@@ -14,9 +14,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.ztstech.vgmate.R;
+import com.ztstech.vgmate.activitys.photo_browser.PhotoBrowserActivity;
 import com.ztstech.vgmate.data.beans.ShareListBean;
+import com.ztstech.vgmate.utils.CommonUtil;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 /**
  * 九宫格图片adapter
@@ -147,12 +150,11 @@ public class ShareFragmentPicAdapter extends BaseAdapter {
 	 *
 	 */
 	private void toShowBigPhoto(int position){
-//		Intent intent = new Intent(ctx, ActivityPhotoBrowser.class);
-//		intent.putExtra("imgPosition",position);
-////        intent.putParcelableArrayListExtra("bitmaps", (ArrayList<? extends Parcelable>) mapList);
-//		intent.putExtra("position", beanPosition);
-//		intent.putExtra("bean",dataBean);
-//		ctx.startActivity(intent);
+		Intent intent = new Intent(ctx, PhotoBrowserActivity.class);
+		intent.putExtra(PhotoBrowserActivity.KEY_POSITION,position);
+		intent.putStringArrayListExtra(PhotoBrowserActivity.KEY_LIST,
+                (ArrayList<String>) CommonUtil.imgUrlsToList(dataBean.contentpicurl));
+		ctx.startActivity(intent);
 	}
 	
 	

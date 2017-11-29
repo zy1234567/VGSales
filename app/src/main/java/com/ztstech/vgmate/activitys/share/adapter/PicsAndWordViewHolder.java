@@ -38,8 +38,8 @@ public class PicsAndWordViewHolder extends BaseShareViewHolder {
         gvImg.setAdapter(adapter);
         tvContent.setText(data.content);
         final String imgs[] = data.contentpicsurl.split(",");
-//        initQuanWen(holder, position, bean.getSummary());
-//        holder.tvQuanwen.setOnClickListener(new MyClickListener(position, holder));
+        initQuanWen(data,tvQuanwen, tvContent,getPosition(), data.content);
+
         setGridViewWidth(imgs, gvImg);
         super.refreshView(data);
     }

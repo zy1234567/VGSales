@@ -5,6 +5,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
+import com.ztstech.appdomain.user_case.Comment;
 import com.ztstech.appdomain.user_case.DeleteMyShare;
 import com.ztstech.appdomain.user_case.GetShareList;
 import com.ztstech.appdomain.user_case.PriseShare;
@@ -113,6 +114,26 @@ public class SharePresenter extends PresenterImpl<ShareContact.View> implements 
     }
 
     @Override
+    public void comment(ShareListBean.ListBean bean, String content) {
+        new BasePresenterSubscriber<BaseRespBean>(mView){
+
+            @Override
+            protected void childNext(BaseRespBean baseRespBean) {
+                if (baseRespBean.isSucceed()){
+                    mView.onCommentSuccess();
+                }else {
+                    mView.showError("评论出错：".concat(baseRespBean.errmsg));
+                }
+            }
+
+            @Override
+            protected void childError(Throwable e) {
+                mView.showError("评论出错：".concat(e.getMessage()));
+            }
+        }.run(new Comment(null,bean.sid,bean.uid,content,"00").run());
+    }
+
+    @Override
     public void priseShare(ShareListBean.ListBean data) {
         String status = TextUtils.equals(data.likestatus, BaseShareViewHolder.STATUS_PRISE)
                 ? BaseShareViewHolder.STATUS_UN_PRISE : BaseShareViewHolder.STATUS_PRISE;
@@ -133,5 +154,7 @@ public class SharePresenter extends PresenterImpl<ShareContact.View> implements 
             }
         }.run(new PriseShare(data.sid,status,data.sid,data.uid).run());
     }
+
+
 
 }
