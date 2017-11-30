@@ -107,6 +107,7 @@ public class ShareFragment extends MVPFragment<ShareContact.Presenter> implement
     @Override
     public void onCommentSuccess() {
         ToastUtil.toastCenter(getContext(),"评论成功");
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -135,6 +136,7 @@ public class ShareFragment extends MVPFragment<ShareContact.Presenter> implement
     @Override
     public void onClickPrise(ShareListBean.ListBean data) {
         mPresenter.priseShare(data);
+        adapter.notifyDataSetChanged();
     }
 
     @Override

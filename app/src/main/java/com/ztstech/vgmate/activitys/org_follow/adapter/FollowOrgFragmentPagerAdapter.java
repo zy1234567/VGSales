@@ -18,9 +18,12 @@ public class FollowOrgFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private String[] TITLES;
 
-    public FollowOrgFragmentPagerAdapter(FragmentManager fm) {
+    private String uid;
+
+    public FollowOrgFragmentPagerAdapter(FragmentManager fm,String uid) {
         super(fm);
         TITLES = new String[] {"已确认", "已认领","管理端"};
+        this.uid = uid;
     }
 
     @Override
@@ -28,14 +31,17 @@ public class FollowOrgFragmentPagerAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             OrgFollowListFragment followListFragment = OrgFollowListFragment.newInstance();
             followListFragment.setIndexStatus(GetOrgFollow.STATUS_INDEX_CONCERN);
+            followListFragment.setUid(uid);
             return followListFragment;
         }else if (position == 1){
             OrgFollowListFragment followListFragment = OrgFollowListFragment.newInstance();
             followListFragment.setIndexStatus(GetOrgFollow.STATUS_INDEX_CLAIM);
+            followListFragment.setUid(uid);
             return followListFragment;
         }else {
             OrgFollowListFragment followListFragment = OrgFollowListFragment.newInstance();
             followListFragment.setIndexStatus(GetOrgFollow.STATUS_INDEX_MANAGER);
+            followListFragment.setUid(uid);
             return followListFragment;
         }
     }

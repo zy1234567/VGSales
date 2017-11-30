@@ -71,9 +71,8 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
 
     private String newsId;
 
+    /** 区分是分享评论还是资讯通知评论的标志位 */
     private String flg;
-
-
 
     @Override
     protected int getLayoutRes() {

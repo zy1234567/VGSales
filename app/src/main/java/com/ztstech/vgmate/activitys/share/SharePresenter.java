@@ -5,6 +5,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.appdomain.user_case.Comment;
 import com.ztstech.appdomain.user_case.DeleteMyShare;
 import com.ztstech.appdomain.user_case.GetShareList;
@@ -114,12 +115,16 @@ public class SharePresenter extends PresenterImpl<ShareContact.View> implements 
     }
 
     @Override
-    public void comment(ShareListBean.ListBean bean, String content) {
+    public void comment(final ShareListBean.ListBean bean, final String content) {
         new BasePresenterSubscriber<BaseRespBean>(mView){
 
             @Override
             protected void childNext(BaseRespBean baseRespBean) {
                 if (baseRespBean.isSucceed()){
+                    ShareListBean.ListBean.CommentListBean commentListBean = new ShareListBean.ListBean.CommentListBean();
+                    commentListBean.comment = content;
+                    commentListBean.name = UserRepository.getInstance().getUser().getUserBean().info.uname;
+                    bean.commentList.add(commentListBean);
                     mView.onCommentSuccess();
                 }else {
                     mView.showError("评论出错：".concat(baseRespBean.errmsg));
@@ -130,7 +135,7 @@ public class SharePresenter extends PresenterImpl<ShareContact.View> implements 
             protected void childError(Throwable e) {
                 mView.showError("评论出错：".concat(e.getMessage()));
             }
-        }.run(new Comment(null,bean.sid,bean.uid,content,"00").run());
+        }.run(new Comment(null,bean.sid,null,content,"00").run());
     }
 
     @Override

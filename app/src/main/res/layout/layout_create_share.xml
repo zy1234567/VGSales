@@ -83,7 +83,9 @@
                 android:id="@+id/tv_none_link"
                 android:text="剪切板中没有有效链接"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_8"
+                android:layout_marginLeft="12dp"/>
 
             <WebView
                 android:id="@+id/web_view"

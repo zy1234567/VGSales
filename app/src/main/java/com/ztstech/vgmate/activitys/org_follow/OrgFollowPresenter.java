@@ -42,14 +42,14 @@ public class OrgFollowPresenter extends PresenterImpl<OrgFollowContact.View> imp
 
 
     @Override
-    public void loadData() {
-        requestData(1,status);
+    public void loadData(String uid) {
+        requestData(1,status,uid);
     }
 
     @Override
-    public void loadCacheData() {
+    public void loadCacheData(String uid) {
         OrgFollowlistBean listBean = new Gson().fromJson(preferences.getString(
-                ORG_FOLLOW_LIST.concat(String.valueOf(status)),""),OrgFollowlistBean.class);
+                ORG_FOLLOW_LIST.concat(uid).concat(String.valueOf(status)),""),OrgFollowlistBean.class);
         if (listBean != null){
             listBeanList.addAll(listBean.list);
             mView.setData(listBeanList);
@@ -57,15 +57,15 @@ public class OrgFollowPresenter extends PresenterImpl<OrgFollowContact.View> imp
     }
 
     @Override
-    public void appendData() {
+    public void appendData(String uid) {
         if (totalPage == currentPage){
             mView.setData(listBeanList);
         }else {
-            requestData(currentPage + 1,status);
+            requestData(currentPage + 1,status,uid);
         }
     }
 
-    private void requestData(final int page, final int status) {
+    private void requestData(final int page, final int status,final String uid) {
         new BasePresenterSubscriber<OrgFollowlistBean>(mView,false) {
 
             @Override
@@ -82,7 +82,7 @@ public class OrgFollowPresenter extends PresenterImpl<OrgFollowContact.View> imp
                     if (currentPage == 1) {
                         //刷新
                         listBeanList.clear();
-                        preferences.edit().putString(ORG_FOLLOW_LIST.concat(String.valueOf(status)),new Gson().toJson(bean)).apply();
+                        preferences.edit().putString(ORG_FOLLOW_LIST.concat(uid).concat(String.valueOf(status)),new Gson().toJson(bean)).apply();
                     }
                     listBeanList.addAll(bean.list);
                     mView.setData(listBeanList);
@@ -92,7 +92,7 @@ public class OrgFollowPresenter extends PresenterImpl<OrgFollowContact.View> imp
                 }
 
             }
-        }.run(new GetOrgFollow(status, page).run());
+        }.run(new GetOrgFollow(status, page,uid).run());
     }
 
 }

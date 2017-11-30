@@ -64,7 +64,7 @@
                 android:id="@+id/img_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/search_home"
+                android:src="@mipmap/ico_search_home"
                 android:layout_centerVertical="true"/>
             <TextView
                 android:focusable="true"

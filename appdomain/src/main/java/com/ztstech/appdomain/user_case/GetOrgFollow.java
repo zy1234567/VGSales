@@ -35,15 +35,19 @@ public class GetOrgFollow implements UserCase<Observable<OrgFollowlistBean>> {
     /** 查询的是哪个状态的列表 */
     private int status;
 
-    public GetOrgFollow(int status,int pageNo){
+    /** 查询其他人的客户跟进列表要传uid 看自己的传null*/
+    private String uid;
+
+    public GetOrgFollow(int status,int pageNo,String uid){
         api = RetrofitUtils.createService(OrgFollowApi.class);
         this.status = status;
         this.pageNo = pageNo;
+        this.uid = uid;
     }
 
     @Override
     public Observable<OrgFollowlistBean> run() {
-        return api.queryList(UserRepository.getInstance().getAuthId(),getStatusParam(),pageNo);
+        return api.queryList(UserRepository.getInstance().getAuthId(),getStatusParam(),uid,pageNo);
     }
 
     public String getStatusParam() {

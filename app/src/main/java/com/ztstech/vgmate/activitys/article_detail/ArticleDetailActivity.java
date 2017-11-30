@@ -253,7 +253,7 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
                 ToastUtil.toastCenter(this, "评论不能为空");
                 return;
             }
-            mPresenter.comment(etComment.getText().toString(), data);
+            mPresenter.comment(null,data.nid,null,etComment.getText().toString(), CommentActivity.FLG_INFO);
         }else if (view == topBar.getRightImage()) {
             //编辑分享
             Go2EditShareUtils.editShareInfo(this,data);
@@ -262,6 +262,7 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
 
     @Override
     public void onCommentFinish(@Nullable String errmsg) {
+        etComment.setText("");
         hideLoading(null);
         if (errmsg == null) {
             ToastUtil.toastCenter(this, "评论成功");

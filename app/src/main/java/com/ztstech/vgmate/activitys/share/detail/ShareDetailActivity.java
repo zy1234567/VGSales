@@ -157,7 +157,13 @@ public class ShareDetailActivity extends MVPActivity<ArticleDetailContract.Prese
 
     @Override
     public void onCommentFinish(@Nullable String errmsg) {
-
+        etComment.setText("");
+        hideLoading(null);
+        if (errmsg == null) {
+            ToastUtil.toastCenter(this, "评论成功");
+        }else {
+            ToastUtil.toastCenter(this, "评论失败：" + errmsg);
+        }
     }
 
     @Override
@@ -212,6 +218,7 @@ public class ShareDetailActivity extends MVPActivity<ArticleDetailContract.Prese
             //跳转评论界面
             Intent it = new Intent(this, CommentActivity.class);
             it.putExtra(CommentActivity.ARG_NEWSID, bean.sid);
+            it.putExtra(CommentActivity.FLG_COMMENT_TYPE, CommentActivity.FLG_SHARE);
             startActivity(it);
         }else if (view == tvSubmit) {
             //提交评论
@@ -219,7 +226,7 @@ public class ShareDetailActivity extends MVPActivity<ArticleDetailContract.Prese
                 ToastUtil.toastCenter(this, "评论不能为空");
                 return;
             }
-//            mPresenter.comment(etComment.getText().toString(), data);
+            mPresenter.comment(null,bean.sid,null,etComment.getText().toString(), CommentActivity.FLG_SHARE);
         }
     }
 }

@@ -29,6 +29,6 @@ public interface ArticleDetailContract {
          * @param comment
          * @param data
          */
-        void comment(String comment, MainListBean.ListBean data);
+        void comment(String flid, String newid, String touid, String comment,String flg);
     }
 }

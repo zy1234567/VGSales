@@ -11,7 +11,9 @@ import retrofit2.http.Query;
 import rx.Observable;
 
 /**
- * Created by smm on 2017/11/14.
+ *
+ * @author smm
+ * @date 2017/11/14
  */
 
 public interface OrgFollowApi {
@@ -23,6 +25,7 @@ public interface OrgFollowApi {
      */
     @GET("exempt/AppSaleQueryMyResponsibilityOrg")
     Observable<OrgFollowlistBean> queryList(@Query("authId") String authId, @Query("status") String status,
+                                            @Query("uid") String uid,
                                             @Query("pageNo") int currentPage);
 
     /**

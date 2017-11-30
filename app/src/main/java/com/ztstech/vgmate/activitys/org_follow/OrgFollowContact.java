@@ -29,11 +29,11 @@ public interface OrgFollowContact {
     }
 
     interface Presenter extends BasePresenter<View>{
-        void loadData();
+        void loadData(String uid);
 
-        void loadCacheData();
+        void loadCacheData(String uid);
 
-        void appendData();
+        void appendData(String uid);
     }
 
 }

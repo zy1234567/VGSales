@@ -161,9 +161,14 @@ public class BaseShareViewHolder extends SimpleViewHolder<ShareListBean.ListBean
                 if (TextUtils.equals(data.likestatus,STATUS_PRISE)){
                     data.likestatus = STATUS_UN_PRISE;
                     imgPrise.setImageResource(R.mipmap.ico_zan);
+                    data.likeList.remove(findPriseBean(data));
                 }else {
                     data.likestatus = STATUS_PRISE;
                     imgPrise.setImageResource(R.mipmap.ico_zan_y);
+                    ShareListBean.ListBean.LikeListBean likeBean = new ShareListBean.ListBean.LikeListBean();
+                    likeBean.picsurl = UserRepository.getInstance().getUser().getUserBean().info.picsurl;
+                    likeBean.uid = UserRepository.getInstance().getUser().getUserBean().info.uid;
+                    data.likeList.add(likeBean);
                 }
             }
         });
@@ -190,7 +195,7 @@ public class BaseShareViewHolder extends SimpleViewHolder<ShareListBean.ListBean
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(getContext(), CommentActivity.class);
-                it.putExtra(CommentActivity.FLG_COMMENT_TYPE, CommentActivity.FLG_INFO);
+                it.putExtra(CommentActivity.FLG_COMMENT_TYPE, CommentActivity.FLG_SHARE);
                 it.putExtra(CommentActivity.ARG_NEWSID, data.sid);
                 getContext().startActivity(it);
             }
@@ -202,6 +207,22 @@ public class BaseShareViewHolder extends SimpleViewHolder<ShareListBean.ListBean
                 toShowCommentDialog(data);
             }
         });
+    }
+
+    /**
+     * 查询自己所点赞的实体类在第几项
+     * @return
+     */
+    private int findPriseBean(ShareListBean.ListBean data){
+        if (data.likeList != null){
+            for (int i = 0; i < data.likeList.size(); i++){
+                if (TextUtils.equals(data.likeList.get(i).uid,
+                        UserRepository.getInstance().getUser().getUserBean().info.uid)){
+                    return i;
+                }
+            }
+        }
+        return 0;
     }
 
     /**

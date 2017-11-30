@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.ztstech.vgmate.R;
+import com.ztstech.vgmate.activitys.org_follow.OrgFollowActivity;
 import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.MatelistBean;
 import com.ztstech.vgmate.utils.CommonUtil;
@@ -96,6 +97,14 @@ public class MateListViewHolder extends SimpleViewHolder<MatelistBean.ListBean> 
         tvDay.setText("成为伙伴:".concat(String.valueOf(data.todays).concat("天")));
         /** 客户跟进 */
         tvNumOrg.setText(String.valueOf(data.budgets).concat("家"));
+        llOrgFollow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), OrgFollowActivity.class);
+                intent.putExtra(OrgFollowActivity.KEY_UID,data.uid);
+                getContext().startActivity(intent);
+            }
+        });
         /** 邀请伙伴 */
         tvNumInviteMate.setText(String.valueOf(data.firstcnt).concat("人"));
         /** 伙伴跟进 */

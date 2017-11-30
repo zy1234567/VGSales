@@ -22,6 +22,7 @@ import butterknife.BindView;
 
 public class OrgFollowActivity extends MVPActivity<OrgFollowNumContact.Presenter> implements OrgFollowNumContact.View{
 
+    public static final String KEY_UID = "uid";
 
     @BindView(R.id.top_bar)
     TopBar topBar;
@@ -30,7 +31,7 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowNumContact.Presenter
     @BindView(R.id.viewpager)
     ViewPager viewpager;
 
-    FollowOrgFragmentPagerAdapter adapter;
+    private FollowOrgFragmentPagerAdapter adapter;
 
     @Override
     protected void onViewBindFinish(@Nullable Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowNumContact.Presenter
     protected void onViewBindFinish() {
         super.onViewBindFinish();
         tablayout.setupWithViewPager(viewpager);
-        adapter = new FollowOrgFragmentPagerAdapter(getSupportFragmentManager());
+        adapter = new FollowOrgFragmentPagerAdapter(getSupportFragmentManager(),getIntent().getStringExtra(KEY_UID));
         viewpager.setAdapter(adapter);
     }
 
