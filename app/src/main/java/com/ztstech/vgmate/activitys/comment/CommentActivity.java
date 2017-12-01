@@ -252,15 +252,15 @@ public class CommentActivity extends MVPActivity<CommentContract.Presenter> impl
                 //回复某人
                 CommentBean.ListBean listBean = (CommentBean.ListBean) tag;
                 if (isReplay) {
-                    mPresenter.comment(String.valueOf(listBean.flid), newsId,
+                    mPresenter.comment(String.valueOf(listBean.lid), newsId,
                             listBean.uid, comment,flg);
                 }else {
                     mPresenter.comment(null, newsId,
-                            listBean.uid, comment,flg);
+                            null, comment,flg);
                 }
             }else {
                 //直接回复新闻
-                mPresenter.comment(null, newsId, "", comment,flg);
+                mPresenter.comment(null, newsId, null, comment,flg);
             }
         }
     }

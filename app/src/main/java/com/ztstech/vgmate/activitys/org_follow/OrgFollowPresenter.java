@@ -49,7 +49,7 @@ public class OrgFollowPresenter extends PresenterImpl<OrgFollowContact.View> imp
     @Override
     public void loadCacheData(String uid) {
         OrgFollowlistBean listBean = new Gson().fromJson(preferences.getString(
-                ORG_FOLLOW_LIST.concat(uid).concat(String.valueOf(status)),""),OrgFollowlistBean.class);
+                ORG_FOLLOW_LIST.concat(uid == null ? "" : uid).concat(String.valueOf(status)),""),OrgFollowlistBean.class);
         if (listBean != null){
             listBeanList.addAll(listBean.list);
             mView.setData(listBeanList);
@@ -82,7 +82,7 @@ public class OrgFollowPresenter extends PresenterImpl<OrgFollowContact.View> imp
                     if (currentPage == 1) {
                         //刷新
                         listBeanList.clear();
-                        preferences.edit().putString(ORG_FOLLOW_LIST.concat(uid).concat(String.valueOf(status)),new Gson().toJson(bean)).apply();
+                        preferences.edit().putString(ORG_FOLLOW_LIST.concat(uid == null ? "" : uid).concat(String.valueOf(status)),new Gson().toJson(bean)).apply();
                     }
                     listBeanList.addAll(bean.list);
                     mView.setData(listBeanList);

@@ -128,7 +128,7 @@ public class BaseShareViewHolder extends SimpleViewHolder<ShareListBean.ListBean
         this.clickCallback = callback;
         FOUR_IMGS_WIDTH = ViewUtils.messureFourImgWidth(getContext());
         NO_FOUR_IMGS_WIDTH = ViewUtils.messureNoFourImgWidth(getContext());
-        mTextStateList = new SparseArray<Integer>();
+        mTextStateList = new SparseArray<>();
     }
 
     @Override
@@ -290,8 +290,17 @@ public class BaseShareViewHolder extends SimpleViewHolder<ShareListBean.ListBean
                 View view = LayoutInflater.from(getContext()).inflate(R.layout.list_item_share_comment, null);
                 final TextView content = view.findViewById(R.id.second_message_name);
                 ShareListBean.ListBean.CommentListBean commentBean = commentBeanList.get(i);
-                String[] strs = new String[] {commentBean.name.concat("："),commentBean.comment};
-                int[] colors = new int[] {ContextCompat.getColor(getContext(), R.color.color_004),
+                String[] strs = null;
+                int[] colors = null;
+                if (TextUtils.isEmpty(commentBean.touid)){
+                    // 一级评论
+                    strs = new String[] {commentBean.name.concat("："),commentBean.comment};
+                }else {
+                    // 二级评论
+                    strs = new String[] {commentBean.name.concat("@").
+                            concat(commentBean.touname).concat("："),commentBean.comment};
+                }
+                colors = new int[] {ContextCompat.getColor(getContext(), R.color.color_004),
                         ContextCompat.getColor(getContext(), R.color.color_100)};
                 SpannableStringBuilder spannableStringBuilder =
                         ViewUtils.getDiffColorSpan(null, strs, colors);
@@ -410,6 +419,8 @@ public class BaseShareViewHolder extends SimpleViewHolder<ShareListBean.ListBean
                     tvContent.setMaxLines(Integer.MAX_VALUE);
                     tvQuanwen.setVisibility(View.VISIBLE);
                     tvQuanwen.setText("收起");
+                    break;
+                default:
                     break;
             }
             tvContent.setText(content);

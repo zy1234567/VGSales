@@ -72,7 +72,7 @@ public class CommentRecyclerAdapter extends SimpleRecyclerAdapter<CommentBean.Li
             //如果不是回复某人
             commentHolder.tvReComment.setVisibility(View.GONE);
         }else {
-            String[] strs = new String[] {"@".concat(data.touname).concat("："), data.comment};
+            String[] strs = new String[] {"@".concat(data.touname).concat("："), data.lastcomment};
 
             SpannableStringBuilder spannableStringBuilder =
                     ViewUtils.getDiffColorSpan(null, strs, commentHolder.colors);

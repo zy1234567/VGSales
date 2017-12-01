@@ -51,6 +51,7 @@ public class QuestionListPresenter extends PresenterImpl<QuestionListContact.Vie
         if (!TextUtils.isEmpty(cachejson)){
             QuestionListBean questionListBean = new Gson().fromJson(cachejson,QuestionListBean.class);
             if (questionListBean != null){
+                listBeen.clear();
                 listBeen.addAll(questionListBean.list);
                 mView.setData(listBeen);
             }

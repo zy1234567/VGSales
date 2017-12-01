@@ -25,7 +25,7 @@ import java.util.List;
 
 public class QuestionDetailPresenter extends PresenterImpl<QuestionDetailContact.View> implements QuestionDetailContact.Presenter{
 
-    private int currentpage;
+    private int currentpage,totalpage;
 
     private List<AnwserListBean.ListBean> listBeen;
 
@@ -49,6 +49,7 @@ public class QuestionDetailPresenter extends PresenterImpl<QuestionDetailContact
             protected void childNext(AnwserListBean anwserListBean) {
                 isRefresh = false;
                 if (anwserListBean.isSucceed()){
+                    totalpage = anwserListBean.pager.totalPages;
                     if (currentpage == 1){
                         listBeen.clear();
                     }
@@ -69,6 +70,9 @@ public class QuestionDetailPresenter extends PresenterImpl<QuestionDetailContact
 
     @Override
     public void appendData() {
+        if (currentpage == totalpage){
+            return;
+        }
         if (isRefresh){
             return;
         }

@@ -101,6 +101,7 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
     public void loadCache() {
         MainListBean mainListBean = new Gson().fromJson(preferences.getString(INFO_LIST,""),MainListBean.class);
         if (mainListBean != null){
+            listData.clear();
             listData.addAll(mainListBean.list);
             mView.setListData(listData);
         }

@@ -59,6 +59,7 @@ public class NoticePresenter extends PresenterImpl<NoticeContract.View> implemen
     public void loadCacheData() {
         MainListBean mainListBean = new Gson().fromJson(preferences.getString(NOTICE_LIST,""),MainListBean.class);
         if (mainListBean != null){
+            mListData.clear();
             mListData.addAll(mainListBean.list);
             mView.setData(mListData);
         }

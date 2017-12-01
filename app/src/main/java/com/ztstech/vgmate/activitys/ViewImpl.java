@@ -41,7 +41,7 @@ public class ViewImpl<P extends BasePresenter> {
             hud.dismiss();
         }
         if (!TextUtils.isEmpty(errorMessage)) {
-            Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
         }
     }
 

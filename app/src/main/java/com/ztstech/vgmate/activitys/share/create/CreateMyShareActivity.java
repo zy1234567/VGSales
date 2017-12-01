@@ -396,9 +396,9 @@ public class CreateMyShareActivity extends MVPActivity<CreateShareContact.Presen
     private void judgeCanCommit(){
         boolean isHasContent = !etContent.getText().toString().isEmpty();
         boolean isHasImage = imageFiles != null && imageFiles.size() > 0;
-        boolean ishasLink = !TextUtils.isEmpty(getLinkUrl())
-                && getLinkUrl().indexOf("http://") != -1 && getLinkUrl().indexOf("https://") != -1;
-        if (isHasContent || isHasImage || ishasLink){
+        boolean isHasLink = !TextUtils.isEmpty(getLinkUrl())
+                && (getLinkUrl().startsWith("http://") || getLinkUrl().startsWith("https://"));
+        if (isHasContent || isHasImage || isHasLink){
             tvNext.setEnabled(true);
         }else {
             tvNext.setEnabled(false);
