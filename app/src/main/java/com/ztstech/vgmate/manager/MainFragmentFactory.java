@@ -7,7 +7,9 @@ import com.ztstech.vgmate.activitys.question.QuestionFragment;
 import com.ztstech.vgmate.activitys.share.ShareFragment;
 
 /**
- * Created by zhiyuan on 2017/8/1.
+ *
+ * @author zhiyuan
+ * @date 2017/8/1
  */
 
 public class MainFragmentFactory {
@@ -33,7 +35,7 @@ public class MainFragmentFactory {
             return ShareFragment.newInstance();
         }else if (index == 2) {
             return QuestionFragment.newInstance();
-        }else {
+        } else {
             return ShareFragment.newInstance();
         }
     }

@@ -100,6 +100,8 @@ public class BottomBar extends FrameLayout implements View.OnClickListener{
             case R.id.rl_tab3:
                 onTabClick(3);
                 break;
+            default:
+                break;
         }
     }
 

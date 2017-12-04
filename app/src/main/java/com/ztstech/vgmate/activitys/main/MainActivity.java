@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.ztstech.appdomain.constants.Constants;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.add_org.AddOrgActivity;
@@ -17,10 +19,7 @@ import com.ztstech.vgmate.activitys.create_share.create_share_info.CreateShareIn
 import com.ztstech.vgmate.activitys.main.adapter.MainPagerAdapter;
 import com.ztstech.vgmate.activitys.main.widget.BottomBar;
 import com.ztstech.vgmate.activitys.qr_code.scan.QRCodeScanActivity;
-import com.ztstech.vgmate.activitys.setting.SettingActivity;
-import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.vgmate.data.api.CreateShareApi;
-import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import butterknife.BindView;

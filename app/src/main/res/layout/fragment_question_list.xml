@@ -6,7 +6,7 @@
         android:id="@+id/srl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/color_109"
+        android:background="@color/color_107"
         android:layout_weight="1">
 
         <android.support.v7.widget.RecyclerView
@@ -21,6 +21,7 @@
         android:id="@+id/ll_no_data"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/color_109"
         android:gravity="center"
         android:orientation="vertical">
         <ImageView

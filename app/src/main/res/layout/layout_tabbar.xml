@@ -92,7 +92,7 @@
                 android:drawableTop="@drawable/sel_tab_3"
                 android:textColor="@drawable/sel_tab_text"
                 android:textSize="@dimen/text_9"
-                android:text="交流"
+                android:text="地图"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="6dp"
                 android:layout_centerHorizontal="true"

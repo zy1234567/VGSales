@@ -62,7 +62,7 @@ public class InformationViewHolder extends SimpleViewHolder<MainListBean.ListBea
         tvCommentCount.setText(String.valueOf(data.evacnt));
         tvTitle.setText(data.title);
         Glide.with(getContext()).load(data.picurl).into(ivTitle);
-        tvDate.setText("最后更新：".concat(TimeUtils.informationTime(data.createtime)));
+        tvDate.setText("最后更新：".concat(TimeUtils.informationTime(data.updatetime)));
 
         clickListener.bean = data;
         longClickListener.bean = data;
