@@ -6,15 +6,18 @@ import android.support.v4.content.ContextCompat;
 import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.ztstech.appdomain.user_case.GetOrgFollow;
 import com.ztstech.vgmate.R;
+import com.ztstech.vgmate.activitys.org_follow.claim_org.ClaimOrgDetailActivity;
 import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import com.ztstech.vgmate.utils.CategoryUtil;
 import com.ztstech.vgmate.utils.LocationUtils;
+import com.ztstech.vgmate.utils.TimeUtils;
 import com.ztstech.vgmate.utils.ViewUtils;
 
 import butterknife.BindView;
@@ -40,6 +43,8 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
     TextView tvOtype;
     @BindView(R.id.tv_address)
     TextView tvAddress;
+    @BindView(R.id.body)
+    LinearLayout body;
 
     private int index;
 
@@ -56,7 +61,6 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
                 .load(data.rbilogosurl)
                 .error(R.mipmap.ic_launcher)
                 .into(imgOrg);
-        tvFrom.setText("来源：".concat(data.comefrom));
         tvOtype.setText(CategoryUtil.findCategoryByOtype(data.rbiotype));
         tvAddress.setText(LocationUtils.getPName(data.rbiprovince).concat(LocationUtils.getCName(data.rbicity)).
                 concat(LocationUtils.getAName(data.rbidistrict))
@@ -67,12 +71,30 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
         SpannableStringBuilder spannableStringBuilder =
                 ViewUtils.getDiffColorSpan(null, strs, colors);
         tvPhone.setText(spannableStringBuilder);
+        body.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ClaimOrgDetailActivity.class);
+                intent.putExtra(ClaimOrgDetailActivity.KEY_BEAN,data);
+                getContext().startActivity(intent);
+            }
+        });
         if (index == GetOrgFollow.STATUS_INDEX_CONCERN){
             tvStatus.setText("已确认");
+            tvFrom.setText("来源：".concat(data.comefrom));
         }else if (index == GetOrgFollow.STATUS_INDEX_CLAIM){
             tvStatus.setText("已认领");
-        }else {
+            tvFrom.setText("来源：".concat(data.comefrom));
+        }else if (index == GetOrgFollow.STATUS_INDEX_MANAGER){
+            // 管理端
             tvStatus.setText("");
+            tvFrom.setText("来源：".concat(data.comefrom));
+        }else {
+            // 机构反馈
+            tvStatus.setText(TimeUtils.informationTime(data.rbicreatetime));
+            tvFrom.setText("认领-待审批");
+            tvFrom.setTextColor(getContext().getResources().getColor(R.color.color_006));
+
         }
         //拨打电话
         tvPhone.setOnClickListener(new View.OnClickListener() {

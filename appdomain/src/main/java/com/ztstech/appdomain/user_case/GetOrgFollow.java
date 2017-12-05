@@ -28,6 +28,11 @@ public class GetOrgFollow implements UserCase<Observable<OrgFollowlistBean>> {
      */
     public static final int STATUS_INDEX_MANAGER = 2;
 
+    /**
+     * 管理端
+     */
+    public static final int STATUS_INDEX_FEEDBACK = 3;
+
     private OrgFollowApi api;
 
     private int pageNo;
@@ -47,7 +52,11 @@ public class GetOrgFollow implements UserCase<Observable<OrgFollowlistBean>> {
 
     @Override
     public Observable<OrgFollowlistBean> run() {
-        return api.queryList(UserRepository.getInstance().getAuthId(),getStatusParam(),uid,pageNo);
+        if (status == STATUS_INDEX_FEEDBACK){
+            return api.queryFeedBackList(UserRepository.getInstance().getAuthId(),pageNo);
+        }else {
+            return api.queryList(UserRepository.getInstance().getAuthId(), getStatusParam(), uid, pageNo);
+        }
     }
 
     public String getStatusParam() {

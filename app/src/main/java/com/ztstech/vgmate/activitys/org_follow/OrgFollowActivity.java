@@ -1,14 +1,17 @@
 package com.ztstech.vgmate.activitys.org_follow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.org_follow.adapter.FollowOrgFragmentPagerAdapter;
+import com.ztstech.vgmate.activitys.org_follow.feedback.OrgFeedBackActivity;
 import com.ztstech.vgmate.data.beans.OrgFollowNumBean;
 import com.ztstech.vgmate.weigets.TopBar;
 
@@ -18,6 +21,7 @@ import butterknife.BindView;
  *
  * @author smm
  * @date 2017/11/13
+ * 客户跟进界面
  */
 
 public class OrgFollowActivity extends MVPActivity<OrgFollowNumContact.Presenter> implements OrgFollowNumContact.View{
@@ -55,14 +59,26 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowNumContact.Presenter
         tablayout.setupWithViewPager(viewpager);
         adapter = new FollowOrgFragmentPagerAdapter(getSupportFragmentManager(),getIntent().getStringExtra(KEY_UID));
         viewpager.setAdapter(adapter);
+        topBar.getRightImage().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(OrgFollowActivity.this,OrgFeedBackActivity.class));
+            }
+        });
     }
 
     @Override
-    public void onGetFollowNumSucced(OrgFollowNumBean.InfoBean bean) {
-        String[] titles = {"已确认".concat(" ").concat(bean.confirmNum),
-                "已认领".concat(" ").concat(bean.claimNum),
-                "管理端".concat(" ").concat(bean.webNum)};
+    public void onGetFollowNumSucced(OrgFollowNumBean bean) {
+        String[] titles = {"已确认".concat(" ").concat(String.valueOf(bean.info.confirmNum)),
+                "已认领".concat(" ").concat(String.valueOf(bean.info.claimNum)),
+                "管理端".concat(" ").concat(String.valueOf(bean.info.webNum))};
         adapter.setTitles(titles);
         adapter.notifyDataSetChanged();
+        topBar.setTitle("客户跟进".concat("(").concat
+                (String.valueOf(bean.info.confirmNum + bean.info.claimNum + bean.info.webNum)).concat(")"));
+        if (bean.info.auditNum > 0){
+            topBar.getRightRedNum().setVisibility(View.VISIBLE);
+            topBar.getRightRedNum().setText(String.valueOf(bean.info.auditNum));
+        }
     }
 }

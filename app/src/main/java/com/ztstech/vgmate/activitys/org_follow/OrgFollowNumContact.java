@@ -11,7 +11,7 @@ import com.ztstech.vgmate.data.beans.OrgFollowNumBean;
 public class OrgFollowNumContact {
 
     interface View extends BaseView{
-        void onGetFollowNumSucced(OrgFollowNumBean.InfoBean bean);
+        void onGetFollowNumSucced(OrgFollowNumBean bean);
     }
 
     interface Presenter extends BasePresenter<View>{

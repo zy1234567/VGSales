@@ -36,4 +36,11 @@ public interface OrgFollowApi {
     @POST("exempt/saleCountRBINum")
     Observable<OrgFollowNumBean> queryFollowNum(@Query("authId") String authId);
 
+    /**
+     * 查询机构反馈列表
+     */
+    @GET("exempt/AppSaleListOrgFeedback")
+    Observable<OrgFollowlistBean> queryFeedBackList(@Query("authId") String authId,
+                                                    @Query("pageNo") int currentPage);
+
 }

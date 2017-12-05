@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@color/color_109"
         app:showBackNav="true"
+        app:srcRight="@mipmap/lingdang"
         app:barTitle="客户跟进">
     </com.ztstech.vgmate.weigets.TopBar>
     <LinearLayout

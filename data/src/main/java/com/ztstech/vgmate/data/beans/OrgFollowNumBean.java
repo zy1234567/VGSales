@@ -6,22 +6,18 @@ package com.ztstech.vgmate.data.beans;
 
 public class OrgFollowNumBean extends BaseRespBean{
 
-
-    /**
-     * info : {"confirmNum":27,"claimNum":0,"webNum":0}
-     */
-
     public InfoBean info;
 
     public static class InfoBean {
         /**
-         * confirmNum : 27
-         * claimNum : 0
+         * confirmNum : 77
+         * claimNum : 2
          * webNum : 0
          */
 
-        public String confirmNum;
-        public String claimNum;
-        public String webNum;
+        public int confirmNum;
+        public int claimNum;
+        public int webNum;
+        public int auditNum;
     }
 }

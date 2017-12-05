@@ -26,6 +26,7 @@ public class TopBar extends FrameLayout {
     private View topView, searchView;
     private ImageView imgRight, imgRightTwo,imgLeft;
     private TextView tvTitle, tvLeft, tvRight, tvSearch;
+    private TextView tvRedNum;
 
     private String title, leftText, rightText, searchText;
 
@@ -59,6 +60,7 @@ public class TopBar extends FrameLayout {
         tvRight = topView.findViewById(R.id.tv_right);
         searchView = topView.findViewById(R.id.rl_total_search);
         tvSearch = topView.findViewById(R.id.tv_search);
+        tvRedNum = topView.findViewById(R.id.tv_red_num);
 
 
 
@@ -165,6 +167,10 @@ public class TopBar extends FrameLayout {
 
     public TextView getRightTextView() {
         return tvRight;
+    }
+
+    public TextView getRightRedNum() {
+        return tvRedNum;
     }
 
     public TextView getLeftTextView() {

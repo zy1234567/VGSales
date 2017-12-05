@@ -1,5 +1,6 @@
 package com.ztstech.vgmate.data.beans;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  * @date 2017/11/14
  */
 
-public class OrgFollowlistBean extends BaseRespBean {
+public class OrgFollowlistBean extends BaseRespBean implements Serializable{
 
 
     /**
@@ -19,7 +20,7 @@ public class OrgFollowlistBean extends BaseRespBean {
     public PagerBean pager;
     public List<ListBean> list;
 
-    public static class PagerBean {
+    public static class PagerBean implements Serializable{
         /**
          * totalRows : 2
          * pageSize : 10
@@ -35,7 +36,7 @@ public class OrgFollowlistBean extends BaseRespBean {
         public int startRow;
     }
 
-    public static class ListBean {
+    public static class ListBean implements Serializable{
         /**
          * rbiid : 494071
          * rbiaddress : 和平东路205号
@@ -69,5 +70,10 @@ public class OrgFollowlistBean extends BaseRespBean {
         public String rbiotype;
         public String rbidistrict;
         public String rbicontphone;
+        public String name;
+        public String position;
+        public String phone;
+        public String aptitudeurl;
+        public String rbicreatetime;
     }
 }

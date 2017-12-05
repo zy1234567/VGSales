@@ -104,6 +104,8 @@
         <activity android:name=".activitys.sell_mate_list.SearchMateActivity"/>
         <activity android:name=".activitys.share.create.CreateMyShareActivity"/>
         <activity android:name=".activitys.share.detail.ShareDetailActivity"/>
+        <activity android:name=".activitys.org_follow.feedback.OrgFeedBackActivity"/>
+        <activity android:name=".activitys.org_follow.claim_org.ClaimOrgDetailActivity"/>
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"

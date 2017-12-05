@@ -132,7 +132,7 @@ public class LocationUtils {
                 return bean.getSname();
             }
         }
-        return null;
+        return "";
     }
 
     /**
@@ -158,7 +158,7 @@ public class LocationUtils {
                 }
             }
         }
-        return null;
+        return "";
     }
 
     /**
@@ -189,7 +189,7 @@ public class LocationUtils {
                 }
             }
         }
-        return null;
+        return "";
     }
 
     /**

@@ -23,7 +23,7 @@ import butterknife.BindView;
 /**
  * @author smm
  * @date 2017/11/13
- * 已确认机构列表
+ * 客户跟进模块展示的机构列表 可以展示四个状态的(已确认，已认领，管理端，机构反馈)
  */
 
 public class OrgFollowListFragment extends MVPFragment<OrgFollowContact.Presenter> implements OrgFollowContact.View {

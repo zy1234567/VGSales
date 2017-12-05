@@ -24,7 +24,7 @@ public class OrgFollowNumPresenter extends PresenterImpl<OrgFollowNumContact.Vie
 
             @Override
             protected void childNext(OrgFollowNumBean orgFollowNumBean) {
-                mView.onGetFollowNumSucced(orgFollowNumBean.info);
+                mView.onGetFollowNumSucced(orgFollowNumBean);
             }
         }.run(new GetOrgFollowNum().run());
     }
