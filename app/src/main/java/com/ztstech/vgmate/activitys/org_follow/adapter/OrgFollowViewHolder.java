@@ -71,14 +71,7 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
         SpannableStringBuilder spannableStringBuilder =
                 ViewUtils.getDiffColorSpan(null, strs, colors);
         tvPhone.setText(spannableStringBuilder);
-        body.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ClaimOrgDetailActivity.class);
-                intent.putExtra(ClaimOrgDetailActivity.KEY_BEAN,data);
-                getContext().startActivity(intent);
-            }
-        });
+
         if (index == GetOrgFollow.STATUS_INDEX_CONCERN){
             tvStatus.setText("已确认");
             tvFrom.setText("来源：".concat(data.comefrom));
@@ -94,7 +87,14 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
             tvStatus.setText(TimeUtils.informationTime(data.rbicreatetime));
             tvFrom.setText("认领-待审批");
             tvFrom.setTextColor(getContext().getResources().getColor(R.color.color_006));
-
+            body.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), ClaimOrgDetailActivity.class);
+                    intent.putExtra(ClaimOrgDetailActivity.KEY_BEAN,data);
+                    getContext().startActivity(intent);
+                }
+            });
         }
         //拨打电话
         tvPhone.setOnClickListener(new View.OnClickListener() {

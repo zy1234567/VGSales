@@ -22,7 +22,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "URL_BASE", "\"http://bucea.verygrow.com/\""
+            buildConfigField "String", "URL_BASE", "\"http://www.008box.com/\""
         }
         debug {
             buildConfigField "String", "URL_BASE", "\"http://bigc.verygrow.com\""

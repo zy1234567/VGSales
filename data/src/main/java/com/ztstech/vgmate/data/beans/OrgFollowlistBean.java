@@ -75,5 +75,6 @@ public class OrgFollowlistBean extends BaseRespBean implements Serializable{
         public String phone;
         public String aptitudeurl;
         public String rbicreatetime;
+        public String calid;
     }
 }

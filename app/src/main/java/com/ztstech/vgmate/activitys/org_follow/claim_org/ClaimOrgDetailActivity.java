@@ -3,7 +3,6 @@ package com.ztstech.vgmate.activitys.org_follow.claim_org;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,15 +13,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.ztstech.appdomain.user_case.ApproveClaimOrg;
 import com.ztstech.vgmate.R;
+import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.org_follow.adapter.OrgProveImgAdapter;
-import com.ztstech.vgmate.activitys.photo_browser.PhotoBrowserActivity;
-import com.ztstech.vgmate.base.BaseActivity;
-import com.ztstech.vgmate.base.SimpleRecyclerAdapter;
 import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import com.ztstech.vgmate.utils.CategoryUtil;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.LocationUtils;
+import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.utils.ViewUtils;
 import com.ztstech.vgmate.weigets.IOSStyleDialog;
 import com.ztstech.vgmate.weigets.TopBar;
@@ -31,7 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -40,7 +38,7 @@ import butterknife.OnClick;
  * 机构认领详情界面
  */
 
-public class ClaimOrgDetailActivity extends BaseActivity {
+public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Presenter> implements ClaimOrgDetailContact.View{
 
     /**
      * 传入显示信息的实体类
@@ -149,23 +147,39 @@ public class ClaimOrgDetailActivity extends BaseActivity {
                 startActivity(intent2);
                 break;
             case R.id.tv_pass:
-                new IOSStyleDialog(this, "确认通过此条认领？", new DialogInterface.OnClickListener() {
+                new IOSStyleDialog(this, "您确定要通过吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        mPresenter.approveOrg(String.valueOf(bean.rbiid),bean.calid,ApproveClaimOrg.STATUS_PASS);
                     }
                 }).show();
                 break;
             case R.id.tv_refuse:
-                new IOSStyleDialog(this, "确认拒绝此条认领？", new DialogInterface.OnClickListener() {
+                new IOSStyleDialog(this, "您确定要拒绝吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        mPresenter.approveOrg(String.valueOf(bean.rbiid),bean.calid, ApproveClaimOrg.STATUS_REFUSE);
                     }
                 }).show();
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    protected ClaimOrgDetailContact.Presenter initPresenter() {
+        return new ClaimDetailPresenter(this);
+    }
+
+    @Override
+    public void onApproveSuccess() {
+        ToastUtil.toastCenter(this,"审批成功");
+        finish();
+    }
+
+    @Override
+    public void showError(String msg) {
+        ToastUtil.toastCenter(this,msg);
     }
 }
