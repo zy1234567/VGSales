@@ -14,7 +14,11 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.org_follow.adapter.OrgFollowListAdapter;
 import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
+import com.ztstech.vgmate.data.events.ApproveOrgEvent;
 import com.ztstech.vgmate.utils.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -67,6 +71,7 @@ public class OrgFollowListFragment extends MVPFragment<OrgFollowContact.Presente
     @Override
     protected void onViewBindFinish(@Nullable Bundle savedInstanceState) {
         super.onViewBindFinish(savedInstanceState);
+        EventBus.getDefault().register(this);
         adapter = new OrgFollowListAdapter(statusIndex);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         recycler.setAdapter(adapter);
@@ -119,6 +124,15 @@ public class OrgFollowListFragment extends MVPFragment<OrgFollowContact.Presente
 
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+    }
 
+    @Subscribe
+    public void onRefresh(ApproveOrgEvent event){
+        mPresenter.loadData(uid);
+    }
 
 }

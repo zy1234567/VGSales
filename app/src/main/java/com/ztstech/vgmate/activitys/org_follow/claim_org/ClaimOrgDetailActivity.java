@@ -18,6 +18,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.org_follow.adapter.OrgProveImgAdapter;
 import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
+import com.ztstech.vgmate.data.events.ApproveOrgEvent;
 import com.ztstech.vgmate.utils.CategoryUtil;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.LocationUtils;
@@ -25,6 +26,8 @@ import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.utils.ViewUtils;
 import com.ztstech.vgmate.weigets.IOSStyleDialog;
 import com.ztstech.vgmate.weigets.TopBar;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -174,6 +177,7 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
 
     @Override
     public void onApproveSuccess() {
+        EventBus.getDefault().post(new ApproveOrgEvent());
         ToastUtil.toastCenter(this,"审批成功");
         finish();
     }
