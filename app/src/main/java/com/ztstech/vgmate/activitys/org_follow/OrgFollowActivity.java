@@ -8,12 +8,15 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.ztstech.vgmate.R;
-import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.org_follow.adapter.FollowOrgFragmentPagerAdapter;
 import com.ztstech.vgmate.activitys.org_follow.feedback.OrgFeedBackActivity;
 import com.ztstech.vgmate.data.beans.OrgFollowNumBean;
+import com.ztstech.vgmate.data.events.ApproveOrgEvent;
 import com.ztstech.vgmate.weigets.TopBar;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 
@@ -24,7 +27,7 @@ import butterknife.BindView;
  * 客户跟进界面
  */
 
-public class OrgFollowActivity extends MVPActivity<OrgFollowNumContact.Presenter> implements OrgFollowNumContact.View{
+public class OrgFollowActivity extends MVPActivity<OrgFollowContact.Presenter> implements OrgFollowContact.View{
 
     public static final String KEY_UID = "uid";
 
@@ -40,12 +43,13 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowNumContact.Presenter
     @Override
     protected void onViewBindFinish(@Nullable Bundle savedInstanceState) {
         super.onViewBindFinish(savedInstanceState);
+        EventBus.getDefault().register(this);
         mPresenter.loadFollowOrgNum();
     }
 
     @Override
-    protected OrgFollowNumContact.Presenter initPresenter() {
-        return new OrgFollowNumPresenter(this);
+    protected OrgFollowContact.Presenter initPresenter() {
+        return new OrgFollowPresenter(this);
     }
 
     @Override
@@ -62,6 +66,7 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowNumContact.Presenter
         topBar.getRightImage().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 点击右上角跳转到机构反馈列表界面
                 startActivity(new Intent(OrgFollowActivity.this,OrgFeedBackActivity.class));
             }
         });
@@ -78,7 +83,20 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowNumContact.Presenter
                 (String.valueOf(bean.info.confirmNum + bean.info.claimNum + bean.info.webNum)).concat(")"));
         if (bean.info.auditNum > 0){
             topBar.getRightRedNum().setVisibility(View.VISIBLE);
-            topBar.getRightRedNum().setText(String.valueOf(bean.info.auditNum));
+            topBar.getRightRedNum().setText(String.valueOf(bean.info.auditNum > 99 ? 99 : bean.info.auditNum));
+        }else {
+            topBar.getRightRedNum().setVisibility(View.GONE);
         }
+    }
+
+    @Subscribe
+    private void onRefersh(ApproveOrgEvent event){
+        mPresenter.loadFollowOrgNum();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

@@ -30,7 +30,7 @@ import butterknife.BindView;
  * 客户跟进模块展示的机构列表 可以展示四个状态的(已确认，已认领，管理端，机构反馈)
  */
 
-public class OrgFollowListFragment extends MVPFragment<OrgFollowContact.Presenter> implements OrgFollowContact.View {
+public class OrgFollowListFragment extends MVPFragment<OrgFollowListContact.Presenter> implements OrgFollowListContact.View {
 
 
     @BindView(R.id.recycler)
@@ -87,8 +87,8 @@ public class OrgFollowListFragment extends MVPFragment<OrgFollowContact.Presente
     }
 
     @Override
-    protected OrgFollowContact.Presenter initPresenter() {
-        return new OrgFollowPresenter(this, statusIndex);
+    protected OrgFollowListContact.Presenter initPresenter() {
+        return new OrgFollowListPresenter(this, statusIndex);
     }
 
 

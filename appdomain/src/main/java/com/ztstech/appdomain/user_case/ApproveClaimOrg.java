@@ -8,12 +8,16 @@ import com.ztstech.vgmate.data.beans.BaseRespBean;
 import rx.Observable;
 
 /**
- * Created by smm on 2017/12/6.
+ * 销售审批机构认领
+ * @author smm
+ * @date 2017/12/6
  */
 
 public class ApproveClaimOrg implements UserCase<Observable<BaseRespBean>>{
 
+    /** 审核通过 */
     public static final String STATUS_PASS = "00";
+    /** 审核拒绝 */
     public static final String STATUS_REFUSE = "01";
 
     private String rbiid;

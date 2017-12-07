@@ -2,38 +2,20 @@ package com.ztstech.vgmate.activitys.org_follow;
 
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.BaseView;
-import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
-import com.ztstech.vgmate.data.beans.WaitApproveMateListBean;
-
-import java.util.List;
+import com.ztstech.vgmate.data.beans.OrgFollowNumBean;
 
 /**
- *
- * @author smm
- * @date 2017/11/14
+ * Created by smm on 2017/11/24.
  */
 
-public interface OrgFollowContact {
+public class OrgFollowContact {
 
     interface View extends BaseView{
-
-        void setData(List<OrgFollowlistBean.ListBean> listData);
-
-        void showError(String errorMessage);
-
-        /**
-         * 设置为没有更多数据
-         * @param noreMoreData
-         */
-        void setNoreMoreData(boolean noreMoreData);
+        void onGetFollowNumSucced(OrgFollowNumBean bean);
     }
 
     interface Presenter extends BasePresenter<View>{
-        void loadData(String uid);
-
-        void loadCacheData(String uid);
-
-        void appendData(String uid);
+        void loadFollowOrgNum();
     }
 
 }
