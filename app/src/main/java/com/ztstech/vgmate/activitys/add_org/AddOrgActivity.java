@@ -89,13 +89,13 @@ public class AddOrgActivity extends MVPActivity<AddOrgContract.Presenter> implem
             tvTag.setText(name);
             tvTag.setTag(ids);
         }else if (REQ_GPS == requestCode) {
-            //获取经纬度
+            // 获取经纬度
             double la = data.getDoubleExtra(GpsActivity.RESULT_LATITUDE, 0);
             double lo = data.getDoubleExtra(GpsActivity.RESULT_LONGITUDE, 0);
             String location = data.getStringExtra(GpsActivity.RESULT_LOCATION);
-
-            tvGps.setText(la + "," + lo);
-            tvGps.setTag(la + "," + lo);
+            // 经度在前纬度在后
+            tvGps.setText(lo + "," + la);
+            tvGps.setTag(lo + "," + la);
             etDetailLocation.setText(location);
         }else if (REQ_LOCATION == requestCode) {
             //请求地址
