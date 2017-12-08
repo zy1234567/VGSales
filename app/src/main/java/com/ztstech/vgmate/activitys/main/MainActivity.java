@@ -19,6 +19,7 @@ import com.ztstech.vgmate.activitys.create_share.create_share_info.CreateShareIn
 import com.ztstech.vgmate.activitys.main.adapter.MainPagerAdapter;
 import com.ztstech.vgmate.activitys.main.widget.BottomBar;
 import com.ztstech.vgmate.activitys.qr_code.scan.QRCodeScanActivity;
+import com.ztstech.vgmate.activitys.search_org.SearchOrgActivity;
 import com.ztstech.vgmate.data.api.CreateShareApi;
 import com.ztstech.vgmate.weigets.TopBar;
 
@@ -72,6 +73,13 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
                     dialog.setVisibility(View.VISIBLE);
                 }
 
+            }
+        });
+
+        topBar.getSearchView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, SearchOrgActivity.class));
             }
         });
 

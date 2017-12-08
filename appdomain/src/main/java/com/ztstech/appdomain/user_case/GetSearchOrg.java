@@ -3,7 +3,7 @@ package com.ztstech.appdomain.user_case;
 import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.appdomain.utils.RetrofitUtils;
 import com.ztstech.vgmate.data.api.GetSearchOrgListApi;
-import com.ztstech.vgmate.data.beans.SearchOrgListBean;
+import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 
 import rx.Observable;
 
@@ -11,7 +11,7 @@ import rx.Observable;
  * Created by smm on 2017/12/8.
  */
 
-public class GetSearchOrg implements UserCase<Observable<SearchOrgListBean.ListBean>>{
+public class GetSearchOrg implements UserCase<Observable<OrgFollowlistBean>>{
 
     private int page;
 
@@ -29,7 +29,7 @@ public class GetSearchOrg implements UserCase<Observable<SearchOrgListBean.ListB
     }
 
     @Override
-    public Observable<SearchOrgListBean.ListBean> run() {
+    public Observable<OrgFollowlistBean> run() {
         return api.getSearchOrgList(UserRepository.getInstance().getAuthId(),page,rbicity,rbioname);
     }
 }

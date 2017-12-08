@@ -36,6 +36,7 @@ public interface NetConstants {
 
     String PARAM_AUTHID = "authId";
 
+    String INTERNET_ERROR_HINT = "当前网络不可用";
 
 
 }

@@ -2,7 +2,9 @@ package com.ztstech.vgmate.activitys.search_org;
 
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.BaseView;
-import com.ztstech.vgmate.data.beans.SearchOrgListBean;
+import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
+
+import java.util.List;
 
 /**
  * Created by smm on 2017/12/8.
@@ -11,7 +13,7 @@ import com.ztstech.vgmate.data.beans.SearchOrgListBean;
 public interface SearchOrgContact {
 
    interface View extends BaseView{
-       void setListData(SearchOrgListBean.ListBean listData);
+       void setListData(List<OrgFollowlistBean.ListBean> listData);
        void showError(String msg);
    }
 

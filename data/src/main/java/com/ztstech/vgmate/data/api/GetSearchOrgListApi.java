@@ -1,6 +1,6 @@
 package com.ztstech.vgmate.data.api;
 
-import com.ztstech.vgmate.data.beans.SearchOrgListBean;
+import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import com.ztstech.vgmate.data.constants.NetConstants;
 
 import retrofit2.http.GET;
@@ -21,9 +21,9 @@ public interface GetSearchOrgListApi {
      * @param rbioname 搜索的机构名字
      * @return
      */
-    @GET("exempt/AppSaleCountSalesList")
-    Observable<SearchOrgListBean.ListBean> getSearchOrgList(@Query(NetConstants.PARAM_AUTHID) String authId,
-                                                   @Query("pageNo") int pageNo,
-                                                   @Query("rbicity") String rbicity,
-                                                   @Query("rbioname") String rbioname);
+    @GET("exempt/AppSalesFindOrgByRegionTypeName")
+    Observable<OrgFollowlistBean> getSearchOrgList(@Query(NetConstants.PARAM_AUTHID) String authId,
+                                                            @Query("pageNo") int pageNo,
+                                                            @Query("rbicity") String rbicity,
+                                                            @Query("rbioname") String rbioname);
 }

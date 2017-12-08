@@ -1,18 +1,26 @@
 package com.ztstech.vgmate.activitys.search_org;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
-import com.ztstech.vgmate.activitys.org_follow.adapter.OrgFollowListAdapter;
-import com.ztstech.vgmate.data.beans.SearchOrgListBean;
+import com.ztstech.vgmate.activitys.search_org.adapter.SearchOrgAdapter;
+import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import com.ztstech.vgmate.utils.KeyboardUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -33,16 +41,43 @@ public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> i
     @BindView(R.id.recycler)
     RecyclerView recycler;
     @BindView(R.id.srl)
-    SmartRefreshLayout srl;
+    SmartRefreshLayout smartRefreshLayout;
     @BindView(R.id.ll_no_data)
     LinearLayout llNoData;
 
-    private OrgFollowListAdapter adapter;
+    private SearchOrgAdapter adapter;
+
+    private String keyword;
 
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
+        etSearch.setHint("输入要搜索的机构名称");
+        adapter = new SearchOrgAdapter();
+        recycler.setLayoutManager(new LinearLayoutManager(this));
+        recycler.setAdapter(adapter);
 
+        smartRefreshLayout.setEnableRefresh(false);
+        etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH){
+                    if (!TextUtils.isEmpty(etSearch.getText().toString())) {
+                        keyword = etSearch.getText().toString();
+                        adapter.setKeyWord(keyword);
+                        mPresenter.LoadDataByKeword(keyword);
+                    }
+                }
+                return false;
+            }
+        });
+
+        smartRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                mPresenter.appendDada(keyword);
+            }
+        });
     }
 
     @Override
@@ -51,8 +86,17 @@ public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> i
     }
 
     @Override
-    public void setListData(SearchOrgListBean.ListBean listData) {
-
+    public void setListData(List<OrgFollowlistBean.ListBean> listData) {
+        adapter.setListData(listData);
+        adapter.notifyDataSetChanged();
+        KeyboardUtils.hideKeyBoard(this,etSearch);
+        if (listData.size() == 0){
+            llNoData.setVisibility(View.VISIBLE);
+            smartRefreshLayout.setVisibility(View.GONE);
+        }else {
+            llNoData.setVisibility(View.GONE);
+            smartRefreshLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
