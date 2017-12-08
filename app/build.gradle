@@ -17,8 +17,8 @@ android {
         applicationId "com.ztstech.vgmate"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 32
-        versionName "1.0.32"
+        versionCode 34
+        versionName "1.0.34"
 
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

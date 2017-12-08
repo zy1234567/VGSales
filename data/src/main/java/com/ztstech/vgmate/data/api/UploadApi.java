@@ -32,6 +32,7 @@ public interface UploadApi {
      */
     @Multipart
     @POST(UPLOAD_FILES)
-    Observable<UploadImageBean> uploadFile(@Part("savetype") String savetype,
-                                           @Part List<MultipartBody.Part> files);
+    Observable<UploadImageBean> uploadFile(@Query("savetype") String savetype,
+                                           @Part List<MultipartBody.Part> files,
+                                            @Query("authId") String authId);
 }

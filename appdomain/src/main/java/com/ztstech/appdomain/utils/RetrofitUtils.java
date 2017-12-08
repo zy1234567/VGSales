@@ -54,6 +54,17 @@ public class RetrofitUtils {
         return retrofit.create(clazz);
     }
 
+    /** 扫码登录的两个接口用的是这个请求地址*/
+    public static <T> T createQrcodeService(Class<T> clazz) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(NetConstants.BASE_QRCODE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(httpClient)
+                .build();
+        return retrofit.create(clazz);
+    }
+
     /**
      * 上传文件
      * @return
@@ -68,7 +79,7 @@ public class RetrofitUtils {
             parts.add(part);
 
         }
-        return createService(UploadApi.class).uploadFile("savetype", parts);
+        return createService(UploadApi.class).uploadFile("01", parts,UserRepository.getInstance().getAuthId());
     }
 
     /**

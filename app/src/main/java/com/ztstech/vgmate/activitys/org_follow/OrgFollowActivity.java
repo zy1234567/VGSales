@@ -43,7 +43,6 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowContact.Presenter> i
     @Override
     protected void onViewBindFinish(@Nullable Bundle savedInstanceState) {
         super.onViewBindFinish(savedInstanceState);
-        EventBus.getDefault().register(this);
         mPresenter.loadFollowOrgNum();
     }
 
@@ -94,9 +93,4 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowContact.Presenter> i
         mPresenter.loadFollowOrgNum();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
 }

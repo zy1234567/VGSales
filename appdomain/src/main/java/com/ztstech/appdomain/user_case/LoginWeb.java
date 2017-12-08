@@ -19,7 +19,7 @@ public class LoginWeb implements UserCase<Observable<BaseRespBean>>{
 
     public LoginWeb(String uuid) {
         this.uuid = uuid;
-        this.api = RetrofitUtils.createService(QRCodeApi.class);
+        this.api = RetrofitUtils.createQrcodeService(QRCodeApi.class);
     }
 
     @Override
