@@ -4,10 +4,11 @@ import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.CommunicationHistoryBean;
 import com.ztstech.vgmate.data.constants.NetConstants;
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-import rx.Observable;
+
 
 /**
  * Created by zhiyuan on 2017/10/11.

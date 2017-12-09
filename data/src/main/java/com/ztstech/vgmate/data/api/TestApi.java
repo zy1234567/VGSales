@@ -1,7 +1,7 @@
 package com.ztstech.vgmate.data.api;
 
 import retrofit2.http.GET;
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by zhiyuan on 2017/8/1.

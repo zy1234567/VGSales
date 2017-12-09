@@ -11,7 +11,7 @@ import com.ztstech.vgmate.data.beans.UploadImageBean;
 import com.ztstech.vgmate.data.dto.CreateShareData;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  *
@@ -82,8 +82,8 @@ public class CreateSharePresenter extends PresenterImpl<CreateShareContact.View>
             }
 
             @Override
-            public void onCompleted() {
-                super.onCompleted();
+            public void onComplete() {
+                super.onComplete();
                 mView.hideLoading(null);
             }
 

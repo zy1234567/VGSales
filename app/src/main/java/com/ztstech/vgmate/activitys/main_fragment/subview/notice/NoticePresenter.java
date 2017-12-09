@@ -92,8 +92,8 @@ public class NoticePresenter extends PresenterImpl<NoticeContract.View> implemen
             }
 
             @Override
-            public void onCompleted() {
-                super.onCompleted();
+            public void onComplete() {
+                super.onComplete();
                 mView.hideLoading(null);
             }
 

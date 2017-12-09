@@ -6,7 +6,7 @@ import com.ztstech.vgmate.data.api.GetMateDetailApi;
 import com.ztstech.vgmate.data.api.GetMateListApi;
 import com.ztstech.vgmate.data.beans.MatelistBean;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  *

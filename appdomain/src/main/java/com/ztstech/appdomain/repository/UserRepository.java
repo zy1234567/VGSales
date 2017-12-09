@@ -14,8 +14,11 @@ import com.ztstech.vgmate.data.dto.UpdateUserInfoData;
 import com.ztstech.vgmate.data.beans.UserBean;
 import com.ztstech.appdomain.utils.RetrofitUtils;
 
-import rx.Observable;
+import io.reactivex.Observable;
+import io.reactivex.functions.BiConsumer;
+import io.reactivex.functions.Consumer;
 import rx.functions.Action1;
+import rx.functions.Action2;
 
 /**
  * Created by zhiyuan on 2017/8/22.
@@ -114,9 +117,9 @@ public class UserRepository {
      * @return
      */
     public Observable<UserBean> login(@NonNull String phone, @NonNull String code) {
-        return loginApi.login(phone, code, TYPE_LOGIN).doOnNext(new Action1<UserBean>() {
+        return loginApi.login(phone, code, TYPE_LOGIN).doOnNext(new Consumer<UserBean>() {
             @Override
-            public void call(UserBean baseRespBean) {
+            public void accept(UserBean baseRespBean) throws Exception {
                 if (baseRespBean.isSucceed()) {
                     //登录成功
                     UserPreferenceManager.getInstance().cacheUser(baseRespBean);
@@ -131,9 +134,9 @@ public class UserRepository {
      * @return
      */
     public Observable<BaseRespBean> logout() {
-        return loginApi.logout(getAuthId()).doOnNext(new Action1<BaseRespBean>() {
+        return loginApi.logout(getAuthId()).doOnNext(new Consumer<BaseRespBean>() {
             @Override
-            public void call(BaseRespBean baseRespBean) {
+            public void accept(BaseRespBean baseRespBean) {
                 if (baseRespBean.isSucceed()) {
                     clearUserInfo();
                 }
@@ -150,9 +153,9 @@ public class UserRepository {
             return null;
         }
         return loginApi.refreshLogin(user.getUserBean().info.phone,
-                getAuthId()).doOnNext(new Action1<UserBean>() {
+                getAuthId()).doOnNext(new Consumer<UserBean>() {
             @Override
-            public void call(UserBean userBean) {
+            public void accept(UserBean userBean) {
                 //登录成功
                 if (userBean.isSucceed()) {
                     UserPreferenceManager.getInstance().cacheUser(userBean);
@@ -188,9 +191,9 @@ public class UserRepository {
         return loginApi.updateUserInfo(getAuthId(), bean.picurl,bean.picsurl, bean.didurl, bean.cardUrl, bean.sex, bean.did,
                 bean.bname, bean.banks, bean.status, bean.cardNo, bean.wdistrict, bean.birthday,
                 bean.uid, bean.uname)
-                .doOnNext(new Action1<BaseRespBean>() {
+                .doOnNext(new Consumer<BaseRespBean>() {
             @Override
-            public void call(BaseRespBean baseRespBean) {
+            public void accept(BaseRespBean baseRespBean) {
                 if (baseRespBean.isSucceed()) {
                     user.getUserBean().info.banks = bean.banks;
                     user.getUserBean().info.picurl = bean.picurl;
@@ -217,9 +220,9 @@ public class UserRepository {
      */
     public Observable<UserBean> getCachedBeanAsync() {
         return UserPreferenceManager.getInstance().getCachedUserAsync().doOnNext(
-                new Action1<UserBean>() {
+                new Consumer<UserBean>() {
             @Override
-            public void call(UserBean userBean) {
+            public void accept(UserBean userBean) {
                 initUser(userBean);
             }
         });

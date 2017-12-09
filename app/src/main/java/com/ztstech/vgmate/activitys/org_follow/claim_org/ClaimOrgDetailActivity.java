@@ -3,6 +3,7 @@ package com.ztstech.vgmate.activitys.org_follow.claim_org;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -41,7 +43,7 @@ import butterknife.OnClick;
  * 机构认领详情界面
  */
 
-public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Presenter> implements ClaimOrgDetailContact.View{
+public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Presenter> implements ClaimOrgDetailContact.View {
 
     /**
      * 传入显示信息的实体类
@@ -68,10 +70,12 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
     TextView tvClaimPhone;
     @BindView(R.id.recycler)
     RecyclerView recycler;
-    @BindView(R.id.tv_pass)
-    TextView tvPass;
     @BindView(R.id.tv_refuse)
     TextView tvRefuse;
+    @BindView(R.id.tv_location_pass)
+    TextView tvLocationPass;
+    @BindView(R.id.tv_addv_pass)
+    TextView tvAddvPass;
 
     /**
      * 相关证明适配器
@@ -88,7 +92,7 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
         super.onViewBindFinish();
         bean = (OrgFollowlistBean.ListBean) getIntent().getSerializableExtra(KEY_BEAN);
         if (bean == null) {
-            throw new NullPointerException();
+            throw new NullPointerException("ClaimOrgDetailActivity传入bean类为空！");
         }
         showInfo();
         showProveImg();
@@ -136,32 +140,40 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
         return R.layout.activity_claim_org_detail;
     }
 
-    @OnClick({R.id.tv_phone, R.id.tv_claim_phone, R.id.tv_pass, R.id.tv_refuse})
+    @OnClick({R.id.tv_phone, R.id.tv_claim_phone, R.id.tv_pass, R.id.tv_refuse,R.id.tv_location_pass, R.id.tv_addv_pass})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_phone:
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+bean.rbicontphone));
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + bean.rbicontphone));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
             case R.id.tv_claim_phone:
-                Intent intent2 = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+bean.phone));
+                Intent intent2 = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + bean.phone));
                 intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent2);
-                break;
-            case R.id.tv_pass:
-                new IOSStyleDialog(this, "您确定要通过吗？", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mPresenter.approveOrg(String.valueOf(bean.rbiid),bean.calid,ApproveClaimOrg.STATUS_PASS);
-                    }
-                }).show();
                 break;
             case R.id.tv_refuse:
                 new IOSStyleDialog(this, "您确定要拒绝吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mPresenter.approveOrg(String.valueOf(bean.rbiid),bean.calid, ApproveClaimOrg.STATUS_REFUSE);
+                        mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid, ApproveClaimOrg.STATUS_REFUSE);
+                    }
+                }).show();
+                break;
+            case R.id.tv_location_pass:
+                new IOSStyleDialog(this, "您确定要通过吗？", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+//                        mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid, ApproveClaimOrg.STATUS_PASS);
+                    }
+                }).show();
+                break;
+            case R.id.tv_addv_pass:
+                new IOSStyleDialog(this, "您确定要通过吗？", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid, ApproveClaimOrg.STATUS_PASS);
                     }
                 }).show();
                 break;
@@ -178,12 +190,13 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
     @Override
     public void onApproveSuccess() {
         EventBus.getDefault().post(new ApproveOrgEvent());
-        ToastUtil.toastCenter(this,"审批成功");
+        ToastUtil.toastCenter(this, "审批成功");
         finish();
     }
 
     @Override
     public void showError(String msg) {
-        ToastUtil.toastCenter(this,msg);
+        ToastUtil.toastCenter(this, msg);
     }
+
 }

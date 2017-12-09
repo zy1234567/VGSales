@@ -5,7 +5,7 @@ import com.ztstech.appdomain.utils.RetrofitUtils;
 import com.ztstech.vgmate.data.api.QuestionApi;
 import com.ztstech.vgmate.data.beans.AnwserListBean;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by smm on 2017/11/22.

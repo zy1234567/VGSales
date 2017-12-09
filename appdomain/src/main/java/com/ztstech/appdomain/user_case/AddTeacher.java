@@ -6,7 +6,7 @@ import com.ztstech.vgmate.data.dto.AddTeacherData;
 import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.appdomain.utils.RetrofitUtils;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by zhiyuan on 2017/10/20.

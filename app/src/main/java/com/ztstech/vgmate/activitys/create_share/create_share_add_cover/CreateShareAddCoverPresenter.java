@@ -11,7 +11,7 @@ import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
 import java.io.File;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by zhiyuan on 2017/9/12.
@@ -135,8 +135,8 @@ public class CreateShareAddCoverPresenter extends PresenterImpl<CreateShareAddCo
             }
 
             @Override
-            public void onCompleted() {
-                super.onCompleted();
+            public void onComplete() {
+                super.onComplete();
                 mView.hideLoading(null);
             }
 

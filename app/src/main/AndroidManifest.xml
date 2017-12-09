@@ -70,7 +70,7 @@
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="2eef75224613462feb1dcd80b26409ee" />
+            android:value="185343a13b82a3b5c52f4c705c74c719" />
 
         <activity android:name=".activitys.complete_org_info.CompleteOrgInfoActivity" />
         <activity android:name=".activitys.complete_org_info.subview.basic_info.CompleteOrgInfoBasicInfoActivity" />
@@ -122,7 +122,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
+        <service android:name="com.amap.api.location.APSService"></service>
         <activity android:name=".activitys.qr_code.confirm.QRCodeLoginActivity" />
         <activity android:name=".activitys.qr_code.scan.QRCodeScanActivity"></activity>
     </application>

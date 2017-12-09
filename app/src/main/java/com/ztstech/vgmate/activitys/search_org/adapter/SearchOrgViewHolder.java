@@ -45,10 +45,10 @@ public class SearchOrgViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
     @Override
     protected void refreshView(final OrgFollowlistBean.ListBean data) {
         super.refreshView(data);
-        tvName.setText(data.rbioname);
+        ViewUtils.setKeyWordLight(keyword,data.rbioname,tvName);
         Glide.with(getContext())
                 .load(data.rbilogosurl)
-                .error(R.mipmap.ic_launcher)
+                .error(R.mipmap.pre_default_image)
                 .into(imgOrg);
         tvOtype.setText(CategoryUtil.findCategoryByOtype(data.rbiotype));
         tvAddress.setText(LocationUtils.getPName(data.rbiprovince).concat(LocationUtils.getCName(data.rbicity)).

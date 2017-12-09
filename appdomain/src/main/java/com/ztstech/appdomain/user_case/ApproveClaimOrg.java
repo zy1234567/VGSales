@@ -5,7 +5,7 @@ import com.ztstech.appdomain.utils.RetrofitUtils;
 import com.ztstech.vgmate.data.api.ApproveOrgApi;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * 销售审批机构认领

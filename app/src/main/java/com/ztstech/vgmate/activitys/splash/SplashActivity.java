@@ -14,9 +14,9 @@ import com.ztstech.vgmate.data.beans.UserBean;
 import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.utils.LocationUtils;
 
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class SplashActivity extends BaseActivity {
 
@@ -31,9 +31,9 @@ public class SplashActivity extends BaseActivity {
                     //刷新登录
                     UserRepository.getInstance().refreshLogin().observeOn(AndroidSchedulers.mainThread())
                             .subscribeOn(Schedulers.io())
-                            .subscribe(new Action1<UserBean>() {
+                            .subscribe(new Consumer<UserBean>() {
                                 @Override
-                                public void call(UserBean userBean) {
+                                public void accept(UserBean userBean) {
 
                                 }
                             });

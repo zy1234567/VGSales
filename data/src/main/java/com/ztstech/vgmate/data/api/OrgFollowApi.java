@@ -8,7 +8,7 @@ import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  *

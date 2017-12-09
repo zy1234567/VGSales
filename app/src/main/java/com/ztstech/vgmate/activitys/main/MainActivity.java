@@ -21,6 +21,7 @@ import com.ztstech.vgmate.activitys.main.widget.BottomBar;
 import com.ztstech.vgmate.activitys.qr_code.scan.QRCodeScanActivity;
 import com.ztstech.vgmate.activitys.search_org.SearchOrgActivity;
 import com.ztstech.vgmate.data.api.CreateShareApi;
+import com.ztstech.vgmate.manager.GpsManager;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import butterknife.BindView;
@@ -53,6 +54,8 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
 
     @Override
     protected void onViewBindFinish() {
+        // 去定位
+        new GpsManager(this).getGpsInfo();
         bottomBar.setOnTabItemClickListener(this);
 
         vpMain.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));

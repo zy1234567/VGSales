@@ -5,7 +5,7 @@ import com.ztstech.vgmate.data.constants.NetConstants;
 
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by zhiyuan on 2017/11/2.

@@ -109,11 +109,9 @@ public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> i
         return R.layout.activity_search_org;
     }
 
-    @OnClick({R.id.et_search, R.id.tv_cancel})
+    @OnClick({R.id.tv_cancel})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.et_search:
-                break;
             case R.id.tv_cancel:
                 KeyboardUtils.hideKeyBoard(this,etSearch);
                 finish();

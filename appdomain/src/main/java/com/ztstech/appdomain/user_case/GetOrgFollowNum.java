@@ -6,7 +6,7 @@ import com.ztstech.vgmate.data.api.OrgFollowApi;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.OrgFollowNumBean;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by smm on 2017/11/24.

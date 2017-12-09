@@ -6,7 +6,7 @@ import com.ztstech.vgmate.data.api.GetMateDetailApi;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.beans.UnApproveMateBean;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  *

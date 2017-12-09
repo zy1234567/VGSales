@@ -4,39 +4,36 @@ package com.ztstech.vgmate.utils;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 
 import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.activitys.BaseView;
 import com.ztstech.vgmate.activitys.login.LoginActivity;
-import com.ztstech.vgmate.base.BaseApplication;
 import com.ztstech.vgmate.base.BaseApplicationLike;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.constants.NetConstants;
-import com.ztstech.vgmate.data.events.LogoutEvent;
 import com.ztstech.vgmate.data.utils.LogUtils;
 
-import org.greenrobot.eventbus.EventBus;
-
-import rx.Observable;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by zhiyuan on 2017/8/21.
+ *
+ * @author smm
+ * @author zhiyuan
+ * @date 2017/8/21
  * presenter执行userCase类
  */
 
-public abstract class BasePresenterSubscriber<E> extends Subscriber<E> {
+public abstract class BasePresenterSubscriber<E> implements Observer<E> {
 
     /**
      * 获取view引用
      */
     private BaseView mView;
 
-    private Subscription subscription;
 
     private Handler handler = new Handler();
 
@@ -66,6 +63,9 @@ public abstract class BasePresenterSubscriber<E> extends Subscriber<E> {
         }
     }
 
+    @Override
+    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+    }
 
     @Override
     public final void onNext(E e) {
@@ -89,7 +89,7 @@ public abstract class BasePresenterSubscriber<E> extends Subscriber<E> {
     }
 
     @Override
-    public void onCompleted() {
+    public void onComplete() {
         try {
             handler.post(new Runnable() {
                 @Override
@@ -139,17 +139,11 @@ public abstract class BasePresenterSubscriber<E> extends Subscriber<E> {
         if (showLoading) {
             mView.showLoading(null);
         }
-        subscription = observable.observeOn(AndroidSchedulers.mainThread())
+        observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this);
     }
 
-    public void cancel() {
-        if (subscription != null) {
-            subscription.unsubscribe();
-        }
-        mView = null;
-    }
 
     protected abstract void childNext(E e);
 

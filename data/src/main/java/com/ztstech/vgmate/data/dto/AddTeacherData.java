@@ -4,7 +4,7 @@ import com.ztstech.vgmate.data.beans.BaseRespBean;
 
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by zhiyuan on 2017/10/20.

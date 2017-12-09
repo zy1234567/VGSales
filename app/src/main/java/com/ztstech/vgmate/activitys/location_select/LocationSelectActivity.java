@@ -11,34 +11,27 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.location_select.adapter.AreaApapter;
 import com.ztstech.vgmate.activitys.location_select.adapter.CityAdapter;
 import com.ztstech.vgmate.activitys.location_select.adapter.ProvinceAdapter;
 import com.ztstech.vgmate.data.beans.LocationBean;
-import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.HUDUtils;
 import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.Emitter;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by smm on 2017/6/23.
@@ -138,23 +131,34 @@ public class LocationSelectActivity extends AppCompatActivity {
         kProgressHUD.setLabel("正在初始化");
         kProgressHUD.show();
 
-        Observable.create(new Action1<Emitter<Void>>() {
+        Observable.create(new ObservableOnSubscribe<Void>() {
             @Override
-            public void call(Emitter<Void> emitter) {
+            public void subscribe(@io.reactivex.annotations.NonNull ObservableEmitter<Void> e) throws Exception {
                 initData();
-                emitter.onNext(null);
-                emitter.onCompleted();
+                e.onNext(null);
+                e.onComplete();
             }
-        }, Emitter.BackpressureMode.NONE)
-                .observeOn(AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.io())
-        .subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                kProgressHUD.dismiss();
-                initListener();
-            }
-        });
+        }).observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread())
+                .subscribeOn(io.reactivex.schedulers.Schedulers.io())
+                .subscribe(new Observer<Void>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(@io.reactivex.annotations.NonNull Void aVoid) {
+                        kProgressHUD.dismiss();
+                        initListener();
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
 
         String defaultLocationId = getIntent().getStringExtra(ARG_DEFAULT_AREA);
         if (!TextUtils.isEmpty(defaultLocationId)) {

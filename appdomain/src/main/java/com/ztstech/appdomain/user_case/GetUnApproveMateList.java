@@ -5,7 +5,7 @@ import com.ztstech.appdomain.utils.RetrofitUtils;
 import com.ztstech.vgmate.data.api.GetUnApproveMateApi;
 import com.ztstech.vgmate.data.beans.WaitApproveMateListBean;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  *

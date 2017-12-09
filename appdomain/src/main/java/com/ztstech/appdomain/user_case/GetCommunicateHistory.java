@@ -7,7 +7,7 @@ import com.ztstech.vgmate.data.api.CommunicateHistoryApi;
 import com.ztstech.vgmate.data.beans.CommunicationHistoryBean;
 import com.ztstech.appdomain.utils.RetrofitUtils;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by zhiyuan on 2017/10/11.

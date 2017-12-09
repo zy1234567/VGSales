@@ -8,7 +8,7 @@ import com.ztstech.vgmate.data.constants.NetConstants;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by zhiyuan on 2017/9/23.

@@ -33,11 +33,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.Emitter;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by zhiyuan on 2017/9/22.
@@ -135,21 +137,32 @@ public class LocationSelectDialog extends Dialog implements View.OnClickListener
         kProgressHUD.setLabel("正在初始化");
         kProgressHUD.show();
 
-        Observable.create(new Action1<Emitter<Void>>() {
+        Observable.create(new ObservableOnSubscribe<Void>() {
             @Override
-            public void call(Emitter<Void> emitter) {
+            public void subscribe(@io.reactivex.annotations.NonNull ObservableEmitter<Void> e) throws Exception {
                 initData();
-                emitter.onNext(null);
-                emitter.onCompleted();
+                e.onNext(null);
+                e.onComplete();
             }
-        }, Emitter.BackpressureMode.NONE)
-                .observeOn(AndroidSchedulers.mainThread())
+        }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Action1<Void>() {
+                .subscribe(new Observer<Void>() {
                     @Override
-                    public void call(Void aVoid) {
+                    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(@io.reactivex.annotations.NonNull Void aVoid) {
                         kProgressHUD.dismiss();
                         initListener();
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
                     }
                 });
     }

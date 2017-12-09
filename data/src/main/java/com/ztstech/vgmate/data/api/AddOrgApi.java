@@ -5,8 +5,7 @@ import com.ztstech.vgmate.data.beans.BaseRespBean;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
-import rx.Observable;
-
+import io.reactivex.Observable;
 /**
  * Created by smm on 2017/11/6.
  */

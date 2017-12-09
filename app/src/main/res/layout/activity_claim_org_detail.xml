@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showBackNav="true"
-        app:barTitle="认领审批详情"
+        app:barTitle="认证审批"
         app:backgroundColor="@color/color_109">
 
     </com.ztstech.vgmate.weigets.TopBar>
@@ -178,22 +178,35 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="通过"
-            android:textSize="@dimen/text_3"
-            android:textColor="@color/color_109"
-            android:gravity="center"
-            android:background="@drawable/bg_c_2_f_001"
-            android:id="@+id/tv_pass" />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
             android:text="拒绝"
             android:textSize="@dimen/text_3"
             android:textColor="@color/color_109"
             android:gravity="center"
             android:background="@drawable/bg_c_2_f_106"
-            android:layout_marginLeft="15dp"
             android:id="@+id/tv_refuse" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="定位认证"
+            android:textSize="@dimen/text_3"
+            android:textColor="@color/color_109"
+            android:gravity="center"
+            android:background="@drawable/bg_c_2_f_001"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tv_location_pass" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="加V认证"
+            android:textSize="@dimen/text_3"
+            android:textColor="@color/color_100"
+            android:gravity="center"
+            android:background="@drawable/bg_c_2_f_005"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tv_addv_pass" />
+
     </LinearLayout>
 </RelativeLayout>

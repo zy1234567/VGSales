@@ -7,8 +7,12 @@ import android.preference.PreferenceManager;
 import com.google.gson.Gson;
 import com.ztstech.vgmate.data.beans.UserBean;
 
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 import rx.Emitter;
-import rx.Observable;
+import io.reactivex.Observable;
 import rx.functions.Action1;
 
 
@@ -76,19 +80,19 @@ public class UserPreferenceManager {
      * @return
      */
     public Observable<UserBean> getCachedUserAsync() {
-        return Observable.create(new Action1<Emitter<UserBean>>() {
+        return Observable.create(new ObservableOnSubscribe<UserBean>() {
             @Override
-            public void call(Emitter<UserBean> userBeanEmitter) {
+            public void subscribe(@NonNull ObservableEmitter<UserBean> e) throws Exception {
                 String data = preferences.getString(USER, null);
                 if (data == null) {
-                    userBeanEmitter.onError(new NullPointerException("无此用户"));
+                    e.onError(new NullPointerException("无此用户"));
                 }else {
                     UserBean bean = new Gson().fromJson(data, UserBean.class);
-                    userBeanEmitter.onNext(bean);
+                    e.onNext(bean);
                 }
-                userBeanEmitter.onCompleted();
+                e.onComplete();
             }
-        }, Emitter.BackpressureMode.NONE);
+        });
     }
 
     public UserBean getCachedUserSync() {

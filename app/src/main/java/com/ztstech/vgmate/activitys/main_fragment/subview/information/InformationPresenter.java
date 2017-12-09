@@ -89,8 +89,8 @@ public class InformationPresenter extends PresenterImpl<InformationContract.View
             }
 
             @Override
-            public void onCompleted() {
-                super.onCompleted();
+            public void onComplete() {
+                super.onComplete();
                 mView.hideLoading(null);
             }
 

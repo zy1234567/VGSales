@@ -15,6 +15,7 @@ import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.user_info.complete_info.FillInfoActivity;
 import com.ztstech.vgmate.activitys.main.MainActivity;
 import com.ztstech.vgmate.data.events.LogoutEvent;
+import com.ztstech.vgmate.manager.GpsManager;
 import com.ztstech.vgmate.utils.ToastUtil;
 
 import butterknife.BindView;
@@ -51,7 +52,7 @@ public class LoginActivity extends MVPActivity<LoginContract.Presenter> implemen
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
-
+        new GpsManager(this).getGpsInfo();
         etPhone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
