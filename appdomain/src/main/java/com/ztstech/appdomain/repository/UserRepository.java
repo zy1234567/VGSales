@@ -15,10 +15,8 @@ import com.ztstech.vgmate.data.beans.UserBean;
 import com.ztstech.appdomain.utils.RetrofitUtils;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.BiConsumer;
 import io.reactivex.functions.Consumer;
-import rx.functions.Action1;
-import rx.functions.Action2;
+
 
 /**
  * Created by zhiyuan on 2017/8/22.
@@ -125,6 +123,11 @@ public class UserRepository {
                     UserPreferenceManager.getInstance().cacheUser(baseRespBean);
                     initUser(baseRespBean);
                 }
+            }
+        }).doOnError(new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+
             }
         });
     }

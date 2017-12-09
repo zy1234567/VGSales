@@ -10,10 +10,9 @@ import com.ztstech.vgmate.data.beans.UserBean;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
-import rx.Emitter;
+
 import io.reactivex.Observable;
-import rx.functions.Action1;
+
 
 
 /**

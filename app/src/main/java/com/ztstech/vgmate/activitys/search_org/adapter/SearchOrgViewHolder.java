@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -51,10 +52,8 @@ public class SearchOrgViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
                 .error(R.mipmap.pre_default_image)
                 .into(imgOrg);
         tvOtype.setText(CategoryUtil.findCategoryByOtype(data.rbiotype));
-        tvAddress.setText(LocationUtils.getPName(data.rbiprovince).concat(LocationUtils.getCName(data.rbicity)).
-                concat(LocationUtils.getAName(data.rbidistrict))
-                .concat(data.rbiaddress));
-        String[] strs = new String[] {"咨询电话：",data.rbicontphone};
+        tvAddress.setText(data.rbiaddress);
+        String[] strs = new String[] {"咨询电话：",data.rbicontphone == null ? "暂无" : data.rbicontphone};
         int[] colors = new int[] {ContextCompat.getColor(getContext(), R.color.color_102),
                 ContextCompat.getColor(getContext(), R.color.color_004)};
         SpannableStringBuilder spannableStringBuilder =
@@ -62,14 +61,16 @@ public class SearchOrgViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
         tvPhone.setText(spannableStringBuilder);
 
         //拨打电话
-        tvPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+data.rbicontphone));
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getContext().startActivity(intent);
-            }
-        });
+        if (!TextUtils.isEmpty(data.rbicontphone)) {
+            tvPhone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + data.rbicontphone));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getContext().startActivity(intent);
+                }
+            });
+        }
     }
 
 }
