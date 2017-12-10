@@ -174,7 +174,9 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
                 break;
             case R.id.rl_custom:
                 //客户跟进
-                startActivity(new Intent(getActivity(), OrgFollowActivity.class));
+                Intent intent2 = new Intent(getContext(), OrgFollowActivity.class);
+                intent2.putExtra(OrgFollowActivity.KEY_UID,UserRepository.getInstance().getUser().getUserBean().info.uid);
+                getContext().startActivity(intent2);
                 break;
             default:
                 break;

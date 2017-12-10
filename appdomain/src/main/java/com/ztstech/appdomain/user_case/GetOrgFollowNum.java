@@ -14,10 +14,17 @@ import io.reactivex.Observable;
 
 public class GetOrgFollowNum implements UserCase<Observable<OrgFollowNumBean>>{
 
-    OrgFollowApi api = RetrofitUtils.createService(OrgFollowApi.class);
+    private OrgFollowApi api;
+
+    private String uid;
+
+    public GetOrgFollowNum(String uid){
+        this.uid = uid;
+        api = RetrofitUtils.createService(OrgFollowApi.class);
+    }
 
     @Override
     public Observable<OrgFollowNumBean> run() {
-        return api.queryFollowNum(UserRepository.getInstance().getAuthId());
+        return api.queryFollowNum(UserRepository.getInstance().getAuthId(),uid);
     }
 }

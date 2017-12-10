@@ -140,7 +140,7 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
         return R.layout.activity_claim_org_detail;
     }
 
-    @OnClick({R.id.tv_phone, R.id.tv_claim_phone, R.id.tv_pass, R.id.tv_refuse,R.id.tv_location_pass, R.id.tv_addv_pass})
+    @OnClick({R.id.tv_phone, R.id.tv_claim_phone, R.id.tv_refuse,R.id.tv_location_pass, R.id.tv_addv_pass})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_phone:

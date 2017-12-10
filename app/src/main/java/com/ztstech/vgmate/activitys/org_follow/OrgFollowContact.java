@@ -15,7 +15,7 @@ public class OrgFollowContact {
     }
 
     interface Presenter extends BasePresenter<View>{
-        void loadFollowOrgNum();
+        void loadFollowOrgNum(String uid);
     }
 
 }

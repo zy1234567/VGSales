@@ -18,13 +18,13 @@ public class OrgFollowPresenter extends PresenterImpl<OrgFollowContact.View> imp
     }
 
     @Override
-    public void loadFollowOrgNum() {
+    public void loadFollowOrgNum(String uid) {
         new BasePresenterSubscriber<OrgFollowNumBean>(mView){
 
             @Override
             protected void childNext(OrgFollowNumBean orgFollowNumBean) {
                 mView.onGetFollowNumSucced(orgFollowNumBean);
             }
-        }.run(new GetOrgFollowNum().run());
+        }.run(new GetOrgFollowNum(uid).run());
     }
 }

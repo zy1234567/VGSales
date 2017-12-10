@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.org_follow.adapter.FollowOrgFragmentPagerAdapter;
@@ -38,12 +40,32 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowContact.Presenter> i
     @BindView(R.id.viewpager)
     ViewPager viewpager;
 
+    /** 要显示对应人的界面uid */
+    private String uid;
+
     private FollowOrgFragmentPagerAdapter adapter;
 
     @Override
     protected void onViewBindFinish(@Nullable Bundle savedInstanceState) {
         super.onViewBindFinish(savedInstanceState);
-        mPresenter.loadFollowOrgNum();
+        uid = getIntent().getStringExtra(KEY_UID);
+        // 右上角的待审批按钮情况
+        if (TextUtils.equals(uid, UserRepository.getInstance().getUser().getUserBean().info.uid)){
+            topBar.getRightImage().setVisibility(View.VISIBLE);
+        }else {
+            topBar.getRightImage().setVisibility(View.GONE);
+        }
+        tablayout.setupWithViewPager(viewpager);
+        adapter = new FollowOrgFragmentPagerAdapter(getSupportFragmentManager(),uid);
+        viewpager.setAdapter(adapter);
+        topBar.getRightImage().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 点击右上角跳转到机构反馈列表界面
+                startActivity(new Intent(OrgFollowActivity.this,OrgFeedBackActivity.class));
+            }
+        });
+        mPresenter.loadFollowOrgNum(uid);
     }
 
     @Override
@@ -56,23 +78,12 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowContact.Presenter> i
         return R.layout.activity_org_follow;
     }
 
-    @Override
-    protected void onViewBindFinish() {
-        super.onViewBindFinish();
-        tablayout.setupWithViewPager(viewpager);
-        adapter = new FollowOrgFragmentPagerAdapter(getSupportFragmentManager(),getIntent().getStringExtra(KEY_UID));
-        viewpager.setAdapter(adapter);
-        topBar.getRightImage().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 点击右上角跳转到机构反馈列表界面
-                startActivity(new Intent(OrgFollowActivity.this,OrgFeedBackActivity.class));
-            }
-        });
-    }
 
     @Override
     public void onGetFollowNumSucced(OrgFollowNumBean bean) {
+        if (bean == null || bean.info == null){
+            return;
+        }
         String[] titles = {"已确认".concat(" ").concat(String.valueOf(bean.info.confirmNum)),
                 "已认领".concat(" ").concat(String.valueOf(bean.info.claimNum)),
                 "管理端".concat(" ").concat(String.valueOf(bean.info.webNum))};
@@ -80,7 +91,8 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowContact.Presenter> i
         adapter.notifyDataSetChanged();
         topBar.setTitle("客户跟进".concat("(").concat
                 (String.valueOf(bean.info.confirmNum + bean.info.claimNum + bean.info.webNum)).concat(")"));
-        if (bean.info.auditNum > 0){
+        if (bean.info.auditNum > 0 &&
+                TextUtils.equals(uid, UserRepository.getInstance().getUser().getUserBean().info.uid)){
             topBar.getRightRedNum().setVisibility(View.VISIBLE);
             topBar.getRightRedNum().setText(String.valueOf(bean.info.auditNum > 99 ? 99 : bean.info.auditNum));
         }else {
@@ -90,7 +102,7 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowContact.Presenter> i
 
     @Subscribe
     private void onRefersh(ApproveOrgEvent event){
-        mPresenter.loadFollowOrgNum();
+        mPresenter.loadFollowOrgNum(uid);
     }
 
 }
