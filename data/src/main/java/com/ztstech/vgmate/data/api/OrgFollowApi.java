@@ -1,7 +1,5 @@
 package com.ztstech.vgmate.data.api;
 
-import com.ztstech.vgmate.data.beans.BaseRespBean;
-import com.ztstech.vgmate.data.beans.MainListBean;
 import com.ztstech.vgmate.data.beans.OrgFollowNumBean;
 import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 

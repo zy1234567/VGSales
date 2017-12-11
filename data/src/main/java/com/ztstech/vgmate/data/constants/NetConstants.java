@@ -3,7 +3,9 @@ package com.ztstech.vgmate.data.constants;
 import com.ztstech.vgmate.data.BuildConfig;
 
 /**
- * Created by zhiyuan on 2017/7/27.
+ *
+ * @author zhiyuan
+ * @date 2017/7/27
  */
 
 public interface NetConstants {
@@ -18,7 +20,7 @@ public interface NetConstants {
 
 //    String BASE_URL = "http://www.008box.com/";
 
-//    String BASE_URL = "http://192.168.1.180/tom/";
+//    String BASE_URL = "http://192.168.1.102/tom/";
 
 //    String BASE_URL = "http://192.168.1.124:8080/tom/";
 

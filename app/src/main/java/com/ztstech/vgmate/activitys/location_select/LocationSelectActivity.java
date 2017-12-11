@@ -246,14 +246,7 @@ public class LocationSelectActivity extends AppCompatActivity {
 
     private void initListener() {
 
-        list_city = new ArrayList<>();
-        list_area = new ArrayList<>();
-        adapterProvince = new ProvinceAdapter(list_province, this);
-        adapterCity = new CityAdapter(list_city, this);
-        adapterArea = new AreaApapter(list_area, this);
-        lvProvince.setAdapter(adapterProvince);
-        lvCity.setAdapter(adapterCity);
-        lvArea.setAdapter(adapterArea);
+
 
         lvProvince.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
