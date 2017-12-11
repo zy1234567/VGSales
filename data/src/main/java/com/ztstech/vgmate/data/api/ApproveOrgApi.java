@@ -15,6 +15,7 @@ public interface ApproveOrgApi {
     @POST("exempt/AppSaleAuditClaims")
     Observable<BaseRespBean> approveClaimOrg(@Query("rbiid") String rbiid,
                                              @Query("calid") String calid,
+                                             @Query("identificationtype") String identificationtype,
                                          @Query("status") String status,
                                          @Query("authId") String authId);
 

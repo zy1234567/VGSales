@@ -15,7 +15,7 @@ public interface ClaimOrgDetailContact {
     }
 
     interface Presenter extends BasePresenter<View>{
-        void approveOrg(String rbiid,String calid,String status);
+        void approveOrg(String rbiid,String calid,String identtype,String status);
     }
 
 }

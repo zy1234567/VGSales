@@ -20,23 +20,33 @@ public class ApproveClaimOrg implements UserCase<Observable<BaseRespBean>>{
     /** 审核拒绝 */
     public static final String STATUS_REFUSE = "01";
 
+    /** 定位认证 */
+    public static final String IDENT_TYPE_LOCATION = "01";
+
+    /** 加v认证 */
+    public static final String IDENT_TYPE_ADDV = "02";
+
     private String rbiid;
 
     private String calid;
+
+    /** 认证类型 */
+    private String identType;
 
     private String status;
 
     private ApproveOrgApi api;
 
-    public ApproveClaimOrg(String rbiid,String status,String calid){
+    public ApproveClaimOrg(String rbiid,String status,String calid,String identType){
         api = RetrofitUtils.createService(ApproveOrgApi.class);
         this.rbiid = rbiid;
         this.status = status;
         this.calid = calid;
+        this.identType = identType;
     }
 
     @Override
     public Observable<BaseRespBean> run() {
-        return api.approveClaimOrg(rbiid,calid,status, UserRepository.getInstance().getAuthId());
+        return api.approveClaimOrg(rbiid,calid,identType,status, UserRepository.getInstance().getAuthId());
     }
 }
