@@ -88,8 +88,8 @@ public class LocationSelectActivity extends AppCompatActivity {
     AreaApapter adapterArea;
 
     List<LocationBean> list_province;
-    List<LocationBean.CityBean> list_city;
-    List<LocationBean.CityBean.SiteBean> list_area;
+    List<LocationBean.CityBean> list_city = new ArrayList<>();
+    List<LocationBean.CityBean.SiteBean> list_area = new ArrayList<>();
 
     /**
      * 当前所选择的tab 默认是选择省份
@@ -127,14 +127,16 @@ public class LocationSelectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_location_select);
         ButterKnife.bind(this);
 
-        kProgressHUD = HUDUtils.create(this);
-        kProgressHUD.setLabel("正在初始化");
-        kProgressHUD.show();
+//        kProgressHUD = HUDUtils.create(this);
+//        kProgressHUD.setLabel("正在初始化");
+//        kProgressHUD.show();
+        initData();
+        initListener();
 
         Observable.create(new ObservableOnSubscribe<Void>() {
             @Override
             public void subscribe(@io.reactivex.annotations.NonNull ObservableEmitter<Void> e) throws Exception {
-                initData();
+
                 e.onNext(null);
                 e.onComplete();
             }
@@ -148,7 +150,7 @@ public class LocationSelectActivity extends AppCompatActivity {
                     @Override
                     public void onNext(@io.reactivex.annotations.NonNull Void aVoid) {
                         kProgressHUD.dismiss();
-                        initListener();
+
                     }
 
                     @Override
@@ -171,7 +173,12 @@ public class LocationSelectActivity extends AppCompatActivity {
         title.setText("地区选择");
         list_province = LocationUtils.getLocationList();
         updateOrgInfo = getIntent().getBooleanExtra("updateOrgInfo", false);
-
+        adapterProvince = new ProvinceAdapter(list_province,this);
+        adapterCity = new CityAdapter(list_city,this);
+        adapterArea = new AreaApapter(list_area,this);
+        lvProvince.setAdapter(adapterProvince);
+        lvCity.setAdapter(adapterCity);
+        lvArea.setAdapter(adapterArea);
     }
 
     @OnClick({R.id.img_back, R.id.tv_save, R.id.rl_province, R.id.rl_city, R.id.rl_area})
