@@ -77,4 +77,21 @@ public class GpsManager implements AMapLocationListener {
             }
         }
     }
+
+    /**
+     * 获得存储的地区编码
+     * @return
+     */
+    public String getSaveDistrict(){
+        return preferences.getString(KEY_DISTRICT,"");
+    }
+
+    /**
+     * 获得存储的gps
+     * @return
+     */
+    public String getSaveGps(){
+        return preferences.getString(KEY_GPS,"");
+    }
+
 }

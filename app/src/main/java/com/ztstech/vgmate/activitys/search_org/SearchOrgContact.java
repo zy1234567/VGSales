@@ -18,8 +18,8 @@ public interface SearchOrgContact {
    }
 
    interface Presenter extends BasePresenter<View>{
-       void LoadDataByKeword(String keyword);
-       void appendDada(String keyword);
+       void LoadDataByKeword(String keyword,String district);
+       void appendDada(String keyword,String district);
    }
 
 }

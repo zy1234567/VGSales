@@ -20,4 +20,6 @@ public class AddOrgData {
     public String rbiaddress;
 
     public String rbigps;
+
+    public String bigtype;
 }

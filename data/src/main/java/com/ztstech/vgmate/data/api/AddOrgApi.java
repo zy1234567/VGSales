@@ -16,6 +16,7 @@ public interface AddOrgApi {
     @POST("exempt/AppSaleRegisterRBI")
     Observable<BaseRespBean> addOrg(@Field("rbioname") String rbioname,
                                          @Field("rbiotype") String rbiotype,
+                                         @Field("bigtype") String bigtype,
                                          @Field("rbidistrict") String rbidistrict,
                                          @Field("rbigps") String rbigps,
                                          @Field("authId") String authId,

@@ -1,6 +1,5 @@
 package com.ztstech.vgmate.activitys.search_org;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -17,16 +16,17 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
-import com.ztstech.vgmate.activitys.location_select.LocationSelectDialog;
 import com.ztstech.vgmate.activitys.search_org.adapter.SearchOrgAdapter;
+import com.ztstech.vgmate.base.BaseApplicationLike;
 import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
+import com.ztstech.vgmate.manager.GpsManager;
 import com.ztstech.vgmate.utils.KeyboardUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
+import com.ztstech.vgmate.weigets.LocationSelectDialog;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -35,7 +35,7 @@ import butterknife.OnClick;
  * 搜索机构界面
  */
 
-public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> implements SearchOrgContact.View {
+public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> implements SearchOrgContact.View,LocationSelectDialog.SelectLocationCallBack {
 
 
     @BindView(R.id.et_search)
@@ -71,9 +71,15 @@ public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> i
 
     private String keyword;
 
+    /**
+     * 要搜索的区域
+     */
+    private String rbidistrict;
+
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
+        rbidistrict = new GpsManager(BaseApplicationLike.getApplicationInstance()).getSaveDistrict();
         etSearch.setHint("输入要搜索的机构名称");
         adapter = new SearchOrgAdapter();
         recycler.setLayoutManager(new LinearLayoutManager(this));
@@ -87,7 +93,7 @@ public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> i
                     if (!TextUtils.isEmpty(etSearch.getText().toString())) {
                         keyword = etSearch.getText().toString();
                         adapter.setKeyWord(keyword);
-                        mPresenter.LoadDataByKeword(keyword);
+                        mPresenter.LoadDataByKeword(keyword,rbidistrict);
                     }
                 }
                 return false;
@@ -97,7 +103,7 @@ public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> i
         smartRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                mPresenter.appendDada(keyword);
+                mPresenter.appendDada(keyword,rbidistrict);
             }
         });
     }
@@ -111,6 +117,10 @@ public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> i
     public void setListData(List<OrgFollowlistBean.ListBean> listData) {
         adapter.setListData(listData);
         adapter.notifyDataSetChanged();
+        if (smartRefreshLayout.isLoading()){
+            smartRefreshLayout.finishRefresh();
+            smartRefreshLayout.finishLoadmore();
+        }
         KeyboardUtils.hideKeyBoard(this, etSearch);
         if (listData.size() == 0) {
             llNoData.setVisibility(View.VISIBLE);
@@ -131,7 +141,7 @@ public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> i
         return R.layout.activity_search_org;
     }
 
-    @OnClick({R.id.tv_cancel,R.id.ll_province})
+    @OnClick({R.id.tv_cancel,R.id.ll_province,R.id.ll_city,R.id.ll_district})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_cancel:
@@ -139,12 +149,43 @@ public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> i
                 finish();
                 break;
             case R.id.ll_province:
-//                LocationSelectDialog dialog =  new LocationSelectDialog(this);
+                LocationSelectDialog dialog =  new LocationSelectDialog(this,0, rbidistrict, this);
 //                dialog.show();
+                break;
+            case R.id.ll_city:
+                if (TextUtils.equals("无可选地区", tvCity.getText().toString())){
+                    return;
+                }
+                LocationSelectDialog dialog2 =  new LocationSelectDialog(this,1, rbidistrict, this);
+//                dialog2.show();
+                break;
+            case R.id.ll_district:
+                if (TextUtils.equals("无可选地区", tvDistrict.getText().toString())){
+                    return;
+                }
+                LocationSelectDialog dialog3 =  new LocationSelectDialog(this,2, rbidistrict, this);
+//                dialog3.show();
                 break;
             default:
                 break;
         }
     }
 
+    @Override
+    public void onSelectLocation(String province, String city, String district, String code) {
+        rbidistrict = code;
+        tvProvince.setText(province);
+        if (TextUtils.isEmpty(city)){
+            tvCity.setText("无可选地区");
+        }else {
+            tvCity.setText(city);
+//            tvCity.setTag("无可选地区");
+        }
+        if (TextUtils.isEmpty(district)){
+            tvDistrict.setText("无可选地区");
+        }else {
+            tvDistrict.setText(district);
+//            tvDistrict.setTag("无可选地区");
+        }
+    }
 }

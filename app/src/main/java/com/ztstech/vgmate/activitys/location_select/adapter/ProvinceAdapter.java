@@ -76,6 +76,10 @@ public class ProvinceAdapter extends BaseAdapter {
         }
     }
 
+    public void setPosition(int pi){
+
+    }
+
     @Override
     public void notifyDataSetChanged() {
         super.notifyDataSetChanged();

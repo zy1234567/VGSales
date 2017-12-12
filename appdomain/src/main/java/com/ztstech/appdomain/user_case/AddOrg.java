@@ -27,6 +27,7 @@ public class AddOrg implements UserCase<Observable<BaseRespBean>>{
     public Observable<BaseRespBean> run() {
         return api.addOrg(data.rbioname,
                 data.rbiotype,
+                data.bigtype,
                 data.rbidistrict,
                 data.rbigps,
                 UserRepository.getInstance().getAuthId(),

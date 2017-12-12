@@ -149,7 +149,7 @@ public class LocationSelectActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(@io.reactivex.annotations.NonNull Void aVoid) {
-                        kProgressHUD.dismiss();
+//                        kProgressHUD.dismiss();
 
                     }
 

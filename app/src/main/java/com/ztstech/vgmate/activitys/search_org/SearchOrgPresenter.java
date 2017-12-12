@@ -27,33 +27,31 @@ public class SearchOrgPresenter extends PresenterImpl<SearchOrgContact.View> imp
 
     private List<OrgFollowlistBean.ListBean> listBeen = new ArrayList<>();
 
-    private SharedPreferences preferences;
-
     public SearchOrgPresenter(SearchOrgContact.View view) {
         super(view);
-        preferences = PreferenceManager.getDefaultSharedPreferences(BaseApplicationLike.getApplicationInstance());
     }
 
     @Override
-    public void LoadDataByKeword(String keyword) {
+    public void LoadDataByKeword(String keyword,String district) {
         currentpage = 1;
-        requestData(keyword);
+        requestData(keyword,district);
     }
 
     @Override
-    public void appendDada(String keyword) {
+    public void appendDada(String keyword,String district) {
         if (currentpage == totalpage){
             mView.setListData(listBeen);
         }else {
             currentpage++;
+            requestData(keyword,district);
         }
     }
 
-    private void requestData(String keyword){
-        String rbidistrict = preferences.getString(GpsManager.KEY_DISTRICT,"");
-        if (TextUtils.isEmpty(rbidistrict)){
+    private void requestData(String keyword,String district){
+//        String rbidistrict = new GpsManager(BaseApplicationLike.getApplicationInstance()).getSaveDistrict();
+        if (TextUtils.isEmpty(district)){
             // 之前没有定位成功 先默认搜索北京
-            rbidistrict = "110115";
+            district = "110115";
             new GpsManager(BaseApplicationLike.getApplicationInstance()).getGpsInfo();
         }
 //        else {
@@ -80,7 +78,7 @@ public class SearchOrgPresenter extends PresenterImpl<SearchOrgContact.View> imp
             protected void childError(Throwable e) {
                 mView.showError(NetConstants.INTERNET_ERROR_HINT);
             }
-        }.run(new GetSearchOrg(currentpage,keyword,rbidistrict).run());
+        }.run(new GetSearchOrg(currentpage,keyword,district).run());
     }
 
 }

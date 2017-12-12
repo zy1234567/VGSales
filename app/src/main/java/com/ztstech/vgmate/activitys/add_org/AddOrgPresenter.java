@@ -5,6 +5,7 @@ import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
 import com.ztstech.vgmate.data.dto.AddOrgData;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
+import com.ztstech.vgmate.utils.CategoryUtil;
 
 /**
  * Created by zhiyuan on 2017/9/27.
@@ -20,6 +21,7 @@ public class AddOrgPresenter extends PresenterImpl<AddOrgContract.View> implemen
 
     @Override
     public void commit(AddOrgData data) {
+        data.bigtype = CategoryUtil.getFatherCategoryByChildId(data.rbiotype.split(",")[0]).getLid();
         mView.showLoading("请稍等");
         new BasePresenterSubscriber<BaseRespBean>(mView) {
 
