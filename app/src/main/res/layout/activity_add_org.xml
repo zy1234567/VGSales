@@ -353,7 +353,6 @@
                     android:enabled="true"
                     android:hint="请输入"
                     android:id="@+id/et_phone"
-                    android:inputType="phone"
                     android:lines="1"
                     android:textColorHint="@color/color_103"
                     android:textCursorDrawable="@null"

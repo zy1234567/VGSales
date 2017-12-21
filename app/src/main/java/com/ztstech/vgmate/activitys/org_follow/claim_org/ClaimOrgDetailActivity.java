@@ -117,6 +117,10 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
         tvRealName.setText("真实姓名：".concat(bean.name));
         tvJob.setText("担任职位：".concat(bean.position));
         tvClaimPhone.setText(bean.phone);
+        if (TextUtils.equals(ApproveClaimOrg.IDENT_TYPE_LOCATION,bean.identificationtype)){
+            tvLocationPass.setBackgroundResource(R.drawable.bg_c_2_f_107);
+            tvLocationPass.setEnabled(false);
+        }
     }
 
     /**

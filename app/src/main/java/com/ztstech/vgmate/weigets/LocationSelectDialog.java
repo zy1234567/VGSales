@@ -101,10 +101,17 @@ public class LocationSelectDialog extends Dialog {
 
     private void initView(){
         View content = LayoutInflater.from(context).inflate(R.layout.dialog_select_loction,null);
+        ViewUtils.setDialogFullScreen(this);
+        View topView = content.findViewById(R.id.topView);
         lvProvince = content.findViewById(R.id.listview_province);
         lvCity = content.findViewById(R.id.listview_city);
         lvArea = content.findViewById(R.id.listview_area);
-
+        topView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
         list_province = LocationUtils.getLocationList();
         list_city = new ArrayList<>();
         list_area = new ArrayList<>();
@@ -133,18 +140,22 @@ public class LocationSelectDialog extends Dialog {
         }else{
             selectArea();
         }
+        Window window = getWindow();
+        if (window != null) {
+            window.setWindowAnimations(0);
+        }
         initListener();
         setContentView(content);
         show();
-        Window dialogWindow = getWindow();
-        WindowManager.LayoutParams layoutParams = dialogWindow.getAttributes();
-        layoutParams.width= ViewGroup.LayoutParams.MATCH_PARENT;
-        layoutParams.height= ViewUtils.getPhoneHeight(context) - ViewUtils.dp2px(context,50);
-        dialogWindow.setGravity(Gravity.TOP);
-//        layoutParams.alpha = 0f;
-//        layoutParams.x = 0;
-//        layoutParams.y = ViewUtils.dp2px(context,150);
-        dialogWindow.setAttributes(layoutParams);
+//        Window dialogWindow = getWindow();
+//        WindowManager.LayoutParams layoutParams = dialogWindow.getAttributes();
+//        layoutParams.width= ViewGroup.LayoutParams.MATCH_PARENT;
+//        layoutParams.height= ViewUtils.getPhoneHeight(context) - ViewUtils.dp2px(context,50);
+//        dialogWindow.setGravity(Gravity.TOP);
+////        layoutParams.alpha = 0f;
+////        layoutParams.x = 0;
+////        layoutParams.y = ViewUtils.dp2px(context,150);
+//        dialogWindow.setAttributes(layoutParams);
     }
 
     private void initListener() {
