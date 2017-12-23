@@ -5,7 +5,9 @@ import android.content.Context;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 /**
- * Created by wangzhiyuan on 2017/4/21.
+ *
+ * @author wangzhiyuan
+ * @date 2017/4/21
  */
 public class HUDUtils {
 

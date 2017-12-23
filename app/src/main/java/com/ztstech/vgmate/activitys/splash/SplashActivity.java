@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.user_info.complete_info.FillInfoActivity;
