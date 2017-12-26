@@ -145,13 +145,13 @@ public class GpsActivity extends BaseActivity implements  GeocodeSearch.OnGeocod
         }
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        if (mapView != null) {
-            mapView.onSaveInstanceState(outState);
-        }
-    }
+//    @Override
+//    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+//        super.onSaveInstanceState(outState, outPersistentState);
+//        if (mapView != null) {
+//            mapView.onSaveInstanceState(outState);
+//        }
+//    }
 
     @Override
     public void onRegeocodeSearched(final RegeocodeResult regeocodeResult, int i) {
