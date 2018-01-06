@@ -17,10 +17,11 @@
     </com.ztstech.vgmate.weigets.TopBar>
 
     <ImageView
-        android:scaleType="centerInside"
+        android:scaleType="centerCrop"
         android:id="@+id/img"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
+        android:src="@mipmap/pre_default_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

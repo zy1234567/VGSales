@@ -14,7 +14,10 @@ import com.ztstech.vgmate.activitys.category_info.CategoryTagsPresenter;
 import com.ztstech.vgmate.activitys.gps.GpsActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
 import com.ztstech.vgmate.data.dto.AddOrgData;
+import com.ztstech.vgmate.manager.GpsManager;
+import com.ztstech.vgmate.utils.CategoryUtil;
 import com.ztstech.vgmate.utils.ContractUtils;
+import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import butterknife.BindView;
@@ -56,6 +59,8 @@ public class AddOrgActivity extends MVPActivity<AddOrgContract.Presenter> implem
 
     AddOrgData data = new AddOrgData();
 
+    GpsManager gpsManager;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_add_org;
@@ -69,12 +74,25 @@ public class AddOrgActivity extends MVPActivity<AddOrgContract.Presenter> implem
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
+        gpsManager = new GpsManager(this);
         tvLocation.setOnClickListener(this);
         tvGps.setOnClickListener(this);
         tvTag.setOnClickListener(this);
         tvContact.setOnClickListener(this);
 
         topBar.getRightTextView().setOnClickListener(this);
+        initCacheGps();
+    }
+
+    /**
+     *  根据缓存的地址显示默认地址
+     */
+    private void initCacheGps() {
+        String districtCode = gpsManager.getSaveDistrict();
+        if (!TextUtils.isEmpty(districtCode)){
+            tvLocation.setText(LocationUtils.getFormedString(districtCode));
+            tvLocation.setTag(districtCode);
+        }
     }
 
     @Override
@@ -168,7 +186,7 @@ public class AddOrgActivity extends MVPActivity<AddOrgContract.Presenter> implem
             return;
         }
 
-
+        data.bigtype = CategoryUtil.getFatherCategoryByChildId(data.rbiotype.split(",")[0]).getLid();
         mPresenter.commit(data);
 
     }

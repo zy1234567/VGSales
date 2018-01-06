@@ -33,7 +33,6 @@ public class ContractUtils {
                 .subscribe(new Action1<Boolean>() {
                     @Override
                     public void call(Boolean aBoolean) {
-
                         if (aBoolean) {
                             Intent i = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
                             activity.startActivityForResult(i , requestCode);

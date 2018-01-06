@@ -66,7 +66,7 @@ public class DialogUtils {
         dialog.show();
         Window dialogWindow = dialog.getWindow();
         WindowManager.LayoutParams layoutParams = dialogWindow.getAttributes();
-        layoutParams.gravity = Gravity.BOTTOM;
+        layoutParams.gravity = Gravity.CENTER;
         layoutParams.width= WindowManager.LayoutParams.MATCH_PARENT;
         layoutParams.height= WindowManager.LayoutParams.WRAP_CONTENT;
         dialogWindow.setAttributes(layoutParams);

@@ -21,7 +21,7 @@ public class AddOrgPresenter extends PresenterImpl<AddOrgContract.View> implemen
 
     @Override
     public void commit(AddOrgData data) {
-        data.bigtype = CategoryUtil.getFatherCategoryByChildId(data.rbiotype.split(",")[0]).getLid();
+
         mView.showLoading("请稍等");
         new BasePresenterSubscriber<BaseRespBean>(mView) {
 

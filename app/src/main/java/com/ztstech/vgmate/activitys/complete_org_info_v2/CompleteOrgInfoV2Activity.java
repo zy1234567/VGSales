@@ -44,6 +44,7 @@ import butterknife.BindView;
 public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Contract.Presenter>
         implements CompleteOrgInfoV2Contract.View, View.OnClickListener {
 
+
     /**data参数*/
     public static final String ARG_RBIID = "arg_ribid";
     /**请求编辑所在地区*/

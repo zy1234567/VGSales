@@ -20,9 +20,9 @@ public interface NetConstants {
 
 //    String BASE_URL = "http://www.008box.com/";
 
-//    String BASE_URL = "http://192.168.1.103/tom/";
+//    String BASE_URL = "http://192.168.1.105:8080/tom/";
 
-//    String BASE_URL = "http://192.168.1.124:8080/tom/";
+//    String BASE_URL = "http://192.168.1.118:8080/tom/";
 
 //    String BASE_URL = "http://192.168.1.129:8080/tom/";
     /**

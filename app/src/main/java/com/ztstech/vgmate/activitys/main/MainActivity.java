@@ -158,8 +158,8 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
             rlShareNotice.setVisibility(View.GONE);
             line3.setVisibility(View.GONE);
         }
-
-
+        // 伙伴暂时去掉添加机构的功能
+        rlAddOrg.setVisibility(View.GONE);
         addContentView(dialog, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
 
