@@ -17,7 +17,7 @@ public class SearchOrgAdapter extends SimpleRecyclerAdapter<OrgFollowlistBean.Li
 
     @Override
     public SearchOrgViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new SearchOrgViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_org,parent,false),keyword);
+        return new SearchOrgViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_org,parent,false),keyword,this);
     }
 
     public void setKeyWord(String keyword){

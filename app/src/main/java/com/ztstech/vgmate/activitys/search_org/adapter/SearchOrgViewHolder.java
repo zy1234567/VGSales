@@ -38,8 +38,8 @@ public class SearchOrgViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
 
     private String keyword;
 
-    public SearchOrgViewHolder(View itemView, String keyword) {
-        super(itemView);
+    public SearchOrgViewHolder(View itemView, String keyword,SearchOrgAdapter adapter) {
+        super(itemView,adapter);
         this.keyword = keyword;
     }
 

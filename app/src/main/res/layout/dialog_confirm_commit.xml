@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_c_10">
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="你确认要提交吗?"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:textColor="@color/color_100"
+        android:textSize="@dimen/text_2" />
+    <TextView
+        android:id="@+id/tv_content_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="您的沟通记录提交以后，系统将会会自动给机构发送跟进短信，内容如下："
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:textSize="@dimen/text_4"
+        android:textColor="@color/color_100"/>
+    <TextView
+        android:id="@+id/tv_content_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="【蔚来地图】很高兴和您进行信息确认，您 也可登陆We17.com认领机构，发现潜在生源，轻松管理后台。任何疑问请致电010-67529331"
+        android:layout_below="@+id/tv_content_top"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="#61696F"
+        android:textSize="@dimen/text_7"
+        android:layout_marginTop="8dp"
+        android:background="#141AA1FB"
+        />
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_106"
+        android:layout_below="@+id/tv_content_bottom"
+        android:layout_marginTop="18dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@+id/view">
+
+        <TextView
+            android:id="@+id/tv_back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/text_2"
+            android:textColor="@color/weilai_color_101"
+            android:text="取消" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="55dp"
+            android:background="@color/color_106"/>
+        <TextView
+            android:id="@+id/tv_commit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="确认提交"
+            android:textSize="@dimen/text_2"
+            android:gravity="center"
+            android:textColor="@color/color_001"
+            android:layout_weight="1"/>
+    </LinearLayout>
+</RelativeLayout>

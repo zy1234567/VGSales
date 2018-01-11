@@ -1,5 +1,6 @@
 package com.ztstech.vgmate.activitys.search_org;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -11,19 +12,23 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.activitys.org_detail_v2.OrgDetailV2Activity;
 import com.ztstech.vgmate.activitys.search_org.adapter.SearchOrgAdapter;
 import com.ztstech.vgmate.base.BaseApplicationLike;
+import com.ztstech.vgmate.base.SimpleRecyclerAdapter;
 import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import com.ztstech.vgmate.manager.GpsManager;
 import com.ztstech.vgmate.utils.KeyboardUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.LocationSelectDialog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -71,6 +76,8 @@ public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> i
 
     private String keyword;
 
+    List<OrgFollowlistBean.ListBean> list = new ArrayList<>();
+
     /**
      * 要搜索的区域
      */
@@ -84,7 +91,7 @@ public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> i
         adapter = new SearchOrgAdapter();
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setAdapter(adapter);
-
+        adapter.setListData(list);
         smartRefreshLayout.setEnableRefresh(false);
         etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -106,6 +113,15 @@ public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> i
                 mPresenter.appendDada(keyword,rbidistrict);
             }
         });
+
+        adapter.setOnItemClickListener(new SimpleRecyclerAdapter.OnItemClickListener<OrgFollowlistBean.ListBean>() {
+            @Override
+            public void onItemClick(OrgFollowlistBean.ListBean item, int index) {
+                Intent intent = new Intent(SearchOrgActivity.this, OrgDetailV2Activity.class);
+                intent.putExtra(OrgDetailV2Activity.ARG_BEAN,new Gson().toJson(item));
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -115,7 +131,8 @@ public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> i
 
     @Override
     public void setListData(List<OrgFollowlistBean.ListBean> listData) {
-        adapter.setListData(listData);
+        list.clear();
+        list.addAll(listData);
         adapter.notifyDataSetChanged();
         if (smartRefreshLayout.isLoading()){
             smartRefreshLayout.finishRefresh();

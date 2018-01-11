@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ztstech.vgmate.activitys.org_detail_v2.OrgDetailV2Activity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <com.ztstech.vgmate.weigets.TopBar
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_001"
+        app:colorTitle="@color/color_109"
+        app:srcLeft="@mipmap/back_black"
+        app:barTitle=""
+        app:colorLeft="@color/color_109"
+        app:showBackNav="true">
+    </com.ztstech.vgmate.weigets.TopBar>
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/top_bar"
+        android:layout_above="@+id/rl_edit">
+    </WebView>
+</LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_next"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/color_107"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+    <TextView
+        android:id="@+id/tv_com"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="沟通记录"
+        android:textColor="@color/color_100"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/bg_c_2_f_005"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="15sp"/>
+    </LinearLayout>
+</RelativeLayout>

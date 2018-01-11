@@ -244,6 +244,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
+                android:drawablePadding="5dp"
                 android:drawableLeft="@mipmap/ico_location_y"
                 android:text="查看实时定位"
                 android:layout_marginTop="8dp"/>
