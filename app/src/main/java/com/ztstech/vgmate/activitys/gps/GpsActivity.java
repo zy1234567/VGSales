@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.AMapGestureListener;
 import com.amap.api.maps.model.LatLng;
@@ -164,6 +165,7 @@ public class GpsActivity extends BaseActivity implements  GeocodeSearch.OnGeocod
                     marker.setPositionByPixels(
                             GpsActivity.this.getResources().getDisplayMetrics().widthPixels / 2,
                             GpsActivity.this.getResources().getDisplayMetrics().heightPixels / 2);
+                    aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
                 }else {
                     // FIXME: 2017/9/29 傻逼高德地图marker上textview只变大不变小
                     marker.setTitle(regeocodeResult.getRegeocodeAddress().getFormatAddress());
