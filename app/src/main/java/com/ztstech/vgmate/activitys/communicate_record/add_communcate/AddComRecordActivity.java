@@ -25,9 +25,6 @@ import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.MVPActivity;
-import com.ztstech.vgmate.activitys.create_share.create_share_add_desc.CreateShareAddDescActivity;
-import com.ztstech.vgmate.activitys.share.create.CreateMyShareActivity;
-import com.ztstech.vgmate.activitys.share.create.CreateShareContact;
 import com.ztstech.vgmate.utils.TakePhotoHelper;
 import com.ztstech.vgmate.weigets.CustomGridView;
 import com.ztstech.vgmate.weigets.TopBar;
@@ -96,6 +93,8 @@ public class AddComRecordActivity extends MVPActivity implements InvokeListener,
     private ImageView imgAddImg;
 
     private TakePhoto takePhoto;
+
+    private InvokeParam invokeParam;
 
     /**
      * 图片文件
@@ -170,9 +169,18 @@ public class AddComRecordActivity extends MVPActivity implements InvokeListener,
         PermissionManager.TPermissionType type=PermissionManager.checkPermission(
                 TContextWrap.of(this),invokeParam.getMethod());
         if(PermissionManager.TPermissionType.WAIT.equals(type)){
-//            this.invokeParam = invokeParam;
+            this.invokeParam = invokeParam;
         }
         return type;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        takePhoto.onActivityResult(requestCode, resultCode, data);
     }
 
     /**

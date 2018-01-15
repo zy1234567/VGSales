@@ -549,12 +549,12 @@
                 android:text="实地拍摄"
                 android:textColor="@color/color_102"
                 android:textSize="12sp" />
-            <com.ztstech.vgmate.weiget.CustomGridView
+            <com.ztstech.vgmate.weigets.CustomGridView
                 android:id="@+id/cgv"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            </com.ztstech.vgmate.weiget.CustomGridView>
+            </com.ztstech.vgmate.weigets.CustomGridView>
         </LinearLayout>
 
     </ScrollView>
