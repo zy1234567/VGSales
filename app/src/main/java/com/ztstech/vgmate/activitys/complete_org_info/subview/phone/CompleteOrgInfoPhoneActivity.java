@@ -6,7 +6,7 @@ import android.os.Bundle;
 import com.ztstech.vgmate.R;
 
 /**
- * 资讯电话
+ * 咨询电话
  */
 public class CompleteOrgInfoPhoneActivity extends AppCompatActivity {
 

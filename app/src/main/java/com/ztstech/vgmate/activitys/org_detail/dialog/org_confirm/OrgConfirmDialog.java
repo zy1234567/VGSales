@@ -238,7 +238,7 @@ public class OrgConfirmDialog extends Dialog implements View.OnClickListener,
             return;
         }
         if (TextUtils.isEmpty(phone)) {
-            ToastUtil.toastCenter(activityContext, "请输入资讯电话！");
+            ToastUtil.toastCenter(activityContext, "请输入咨询电话！");
             return;
         }
 
