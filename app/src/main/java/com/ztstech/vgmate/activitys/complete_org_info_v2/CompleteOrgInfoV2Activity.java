@@ -196,7 +196,7 @@ public class CompleteOrgInfoV2Activity extends MVPActivity<CompleteOrgInfoV2Cont
             startActivityForResult(it, REQ_DETAIL_LOCATION);
         }else if (view == tvPhone) {
             Intent it = new Intent(this, EditOrgInfoSignleInputActivity.class);
-            it.putExtra(EditOrgInfoSignleInputActivity.ARG_TITLE, "资讯电话");
+            it.putExtra(EditOrgInfoSignleInputActivity.ARG_TITLE, "咨询电话");
             it.putExtra(EditOrgInfoSignleInputActivity.ARG_DATA, infoBean.phone);
             startActivityForResult(it, REQ_PHONE);
         }else if (view == tvManager) {

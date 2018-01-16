@@ -166,7 +166,7 @@
                 <TextView
                     android:id="@+id/tv_phone_title"
                     android:layout_marginTop="10dp"
-                    android:text="* 资讯电话"
+                    android:text="* 咨询电话"
                     android:layout_below="@id/et_location"
                     android:textColor="@color/color_100"
                     android:textSize="@dimen/text_8"
