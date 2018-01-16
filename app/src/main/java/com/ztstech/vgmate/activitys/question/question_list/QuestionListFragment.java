@@ -13,13 +13,12 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
-import com.ztstech.vgmate.activitys.question.question_detail.QuestDetailActivity;
 import com.ztstech.vgmate.activitys.question.adapter.QuestionListAdapter;
 import com.ztstech.vgmate.activitys.question.adapter.QuestionViewHolder;
 import com.ztstech.vgmate.activitys.question.create_question.CreateQuestionActivity;
+import com.ztstech.vgmate.activitys.question.question_detail.QuestDetailActivity;
 import com.ztstech.vgmate.data.beans.QuestionListBean;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.IOSStyleDialog;
@@ -96,6 +95,9 @@ public class QuestionListFragment extends MVPFragment<QuestionListContact.Presen
 
     @Override
     public void setData(List<QuestionListBean.ListBean> listData) {
+        if (getActivity() == null || getActivity().isFinishing()){
+            return;
+        }
         adapter.setListData(listData);
         adapter.notifyDataSetChanged();
         if (smartRefreshLayout.isRefreshing()){

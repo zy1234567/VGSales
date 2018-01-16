@@ -2,9 +2,6 @@ package com.ztstech.vgmate.utils;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -95,24 +92,28 @@ public class DialogUtils {
             @Override
             public void onClick(View v) {
                 callback.onFllowUpClick(0);
+                dialog.dismiss();
             }
         });
         llNormalFllowUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 callback.onFllowUpClick(1);
+                dialog.dismiss();
             }
         });
         llContinuedFllowUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 callback.onFllowUpClick(2);
+                dialog.dismiss();
             }
         });
         llNoFllowUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 callback.onFllowUpClick(3);
+                dialog.dismiss();
             }
         });
         tvBack.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +126,7 @@ public class DialogUtils {
         dialog.show();
         Window dialogWindow = dialog.getWindow();
         WindowManager.LayoutParams layoutParams = dialogWindow.getAttributes();
-        layoutParams.gravity = Gravity.CENTER;
+        layoutParams.gravity = Gravity.BOTTOM;
         layoutParams.width= WindowManager.LayoutParams.MATCH_PARENT;
         layoutParams.height= WindowManager.LayoutParams.WRAP_CONTENT;
         dialogWindow.setAttributes(layoutParams);

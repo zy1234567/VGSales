@@ -245,6 +245,22 @@
                     android:textColorHint="@color/color_103"
                     android:textCursorDrawable="@null"
                     android:textSize="@dimen/text_5" />
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_detail_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/tv_gps_title"
+                    android:layout_toRightOf="@+id/tv_gps_title"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:enabled="true"
+                    android:hint="请输入"
+                    android:lines="1"
+                    android:textColorHint="@color/color_103"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/text_5" />
             </RelativeLayout>
 
             <View
@@ -280,20 +296,6 @@
                     android:textSize="@dimen/text_7" />
 
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/et_detail_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="12dp"
-                    android:layout_toRightOf="@id/tv_detail_location_title"
-                    android:background="@null"
-                    android:enabled="true"
-                    android:hint="请输入"
-                    android:lines="1"
-                    android:ellipsize="end"
-                    android:textColorHint="@color/color_103"
-                    android:textCursorDrawable="@null"
-                    android:textSize="@dimen/text_5" />
             </RelativeLayout>
 
             <View

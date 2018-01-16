@@ -1,9 +1,9 @@
 package com.ztstech.vgmate.activitys.communicate_record.com_list;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -12,14 +12,12 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.communicate_record.add_communcate.AddComRecordActivity;
 import com.ztstech.vgmate.activitys.communicate_record.com_list.adapter.CommunicateListAdapter;
-import com.ztstech.vgmate.data.beans.CommunicateListBean;
+import com.ztstech.vgmate.data.beans.GetComRecordBean;
 import com.ztstech.vgmate.weigets.TopBar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -53,7 +51,7 @@ public class CommmunicateListActivity extends MVPActivity<ComListContact.Present
         adapter = new CommunicateListAdapter();
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setAdapter(adapter);
-        setData(null);
+        mPresenter.loadData(rbiid);
     }
 
     @Override
@@ -67,13 +65,7 @@ public class CommmunicateListActivity extends MVPActivity<ComListContact.Present
     }
 
     @Override
-    public void setData(List<CommunicateListBean.ListBean> listData) {
-        listData = new ArrayList<>();
-        listData.add(new CommunicateListBean.ListBean());
-        listData.add(new CommunicateListBean.ListBean());
-        listData.add(new CommunicateListBean.ListBean());
-        listData.add(new CommunicateListBean.ListBean());
-        listData.add(new CommunicateListBean.ListBean());
+    public void setData(List<GetComRecordBean.ListBean> listData) {
         adapter.setListData(listData);
         adapter.notifyDataSetChanged();
     }
@@ -81,6 +73,19 @@ public class CommmunicateListActivity extends MVPActivity<ComListContact.Present
     @Override
     public void showError(String errorMessage) {
 
+    }
+
+    @Override
+    public void setListData(List<GetComRecordBean.ListBean> listData) {
+        srl.finishRefresh();
+        srl.finishLoadmore();
+        if (listData.size() == 0){
+            recycler.setVisibility(View.GONE);
+        }else {
+            recycler.setVisibility(View.VISIBLE);
+        }
+        adapter.setListData(listData);
+        adapter.notifyDataSetChanged();
     }
 
     @OnClick(R.id.ll_add)

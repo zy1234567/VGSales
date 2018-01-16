@@ -2,8 +2,7 @@ package com.ztstech.vgmate.activitys.communicate_record.com_list;
 
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.BaseView;
-import com.ztstech.vgmate.data.beans.CommunicateListBean;
-import com.ztstech.vgmate.data.beans.WaitApproveMateListBean;
+import com.ztstech.vgmate.data.beans.GetComRecordBean;
 
 import java.util.List;
 
@@ -14,9 +13,11 @@ import java.util.List;
 public class ComListContact {
 
     interface View extends BaseView{
-        void setData(List<CommunicateListBean.ListBean> listData);
+        void setData(List<GetComRecordBean.ListBean> listData);
 
         void showError(String errorMessage);
+
+        void setListData(List<GetComRecordBean.ListBean> listData);
     }
 
     interface Presenter extends BasePresenter<View>{

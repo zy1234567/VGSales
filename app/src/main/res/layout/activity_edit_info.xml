@@ -78,7 +78,7 @@
             android:textSize="@dimen/text_3"
             android:textColor="@color/color_109"
             android:gravity="center"
-            android:background="@drawable/bg_c_2_f_106"
+            android:background="@drawable/bg_c_2_f_006"
             android:layout_marginLeft="15dp"
             android:id="@+id/tv_refuse" />
     </LinearLayout>

@@ -2,7 +2,6 @@ package com.ztstech.vgmate.activitys.org_detail_v2;
 
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,7 +15,6 @@ import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class OrgDetailV2Activity extends MVPActivity {
@@ -58,7 +56,7 @@ public class OrgDetailV2Activity extends MVPActivity {
     @OnClick(R.id.ll_next)
     public void onViewClicked() {
         Intent intent = new Intent(this, CommmunicateListActivity.class);
-        intent.putExtra(CommmunicateListActivity.ARG_RBIID,bean.rbiid);
+        intent.putExtra(CommmunicateListActivity.ARG_RBIID,String.valueOf(bean.rbiid));
         startActivity(intent);
     }
 }

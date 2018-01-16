@@ -28,9 +28,9 @@
         android:id="@+id/tv_right"
         android:layout_marginRight="12dp"
         android:layout_alignParentRight="true"
-        android:gravity="center_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+        android:layout_centerVertical="true"
+        android:layout_width="40dp"
+        android:layout_height="23dp" />
 
     <TextView
         android:focusable="true"
