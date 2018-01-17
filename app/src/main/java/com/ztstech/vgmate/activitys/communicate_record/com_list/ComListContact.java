@@ -17,7 +17,7 @@ public class ComListContact {
 
         void showError(String errorMessage);
 
-        void setListData(List<GetComRecordBean.ListBean> listData);
+//        void setListData(List<GetComRecordBean.ListBean> listData);
     }
 
     interface Presenter extends BasePresenter<View>{

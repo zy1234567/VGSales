@@ -131,6 +131,9 @@ public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> i
 
     @Override
     public void setListData(List<OrgFollowlistBean.ListBean> listData) {
+        if (isFinishing()){
+            return;
+        }
         list.clear();
         list.addAll(listData);
         adapter.notifyDataSetChanged();

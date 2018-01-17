@@ -28,7 +28,7 @@ public class ComListPresenter extends PresenterImpl<ComListContact.View> impleme
     @Override
     public void appendData(String rbiid) {
         if (currentpage == totalpage){
-            mView.setListData(listBean);
+            mView.setData(listBean);
         }else {
             currentpage ++;
             requestData(rbiid);

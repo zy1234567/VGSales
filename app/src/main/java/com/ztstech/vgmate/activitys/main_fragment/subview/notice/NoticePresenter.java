@@ -2,6 +2,7 @@ package com.ztstech.vgmate.activitys.main_fragment.subview.notice;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.ztstech.appdomain.user_case.DeleteArticle;
@@ -128,7 +129,9 @@ public class NoticePresenter extends PresenterImpl<NoticeContract.View> implemen
 
             @Override
             protected void childError(Throwable e) {
-                mView.showError("网络请求出错".concat(e.getLocalizedMessage()));
+                if (!TextUtils.isEmpty(e.getLocalizedMessage())){
+                    mView.showError("网络请求出错".concat(e.getLocalizedMessage()));
+                }
             }
         }.run(repository.queryNotice(page));
     }

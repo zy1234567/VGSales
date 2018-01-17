@@ -2,28 +2,25 @@ package com.ztstech.vgmate.activitys.gps;
 
 import android.Manifest;
 import android.content.Intent;
-import android.location.Location;
-import android.os.PersistableBundle;
-import android.provider.ContactsContract;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.os.Handler;
+import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.amap.api.location.AMapLocation;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.AMapGestureListener;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.services.core.LatLonPoint;
-import com.amap.api.services.geocoder.GeocodeQuery;
 import com.amap.api.services.geocoder.GeocodeResult;
 import com.amap.api.services.geocoder.GeocodeSearch;
 import com.amap.api.services.geocoder.RegeocodeQuery;
@@ -31,7 +28,6 @@ import com.amap.api.services.geocoder.RegeocodeResult;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import com.ztstech.vgmate.R;
-import com.ztstech.vgmate.activitys.add_org.AddOrgActivity;
 import com.ztstech.vgmate.base.BaseActivity;
 import com.ztstech.vgmate.weigets.TopBar;
 
@@ -42,6 +38,12 @@ import rx.functions.Action1;
  * 选择gps
  */
 public class GpsActivity extends BaseActivity implements  GeocodeSearch.OnGeocodeSearchListener {
+
+    /**经纬度和地址的key和向GpsACtivity传的标志位的key*/
+    public final static String SHOW_ORG_FLG = "CorrectionErrorActivityFlg";
+    public final static String ARG_LA = "la";
+    public final static String ARG_LO = "lo";
+    public final static String ARG_ADDRESS = "address";
 
     /**延时*/
     public static final int DELAY = 200;
@@ -68,14 +70,15 @@ public class GpsActivity extends BaseActivity implements  GeocodeSearch.OnGeocod
     private GeocodeSearch geocoderSearch;
 
     private KProgressHUD progressHUD;
-
     /**纬度*/
     private double la;
     /**精度*/
     private double lo;
     /**选中的地址*/
     private String location;
-
+    /**根据gps定位位置信息以及标志位和地址信息*/
+    String strla,strlo,address;
+    boolean flg = false;
 
     private Runnable getLocationRunnable = new Runnable() {
         @Override
@@ -85,9 +88,10 @@ public class GpsActivity extends BaseActivity implements  GeocodeSearch.OnGeocod
             // 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
             RegeocodeQuery query = new RegeocodeQuery(new LatLonPoint(latLng.latitude, latLng.longitude),
                     100,GeocodeSearch.GPS);
-
-            la = latLng.latitude;
-            lo = latLng.longitude;
+            if (!flg){
+                la = latLng.latitude;
+                lo = latLng.longitude;
+            }
             geocoderSearch.getFromLocationAsyn(query);
         }
     };
@@ -104,12 +108,11 @@ public class GpsActivity extends BaseActivity implements  GeocodeSearch.OnGeocod
         mapView.onCreate(savedInstanceState);
 
         progressHUD = new KProgressHUD(this);
-
+//        initMap(savedInstanceState);
         //请求权限
         RxPermissions rxPermissions = new RxPermissions(this);
         rxPermissions
-                .request(Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.ACCESS_FINE_LOCATION)
+                .request(Manifest.permission.ACCESS_COARSE_LOCATION)
                 .subscribe(new Action1<Boolean>() {
                     @Override
                     public void call(Boolean aBoolean) {
@@ -120,6 +123,29 @@ public class GpsActivity extends BaseActivity implements  GeocodeSearch.OnGeocod
                         }
                     }
                 });
+        flg = getIntent().getBooleanExtra(SHOW_ORG_FLG,false);
+        if (flg) {
+            strla = getIntent().getStringExtra(ARG_LA);
+            strlo = getIntent().getStringExtra(ARG_LO);
+            address = getIntent().getStringExtra(ARG_ADDRESS);
+            la = Double.parseDouble(strla);
+            lo = Double.parseDouble(strlo);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    marker = aMap.addMarker(new MarkerOptions().position(new LatLng(la, lo))
+                            .title(address));
+                    marker.setPosition(new LatLng(la, lo));
+                    marker.showInfoWindow();
+                    marker.setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.gps));
+                    marker.setPositionByPixels(
+                            GpsActivity.this.getResources().getDisplayMetrics().widthPixels / 2,
+                            GpsActivity.this.getResources().getDisplayMetrics().heightPixels / 2);
+                    aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(la, lo), 16));
+                    flg = false;
+                }
+            },1000);
+        }
     }
 
     @Override
@@ -162,6 +188,7 @@ public class GpsActivity extends BaseActivity implements  GeocodeSearch.OnGeocod
                             .title(regeocodeResult.getRegeocodeAddress().getFormatAddress()));
                     marker.setPosition(latLng);
                     marker.showInfoWindow();
+                    marker.setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.gps));
                     marker.setPositionByPixels(
                             GpsActivity.this.getResources().getDisplayMetrics().widthPixels / 2,
                             GpsActivity.this.getResources().getDisplayMetrics().heightPixels / 2);
@@ -265,11 +292,23 @@ public class GpsActivity extends BaseActivity implements  GeocodeSearch.OnGeocod
                 if (marker != null) {
                     marker.setTitle("正在定位");
                 }
-                mapView.postDelayed(getLocationRunnable, DELAY);
-                progressHUD.show();
+//                mapView.postDelayed(getLocationRunnable, DELAY);
+//                progressHUD.show();
             }
         });
 
+        aMap.setOnCameraChangeListener(new AMap.OnCameraChangeListener() {
+            @Override
+            public void onCameraChange(CameraPosition cameraPosition) {
+                Log.e("onCameraChange","onCameraChange");
+            }
+
+            @Override
+            public void onCameraChangeFinish(CameraPosition cameraPosition) {
+                mapView.postDelayed(getLocationRunnable, DELAY);
+                Log.e("onCameraChange","onCameraChangeFinish");
+            }
+        });
 
         topBar.getRightTextView().setOnClickListener(new View.OnClickListener() {
             @Override

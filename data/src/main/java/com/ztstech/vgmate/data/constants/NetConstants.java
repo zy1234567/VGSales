@@ -28,7 +28,7 @@ public interface NetConstants {
     /**
      * 上传文件
      */
-    String UPLOAD_FILES = BASE_URL + "exempt/AppSaleuploadFiles";
+    String UPLOAD_FILES = BuildConfig.URL_BASE + "exempt/AppSaleuploadFiles";
 
 
     int STATUS_SUCCEED = 0;

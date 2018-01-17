@@ -27,11 +27,8 @@ import android.view.animation.RotateAnimation;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-
 import com.ztstech.vgmate.R;
-import com.ztstech.vgmate.base.BaseApplication;
 import com.ztstech.vgmate.base.BaseApplicationLike;
-
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -722,6 +719,18 @@ public class CommonUtil {
             for (int i = 0; i < array.length; i++){
                 list.add(array[i]);
             }
+        }
+        return list;
+    }
+    /**
+     * 数组转list
+     */
+    public static List arraytolist(String[] str,List list){
+        if (str.length == 0){
+            return null;
+        }
+        for (int i = 0; i < str.length;i++){
+            list.add(str[i]);
         }
         return list;
     }

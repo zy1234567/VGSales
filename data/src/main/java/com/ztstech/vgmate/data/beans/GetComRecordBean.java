@@ -59,5 +59,7 @@ public class GetComRecordBean extends BaseRespBean {
         public String contactsname;
         public String makecall;
         public String roletype;
+        public String spotphotos;
+        public String contactsphone;
     }
 }

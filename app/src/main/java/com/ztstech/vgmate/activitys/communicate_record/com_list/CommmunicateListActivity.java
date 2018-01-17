@@ -8,6 +8,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.communicate_record.add_communcate.AddComRecordActivity;
@@ -51,7 +54,19 @@ public class CommmunicateListActivity extends MVPActivity<ComListContact.Present
         adapter = new CommunicateListAdapter();
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setAdapter(adapter);
-        mPresenter.loadData(rbiid);
+        srl.autoRefresh();
+        srl.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                mPresenter.loadData(rbiid);
+            }
+        });
+        srl.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                mPresenter.appendData(rbiid);
+            }
+        });
     }
 
     @Override
@@ -66,8 +81,15 @@ public class CommmunicateListActivity extends MVPActivity<ComListContact.Present
 
     @Override
     public void setData(List<GetComRecordBean.ListBean> listData) {
+        srl.finishLoadmore();
+        srl.finishRefresh();
         adapter.setListData(listData);
         adapter.notifyDataSetChanged();
+        if (listData.size() == 0){
+            recycler.setVisibility(View.GONE);
+        }else {
+            recycler.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -75,18 +97,21 @@ public class CommmunicateListActivity extends MVPActivity<ComListContact.Present
 
     }
 
-    @Override
-    public void setListData(List<GetComRecordBean.ListBean> listData) {
-        srl.finishRefresh();
-        srl.finishLoadmore();
-        if (listData.size() == 0){
-            recycler.setVisibility(View.GONE);
-        }else {
-            recycler.setVisibility(View.VISIBLE);
-        }
-        adapter.setListData(listData);
-        adapter.notifyDataSetChanged();
-    }
+//    @Override
+//    public void setListData(List<GetComRecordBean.ListBean> listData) {
+//        if (srl.isLoading()){
+//            srl.finishLoadmore();
+//            srl.finishRefresh();
+//        }
+//        adapter.setListData(listData);
+//        adapter.notifyDataSetChanged();
+//        if (listData.size() == 0){
+//            recycler.setVisibility(View.GONE);
+//        }else {
+//            recycler.setVisibility(View.VISIBLE);
+//        }
+//
+//    }
 
     @OnClick(R.id.ll_add)
     public void onViewClicked() {
