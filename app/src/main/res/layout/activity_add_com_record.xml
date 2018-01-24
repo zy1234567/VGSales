@@ -158,6 +158,8 @@
                         android:singleLine="true"
                         android:ellipsize="end"
                         android:textSize="@dimen/text_5"
+                        android:layout_marginRight="3dp"
+                        android:layout_toLeftOf="@+id/tv_phone_mail_this"
                         android:layout_toRightOf="@+id/tv_1"
                         android:hint="请输入本次拨打的电话号码"/>
                     <TextView
