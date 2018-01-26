@@ -3,7 +3,6 @@ package com.ztstech.vgmate.activitys.org_follow.claim_org;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,7 +33,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -94,6 +92,10 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
         if (bean == null) {
             throw new NullPointerException("ClaimOrgDetailActivity传入bean类为空！");
         }
+        if (TextUtils.isEmpty(bean.orgid)){
+            tvAddvPass.setBackgroundResource(R.drawable.bg_c_2_f_106);
+            tvAddvPass.setEnabled(false);
+        }
         showInfo();
         showProveImg();
     }
@@ -114,7 +116,8 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
         SpannableStringBuilder spannableStringBuilder =
                 ViewUtils.getDiffColorSpan(null, strs, colors);
         tvPhone.setText(spannableStringBuilder);
-        tvRealName.setText("真实姓名：".concat(bean.name));
+        String str = bean.name != null ? bean.name:"暂无";
+        tvRealName.setText("真实姓名：".concat(str));
         tvJob.setText("担任职位：".concat(bean.position));
         tvClaimPhone.setText(bean.phone);
         if (TextUtils.equals(ApproveClaimOrg.IDENT_TYPE_LOCATION,bean.identificationtype)){
@@ -161,7 +164,8 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
                 new IOSStyleDialog(this, "您确定要拒绝吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid, "",ApproveClaimOrg.STATUS_REFUSE);
+                            mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid, "", ApproveClaimOrg.STATUS_REFUSE,bean.type,ApproveClaimOrg.STATUS_REFUSE);
+
                     }
                 }).show();
                 break;
@@ -169,7 +173,7 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
                 new IOSStyleDialog(this, "您确定要通过定位认证吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid,ApproveClaimOrg.IDENT_TYPE_LOCATION,ApproveClaimOrg.STATUS_PASS);
+                        mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid,ApproveClaimOrg.IDENT_TYPE_LOCATION,ApproveClaimOrg.STATUS_PASS,bean.type,ApproveClaimOrg.STATUS_PASS);
                     }
                 }).show();
                 break;
@@ -177,7 +181,7 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
                 new IOSStyleDialog(this, "您确定要通过吗加V认证吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid,ApproveClaimOrg.IDENT_TYPE_ADDV, ApproveClaimOrg.STATUS_PASS);
+                        mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid,ApproveClaimOrg.IDENT_TYPE_ADDV, ApproveClaimOrg.STATUS_PASS,bean.type,ApproveClaimOrg.STATUS_PASS);
                     }
                 }).show();
                 break;

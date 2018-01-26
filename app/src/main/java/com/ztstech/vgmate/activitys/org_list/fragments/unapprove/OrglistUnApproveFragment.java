@@ -1,14 +1,11 @@
 package com.ztstech.vgmate.activitys.org_list.fragments.unapprove;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -16,7 +13,9 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
+import com.ztstech.vgmate.activitys.org_detail_v2.OrgDetailV2Activity;
 import com.ztstech.vgmate.activitys.org_list.fragments.unapprove.adapter.UnApproveRecyclerAdapter;
+import com.ztstech.vgmate.base.SimpleRecyclerAdapter;
 import com.ztstech.vgmate.data.beans.OrglistUnApproveBean;
 import com.ztstech.vgmate.utils.ToastUtil;
 
@@ -77,6 +76,15 @@ public class OrglistUnApproveFragment extends MVPFragment<OrglistUnApproveContra
         recyclerView.setAdapter(recyclerAdapter);
 
         mPresenter.refresh();
+
+        recyclerAdapter.setOnItemClickListener(new SimpleRecyclerAdapter.OnItemClickListener<OrglistUnApproveBean.ListBean>() {
+            @Override
+            public void onItemClick(OrglistUnApproveBean.ListBean item, int index) {
+                Intent intent = new Intent(getContext(), OrgDetailV2Activity.class);
+                intent.putExtra(OrgDetailV2Activity.ARG_RBIID,item.rbiid);
+                startActivity(intent);
+            }
+        });
 
     }
 

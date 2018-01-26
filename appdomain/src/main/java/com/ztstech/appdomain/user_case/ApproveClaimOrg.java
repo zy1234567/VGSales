@@ -1,5 +1,7 @@
 package com.ztstech.appdomain.user_case;
 
+import android.text.TextUtils;
+
 import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.appdomain.utils.RetrofitUtils;
 import com.ztstech.vgmate.data.api.ApproveOrgApi;
@@ -36,17 +38,31 @@ public class ApproveClaimOrg implements UserCase<Observable<BaseRespBean>>{
     private String status;
 
     private ApproveOrgApi api;
+    /**机构类型 00认领来的机构 01登记来的机构*/
+    String type;
+    /**登记来的机构是否通过审核*/
+    String yesorno;
 
-    public ApproveClaimOrg(String rbiid,String status,String calid,String identType){
+    public ApproveClaimOrg(String rbiid,String status,String calid,String identType,String type,String yesorno){
         api = RetrofitUtils.createService(ApproveOrgApi.class);
         this.rbiid = rbiid;
         this.status = status;
         this.calid = calid;
         this.identType = identType;
+        this.type = type;
+        this.yesorno = yesorno;
     }
 
     @Override
     public Observable<BaseRespBean> run() {
-        return api.approveClaimOrg(rbiid,calid,identType,status, UserRepository.getInstance().getAuthId());
+        if (TextUtils.equals(type,STATUS_PASS)) {
+            return api.approveClaimOrg(rbiid, calid, identType, status, UserRepository.getInstance().getAuthId());
+        }else{
+            if (TextUtils.equals(yesorno,STATUS_PASS)) {
+                return api.appregisterOrgyes(rbiid, STATUS_PASS, STATUS_PASS, identType, STATUS_PASS, UserRepository.getInstance().getAuthId());
+            }else{
+                return api.appregisterOrgno(rbiid,UserRepository.getInstance().getAuthId());
+            }
+        }
     }
 }

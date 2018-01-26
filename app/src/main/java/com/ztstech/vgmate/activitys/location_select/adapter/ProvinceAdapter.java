@@ -62,6 +62,8 @@ public class ProvinceAdapter extends BaseAdapter {
         holder.textView.setText(entityList.get(i).getSname());
         if (entityList.get(i).isSelected()){
             holder.textView.setTextColor(context.getResources().getColor(R.color.weilai_color_003));
+        }else {
+
         }
 //        holder.img_selected.setVisibility(View.VISIBLE);
         return convertView;

@@ -11,7 +11,10 @@
         android:background="#fff"
         android:orientation="vertical"
         android:gravity="center">
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#dddddd" />
         <LinearLayout
             android:id="@+id/layout_one"
             android:layout_width="match_parent"

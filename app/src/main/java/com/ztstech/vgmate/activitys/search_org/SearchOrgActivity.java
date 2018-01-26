@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -118,7 +117,7 @@ public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> i
             @Override
             public void onItemClick(OrgFollowlistBean.ListBean item, int index) {
                 Intent intent = new Intent(SearchOrgActivity.this, OrgDetailV2Activity.class);
-                intent.putExtra(OrgDetailV2Activity.ARG_BEAN,new Gson().toJson(item));
+                intent.putExtra(OrgDetailV2Activity.ARG_RBIID,item.rbiid);
                 startActivity(intent);
             }
         });

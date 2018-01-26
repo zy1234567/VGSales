@@ -6,12 +6,10 @@ import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.communicate_record.com_list.CommmunicateListActivity;
-import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import butterknife.BindView;
@@ -19,7 +17,7 @@ import butterknife.OnClick;
 
 public class OrgDetailV2Activity extends MVPActivity {
 
-    public static final String ARG_BEAN = "bean";
+    public static final String ARG_RBIID = "rbiid";
 
 
     @BindView(R.id.top_bar)
@@ -31,15 +29,13 @@ public class OrgDetailV2Activity extends MVPActivity {
     @BindView(R.id.ll_next)
     LinearLayout llNext;
 
-    OrgFollowlistBean.ListBean bean;
+
+    int rbiid;
 
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
-        bean = new Gson().fromJson(getIntent().getStringExtra(ARG_BEAN),OrgFollowlistBean.ListBean.class);
-        if (bean == null){
-            throw new NullPointerException("沒有传入正确的实体类");
-        }
+        rbiid = getIntent().getIntExtra(ARG_RBIID,0);
     }
 
     @Override
@@ -56,7 +52,7 @@ public class OrgDetailV2Activity extends MVPActivity {
     @OnClick(R.id.ll_next)
     public void onViewClicked() {
         Intent intent = new Intent(this, CommmunicateListActivity.class);
-        intent.putExtra(CommmunicateListActivity.ARG_RBIID,String.valueOf(bean.rbiid));
+        intent.putExtra(CommmunicateListActivity.ARG_RBIID,String.valueOf(rbiid));
         startActivity(intent);
     }
 }

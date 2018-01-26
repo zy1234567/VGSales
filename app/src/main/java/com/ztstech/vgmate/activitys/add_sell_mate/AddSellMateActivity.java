@@ -120,6 +120,8 @@ public class AddSellMateActivity extends MVPActivity<AddSellMateContract.Present
         }else if (TextUtils.isEmpty(addSellMateData.uname)) {
             Toast.makeText(this, "请填写姓名", Toast.LENGTH_SHORT).show();
             return;
+        }else if (addSellMateData.phone.length() != 11){
+            Toast.makeText(this, "请填写正确11位手机号", Toast.LENGTH_SHORT).show();
         }
 
 

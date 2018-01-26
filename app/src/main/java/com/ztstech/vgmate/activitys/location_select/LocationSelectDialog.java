@@ -7,21 +7,17 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.location_select.adapter.AreaApapter;
 import com.ztstech.vgmate.activitys.location_select.adapter.CityAdapter;
 import com.ztstech.vgmate.activitys.location_select.adapter.ProvinceAdapter;
 import com.ztstech.vgmate.data.beans.LocationBean;
-import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.HUDUtils;
 import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
@@ -30,12 +26,10 @@ import com.ztstech.vgmate.utils.ViewUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -193,6 +187,8 @@ public class LocationSelectDialog extends Dialog implements View.OnClickListener
             case R.id.rl_area:
                 selectArea();
                 break;
+            default:
+                break;
         }
     }
 
@@ -262,6 +258,9 @@ public class LocationSelectDialog extends Dialog implements View.OnClickListener
                 }
                 if (pPosition != -1) {
                     list_province.get(pPosition).setSelected(false);
+                }
+                for (int i = 0;i < list_province.size();i++){
+                    list_province.get(i).setSelected(false);
                 }
                 LocationBean pBean = list_province.get(position);
                 pBean.setSelected(true);
