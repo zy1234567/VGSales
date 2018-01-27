@@ -404,7 +404,27 @@
 
 
             </RelativeLayout>
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="12dp">
+                <CheckBox
+                    android:id="@+id/ckeckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/ck_normal"
+                    android:checked="false"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#ff4443"
+                    android:layout_marginLeft="5dp"
+                    android:text="测试机构（地图上不对外显示，仅测试使用）"/>
+            </LinearLayout>
 
         </LinearLayout>
 

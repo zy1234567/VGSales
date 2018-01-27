@@ -12,6 +12,10 @@ import io.reactivex.Observable;
 
 public interface AddOrgApi {
 
+    /** 测试机构标志位 */
+    String TEST_ORG = "01";
+    String NO_TEST_ORG = "00";
+
     @FormUrlEncoded
     @POST("exempt/AppSaleRegisterRBI")
     Observable<BaseRespBean> addOrg(@Field("rbioname") String rbioname,
@@ -22,6 +26,7 @@ public interface AddOrgApi {
                                          @Field("authId") String authId,
                                          @Field("rbiaddress") String rbiaddress,
                                          @Field("rbiintroduction") String rbiintroduction,
-                                         @Field("rbiphone") String rbiphone);
+                                         @Field("rbiphone") String rbiphone,
+                                         @Field("testorg") String testorg);
 
 }

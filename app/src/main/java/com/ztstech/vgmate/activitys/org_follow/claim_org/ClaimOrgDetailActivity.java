@@ -9,7 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +19,7 @@ import com.ztstech.appdomain.user_case.ApproveClaimOrg;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.org_follow.adapter.OrgProveImgAdapter;
+import com.ztstech.vgmate.data.api.AddOrgApi;
 import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import com.ztstech.vgmate.data.events.ApproveOrgEvent;
 import com.ztstech.vgmate.utils.CategoryUtil;
@@ -74,6 +77,8 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
     TextView tvLocationPass;
     @BindView(R.id.tv_addv_pass)
     TextView tvAddvPass;
+    @BindView(R.id.ckeckbox)
+    CheckBox checkBox;
 
     /**
      * 相关证明适配器
@@ -91,10 +96,6 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
         bean = (OrgFollowlistBean.ListBean) getIntent().getSerializableExtra(KEY_BEAN);
         if (bean == null) {
             throw new NullPointerException("ClaimOrgDetailActivity传入bean类为空！");
-        }
-        if (TextUtils.isEmpty(bean.orgid)){
-            tvAddvPass.setBackgroundResource(R.drawable.bg_c_2_f_106);
-            tvAddvPass.setEnabled(false);
         }
         showInfo();
         showProveImg();
@@ -124,6 +125,12 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
             tvLocationPass.setBackgroundResource(R.drawable.bg_c_2_f_106);
             tvLocationPass.setEnabled(false);
         }
+        if (TextUtils.isEmpty(bean.orgid)){
+            tvAddvPass.setBackgroundResource(R.drawable.bg_c_2_f_106);
+            tvAddress.setTextColor(getResources().getColor(R.color.color_109));
+            tvAddvPass.setEnabled(false);
+        }
+        checkBox.setChecked(TextUtils.equals(bean.testorg, AddOrgApi.TEST_ORG));
     }
 
     /**
@@ -147,7 +154,8 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
         return R.layout.activity_claim_org_detail;
     }
 
-    @OnClick({R.id.tv_phone, R.id.tv_claim_phone, R.id.tv_refuse,R.id.tv_location_pass, R.id.tv_addv_pass})
+    @OnClick({R.id.tv_phone, R.id.tv_claim_phone, R.id.tv_refuse,R.id.tv_location_pass,
+            R.id.tv_addv_pass,R.id.ll_test})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_phone:
@@ -164,8 +172,8 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
                 new IOSStyleDialog(this, "您确定要拒绝吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                            mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid, "", ApproveClaimOrg.STATUS_REFUSE,bean.type,ApproveClaimOrg.STATUS_REFUSE);
-
+                            mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid, "", ApproveClaimOrg.STATUS_REFUSE,bean.type,ApproveClaimOrg.STATUS_REFUSE,
+                                    checkBox.isChecked() ? AddOrgApi.TEST_ORG : AddOrgApi.NO_TEST_ORG);
                     }
                 }).show();
                 break;
@@ -173,7 +181,8 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
                 new IOSStyleDialog(this, "您确定要通过定位认证吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid,ApproveClaimOrg.IDENT_TYPE_LOCATION,ApproveClaimOrg.STATUS_PASS,bean.type,ApproveClaimOrg.STATUS_PASS);
+                        mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid,ApproveClaimOrg.IDENT_TYPE_LOCATION,ApproveClaimOrg.STATUS_PASS,bean.type,ApproveClaimOrg.STATUS_PASS
+                                ,checkBox.isChecked() ? AddOrgApi.TEST_ORG : AddOrgApi.NO_TEST_ORG);
                     }
                 }).show();
                 break;
@@ -181,9 +190,13 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
                 new IOSStyleDialog(this, "您确定要通过吗加V认证吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid,ApproveClaimOrg.IDENT_TYPE_ADDV, ApproveClaimOrg.STATUS_PASS,bean.type,ApproveClaimOrg.STATUS_PASS);
+                        mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid,ApproveClaimOrg.IDENT_TYPE_ADDV, ApproveClaimOrg.STATUS_PASS,bean.type,ApproveClaimOrg.STATUS_PASS
+                                ,checkBox.isChecked() ? AddOrgApi.TEST_ORG : AddOrgApi.NO_TEST_ORG);
                     }
                 }).show();
+                break;
+            case R.id.ll_test:
+                checkBox.toggle();
                 break;
             default:
                 break;

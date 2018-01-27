@@ -3,16 +3,20 @@ package com.ztstech.vgmate.activitys.add_org;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ztstech.appdomain.user_case.AddOrg;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.category_info.CategoryTagsActivity;
 import com.ztstech.vgmate.activitys.category_info.CategoryTagsPresenter;
 import com.ztstech.vgmate.activitys.gps.GpsActivity;
 import com.ztstech.vgmate.activitys.location_select.LocationSelectActivity;
+import com.ztstech.vgmate.data.api.AddOrgApi;
 import com.ztstech.vgmate.data.dto.AddOrgData;
 import com.ztstech.vgmate.manager.GpsManager;
 import com.ztstech.vgmate.utils.CategoryUtil;
@@ -53,6 +57,8 @@ public class AddOrgActivity extends MVPActivity<AddOrgContract.Presenter> implem
     TextView tvGps;
     @BindView(R.id.tv_contact)
     TextView tvContact;
+    @BindView(R.id.ckeckbox)
+    CheckBox checkBox;
 
     @BindView(R.id.top_bar)
     TopBar topBar;
@@ -82,6 +88,12 @@ public class AddOrgActivity extends MVPActivity<AddOrgContract.Presenter> implem
 
         topBar.getRightTextView().setOnClickListener(this);
         initCacheGps();
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                data.testorg = isChecked ? AddOrgApi.TEST_ORG : AddOrgApi.NO_TEST_ORG;
+            }
+        });
     }
 
     /**

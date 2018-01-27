@@ -25,6 +25,7 @@ public interface ApproveOrgApi {
                                              @Query("calid") String calid,
                                              @Query("identificationtype") String identificationtype,
                                              @Query("status") String status,
+                                             @Query("testorg") String testorg,
                                              @Query("authId") String authId);
 
     /**
@@ -42,6 +43,7 @@ public interface ApproveOrgApi {
                                                @Query("flag") String flag,
                                                @Query("identificationtype") String identificationtype,
                                                @Query("confirmOrUpdateType") String confirmOrUpdateType,
+                                               @Query("testorg") String testorg,
                                                @Query("authId") String authId);
 
     /**
@@ -52,6 +54,7 @@ public interface ApproveOrgApi {
      */
     @POST("exempt/appSaleDelRbiByRbiId")
     Observable<BaseRespBean> appregisterOrgno(@Query("rbiid") String rbiid,
+                                              @Query("testorg") String testorg,
                                               @Query("authId") String authId);
 
 

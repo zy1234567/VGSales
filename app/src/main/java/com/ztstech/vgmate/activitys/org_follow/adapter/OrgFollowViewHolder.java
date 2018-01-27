@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.ztstech.appdomain.user_case.GetOrgFollow;
 import com.ztstech.vgmate.R;
+import com.ztstech.vgmate.activitys.org_detail_v2.OrgDetailV2Activity;
 import com.ztstech.vgmate.activitys.org_follow.claim_org.ClaimOrgDetailActivity;
 import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
@@ -87,15 +88,23 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
             tvStatus.setText(TimeUtils.informationTime(data.rbicreatetime));
             tvFrom.setText("认领-待审批");
             tvFrom.setTextColor(getContext().getResources().getColor(R.color.color_006));
-            body.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        }
+        body.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (index == GetOrgFollow.STATUS_INDEX_FEEDBACK){
+                    // 如果是待审批列表跳转至审批详情
                     Intent intent = new Intent(getContext(), ClaimOrgDetailActivity.class);
                     intent.putExtra(ClaimOrgDetailActivity.KEY_BEAN,data);
                     getContext().startActivity(intent);
+                }else {
+                    // 不是审批列表跳转至机构详情
+                    Intent intent = new Intent(getContext(), OrgDetailV2Activity.class);
+                    intent.putExtra(OrgDetailV2Activity.ARG_RBIID,data.rbiid);
+                    getContext().startActivity(intent);
                 }
-            });
-        }
+            }
+        });
         //拨打电话
         tvPhone.setOnClickListener(new View.OnClickListener() {
             @Override

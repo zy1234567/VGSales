@@ -11,10 +11,12 @@ import android.widget.LinearLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.ztstech.appdomain.user_case.GetOrgFollow;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.org_detail_v2.OrgDetailV2Activity;
 import com.ztstech.vgmate.activitys.org_follow.adapter.OrgFollowListAdapter;
+import com.ztstech.vgmate.activitys.org_follow.claim_org.ClaimOrgDetailActivity;
 import com.ztstech.vgmate.base.SimpleRecyclerAdapter;
 import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import com.ztstech.vgmate.data.events.ApproveOrgEvent;
@@ -85,14 +87,6 @@ public class OrgFollowListFragment extends MVPFragment<OrgFollowListContact.Pres
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
                 mPresenter.appendData(uid);
-            }
-        });
-        adapter.setOnItemClickListener(new SimpleRecyclerAdapter.OnItemClickListener<OrgFollowlistBean.ListBean>() {
-            @Override
-            public void onItemClick(OrgFollowlistBean.ListBean item, int index) {
-                Intent intent = new Intent(getContext(), OrgDetailV2Activity.class);
-                intent.putExtra(OrgDetailV2Activity.ARG_RBIID,item.rbiid);
-                startActivity(intent);
             }
         });
     }

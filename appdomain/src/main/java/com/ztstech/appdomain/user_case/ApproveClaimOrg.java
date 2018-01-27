@@ -37,31 +37,35 @@ public class ApproveClaimOrg implements UserCase<Observable<BaseRespBean>>{
 
     private String status;
 
+    /** 是否勾选了测试 */
+    private String testOrg;
+
     private ApproveOrgApi api;
     /**机构类型 00认领来的机构 01登记来的机构*/
     String type;
     /**登记来的机构是否通过审核*/
     String yesorno;
 
-    public ApproveClaimOrg(String rbiid,String status,String calid,String identType,String type,String yesorno){
+    public ApproveClaimOrg(String rbiid,String status,String calid,String identType,String testOrg,String type,String yesorno){
         api = RetrofitUtils.createService(ApproveOrgApi.class);
         this.rbiid = rbiid;
         this.status = status;
         this.calid = calid;
         this.identType = identType;
         this.type = type;
+        this.testOrg = testOrg;
         this.yesorno = yesorno;
     }
 
     @Override
     public Observable<BaseRespBean> run() {
         if (TextUtils.equals(type,STATUS_PASS)) {
-            return api.approveClaimOrg(rbiid, calid, identType, status, UserRepository.getInstance().getAuthId());
+            return api.approveClaimOrg(rbiid, calid, identType, status,testOrg,UserRepository.getInstance().getAuthId());
         }else{
             if (TextUtils.equals(yesorno,STATUS_PASS)) {
-                return api.appregisterOrgyes(rbiid, STATUS_PASS, STATUS_PASS, identType, STATUS_PASS, UserRepository.getInstance().getAuthId());
+                return api.appregisterOrgyes(rbiid, STATUS_PASS, STATUS_PASS, identType, STATUS_PASS, testOrg,UserRepository.getInstance().getAuthId());
             }else{
-                return api.appregisterOrgno(rbiid,UserRepository.getInstance().getAuthId());
+                return api.appregisterOrgno(rbiid,testOrg,UserRepository.getInstance().getAuthId());
             }
         }
     }

@@ -78,5 +78,6 @@ public class OrgFollowlistBean extends BaseRespBean implements Serializable{
         public String calid;
         public String identificationtype;
         public String type;
+        public String testorg;
     }
 }

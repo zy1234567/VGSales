@@ -29,7 +29,7 @@ public class GetOrgFollow implements UserCase<Observable<OrgFollowlistBean>> {
     public static final int STATUS_INDEX_MANAGER = 2;
 
     /**
-     * 管理端
+     * 待审批
      */
     public static final int STATUS_INDEX_FEEDBACK = 3;
 

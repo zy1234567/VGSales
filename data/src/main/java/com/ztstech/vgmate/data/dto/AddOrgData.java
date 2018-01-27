@@ -22,4 +22,6 @@ public class AddOrgData {
     public String rbigps;
 
     public String bigtype;
+
+    public String testorg;
 }

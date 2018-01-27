@@ -33,6 +33,7 @@ public class AddOrg implements UserCase<Observable<BaseRespBean>>{
                 UserRepository.getInstance().getAuthId(),
                 data.rbiaddress,
                 data.rbiintroduction,
-                data.rbiphone);
+                data.rbiphone,
+                data.testorg);
     }
 }
