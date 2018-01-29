@@ -11,14 +11,14 @@ import com.ztstech.vgmate.data.BuildConfig;
 public interface NetConstants {
 
     /**服务器地址，debug时使用测试服务器，release使用正式服务器*/
-    String BASE_URL = BuildConfig.URL_BASE;
+//    String BASE_URL = BuildConfig.URL_BASE;
 
     /** 扫码登录的两个接口用的是这个请求地址*/
     String BASE_QRCODE_URL = "http://www.we17.com";
 
 //    String BASE_URL = "http://bigc.verygrow.com";
 
-//    String BASE_URL = "http://www.008box.com/";
+    String BASE_URL = "http://www.008box.com/";
 
 //    String BASE_URL = "http://192.168.1.105:8080/tom/";
 

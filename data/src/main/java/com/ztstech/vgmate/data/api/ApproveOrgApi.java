@@ -52,7 +52,7 @@ public interface ApproveOrgApi {
      * @param authId
      * @return
      */
-    @POST("exempt/appSaleDelRbiByRbiId")
+    @POST("exempt/AppSaleDelRbiByRbiId")
     Observable<BaseRespBean> appregisterOrgno(@Query("rbiid") String rbiid,
                                               @Query("testorg") String testorg,
                                               @Query("authId") String authId);
