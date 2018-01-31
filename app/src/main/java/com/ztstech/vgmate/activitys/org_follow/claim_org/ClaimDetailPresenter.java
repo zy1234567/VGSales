@@ -33,6 +33,6 @@ public class ClaimDetailPresenter extends PresenterImpl<ClaimOrgDetailContact.Vi
             protected void childError(Throwable e) {
                 mView.showError("审批出错:".concat(e.getMessage()));
             }
-        }.run(new ApproveClaimOrg(rbiid,status,calid,identtype,type,yesorno,testorg).run());
+        }.run(new ApproveClaimOrg(rbiid,status,calid,identtype,testorg,type,yesorno).run());
     }
 }
