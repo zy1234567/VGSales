@@ -22,6 +22,11 @@ public class ApproveClaimOrg implements UserCase<Observable<BaseRespBean>>{
     /** 审核拒绝 */
     public static final String STATUS_REFUSE = "01";
 
+    /** 来源于认领 */
+    public static final String TYPE_CLAIM = "00";
+    /** 来源于登记 */
+    public static final String TYPE_ADD = "01";
+
     /** 定位认证 */
     public static final String IDENT_TYPE_LOCATION = "01";
 
@@ -59,7 +64,7 @@ public class ApproveClaimOrg implements UserCase<Observable<BaseRespBean>>{
 
     @Override
     public Observable<BaseRespBean> run() {
-        if (TextUtils.equals(type,STATUS_PASS)) {
+        if (TextUtils.equals(type,TYPE_CLAIM)) {
             return api.approveClaimOrg(rbiid, calid, identType, status,testOrg,UserRepository.getInstance().getAuthId());
         }else{
             if (TextUtils.equals(yesorno,STATUS_PASS)) {

@@ -31,6 +31,7 @@ import com.ztstech.vgmate.weigets.IOSStyleDialog;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import org.greenrobot.eventbus.EventBus;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,13 +122,21 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
         tvRealName.setText("真实姓名：".concat(str));
         tvJob.setText("担任职位：".concat(bean.position));
         tvClaimPhone.setText(bean.phone);
+
+        /**
+         * identificationtype == 01 定位按钮置灰
+         type == 00 什么情况下都可以加V
+         type == 01 并且 orgid等于空的加V认证灰
+         */
         if (TextUtils.equals(ApproveClaimOrg.IDENT_TYPE_LOCATION,bean.identificationtype)){
-            tvLocationPass.setBackgroundResource(R.drawable.bg_c_2_f_106);
+            tvLocationPass.setBackgroundResource(R.drawable.bg_c_2_f_104);
+            tvLocationPass.setTextColor(getResources().getColor(R.color.color_109));
             tvLocationPass.setEnabled(false);
         }
-        if (TextUtils.isEmpty(bean.orgid)){
-            tvAddvPass.setBackgroundResource(R.drawable.bg_c_2_f_106);
-            tvAddress.setTextColor(getResources().getColor(R.color.color_109));
+        if (TextUtils.isEmpty(bean.orgid) &&
+                TextUtils.equals(ApproveClaimOrg.TYPE_ADD,bean.type)){
+            tvAddvPass.setBackgroundResource(R.drawable.bg_c_2_f_104);
+            tvAddvPass.setTextColor(getResources().getColor(R.color.color_109));
             tvAddvPass.setEnabled(false);
         }
         checkBox.setChecked(TextUtils.equals(bean.testorg, AddOrgApi.TEST_ORG));
