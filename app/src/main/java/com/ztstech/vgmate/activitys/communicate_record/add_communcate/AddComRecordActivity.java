@@ -384,6 +384,7 @@ public class AddComRecordActivity extends MVPActivity<AddComRecordContact.Presen
         addComRecordData.contactsname = etCall.getText().toString();
         addComRecordData.makecall = etThisPhone.getText().toString();
         addComRecordData.msg =  etCommunicate.getText().toString();
+        addComRecordData.consultphone = etMulPhone.getText().toString();
         if (ckPhoneRecord.isChecked()){
             if (TextUtils.isEmpty(etThisPhone.getText().toString()) || TextUtils.isEmpty(etCall.getText().toString()) || TextUtils.isEmpty(tvPosition.getText().toString())
                     || TextUtils.isEmpty(etMulPhone.getText().toString())){
