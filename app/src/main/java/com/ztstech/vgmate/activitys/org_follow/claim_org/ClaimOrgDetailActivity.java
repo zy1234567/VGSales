@@ -124,11 +124,13 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
         tvClaimPhone.setText(bean.phone);
 
         /**
-         * identificationtype == 01 定位按钮置灰
+         * identificationtype == 01 type == 00定位按钮置灰 来源于网络抓取也置灰
          type == 00 什么情况下都可以加V
          type == 01 并且 orgid等于空的加V认证灰
          */
-        if (TextUtils.equals(ApproveClaimOrg.IDENT_TYPE_LOCATION,bean.identificationtype)){
+        if (TextUtils.equals(ApproveClaimOrg.IDENT_TYPE_LOCATION,bean.identificationtype)
+                || TextUtils.equals(ApproveClaimOrg.TYPE_CLAIM,bean.type)
+                || TextUtils.equals(bean.comefrom,"网络抓取")){
             tvLocationPass.setBackgroundResource(R.drawable.bg_c_2_f_104);
             tvLocationPass.setTextColor(getResources().getColor(R.color.color_109));
             tvLocationPass.setEnabled(false);

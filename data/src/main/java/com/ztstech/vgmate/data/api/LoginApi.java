@@ -42,7 +42,7 @@ public interface LoginApi {
 
 
     @Headers("user-agent: Android")
-    @POST("exempt/saleUpdateUserMsg")
+    @POST("exempt/AppSaleUpdateUserMsg")
     Observable<BaseRespBean> updateUserInfo(@Query("authId") String authId,
                                             @Query("picurl") String picurl,
                                             @Query("picsurl") String picsurl,

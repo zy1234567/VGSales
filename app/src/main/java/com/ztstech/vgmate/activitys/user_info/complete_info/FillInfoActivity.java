@@ -152,11 +152,11 @@ public class FillInfoActivity extends MVPActivity<FillInfoContract.Presenter> im
 
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        takePhoto.onSaveInstanceState(outState);
-        super.onSaveInstanceState(outState);
-    }
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState) {
+//        takePhoto.onSaveInstanceState(outState);
+//        super.onSaveInstanceState(outState);
+//    }
 
 
     /**

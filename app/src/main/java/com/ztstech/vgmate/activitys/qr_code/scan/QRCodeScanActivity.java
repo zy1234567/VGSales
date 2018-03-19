@@ -140,11 +140,11 @@ public class QRCodeScanActivity extends MVPActivity<QRCodeScanContract.Presenter
         stopScan();
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        takePhotoHelperWapper.onSaveInstanceState(outState);
-    }
+//    @Override
+//    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+//        super.onSaveInstanceState(outState, outPersistentState);
+//        takePhotoHelperWapper.onSaveInstanceState(outState);
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
