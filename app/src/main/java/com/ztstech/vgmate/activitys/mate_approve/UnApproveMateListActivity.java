@@ -134,6 +134,7 @@ public class UnApproveMateListActivity extends MVPActivity<UnApproveMateContact.
     public void clickDetail(String saleid) {
         this.saleid = saleid;
         mPresenter.findMateDetail(saleid);
+        adapter.notifyDataSetChanged();
     }
 
     private void showFilterDialog(){

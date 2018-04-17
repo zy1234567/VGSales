@@ -40,12 +40,27 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="沟通记录"
+        android:layout_weight="1"
         android:textColor="@color/color_100"
         android:gravity="center"
         android:layout_gravity="center_vertical"
         android:background="@drawable/bg_c_2_f_005"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="5dp"
         android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_upload"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="上传协议/证明"
+            android:textColor="@color/color_100"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bg_c_2_f_005"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="12dp"
+            android:textSize="15sp"/>
     </LinearLayout>
 </RelativeLayout>

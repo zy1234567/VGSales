@@ -232,6 +232,7 @@
             android:textSize="@dimen/text_3"
             android:textColor="@color/color_109"
             android:gravity="center"
+            android:visibility="gone"
             android:background="@drawable/bg_c_2_f_001"
             android:layout_marginLeft="10dp"
             android:id="@+id/tv_location_pass" />

@@ -38,9 +38,9 @@ public class RetrofitUtils {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         httpClient = new OkHttpClient.Builder().addInterceptor(logging)
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(15, TimeUnit.SECONDS)
-                .readTimeout(15, TimeUnit.SECONDS).build();
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS).build();
     }
 
     public static <T> T createService(Class<T> clazz) {

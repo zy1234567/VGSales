@@ -178,9 +178,20 @@
             tools:replace="name,authorities,exported,grantUriPermissions">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
+                android:resource="@xml/file_paths_public" />
+            <!--<meta-data-->
+            <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
+            <!--android:resource="@xml/file_paths_public"></meta-data>-->
         </provider>
-
+        <!--<provider-->
+            <!--android:name="android.support.v4.content.FileProvider"-->
+            <!--android:authorities="com.ztstech.vgmap.fileprovider"-->
+            <!--android:exported="false"-->
+            <!--android:grantUriPermissions="true">-->
+            <!--<meta-data-->
+                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
+                <!--android:resource="@xml/file_paths_public"></meta-data>-->
+        <!--</provider>-->
         <service android:name="com.amap.api.location.APSService" />
 
         <activity android:name=".activitys.qr_code.confirm.QRCodeLoginActivity"
@@ -193,6 +204,13 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activitys.communicate_record.com_list.CommmunicateListActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activitys.upload_protocol.UploadActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activitys.upload_protocol.upload_cood_poster.UploadCoodPosterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".matisse.ui.MatisseActivity"/>
+        <activity android:name=".matisse.internal.ui.AlbumPreviewActivity"/>
+        <activity android:name=".matisse.internal.ui.SelectedPreviewActivity"/>
     </application>
 
 </manifest>

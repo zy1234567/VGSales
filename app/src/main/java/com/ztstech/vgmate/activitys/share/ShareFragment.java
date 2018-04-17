@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,6 +16,8 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.ztstech.appdomain.constants.Constants;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.share.adapter.BaseShareViewHolder;
@@ -81,8 +84,19 @@ public class ShareFragment extends MVPFragment<ShareContact.Presenter> implement
                 startActivityForResult(new Intent(getContext(), CreateMyShareActivity.class),REQ_SHARE);
             }
         });
+        imgsharevisiorgone();
     }
-
+    //发布按钮（审核中/未提交审核状态 01/04 隐藏）
+    public void imgsharevisiorgone(){
+        if (TextUtils.equals(Constants.USER_ID_CHECKING,
+                UserRepository.getInstance().getUser().getUserBean().info.status) ||
+                TextUtils.equals(Constants.USER_ID_WILL_CHECK,
+                        UserRepository.getInstance().getUser().getUserBean().info.status)){
+            imgShare.setVisibility(View.GONE);
+        }else{
+            imgShare.setVisibility(View.VISIBLE);
+        }
+    }
     @Override
     protected ShareContact.Presenter initPresenter() {
         return new SharePresenter(this);

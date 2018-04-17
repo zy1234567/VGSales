@@ -13,7 +13,7 @@ import com.ztstech.vgmate.activitys.main_fragment.subview.notice.NoticeFragment;
 
 public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    public static final String[] TITLES = new String[] {"资讯/通知", "公告/教程"};
+    public static final String[] TITLES = new String[] { "公告/教程","资讯/通知"};
 
     public MainFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -22,9 +22,9 @@ public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return InformationFragment.newInstance();
-        }else {
             return NoticeFragment.newInstance();
+        }else {
+            return InformationFragment.newInstance();
         }
     }
 

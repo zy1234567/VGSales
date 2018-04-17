@@ -16,12 +16,15 @@ import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.add_org.AddOrgActivity;
 import com.ztstech.vgmate.activitys.add_sell_mate.AddSellMateActivity;
 import com.ztstech.vgmate.activitys.create_share.create_share_info.CreateShareInfoActivity;
+import com.ztstech.vgmate.activitys.login.LoginActivity;
 import com.ztstech.vgmate.activitys.main.adapter.MainPagerAdapter;
 import com.ztstech.vgmate.activitys.main.widget.BottomBar;
 import com.ztstech.vgmate.activitys.qr_code.scan.QRCodeScanActivity;
 import com.ztstech.vgmate.activitys.search_org.SearchOrgActivity;
 import com.ztstech.vgmate.data.api.CreateShareApi;
 import com.ztstech.vgmate.manager.GpsManager;
+import com.ztstech.vgmate.utils.DialogUtils;
+import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import butterknife.BindView;
@@ -57,14 +60,24 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
         // 去定位
         new GpsManager(this).getGpsInfo();
         bottomBar.setOnTabItemClickListener(this);
-
         vpMain.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
-
+        if (TextUtils.equals(UserRepository.getInstance().getUser().getUserBean().info.status,Constants.USER_ID_REFUSE)){
+            ToastUtil.toastCenter(this,"您的审核被拒绝，请重新审核");
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
         initDialog();
 
         topBar.getLeftImage().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (TextUtils.equals(Constants.USER_ID_CHECKING,
+                        UserRepository.getInstance().getUser().getUserBean().info.status) ||
+                        TextUtils.equals(Constants.USER_ID_WILL_CHECK,
+                                UserRepository.getInstance().getUser().getUserBean().info.status)) {
+                    DialogUtils.showdialogknow(MainActivity.this,"您的销售身份未通过审核，暂无权限使用此功能。");
+                    return;
+                }
                 startActivity(new Intent(MainActivity.this, QRCodeScanActivity.class));
             }
         });
@@ -72,6 +85,19 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
         topBar.getRightImage().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (TextUtils.equals(Constants.USER_ID_CHECKING,
+                        UserRepository.getInstance().getUser().getUserBean().info.status)||
+                        TextUtils.equals(Constants.USER_ID_WILL_CHECK,
+                                UserRepository.getInstance().getUser().getUserBean().info.status)) {
+                    DialogUtils.showdialogknow(MainActivity.this,"您的销售身份未通过审核，暂无权限使用此功能。");
+                    return;
+                }
+                if (!UserRepository.getInstance().getUser().enableShare() &&
+                        TextUtils.equals(Constants.ADDTYPE_NO,
+                                UserRepository.getInstance().getUser().getUserBean().info.addtype)){
+                    DialogUtils.showdialogknow(MainActivity.this,"暂无权限");
+                    return;
+                }
                 if (View.GONE == dialog.getVisibility()) {
                     dialog.setVisibility(View.VISIBLE);
                 }
@@ -145,21 +171,30 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
          是否能添加机构：都可以添加机构
          是否能发布资讯和公告：是否是王总或一级销售
          */
-        if (!TextUtils.equals(Constants.USER_ID_PASS,
-                UserRepository.getInstance().getUser().getUserBean().info.status)) {
+//        if (!TextUtils.equals(Constants.USER_ID_PASS,
+//                UserRepository.getInstance().getUser().getUserBean().info.status)) {
+
+        // 伙伴暂时去掉添加机构的功能
+        rlAddOrg.setVisibility(View.GONE);
+
+        if (TextUtils.equals(Constants.USER_ID_CHECKING,
+                UserRepository.getInstance().getUser().getUserBean().info.status)||
+                TextUtils.equals(Constants.USER_ID_WILL_CHECK,
+                        UserRepository.getInstance().getUser().getUserBean().info.status)){
             //未审核通过
             rlAddMate.setVisibility(View.GONE);
             line1.setVisibility(View.GONE);
         }
 
-        if (!UserRepository.getInstance().getUser().enableShare()) {
+        if (!UserRepository.getInstance().getUser().enableShare() &&
+                TextUtils.equals(Constants.ADDTYPE_YES,
+                        UserRepository.getInstance().getUser().getUserBean().info.addtype)) {
             rlShareInfo.setVisibility(View.GONE);
             line2.setVisibility(View.GONE);
             rlShareNotice.setVisibility(View.GONE);
             line3.setVisibility(View.GONE);
         }
-        // 伙伴暂时去掉添加机构的功能
-        rlAddOrg.setVisibility(View.GONE);
+
         addContentView(dialog, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
 

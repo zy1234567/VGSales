@@ -170,6 +170,15 @@
             android:layout_marginTop="14.5dp"
             android:layout_alignBaseline="@+id/age_layout"
             android:layout_toRightOf="@+id/age_layout" />
+        <TextView
+            android:id="@+id/tv_states_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="13dp"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/text_7"
+            />
     </RelativeLayout>
     <View
         android:layout_width="match_parent"

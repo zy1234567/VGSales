@@ -18,6 +18,7 @@ import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
+import com.ztstech.vgmate.activitys.main.MainActivity;
 import com.ztstech.vgmate.activitys.main_fragment.adapter.MainFragmentPagerAdapter;
 import com.ztstech.vgmate.activitys.mate_approve.UnApproveMateListActivity;
 import com.ztstech.vgmate.activitys.org_follow.OrgFollowActivity;
@@ -25,6 +26,7 @@ import com.ztstech.vgmate.activitys.sell_mate_list.SellMateListActivity;
 import com.ztstech.vgmate.activitys.setting.SettingActivity;
 import com.ztstech.vgmate.data.beans.MainPageBean;
 import com.ztstech.vgmate.data.beans.UserBean;
+import com.ztstech.vgmate.utils.DialogUtils;
 import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.ToastUtil;
 
@@ -174,9 +176,16 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
                 break;
             case R.id.rl_custom:
                 //客户跟进
-                Intent intent2 = new Intent(getContext(), OrgFollowActivity.class);
-                intent2.putExtra(OrgFollowActivity.KEY_UID,UserRepository.getInstance().getUser().getUserBean().info.uid);
-                getContext().startActivity(intent2);
+                if (TextUtils.equals(Constants.USER_ID_CHECKING,
+                    UserRepository.getInstance().getUser().getUserBean().info.status) ||
+                    TextUtils.equals(Constants.USER_ID_WILL_CHECK,
+                            UserRepository.getInstance().getUser().getUserBean().info.status)){
+                    DialogUtils.showdialogknow(getContext(),"您的销售身份未通过审核，暂无权限使用此功能。");
+                }else{
+                    Intent intent2 = new Intent(getContext(), OrgFollowActivity.class);
+                    intent2.putExtra(OrgFollowActivity.KEY_UID,UserRepository.getInstance().getUser().getUserBean().info.uid);
+                    getContext().startActivity(intent2);
+                }
                 break;
             default:
                 break;

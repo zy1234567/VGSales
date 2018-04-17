@@ -50,12 +50,16 @@ public interface ApproveOrgApi {
      * 登记来的机构审核拒绝接口
      * @param rbiid
      * @param authId
+     * @param type 01删除（回收站）    00恢复
      * @return
      */
-    @POST("exempt/AppSaleDelRbiByRbiId")
+    @POST("exempt/appMapsaleRecyclingRbi")
     Observable<BaseRespBean> appregisterOrgno(@Query("rbiid") String rbiid,
-                                              @Query("testorg") String testorg,
-                                              @Query("authId") String authId);
+                                              @Query("authId") String authId,
+                                              @Query("type") String type,
+                                              @Query("rubbishtype") String rubbishtype,
+                                              @Query("refuse") String refuse,
+                                              @Query("oname") String oname);
 
 
 }

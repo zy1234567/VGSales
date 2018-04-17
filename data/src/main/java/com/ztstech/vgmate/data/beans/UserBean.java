@@ -118,6 +118,7 @@ public class UserBean extends BaseRespBean{
         public String cardImg;
         public String banks;
         public int fourthbudgets;
+        public String addtype;//是否可以添加伙伴
     }
 
     public static class RlistBean {

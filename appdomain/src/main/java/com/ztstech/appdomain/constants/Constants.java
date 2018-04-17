@@ -96,5 +96,11 @@ public interface Constants {
     String SHARE_ONLY_LINK = "04";
     /** 连接加文字 */
     String SHARE_WORD_LINK = "05";
-
+    /**审核状态00通过，01拒绝，02待审核**/
+    String PASS_TYPE = "00";
+    String REFUSE_TYPE = "01";
+    String CHECK_PEND_TYPE = "02";
+    //是否可以添加销售 01 可以 00 不可以
+    String ADDTYPE_YES = "01";
+    String ADDTYPE_NO = "00";
 }

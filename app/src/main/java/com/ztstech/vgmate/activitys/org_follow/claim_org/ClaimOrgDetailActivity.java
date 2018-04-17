@@ -184,7 +184,7 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                             mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid, "", ApproveClaimOrg.STATUS_REFUSE,bean.type,ApproveClaimOrg.STATUS_REFUSE,
-                                    checkBox.isChecked() ? AddOrgApi.TEST_ORG : AddOrgApi.NO_TEST_ORG);
+                                    checkBox.isChecked() ? AddOrgApi.TEST_ORG : AddOrgApi.NO_TEST_ORG,bean.rbioname);
                     }
                 }).show();
                 break;
@@ -193,7 +193,7 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid,ApproveClaimOrg.IDENT_TYPE_LOCATION,ApproveClaimOrg.STATUS_PASS,bean.type,ApproveClaimOrg.STATUS_PASS
-                                ,checkBox.isChecked() ? AddOrgApi.TEST_ORG : AddOrgApi.NO_TEST_ORG);
+                                ,checkBox.isChecked() ? AddOrgApi.TEST_ORG : AddOrgApi.NO_TEST_ORG,bean.rbioname);
                     }
                 }).show();
                 break;
@@ -202,7 +202,7 @@ public class ClaimOrgDetailActivity extends MVPActivity<ClaimOrgDetailContact.Pr
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mPresenter.approveOrg(String.valueOf(bean.rbiid), bean.calid,ApproveClaimOrg.IDENT_TYPE_ADDV, ApproveClaimOrg.STATUS_PASS,bean.type,ApproveClaimOrg.STATUS_PASS
-                                ,checkBox.isChecked() ? AddOrgApi.TEST_ORG : AddOrgApi.NO_TEST_ORG);
+                                ,checkBox.isChecked() ? AddOrgApi.TEST_ORG : AddOrgApi.NO_TEST_ORG,bean.rbioname);
                     }
                 }).show();
                 break;

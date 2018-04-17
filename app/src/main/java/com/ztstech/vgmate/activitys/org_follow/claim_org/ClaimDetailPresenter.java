@@ -18,7 +18,7 @@ public class ClaimDetailPresenter extends PresenterImpl<ClaimOrgDetailContact.Vi
     }
 
     @Override
-    public void approveOrg(String rbiid, String calid,String identtype,String status,String type,String yesorno,String testorg) {
+    public void approveOrg(String rbiid, String calid,String identtype,String status,String type,String yesorno,String testorg,String oname) {
         new BasePresenterSubscriber<BaseRespBean>(mView){
             @Override
             protected void childNext(BaseRespBean baseRespBean) {
@@ -33,6 +33,6 @@ public class ClaimDetailPresenter extends PresenterImpl<ClaimOrgDetailContact.Vi
             protected void childError(Throwable e) {
                 mView.showError("审批出错:".concat(e.getMessage()));
             }
-        }.run(new ApproveClaimOrg(rbiid,status,calid,identtype,testorg,type,yesorno).run());
+        }.run(new ApproveClaimOrg(rbiid,status,calid,identtype,testorg,type,yesorno,oname).run());
     }
 }

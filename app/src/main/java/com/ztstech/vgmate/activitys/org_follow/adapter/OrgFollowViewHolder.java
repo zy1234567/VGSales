@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,7 +30,11 @@ import butterknife.BindView;
  */
 
 public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.ListBean> {
-
+    /**
+     * 认领00 登记01
+     */
+    public static final String CLAIM_ORG_TYPE = "00";
+    public static final String ADD_ORG_TYPE = "01";
     @BindView(R.id.tv_from)
     TextView tvFrom;
     @BindView(R.id.tv_status)
@@ -85,8 +90,13 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
             tvFrom.setText("来源：".concat(data.comefrom));
         }else {
             // 机构反馈
+            if (TextUtils.equals(data.type,CLAIM_ORG_TYPE)){
+                tvFrom.setText("认领-待审批");
+            }else if (TextUtils.equals(data.type,ADD_ORG_TYPE)){
+                tvFrom.setText("登记-待审批");
+            }
             tvStatus.setText(TimeUtils.informationTime(data.rbicreatetime));
-            tvFrom.setText("认领-待审批");
+
             tvFrom.setTextColor(getContext().getResources().getColor(R.color.color_006));
         }
         body.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +111,8 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
                     // 不是审批列表跳转至机构详情
                     Intent intent = new Intent(getContext(), OrgDetailV2Activity.class);
                     intent.putExtra(OrgDetailV2Activity.ARG_RBIID,data.rbiid);
+                    intent.putExtra(OrgDetailV2Activity.ARG_RBIONAMW,data.rbioname);
+                    intent.putExtra(OrgDetailV2Activity.ARG_ORGID,data.orgid);
                     getContext().startActivity(intent);
                 }
             }

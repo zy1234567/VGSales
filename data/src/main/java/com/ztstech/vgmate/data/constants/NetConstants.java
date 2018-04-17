@@ -20,11 +20,11 @@ public interface NetConstants {
 
     String BASE_URL = "http://www.008box.com/";
 
-//    String BASE_URL = "http://192.168.1.105:8080/tom/";
+//    String BASE_URL = "http://192.168.1.122:8080/tom/";
 
 //    String BASE_URL = "http://192.168.1.159/tom/";
 
-//    String BASE_URL = "http://192.168.1.113:8080/tom/";
+//    String BASE_URL = "http://192.168.1.230:8081/tom/";
     /**
      * 上传文件
      */

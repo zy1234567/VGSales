@@ -2,12 +2,14 @@ package com.ztstech.vgmate.activitys.sell_mate_list.adapter;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.org_follow.OrgFollowActivity;
 import com.ztstech.vgmate.base.SimpleViewHolder;
@@ -65,6 +67,8 @@ public class MateListViewHolder extends SimpleViewHolder<MatelistBean.ListBean> 
     LinearLayout llMoney;
     @BindView(R.id.tv_phone)
     TextView tvPhone;
+    @BindView(R.id.tv_states_type)
+    TextView tvStatesType;
 
     public MateListViewHolder(View itemView) {
         super(itemView);
@@ -119,5 +123,15 @@ public class MateListViewHolder extends SimpleViewHolder<MatelistBean.ListBean> 
                 getContext().startActivity(intent);
             }
         });
+        if (TextUtils.equals(data.status, Constants.PASS_TYPE)){
+            tvStatesType.setText("已通过");
+            tvStatesType.setTextColor(getContext().getResources().getColor(R.color.weilai_color_1105));
+        }else if (TextUtils.equals(data.status, Constants.USER_ID_CHECKING) || TextUtils.equals(data.status, Constants.USER_ID_WILL_CHECK)){
+            tvStatesType.setText("审核中");
+            tvStatesType.setTextColor(getContext().getResources().getColor(R.color.color_006));
+        }else{
+            tvStatesType.setText("已拒绝");
+            tvStatesType.setTextColor(getContext().getResources().getColor(R.color.color_006));
+        }
     }
 }

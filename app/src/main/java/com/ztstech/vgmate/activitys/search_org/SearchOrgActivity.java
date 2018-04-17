@@ -118,6 +118,8 @@ public class SearchOrgActivity extends MVPActivity<SearchOrgContact.Presenter> i
             public void onItemClick(OrgFollowlistBean.ListBean item, int index) {
                 Intent intent = new Intent(SearchOrgActivity.this, OrgDetailV2Activity.class);
                 intent.putExtra(OrgDetailV2Activity.ARG_RBIID,item.rbiid);
+                intent.putExtra(OrgDetailV2Activity.ARG_RBIONAMW,item.rbioname);
+                intent.putExtra(OrgDetailV2Activity.ARG_ORGID,item.orgid);
                 startActivity(intent);
             }
         });

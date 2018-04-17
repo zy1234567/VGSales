@@ -2,16 +2,26 @@ package com.ztstech.vgmate.utils;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
+import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.data.beans.MainListBean;
+import com.ztstech.vgmate.data.dto.UploadProtocolData;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by smm on 2017/11/7.
@@ -119,7 +129,7 @@ public class DialogUtils {
         tvBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               dialog.dismiss();
+                dialog.dismiss();
             }
         });
         dialog.setContentView(view);
@@ -174,5 +184,117 @@ public class DialogUtils {
     public interface showCommitCallBack{
         void onBackClick();
         void onCommitClick();
+    }
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public static void showUploadMsg(Context context, UploadProtocolData uploadProtocolData, final showUploadMsgCallBack callBack){
+        final Dialog dialog = new Dialog(context,R.style.dark_transdialog);
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_upload_protocol,null);
+        RelativeLayout rlUploadProtocol = view.findViewById(R.id.rl_upload_protocol);
+        TextView tvUploadProtocolState = view.findViewById(R.id.tv_upload_protocol_state);
+        RelativeLayout rlUploadPoster = view.findViewById(R.id.rl_upload_poster);
+        TextView tvUploadPosterState = view.findViewById(R.id.tv_upload_poster_state);
+        RelativeLayout rlUploadPrivary = view.findViewById(R.id.rl_upload_privary);
+        TextView tvUploadPrivaryState = view.findViewById(R.id.tv_upload_privary_state);
+        RelativeLayout rlCancel = view.findViewById(R.id.rl_cancel);
+        if (uploadProtocolData.protocolMap != null) {
+            if (!TextUtils.isEmpty(uploadProtocolData.protocolMap.teamworkprotocalpicurl)) {
+                if (TextUtils.equals(uploadProtocolData.protocolMap.teamworkprotocalstatus, Constants.PASS_TYPE)) {
+                    tvUploadProtocolState.setText("已结成合作伙伴");
+                    tvUploadProtocolState.setTextColor(context.getResources().getColor(R.color.color_001));
+                } else if (TextUtils.equals(uploadProtocolData.protocolMap.teamworkprotocalstatus, Constants.REFUSE_TYPE)) {
+                    tvUploadProtocolState.setText("已拒绝");
+                    tvUploadProtocolState.setTextColor(context.getResources().getColor(R.color.color_006));
+                } else if (TextUtils.equals(uploadProtocolData.protocolMap.teamworkprotocalstatus, Constants.CHECK_PEND_TYPE)) {
+                    tvUploadProtocolState.setText("已上传-审核中");
+                    tvUploadProtocolState.setTextColor(context.getResources().getColor(R.color.color_006));
+                }
+            }
+            if (!TextUtils.isEmpty(uploadProtocolData.protocolMap.posterpicurl)) {
+                tvUploadPosterState.setText("已上传");
+                tvUploadPosterState.setTextColor(context.getResources().getColor(R.color.color_001));
+            }
+            if (!TextUtils.isEmpty(uploadProtocolData.protocolMap.secretagreementpicurl) &&
+                    !TextUtils.isEmpty(uploadProtocolData.protocolMap.promisebookpicurl)) {
+                tvUploadPrivaryState.setText("已上传/已上传");
+                tvUploadPrivaryState.setTextColor(context.getResources().getColor(R.color.color_001));
+            } else if (TextUtils.isEmpty(uploadProtocolData.protocolMap.secretagreementpicurl) &&
+                    !TextUtils.isEmpty(uploadProtocolData.protocolMap.promisebookpicurl)) {
+                String[] strs = {"未上传/", "已上传"};
+                final int[] colors = new int[]{ContextCompat.getColor(context, R.color.color_102),
+                        ContextCompat.getColor(context, R.color.color_001)};
+                SpannableStringBuilder spannableStringBuilder =
+                        ViewUtils.getDiffColorSpan(null, strs, colors);
+                tvUploadPrivaryState.setText(spannableStringBuilder);
+            } else if (!TextUtils.isEmpty(uploadProtocolData.protocolMap.secretagreementpicurl) &&
+                    TextUtils.isEmpty(uploadProtocolData.protocolMap.promisebookpicurl)) {
+                String[] strs = {"已上传", "/未上传"};
+                final int[] colors = new int[]{ContextCompat.getColor(context, R.color.color_001),
+                        ContextCompat.getColor(context, R.color.color_102)};
+                SpannableStringBuilder spannableStringBuilder =
+                        ViewUtils.getDiffColorSpan(null, strs, colors);
+                tvUploadPrivaryState.setText(spannableStringBuilder);
+            }
+        }
+        rlUploadPoster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callBack.onUploadposterClick();
+                dialog.dismiss();
+            }
+        });
+        rlUploadProtocol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callBack.onUploadprotocolClick();
+                dialog.dismiss();
+            }
+        });
+        rlUploadPrivary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callBack.onUploadprivaryClick();
+                dialog.dismiss();
+            }
+        });
+        rlCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setContentView(view);
+        dialog.show();
+        Window dialogWindow = dialog.getWindow();
+        WindowManager.LayoutParams layoutParams = dialogWindow.getAttributes();
+        layoutParams.gravity = Gravity.BOTTOM;
+        layoutParams.width= WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.height= WindowManager.LayoutParams.WRAP_CONTENT;
+        dialogWindow.setAttributes(layoutParams);
+    }
+    public interface showUploadMsgCallBack{
+        void onUploadprotocolClick();
+        void onUploadposterClick();
+        void onUploadprivaryClick();
+    }
+    public static void showdialogknow(Context context,String content){
+        final Dialog dialog = new Dialog(context,R.style.dark_transdialog);
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_me_know,null);
+        TextView tvKnow = view.findViewById(R.id.tv_me_know);
+        TextView tvContent = view.findViewById(R.id.tv_content);
+        tvContent.setText(content);
+        tvKnow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setContentView(view);
+        dialog.show();
+        Window dialogWindow = dialog.getWindow();
+        WindowManager.LayoutParams layoutParams = dialogWindow.getAttributes();
+        layoutParams.gravity = Gravity.CENTER;
+        layoutParams.width= ViewUtils.dp2px(context,300);
+        layoutParams.height= WindowManager.LayoutParams.WRAP_CONTENT;
+        dialogWindow.setAttributes(layoutParams);
     }
 }

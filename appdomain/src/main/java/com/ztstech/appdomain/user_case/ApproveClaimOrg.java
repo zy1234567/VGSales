@@ -50,8 +50,8 @@ public class ApproveClaimOrg implements UserCase<Observable<BaseRespBean>>{
     String type;
     /**登记来的机构是否通过审核*/
     String yesorno;
-
-    public ApproveClaimOrg(String rbiid,String status,String calid,String identType,String testOrg,String type,String yesorno){
+    String oname;
+    public ApproveClaimOrg(String rbiid,String status,String calid,String identType,String testOrg,String type,String yesorno,String oname){
         api = RetrofitUtils.createService(ApproveOrgApi.class);
         this.rbiid = rbiid;
         this.status = status;
@@ -60,6 +60,7 @@ public class ApproveClaimOrg implements UserCase<Observable<BaseRespBean>>{
         this.type = type;
         this.testOrg = testOrg;
         this.yesorno = yesorno;
+        this.oname = oname;
     }
 
     @Override
@@ -70,7 +71,7 @@ public class ApproveClaimOrg implements UserCase<Observable<BaseRespBean>>{
             if (TextUtils.equals(yesorno,STATUS_PASS)) {
                 return api.appregisterOrgyes(rbiid, STATUS_PASS, STATUS_PASS, identType, STATUS_PASS, testOrg,UserRepository.getInstance().getAuthId());
             }else{
-                return api.appregisterOrgno(rbiid,testOrg,UserRepository.getInstance().getAuthId());
+                return api.appregisterOrgno(rbiid,UserRepository.getInstance().getAuthId(),"01","04","00",oname);
             }
         }
     }

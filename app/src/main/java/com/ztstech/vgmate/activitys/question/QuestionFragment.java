@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.ztstech.appdomain.constants.Constants;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.question.adapter.QuestionViewPgerAdapter;
 import com.ztstech.vgmate.activitys.question.create_question.CreateQuestionActivity;
@@ -46,13 +49,24 @@ public class QuestionFragment extends BaseFragment{
         super.onViewBindFinish(savedInstanceState);
         tablayout.setupWithViewPager(viewpager);
         viewpager.setAdapter(new QuestionViewPgerAdapter(getChildFragmentManager()));
+        imgQuizvisiorgone();
     }
 
     @Override
     protected int getLayoutRes() {
         return R.layout.fragment_question;
     }
-
+    //发布按钮（审核中/未提交审核状态 01/04 隐藏）
+    public void imgQuizvisiorgone(){
+        if (TextUtils.equals(Constants.USER_ID_CHECKING,
+                UserRepository.getInstance().getUser().getUserBean().info.status) ||
+                TextUtils.equals(Constants.USER_ID_WILL_CHECK,
+                        UserRepository.getInstance().getUser().getUserBean().info.status)){
+            imgQuiz.setVisibility(View.GONE);
+        }else{
+            imgQuiz.setVisibility(View.VISIBLE);
+        }
+    }
 
 
     @OnClick({R.id.rl_search,R.id.img_quiz})

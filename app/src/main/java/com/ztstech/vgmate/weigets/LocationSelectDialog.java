@@ -113,6 +113,10 @@ public class LocationSelectDialog extends Dialog {
             }
         });
         list_province = LocationUtils.getLocationList();
+        if (list_province == null){
+            ToastUtil.toastCenter(getContext(),"数据解析未完成，请稍后再试");
+            return;
+        }
         list_city = new ArrayList<>();
         list_area = new ArrayList<>();
         pPosition = findProPositionBypid(psid);
