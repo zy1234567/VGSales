@@ -42,12 +42,9 @@ public class CommentPresenter extends PresenterImpl<CommentContract.View> implem
         }
     }
 
-
     @Override
     public void comment(String flid, String newid, String touid, String comment,String flg) {
-
         new BasePresenterSubscriber<BaseRespBean>(mView) {
-
             @Override
             protected void childNext(BaseRespBean baseRespBean) {
                 mView.onCommentFinish(baseRespBean.getErrmsg());

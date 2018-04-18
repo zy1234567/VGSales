@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:background="@color/color_107"
+        android:layout_height="25dp">
+        <TextView
+            android:id="@+id/tv_come"
+            android:layout_marginLeft="12dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:text="来源：web登记"
+            android:textSize="@dimen/text_7"
+            android:textColor="@color/zhihu_album_dropdown_count_text"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_marginRight="12dp"
+            android:layout_alignParentRight="true"
+            android:text="29:12:34"
+            android:textSize="@dimen/text_7"
+            android:textColor="@color/color_006"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_org_name"
+        android:layout_marginTop="@dimen/dialog_isfrist_used"
+        android:layout_below="@+id/rl_top"
+        android:textStyle="bold"
+        android:textColor="@color/color_100"
+        android:layout_marginRight="@dimen/dialog_isfrist_used"
+        android:layout_marginLeft="@dimen/dialog_isfrist_used"
+        android:textSize="@dimen/text_2"
+        android:layout_width="wrap_content"
+        android:text="上海启跳J联盟青少年篮球培训机构"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_class_types"
+            android:layout_width="wrap_content"
+            android:text="课程分类 "
+            android:textStyle="bold"
+            android:textColor="@color/oder_color"
+            android:textSize="@dimen/text_6"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_class_type"
+            android:layout_toRightOf="@+id/tv_class_types"
+            android:text="芭蕾舞/民族舞/爵士舞/瑜伽/普拉提/吉他/尤克里里/升学"
+            android:layout_width="wrap_content"
+            android:textColor="@color/oder_color"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/text_6"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_locations"
+            android:layout_width="wrap_content"
+            android:text="所在地区 "
+            android:textStyle="bold"
+            android:textColor="@color/oder_color"
+            android:textSize="@dimen/text_6"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_toRightOf="@+id/tv_locations"
+            android:text="北京市"
+            android:layout_width="wrap_content"
+            android:textColor="@color/oder_color"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/text_6"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_detial_locations"
+            android:layout_width="wrap_content"
+            android:text="详细地址 "
+            android:textStyle="bold"
+            android:textColor="@color/oder_color"
+            android:textSize="@dimen/text_6"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_detial_location"
+            android:layout_toRightOf="@+id/tv_detial_locations"
+            android:text="西什库大街28号九四文创13号楼50"
+            android:layout_width="wrap_content"
+            android:textColor="@color/oder_color"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/text_6"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_phones"
+            android:layout_width="wrap_content"
+            android:text="咨询电话 "
+            android:textStyle="bold"
+            android:textColor="@color/oder_color"
+            android:textSize="@dimen/text_6"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_toRightOf="@+id/tv_phones"
+            android:text="010222222"
+            android:layout_width="wrap_content"
+            android:textColor="@color/oder_color"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/text_6"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="12dp"
+        android:gravity="center_vertical"
+        android:layout_marginRight="12dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_gpss"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:text="GPS定位 "
+            android:textStyle="bold"
+            android:textColor="@color/oder_color"
+            android:textSize="@dimen/text_6"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_gps"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/rl_ico_gps"
+            android:layout_toRightOf="@+id/tv_gpss"
+            android:text="116.31°E,39.69N"
+            android:layout_width="wrap_content"
+            android:textColor="@color/oder_color"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/text_6"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:id="@+id/rl_ico_gps"
+            android:layout_width="55dp"
+            android:background="@drawable/bg_c_1_f_001"
+            android:layout_alignParentRight="true"
+            android:layout_height="22dp">
+            <ImageView
+                android:id="@+id/img_ico"
+                android:layout_width="wrap_content"
+                android:src="@mipmap/dingwei_ico"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="9dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_toRightOf="@+id/img_ico"
+                android:id="@+id/tv_ico_gps"
+                android:layout_width="wrap_content"
+                android:text="查看"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_7"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

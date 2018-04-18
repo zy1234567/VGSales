@@ -28,7 +28,6 @@ public class Comment implements UserCase<Observable<BaseRespBean>> {
         this.touid = touid;
         this.comment = comment;
         this.flg = flg;
-
         commentApi = RetrofitUtils.createService(CommentApi.class);
     }
 

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <include
+                android:id="@+id/layout_center"
+                layout="@layout/layout_way_center"/>
+            <RelativeLayout
+                android:id="@+id/rl_dismiss"
+                android:layout_below="@+id/layout_center"
+                android:layout_width="match_parent"
+                android:background="@color/color_107"
+                android:layout_height="25dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:layout_marginLeft="4dp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/color_006" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:text="实地定位"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/list_item_text_gray_color"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_below="@+id/rl_dismiss"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:drawableRight="@mipmap/arrow"
+                android:layout_marginRight="@dimen/dialog_isfrist_used"
+                android:layout_marginLeft="@dimen/dialog_isfrist_used"
+                android:hint="请定位（100m范围内即可）"
+                android:layout_height="45dp" />
+            <RelativeLayout
+                android:id="@+id/rl_photo"
+                android:layout_below="@+id/tv_location"
+                android:layout_width="match_parent"
+                android:background="@color/color_107"
+                android:layout_height="25dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:layout_marginLeft="4dp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/color_006" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:text="实地拍照"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/text_7"
+                    android:textColor="@color/list_item_text_gray_color"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <GridView
+                android:layout_below="@+id/rl_photo"
+                android:layout_width="match_parent"
+                android:layout_height="105dp">
+            </GridView>
+
+        </RelativeLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="55dp">
+        <TextView
+            android:id="@+id/tv_pass"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:text="通过(加V认证)"
+            android:gravity="center"
+            android:textSize="@dimen/text_4"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_c_2_f_009"
+            android:layout_height="40dp" />
+    </RelativeLayout>
+</RelativeLayout>

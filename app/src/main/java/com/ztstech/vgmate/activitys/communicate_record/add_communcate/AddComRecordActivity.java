@@ -397,7 +397,6 @@ public class AddComRecordActivity extends MVPActivity<AddComRecordContact.Presen
             }
         }
 
-
         mPresenter.submit(addComRecordData);
     }
     /**

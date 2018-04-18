@@ -73,9 +73,7 @@ public class AddSellMateActivity extends MVPActivity<AddSellMateContract.Present
             addSellMateData.wprovince = data.getStringExtra(LocationSelectActivity.RESULT_P);
             addSellMateData.wcity = data.getStringExtra(LocationSelectActivity.RESULT_C);
             addSellMateData.wdistrict = data.getStringExtra(LocationSelectActivity.RESULT_A);
-
             tvLocation.setText(data.getStringExtra(LocationSelectActivity.RESULT_NAME));
-
         }else if (requestCode == REQ_CONTACT && resultCode == RESULT_OK) {
             //得到联系人
             ContractUtils.ContractUser user = ContractUtils.readContract(this, data);
