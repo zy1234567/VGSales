@@ -18,6 +18,7 @@ import com.ztstech.vgmate.activitys.org_follow.claim_org.ClaimOrgDetailActivity;
 import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import com.ztstech.vgmate.utils.CategoryUtil;
+import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.TimeUtils;
 import com.ztstech.vgmate.utils.ViewUtils;
@@ -37,7 +38,7 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
     public static final String ADD_ORG_TYPE = "01";
     @BindView(R.id.tv_from)
     TextView tvFrom;
-    @BindView(R.id.tv_status)
+    @BindView(R.id.tv_time)
     TextView tvStatus;
     @BindView(R.id.img_org)
     ImageView imgOrg;
@@ -79,26 +80,29 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
         tvPhone.setText(spannableStringBuilder);
 
         if (index == GetOrgFollow.STATUS_INDEX_CONCERN){
-            tvStatus.setText("已确认");
-            tvFrom.setText("来源：".concat(data.comefrom));
+            tvStatus.setText(TimeUtils.getDateWithString(data.createtime,"yyyy-MM-dd"));
+//            tvFrom.setText("来源：".concat(data.comefrom));
+            CommonUtil.orgfFromType(getContext(),tvFrom,data.cstatus,data.nowchancetype,data.chancetype);
         }else if (index == GetOrgFollow.STATUS_INDEX_CLAIM){
-            tvStatus.setText("已认领");
-            tvFrom.setText("来源：".concat(data.comefrom));
+            tvStatus.setText(TimeUtils.getDateWithString(data.createtime,"yyyy-MM-dd"));
+//            tvFrom.setText("来源：".concat(data.comefrom));
+            CommonUtil.orgfFromType(getContext(),tvFrom,data.cstatus,data.nowchancetype,data.chancetype);
         }else if (index == GetOrgFollow.STATUS_INDEX_MANAGER){
-            // 管理端
-            tvStatus.setText("");
-            tvFrom.setText("来源：".concat(data.comefrom));
-        }else {
-            // 机构反馈
-            if (TextUtils.equals(data.type,CLAIM_ORG_TYPE)){
-                tvFrom.setText("认领-待审批");
-            }else if (TextUtils.equals(data.type,ADD_ORG_TYPE)){
-                tvFrom.setText("登记-待审批");
-            }
-            tvStatus.setText(TimeUtils.informationTime(data.rbicreatetime));
-
-            tvFrom.setTextColor(getContext().getResources().getColor(R.color.color_006));
+            // 机会抢单
+            tvStatus.setText(TimeUtils.getDateWithString(data.createtime,"yyyy-MM-dd"));
+            CommonUtil.orgfFromType(getContext(),tvFrom,data.cstatus,data.nowchancetype,data.chancetype);
         }
+//        else {
+//            // 机构反馈
+//            if (TextUtils.equals(data.type,CLAIM_ORG_TYPE)){
+//                tvFrom.setText("认领-待审批");
+//            }else if (TextUtils.equals(data.type,ADD_ORG_TYPE)){
+//                tvFrom.setText("登记-待审批");
+//            }
+//            tvStatus.setText(TimeUtils.getDateWithString(data.createtime,"yyyy-MM-dd"));
+//
+//            tvFrom.setTextColor(getContext().getResources().getColor(R.color.color_006));
+//        }
         body.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

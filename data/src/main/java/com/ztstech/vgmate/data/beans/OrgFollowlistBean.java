@@ -79,5 +79,9 @@ public class OrgFollowlistBean extends BaseRespBean implements Serializable{
         public String identificationtype;
         public String type;
         public String testorg;
+        public String cstatus;
+        public String chancetype;
+        public String nowchancetype;
+        public String createtime;
     }
 }

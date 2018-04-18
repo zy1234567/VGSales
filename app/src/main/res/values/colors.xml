@@ -4,6 +4,7 @@
     <color name="colorAccent">#1aa1fb</color>
     <color name="colorPrimary">#fff</color>
     <color name="colorPrimaryDark">#ff000000</color>
+    <color name="dark_color_001">#2296d4</color>
 
     <color name="datePicker_colorAccent">#1aa1fb</color>
     <color name="datePicker_colorPrimary">#ff9700</color>

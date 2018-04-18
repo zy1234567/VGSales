@@ -276,15 +276,26 @@ public class DialogUtils {
         void onUploadposterClick();
         void onUploadprivaryClick();
     }
-    public static void showdialogknow(Context context,String content){
+
+    /**
+     * 我知道了
+     * @param context
+     * @param content
+     * @param title
+     * @param callBack
+     */
+    public static void showdialogknow(Context context, String content, String title, final showdialogCallBack callBack){
         final Dialog dialog = new Dialog(context,R.style.dark_transdialog);
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_me_know,null);
         TextView tvKnow = view.findViewById(R.id.tv_me_know);
         TextView tvContent = view.findViewById(R.id.tv_content);
+        TextView tvTitle = view.findViewById(R.id.tv_title);
         tvContent.setText(content);
+        tvTitle.setText(title);
         tvKnow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                callBack.knowclick();
                 dialog.dismiss();
             }
         });
@@ -296,5 +307,49 @@ public class DialogUtils {
         layoutParams.width= ViewUtils.dp2px(context,300);
         layoutParams.height= WindowManager.LayoutParams.WRAP_CONTENT;
         dialogWindow.setAttributes(layoutParams);
+    }
+    public interface showdialogCallBack{
+        void knowclick();
+    }
+    /**
+     * 带有标题下方有两个按钮的dialog
+     */
+    public static void showdialogbottomtwobutton(Context context,String tvright,String tvleft,String title, String content, final showdialogbottomtwobuttonCallBack callBack){
+        final Dialog dialog = new Dialog(context,R.style.dark_transdialog);
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_title_bottom_two,null);
+        final TextView tvLeft = view.findViewById(R.id.tv_left);
+        TextView tvContent = view.findViewById(R.id.tv_content);
+        TextView tvTitle = view.findViewById(R.id.tv_title);
+        TextView tvRight = view.findViewById(R.id.tv_right);
+        tvContent.setText(content);
+        tvTitle.setText(title);
+        tvLeft.setText(tvleft);
+        tvRight.setText(tvright);
+        tvLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callBack.tvLeftClick();
+                dialog.dismiss();
+            }
+        });
+        tvRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callBack.tvRightClick();
+                dialog.dismiss();
+            }
+        });
+        dialog.setContentView(view);
+        dialog.show();
+        Window dialogWindow = dialog.getWindow();
+        WindowManager.LayoutParams layoutParams = dialogWindow.getAttributes();
+        layoutParams.gravity = Gravity.CENTER;
+        layoutParams.width= ViewUtils.dp2px(context,300);
+        layoutParams.height= WindowManager.LayoutParams.WRAP_CONTENT;
+        dialogWindow.setAttributes(layoutParams);
+    }
+    public interface showdialogbottomtwobuttonCallBack{
+        void tvRightClick();
+        void tvLeftClick();
     }
 }

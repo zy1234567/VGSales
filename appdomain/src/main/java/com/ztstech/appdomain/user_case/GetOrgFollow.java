@@ -16,15 +16,15 @@ import io.reactivex.Observable;
 public class GetOrgFollow implements UserCase<Observable<OrgFollowlistBean>> {
 
     /**
-     * 已确认
+     * 我开拓的
      */
     public static final int STATUS_INDEX_CONCERN = 0;
     /**
-     * 已认领
+     * 商家介绍
      */
     public static final int STATUS_INDEX_CLAIM = 1;
     /**
-     * 管理端
+     * 机会抢单
      */
     public static final int STATUS_INDEX_MANAGER = 2;
 
@@ -43,11 +43,10 @@ public class GetOrgFollow implements UserCase<Observable<OrgFollowlistBean>> {
     /** 查询其他人的客户跟进列表要传uid 看自己的传null*/
     private String uid;
 
-    public GetOrgFollow(int status,int pageNo,String uid){
+    public GetOrgFollow(int status,int pageNo){
         api = RetrofitUtils.createService(OrgFollowApi.class);
         this.status = status;
         this.pageNo = pageNo;
-        this.uid = uid;
     }
 
     @Override
@@ -55,17 +54,17 @@ public class GetOrgFollow implements UserCase<Observable<OrgFollowlistBean>> {
         if (status == STATUS_INDEX_FEEDBACK){
             return api.queryFeedBackList(UserRepository.getInstance().getAuthId(),pageNo);
         }else {
-            return api.queryList(UserRepository.getInstance().getAuthId(), getStatusParam(), uid, pageNo);
+            return api.queryList(UserRepository.getInstance().getAuthId(), getFlag(), pageNo);
         }
     }
 
-    public String getStatusParam() {
+    public String getFlag() {
         if (status == STATUS_INDEX_CONCERN){
-            return "01";
+            return "00";
         }else if (status == STATUS_INDEX_CLAIM){
-            return "03";
+            return "01";
         }else {
-            return "04";
+            return "02";
         }
     }
 }

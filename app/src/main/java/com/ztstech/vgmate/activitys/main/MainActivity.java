@@ -75,7 +75,12 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
                         UserRepository.getInstance().getUser().getUserBean().info.status) ||
                         TextUtils.equals(Constants.USER_ID_WILL_CHECK,
                                 UserRepository.getInstance().getUser().getUserBean().info.status)) {
-                    DialogUtils.showdialogknow(MainActivity.this,"您的销售身份未通过审核，暂无权限使用此功能。");
+                    DialogUtils.showdialogknow(MainActivity.this, "您的销售身份未通过审核，暂无权限使用此功能。", "友情提示", new DialogUtils.showdialogCallBack() {
+                        @Override
+                        public void knowclick() {
+
+                        }
+                    });
                     return;
                 }
                 startActivity(new Intent(MainActivity.this, QRCodeScanActivity.class));
@@ -89,13 +94,23 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
                         UserRepository.getInstance().getUser().getUserBean().info.status)||
                         TextUtils.equals(Constants.USER_ID_WILL_CHECK,
                                 UserRepository.getInstance().getUser().getUserBean().info.status)) {
-                    DialogUtils.showdialogknow(MainActivity.this,"您的销售身份未通过审核，暂无权限使用此功能。");
+                    DialogUtils.showdialogknow(MainActivity.this, "您的销售身份未通过审核，暂无权限使用此功能。", "友情提示", new DialogUtils.showdialogCallBack() {
+                        @Override
+                        public void knowclick() {
+
+                        }
+                    });
                     return;
                 }
                 if (!UserRepository.getInstance().getUser().enableShare() &&
-                        TextUtils.equals(Constants.ADDTYPE_NO,
+                        TextUtils.isEmpty(
                                 UserRepository.getInstance().getUser().getUserBean().info.addtype)){
-                    DialogUtils.showdialogknow(MainActivity.this,"暂无权限");
+                    DialogUtils.showdialogknow(MainActivity.this, "暂无权限", "友情提示", new DialogUtils.showdialogCallBack() {
+                        @Override
+                        public void knowclick() {
+
+                        }
+                    });
                     return;
                 }
                 if (View.GONE == dialog.getVisibility()) {

@@ -20,13 +20,16 @@ import android.provider.Settings;
 import android.renderscript.Element;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.base.BaseApplicationLike;
 
@@ -734,5 +737,78 @@ public class CommonUtil {
         }
         return list;
     }
-
+    //判断机构来源类型
+    public static void orgfFromType(Context context,TextView textView,String cstatus,String nowchancetype,
+                                    String chancetype){
+        /**
+         * web登记
+         * cststus 15 && nowchancetype == null && chancetype （01 || 05 || 07 || 09）
+         */
+        if (TextUtils.equals(cstatus,Constants.CSTATUS_ALREADY_CLAIM) &&
+                TextUtils.isEmpty(nowchancetype) &&
+                (TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_ORG_REGISTER) ||
+                        TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_ORG_CHECK_IN) ||
+                        TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_PASSER_CHECK_IN) ||
+                        TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_SALE_CHECK_IN))){
+            textView.setText("web登记");
+            textView.setTextColor(context.getResources().getColor(R.color.color_102));
+            return;
+        }
+        /**
+         * web认领
+         * (cststus 15 && nowchancetype == null && chancetype(03)) ||
+         * (cststus 15 && nowchancetype != null && nowchancetype (03))
+         */
+        if ((TextUtils.equals(cstatus,Constants.CSTATUS_ALREADY_CLAIM) && TextUtils.isEmpty(nowchancetype)
+                && TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_ORG_CLAIM)) ||
+                (TextUtils.equals(cstatus,Constants.CSTATUS_ALREADY_CLAIM) &&
+                        !TextUtils.isEmpty(nowchancetype) && TextUtils.equals(nowchancetype,Constants.NOW_CHANCE_TYPE_WEB_CLAIM))){
+            textView.setText("web认领");
+            textView.setTextColor(context.getResources().getColor(R.color.color_102));
+            return;
+        }
+        /**
+         * app登记
+         * cststus 15 && nowchancetype == null && chancetype(02 || 06 || 08 || 10)
+         */
+        if (TextUtils.equals(cstatus,Constants.CSTATUS_ALREADY_CLAIM) &&
+                TextUtils.isEmpty(nowchancetype) && (TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_ORG_REGISTER)
+                || TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_ORG_CHECK_IN) ||
+                TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_PASSER_CHECK_IN))||
+                TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_SALE_CHECK_IN)){
+            textView.setText("app登记");
+            textView.setTextColor(context.getResources().getColor(R.color.color_102));
+            return;
+        }
+        /**
+         * app认领
+         * (cststus 15 && nowchancetype == null && chancetype(04)) ||
+         * (cststus 15 && nowchancetype != null && nowchancetype (04))
+         */
+        if ((TextUtils.equals(cstatus,Constants.CSTATUS_ALREADY_CLAIM) && TextUtils.isEmpty(nowchancetype)
+                && TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_ORG_CLAIM)) ||
+                (TextUtils.equals(cstatus,Constants.CSTATUS_ALREADY_CLAIM) &&
+                        !TextUtils.isEmpty(nowchancetype) &&
+                        TextUtils.equals(nowchancetype,Constants.NOW_CHANCE_TYPE_APP_CLAIM))){
+            textView.setText("app认领");
+            textView.setTextColor(context.getResources().getColor(R.color.color_102));
+            return;
+        }
+        /**
+         * cstatus 14 机构认领审核
+         */
+        if (TextUtils.equals(cstatus, Constants.CSTATUS_ORG_CLAIM_ING)) {
+            textView.setText("机构认领审核");
+            textView.setTextColor(context.getResources().getColor(R.color.color_006));
+            return;
+        }
+        /**
+         * cstatus 11 机构登记审核
+         */
+         if (TextUtils.equals(cstatus,Constants.CSTATUS_GRAY_UNVERIFIED)){
+            textView.setText("机构登记审核");
+            textView.setTextColor(context.getResources().getColor(R.color.color_006));
+            return;
+        }
+    }
 }

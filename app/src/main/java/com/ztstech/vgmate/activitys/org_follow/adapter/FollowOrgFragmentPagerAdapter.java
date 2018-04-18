@@ -22,7 +22,7 @@ public class FollowOrgFragmentPagerAdapter extends FragmentPagerAdapter {
 
     public FollowOrgFragmentPagerAdapter(FragmentManager fm,String uid) {
         super(fm);
-        TITLES = new String[] {"已确认", "已认领","管理端"};
+        TITLES = new String[] {"我开拓的", "商家认领","机会抢单"};
         this.uid = uid;
     }
 

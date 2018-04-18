@@ -180,7 +180,12 @@ public class MainFragment extends MVPFragment<MainContract.Presenter> implements
                     UserRepository.getInstance().getUser().getUserBean().info.status) ||
                     TextUtils.equals(Constants.USER_ID_WILL_CHECK,
                             UserRepository.getInstance().getUser().getUserBean().info.status)){
-                    DialogUtils.showdialogknow(getContext(),"您的销售身份未通过审核，暂无权限使用此功能。");
+                    DialogUtils.showdialogknow(getContext(), "您的销售身份未通过审核，暂无权限使用此功能。", "友情提示", new DialogUtils.showdialogCallBack() {
+                        @Override
+                        public void knowclick() {
+
+                        }
+                    });
                 }else{
                     Intent intent2 = new Intent(getContext(), OrgFollowActivity.class);
                     intent2.putExtra(OrgFollowActivity.KEY_UID,UserRepository.getInstance().getUser().getUserBean().info.uid);
