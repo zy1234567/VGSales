@@ -16,6 +16,7 @@
    </com.ztstech.vgmate.weigets.TopBar>
     <RelativeLayout
         android:id="@+id/rl_top"
+        android:layout_below="@+id/top_bar"
         android:layout_width="match_parent"
         android:background="@color/color_107"
         android:layout_height="25dp">
