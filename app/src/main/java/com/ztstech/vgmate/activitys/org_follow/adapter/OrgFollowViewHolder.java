@@ -80,9 +80,12 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
         tvPhone.setText(spannableStringBuilder);
 
         if (index == GetOrgFollow.STATUS_INDEX_CONCERN){
-            tvStatus.setText(TimeUtils.getDateWithString(data.createtime,"yyyy-MM-dd"));
+            System.out.println("时间   "+data.createtime);
+            if(!TextUtils.isEmpty(data.createtime)) {
+                tvStatus.setText(TimeUtils.getDateWithString(data.createtime, "yyyy-MM-dd"));
 //            tvFrom.setText("来源：".concat(data.comefrom));
-            CommonUtil.orgfFromType(getContext(),tvFrom,data.cstatus,data.nowchancetype,data.chancetype);
+                CommonUtil.orgfFromType(getContext(), tvFrom, data.cstatus, data.nowchancetype, data.chancetype);
+            }
         }else if (index == GetOrgFollow.STATUS_INDEX_CLAIM){
             tvStatus.setText(TimeUtils.getDateWithString(data.createtime,"yyyy-MM-dd"));
 //            tvFrom.setText("来源：".concat(data.comefrom));

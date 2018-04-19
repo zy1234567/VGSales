@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:background="@color/white"
@@ -14,16 +14,27 @@
         app:srcLeft="@mipmap/back_black"
         android:background="@color/color_109">
     </com.ztstech.vgmate.weigets.TopBar>
-    <include
-        android:id="@+id/layout_top"
-        layout="@layout/layout_grabel_a_single_center"/>
-    <include
-        android:id="@+id/layout_center"
-        layout="@layout/layout_grabel_a_single_buttom"
-        />
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <include
+            android:id="@+id/layout_top"
+            layout="@layout/layout_grabel_a_single_center"/>
+        <include
+            android:id="@+id/layout_center"
+            layout="@layout/layout_grabel_a_single_buttom"
+            />
+
+    </LinearLayout>
+    </ScrollView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_gravity="center"
+        android:layout_alignParentBottom="true"
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_height="55dp">
@@ -50,4 +61,4 @@
             android:layout_height="40dp" />
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
