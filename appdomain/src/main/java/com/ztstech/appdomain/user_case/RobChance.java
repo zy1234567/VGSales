@@ -1,5 +1,7 @@
 package com.ztstech.appdomain.user_case;
 
+import android.text.TextUtils;
+
 import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.appdomain.utils.RetrofitUtils;
 import com.ztstech.vgmate.data.api.RobChanceApi;
@@ -14,12 +16,18 @@ import io.reactivex.Observable;
 public class RobChance {
     private int pageNo;
     private RobChanceApi api;
-    public RobChance(int pageNo){
+    private String rbiid;
+    public RobChance(int pageNo,String rbiid){
         this.pageNo = pageNo;
+        this.rbiid = rbiid;
         api = RetrofitUtils.createService(RobChanceApi.class);
     }
 
     public Observable<RobChanceBean> run() {
-        return api.robChance(pageNo,UserRepository.getInstance().getAuthId());
+        if (!TextUtils.isEmpty(rbiid)) {
+            return api.lockOrg(rbiid,UserRepository.getInstance().getAuthId());
+        }else{
+            return api.robChance(pageNo, UserRepository.getInstance().getAuthId());
+        }
     }
 }

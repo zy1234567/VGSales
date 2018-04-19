@@ -13,6 +13,10 @@
         app:showBackNav="true"
         app:barTitle="可抢机会">
     </com.ztstech.vgmate.weigets.TopBar>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_107"/>
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/srl"
         android:layout_width="match_parent"

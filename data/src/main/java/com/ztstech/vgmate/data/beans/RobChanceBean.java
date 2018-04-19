@@ -69,6 +69,7 @@ public class RobChanceBean extends BaseRespBean implements Serializable {
         public String rbilogo;
         public String contractname;
         public String nowchancetype;
+        public String locksaleuid;
         public String locktype; //是否锁定，00：未锁定，01：已锁定
     }
 

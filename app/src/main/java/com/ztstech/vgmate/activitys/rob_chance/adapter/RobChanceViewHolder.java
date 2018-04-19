@@ -7,7 +7,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.ztstech.appdomain.constants.Constants;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.base.SimpleRecyclerAdapter;
 import com.ztstech.vgmate.base.SimpleViewHolder;
@@ -44,10 +46,12 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
     TextView tvLinkman;
     @BindView(R.id.tv_service)
     TextView tvService;
-    private static final int PASSER_CHECK_IN = 11;
-    private static final int ORG_CHECK_IN_OR_CALIM = 12;
-    public RobChanceViewHolder(View itemView) {
+    public static final int PASSER_CHECK_IN = 11;
+    public static final int ORG_CHECK_IN_OR_CALIM = 12;
+    private lockorgCallBack callBack;
+    public RobChanceViewHolder(View itemView,lockorgCallBack callBack) {
         super(itemView);
+        this.callBack = callBack;
     }
 
     @Override
@@ -67,18 +71,44 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
             tvLinkman.setText("联系人：暂无");
         }
         tvService.setText("客服：".concat(data.marketname));
-        if (TextUtils.equals(data.locktype, Constants.LOCK_YES)) {
+        if (TextUtils.equals(data.locktype, Constants.LOCK_YES) &&
+                !TextUtils.equals(UserRepository.getInstance().getUser().getUserBean().info.uid,data.locksaleuid)) {
             tvRobType.setText("锁定中");
             tvRobType.setBackgroundResource(R.drawable.bg_c_1_f_002);
-        }else {
+        }else if (TextUtils.equals(data.locktype, Constants.LOCK_YES) &&
+                TextUtils.equals(UserRepository.getInstance().getUser().getUserBean().info.uid,data.locksaleuid)){
+            tvRobType.setText("处理中");
+            tvRobType.setBackgroundResource(R.drawable.bg_c_1_f_009);
+        } else {
             tvRobType.setText("抢单");
             tvRobType.setBackgroundResource(R.drawable.bg_c_1_f_006);
         }
         tvRobType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (identity(data.cstatus,data.nowchancetype,data.chancetype) == PASSER_CHECK_IN){
-//                    DialogUtils.showdialogbottomtwobutton(this,"抢单","取消",)
+                if (TextUtils.equals(data.locktype, Constants.LOCK_YES)){
+                    DialogUtils.showdialogknow(getContext(), "该机会正在其他销售的抢单锁定中，请稍后再试。",
+                            "提示", new DialogUtils.showdialogCallBack() {
+                                @Override
+                                public void knowclick() {
+
+                                }
+                            });
+                }else{
+                    DialogUtils.showdialogbottomtwobutton(getContext(), "抢单", "取消", "提示",
+                            "请在30分钟内完成与机构的沟通、填写沟通记录、完成审核流程等操作。", new DialogUtils.showdialogbottomtwobuttonCallBack() {
+                                @Override
+                                public void tvRightClick() {
+                                    if (identity(data.cstatus,data.nowchancetype,data.chancetype) == PASSER_CHECK_IN ) {
+                                        callBack.lockOrgClick(String.valueOf(data.rbiid), new Gson().toJson(data), tvRobType,PASSER_CHECK_IN);
+                                    }
+                                }
+
+                                @Override
+                                public void tvLeftClick() {
+
+                                }
+                            });
                 }
             }
         });
@@ -101,5 +131,8 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
             return ORG_CHECK_IN_OR_CALIM;
         }
         return PASSER_CHECK_IN;
+    }
+    public interface lockorgCallBack{
+        void lockOrgClick(String rbiid,Object object,TextView textView,int i);
     }
 }

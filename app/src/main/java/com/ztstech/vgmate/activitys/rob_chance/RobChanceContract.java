@@ -1,5 +1,7 @@
 package com.ztstech.vgmate.activitys.rob_chance;
 
+import android.widget.TextView;
+
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.BaseView;
 import com.ztstech.vgmate.activitys.communicate_record.com_list.ComListContact;
@@ -17,7 +19,7 @@ public class RobChanceContract {
         void setData(List<RobChanceBean.ListBean> listData);
         void setDataPage(RobChanceBean.PagerBean pagerBean);
         void showError(String errorMessage);
-
+        void onSubmitFinish(String errorMessage, TextView textView,Object object,int i);
 //        void setListData(List<GetComRecordBean.ListBean> listData);
     }
 
@@ -27,5 +29,10 @@ public class RobChanceContract {
 
         void appendData();
 
+        /**
+         * 锁定抢单
+         * @param rbiid
+         */
+        void lockOrg(String rbiid,TextView textView,Object object,int i);
     }
 }

@@ -11,7 +11,7 @@
         android:background="@color/color_107"
         android:layout_height="25dp">
         <TextView
-            android:id="@+id/tv_come"
+            android:id="@+id/tv_add_type"
             android:layout_marginLeft="12dp"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
@@ -58,7 +58,7 @@
             android:textSize="@dimen/text_6"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/tv_class_type"
+            android:id="@+id/tv_otype"
             android:layout_toRightOf="@+id/tv_class_types"
             android:text="芭蕾舞/民族舞/爵士舞/瑜伽/普拉提/吉他/尤克里里/升学"
             android:layout_width="wrap_content"

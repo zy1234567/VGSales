@@ -11,7 +11,24 @@ import retrofit2.http.Query;
  */
 
 public interface RobChanceApi {
+    /**
+     * 可抢机会列表
+     * @param pageNo
+     * @param authId
+     * @return
+     */
     @POST("exempt/AppSaleListEnableChanceOrg")
     Observable<RobChanceBean> robChance(@Query("pageNo") int pageNo,
                                         @Query("authId") String authId);
+
+    /**
+     * 锁定抢单
+     * @param rbiid
+     * @param authId
+     * @return
+     */
+    @POST("exempt/AppSaleLockOrgByRbiid")
+    Observable<RobChanceBean> lockOrg(@Query("rbiid") String rbiid,
+                                      @Query("authId") String authId);
+
 }
