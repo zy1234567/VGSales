@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="340dp"
     android:layout_height="318dp"
@@ -8,10 +8,10 @@
         <ImageView
             android:id="@+id/img_close"
             android:layout_width="wrap_content"
-            android:src="@mipmap/ico_close"
+            android:src="@mipmap/close_tanchuang"
             android:layout_marginTop="6dp"
             android:layout_marginRight="14dp"
-            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/tv_title"
@@ -35,124 +35,99 @@
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:layout_marginTop="15dp"/>
-        <RelativeLayout
-            android:id="@+id/rl_reason"
-            android:layout_below="@+id/tv_reasons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:layout_marginTop="10dp">
-            <LinearLayout
-                android:id="@+id/ll_repeat_org"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/img_repeat_org"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/check_none"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="重复机构"
-                    android:textSize="@dimen/text_5"
-                    android:textColor="@color/color_100"
-                    android:layout_marginLeft="6dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/ll_pause_open"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/ll_repeat_org"
-                android:layout_marginLeft="60dp">
-                <ImageView
-                    android:id="@+id/img_pause_open"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/check_none"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="已关闭/暂停营业"
-                    android:textSize="@dimen/text_5"
-                    android:textColor="@color/color_100"
-                    android:layout_marginLeft="6dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/ll_yet_open"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_below="@+id/ll_repeat_org">
-                <ImageView
-                    android:id="@+id/img_yet_open"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/check_none"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="尚未营业"
-                    android:textSize="@dimen/text_5"
-                    android:textColor="@color/color_100"
-                    android:layout_marginLeft="6dp"/>
-            </LinearLayout>
+    <LinearLayout
+        android:id="@+id/radio_group1"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/rb1"
+            android:layout_width="wrap_content"
+            android:button="@null"
+            android:text="重复机构"
+            android:drawablePadding="6dp"
+            android:drawableLeft="@drawable/sel_check"
+            android:textSize="@dimen/text_5"
+            android:textColor="@color/color_100"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/rb2"
+            android:layout_width="wrap_content"
+            android:button="@null"
+            android:text="已关闭/暂停营业"
+            android:drawablePadding="6dp"
+            android:drawableLeft="@drawable/sel_check"
+            android:layout_marginLeft="60dp"
+            android:textSize="@dimen/text_5"
+            android:textColor="@color/color_100"
+            android:layout_height="wrap_content" />
 
-            <LinearLayout
-                android:id="@+id/ll_org_none"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/ll_yet_open"
-                android:layout_marginLeft="60dp"
-                android:layout_marginTop="15dp"
-                android:layout_below="@+id/ll_repeat_org">
-                <ImageView
-                    android:id="@+id/img_org_none"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/check_none"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="机构不存在"
-                    android:textSize="@dimen/text_5"
-                    android:textColor="@color/color_100"
-                    android:layout_marginLeft="6dp"/>
-            </LinearLayout>
-        </RelativeLayout>
-        <LinearLayout
-            android:id="@+id/tv_other_reason"
-            android:layout_below="@+id/rl_reason"
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/radio_group2"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:layout_below="@+id/radio_group1"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/rb3"
+            android:layout_width="wrap_content"
+            android:button="@null"
+            android:text="尚未营业"
+            android:drawablePadding="6dp"
+            android:drawableLeft="@drawable/sel_check"
+            android:textSize="@dimen/text_5"
+            android:textColor="@color/color_100"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/rb4"
+            android:layout_width="wrap_content"
+            android:button="@null"
+            android:text="机构不存在"
+            android:drawablePadding="6dp"
+            android:drawableLeft="@drawable/sel_check"
+            android:layout_marginLeft="60dp"
+            android:textSize="@dimen/text_5"
+            android:textColor="@color/color_100"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/tv_other_reason"
+        android:layout_below="@+id/rl_reason"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/color_107"
+        android:layout_marginLeft="25dp"
+        android:orientation="vertical"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp">
+        <EditText
+            android:id="@+id/et_else_reason"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@color/color_107"
-            android:layout_marginLeft="25dp"
-            android:orientation="vertical"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="15dp">
-            <EditText
-                android:id="@+id/et_else_reason"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@null"
-                android:hint="其他补充原因..."
-                android:layout_marginTop="15dp"
-                android:textSize="@dimen/text_5"
-                android:gravity="start"
-                android:padding="8dp"/>
-            <TextView
-                android:id="@+id/tv_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:textColor="@color/color_103"
-                android:textSize="@dimen/text_8"
-                android:layout_marginRight="4dp"
-                android:layout_marginBottom="4dp"
-                android:text="0/100"/>
-        </LinearLayout>
+            android:layout_height="60dp"
+            android:layout_gravity="top|left"
+            android:background="@null"
+            android:hint="其他补充原因..."
+            android:textSize="@dimen/text_5"
+            android:gravity="top|left"
+            android:padding="8dp"/>
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:textColor="@color/color_103"
+            android:textSize="@dimen/text_8"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="0/100"/>
+    </LinearLayout>
         <TextView
             android:id="@+id/tv_commit"
             android:layout_marginTop="15dp"
@@ -168,4 +143,4 @@
             android:gravity="center"
             />
 
-</RelativeLayout>
+</LinearLayout>
