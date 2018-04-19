@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_109"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.ztstech.vgmate.weigets.TopBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:barTitle="上传合作协议"
+        app:showBackNav="true"/>
+    <TextView
+        android:id="@+id/tv_hint"
+        android:gravity="center_vertical"
+        android:paddingLeft="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:text="上传合作协议，结成合作伙伴"
+        android:background="#EFF0F1" />
+    <ImageView
+        android:id="@+id/img_upload_photo"
+        android:layout_width="345dp"
+        android:layout_height="345dp"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:src="@mipmap/upload_big"/>
+</LinearLayout>

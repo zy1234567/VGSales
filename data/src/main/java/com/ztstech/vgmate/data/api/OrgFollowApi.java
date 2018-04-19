@@ -16,16 +16,27 @@ import io.reactivex.Observable;
 
 public interface OrgFollowApi {
 
+//    /**
+//     * 查询客户跟进列表
+//     * @param status 00默认没有筛选 01以确认，02有待认领，03以认领，04管理端
+//     * @return
+//     */
+//    @GET("exempt/AppSaleQueryMyResponsibilityOrg")
+//    Observable<OrgFollowlistBean> queryList(@Query("authId") String authId, @Query("status") String status,
+//                                            @Query("uid") String uid,
+//                                            @Query("pageNo") int currentPage);
+
     /**
-     * 查询客户跟进列表
-     * @param status 00默认没有筛选 01以确认，02有待认领，03以认领，04管理端
+     * 查询 客户跟进列表
+     * @param authId
+     * @param flag 00我开拓的 01商家介绍 02机会抢单
+     * @param currentPage
      * @return
      */
-    @GET("exempt/AppSaleQueryMyResponsibilityOrg")
-    Observable<OrgFollowlistBean> queryList(@Query("authId") String authId, @Query("status") String status,
-                                            @Query("uid") String uid,
+    @GET("exempt/AppSaleListEnterOrgBySaleuid")
+    Observable<OrgFollowlistBean> queryList(@Query("authId") String authId,
+                                            @Query("flag") String flag,
                                             @Query("pageNo") int currentPage);
-
     /**
      * 查询客户跟进三个状态的数量
      * @param authId

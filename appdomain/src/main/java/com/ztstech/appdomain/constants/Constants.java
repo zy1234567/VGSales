@@ -103,4 +103,33 @@ public interface Constants {
     //是否可以添加销售 01 可以 00 不可以
     String ADDTYPE_YES = "01";
     String ADDTYPE_NO = "00";
+
+    //机构可抢机会 是否锁定 00：未锁定，01：已锁定
+    String LOCK_YES = "01";
+    String LOCK_NO = "00";
+
+    // cstatus：机会状态,11:灰点未认证,14:机构认领中,15:已认领
+    String CSTATUS_GRAY_UNVERIFIED = "11";
+    String CSTATUS_ORG_CLAIM_ING = "14";
+    String CSTATUS_ALREADY_CLAIM = "15";
+
+    //nowchancetype：当前机会类型，03：web机构认领，04：app机构认领
+    String NOW_CHANCE_TYPE_WEB_CLAIM = "03";
+    String NOW_CHANCE_TYPE_APP_CLAIM = "04";
+
+    /**
+     * chancetype：机会来源,01:web机构注册,02:app机构注册,03:web机构认领,04:app机构认领,05:web机构登记,
+     * 06:app机构登记,07:web路人登记,08:app路人登记,09:web销售登记,10:app销售登记,11:app地图注册
+     */
+    String CHANCE_TYPE_WEB_ORG_REGISTER = "01";
+    String CHANCE_TYPE_APP_ORG_REGISTER = "02";
+    String CHANCE_TYPE_WEB_ORG_CLAIM = "03";
+    String CHANCE_TYPE_APP_ORG_CLAIM = "04";
+    String CHANCE_TYPE_WEB_ORG_CHECK_IN = "05";
+    String CHANCE_TYPE_APP_ORG_CHECK_IN = "06";
+    String CHANCE_TYPE_WEB_PASSER_CHECK_IN = "07";
+    String CHANCE_TYPE_APP_PASSER_CHECK_IN = "08";
+    String CHANCE_TYPE_WEB_SALE_CHECK_IN = "09";
+    String CHANCE_TYPE_APP_SALE_CHECK_IN = "10";
+    String CHANCE_TYPE_APP_MAP_REGISTER = "11";
 }

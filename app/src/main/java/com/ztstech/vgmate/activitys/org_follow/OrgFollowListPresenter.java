@@ -91,7 +91,7 @@ public class OrgFollowListPresenter extends PresenterImpl<OrgFollowListContact.V
                 }
 
             }
-        }.run(new GetOrgFollow(status, page,uid).run());
+        }.run(new GetOrgFollow(status, page).run());
     }
 
 }
