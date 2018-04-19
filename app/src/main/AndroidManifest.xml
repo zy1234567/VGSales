@@ -210,6 +210,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activitys.rob_chance.RobChanceActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activitys.rob_chance.rob_ing.RobIngActivty"
+            android:screenOrientation="portrait"/>
         <activity android:name=".matisse.ui.MatisseActivity"/>
         <activity android:name=".matisse.internal.ui.AlbumPreviewActivity"/>
         <activity android:name=".matisse.internal.ui.SelectedPreviewActivity"/>

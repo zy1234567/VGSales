@@ -17,6 +17,7 @@ import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.communicate_record.com_list.adapter.CommunicateListAdapter;
 import com.ztstech.vgmate.activitys.rob_chance.adapter.RobChanceAdapter;
 import com.ztstech.vgmate.activitys.rob_chance.adapter.RobChanceViewHolder;
+import com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
 import com.ztstech.vgmate.weigets.TopBar;
 
@@ -114,7 +115,8 @@ public class RobChanceActivity extends MVPActivity<RobChanceContract.Presenter> 
         textView.setBackgroundResource(R.drawable.bg_c_1_f_009);
         Intent intent;
         if (i == PASSER_CHECK_IN){
-//            intent = new Intent(this,)
+            intent = new Intent(this, RobIngActivty.class);
+//            intent.putExtra()
         }
     }
 

@@ -39,6 +39,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -810,5 +811,31 @@ public class CommonUtil {
             textView.setTextColor(context.getResources().getColor(R.color.color_006));
             return;
         }
+    }
+    //将小数转换为度分秒
+    public static String convertToSexagesimal(double num){
+
+        int du=(int)Math.floor(Math.abs(num));    //获取整数部分
+        double temp=getdPoint(Math.abs(num))*60;
+        int fen=(int)Math.floor(temp); //获取整数部分
+        int miao=(int)(getdPoint(temp)*60);
+        if(num<0) {
+            return "-" + du + "°" + fen + "′" + miao + "″";
+        }
+        if (miao == 0){
+            return du+"°"+fen+"′";
+        }
+
+        return du+"°"+fen+"′"+miao+"″";
+
+    }
+    //获取小数部分
+    public static double getdPoint(double num){
+        double d = num;
+        int fInt = (int) d;
+        BigDecimal b1 = new BigDecimal(Double.toString(d));
+        BigDecimal b2 = new BigDecimal(Integer.toString(fInt));
+        double dPoint = b1.subtract(b2).floatValue();
+        return dPoint;
     }
 }
