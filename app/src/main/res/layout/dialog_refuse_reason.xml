@@ -10,7 +10,7 @@
             android:layout_width="wrap_content"
             android:src="@mipmap/close_tanchuang"
             android:layout_marginTop="6dp"
-            android:layout_marginRight="14dp"
+            android:layout_marginRight="6dp"
             android:layout_gravity="right"
             android:layout_height="wrap_content" />
         <TextView
