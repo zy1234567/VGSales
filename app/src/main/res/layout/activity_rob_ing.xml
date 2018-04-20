@@ -27,7 +27,6 @@
                 android:id="@+id/layout_top"
                 layout="@layout/layout_grabel_a_single_center"/>
             <include
-                android:id="@+id/layout_center"
                 layout="@layout/layout_grabel_a_single_buttom"
                 />
 

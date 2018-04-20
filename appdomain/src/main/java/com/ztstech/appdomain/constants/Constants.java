@@ -132,4 +132,10 @@ public interface Constants {
     String CHANCE_TYPE_WEB_SALE_CHECK_IN = "09";
     String CHANCE_TYPE_APP_SALE_CHECK_IN = "10";
     String CHANCE_TYPE_APP_MAP_REGISTER = "11";
+
+    /**
+     * 担任职位，05机构一般管理人员，09机构法人/老板/店长
+     */
+    String ORG_ADMIN = "05";
+    String ORG_BOSS = "09";
 }

@@ -71,6 +71,9 @@ public class RobChanceBean extends BaseRespBean implements Serializable {
         public String nowchancetype;
         public String locksaleuid;
         public String locktype; //是否锁定，00：未锁定，01：已锁定
+        public String rbicontphone;//咨询电话
+        public int orgcount;
+        public String createrid;     //担任职位，05机构一般管理人员，09机构法人/老板/店长
     }
 
 }

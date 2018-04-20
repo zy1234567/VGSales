@@ -1,25 +1,39 @@
 package com.ztstech.vgmate.activitys.rob_chance.rob_ing;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.base.BaseActivity;
+import com.ztstech.vgmate.data.beans.RobChanceBean;
+import com.ztstech.vgmate.utils.CategoryUtil;
+import com.ztstech.vgmate.utils.CommonUtil;
+import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.ztstech.vgmate.activitys.rob_chance.adapter.RobChanceViewHolder.ORG_CHECK_IN_OR_CALIM;
+import static com.ztstech.vgmate.activitys.rob_chance.adapter.RobChanceViewHolder.PASSER_CHECK_IN;
+
 /**
  * Created by dongdong on 2018/4/19.
  */
 
 public class RobIngActivty extends BaseActivity {
+    //传入得实体类key
+    public static final String ORG_BEAN_ROB = "ORG_BEAN_ROB";
+    //传入得身份key
+    public static final String ORG_IDENTITY = "ORG_IDENTITY_KEY";
     @BindView(R.id.top_bar)
     TopBar topBar;
     @BindView(R.id.tv_add_type)
@@ -76,6 +90,14 @@ public class RobIngActivty extends BaseActivity {
     TextView tvPass;
     @BindView(R.id.ll_buttom)
     LinearLayout llButtom;
+    @BindView(R.id.ll_layout_center)
+    LinearLayout llLayoutCenter;
+
+    RobChanceBean.ListBean bean;
+    //传入得身份 路人/机构
+    int identityFlg;
+
+
 
     @Override
     protected int getLayoutRes() {
@@ -85,6 +107,41 @@ public class RobIngActivty extends BaseActivity {
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
+        initData();
+        initView();
+    }
+
+    private void initView() {
+        CommonUtil.orgfFromType(this, tvAddType, bean.cstatus, bean.nowchancetype, bean.chancetype);
+        tvOtype.setText(CategoryUtil.findCategoryByOtype(bean.rbiotype));
+        tvOrgName.setText(bean.rbioname);
+        tvLocation.setText(LocationUtils.getPName(bean.rbiprovince)
+                .concat(LocationUtils.getCName(bean.rbicity)).concat(LocationUtils.getAName(bean.rbidistrict)));
+        tvDetialLocation.setText(bean.rbiaddress);
+        tvPhone.setText(bean.rbicontphone);
+        tvName.setText(bean.contractname);
+        tvTel.setText(bean.contractphone);
+        if (bean.orgcount >= 0) {
+            tvOrgCount.setText("(名下机构数：".concat(String.valueOf(bean.orgcount)).concat(")"));
+        }
+        if (!TextUtils.isEmpty(bean.createrid)) {
+            if (TextUtils.equals(bean.createrid, Constants.ORG_ADMIN)) {
+                tvPostions.setText("机构一般管理人员");
+            } else if (TextUtils.equals(bean.createrid, Constants.ORG_BOSS)) {
+                tvPostions.setText("机构法人/老板/店长");
+            }
+
+        }
+        if (identityFlg == PASSER_CHECK_IN) {
+            llLayoutCenter.setVisibility(View.GONE);
+        } else if (identityFlg == ORG_CHECK_IN_OR_CALIM) {
+            llLayoutCenter.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void initData() {
+        bean = new Gson().fromJson(getIntent().getStringExtra(ORG_BEAN_ROB), RobChanceBean.ListBean.class);
+        identityFlg = getIntent().getIntExtra(ORG_IDENTITY, 0);
     }
 
     @OnClick({R.id.rl_ico_gps, R.id.tv_refuse, R.id.tv_pass})
@@ -96,6 +153,9 @@ public class RobIngActivty extends BaseActivity {
                 break;
             case R.id.tv_pass:
                 break;
+            default:
+                break;
         }
     }
+
 }

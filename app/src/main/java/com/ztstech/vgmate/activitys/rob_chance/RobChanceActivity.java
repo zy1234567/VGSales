@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -19,6 +20,7 @@ import com.ztstech.vgmate.activitys.rob_chance.adapter.RobChanceAdapter;
 import com.ztstech.vgmate.activitys.rob_chance.adapter.RobChanceViewHolder;
 import com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
+import com.ztstech.vgmate.utils.HUDUtils;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import java.util.List;
@@ -26,7 +28,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.ztstech.vgmate.activitys.rob_chance.adapter.RobChanceViewHolder.ORG_CHECK_IN_OR_CALIM;
 import static com.ztstech.vgmate.activitys.rob_chance.adapter.RobChanceViewHolder.PASSER_CHECK_IN;
+import static com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty.ORG_BEAN_ROB;
+import static com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty.ORG_IDENTITY;
 
 /**
  * Created by dongdong on 2018/4/18.
@@ -40,12 +45,15 @@ public class RobChanceActivity extends MVPActivity<RobChanceContract.Presenter> 
     @BindView(R.id.srl)
     SmartRefreshLayout srl;
     private RobChanceAdapter adapter;
+    private KProgressHUD kProgressHUD;
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
+//        hud.create(this,"请求抢单中");
+        kProgressHUD =HUDUtils.create(this);
         adapter = new RobChanceAdapter(new RobChanceViewHolder.lockorgCallBack() {
             @Override
-            public void lockOrgClick(String rbiid, Object object, TextView textView,int i) {
+            public void lockOrgClick(String rbiid, String object, TextView textView,int i) {
                 mPresenter.lockOrg(rbiid,textView,object,i);
             }
         });
@@ -110,14 +118,19 @@ public class RobChanceActivity extends MVPActivity<RobChanceContract.Presenter> 
     }
 
     @Override
-    public void onSubmitFinish(String errorMessage, TextView textView, Object object,int i) {
+    public void onSubmitFinish(String errorMessage, TextView textView, String object,int i) {
+        kProgressHUD.show();
         textView.setText("处理中");
         textView.setBackgroundResource(R.drawable.bg_c_1_f_009);
-        Intent intent;
+        Intent intent  = new Intent(this, RobIngActivty.class);
+        intent.putExtra(ORG_BEAN_ROB,object);
         if (i == PASSER_CHECK_IN){
-            intent = new Intent(this, RobIngActivty.class);
-//            intent.putExtra()
+            intent.getIntExtra(ORG_IDENTITY,PASSER_CHECK_IN);
+        }else{
+            intent.getIntExtra(ORG_IDENTITY,ORG_CHECK_IN_OR_CALIM);
         }
+        startActivity(intent);
+        kProgressHUD.dismiss();
     }
 
 

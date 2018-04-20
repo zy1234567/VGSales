@@ -39,7 +39,7 @@ public class RobChancePresenter extends PresenterImpl<RobChanceContract.View> im
      * @param rbiid
      */
     @Override
-    public void lockOrg(String rbiid, final TextView textView, final Object object, final int i) {
+    public void lockOrg(String rbiid, final TextView textView, final String object, final int i) {
         new BasePresenterSubscriber<RobChanceBean>(mView,false){
 
             @Override
