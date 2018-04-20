@@ -11,16 +11,15 @@ import io.reactivex.Observable;
  * Created by Administrator on 2018/4/20.
  */
 
-public class AddVcertification implements UserCase<BaseRespBean> {
+public class AddVcertification implements  UserCase<Observable<BaseRespBean>> {
     private AddVData addVData;
     private AddVCertificationApi addVCertificationApi;
-    public  AddVCertificationApi(AddVData addVData){
+    public  AddVcertification(AddVData addVData){
         this.addVData=addVData;
-    this.addVCertificationApi= RetrofitUtils.createService(AddVCertificationApi.class);
+        this.addVCertificationApi= RetrofitUtils.createService(AddVCertificationApi.class);
     }
-
-    @Override
-    public Observable<BaseRespBean> run() { {
-        return null;
+   @Override
+    public Observable<BaseRespBean> run() {
+        return addVCertificationApi.AddVCertification();
     }
 }

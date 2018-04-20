@@ -21,7 +21,6 @@ import com.ztstech.vgmate.weigets.TopBar;
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

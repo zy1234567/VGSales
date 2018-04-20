@@ -18,11 +18,14 @@ import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.DialogUtils;
+import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.TimeUtils;
 
 import org.w3c.dom.Text;
 
 import butterknife.BindView;
+
+import static com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty.ORG_BEAN_ROB;
 
 /**
  * Created by dongdong on 2018/4/18.
@@ -66,7 +69,7 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
                 .into(imgOrg);
         tvTime.setText(TimeUtils.informationTime(data.createtime));
         tvName.setText(data.rbioname);
-        tvAddress.setText("地区：".concat(data.rbiaddress));
+        tvAddress.setText("地区：".concat(LocationUtils.getPName(data.rbiprovince).concat(LocationUtils.getCName(data.rbicity))).concat(LocationUtils.getAName(data.rbidistrict)));
         if (!TextUtils.isEmpty(data.contractname) && !TextUtils.isEmpty(data.contractphone)) {
             tvLinkman.setText("联系人：".concat(data.contractname).concat(data.contractphone));
         }else{
@@ -96,16 +99,19 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
 
                                 }
                             });
-                }else{
+                }else if (TextUtils.equals(data.locktype, Constants.LOCK_YES) &&
+                        TextUtils.equals(UserRepository.getInstance().getUser().getUserBean().info.uid,data.locksaleuid)){
+
+                } else{
                     DialogUtils.showdialogbottomtwobutton(getContext(), "抢单", "取消", "提示",
                             "请在30分钟内完成与机构的沟通、填写沟通记录、完成审核流程等操作。", new DialogUtils.showdialogbottomtwobuttonCallBack() {
                                 @Override
                                 public void tvRightClick() {
-//                                    if (identity(data.cstatus,data.nowchancetype,data.chancetype) == PASSER_CHECK_IN ) {
-//                                        callBack.lockOrgClick(String.valueOf(data.rbiid), new Gson().toJson(data), tvRobType,PASSER_CHECK_IN);
-//                                    }
-                                    Intent intent=new Intent(getContext(), RobIngActivty.class);
-                                    getContext().startActivity(intent);
+                                    if (identity(data.cstatus,data.nowchancetype,data.chancetype) == PASSER_CHECK_IN ) {
+                                        callBack.lockOrgClick(String.valueOf(data.rbiid), new Gson().toJson(data), tvRobType,PASSER_CHECK_IN);
+                                    }else{
+                                        callBack.lockOrgClick(String.valueOf(data.rbiid), new Gson().toJson(data), tvRobType,ORG_CHECK_IN_OR_CALIM);
+                                    }
                                 }
 
                                 @Override
@@ -113,7 +119,6 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
 
                                 }
                             });
-
                 }
             }
         });
@@ -135,9 +140,9 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
         TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_MAP_REGISTER))){
             return ORG_CHECK_IN_OR_CALIM;
         }
-        return PASSER_CHECK_IN;
+        return 0;
     }
     public interface lockorgCallBack{
-        void lockOrgClick(String rbiid,Object object,TextView textView,int i);
+        void lockOrgClick(String rbiid, String object, TextView textView, int i);
     }
 }
