@@ -19,7 +19,7 @@ public class RobChanceContract {
         void setData(List<RobChanceBean.ListBean> listData);
         void setDataPage(RobChanceBean.PagerBean pagerBean);
         void showError(String errorMessage);
-        void onSubmitFinish(String errorMessage, TextView textView,String object,int i);
+        void onSubmitFinish(String errorMessage, TextView textView,String object,int i,String j);
 //        void setListData(List<GetComRecordBean.ListBean> listData);
     }
 
@@ -33,6 +33,6 @@ public class RobChanceContract {
          * 锁定抢单
          * @param rbiid
          */
-        void lockOrg(String rbiid,TextView textView,String object,int i);
+        void lockOrg(String rbiid,TextView textView,String object,int i,String j);
     }
 }

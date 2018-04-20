@@ -164,6 +164,10 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activitys.org_follow.claim_org.ClaimOrgDetailActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activitys.rob_chance.RobChanceActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activitys.rob_chance.rob_ing.RobIngActivty"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"

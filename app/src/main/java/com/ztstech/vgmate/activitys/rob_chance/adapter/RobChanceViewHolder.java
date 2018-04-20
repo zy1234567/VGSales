@@ -101,16 +101,16 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
                             });
                 }else if (TextUtils.equals(data.locktype, Constants.LOCK_YES) &&
                         TextUtils.equals(UserRepository.getInstance().getUser().getUserBean().info.uid,data.locksaleuid)){
-
+                    callBack.lockOrgClick(String.valueOf(data.rbiid), new Gson().toJson(data), tvRobType,PASSER_CHECK_IN,"lock");
                 } else{
                     DialogUtils.showdialogbottomtwobutton(getContext(), "抢单", "取消", "提示",
                             "请在30分钟内完成与机构的沟通、填写沟通记录、完成审核流程等操作。", new DialogUtils.showdialogbottomtwobuttonCallBack() {
                                 @Override
                                 public void tvRightClick() {
                                     if (identity(data.cstatus,data.nowchancetype,data.chancetype) == PASSER_CHECK_IN ) {
-                                        callBack.lockOrgClick(String.valueOf(data.rbiid), new Gson().toJson(data), tvRobType,PASSER_CHECK_IN);
+                                        callBack.lockOrgClick(String.valueOf(data.rbiid), new Gson().toJson(data), tvRobType,PASSER_CHECK_IN,null);
                                     }else{
-                                        callBack.lockOrgClick(String.valueOf(data.rbiid), new Gson().toJson(data), tvRobType,ORG_CHECK_IN_OR_CALIM);
+                                        callBack.lockOrgClick(String.valueOf(data.rbiid), new Gson().toJson(data), tvRobType,ORG_CHECK_IN_OR_CALIM,null);
                                     }
                                 }
 
@@ -146,6 +146,6 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
         return 0;
     }
     public interface lockorgCallBack{
-        void lockOrgClick(String rbiid, String object, TextView textView, int i);
+        void lockOrgClick(String rbiid, String object, TextView textView, int i,String j);
     }
 }

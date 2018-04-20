@@ -843,7 +843,7 @@ public class CommonUtil {
     }
     //判断是路人登记还是机构登记认领的
     private int identity(String cstatus,String nowchancetype, String chancetype){
-        //返回路人
+        //路人登记
         if (TextUtils.equals(cstatus,Constants.CSTATUS_GRAY_UNVERIFIED) &&
                 (TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_PASSER_CHECK_IN) ||
                         TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_PASSER_CHECK_IN)) &&
@@ -868,5 +868,17 @@ public class CommonUtil {
             return ORG_CALIM;
         }
         return 0;
+    }
+    /**
+     * 将毫秒转化成分秒
+     */
+    private String secondToMinute(double second){
+        double ss = second/1000;
+        int m = (int) (second / 60);
+        int s = (int) (second % 60);
+        if (s < 10){
+            return m + "：0" + s;
+        }
+        return m + "：" + s;
     }
 }

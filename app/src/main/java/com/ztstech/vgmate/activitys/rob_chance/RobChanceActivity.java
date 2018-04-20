@@ -50,8 +50,9 @@ public class RobChanceActivity extends MVPActivity<RobChanceContract.Presenter> 
         kProgressHUD =HUDUtils.create(this);
         adapter = new RobChanceAdapter(new RobChanceViewHolder.lockorgCallBack() {
             @Override
-            public void lockOrgClick(String rbiid, String object, TextView textView,int i) {
-                mPresenter.lockOrg(rbiid,textView,object,i);
+            public void lockOrgClick(String rbiid, String object, TextView textView,int i,String j) {
+                //判断 j 是否为null 如果不为null，直接请求剩余时间接口，不在去走锁定订单的接口
+                mPresenter.lockOrg(rbiid,textView,object,i,j);
             }
         });
         recycler.setLayoutManager(new LinearLayoutManager(this));
@@ -115,7 +116,7 @@ public class RobChanceActivity extends MVPActivity<RobChanceContract.Presenter> 
     }
 
     @Override
-    public void onSubmitFinish(String errorMessage, TextView textView, String object,int i) {
+    public void onSubmitFinish(String errorMessage, TextView textView, String object,int i,String j) {
         kProgressHUD.show();
         textView.setText("处理中");
         textView.setBackgroundResource(R.drawable.bg_c_1_f_009);

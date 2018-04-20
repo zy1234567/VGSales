@@ -39,14 +39,13 @@ public class RobChancePresenter extends PresenterImpl<RobChanceContract.View> im
      * @param rbiid
      */
     @Override
-    public void lockOrg(String rbiid, final TextView textView, final String object, final int i) {
+    public void lockOrg(String rbiid, final TextView textView, final String object, final int i, final String j) {
         new BasePresenterSubscriber<RobChanceBean>(mView,false){
 
             @Override
             protected void childNext(RobChanceBean getComRecordBean) {
                 if (getComRecordBean.isSucceed()) {
-                    mView.onSubmitFinish(null,textView,object,i);
-
+                    mView.onSubmitFinish(null,textView,object,i,j);
                 }else {
                     //如果失败
                     mView.showError(getComRecordBean.getErrmsg());
