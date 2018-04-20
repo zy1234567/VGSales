@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="340dp"
-    android:layout_height="318dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg_c_10">
+    android:gravity="center"
+    android:background="@color/color_30_000">
+    <LinearLayout
+        android:layout_width="340dp"
+        android:orientation="vertical"
+        android:background="@drawable/bg_c_10"
+        android:layout_height="318dp">
         <ImageView
             android:id="@+id/img_close"
             android:layout_width="wrap_content"
@@ -142,5 +148,5 @@
             android:layout_marginRight="25dp"
             android:gravity="center"
             />
-
+    </LinearLayout>
 </LinearLayout>

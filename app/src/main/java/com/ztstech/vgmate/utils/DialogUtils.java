@@ -37,7 +37,7 @@ import static java.security.AccessController.getContext;
 public class DialogUtils {
 
     /**拒绝抢单*/
-    public   void showRefuseReasonDialog(Context context,final ShowRefuseReasonCallBack refuseReasonCallBack){
+    public  static void showRefuseReasonDialog(Context context,int maxLenght,final ShowRefuseReasonCallBack refuseReasonCallBack){
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_refuse_reason, null);
         final TextView tvConfirm = view.findViewById(R.id.tv_commit);
         ImageView imgClose=view.findViewById(R.id.img_close);
@@ -48,7 +48,7 @@ public class DialogUtils {
         final RadioButton  rb4=view.findViewById(R.id.rb4);
         final TextView tvNum=view.findViewById(R.id.tv_num);
         final EditText etReason =view.findViewById(R.id.et_else_reason);
-        etReason.setFilters(new InputFilter[]{new MaxTextLengthFilter(context,300)});
+        etReason.setFilters(new InputFilter[]{new MaxTextLengthFilter(context,maxLenght)});
         rb1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

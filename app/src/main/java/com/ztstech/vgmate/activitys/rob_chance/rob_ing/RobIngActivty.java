@@ -3,8 +3,10 @@ package com.ztstech.vgmate.activitys.rob_chance.rob_ing;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,6 +17,7 @@ import com.ztstech.vgmate.base.BaseActivity;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
 import com.ztstech.vgmate.utils.CategoryUtil;
 import com.ztstech.vgmate.utils.CommonUtil;
+import com.ztstech.vgmate.utils.DialogUtils;
 import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.weigets.TopBar;
 
@@ -96,9 +99,10 @@ public class RobIngActivty extends BaseActivity {
     RobChanceBean.ListBean bean;
     //传入得身份 路人/机构
     int identityFlg;
-
-
-
+    /**其他补充最大长度*/
+    static int maxLenght=100;
+    /**拒绝原因01重复，02已关闭/暂停营业，03尚未营业，04机构不存在*/
+    static  String []strReason=new String []{"01","02","03","04"};
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_rob_ing;
@@ -150,6 +154,23 @@ public class RobIngActivty extends BaseActivity {
             case R.id.rl_ico_gps:
                 break;
             case R.id.tv_refuse:
+                DialogUtils.showRefuseReasonDialog(RobIngActivty.this, maxLenght, new DialogUtils.ShowRefuseReasonCallBack() {
+                    @Override
+                    public void confirm(TextView tvConfirm, EditText reason, RadioButton rb1, RadioButton rb2, RadioButton rb3, RadioButton rb4) {
+
+                    }
+
+                    @Override
+                    public void textChanged(TextView tvConfirm, EditText etReason, RadioButton rb1, RadioButton rb2, RadioButton rb3, RadioButton rb4, TextView tvNum) {
+                        tvNum.setText(etReason.getText().toString().length()+"/"+maxLenght);
+                        isCommit(etReason,rb1,rb2,rb3,rb4,tvConfirm);
+                    }
+
+                    @Override
+                    public void radioButtonCheck(TextView tvConfirm, EditText etReason, RadioButton rb1, RadioButton rb2, RadioButton rb3, RadioButton rb4, TextView tvNum) {
+                        isCommit(etReason,rb1,rb2,rb3,rb4,tvConfirm);
+                    }
+                });
                 break;
             case R.id.tv_pass:
                 break;
@@ -157,5 +178,16 @@ public class RobIngActivty extends BaseActivity {
                 break;
         }
     }
-
+    /**
+     * 判断是原因否为空以及按钮是否选择
+     */
+    private  void isCommit( EditText etReason ,RadioButton rb1,RadioButton rb2,RadioButton rb3,RadioButton rb4,TextView tvCommit){
+        if(!TextUtils.equals(etReason.getText().toString(),"")&&!TextUtils.isEmpty(CommonUtil.isCheck(rb1,rb2,rb3,rb4,strReason))){
+            tvCommit.setBackgroundResource(R.drawable.bg_c_2_f_001);
+            tvCommit.setClickable(true);
+        }else {
+            tvCommit.setBackgroundResource(R.drawable.bg_c_2_f_104);
+            tvCommit.setClickable(false);
+        }
+    }
 }
