@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.activitys.add_certification.RobAddVCertificationActivity;
 import com.ztstech.vgmate.activitys.org_follow.adapter.FollowOrgFragmentPagerAdapter;
 import com.ztstech.vgmate.activitys.rob_chance.RobChanceActivity;
 import com.ztstech.vgmate.data.beans.OrgFollowNumBean;
@@ -111,7 +112,9 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowContact.Presenter> i
 
     @OnClick(R.id.rl_rob_chance)
     public void onClick() {
-        Intent intent = new Intent(this, RobChanceActivity.class);
+        Intent intent=new Intent(this, RobAddVCertificationActivity.class);
         startActivity(intent);
+//        Intent intent = new Intent(this, RobChanceActivity.class);
+//        startActivity(intent);
     }
 }

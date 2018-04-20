@@ -17,22 +17,5 @@ public class AddVPresenter  extends PresenterImpl<AddVContract.View> implements
                 super(view);
         }
 
-        @Override
-        public void commit(AddVData data) {
 
-                mView.showLoading("请稍等");
-                new BasePresenterSubscriber<BaseRespBean>(mView) {
-                @Override
-                public void childNext(BaseRespBean baseRespBean) {
-                        mView.hideLoading(null);
-                        if (baseRespBean.isSucceed()) {
-                                //防止后台在正确情况下返回errmsg
-                                mView.onSubmitFinish(null);
-                        }else {
-                                mView.onSubmitFinish(baseRespBean.getErrmsg());
-                        }
-
-                }
-                }.run(new AddVcertification(data).run());
-        }
 }

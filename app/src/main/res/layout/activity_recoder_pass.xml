@@ -93,12 +93,12 @@
         android:background="@color/color_001"
         android:layout_width="85dp"
         android:layout_height="3dp"/>
-    <FrameLayout
+    <com.ztstech.vgmate.weigets.NoScrollViewPager
         android:layout_below="@+id/rg_button"
         android:layout_marginTop="15dp"
-        android:id="@+id/frame_layout_way"
+        android:id="@+id/viewpager_way"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </FrameLayout>
+    </com.ztstech.vgmate.weigets.NoScrollViewPager>
     
 </RelativeLayout>

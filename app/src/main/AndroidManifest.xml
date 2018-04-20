@@ -48,8 +48,13 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activitys.provide_chance.ProvideChanceActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activitys.add_certification.RobAddVCertificationActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activitys.location_select.LocationInfoActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activitys.add_certification.PhoneCertification_next.PhoneCertificationActivity"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".activitys.location_select.LocationSelectActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".activitys.add_sell_mate.AddSellMateActivity"

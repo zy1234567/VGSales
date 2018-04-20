@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.ztstech.vgmate.weigets.TopBar
@@ -15,9 +14,10 @@
         android:background="@color/color_109">
     </com.ztstech.vgmate.weigets.TopBar>
     <ScrollView
+        android:layout_marginBottom="65dp"
+        android:background="@color/white"
         android:layout_below="@+id/top_bar"
         android:layout_width="wrap_content"
-        android:background="@color/white"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
         android:layout_gravity="center"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:background="@color/color_105"
+        android:background="@color/list_job_0_bg_color"
         android:orientation="horizontal"
         android:layout_height="55dp">
         <TextView

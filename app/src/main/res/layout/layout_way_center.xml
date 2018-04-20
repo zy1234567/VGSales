@@ -36,6 +36,7 @@
             android:layout_centerVertical="true"
             android:text="对方称呼"
             android:textSize="14sp"
+            android:textColorHint="@color/color_103"
             android:textColor="@color/color_100"
             android:layout_marginLeft="12dp"/>
         <EditText
@@ -64,6 +65,14 @@
         android:layout_width="match_parent"
         android:layout_height="45dp">
         <TextView
+            android:id="@+id/tv_need_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:layout_marginLeft="4dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/color_006" />
+        <TextView
             android:id="@+id/tv_3"
             android:layout_width="84dp"
             android:layout_height="wrap_content"
@@ -77,6 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:textColorHint="@color/color_103"
             android:layout_centerVertical="true"
             android:textColor="@color/color_100"
             android:layout_marginLeft="8dp"
@@ -132,6 +142,7 @@
             android:layout_marginLeft="8dp"
             android:textSize="@dimen/text_5"
             android:ellipsize="end"
+            android:textColorHint="@color/color_103"
             android:layout_toRightOf="@+id/tv_4"
             android:hint="请选择对方职位"
             android:layout_alignParentRight="true"
@@ -165,6 +176,7 @@
             android:gravity="left|top"
             android:layout_marginTop="11dp"
             android:textColor="@color/color_100"
+            android:textColorHint="@color/color_103"
             android:textSize="@dimen/text_5"
             android:hint="请输入本次的沟通内容"
             android:layout_height="100dp" />
@@ -205,7 +217,8 @@
             android:background="@null"
             android:gravity="left|top"
             android:layout_marginTop="11dp"
-            android:textSize="@dimen/text_5"
+            android:textColorHint="@color/color_103"
+            android:textSize="14sp"
             android:textColor="@color/color_100"
             android:hint="如：对该机构的补充描述/整体评价/对方其他诉求/有无管理后台等您认为有意义的信息"
             android:layout_height="100dp" />

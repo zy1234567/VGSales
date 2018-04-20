@@ -15,6 +15,6 @@ interface AddVContract {
     }
 
     interface Presenter extends BasePresenter<AddVContract.View> {
-        void commit(AddVData data);
+
     }
 }
