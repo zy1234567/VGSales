@@ -38,6 +38,7 @@
         android:layout_gravity="center"
         android:layout_alignParentBottom="true"
         android:gravity="center"
+        android:background="@color/color_105"
         android:orientation="horizontal"
         android:layout_height="55dp">
         <TextView
