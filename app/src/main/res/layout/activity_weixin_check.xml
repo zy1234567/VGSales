@@ -16,6 +16,7 @@
     </com.ztstech.vgmate.weigets.TopBar>
     <RelativeLayout
         android:id="@+id/rl_top"
+        android:layout_below="@+id/top_bar"
         android:layout_width="match_parent"
         android:background="@color/color_107"
         android:layout_height="25dp">
@@ -68,6 +69,7 @@
             android:layout_marginLeft="10dp"
             android:textSize="@dimen/text_5"
             android:ellipsize="end"
+            android:textColorHint="@color/color_103"
             android:layout_toRightOf="@+id/tv_1"
             android:hint="请输入对方的微信号"
             android:layout_alignParentRight="true"
@@ -128,6 +130,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="horizontal"
+        android:background="@color/list_job_0_bg_color"
         android:layout_height="55dp">
         <TextView
             android:layout_width="0dp"

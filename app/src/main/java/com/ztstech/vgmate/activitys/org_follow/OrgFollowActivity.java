@@ -112,9 +112,7 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowContact.Presenter> i
 
     @OnClick(R.id.rl_rob_chance)
     public void onClick() {
-        Intent intent=new Intent(this, RobAddVCertificationActivity.class);
+        Intent intent = new Intent(this, RobChanceActivity.class);
         startActivity(intent);
-//        Intent intent = new Intent(this, RobChanceActivity.class);
-//        startActivity(intent);
     }
 }
