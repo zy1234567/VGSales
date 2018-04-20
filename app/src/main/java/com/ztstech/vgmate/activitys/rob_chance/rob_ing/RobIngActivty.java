@@ -186,6 +186,8 @@ public class RobIngActivty extends BaseActivity {
             if (minute == 0) {
                 if (second == 0) {
                     tvTime.setText("超时");
+                    tvPass.setBackgroundResource(R.drawable.bg_c_2_f_104);
+                    tvRefuse.setBackgroundResource(R.drawable.bg_c_2_f_104);
                     if (timer != null) {
                         timer.cancel();
                         timer = null;
@@ -270,5 +272,18 @@ public class RobIngActivty extends BaseActivity {
             tvCommit.setBackgroundResource(R.drawable.bg_c_2_f_104);
             tvCommit.setClickable(false);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (timer != null){
+            timer.cancel();
+            timer = null;
+        }
+        if (timerTask != null){
+            timerTask = null;
+        }
+        super.onDestroy();
+
     }
 }
