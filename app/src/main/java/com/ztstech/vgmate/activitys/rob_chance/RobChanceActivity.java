@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import com.ztstech.vgmate.activitys.rob_chance.adapter.RobChanceViewHolder;
 import com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
 import com.ztstech.vgmate.utils.HUDUtils;
+import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import java.util.List;
@@ -27,6 +29,7 @@ import butterknife.BindView;
 
 import static com.ztstech.vgmate.activitys.rob_chance.adapter.RobChanceViewHolder.ORG_CHECK_IN_OR_CALIM;
 import static com.ztstech.vgmate.activitys.rob_chance.adapter.RobChanceViewHolder.PASSER_CHECK_IN;
+import static com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty.LAST_TIME;
 import static com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty.ORG_BEAN_ROB;
 import static com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty.ORG_IDENTITY;
 
@@ -43,6 +46,8 @@ public class RobChanceActivity extends MVPActivity<RobChanceContract.Presenter> 
     SmartRefreshLayout srl;
     private RobChanceAdapter adapter;
     private KProgressHUD kProgressHUD;
+    //剩余时间
+    double lasttime;
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
@@ -52,7 +57,11 @@ public class RobChanceActivity extends MVPActivity<RobChanceContract.Presenter> 
             @Override
             public void lockOrgClick(String rbiid, String object, TextView textView,int i,String j) {
                 //判断 j 是否为null 如果不为null，直接请求剩余时间接口，不在去走锁定订单的接口
-                mPresenter.lockOrg(rbiid,textView,object,i,j);
+                if (TextUtils.isEmpty(j)) {
+                    mPresenter.lockOrg(rbiid, textView, object, i, j);
+                }else{
+                    mPresenter.lasttime(rbiid, textView, object, i, j);
+                }
             }
         });
         recycler.setLayoutManager(new LinearLayoutManager(this));
@@ -114,14 +123,21 @@ public class RobChanceActivity extends MVPActivity<RobChanceContract.Presenter> 
     public void showError(String errorMessage) {
 
     }
+    //剩余时间
+    @Override
+    public void setLastTime(double lasttime) {
+        this.lasttime = lasttime;
+    }
 
     @Override
     public void onSubmitFinish(String errorMessage, TextView textView, String object,int i,String j) {
+        //请求成功 通过回调进行跳转
         kProgressHUD.show();
         textView.setText("处理中");
         textView.setBackgroundResource(R.drawable.bg_c_1_f_009);
         Intent intent  = new Intent(this, RobIngActivty.class);
         intent.putExtra(ORG_BEAN_ROB,object);
+        intent.putExtra(LAST_TIME,lasttime);
         if (i == PASSER_CHECK_IN){
             intent.getIntExtra(ORG_IDENTITY,PASSER_CHECK_IN);
         }else{

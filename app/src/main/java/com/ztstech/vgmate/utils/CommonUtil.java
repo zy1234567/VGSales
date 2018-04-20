@@ -887,13 +887,13 @@ public class CommonUtil {
     /**
      * 将毫秒转化成分秒
      */
-    private String secondToMinute(double second){
+    public static String secondToMinute(double second){
         double ss = second/1000;
-        int m = (int) (second / 60);
-        int s = (int) (second % 60);
+        int m = (int) (ss / 60);
+        int s = (int) (ss % 60);
         if (s < 10){
-            return m + "：0" + s;
+            return m + ":0" + s;
         }
-        return m + "：" + s;
+        return m + ":" + s;
     }
 }

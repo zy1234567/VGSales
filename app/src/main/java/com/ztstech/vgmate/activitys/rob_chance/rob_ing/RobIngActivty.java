@@ -1,6 +1,9 @@
 package com.ztstech.vgmate.activitys.rob_chance.rob_ing;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +24,9 @@ import com.ztstech.vgmate.utils.DialogUtils;
 import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.weigets.TopBar;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -37,6 +43,8 @@ public class RobIngActivty extends BaseActivity {
     public static final String ORG_BEAN_ROB = "ORG_BEAN_ROB";
     //传入得身份key
     public static final String ORG_IDENTITY = "ORG_IDENTITY_KEY";
+    //传入剩余时间
+    public static final String LAST_TIME = "LAST_TIME_KEY";
     @BindView(R.id.top_bar)
     TopBar topBar;
     @BindView(R.id.tv_add_type)
@@ -101,6 +109,12 @@ public class RobIngActivty extends BaseActivity {
     int identityFlg;
     /**其他补充最大长度*/
     static int maxLenght=100;
+    //纯如的剩余时间
+    double lasttime;
+    int minute;
+    int second;
+    private Timer timer;
+    private TimerTask timerTask;
     /**拒绝原因01重复，02已关闭/暂停营业，03尚未营业，04机构不存在*/
     static  String []strReason=new String []{"01","02","03","04"};
     @Override
@@ -141,13 +155,80 @@ public class RobIngActivty extends BaseActivity {
         } else if (identityFlg == ORG_CHECK_IN_OR_CALIM) {
             llLayoutCenter.setVisibility(View.VISIBLE);
         }
-    }
+        tvTime.setText(minute + ":" + second);
 
+        timerTask = new TimerTask() {
+
+            @Override
+            public void run() {
+                Message msg = new Message();
+                msg.what = 0;
+                handler.sendMessage(msg);
+            }
+        };
+
+        timer = new Timer();
+        timer.schedule(timerTask, 0, 1000);
+    }
+    //初始化数据
     private void initData() {
         bean = new Gson().fromJson(getIntent().getStringExtra(ORG_BEAN_ROB), RobChanceBean.ListBean.class);
         identityFlg = getIntent().getIntExtra(ORG_IDENTITY, 0);
+        lasttime = getIntent().getDoubleExtra(LAST_TIME,0);
+        String minteSecend[] = null;
+        minteSecend = CommonUtil.secondToMinute(lasttime).split(":");
+        minute = Integer.parseInt(minteSecend[0]);
+        second = Integer.parseInt(minteSecend[1]);
     }
-
+    @SuppressLint("HandlerLeak")
+    private Handler handler =  new Handler(){
+        public void handleMessage(Message msg){
+            if (minute == 0) {
+                if (second == 0) {
+                    tvTime.setText("超时");
+                    if (timer != null) {
+                        timer.cancel();
+                        timer = null;
+                    }
+                    if (timerTask != null) {
+                        timerTask = null;
+                    }
+                } else {
+                    second--;
+                    if (second >= 10) {
+                        tvTime.setText("0" + minute + ":" + second);
+                    } else {
+                        tvTime.setText("0" + minute + ":0" + second);
+                    }
+                }
+            } else {
+                if (second == 0) {
+                    second = 59;
+                    minute--;
+                    if (minute >= 10) {
+                        tvTime.setText(minute + ":" + second);
+                    } else {
+                        tvTime.setText("0" + minute + ":" + second);
+                    }
+                } else {
+                    second--;
+                    if (second >= 10) {
+                        if (minute >= 10) {
+                            tvTime.setText(minute + ":" + second);
+                        } else {
+                            tvTime.setText("0" + minute + ":" + second);
+                        }
+                    } else {
+                        if (minute >= 10) {
+                            tvTime.setText(minute + ":0" + second);
+                        } else {
+                            tvTime.setText("0" + minute + ":0" + second);
+                        }
+                    }
+                }
+            }
+        }
+    };
     @OnClick({R.id.rl_ico_gps, R.id.tv_refuse, R.id.tv_pass})
     public void onClick(View view) {
         switch (view.getId()) {

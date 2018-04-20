@@ -19,6 +19,8 @@ public class RobChanceContract {
         void setData(List<RobChanceBean.ListBean> listData);
         void setDataPage(RobChanceBean.PagerBean pagerBean);
         void showError(String errorMessage);
+        //绑定剩余时间
+        void setLastTime(double lasttime);
         void onSubmitFinish(String errorMessage, TextView textView,String object,int i,String j);
 //        void setListData(List<GetComRecordBean.ListBean> listData);
     }
@@ -34,5 +36,15 @@ public class RobChanceContract {
          * @param rbiid
          */
         void lockOrg(String rbiid,TextView textView,String object,int i,String j);
+
+        /**
+         * 请求剩余锁定时间
+         * @param rbiid
+         * @param textView
+         * @param object
+         * @param i
+         * @param j
+         */
+        void lasttime(String rbiid,TextView textView,String object,int i,String j);
     }
 }

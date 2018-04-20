@@ -1,13 +1,17 @@
 package com.ztstech.vgmate.activitys.rob_chance;
 
+import android.text.TextUtils;
 import android.widget.TextView;
 
+import com.ztstech.appdomain.user_case.LastTime;
 import com.ztstech.appdomain.user_case.RobChance;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.GetComRecordBean;
+import com.ztstech.vgmate.data.beans.LastTimeBean;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 import com.ztstech.vgmate.utils.TimeUtils;
+import com.ztstech.vgmate.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,19 +43,24 @@ public class RobChancePresenter extends PresenterImpl<RobChanceContract.View> im
      * @param rbiid
      */
     @Override
-    public void lockOrg(String rbiid, final TextView textView, final String object, final int i, final String j) {
+    public void lockOrg(final String rbiid, final TextView textView, final String object, final int i, final String j) {
         new BasePresenterSubscriber<RobChanceBean>(mView,false){
 
             @Override
             protected void childNext(RobChanceBean getComRecordBean) {
                 if (getComRecordBean.isSucceed()) {
-                    mView.onSubmitFinish(null,textView,object,i,j);
+                    requestlastTime(rbiid,textView,object,i,j);
                 }else {
                     //如果失败
                     mView.showError(getComRecordBean.getErrmsg());
                 }
             }
         }.run(new RobChance(0,rbiid).run());
+    }
+
+    @Override
+    public void lasttime(String rbiid, TextView textView, String object, int i, String j) {
+        requestlastTime(rbiid,textView,object,i,j);
     }
 
     /**
@@ -79,5 +88,27 @@ public class RobChancePresenter extends PresenterImpl<RobChanceContract.View> im
                 }
             }
         }.run(new RobChance(currentpage,null).run());
+    }
+    /**
+     * 请求剩余时间
+     */
+    private void requestlastTime(String rbiid, final TextView textView, final String object, final int i, final String j){
+        new BasePresenterSubscriber<LastTimeBean>(mView,false){
+
+            @Override
+            protected void childNext(LastTimeBean getComRecordBean) {
+                if (getComRecordBean.isSucceed()) {
+                    if (getComRecordBean.lasttimeMillis > 50) {
+                        mView.setLastTime(getComRecordBean.lasttimeMillis);
+                        mView.onSubmitFinish(null, textView, object, i, j);
+                    }else{
+                        return;
+                    }
+                }else {
+                    //如果失败
+                    mView.showError(getComRecordBean.getErrmsg());
+                }
+            }
+        }.run(new LastTime(rbiid).run());
     }
 }

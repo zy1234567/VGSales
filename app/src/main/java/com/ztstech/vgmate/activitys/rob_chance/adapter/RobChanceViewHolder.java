@@ -91,7 +91,8 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
         tvRobType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.equals(data.locktype, Constants.LOCK_YES)){
+                if (TextUtils.equals(data.locktype, Constants.LOCK_YES) &&
+                        !TextUtils.equals(UserRepository.getInstance().getUser().getUserBean().info.uid,data.locksaleuid)){
                     DialogUtils.showdialogknow(getContext(), "该机会正在其他销售的抢单锁定中，请稍后再试。",
                             "提示", new DialogUtils.showdialogCallBack() {
                                 @Override

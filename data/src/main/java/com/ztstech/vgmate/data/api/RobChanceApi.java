@@ -1,5 +1,6 @@
 package com.ztstech.vgmate.data.api;
 
+import com.ztstech.vgmate.data.beans.LastTimeBean;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
 
 import io.reactivex.Observable;
@@ -31,4 +32,13 @@ public interface RobChanceApi {
     Observable<RobChanceBean> lockOrg(@Query("rbiid") String rbiid,
                                       @Query("authId") String authId);
 
+    /**
+     *
+     * @param rbiid
+     * @param authId
+     * @return
+     */
+    @POST("exempt/AppSaleGetRushorderByRbiid")
+    Observable<LastTimeBean> lasttime(@Query("rbiid") String rbiid,
+                                      @Query("authId") String authId);
 }
