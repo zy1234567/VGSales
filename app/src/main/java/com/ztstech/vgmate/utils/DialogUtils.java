@@ -5,14 +5,20 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.InputFilter;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -30,6 +36,105 @@ import static java.security.AccessController.getContext;
 
 public class DialogUtils {
 
+    /**拒绝抢单*/
+    public   void showRefuseReasonDialog(Context context,final ShowRefuseReasonCallBack refuseReasonCallBack){
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_refuse_reason, null);
+        final TextView tvConfirm = view.findViewById(R.id.tv_commit);
+        ImageView imgClose=view.findViewById(R.id.img_close);
+        final Dialog  dialog = new Dialog(context, R.style.transdialog);
+        final RadioButton  rb1=view.findViewById(R.id.rb1);
+        final RadioButton  rb2=view.findViewById(R.id.rb2);
+        final RadioButton  rb3=view.findViewById(R.id.rb3);
+        final RadioButton  rb4=view.findViewById(R.id.rb4);
+        final TextView tvNum=view.findViewById(R.id.tv_num);
+        final EditText etReason =view.findViewById(R.id.et_else_reason);
+        etReason.setFilters(new InputFilter[]{new MaxTextLengthFilter(context,300)});
+        rb1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rb2.setChecked(false);
+                rb3.setChecked(false);
+                rb4.setChecked(false);
+                rb1.setChecked(true);
+                refuseReasonCallBack.radioButtonCheck(tvConfirm,etReason,rb1,rb2,rb3,rb4,tvNum);
+            }
+        });
+
+        rb2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rb1.setChecked(false);
+                rb3.setChecked(false);
+                rb4.setChecked(false);
+                rb2.setChecked(true);
+                refuseReasonCallBack.radioButtonCheck(tvConfirm,etReason,rb1,rb2,rb3,rb4,tvNum);
+            }
+        });
+        rb3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rb1.setChecked(false);
+                rb2.setChecked(false);
+                rb4.setChecked(false);
+                rb3.setChecked(true);
+                refuseReasonCallBack.radioButtonCheck(tvConfirm,etReason,rb1,rb2,rb3,rb4,tvNum);
+            }
+        });
+        rb4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rb1.setChecked(false);
+                rb2.setChecked(false);
+                rb3.setChecked(false);
+                rb4.setChecked(true);
+                refuseReasonCallBack.radioButtonCheck(tvConfirm,etReason,rb1,rb2,rb3,rb4,tvNum);
+            }
+        });
+        tvConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                refuseReasonCallBack.confirm(tvConfirm,etReason,rb1,rb2,rb3,rb4);
+            }
+        });
+        imgClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        etReason.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                refuseReasonCallBack.textChanged(tvConfirm,etReason,rb1,rb2,rb3,rb4,tvNum);
+            }
+        });
+        tvConfirm.setClickable(false);
+        dialog.setContentView(view);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        ViewUtils.setDialogFullScreen(dialog);
+        dialog.show();
+    }
+
+    public interface ShowRefuseReasonCallBack {
+        void  confirm( TextView tvConfirm, EditText reason,RadioButton rb1,RadioButton rb2,
+                       RadioButton rb3,RadioButton rb4);
+        void textChanged(TextView tvConfirm, EditText reason,RadioButton rb1,RadioButton rb2,
+                         RadioButton rb3,RadioButton rb4,TextView tvNum);
+        void radioButtonCheck(TextView tvConfirm, EditText reason,RadioButton rb1,RadioButton rb2,
+                              RadioButton rb3,RadioButton rb4,TextView tvNum);
+    }
 
     /**
      * 删除资讯或公告的弹框

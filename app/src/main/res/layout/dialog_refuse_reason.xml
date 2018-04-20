@@ -134,7 +134,7 @@
             android:layout_below="@+id/tv_other_reason"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="确认删除"
+            android:text="提交"
             android:textSize="@dimen/text_4"
             android:textColor="@color/color_109"
             android:background="@drawable/bg_c_2_f_104"
