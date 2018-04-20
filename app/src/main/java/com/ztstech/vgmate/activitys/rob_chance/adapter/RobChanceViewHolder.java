@@ -140,6 +140,9 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
         TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_MAP_REGISTER))){
             return ORG_CHECK_IN_OR_CALIM;
         }
+        if (TextUtils.equals(chancetype,Constants.CSTATUS_ORG_CLAIM_ING)){
+            return ORG_CHECK_IN_OR_CALIM;
+        }
         return 0;
     }
     public interface lockorgCallBack{

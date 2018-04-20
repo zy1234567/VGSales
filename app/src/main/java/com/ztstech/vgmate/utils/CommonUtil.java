@@ -45,6 +45,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import static android.content.Context.ACTIVITY_SERVICE;
+import static com.ztstech.appdomain.constants.Constants.NORMAL_REGISTER;
+import static com.ztstech.appdomain.constants.Constants.ORG_CALIM;
+import static com.ztstech.appdomain.constants.Constants.ORG_REGISTER;
 
 /**
  * Created by smm on 2017/5/21.
@@ -837,5 +840,33 @@ public class CommonUtil {
         BigDecimal b2 = new BigDecimal(Integer.toString(fInt));
         double dPoint = b1.subtract(b2).floatValue();
         return dPoint;
+    }
+    //判断是路人登记还是机构登记认领的
+    private int identity(String cstatus,String nowchancetype, String chancetype){
+        //返回路人
+        if (TextUtils.equals(cstatus,Constants.CSTATUS_GRAY_UNVERIFIED) &&
+                (TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_PASSER_CHECK_IN) ||
+                        TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_PASSER_CHECK_IN)) &&
+                TextUtils.isEmpty(nowchancetype)){
+            return NORMAL_REGISTER;
+        }
+        /**
+         * 机构登记
+         */
+        if (TextUtils.equals(cstatus,Constants.CSTATUS_GRAY_UNVERIFIED) && TextUtils.isEmpty(nowchancetype)
+                && (TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_ORG_REGISTER) ||
+                TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_ORG_REGISTER) ||
+                TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_ORG_CHECK_IN) ||
+                TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_ORG_CHECK_IN) ||
+                TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_MAP_REGISTER))){
+            return ORG_REGISTER;
+        }
+        /**
+         * 机构认领
+         */
+        if (TextUtils.equals(chancetype,Constants.CSTATUS_ORG_CLAIM_ING)){
+            return ORG_CALIM;
+        }
+        return 0;
     }
 }

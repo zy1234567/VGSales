@@ -138,4 +138,8 @@ public interface Constants {
      */
     String ORG_ADMIN = "05";
     String ORG_BOSS = "09";
+    //机构认领 01 机构登记 02 路人登记 03
+    int ORG_CALIM = 01;
+    int ORG_REGISTER = 02;
+    int NORMAL_REGISTER = 03;
 }
