@@ -27,6 +27,7 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.ztstech.appdomain.constants.Constants;
@@ -55,7 +56,21 @@ import static com.ztstech.appdomain.constants.Constants.ORG_REGISTER;
  */
 
 public class CommonUtil {
-
+    /**判断删除按钮的选择按钮的选择*/
+    public  static  String isCheck(RadioButton rb1, RadioButton rb2, RadioButton rb3, RadioButton rb4, String [] str){
+        if(rb1.isChecked()){
+            return str[0];
+        }else if(rb2.isChecked()){
+            return  str[1];
+        }else  if(rb3.isChecked()){
+            return  str[2];
+        }else if(rb4.isChecked()){
+            return  str[3];
+        }
+        else {
+            return  null;
+        }
+    }
     /**
      * 动态设置ListView的高度
      * @param listView
