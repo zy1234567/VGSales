@@ -115,6 +115,11 @@ public class RobIngActivty extends BaseActivity {
     int second;
     private Timer timer;
     private TimerTask timerTask;
+    /**当前机构来源是 路人登记，机构登记，机构认领*/
+    static  boolean  isNormalRegister;
+    static  boolean isOrgRegister;
+    static  boolean isOrgCalim;
+    int type;
     /**拒绝原因01重复，02已关闭/暂停营业，03尚未营业，04机构不存在*/
     static  String []strReason=new String []{"01","02","03","04"};
     @Override
@@ -179,6 +184,15 @@ public class RobIngActivty extends BaseActivity {
         minteSecend = CommonUtil.secondToMinute(lasttime).split(":");
         minute = Integer.parseInt(minteSecend[0]);
         second = Integer.parseInt(minteSecend[1]);
+        type= CommonUtil.identity(bean.cstatus,bean.nowchancetype,bean.chancetype);
+        if(Constants.NORMAL_REGISTER== type)
+        {
+            isNormalRegister = true;
+        }else if(Constants.ORG_CALIM==type){
+           isOrgCalim=true;
+        }else if(Constants.ORG_REGISTER==type){
+            isOrgRegister=true;
+        }
     }
     @SuppressLint("HandlerLeak")
     private Handler handler =  new Handler(){
@@ -259,6 +273,16 @@ public class RobIngActivty extends BaseActivity {
                 break;
             default:
                 break;
+        }
+    }
+    /**判断登记 认领拒绝*/
+    private  void  refuseReason(){
+        if(isNormalRegister){
+
+        }else if(isOrgRegister){
+
+        }else if(isOrgCalim){
+
         }
     }
     /**

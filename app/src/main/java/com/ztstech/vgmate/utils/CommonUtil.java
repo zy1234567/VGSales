@@ -857,7 +857,7 @@ public class CommonUtil {
         return dPoint;
     }
     //判断是路人登记还是机构登记认领的
-    private int identity(String cstatus,String nowchancetype, String chancetype){
+    public   static int identity(String cstatus,String nowchancetype, String chancetype){
         //路人登记
         if (TextUtils.equals(cstatus,Constants.CSTATUS_GRAY_UNVERIFIED) &&
                 (TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_PASSER_CHECK_IN) ||
