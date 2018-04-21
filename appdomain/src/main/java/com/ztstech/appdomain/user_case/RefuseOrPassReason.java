@@ -27,8 +27,10 @@ public class RefuseOrPassReason implements UserCase<Observable<BaseRespBean>> {
     @Override
     public Observable<BaseRespBean> run() {
         return refuseReasonApi.approveClaimOrg(refuseCalimData.rbiid,
-                refuseCalimData.calid, refuseCalimData.identificationtype,
-                refuseCalimData.status, refuseCalimData.testorg
+                refuseCalimData.calid,
+                refuseCalimData.identificationtype,
+                refuseCalimData.status,
+                refuseCalimData.testorg
                 , UserRepository.getInstance().getAuthId());
     }
 }

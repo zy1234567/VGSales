@@ -36,12 +36,16 @@ import static java.security.AccessController.getContext;
 
 public class DialogUtils {
 
+    public static DialogUtils getInstance(){
+
+        return new DialogUtils();
+    }
     /**拒绝抢单*/
-    public  static void showRefuseReasonDialog(Context context,int maxLenght,final ShowRefuseReasonCallBack refuseReasonCallBack){
+    public void showRefuseReasonDialog(Context context,int maxLenght,final ShowRefuseReasonCallBack refuseReasonCallBack){
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_refuse_reason, null);
         final TextView tvConfirm = view.findViewById(R.id.tv_commit);
         ImageView imgClose=view.findViewById(R.id.img_close);
-        final Dialog  dialog = new Dialog(context, R.style.transdialog);
+        final Dialog dialog = new Dialog(context, R.style.transdialog);
         final RadioButton  rb1=view.findViewById(R.id.rb1);
         final RadioButton  rb2=view.findViewById(R.id.rb2);
         final RadioButton  rb3=view.findViewById(R.id.rb3);

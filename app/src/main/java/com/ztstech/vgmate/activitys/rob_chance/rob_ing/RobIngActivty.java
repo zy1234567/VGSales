@@ -1,6 +1,8 @@
 package com.ztstech.vgmate.activitys.rob_chance.rob_ing;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -16,6 +18,7 @@ import com.google.gson.Gson;
 import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.activitys.add_certification.RobAddVCertificationActivity;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
 import com.ztstech.vgmate.data.dto.OrgRegisterRefuseData;
 import com.ztstech.vgmate.data.dto.RefuseOrPassData;
@@ -218,6 +221,8 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
                     tvTime.setText("超时");
                     tvPass.setBackgroundResource(R.drawable.bg_c_2_f_104);
                     tvRefuse.setBackgroundResource(R.drawable.bg_c_2_f_104);
+                    tvRefuse.setEnabled(false);
+                    tvPass.setEnabled(false);
                     if (timer != null) {
                         timer.cancel();
                         timer = null;
@@ -273,7 +278,9 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
                     if(isNormalRegister){
                         locationPass();
                     }else {
-
+                        Intent intent = new Intent(this,RobAddVCertificationActivity.class);
+//                        intent.putExtra()
+                        startActivity(intent);
                     }
                 break;
             default:
@@ -305,7 +312,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
     /**判断登记 认领拒绝*/
     private  void  refuseReason(){
         if(isNormalRegister||isOrgRegister){
-            DialogUtils.showRefuseReasonDialog(RobIngActivty.this, maxLenght,
+            DialogUtils.getInstance().showRefuseReasonDialog(RobIngActivty.this, maxLenght,
                     new DialogUtils.ShowRefuseReasonCallBack() {
                 @Override
                 public void confirm(TextView tvConfirm, EditText etReason, RadioButton rb1,
