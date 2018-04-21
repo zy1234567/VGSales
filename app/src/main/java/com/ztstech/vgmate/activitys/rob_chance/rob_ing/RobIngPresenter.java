@@ -1,11 +1,9 @@
 package com.ztstech.vgmate.activitys.rob_chance.rob_ing;
 
 import com.ztstech.appdomain.constants.Constants;
-import com.ztstech.appdomain.user_case.OrgRegisterRefuseReason;
 import com.ztstech.appdomain.user_case.RefuseOrPassReason;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
-import com.ztstech.vgmate.data.dto.OrgRegisterRefuseData;
 import com.ztstech.vgmate.data.dto.RefuseOrPassData;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
 
@@ -19,7 +17,7 @@ public class RobIngPresenter extends PresenterImpl<RobIngContract.View>
         super(view);
     }
     @Override
-    public void refuse0rPassCommit(RefuseOrPassData refuseCalimData) {
+    public void refuse0rPassCommit(RefuseOrPassData refuseCalimData,int type) {
         new BasePresenterSubscriber<BaseRespBean>(mView){
             @Override
             protected void childNext(BaseRespBean baseRespBean) {
@@ -39,7 +37,7 @@ public class RobIngPresenter extends PresenterImpl<RobIngContract.View>
 
 
     @Override
-    public void refuseRegisterCommit(OrgRegisterRefuseData orgRegisterRefuseData) {
+    public void refuseRegisterCommit(RefuseOrPassData orgRegisterRefuseData,int type) {
         new BasePresenterSubscriber<BaseRespBean>(mView){
             @Override
             protected void childNext(BaseRespBean baseRespBean) {
@@ -53,6 +51,6 @@ public class RobIngPresenter extends PresenterImpl<RobIngContract.View>
             protected void childError(Throwable e) {
                 mView.showError("出错:".concat(e.getMessage()));
             }
-        }.run(new OrgRegisterRefuseReason(orgRegisterRefuseData).run());
+        }.run(new RefuseOrPassReason(orgRegisterRefuseData,type).run());
     }
 }

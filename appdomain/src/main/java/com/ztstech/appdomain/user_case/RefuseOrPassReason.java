@@ -23,14 +23,22 @@ public class RefuseOrPassReason implements UserCase<Observable<BaseRespBean>> {
         this.refuseCalimData = refuseOrPassData;
         this.type = type;
     }
-
     @Override
     public Observable<BaseRespBean> run() {
-        return refuseReasonApi.approveClaimOrg(refuseCalimData.rbiid,
-                refuseCalimData.calid,
-                refuseCalimData.identificationtype,
-                refuseCalimData.status,
-                refuseCalimData.testorg
-                , UserRepository.getInstance().getAuthId());
+        if(type==Constants.ORG_CALIM) {
+            return refuseReasonApi.approveClaimOrg(refuseCalimData.rbiid,
+                    refuseCalimData.calid,
+                    refuseCalimData.identificationtype,
+                    refuseCalimData.status,
+                    refuseCalimData.testorg
+                    , UserRepository.getInstance().getAuthId());
+        }else {
+            return refuseReasonApi.appregisterOrgno(refuseCalimData.rbiid,
+                    UserRepository.getInstance().getAuthId(),
+                    refuseCalimData.type,
+                    refuseCalimData.rubbishtype,
+                    refuseCalimData.refuse,
+                    refuseCalimData.oname);
+        }
     }
 }

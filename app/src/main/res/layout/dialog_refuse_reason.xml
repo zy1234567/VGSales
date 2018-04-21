@@ -10,7 +10,7 @@
         android:layout_width="340dp"
         android:orientation="vertical"
         android:background="@drawable/bg_c_10"
-        android:layout_height="318dp">
+        android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/img_close"
             android:layout_width="wrap_content"
@@ -142,6 +142,7 @@
             android:layout_height="40dp"
             android:text="提交"
             android:textSize="@dimen/text_4"
+            android:layout_marginBottom="30dp"
             android:textColor="@color/color_109"
             android:background="@drawable/bg_c_2_f_104"
             android:layout_marginLeft="25dp"

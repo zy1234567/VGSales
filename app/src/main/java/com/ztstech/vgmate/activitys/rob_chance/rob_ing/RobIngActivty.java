@@ -1,7 +1,6 @@
 package com.ztstech.vgmate.activitys.rob_chance.rob_ing;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -20,7 +19,6 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.add_certification.RobAddVCertificationActivity;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
-import com.ztstech.vgmate.data.dto.OrgRegisterRefuseData;
 import com.ztstech.vgmate.data.dto.RefuseOrPassData;
 import com.ztstech.vgmate.utils.CategoryUtil;
 import com.ztstech.vgmate.utils.CommonUtil;
@@ -134,7 +132,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
      static String lIdenttype="01";
      static String vIdenttype="02";
     /**登记机构拒绝*/
-    OrgRegisterRefuseData orgRegisterRefuseData;
+    RefuseOrPassData orgRegisterRefuseData;
 
     @Override
     protected int getLayoutRes() {
@@ -301,7 +299,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
                 new DialogUtils.showdialogbottomtwobuttonCallBack() {
                     @Override
                     public void tvRightClick() {
-                        mPresenter.refuse0rPassCommit(refuseOrPassData);
+                        mPresenter.refuse0rPassCommit(refuseOrPassData,Constants.NORMAL_REGISTER);
                     }
                     @Override
                     public void tvLeftClick() {
@@ -317,13 +315,17 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
                 @Override
                 public void confirm(TextView tvConfirm, EditText etReason, RadioButton rb1,
                                     RadioButton rb2, RadioButton rb3, RadioButton rb4) {
-                    orgRegisterRefuseData=new OrgRegisterRefuseData();
+                    orgRegisterRefuseData=new RefuseOrPassData();
                     orgRegisterRefuseData.oname=bean.rbioname;
                     orgRegisterRefuseData.rbiid=String .valueOf(bean.rbiid);
                     orgRegisterRefuseData.type="00";
                     orgRegisterRefuseData.refuse=etReason.getText().toString();
                     orgRegisterRefuseData.rubbishtype=CommonUtil.isCheck(rb1,rb2,rb3,rb4,strReason);
-                    mPresenter.refuseRegisterCommit(orgRegisterRefuseData);
+                    if(isNormalRegister) {
+                        mPresenter.refuseRegisterCommit(orgRegisterRefuseData,Constants.NORMAL_REGISTER);
+                    }else {
+                        mPresenter.refuseRegisterCommit(orgRegisterRefuseData,Constants.ORG_REGISTER);
+                    }
                 }
 
                 @Override
@@ -348,7 +350,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
                     "拒绝提示","你确定要拒绝吗？", new DialogUtils.showdialogbottomtwobuttonCallBack() {
                 @Override
                 public void tvRightClick() {
-                  mPresenter.refuse0rPassCommit(refuseOrPassData);
+                  mPresenter.refuse0rPassCommit(refuseOrPassData,Constants.ORG_CALIM);
                 }
                 @Override
                 public void tvLeftClick() {
@@ -363,7 +365,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
      */
     private  void isCommit( EditText etReason ,RadioButton rb1,RadioButton rb2,RadioButton rb3,
                             RadioButton rb4,TextView tvCommit){
-        if(!TextUtils.equals(etReason.getText().toString(),"")&&!TextUtils.isEmpty(CommonUtil.isCheck(rb1,
+        if(!TextUtils.isEmpty(CommonUtil.isCheck(rb1,
                 rb2,rb3,rb4,strReason))){
             tvCommit.setBackgroundResource(R.drawable.bg_c_2_f_001);
             tvCommit.setClickable(true);

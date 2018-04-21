@@ -2,7 +2,6 @@ package com.ztstech.vgmate.activitys.rob_chance.rob_ing;
 
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.BaseView;
-import com.ztstech.vgmate.data.dto.OrgRegisterRefuseData;
 import com.ztstech.vgmate.data.dto.RefuseOrPassData;
 
 /**
@@ -16,8 +15,8 @@ public interface RobIngContract {
 
     }
     interface  Presenter extends BasePresenter<RobIngContract.View>{
-        void refuse0rPassCommit(RefuseOrPassData refuseCalimData);
-        void refuseRegisterCommit(OrgRegisterRefuseData orgRegisterRefuseData);
+        void refuse0rPassCommit(RefuseOrPassData refuseCalimData,int type);
+        void refuseRegisterCommit(RefuseOrPassData orgRegisterRefuseData,int  type);
     }
 
 }
