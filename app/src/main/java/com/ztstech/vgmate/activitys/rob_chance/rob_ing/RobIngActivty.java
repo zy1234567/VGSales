@@ -1,7 +1,6 @@
 package com.ztstech.vgmate.activitys.rob_chance.rob_ing;
 
 import android.annotation.SuppressLint;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -16,8 +15,10 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.vgmate.R;
-import com.ztstech.vgmate.base.BaseActivity;
+import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
+import com.ztstech.vgmate.data.dto.OrgRegisterRefuseData;
+import com.ztstech.vgmate.data.dto.RefuseOrPassData;
 import com.ztstech.vgmate.utils.CategoryUtil;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.DialogUtils;
@@ -28,7 +29,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.ztstech.vgmate.activitys.rob_chance.adapter.RobChanceViewHolder.ORG_CHECK_IN_OR_CALIM;
@@ -38,7 +38,7 @@ import static com.ztstech.vgmate.activitys.rob_chance.adapter.RobChanceViewHolde
  * Created by dongdong on 2018/4/19.
  */
 
-public class RobIngActivty extends BaseActivity {
+public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implements RobIngContract.View {
     //传入得实体类key
     public static final String ORG_BEAN_ROB = "ORG_BEAN_ROB";
     //传入得身份key
@@ -103,7 +103,6 @@ public class RobIngActivty extends BaseActivity {
     LinearLayout llButtom;
     @BindView(R.id.ll_layout_center)
     LinearLayout llLayoutCenter;
-
     RobChanceBean.ListBean bean;
     //传入得身份 路人/机构
     int identityFlg;
@@ -116,12 +115,24 @@ public class RobIngActivty extends BaseActivity {
     private Timer timer;
     private TimerTask timerTask;
     /**当前机构来源是 路人登记，机构登记，机构认领*/
-    static  boolean  isNormalRegister;
-    static  boolean isOrgRegister;
-    static  boolean isOrgCalim;
+    public static  boolean  isNormalRegister;
+    public static  boolean isOrgRegister;
+    public static  boolean isOrgCalim;
     int type;
     /**拒绝原因01重复，02已关闭/暂停营业，03尚未营业，04机构不存在*/
     static  String []strReason=new String []{"01","02","03","04"};
+    /**拒绝认领*/
+    RefuseOrPassData refuseOrPassData;
+    /**status 01拒绝  00t通过*/
+     static String refuseStatus="01";
+     static String passStatus="00";
+
+     /**identificationtype 02加v通过 01 定位通过*/
+     static String lIdenttype="01";
+     static String vIdenttype="02";
+    /**登记机构拒绝*/
+    OrgRegisterRefuseData orgRegisterRefuseData;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_rob_ing;
@@ -135,6 +146,11 @@ public class RobIngActivty extends BaseActivity {
     }
 
     private void initView() {
+        if(isNormalRegister){
+           tvPass.setText("通过(定位认证)");
+        }else {
+            tvPass.setText("通过(加V认证)");
+        }
         CommonUtil.orgfFromType(this, tvAddType, bean.cstatus, bean.nowchancetype, bean.chancetype);
         tvOtype.setText(CategoryUtil.findCategoryByOtype(bean.rbiotype));
         tvOrgName.setText(bean.rbioname);
@@ -251,45 +267,97 @@ public class RobIngActivty extends BaseActivity {
             case R.id.rl_ico_gps:
                 break;
             case R.id.tv_refuse:
-                DialogUtils.showRefuseReasonDialog(RobIngActivty.this, maxLenght, new DialogUtils.ShowRefuseReasonCallBack() {
-                    @Override
-                    public void confirm(TextView tvConfirm, EditText reason, RadioButton rb1, RadioButton rb2, RadioButton rb3, RadioButton rb4) {
-
-                    }
-
-                    @Override
-                    public void textChanged(TextView tvConfirm, EditText etReason, RadioButton rb1, RadioButton rb2, RadioButton rb3, RadioButton rb4, TextView tvNum) {
-                        tvNum.setText(etReason.getText().toString().length()+"/"+maxLenght);
-                        isCommit(etReason,rb1,rb2,rb3,rb4,tvConfirm);
-                    }
-
-                    @Override
-                    public void radioButtonCheck(TextView tvConfirm, EditText etReason, RadioButton rb1, RadioButton rb2, RadioButton rb3, RadioButton rb4, TextView tvNum) {
-                        isCommit(etReason,rb1,rb2,rb3,rb4,tvConfirm);
-                    }
-                });
+               refuseReason();
                 break;
             case R.id.tv_pass:
+                    if(isNormalRegister){
+                        locationPass();
+                    }else {
+
+                    }
                 break;
             default:
                 break;
         }
     }
+    /**
+     *通过定位认证
+     */
+    private  void locationPass(){
+        refuseOrPassData =new RefuseOrPassData();
+        refuseOrPassData.calid=bean.calid;
+        refuseOrPassData.rbiid=String.valueOf(bean.rbiid);
+        refuseOrPassData.status=passStatus;
+        refuseOrPassData.identificationtype=lIdenttype;
+        DialogUtils.showdialogbottomtwobutton(RobIngActivty.this, "取消","确定",
+                "通过提示","您确定要通过该机构的定位认证吗？",
+                new DialogUtils.showdialogbottomtwobuttonCallBack() {
+                    @Override
+                    public void tvRightClick() {
+                        mPresenter.refuse0rPassCommit(refuseOrPassData);
+                    }
+                    @Override
+                    public void tvLeftClick() {
+
+                    }
+                });
+    }
     /**判断登记 认领拒绝*/
     private  void  refuseReason(){
-        if(isNormalRegister){
+        if(isNormalRegister||isOrgRegister){
+            DialogUtils.showRefuseReasonDialog(RobIngActivty.this, maxLenght,
+                    new DialogUtils.ShowRefuseReasonCallBack() {
+                @Override
+                public void confirm(TextView tvConfirm, EditText etReason, RadioButton rb1,
+                                    RadioButton rb2, RadioButton rb3, RadioButton rb4) {
+                    orgRegisterRefuseData=new OrgRegisterRefuseData();
+                    orgRegisterRefuseData.oname=bean.rbioname;
+                    orgRegisterRefuseData.rbiid=String .valueOf(bean.rbiid);
+                    orgRegisterRefuseData.type="00";
+                    orgRegisterRefuseData.refuse=etReason.getText().toString();
+                    orgRegisterRefuseData.rubbishtype=CommonUtil.isCheck(rb1,rb2,rb3,rb4,strReason);
+                    mPresenter.refuseRegisterCommit(orgRegisterRefuseData);
+                }
 
-        }else if(isOrgRegister){
+                @Override
+                public void textChanged(TextView tvConfirm, EditText etReason, RadioButton rb1,
+                                        RadioButton rb2, RadioButton rb3, RadioButton rb4, TextView tvNum) {
+                    tvNum.setText(etReason.getText().toString().length()+"/"+maxLenght);
+                    isCommit(etReason,rb1,rb2,rb3,rb4,tvConfirm);
+                }
 
+                @Override
+                public void radioButtonCheck(TextView tvConfirm, EditText etReason, RadioButton rb1,
+                                             RadioButton rb2, RadioButton rb3, RadioButton rb4, TextView tvNum) {
+                    isCommit(etReason,rb1,rb2,rb3,rb4,tvConfirm);
+                }
+            });
         }else if(isOrgCalim){
+            refuseOrPassData =new RefuseOrPassData();
+            refuseOrPassData.rbiid=String.valueOf(bean.rbiid);
+            refuseOrPassData.status=refuseStatus;
+            refuseOrPassData.calid=bean.calid;
+            DialogUtils.showdialogbottomtwobutton(RobIngActivty.this, "取消","确定",
+                    "拒绝提示","你确定要拒绝吗？", new DialogUtils.showdialogbottomtwobuttonCallBack() {
+                @Override
+                public void tvRightClick() {
+                  mPresenter.refuse0rPassCommit(refuseOrPassData);
+                }
+                @Override
+                public void tvLeftClick() {
+
+                }
+            });
 
         }
     }
     /**
      * 判断是原因否为空以及按钮是否选择
      */
-    private  void isCommit( EditText etReason ,RadioButton rb1,RadioButton rb2,RadioButton rb3,RadioButton rb4,TextView tvCommit){
-        if(!TextUtils.equals(etReason.getText().toString(),"")&&!TextUtils.isEmpty(CommonUtil.isCheck(rb1,rb2,rb3,rb4,strReason))){
+    private  void isCommit( EditText etReason ,RadioButton rb1,RadioButton rb2,RadioButton rb3,
+                            RadioButton rb4,TextView tvCommit){
+        if(!TextUtils.equals(etReason.getText().toString(),"")&&!TextUtils.isEmpty(CommonUtil.isCheck(rb1,
+                rb2,rb3,rb4,strReason))){
             tvCommit.setBackgroundResource(R.drawable.bg_c_2_f_001);
             tvCommit.setClickable(true);
         }else {
@@ -308,6 +376,21 @@ public class RobIngActivty extends BaseActivity {
             timerTask = null;
         }
         super.onDestroy();
+
+    }
+
+    @Override
+    protected RobIngContract.Presenter initPresenter() {
+        return new RobIngPresenter(this);
+    }
+
+    @Override
+    public void Success() {
+
+    }
+
+    @Override
+    public void showError(String msg) {
 
     }
 }

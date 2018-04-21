@@ -32,7 +32,6 @@ public class AddSellMatePresenter extends PresenterImpl<AddSellMateContract.View
                 }else {
                     mView.onSubmitFinish(baseRespBean.getErrmsg());
                 }
-
             }
         }.run(new AddSellMate(addSellMateData).run());
     }
