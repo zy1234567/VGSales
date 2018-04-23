@@ -89,6 +89,7 @@ public class OrgFollowListFragment extends MVPFragment<OrgFollowListContact.Pres
                 mPresenter.appendData(uid);
             }
         });
+
     }
 
     @Override

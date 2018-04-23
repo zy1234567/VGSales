@@ -11,12 +11,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.ztstech.appdomain.user_case.GetOrgFollow;
 import com.ztstech.vgmate.R;
+import com.ztstech.vgmate.activitys.add_certification.RobAddVCertificationActivity;
 import com.ztstech.vgmate.activitys.org_detail_v2.OrgDetailV2Activity;
 import com.ztstech.vgmate.activitys.org_follow.claim_org.ClaimOrgDetailActivity;
+import com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty;
 import com.ztstech.vgmate.base.SimpleViewHolder;
 import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
+import com.ztstech.vgmate.data.beans.RobChanceBean;
 import com.ztstech.vgmate.utils.CategoryUtil;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.LocationUtils;
@@ -85,6 +89,7 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
             tvStatus.setText("暂无");
             CommonUtil.orgfFromType(getContext(),tvFrom,data.cstatus,data.nowchancetype,data.chancetype);
         }
+
 //
 //        if (index == GetOrgFollow.STATUS_INDEX_CONCERN){
 //            tvStatus.setText(TimeUtils.getDateWithString(data.createtime,"yyyy-MM-dd"));
@@ -113,7 +118,13 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
         body.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (index == GetOrgFollow.STATUS_INDEX_FEEDBACK){
+                //我开拓的
+                if (index == GetOrgFollow.STATUS_INDEX_CONCERN){
+                    Intent  intent=new Intent(getContext(), RobIngActivty.class);
+                    intent.putExtra(RobIngActivty.ORG_BEAN_ROB,new Gson().toJson(data));
+                    getContext().startActivity(intent);
+                }
+                else if (index == GetOrgFollow.STATUS_INDEX_FEEDBACK){
                     // 如果是待审批列表跳转至审批详情
                     Intent intent = new Intent(getContext(), ClaimOrgDetailActivity.class);
                     intent.putExtra(ClaimOrgDetailActivity.KEY_BEAN,data);
