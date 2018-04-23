@@ -36,12 +36,12 @@
             android:layout_centerVertical="true"
             android:text="对方称呼"
             android:textSize="14sp"
-            android:textColorHint="@color/color_103"
             android:textColor="@color/color_100"
             android:layout_marginLeft="12dp"/>
         <EditText
             android:id="@+id/tv_name"
             android:background="@null"
+            android:textColorHint="@color/color_103"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
