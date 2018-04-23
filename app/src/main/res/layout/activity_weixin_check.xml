@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="@color/color_107"
     android:layout_height="match_parent"
     >
     <com.ztstech.vgmate.weigets.TopBar
@@ -46,6 +47,7 @@
         android:id="@+id/rl_name"
         android:layout_below="@+id/rl_top"
         android:gravity="center"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="45dp">
         <TextView
@@ -86,23 +88,22 @@
       />
     <RelativeLayout
         android:id="@+id/rl_img"
+        android:background="@color/white"
         android:layout_below="@id/v1"
-        android:layout_marginTop="@dimen/dialog_isfrist_used"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
+        android:gravity="center_vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="103dp">
         <ImageView
             android:id="@+id/img_vido"
+            android:layout_marginLeft="12dp"
             android:layout_width="wrap_content"
             android:src="@mipmap/shipin_upload"
             android:layout_height="wrap_content" />
         <ImageView
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
             android:id="@+id/img_location"
-
             android:layout_toRightOf="@+id/img_vido"
-            android:layout_marginLeft="10dp"
-
             android:layout_width="wrap_content"
             android:src="@mipmap/weizhi_upload"
             android:layout_height="wrap_content" />
@@ -132,7 +133,8 @@
     android:layout_width="match_parent"
     android:textColor="@color/color_002"
     android:textSize="12sp"
-    android:gravity="center"
+    android:layout_marginLeft="12dp"
+    android:gravity="center_vertical"
     android:text="如果不能立即实现远程审核，通过后尽快在沟通记录中补充资料"
     android:layout_height="wrap_content" />
     </LinearLayout>
