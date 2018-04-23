@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.ztstech.appdomain.user_case.LastTime;
 import com.ztstech.appdomain.user_case.RobChance;
+import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.GetComRecordBean;
 import com.ztstech.vgmate.data.beans.LastTimeBean;
@@ -98,10 +99,12 @@ public class RobChancePresenter extends PresenterImpl<RobChanceContract.View> im
             @Override
             protected void childNext(LastTimeBean getComRecordBean) {
                 if (getComRecordBean.isSucceed()) {
-                    if (getComRecordBean.lasttimeMillis > 50) {
+                    if (getComRecordBean.lasttimeMillis > 30) {
                         mView.setLastTime(getComRecordBean.lasttimeMillis);
                         mView.onSubmitFinish(null, textView, object, i, j);
                     }else{
+                        textView.setText("抢单");
+                        textView.setBackgroundResource(R.drawable.bg_c_1_f_006);
                         return;
                     }
                 }else {

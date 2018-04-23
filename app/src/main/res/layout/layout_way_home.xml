@@ -65,10 +65,13 @@
             android:textColor="@color/list_item_text_gray_color"
             android:layout_height="wrap_content" />
     </RelativeLayout>
-    <GridView
+    <com.ztstech.vgmate.weigets.CustomGridView
+        android:id="@+id/cgv"
         android:layout_below="@+id/rl_photo"
         android:layout_width="match_parent"
-        android:layout_height="105dp">
-    </GridView>
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_height="wrap_content">
+    </com.ztstech.vgmate.weigets.CustomGridView>
 
 </LinearLayout>

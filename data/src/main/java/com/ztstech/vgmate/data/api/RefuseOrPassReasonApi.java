@@ -86,7 +86,6 @@ public interface RefuseOrPassReasonApi {
         Observable<BaseRespBean> nomalorOrgRegister(@Query("authId") String authid,
                                                     @Query("rbiid") String rbiid,
                                                     @Query("rbiostatus") String rbiostatus,
-                                                    @Query("oname") String oname,
                                                     @Query("identificationtype") String identificationtype,
                                                     @Query("terminal") String terminal,
                                                     @Query("type") String type,

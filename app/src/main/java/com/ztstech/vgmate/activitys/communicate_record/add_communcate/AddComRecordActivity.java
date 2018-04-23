@@ -51,7 +51,7 @@ public class AddComRecordActivity extends MVPActivity<AddComRecordContact.Presen
     public static final int REQ_CONTACT = 2;
     /**请求联系人手机*/
     public static final int REQ_CONTACT_1 = 1;
-    /**02:其他人员,05:管理员,06:老板（法人）*/
+    /**02:其他人员,05:管理员,09:老板（法人）*/
     public static final String IDEN_NOMAL = "02";
     public static final String IDEN_MANAGER = "05";
     public static final String IDEN_BOSS = "06";

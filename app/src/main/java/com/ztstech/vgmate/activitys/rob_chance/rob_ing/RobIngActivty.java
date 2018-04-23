@@ -18,6 +18,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.add_certification.RobAddVCertificationActivity;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
+import com.ztstech.vgmate.data.dto.OrgPassData;
 import com.ztstech.vgmate.data.dto.RefuseOrPassData;
 import com.ztstech.vgmate.utils.CategoryUtil;
 import com.ztstech.vgmate.utils.CommonUtil;
@@ -122,17 +123,22 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
     /**拒绝认领*/
     RefuseOrPassData refuseOrPassData;
     /**status 01拒绝  00t通过*/
-     static String refuseStatus="01";
-     static String passStatus="00";
+    static String refuseStatus="01";
+    static String passStatus="00";
 
-     /**identificationtype 02加v通过 01 定位通过*/
-     static String lIdenttype="01";
-     static String vIdenttype="02";
+    /**identificationtype 02加v通过 01 定位通过*/
+    static String lIdenttype="01";
+    static String vIdenttype="02";
+    /**
+     * 处理终端
+     */
+    public static final String TENMINAL_TYPE = "02";
     /**登记机构拒绝*/
     RefuseOrPassData orgRegisterRefuseData;
 
     private CountDownHandler mCountDownHandler;
 
+    private OrgPassData orgPassData;
 
     @Override
     protected int getLayoutRes() {
@@ -148,7 +154,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
 
     private void initView() {
         if(isNormalRegister){
-           tvPass.setText("通过(定位认证)");
+            tvPass.setText("通过(定位认证)");
         }else {
             tvPass.setText("通过(加V认证)");
         }
@@ -194,7 +200,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         {
             isNormalRegister = true;
         }else if(Constants.ORG_CALIM==type){
-           isOrgCalim=true;
+            isOrgCalim=true;
         }else if(Constants.ORG_REGISTER==type){
             isOrgRegister=true;
         }
@@ -210,16 +216,16 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
             case R.id.rl_ico_gps:
                 break;
             case R.id.tv_refuse:
-               refuseReason();
+                refuseReason();
                 break;
             case R.id.tv_pass:
-                    if(isNormalRegister){
-                        locationPass();
-                    }else {
-                        Intent intent = new Intent(this,RobAddVCertificationActivity.class);
-//                        intent.putExtra()
-                        startActivity(intent);
-                    }
+                if(isNormalRegister){
+                    locationPass();
+                }else {
+                    Intent intent = new Intent(this,RobAddVCertificationActivity.class);
+                    intent.putExtra(RobAddVCertificationActivity.ORG_BEAN,new Gson().toJson(bean));
+                    startActivity(intent);
+                }
                 break;
             default:
                 break;
@@ -239,7 +245,12 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
                 new DialogUtils.showdialogbottomtwobuttonCallBack() {
                     @Override
                     public void tvRightClick() {
-                        mPresenter.refuse0rPassCommit(refuseOrPassData,Constants.NORMAL_REGISTER);
+                        orgPassData.rbiid  = String.valueOf(bean.rbiid);
+                        orgPassData.terminal = TENMINAL_TYPE;
+                        orgPassData.rbiostatus = Constants.PASS_ORG;
+                        orgPassData.identificationtype = Constants.IDENTIFICATION_TYPE_REGISTER_LOCATION;
+                        orgPassData.type = Constants.COMMUNICATION_TYPE_CHANCE;
+                        mPresenter.locationCertificationCommit(orgPassData);
                     }
                     @Override
                     public void tvLeftClick() {
@@ -336,6 +347,11 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
 
     @Override
     public void showError(String msg) {
+
+    }
+
+    @Override
+    public void onSubmitFinish(String errorMessage) {
 
     }
 

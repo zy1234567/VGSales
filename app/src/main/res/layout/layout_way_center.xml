@@ -39,7 +39,7 @@
             android:textColor="@color/color_100"
             android:layout_marginLeft="12dp"/>
         <EditText
-            android:id="@+id/tv_name"
+            android:id="@+id/et_name"
             android:background="@null"
             android:textColorHint="@color/color_103"
             android:layout_width="wrap_content"
@@ -91,6 +91,7 @@
             android:textColor="@color/color_100"
             android:layout_marginLeft="8dp"
             android:singleLine="true"
+            android:maxLength="11"
             android:inputType="number"
             android:ellipsize="end"
             android:textSize="@dimen/text_5"
@@ -114,6 +115,7 @@
             android:paddingBottom="7dp"/>
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/rl_position"
         android:layout_width="match_parent"
         android:layout_height="45dp">
         <TextView
@@ -169,7 +171,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp">
         <EditText
-            android:id="@+id/tv_content"
+            android:id="@+id/et_content"
             android:layout_width="match_parent"
             android:layout_marginLeft="@dimen/dialog_isfrist_used"
             android:background="@null"
@@ -211,7 +213,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp">
         <EditText
-            android:id="@+id/tv_more"
+            android:id="@+id/et_more"
             android:layout_width="match_parent"
             android:layout_marginLeft="@dimen/dialog_isfrist_used"
             android:background="@null"

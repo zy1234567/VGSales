@@ -102,7 +102,11 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
                             });
                 }else if (TextUtils.equals(data.locktype, Constants.LOCK_YES) &&
                         TextUtils.equals(UserRepository.getInstance().getUser().getUserBean().info.uid,data.locksaleuid)){
-                    callBack.lockOrgClick(String.valueOf(data.rbiid), new Gson().toJson(data), tvRobType,PASSER_CHECK_IN,"lock");
+                    if (identity(data.cstatus,data.nowchancetype,data.chancetype) == PASSER_CHECK_IN ) {
+                        callBack.lockOrgClick(String.valueOf(data.rbiid), new Gson().toJson(data), tvRobType,PASSER_CHECK_IN,"lock");
+                    }else{
+                        callBack.lockOrgClick(String.valueOf(data.rbiid), new Gson().toJson(data), tvRobType,ORG_CHECK_IN_OR_CALIM,"lock");
+                    }
                 } else{
                     DialogUtils.showdialogbottomtwobutton(getContext(), "抢单", "取消", "提示",
                             "请在30分钟内完成与机构的沟通、填写沟通记录、完成审核流程等操作。", new DialogUtils.showdialogbottomtwobuttonCallBack() {
@@ -113,6 +117,7 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
                                     }else{
                                         callBack.lockOrgClick(String.valueOf(data.rbiid), new Gson().toJson(data), tvRobType,ORG_CHECK_IN_OR_CALIM,null);
                                     }
+                                    data.locktype = Constants.LOCK_YES;
                                 }
 
                                 @Override

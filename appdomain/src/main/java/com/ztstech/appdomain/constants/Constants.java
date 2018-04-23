@@ -134,10 +134,11 @@ public interface Constants {
     String CHANCE_TYPE_APP_MAP_REGISTER = "11";
 
     /**
-     * 担任职位，05机构一般管理人员，09机构法人/老板/店长
+     * 担任职位，05机构一般管理人员，09机构法人/老板/店长,其他 02
      */
     String ORG_ADMIN = "05";
     String ORG_BOSS = "09";
+    String ELSE_NOMAL = "02";
     //机构认领 01 机构登记 02 路人登记 03
     int ORG_CALIM = 01;
     int ORG_REGISTER = 02;
@@ -146,4 +147,13 @@ public interface Constants {
     String PHONE_CATION_TYPE = "00";
     String HOME_VISI_TYPE = "01";
     String LONG_RANGE_AUDIT = "02";
+
+    // 01:定位认证,02:加V认证
+    String IDENTIFICATION_TYPE_REGISTER_ADD_V = "02";
+    String IDENTIFICATION_TYPE_REGISTER_LOCATION = "01";
+    //审核通过
+    String PASS_ORG = "00";
+    //沟通机会类型00机构沟通记录，01机会沟通记录
+    String COMMUNICATION_TYPE_ORG = "00";
+    String COMMUNICATION_TYPE_CHANCE = "01";
 }
