@@ -2,19 +2,15 @@ package com.ztstech.vgmate.activitys.add_certification.add_home_fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
-import com.ztstech.vgmate.activitys.main_fragment.MainFragment;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -61,7 +57,7 @@ public class HomeFragment extends MVPFragment<HomeContract.Presenter> implements
     }
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_way_home;
+        return R.layout.layout_way_phone;
     }
 
     @Override

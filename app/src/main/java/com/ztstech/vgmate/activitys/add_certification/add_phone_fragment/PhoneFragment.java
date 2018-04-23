@@ -3,9 +3,7 @@ package com.ztstech.vgmate.activitys.add_certification.add_phone_fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,8 +13,6 @@ import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.add_certification.PhoneCertification_next.PhoneCertificationActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -57,7 +53,7 @@ public class PhoneFragment extends MVPFragment<PhoneContract.Presenter> implemen
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_way_pnone;
+        return R.layout.layout_way_home;
     }
 
     @Override
