@@ -45,4 +45,16 @@ public class OrgPassData {
     public String wechatid;
     public String videopicurl;
     public String positionpicurl;
+
+    /**
+     * 认领多余的参数
+     */
+    public String callon;
+    public String calid;
+    public String status;
+    public String logstatus;
+    /**
+     * 判断走认领还是登记审核
+     */
+    public int approvetype;
 }

@@ -22,11 +22,15 @@ import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
 import com.ztstech.vgmate.data.dto.OrgPassData;
 import com.ztstech.vgmate.data.dto.RefuseOrPassData;
+import com.ztstech.vgmate.event.ApproveEvent;
 import com.ztstech.vgmate.utils.CategoryUtil;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.DialogUtils;
 import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.weigets.TopBar;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.ref.WeakReference;
 import java.util.Timer;
@@ -420,7 +424,10 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         tvRefuse.setEnabled(false);
         tvPass.setEnabled(false);
     }
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(ApproveEvent event) {
+        finish();
+    };
 
     private static class CountDownHandler extends Handler {
 

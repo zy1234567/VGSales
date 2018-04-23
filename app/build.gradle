@@ -17,8 +17,8 @@ android {
         applicationId "com.ztstech.vgmate"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 47
-        versionName "1.0.47"
+        versionCode 48
+        versionName "1.0.48"
 
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -94,5 +94,4 @@ dependencies {
     compile 'com.github.chrisbanes.photoview:library:+'
     compile 'it.sephiroth.android.library.imagezoom:library:1.0.4'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'org.greenrobot:eventbus:3.0.0'
 }

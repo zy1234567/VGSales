@@ -1,11 +1,16 @@
 package com.ztstech.vgmate.activitys.add_certification;
 
+import android.app.Activity;
+import android.widget.TextView;
+
 import com.ztstech.appdomain.user_case.AddComRecord;
 import com.ztstech.appdomain.user_case.AddVcertification;
+import com.ztstech.appdomain.user_case.LastTime;
 import com.ztstech.appdomain.user_case.OrgPass;
 import com.ztstech.appdomain.utils.RetrofitUtils;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
+import com.ztstech.vgmate.data.beans.LastTimeBean;
 import com.ztstech.vgmate.data.beans.UploadImageBean;
 import com.ztstech.vgmate.data.dto.AddComRecordData;
 import com.ztstech.vgmate.data.dto.AddVData;
@@ -55,6 +60,8 @@ public class AddVPresenter  extends PresenterImpl<AddVContract.View> implements
                                 if (baseRespBean.isSucceed()) {
                                         //防止后台在正确情况下返回errmsg
                                         mView.onSubmitFinish(null);
+
+
                                 }else {
                                         mView.onSubmitFinish(baseRespBean.getErrmsg());
                                 }
@@ -69,5 +76,32 @@ public class AddVPresenter  extends PresenterImpl<AddVContract.View> implements
                 }else {
                         uploadData(orgPassData);
                 }
+        }
+
+        @Override
+        public void lastTime(String rbiid) {
+                requestlastTime(rbiid);
+        }
+
+        /**
+         * 请求剩余时间
+         */
+        private void requestlastTime(String rbiid){
+                new BasePresenterSubscriber<LastTimeBean>(mView,false){
+
+                        @Override
+                        protected void childNext(LastTimeBean getComRecordBean) {
+                                if (getComRecordBean.isSucceed()) {
+                                        if (getComRecordBean.lasttimeMillis > 30) {
+                                                mView.setLastTime(getComRecordBean.lasttimeMillis);
+                                        }else{
+                                                return;
+                                        }
+                                }else {
+                                        //如果失败
+                                        mView.showError(getComRecordBean.getErrmsg());
+                                }
+                        }
+                }.run(new LastTime(rbiid).run());
         }
 }

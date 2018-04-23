@@ -879,7 +879,7 @@ public class CommonUtil {
         /**
          * 机构认领
          */
-        if (TextUtils.equals(chancetype,Constants.CSTATUS_ORG_CLAIM_ING)){
+        if (TextUtils.equals(cstatus,Constants.CSTATUS_ORG_CLAIM_ING)){
             return ORG_CALIM;
         }
         return 0;

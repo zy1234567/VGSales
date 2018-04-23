@@ -18,16 +18,20 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.activitys.add_certification.RobAddVCertificationActivity;
 import com.ztstech.vgmate.activitys.gps.GpsActivity;
 import com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
 import com.ztstech.vgmate.data.dto.OrgPassData;
+import com.ztstech.vgmate.event.ApproveEvent;
 import com.ztstech.vgmate.manager.MatissePhotoHelper;
 import com.ztstech.vgmate.matisse.Matisse;
 import com.ztstech.vgmate.matisse.MimeType;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.CustomGridView;
 import com.ztstech.vgmate.weigets.TopBar;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -179,7 +183,7 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
             addImg(imgVido,data,1);
         }else  if(requestCode==REQUSTCODELOCATION&&resultCode==RESULT_OK){
             addImg(imgLocation,data,0);
-        } else if(requestCode==REQUSTCODEPOSITION&&requestCode==RESULT_OK){
+        } else if(requestCode==REQUSTCODEPOSITION&&resultCode==RESULT_OK){
             for (int i = 0; i < Matisse.obtainPathResult(data).size(); i++){
                 addItem(Matisse.obtainPathResult(data).get(i),null);
             }
@@ -277,7 +281,9 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
                 ToastUtil.toastCenter(RobAddVAppointSaleActivity.this,"定位不能为空！");
                 return;
             }
+            orgPassData.calid = bean.calid;
             orgPassData.communicationtype="03";
+            orgPassData.status = "00";
             orgPassData.spotgps=tvLocation.getText().toString();
             orgPassData.description =tvMore.getText().toString();
             mPresenter.submit(orgPassData);
@@ -305,6 +311,7 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
 
     @Override
     public void onSubmitFinish(String errorMessage) {
-
+        EventBus.getDefault().post(new ApproveEvent(RobAddVCertificationActivity.APPROVE_FINISH));
+        finish();
     }
 }

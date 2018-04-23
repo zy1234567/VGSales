@@ -2,6 +2,8 @@ package com.ztstech.vgmate.activitys.add_certification;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -23,8 +25,10 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.add_certification.PhoneCertification_next.PhoneCertificationActivity;
 import com.ztstech.vgmate.activitys.gps.GpsActivity;
+import com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
 import com.ztstech.vgmate.data.dto.OrgPassData;
+import com.ztstech.vgmate.event.ApproveEvent;
 import com.ztstech.vgmate.manager.MatissePhotoHelper;
 import com.ztstech.vgmate.matisse.Matisse;
 import com.ztstech.vgmate.matisse.MimeType;
@@ -35,13 +39,23 @@ import com.ztstech.vgmate.weigets.CustomGridView;
 import com.ztstech.vgmate.weigets.DialogMultiSelect;
 import com.ztstech.vgmate.weigets.TopBar;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.ztstech.appdomain.constants.Constants.ORG_CALIM;
+import static com.ztstech.appdomain.constants.Constants.ORG_REGISTER;
 
 /**
  * Created by Administrator on 2018/4/20.
@@ -76,6 +90,10 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
      * 处理终端
      */
     public static final String TENMINAL_TYPE = "02";
+    /**
+     * 接收微信认证审核事件，销毁页面
+     */
+    public static final String APPROVE_FINISH = "approve_finish";
     @BindView(R.id.top_bar)
     TopBar topBar;
     @BindView(R.id.tv_way)
@@ -142,6 +160,9 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
     private String[] datastr = {"机构法人/老板/店长", "一般管理人员", "其他机构人员"};
     private DialogMultiSelect dialogMultiSelect;
     RobChanceBean.ListBean bean;
+    private CountDownHandler mCountDownHandler;
+    double lasttime;
+
 
     @Override
     protected int getLayoutRes() {
@@ -163,6 +184,7 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
         rlHome.setVisibility(View.GONE);
         tvPass.setText("下一步");
         viewHome.setVisibility(View.INVISIBLE);
+//        tvTime.setText(mCountDownHandler.getCurrentText());
         rgButton.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -174,6 +196,7 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
                     viewPhone.setVisibility(View.VISIBLE);
                     orgPassData.communicationtype = Constants.PHONE_CATION_TYPE;
                     buttontype();
+                    orgPassData.callon = "00";
                 } else {
                     viewPhone.setVisibility(View.INVISIBLE);
                     rlHome.setVisibility(View.VISIBLE);
@@ -182,6 +205,7 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
                     viewHome.setVisibility(View.VISIBLE);
                     orgPassData.communicationtype = Constants.HOME_VISI_TYPE;
                     buttontype();
+                    orgPassData.callon = "01";
                 }
             }
         });
@@ -195,6 +219,14 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
         orgPassData.identificationtype = Constants.IDENTIFICATION_TYPE_REGISTER_ADD_V;
         orgPassData.rbiostatus = Constants.PASS_ORG;
         orgPassData.type = Constants.COMMUNICATION_TYPE_CHANCE;
+        if (CommonUtil.identity(bean.cstatus,bean.nowchancetype,bean.chancetype) == ORG_CALIM){
+            orgPassData.approvetype = 0;
+            orgPassData.calid = bean.calid;
+        }else{
+            orgPassData.approvetype = 1;
+        }
+//        mCountDownHandler = new CountDownHandler(this, lasttime);
+//        mCountDownHandler.startTimer();
     }
 
     @Override
@@ -208,6 +240,17 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
 
     @Override
     public void onSubmitFinish(String msg) {
+
+    }
+
+    @Override
+    public void setLastTime(double lasttime) {
+        this.lasttime = lasttime;
+
+    }
+
+    @Override
+    public void showError(String errorMessage) {
 
     }
 
@@ -239,7 +282,7 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
                         default:
                             break;
                     }
-//                    btcommitstate();
+                    buttontype();
                 }
             });
         }
@@ -258,16 +301,7 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
                 showSelectDialog();
                 break;
             case R.id.rl_buttom:
-                if (rbPhone.isChecked()) {
-                    commit();
-                    Intent intent = new Intent(RobAddVCertificationActivity.this,
-                            PhoneCertificationActivity.class);
-                    intent.putExtra(PhoneCertificationActivity.ORG_PASS_DATA,new Gson().toJson(orgPassData));
-                    startActivity(intent);
-                } else {
-                    commit();
-                    mPresenter.submit(orgPassData);
-                }
+                commit();
                 break;
             case R.id.tv_location:
                 Intent it = new Intent(this, GpsActivity.class);
@@ -321,7 +355,14 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
                 imageFiles.clear();
             }
         }
-
+        if (rbPhone.isChecked()) {
+            Intent intent = new Intent(RobAddVCertificationActivity.this,
+                    PhoneCertificationActivity.class);
+            intent.putExtra(PhoneCertificationActivity.ORG_PASS_DATA,new Gson().toJson(orgPassData));
+            startActivity(intent);
+        } else {
+            mPresenter.submit(orgPassData);
+        }
     }
     //判断按钮颜色
     private void buttontype(){
@@ -450,5 +491,149 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
         public void afterTextChanged(Editable editable) {
             buttontype();
         }
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(ApproveEvent event) {
+        finish();
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+        if (mCountDownHandler != null) {
+            mCountDownHandler.cancel();
+        }
+    }
+    /**
+     * 倒计时时间变化调用
+     * @param newTimeText
+     */
+    private void onTimeChanged(String newTimeText) {
+        tvTime.setText(newTimeText);
+    }
+    /**
+     * 倒计时结束
+     */
+    private void onTimeFinish() {
+        tvTime.setText("超时");
+        tvPass.setBackgroundResource(R.drawable.bg_c_2_f_104);
+        tvPass.setEnabled(false);
+    }
+    private static class CountDownHandler extends Handler {
+
+        private int mMinute;
+        private int mSecond;
+
+        private Timer timer;
+        private TimerTask timerTask;
+
+        private WeakReference<RobAddVCertificationActivity> mActivityRef;
+
+        public CountDownHandler(RobAddVCertificationActivity activty, double lasttime) {
+            mActivityRef = new WeakReference<RobAddVCertificationActivity>(activty);
+
+            String[] minteSecend = CommonUtil.secondToMinute(lasttime).split(":");
+            if (minteSecend != null || minteSecend.length >= 2) {
+                mMinute = Integer.parseInt(minteSecend[0]);
+                mSecond = Integer.parseInt(minteSecend[1]);
+            }else {
+                // TODO: 2018/4/21 脏数据，记录log，给后台提示
+            }
+        }
+
+
+        /**
+         * 开始倒计时
+         */
+        public void startTimer() {
+            timerTask = new TimerTask() {
+
+                @Override
+                public void run() {
+                    Message msg = new Message();
+                    msg.what = 0;
+                    sendMessage(msg);
+                }
+            };
+            timer = new Timer();
+            timer.schedule(timerTask, 0, 1000);
+        }
+
+
+        public String getCurrentText() {
+            if (mSecond >= 10) {
+                return "" + mMinute + ":" + mSecond;
+            } else {
+                return "" + mMinute + ":0" + mSecond;
+            }
+        }
+
+
+        public void cancel() {
+            if (timer != null){
+                timer.cancel();
+                timer = null;
+            }
+            if (timerTask != null){
+                timerTask = null;
+            }
+        }
+
+
+        public void handleMessage(Message msg){
+            if (isCountDownOver()) {
+                callbackActivityOnTimeFinish();
+                return;
+            }
+
+            if (mMinute == 0) {
+                if (mSecond != 0) {
+                    mSecond--;
+                    callbackActivityTimeTextChange();
+                }
+
+            } else {
+                if (mSecond == 0) {
+                    mSecond = 59;
+                    mMinute--;
+                    callbackActivityTimeTextChange();
+                } else {
+                    mSecond--;
+                    if (mSecond >= 10) {
+                        callbackActivityTimeTextChange();
+                    } else {
+                        callbackActivityTimeTextChange();
+                    }
+                }
+            }
+        } // handle message finish
+
+        private boolean isCountDownOver() {
+            return mMinute == 0 && mSecond == 0;
+        }
+
+        /**
+         * 回调Activity 倒计时结束
+         */
+        private void callbackActivityOnTimeFinish() {
+            RobAddVCertificationActivity activty = mActivityRef.get();
+            if (activty == null || activty.isFinishing()) {
+                return;
+            }
+            activty.onTimeFinish();
+        }
+
+        /**
+         * 回调Activity 倒计时时间变化
+         */
+        private void callbackActivityTimeTextChange() {
+            RobAddVCertificationActivity activty = mActivityRef.get();
+            if (activty == null || activty.isFinishing()) {
+                return;
+            }
+            activty.onTimeChanged(getCurrentText());
+        }
+
     }
 }
