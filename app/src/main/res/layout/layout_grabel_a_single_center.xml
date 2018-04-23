@@ -171,7 +171,7 @@
             android:layout_toRightOf="@+id/tv_gpss"
             android:singleLine="true"
             android:text="116.31°E,39.69N"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:textColor="@color/oder_color"
             android:layout_marginLeft="10dp"
             android:textSize="@dimen/text_6"
@@ -188,7 +188,6 @@
                 android:layout_width="wrap_content"
                 android:src="@mipmap/dingwei_ico"
                 android:layout_centerVertical="true"
-
                 android:layout_height="wrap_content" />
             <TextView
                 android:layout_toRightOf="@+id/img_ico"
