@@ -142,4 +142,8 @@ public interface Constants {
     int ORG_CALIM = 01;
     int ORG_REGISTER = 02;
     int NORMAL_REGISTER = 03;
+    //沟通方式 00:电话沟通,01:上门拜访,03:远程审核
+    String PHONE_CATION_TYPE = "00";
+    String HOME_VISI_TYPE = "01";
+    String LONG_RANGE_AUDIT = "02";
 }

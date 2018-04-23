@@ -1,6 +1,5 @@
 package com.ztstech.vgmate.activitys.rob_chance.rob_ing;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -26,6 +25,7 @@ import com.ztstech.vgmate.utils.DialogUtils;
 import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.weigets.TopBar;
 
+import java.lang.ref.WeakReference;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -110,11 +110,8 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
     /**其他补充最大长度*/
     static int maxLenght=100;
     //纯如的剩余时间
-    double lasttime;
-    int minute;
-    int second;
-    private Timer timer;
-    private TimerTask timerTask;
+
+
     /**当前机构来源是 路人登记，机构登记，机构认领*/
     public static  boolean  isNormalRegister;
     public static  boolean isOrgRegister;
@@ -133,6 +130,9 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
      static String vIdenttype="02";
     /**登记机构拒绝*/
     RefuseOrPassData orgRegisterRefuseData;
+
+    private CountDownHandler mCountDownHandler;
+
 
     @Override
     protected int getLayoutRes() {
@@ -177,30 +177,18 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         } else if (identityFlg == ORG_CHECK_IN_OR_CALIM) {
             llLayoutCenter.setVisibility(View.VISIBLE);
         }
-        tvTime.setText(minute + ":" + second);
 
-        timerTask = new TimerTask() {
-
-            @Override
-            public void run() {
-                Message msg = new Message();
-                msg.what = 0;
-                handler.sendMessage(msg);
-            }
-        };
-
-        timer = new Timer();
-        timer.schedule(timerTask, 0, 1000);
+        tvTime.setText(mCountDownHandler.getCurrentText());
+        String[] gps = bean.rbigps.split(",");
+        tvGps.setText("E"+CommonUtil.convertToSexagesimal(Double.parseDouble(gps[0])).
+                concat("N"+CommonUtil.convertToSexagesimal(Double.parseDouble(gps[1]))));
     }
+
     //初始化数据
     private void initData() {
         bean = new Gson().fromJson(getIntent().getStringExtra(ORG_BEAN_ROB), RobChanceBean.ListBean.class);
         identityFlg = getIntent().getIntExtra(ORG_IDENTITY, 0);
-        lasttime = getIntent().getDoubleExtra(LAST_TIME,0);
-        String minteSecend[] = null;
-        minteSecend = CommonUtil.secondToMinute(lasttime).split(":");
-        minute = Integer.parseInt(minteSecend[0]);
-        second = Integer.parseInt(minteSecend[1]);
+
         type= CommonUtil.identity(bean.cstatus,bean.nowchancetype,bean.chancetype);
         if(Constants.NORMAL_REGISTER== type)
         {
@@ -210,60 +198,12 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         }else if(Constants.ORG_REGISTER==type){
             isOrgRegister=true;
         }
+
+        double lasttime = getIntent().getDoubleExtra(LAST_TIME,0);
+        mCountDownHandler = new CountDownHandler(this, lasttime);
+        mCountDownHandler.startTimer();
     }
-    @SuppressLint("HandlerLeak")
-    private Handler handler =  new Handler(){
-        public void handleMessage(Message msg){
-            if (minute == 0) {
-                if (second == 0) {
-                    tvTime.setText("超时");
-                    tvPass.setBackgroundResource(R.drawable.bg_c_2_f_104);
-                    tvRefuse.setBackgroundResource(R.drawable.bg_c_2_f_104);
-                    tvRefuse.setEnabled(false);
-                    tvPass.setEnabled(false);
-                    if (timer != null) {
-                        timer.cancel();
-                        timer = null;
-                    }
-                    if (timerTask != null) {
-                        timerTask = null;
-                    }
-                } else {
-                    second--;
-                    if (second >= 10) {
-                        tvTime.setText("0" + minute + ":" + second);
-                    } else {
-                        tvTime.setText("0" + minute + ":0" + second);
-                    }
-                }
-            } else {
-                if (second == 0) {
-                    second = 59;
-                    minute--;
-                    if (minute >= 10) {
-                        tvTime.setText(minute + ":" + second);
-                    } else {
-                        tvTime.setText("0" + minute + ":" + second);
-                    }
-                } else {
-                    second--;
-                    if (second >= 10) {
-                        if (minute >= 10) {
-                            tvTime.setText(minute + ":" + second);
-                        } else {
-                            tvTime.setText("0" + minute + ":" + second);
-                        }
-                    } else {
-                        if (minute >= 10) {
-                            tvTime.setText(minute + ":0" + second);
-                        } else {
-                            tvTime.setText("0" + minute + ":0" + second);
-                        }
-                    }
-                }
-            }
-        }
-    };
+
     @OnClick({R.id.rl_ico_gps, R.id.tv_refuse, R.id.tv_pass})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -312,35 +252,35 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         if(isNormalRegister||isOrgRegister){
             DialogUtils.getInstance().showRefuseReasonDialog(RobIngActivty.this, maxLenght,
                     new DialogUtils.ShowRefuseReasonCallBack() {
-                @Override
-                public void confirm(TextView tvConfirm, EditText etReason, RadioButton rb1,
-                                    RadioButton rb2, RadioButton rb3, RadioButton rb4) {
-                    orgRegisterRefuseData=new RefuseOrPassData();
-                    orgRegisterRefuseData.oname=bean.rbioname;
-                    orgRegisterRefuseData.rbiid=String .valueOf(bean.rbiid);
-                    orgRegisterRefuseData.type="00";
-                    orgRegisterRefuseData.refuse=etReason.getText().toString();
-                    orgRegisterRefuseData.rubbishtype=CommonUtil.isCheck(rb1,rb2,rb3,rb4,strReason);
-                    if(isNormalRegister) {
-                        mPresenter.refuseRegisterCommit(orgRegisterRefuseData,Constants.NORMAL_REGISTER);
-                    }else {
-                        mPresenter.refuseRegisterCommit(orgRegisterRefuseData,Constants.ORG_REGISTER);
-                    }
-                }
+                        @Override
+                        public void confirm(TextView tvConfirm, EditText etReason, RadioButton rb1,
+                                            RadioButton rb2, RadioButton rb3, RadioButton rb4) {
+                            orgRegisterRefuseData=new RefuseOrPassData();
+                            orgRegisterRefuseData.oname=bean.rbioname;
+                            orgRegisterRefuseData.rbiid=String .valueOf(bean.rbiid);
+                            orgRegisterRefuseData.type="00";
+                            orgRegisterRefuseData.refuse=etReason.getText().toString();
+                            orgRegisterRefuseData.rubbishtype=CommonUtil.isCheck(rb1,rb2,rb3,rb4,strReason);
+                            if(isNormalRegister) {
+                                mPresenter.refuseRegisterCommit(orgRegisterRefuseData,Constants.NORMAL_REGISTER);
+                            }else {
+                                mPresenter.refuseRegisterCommit(orgRegisterRefuseData,Constants.ORG_REGISTER);
+                            }
+                        }
 
-                @Override
-                public void textChanged(TextView tvConfirm, EditText etReason, RadioButton rb1,
-                                        RadioButton rb2, RadioButton rb3, RadioButton rb4, TextView tvNum) {
-                    tvNum.setText(etReason.getText().toString().length()+"/"+maxLenght);
-                    isCommit(etReason,rb1,rb2,rb3,rb4,tvConfirm);
-                }
+                        @Override
+                        public void textChanged(TextView tvConfirm, EditText etReason, RadioButton rb1,
+                                                RadioButton rb2, RadioButton rb3, RadioButton rb4, TextView tvNum) {
+                            tvNum.setText(etReason.getText().toString().length()+"/"+maxLenght);
+                            isCommit(etReason,rb1,rb2,rb3,rb4,tvConfirm);
+                        }
 
-                @Override
-                public void radioButtonCheck(TextView tvConfirm, EditText etReason, RadioButton rb1,
-                                             RadioButton rb2, RadioButton rb3, RadioButton rb4, TextView tvNum) {
-                    isCommit(etReason,rb1,rb2,rb3,rb4,tvConfirm);
-                }
-            });
+                        @Override
+                        public void radioButtonCheck(TextView tvConfirm, EditText etReason, RadioButton rb1,
+                                                     RadioButton rb2, RadioButton rb3, RadioButton rb4, TextView tvNum) {
+                            isCommit(etReason,rb1,rb2,rb3,rb4,tvConfirm);
+                        }
+                    });
         }else if(isOrgCalim){
             refuseOrPassData =new RefuseOrPassData();
             refuseOrPassData.rbiid=String.valueOf(bean.rbiid);
@@ -348,15 +288,15 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
             refuseOrPassData.calid=bean.calid;
             DialogUtils.showdialogbottomtwobutton(RobIngActivty.this, "取消","确定",
                     "拒绝提示","你确定要拒绝吗？", new DialogUtils.showdialogbottomtwobuttonCallBack() {
-                @Override
-                public void tvRightClick() {
-                  mPresenter.refuse0rPassCommit(refuseOrPassData,Constants.ORG_CALIM);
-                }
-                @Override
-                public void tvLeftClick() {
+                        @Override
+                        public void tvRightClick() {
+                            mPresenter.refuse0rPassCommit(refuseOrPassData,Constants.ORG_CALIM);
+                        }
+                        @Override
+                        public void tvLeftClick() {
 
-                }
-            });
+                        }
+                    });
 
         }
     }
@@ -375,17 +315,13 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         }
     }
 
+
     @Override
     protected void onDestroy() {
-        if (timer != null){
-            timer.cancel();
-            timer = null;
-        }
-        if (timerTask != null){
-            timerTask = null;
-        }
         super.onDestroy();
-
+        if (mCountDownHandler != null) {
+            mCountDownHandler.cancel();
+        }
     }
 
     @Override
@@ -400,6 +336,143 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
 
     @Override
     public void showError(String msg) {
+
+    }
+
+    /**
+     * 倒计时时间变化调用
+     * @param newTimeText
+     */
+    private void onTimeChanged(String newTimeText) {
+        tvTime.setText(newTimeText);
+    }
+
+    /**
+     * 倒计时结束
+     */
+    private void onTimeFinish() {
+        tvTime.setText("超时");
+        tvPass.setBackgroundResource(R.drawable.bg_c_2_f_104);
+        tvRefuse.setBackgroundResource(R.drawable.bg_c_2_f_104);
+        tvRefuse.setEnabled(false);
+        tvPass.setEnabled(false);
+    }
+
+
+    private static class CountDownHandler extends Handler {
+
+        private int mMinute;
+        private int mSecond;
+
+        private Timer timer;
+        private TimerTask timerTask;
+
+        private WeakReference<RobIngActivty> mActivityRef;
+
+        public CountDownHandler(RobIngActivty activty, double lasttime) {
+            mActivityRef = new WeakReference<RobIngActivty>(activty);
+
+            String[] minteSecend = CommonUtil.secondToMinute(lasttime).split(":");
+            if (minteSecend != null || minteSecend.length >= 2) {
+                mMinute = Integer.parseInt(minteSecend[0]);
+                mSecond = Integer.parseInt(minteSecend[1]);
+            }else {
+                // TODO: 2018/4/21 脏数据，记录log，给后台提示
+            }
+        }
+
+
+        /**
+         * 开始倒计时
+         */
+        public void startTimer() {
+            timerTask = new TimerTask() {
+
+                @Override
+                public void run() {
+                    Message msg = new Message();
+                    msg.what = 0;
+                    sendMessage(msg);
+                }
+            };
+            timer = new Timer();
+            timer.schedule(timerTask, 0, 1000);
+        }
+
+
+        public String getCurrentText() {
+            if (mSecond >= 10) {
+                return "" + mMinute + ":" + mSecond;
+            } else {
+                return "" + mMinute + ":0" + mSecond;
+            }
+        }
+
+
+        public void cancel() {
+            if (timer != null){
+                timer.cancel();
+                timer = null;
+            }
+            if (timerTask != null){
+                timerTask = null;
+            }
+        }
+
+
+        public void handleMessage(Message msg){
+            if (isCountDownOver()) {
+                callbackActivityOnTimeFinish();
+                return;
+            }
+
+            if (mMinute == 0) {
+                if (mSecond != 0) {
+                    mSecond--;
+                    callbackActivityTimeTextChange();
+                }
+
+            } else {
+                if (mSecond == 0) {
+                    mSecond = 59;
+                    mMinute--;
+                    callbackActivityTimeTextChange();
+                } else {
+                    mSecond--;
+                    if (mSecond >= 10) {
+                        callbackActivityTimeTextChange();
+                    } else {
+                        callbackActivityTimeTextChange();
+                    }
+                }
+            }
+        } // handle message finish
+
+        private boolean isCountDownOver() {
+            return mMinute == 0 && mSecond == 0;
+        }
+
+        /**
+         * 回调Activity 倒计时结束
+         */
+        private void callbackActivityOnTimeFinish() {
+            RobIngActivty activty = mActivityRef.get();
+            if (activty == null || activty.isFinishing()) {
+                return;
+            }
+            activty.onTimeFinish();
+        }
+
+        /**
+         * 回调Activity 倒计时时间变化
+         */
+        private void callbackActivityTimeTextChange() {
+            RobIngActivty activty = mActivityRef.get();
+            if (activty == null || activty.isFinishing()) {
+                return;
+            }
+            activty.onTimeChanged(getCurrentText());
+        }
 
     }
 }

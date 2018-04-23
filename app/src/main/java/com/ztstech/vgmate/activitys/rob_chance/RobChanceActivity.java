@@ -34,6 +34,7 @@ import static com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty.ORG_
 import static com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty.ORG_IDENTITY;
 
 /**
+ * 可抢机会
  * Created by dongdong on 2018/4/18.
  */
 
@@ -139,9 +140,9 @@ public class RobChanceActivity extends MVPActivity<RobChanceContract.Presenter> 
         intent.putExtra(ORG_BEAN_ROB,object);
         intent.putExtra(LAST_TIME,lasttime);
         if (i == PASSER_CHECK_IN){
-            intent.getIntExtra(ORG_IDENTITY,PASSER_CHECK_IN);
+            intent.putExtra(ORG_IDENTITY,PASSER_CHECK_IN);
         }else{
-            intent.getIntExtra(ORG_IDENTITY,ORG_CHECK_IN_OR_CALIM);
+            intent.putExtra(ORG_IDENTITY,ORG_CHECK_IN_OR_CALIM);
         }
         startActivity(intent);
         kProgressHUD.dismiss();
