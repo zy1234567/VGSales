@@ -263,7 +263,7 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
         orgPassData.rbiostatus="00";
         orgPassData.type="01";
         orgPassData.terminal="02";
-
+        orgPassData.calid=bean.calid;
         if(rbRemote.isChecked()){
            if(!tvName.getText().toString().equals("")){
                orgPassData.wechatid=tvName.getText().toString();

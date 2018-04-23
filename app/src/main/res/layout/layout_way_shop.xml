@@ -14,6 +14,7 @@
         android:background="@color/color_107"
         android:layout_height="25dp">
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="*"
@@ -30,16 +31,19 @@
             android:textColor="@color/list_item_text_gray_color"
             android:layout_height="wrap_content" />
     </RelativeLayout>
-    <com.ztstech.vgmate.weigets.CustomGridView
-        android:id="@+id/gv_img"
-        android:layout_below="@+id/rl_photo"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_width="match_parent"
-        android:layout_height="105dp">
-    </com.ztstech.vgmate.weigets.CustomGridView>
+
+        <com.ztstech.vgmate.weigets.CustomGridView
+            android:id="@+id/gv_img"
+            android:layout_marginLeft="12dp"
+            android:layout_below="@+id/rl_photo"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.ztstech.vgmate.weigets.CustomGridView>
+
+
     <RelativeLayout
         android:id="@+id/rl_dismiss"
         android:layout_width="match_parent"

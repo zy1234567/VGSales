@@ -171,6 +171,13 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         if(ISSALE){
             tvNames.setText("认领人");
             tvTime.setVisibility(View.GONE);
+            if(isOrgRegister) {
+                topBar.setTitle("机构登记审核");
+            }else if(isOrgCalim){
+                topBar.setTitle("机构认领审核");
+            }else {
+                topBar.setTitle("路人登记审核");
+            }
         }else {
             tvNames.setText("对方姓名");
             tvTime.setVisibility(View.VISIBLE);
@@ -190,9 +197,9 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         }
         if (!TextUtils.isEmpty(bean.createrid)) {
             if (TextUtils.equals(bean.createrid, Constants.ORG_ADMIN)) {
-                tvPostions.setText("机构一般管理人员");
+                tvPosition.setText("机构一般管理人员");
             } else if (TextUtils.equals(bean.createrid, Constants.ORG_BOSS)) {
-                tvPostions.setText("机构法人/老板/店长");
+                tvPosition.setText("机构法人/老板/店长");
             }
 
         }
@@ -224,7 +231,9 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         bean.chancetype=orgFollowlistBean.chancetype;
         bean.nowchancetype=orgFollowlistBean.nowchancetype;
         bean.cstatus=orgFollowlistBean.cstatus;
+        bean.orgcount=orgFollowlistBean.orgcount;
         bean.rbiid=orgFollowlistBean.rbiid;
+        bean.createrid=orgFollowlistBean.createrid;
     }
     //初始化数据
     private void initData() {
@@ -328,6 +337,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
                             }else {
                                 mPresenter.refuseRegisterCommit(orgRegisterRefuseData,Constants.ORG_REGISTER);
                             }
+                            finish();
                         }
 
                         @Override
@@ -353,13 +363,13 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
                         @Override
                         public void tvRightClick() {
                             mPresenter.refuse0rPassCommit(refuseOrPassData,Constants.ORG_CALIM);
+                            finish();
                         }
                         @Override
                         public void tvLeftClick() {
 
                         }
                     });
-
         }
     }
     /**

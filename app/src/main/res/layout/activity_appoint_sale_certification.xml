@@ -6,109 +6,115 @@
     android:layout_width="match_parent"
     android:background="@color/color_107"
     android:layout_height="match_parent">
-    <com.ztstech.vgmate.weigets.TopBar
-        android:id="@+id/top_bar"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:showBackNav="true"
-        app:barTitle="加V认证"
-        app:srcLeft="@mipmap/back_black"
-        android:background="@color/color_109">
-    </com.ztstech.vgmate.weigets.TopBar>
-    <LinearLayout
-        android:id="@+id/rl_top"
-        android:layout_below="@+id/top_bar"
-        android:layout_width="match_parent"
-        android:gravity="center_vertical"
-        android:background="@color/color_107"
-        android:layout_height="25dp">
-        <TextView
-            android:id="@+id/tv_way"
-            android:layout_marginLeft="12dp"
-            android:layout_width="wrap_content"
-            android:text="审核方式"
-            android:textSize="@dimen/text_7"
-            android:textColor="@color/list_item_text_gray_color"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <RadioGroup
-        android:id="@+id/rg_button"
-        android:layout_below="@id/rl_top"
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:layout_height="50dp">
-        <RadioButton
-            android:id="@+id/rb_remote"
-            android:layout_marginLeft="@dimen/dialog_isfrist_used"
-            android:drawablePadding="6dp"
-            android:background="@null"
-            android:button="@null"
-            android:layout_width="85dp"
-            android:checked="true"
-            android:drawableLeft="@drawable/sel_check"
-            android:text="远程审核"
-            android:textSize="@dimen/text_5"
-            android:textColor="@drawable/textcolor_radiobutton"
-            android:layout_height="wrap_content" />
-        <RadioButton
-            android:layout_marginLeft="40dp"
-            android:id="@+id/rb_shop"
-            android:background="@null"
-            android:button="@null"
-            android:textSize="@dimen/text_5"
-            android:drawablePadding="6dp"
-            android:text="到店审核"
-            android:layout_width="wrap_content"
-            android:textColor="@drawable/textcolor_radiobutton"
-            android:drawableLeft="@drawable/sel_check"
-            android:layout_height="wrap_content" />
-    </RadioGroup>
+        android:layout_height="match_parent">
     <RelativeLayout
-        android:id="@+id/ll_center"
-        android:layout_below="@+id/rg_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <include layout="@layout/layout_appoint_way_center"/>
-        <include layout="@layout/layout_way_shop"/>
-    </RelativeLayout>
-    <LinearLayout
-        android:id="@+id/ll_more"
-        android:layout_below="@+id/ll_center"
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:background="@color/color_107"
-        android:layout_height="25dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:text="补充说明"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"
-            android:textSize="@dimen/text_7"
-            android:textColor="@color/list_item_text_gray_color"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <RelativeLayout
-        android:layout_below="@+id/ll_more"
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="100dp">
-        <EditText
-            android:id="@+id/tv_more"
+        android:layout_height="match_parent">
+        <com.ztstech.vgmate.weigets.TopBar
+            android:id="@+id/top_bar"
             android:layout_width="match_parent"
-            android:layout_marginLeft="@dimen/dialog_isfrist_used"
-            android:background="@null"
-            android:gravity="left|top"
-            android:layout_marginTop="11dp"
-            android:textColorHint="@color/color_103"
-            android:textSize="14sp"
-            android:textColor="@color/color_100"
-            android:hint="您可以输入其他补充说明"
-            android:layout_height="100dp" />
-        <!--<TextView-->
+            android:layout_height="wrap_content"
+            app:showBackNav="true"
+            app:barTitle="加V认证"
+            app:srcLeft="@mipmap/back_black"
+            android:background="@color/color_109">
+        </com.ztstech.vgmate.weigets.TopBar>
+        <LinearLayout
+            android:id="@+id/rl_top"
+            android:layout_below="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:background="@color/color_107"
+            android:layout_height="25dp">
+            <TextView
+                android:id="@+id/tv_way"
+                android:layout_marginLeft="12dp"
+                android:layout_width="wrap_content"
+                android:text="审核方式"
+                android:textSize="@dimen/text_7"
+                android:textColor="@color/list_item_text_gray_color"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/rg_button"
+            android:layout_below="@id/rl_top"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_height="50dp">
+            <RadioButton
+                android:id="@+id/rb_remote"
+                android:layout_marginLeft="@dimen/dialog_isfrist_used"
+                android:drawablePadding="6dp"
+                android:background="@null"
+                android:button="@null"
+                android:layout_width="85dp"
+                android:checked="true"
+                android:drawableLeft="@drawable/sel_check"
+                android:text="远程审核"
+                android:textSize="@dimen/text_5"
+                android:textColor="@drawable/textcolor_radiobutton"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:layout_marginLeft="40dp"
+                android:id="@+id/rb_shop"
+                android:background="@null"
+                android:button="@null"
+                android:textSize="@dimen/text_5"
+                android:drawablePadding="6dp"
+                android:text="到店审核"
+                android:layout_width="wrap_content"
+                android:textColor="@drawable/textcolor_radiobutton"
+                android:drawableLeft="@drawable/sel_check"
+                android:layout_height="wrap_content" />
+        </RadioGroup>
+        <RelativeLayout
+            android:id="@+id/ll_center"
+            android:layout_below="@+id/rg_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/layout_appoint_way_center"/>
+            <include layout="@layout/layout_way_shop"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/ll_more"
+            android:layout_below="@+id/ll_center"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:background="@color/color_107"
+            android:layout_height="25dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:text="补充说明"
+                android:textStyle="bold"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/text_7"
+                android:textColor="@color/list_item_text_gray_color"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_below="@+id/ll_more"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+            <EditText
+                android:id="@+id/tv_more"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="@dimen/dialog_isfrist_used"
+                android:background="@null"
+                android:gravity="left|top"
+                android:layout_marginTop="11dp"
+                android:textColorHint="@color/color_103"
+                android:textSize="14sp"
+                android:textColor="@color/color_100"
+                android:hint="您可以输入其他补充说明"
+                android:layout_height="100dp" />
+            <!--<TextView-->
             <!--android:id="@+id/tv_more_count"-->
             <!--android:layout_alignParentBottom="true"-->
             <!--android:layout_alignParentRight="true"-->
@@ -119,7 +125,10 @@
             <!--android:textSize="@dimen/text_8"-->
             <!--android:layout_marginBottom="4dp"-->
             <!--android:layout_height="wrap_content" />-->
+        </RelativeLayout>
+
     </RelativeLayout>
+    </ScrollView>
     <View
         android:id="@+id/v2"
         android:layout_alignParentBottom="true"
