@@ -17,6 +17,8 @@ import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.add_certification.RobAddVCertificationActivity;
+import com.ztstech.vgmate.activitys.add_certification.appoint_sale.RobAddVAppointSaleActivity;
+import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
 import com.ztstech.vgmate.data.dto.OrgPassData;
 import com.ztstech.vgmate.data.dto.RefuseOrPassData;
@@ -139,7 +141,11 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
     private CountDownHandler mCountDownHandler;
 
     private OrgPassData orgPassData;
-
+    /** 指定销售 审核*/
+    public static final String APPOINT_SALE_KEY="appoint_sale_key";
+    public static final String APPOINT_SALE_VALUE="appoint_sale_value";
+     /**是否是指定销售*/
+     boolean ISSALE=false;
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_rob_ing;
@@ -157,6 +163,14 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
             tvPass.setText("通过(定位认证)");
         }else {
             tvPass.setText("通过(加V认证)");
+        }
+        if(ISSALE){
+            tvNames.setText("认领人");
+            tvTime.setVisibility(View.GONE);
+        }else {
+            tvNames.setText("对方姓名");
+            tvTime.setVisibility(View.VISIBLE);
+            tvTime.setText(mCountDownHandler.getCurrentText());
         }
         CommonUtil.orgfFromType(this, tvAddType, bean.cstatus, bean.nowchancetype, bean.chancetype);
         tvOtype.setText(CategoryUtil.findCategoryByOtype(bean.rbiotype));
@@ -184,17 +198,42 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
             llLayoutCenter.setVisibility(View.VISIBLE);
         }
 
-        tvTime.setText(mCountDownHandler.getCurrentText());
         String[] gps = bean.rbigps.split(",");
         tvGps.setText("E"+CommonUtil.convertToSexagesimal(Double.parseDouble(gps[0])).
                 concat("N"+CommonUtil.convertToSexagesimal(Double.parseDouble(gps[1]))));
     }
-
+    /**转化数据源bean*/
+    private  void changeBean(){
+        OrgFollowlistBean.ListBean orgFollowlistBean=  new Gson().fromJson(getIntent().
+                getStringExtra(ORG_BEAN_ROB), OrgFollowlistBean.ListBean.class);
+        bean.rbioname=orgFollowlistBean.rbioname;
+        bean.rbiotype=orgFollowlistBean.rbiotype;
+        bean.rbicity=orgFollowlistBean.rbicity;
+        bean.rbiaddress=orgFollowlistBean.rbiaddress;
+        bean.rbicontphone=orgFollowlistBean.rbicontphone;
+        bean.rbigps=orgFollowlistBean.rbigps;
+        bean.contractname=orgFollowlistBean.contractname;
+        bean.contractphone=orgFollowlistBean.contractphone;
+        bean.calid=orgFollowlistBean.calid;
+        bean.rbiprovince=orgFollowlistBean.rbiprovince;
+        bean.rbidistrict=orgFollowlistBean.rbidistrict;
+        bean.chancetype=orgFollowlistBean.chancetype;
+        bean.nowchancetype=orgFollowlistBean.nowchancetype;
+        bean.cstatus=orgFollowlistBean.cstatus;
+        bean.rbiid=orgFollowlistBean.rbiid;
+    }
     //初始化数据
     private void initData() {
-        bean = new Gson().fromJson(getIntent().getStringExtra(ORG_BEAN_ROB), RobChanceBean.ListBean.class);
+        bean=new RobChanceBean.ListBean();
+        if(getIntent().getStringExtra(APPOINT_SALE_KEY)!=null&&
+                getIntent().getStringExtra(APPOINT_SALE_KEY).equals(APPOINT_SALE_VALUE)){
+            ISSALE=true;
+            changeBean();
+        }else {
+            ISSALE=false;
+            bean = new Gson().fromJson(getIntent().getStringExtra(ORG_BEAN_ROB), RobChanceBean.ListBean.class);
+        }
         identityFlg = getIntent().getIntExtra(ORG_IDENTITY, 0);
-
         type= CommonUtil.identity(bean.cstatus,bean.nowchancetype,bean.chancetype);
         if(Constants.NORMAL_REGISTER== type)
         {
@@ -204,10 +243,11 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         }else if(Constants.ORG_REGISTER==type){
             isOrgRegister=true;
         }
-
-        double lasttime = getIntent().getDoubleExtra(LAST_TIME,0);
-        mCountDownHandler = new CountDownHandler(this, lasttime);
-        mCountDownHandler.startTimer();
+        if(!ISSALE) {
+            double lasttime = getIntent().getDoubleExtra(LAST_TIME, 0);
+            mCountDownHandler = new CountDownHandler(this, lasttime);
+            mCountDownHandler.startTimer();
+        }
     }
 
     @OnClick({R.id.rl_ico_gps, R.id.tv_refuse, R.id.tv_pass})
@@ -222,9 +262,16 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
                 if(isNormalRegister){
                     locationPass();
                 }else {
-                    Intent intent = new Intent(this,RobAddVCertificationActivity.class);
-                    intent.putExtra(RobAddVCertificationActivity.ORG_BEAN,new Gson().toJson(bean));
-                    startActivity(intent);
+                    if(getIntent().getStringExtra(APPOINT_SALE_KEY)!=null&&
+                            getIntent().getStringExtra(APPOINT_SALE_KEY).equals(APPOINT_SALE_VALUE)){
+                        Intent intent = new Intent(this,RobAddVAppointSaleActivity.class);
+                        intent.putExtra(ORG_BEAN_ROB,new Gson().toJson(bean));
+                        startActivity(intent);
+                    }else {
+                        Intent intent = new Intent(this,RobAddVCertificationActivity.class);
+                        intent.putExtra(RobAddVCertificationActivity.ORG_BEAN,new Gson().toJson(bean));
+                        startActivity(intent);
+                    }
                 }
                 break;
             default:

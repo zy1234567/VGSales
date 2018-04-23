@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.ztstech.vgmate.R;
-import com.ztstech.vgmate.activitys.org_follow.claim_org.ClaimOrgDetailActivity;
 import com.ztstech.vgmate.activitys.photo_browser.PhotoBrowserActivity;
 import com.ztstech.vgmate.base.SimpleRecyclerAdapter;
 import com.ztstech.vgmate.base.SimpleViewHolder;

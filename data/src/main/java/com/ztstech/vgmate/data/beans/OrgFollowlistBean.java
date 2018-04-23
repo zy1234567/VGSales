@@ -83,5 +83,7 @@ public class OrgFollowlistBean extends BaseRespBean implements Serializable{
         public String chancetype;
         public String nowchancetype;
         public String createtime;
+        public String contractname;
+        public String contractphone;
     }
 }

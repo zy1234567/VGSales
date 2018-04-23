@@ -12,23 +12,32 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
+import com.ztstech.vgmate.activitys.gps.GpsActivity;
+import com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty;
+import com.ztstech.vgmate.data.beans.RobChanceBean;
+import com.ztstech.vgmate.data.dto.OrgPassData;
 import com.ztstech.vgmate.manager.MatissePhotoHelper;
 import com.ztstech.vgmate.matisse.Matisse;
 import com.ztstech.vgmate.matisse.MimeType;
+import com.ztstech.vgmate.utils.ToastUtil;
+import com.ztstech.vgmate.weigets.CustomGridView;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.ztstech.vgmate.activitys.complete_org_info_v2.subview.pic_video.EditOrgPicVideoActivity.MAX_PIC_COUNT;
+import static com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty.ORG_BEAN_ROB;
 
 /**
  * Created by Administrator on 2018/4/23.
@@ -84,8 +93,8 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
     LinearLayout llMore;
     @BindView(R.id.tv_more)
     EditText tvMore;
-    @BindView(R.id.tv_more_count)
-    TextView tvMoreCount;
+//    @BindView(R.id.tv_more_count)
+//    TextView tvMoreCount;
     @BindView(R.id.v2)
     View v2;
     @BindView(R.id.ll_reminder)
@@ -94,12 +103,31 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
     LinearLayout llButtom;
     @BindView(R.id.tv_pass)
     TextView tvPass;
-     final  int REQUESTCODE=11;
+    @BindView(R.id.gv_img)
+    CustomGridView customGridView;
+    ImageView imgAddImg;
+     final int REQUESTCODEVIDIO=11;
+     final int REQUSTCODELOCATION=12;
+     final int REQUSTCODEPOSITION=13;
+    RobChanceBean.ListBean bean;
+    /**
+     * 请求gps信息
+     */
+    public static final int REQ_GPS = 3;
      File[] files;
+     private OrgPassData orgPassData = new OrgPassData();
+    /**图片文件地址*/
+    private List<String> imageFiles = new ArrayList<>();
+    public static String RBIID;
+    String rbiid;
+    int MAX_PIC_COUNT=5;
+
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
+        bean = new Gson().fromJson(getIntent().getStringExtra(ORG_BEAN_ROB), RobChanceBean.ListBean.class);
         initView();
+        addDefaultImage();
     }
     private void initView() {
         rbRemote.setChecked(true);
@@ -123,41 +151,138 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
             }
         });
     }
-    private void addImg(final String imgPath,ImageView img) {
-        Glide.with(RobAddVAppointSaleActivity.this).
-                load(imgPath).placeholder(R.mipmap.pre_default_image).error(R.mipmap.pre_default_image).into(img);
+    /**
+     * 增加默认图片
+     */
+    private void addDefaultImage() {
+        imgAddImg = new ImageView(this);
+        imgAddImg.setImageResource(R.mipmap.add_img);
+        imgAddImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imgAddImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (view == imgAddImg) {
+                    MatissePhotoHelper.selectPhoto(RobAddVAppointSaleActivity.this,
+                            MAX_PIC_COUNT - imageFiles.size(), REQUSTCODEPOSITION,MimeType.ofImage());
+                }
+            }
+        });
+        customGridView.addView(imgAddImg);
+        customGridView.requestLayout();
+
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==REQUESTCODE&&resultCode==RESULT_OK){
+        if(requestCode==REQUESTCODEVIDIO&&resultCode==RESULT_OK){
+            addImg(imgVido,data,1);
+        }else  if(requestCode==REQUSTCODELOCATION&&resultCode==RESULT_OK){
+            addImg(imgLocation,data,0);
+        } else if(requestCode==REQUSTCODEPOSITION&&requestCode==RESULT_OK){
             for (int i = 0; i < Matisse.obtainPathResult(data).size(); i++){
-                files = new File[1];
-                String uri =Matisse.obtainPathResult(data).get(i);
-                final File f = new File(uri);
-                Glide.with(this).load(f).into(imgVido);
-                files[0] = f;
+                addItem(Matisse.obtainPathResult(data).get(i),null);
             }
-        }else  if(re)
+        }else if (requestCode == REQ_GPS && resultCode == RESULT_OK) {
+            // 获取经纬度
+            double la = data.getDoubleExtra(GpsActivity.RESULT_LATITUDE, 0);
+            double lo = data.getDoubleExtra(GpsActivity.RESULT_LONGITUDE, 0);
+            String location = data.getStringExtra(GpsActivity.RESULT_LOCATION);
+            // 经度在前纬度在后
+            tvLocation.setText(lo + "," + la);
+            tvLocation.setTag(lo + "," + la);
+        }
     }
-    @OnClick({R.id.rl_ico_gps, R.id.tv_refuse, R.id.tv_pass})
+    private void addItem(final String imgPath, String desc) {
+        final View itemView = LayoutInflater.from(this)
+                .inflate(R.layout.item_img_with_del,
+                        customGridView, false);
+        ImageView img = itemView.findViewById(R.id.img);
+        Glide.with(this).load(imgPath).into(img);
+        View del = itemView.findViewById(R.id.del);
+        final TextView tvAddDesc = itemView.findViewById(R.id.tv_desc);
+        tvAddDesc.setVisibility(View.GONE);
+        if (!TextUtils.isEmpty(desc)) {
+            tvAddDesc.setText(desc);
+            tvAddDesc.setTag(desc);
+        }
+        imageFiles.add(imgPath);
+        customGridView.addView(itemView, 0);
+        del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                customGridView.removeView(itemView);
+                imageFiles.remove(imgPath);
+             //   buttontype();
+            }
+        });
+    }
+    private void addImg(ImageView img,Intent data,int type) {
+        for (int i = 0; i < Matisse.obtainPathResult(data).size(); i++){
+            files = new File[1];
+            String uri =Matisse.obtainPathResult(data).get(i);
+            final File f = new File(uri);
+            Glide.with(RobAddVAppointSaleActivity.this).
+                    load(uri).placeholder(R.mipmap.pre_default_image).
+                    error(R.mipmap.pre_default_image).into(img);
+            files[0] = f;
+            mPresenter.uploadimg(orgPassData,type);
+        }
+    }
+    @OnClick({R.id.ll_buttom, R.id.img_vido, R.id.img_location,R.id.tv_location})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_buttom:
+                Commit();
                 break;
             case R.id.img_vido:
-                choosePicture(1);
+                choosePicture(1,REQUESTCODEVIDIO);
                 break;
             case R.id.img_location:
-                choosePicture(1);
+                choosePicture(1,REQUSTCODELOCATION);
                 break;
+            case R.id.tv_location:
+                Intent it = new Intent(this, GpsActivity.class);
+                startActivityForResult(it, REQ_GPS);
+            break;
             default:
                 break;
         }
     }
-    private  void choosePicture(int maxLength){
+    private  void choosePicture(int maxLength,int requstcode){
         MatissePhotoHelper.selectPhoto(this,
-                maxLength , REQUESTCODE,MimeType.ofImage());
+                maxLength , requstcode,MimeType.ofImage());
+    }
+    private  void  Commit(){
+       // orgPassData.approvetype
+        orgPassData.rbiid=String.valueOf(bean.rbiid);
+        orgPassData.rbiostatus="00";
+        orgPassData.type="01";
+        orgPassData.terminal="02";
+
+        if(rbRemote.isChecked()){
+           if(!tvName.getText().toString().equals("")){
+               orgPassData.wechatid=tvName.getText().toString();
+           }
+           if(!tvMore.getText().toString().equals("")) {
+               orgPassData.description = tvMore.getText().toString();
+           }
+            orgPassData.communicationtype="02";
+           mPresenter.submit(orgPassData);
+        }else {
+            if(imageFiles==null||imageFiles.size()==0){
+                ToastUtil.toastCenter(RobAddVAppointSaleActivity.this,"定位照片不能为空！");
+                return;
+            }else if(TextUtils.equals(tvLocation.getText().toString(),"")){
+                ToastUtil.toastCenter(RobAddVAppointSaleActivity.this,"定位不能为空！");
+                return;
+            }
+            orgPassData.communicationtype="03";
+            orgPassData.spotgps=tvLocation.getText().toString();
+            orgPassData.description =tvMore.getText().toString();
+            mPresenter.submit(orgPassData);
+        }
+
     }
     @Override
     protected RobAddVAppointSaleContract.Presenter initPresenter() {
@@ -169,4 +294,17 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
         return R.layout.activity_appoint_sale_certification;
     }
 
+    @Override
+    public File[] getImgaeFiles() {
+        File[] files = new File[imageFiles.size()];
+        for (int i = 0; i < imageFiles.size(); i++) {
+            files[i] = new File(imageFiles.get(i));
+        }
+        return files;
+    }
+
+    @Override
+    public void onSubmitFinish(String errorMessage) {
+
+    }
 }

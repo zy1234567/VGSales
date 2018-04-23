@@ -16,7 +16,6 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPFragment;
 import com.ztstech.vgmate.activitys.org_detail_v2.OrgDetailV2Activity;
 import com.ztstech.vgmate.activitys.org_follow.adapter.OrgFollowListAdapter;
-import com.ztstech.vgmate.activitys.org_follow.claim_org.ClaimOrgDetailActivity;
 import com.ztstech.vgmate.base.SimpleRecyclerAdapter;
 import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import com.ztstech.vgmate.data.events.ApproveOrgEvent;
