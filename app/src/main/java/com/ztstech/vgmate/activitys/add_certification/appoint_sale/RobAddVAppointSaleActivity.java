@@ -303,6 +303,7 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
             orgPassData.status = "00";
             orgPassData.spotgps=tvLocation.getText().toString();
             orgPassData.description =tvMore.getText().toString();
+            orgPassData.identificationtype = Constants.IDENTIFICATION_TYPE_REGISTER_ADD_V;
             mPresenter.submit(orgPassData);
         }
 

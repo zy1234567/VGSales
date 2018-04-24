@@ -46,6 +46,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import static android.content.Context.ACTIVITY_SERVICE;
+import static android.content.Context.TEXT_SERVICES_MANAGER_SERVICE;
 import static com.ztstech.appdomain.constants.Constants.NORMAL_REGISTER;
 import static com.ztstech.appdomain.constants.Constants.ORG_CALIM;
 import static com.ztstech.appdomain.constants.Constants.ORG_REGISTER;
@@ -915,5 +916,24 @@ public class CommonUtil {
             return;
         }
 
+        if (TextUtils.equals(cstatus,Constants.CSTATUS_GRAY_UNVERIFIED) &&
+                (TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_ORG_REGISTER) ||
+                TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_ORG_CHECK_IN) ||
+                TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_PASSER_CHECK_IN)||
+                TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_SALE_CHECK_IN))){
+            textView.setText("web登记");
+            textView.setTextColor(context.getResources().getColor(R.color.color_102));
+            return;
+        }
+         if (TextUtils.equals(cstatus,Constants.CSTATUS_GRAY_UNVERIFIED) &&
+                 (TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_ORG_REGISTER) ||
+                 TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_ORG_CHECK_IN) ||
+                 TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_PASSER_CHECK_IN) ||
+                 TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_SALE_CHECK_IN) ||
+                 TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_MAP_REGISTER))){
+             textView.setText("app登记");
+             textView.setTextColor(context.getResources().getColor(R.color.color_102));
+             return;
+         }
     }
 }

@@ -240,7 +240,8 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
 
     @Override
     public void onSubmitFinish(String msg) {
-
+        EventBus.getDefault().post(new ApproveEvent(RobAddVCertificationActivity.APPROVE_FINISH));
+        finish();
     }
 
     @Override

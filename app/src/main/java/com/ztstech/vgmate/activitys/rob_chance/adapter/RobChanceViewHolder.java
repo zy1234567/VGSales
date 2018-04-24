@@ -62,7 +62,7 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
     @Override
     protected void refreshView(final RobChanceBean.ListBean data) {
         super.refreshView(data);
-        CommonUtil.orgfFromType(getContext(),tvAddType,data.cstatus,data.nowchancetype,data.chancetype);
+        CommonUtil.source(getContext(),tvAddType,data.cstatus,data.nowchancetype,data.chancetype);
         Glide.with(getContext())
                 .load(data.rbilogosurl)
                 .error(R.mipmap.ic_launcher)
@@ -118,6 +118,7 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
                                         callBack.lockOrgClick(String.valueOf(data.rbiid), new Gson().toJson(data), tvRobType,ORG_CHECK_IN_OR_CALIM,null);
                                     }
                                     data.locktype = Constants.LOCK_YES;
+                                    data.locksaleuid = UserRepository.getInstance().getUser().getUserBean().info.uid;
                                 }
 
                                 @Override
