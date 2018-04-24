@@ -129,6 +129,7 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
     public static String RBIID;
     String rbiid;
     int MAX_PIC_COUNT=5;
+    private  List<String>rmImageFile=new ArrayList<>();
 
     @Override
     protected void onViewBindFinish() {
@@ -227,14 +228,14 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
         });
     }
     private void addImg(ImageView img,Intent data,int type) {
+        rmImageFile.clear();
         for (int i = 0; i < Matisse.obtainPathResult(data).size(); i++){
-            files = new File[1];
             String uri =Matisse.obtainPathResult(data).get(i);
-            final File f = new File(uri);
+            File f = new File(uri);
+            rmImageFile.add(0, String.valueOf(f));
             Glide.with(RobAddVAppointSaleActivity.this).
                     load(uri).placeholder(R.mipmap.pre_default_image).
                     error(R.mipmap.pre_default_image).into(img);
-            files[0] = f;
             mPresenter.uploadimg(orgPassData,type);
         }
     }
@@ -279,7 +280,8 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
         orgPassData.type = Constants.COMMUNICATION_TYPE_CHANCE;
         orgPassData.terminal = TENMINAL_TYPE;
         orgPassData.calid=bean.calid;
-
+        orgPassData.status = "00";
+        orgPassData.identificationtype = Constants.IDENTIFICATION_TYPE_REGISTER_ADD_V;
         if(rbRemote.isChecked()){
             if(!TextUtils.isEmpty(tvName.getText().toString())){
                 orgPassData.wechatid=tvName.getText().toString();
@@ -290,6 +292,10 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
             orgPassData.communicationtype=Constants.LONGR_ANGE_AUDIT;
             mPresenter.submit(orgPassData);
         }else {
+            orgPassData.description=null;
+            orgPassData.wechatid=null;
+            orgPassData.positionpicurl=null;
+            orgPassData.videopicurl=null;
             if(imageFiles==null||imageFiles.size()==0){
                 ToastUtil.toastCenter(RobAddVAppointSaleActivity.this,"定位照片不能为空！");
                 return;
@@ -297,13 +303,9 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
                 ToastUtil.toastCenter(RobAddVAppointSaleActivity.this,"定位不能为空！");
                 return;
             }
-
-            orgPassData.calid = bean.calid;
             orgPassData.communicationtype = Constants.LONG_RANGE;
-            orgPassData.status = "00";
             orgPassData.spotgps=tvLocation.getText().toString();
             orgPassData.description =tvMore.getText().toString();
-            orgPassData.identificationtype = Constants.IDENTIFICATION_TYPE_REGISTER_ADD_V;
             mPresenter.submit(orgPassData);
         }
 
@@ -320,9 +322,17 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
 
     @Override
     public File[] getImgaeFiles() {
-        File[] files = new File[imageFiles.size()];
-        for (int i = 0; i < imageFiles.size(); i++) {
-            files[i] = new File(imageFiles.get(i));
+        File[] files ;
+        if(rbRemote.isChecked()){
+            files = new File[rmImageFile.size()];
+            for (int i = 0; i < rmImageFile.size(); i++) {
+                files[i] = new File(rmImageFile.get(i));
+            }
+        }else {
+            files = new File[imageFiles.size()];
+            for (int i = 0; i < imageFiles.size(); i++) {
+                files[i] = new File(imageFiles.get(i));
+            }
         }
         return files;
     }

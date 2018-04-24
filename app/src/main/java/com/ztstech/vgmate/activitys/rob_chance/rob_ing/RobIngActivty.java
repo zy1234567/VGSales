@@ -6,6 +6,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -18,6 +19,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.add_certification.RobAddVCertificationActivity;
 import com.ztstech.vgmate.activitys.add_certification.appoint_sale.RobAddVAppointSaleActivity;
+import com.ztstech.vgmate.activitys.rob_chance.adapter.RobIngImgAdapter;
 import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
 import com.ztstech.vgmate.data.dto.OrgPassData;
@@ -111,6 +113,9 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
     LinearLayout llButtom;
     @BindView(R.id.ll_layout_center)
     LinearLayout llLayoutCenter;
+    /**图片*/
+    @BindView(R.id.gv_img)
+    GridView gridView;
     RobChanceBean.ListBean bean;
     //传入得身份 路人/机构
     int identityFlg;
@@ -120,9 +125,9 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
 
 
     /**当前机构来源是 路人登记，机构登记，机构认领*/
-    public static  boolean  isNormalRegister;
-    public static  boolean isOrgRegister;
-    public static  boolean isOrgCalim;
+    public   boolean  isNormalRegister;
+    public   boolean isOrgRegister;
+    public   boolean isOrgCalim;
     int type;
     /**拒绝原因01重复，02已关闭/暂停营业，03尚未营业，04机构不存在*/
     static  String []strReason=new String []{"01","02","03","04"};
@@ -149,7 +154,8 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
     public static final String APPOINT_SALE_KEY="appoint_sale_key";
     public static final String APPOINT_SALE_VALUE="appoint_sale_value";
     /**是否是指定销售*/
-    boolean ISSALE=false;
+    boolean issale =false;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_rob_ing;
@@ -168,7 +174,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         }else {
             tvPass.setText("通过(加V认证)");
         }
-        if(ISSALE){
+        if(issale){
             tvNames.setText("认领人");
             tvTime.setVisibility(View.GONE);
             if(isOrgRegister) {
@@ -216,6 +222,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         String[] gps = bean.rbigps.split(",");
         tvGps.setText("E".concat(CommonUtil.convertToSexagesimal(Double.parseDouble(gps[0]))).
                 concat("N".concat(CommonUtil.convertToSexagesimal(Double.parseDouble(gps[1])))));
+        gridView.setAdapter(new RobIngImgAdapter(RobIngActivty.this,bean));
     }
     /**转化数据源bean*/
     private  void changeBean(){
@@ -238,6 +245,8 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         bean.orgcount=orgFollowlistBean.orgcount;
         bean.rbiid=orgFollowlistBean.rbiid;
         bean.createrid=orgFollowlistBean.createrid;
+        bean.rbipicsurl=orgFollowlistBean.rbipicsurl;
+        bean.rbipicurl=orgFollowlistBean.rbipicurl;
     }
     //初始化数据
     private void initData() {
@@ -247,10 +256,10 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         if(getIntent().getStringExtra(APPOINT_SALE_KEY)!=null&&
                 getIntent().getStringExtra(APPOINT_SALE_KEY).equals(APPOINT_SALE_VALUE)){
             bean = new RobChanceBean.ListBean();
-            ISSALE=true;
+            issale =true;
             changeBean();
         }else {
-            ISSALE=false;
+            issale =false;
             bean = new Gson().fromJson(getIntent().getStringExtra(ORG_BEAN_ROB), RobChanceBean.ListBean.class);
         }
 
@@ -265,7 +274,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         }else if(Constants.ORG_REGISTER==type){
             isOrgRegister=true;
         }
-        if(!ISSALE) {
+        if(!issale) {
             double lasttime = getIntent().getDoubleExtra(LAST_TIME, 0);
             mCountDownHandler = new CountDownHandler(this, lasttime);
             mCountDownHandler.startTimer();
@@ -304,16 +313,16 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
      *通过定位认证
      */
     private  void locationPass(){
-        refuseOrPassData =new RefuseOrPassData();
-        refuseOrPassData.calid=bean.calid;
-        refuseOrPassData.rbiid=String.valueOf(bean.rbiid);
-        refuseOrPassData.status=passStatus;
-        refuseOrPassData.identificationtype=lIdenttype;
-        DialogUtils.showdialogbottomtwobutton(RobIngActivty.this, "取消","确定",
+        orgPassData =new OrgPassData();
+        orgPassData.calid=bean.calid;
+        orgPassData.status=passStatus;
+        orgPassData.identificationtype=lIdenttype;
+        DialogUtils.showdialogbottomtwobutton(RobIngActivty.this, "确定","取消",
                 "通过提示","您确定要通过该机构的定位认证吗？",
                 new DialogUtils.showdialogbottomtwobuttonCallBack() {
                     @Override
                     public void tvRightClick() {
+                        orgPassData.approvetype=1;
                         orgPassData.rbiid  = String.valueOf(bean.rbiid);
                         orgPassData.terminal = TENMINAL_TYPE;
                         orgPassData.rbiostatus = Constants.PASS_ORG;
@@ -338,7 +347,8 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
                             orgRegisterRefuseData=new RefuseOrPassData();
                             orgRegisterRefuseData.oname=bean.rbioname;
                             orgRegisterRefuseData.rbiid=String .valueOf(bean.rbiid);
-                            orgRegisterRefuseData.type="00";
+                            orgRegisterRefuseData.type="01";
+                            orgRegisterRefuseData.statustype="01";
                             orgRegisterRefuseData.refuse=etReason.getText().toString();
                             orgRegisterRefuseData.rubbishtype=CommonUtil.isCheck(rb1,rb2,rb3,rb4,strReason);
                             if(isNormalRegister) {
@@ -367,7 +377,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
             refuseOrPassData.rbiid=String.valueOf(bean.rbiid);
             refuseOrPassData.status=refuseStatus;
             refuseOrPassData.calid=bean.calid;
-            DialogUtils.showdialogbottomtwobutton(RobIngActivty.this, "取消","确定",
+            DialogUtils.showdialogbottomtwobutton(RobIngActivty.this, "确定","取消",
                     "拒绝提示","你确定要拒绝吗？", new DialogUtils.showdialogbottomtwobuttonCallBack() {
                         @Override
                         public void tvRightClick() {
@@ -422,7 +432,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
 
     @Override
     public void onSubmitFinish(String errorMessage) {
-
+            finish();
     }
 
     /**

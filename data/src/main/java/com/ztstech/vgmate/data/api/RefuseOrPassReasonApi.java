@@ -91,13 +91,14 @@ public interface RefuseOrPassReasonApi {
                                                 @Query("type") String type,
                                                 @Query("communicationtype") String communicationtype,
                                                 @Query("contactsname") String contactsname,
-                                                @Query("contactsphone") String roletype,
+                                                @Query("contactsphone") String contactsphone,
                                                 @Query("msg") String msg,
                                                 @Query("description") String description,
                                                 @Query("spotgps") String spotgps,
                                                 @Query("spotphotos") String spotphotos,
                                                 @Query("wechatid") String wechatid,
                                                 @Query("videopicurl") String videopicurl,
+                                                @Query("roletype")String roletype,
                                                 @Query("positionpicurl") String positionpicurl);
     @POST("exempt/AppSaleAuditClaims")
     Observable<BaseRespBean> orgClaim(@Query("authId") String authid,
@@ -108,7 +109,7 @@ public interface RefuseOrPassReasonApi {
                                       @Query("type") String type,
                                       @Query("communicationtype") String communicationtype,
                                       @Query("contactsname") String contactsname,
-                                      @Query("contactsphone") String roletype,
+                                      @Query("contactsphone") String contactsphone,
                                       @Query("msg") String msg,
                                       @Query("description") String description,
                                       @Query("spotgps") String spotgps,
@@ -119,5 +120,6 @@ public interface RefuseOrPassReasonApi {
                                       @Query("callon") String callon,
                                       @Query("calid") String calid,
                                       @Query("status") String status,
+                                      @Query("roletype")String roletype,
                                       @Query("logstatus") String logstatus);
 }

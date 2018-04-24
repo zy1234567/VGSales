@@ -34,7 +34,7 @@ public class RobIngPresenter extends PresenterImpl<RobIngContract.View>
             protected void childError(Throwable e) {
                 mView.showError("出错:".concat(e.getMessage()));
             }
-        }.run(new RefuseOrPassReason(refuseCalimData, Constants.NORMAL_REGISTER).run());
+        }.run(new RefuseOrPassReason(refuseCalimData, Constants.ORG_CALIM).run());
     }
 
 

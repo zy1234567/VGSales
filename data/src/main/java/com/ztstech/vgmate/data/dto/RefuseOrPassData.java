@@ -23,5 +23,6 @@ public class RefuseOrPassData  {
     public String identificationtype;
     public String status;
     public String testorg;
+    public String statustype;
 
 }

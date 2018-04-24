@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,6 +36,7 @@ import com.ztstech.vgmate.matisse.Matisse;
 import com.ztstech.vgmate.matisse.MimeType;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.ContractUtils;
+import com.ztstech.vgmate.utils.MaxTextLengthFilter;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.CustomGridView;
 import com.ztstech.vgmate.weigets.DialogMultiSelect;
@@ -163,7 +166,7 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
     private CountDownHandler mCountDownHandler;
     double lasttime;
 
-
+    int maxLenght=300;
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_recoder_pass;
@@ -184,7 +187,45 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
         rlHome.setVisibility(View.GONE);
         tvPass.setText("下一步");
         viewHome.setVisibility(View.INVISIBLE);
-//        tvTime.setText(mCountDownHandler.getCurrentText());
+        if(!TextUtils.isEmpty(bean.rbioname)){
+            topBar.setTitle(bean.rbioname);
+        }else {
+            topBar.setTitle("审核方式");
+        }
+        etContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                tvContentCount.setText(etContent.getText().toString().length()+"/"+ maxLenght);
+            }
+        });
+        etMore.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                tvMoreCount.setText(etMore.getText().toString().length()+"/"+ maxLenght);
+            }
+        });
+        etContent.setFilters(new InputFilter[]{new MaxTextLengthFilter(RobAddVCertificationActivity.this,maxLenght)});
+        etMore.setFilters(new InputFilter[]{new MaxTextLengthFilter(RobAddVCertificationActivity.this,maxLenght)});
         rgButton.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -222,6 +263,7 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
         if (CommonUtil.identity(bean.cstatus,bean.nowchancetype,bean.chancetype) == ORG_CALIM){
             orgPassData.calid = bean.calid;
             orgPassData.approvetype = 0;
+            orgPassData.status = "00";
         }else{
             orgPassData.approvetype = 1;
         }
@@ -475,6 +517,8 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
             }
         });
     }
+
+
     private class EditOnclick implements TextWatcher {
 
         @Override

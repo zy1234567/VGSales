@@ -41,6 +41,7 @@ public class OrgPass implements UserCase<Observable<BaseRespBean>>  {
                     orgPassData.spotphotos,
                     orgPassData.wechatid,
                     orgPassData.videopicurl,
+                    orgPassData.roletype,
                     orgPassData.positionpicurl);
         }else{
             return refuseOrPassReasonApi.orgClaim(
@@ -63,6 +64,7 @@ public class OrgPass implements UserCase<Observable<BaseRespBean>>  {
                     orgPassData.callon,
                     orgPassData.calid,
                     orgPassData.status,
+                    orgPassData.roletype,
                     "01");
         }
     }

@@ -76,6 +76,8 @@ public class RobChanceBean extends BaseRespBean implements Serializable {
         public String createrid;     //担任职位，05机构一般管理人员，09机构法人/老板/店长
         public  String calid;
         public String rbigps;
+        public String rbipicurl;
+        public String rbipicsurl;
     }
 
 }
