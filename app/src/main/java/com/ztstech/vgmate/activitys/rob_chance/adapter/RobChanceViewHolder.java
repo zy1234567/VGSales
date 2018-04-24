@@ -2,7 +2,10 @@ package com.ztstech.vgmate.activitys.rob_chance.adapter;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -71,7 +74,13 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
         tvName.setText(data.rbioname);
         tvAddress.setText("地区：".concat(LocationUtils.getPName(data.rbiprovince).concat(LocationUtils.getCName(data.rbicity))).concat(LocationUtils.getAName(data.rbidistrict)));
         if (!TextUtils.isEmpty(data.contractname) && !TextUtils.isEmpty(data.contractphone)) {
-            tvLinkman.setText("联系人：".concat(data.contractname).concat(data.contractphone));
+            String wholeStr=("联系人：".concat(data.contractname).concat(data.contractphone));
+            SpannableStringBuilder spBuilder = new SpannableStringBuilder(wholeStr);
+            ForegroundColorSpan colorSpan = new ForegroundColorSpan(getContext().getResources().getColor(R.color.color_102));
+            ForegroundColorSpan colorSpan1 = new ForegroundColorSpan(getContext().getResources().getColor(R.color.list_item_title_txt_color_34));
+            spBuilder.setSpan(colorSpan, 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spBuilder.setSpan(colorSpan1, 4, wholeStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            tvLinkman.setText(spBuilder);
         }else{
             tvLinkman.setText("联系人：暂无");
         }
