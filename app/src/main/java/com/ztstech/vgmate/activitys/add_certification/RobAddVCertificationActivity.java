@@ -220,8 +220,8 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
         orgPassData.rbiostatus = Constants.PASS_ORG;
         orgPassData.type = Constants.COMMUNICATION_TYPE_CHANCE;
         if (CommonUtil.identity(bean.cstatus,bean.nowchancetype,bean.chancetype) == ORG_CALIM){
-            orgPassData.approvetype = 0;
             orgPassData.calid = bean.calid;
+            orgPassData.approvetype = 0;
         }else{
             orgPassData.approvetype = 1;
         }

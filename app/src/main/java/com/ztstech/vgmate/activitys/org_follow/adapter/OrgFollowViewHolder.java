@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.appdomain.user_case.GetOrgFollow;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.add_certification.RobAddVCertificationActivity;
@@ -24,6 +25,7 @@ import com.ztstech.vgmate.utils.CategoryUtil;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.LocationUtils;
 import com.ztstech.vgmate.utils.TimeUtils;
+import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.utils.ViewUtils;
 
 import butterknife.BindView;
@@ -81,6 +83,8 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
         SpannableStringBuilder spannableStringBuilder =
                 ViewUtils.getDiffColorSpan(null, strs, colors);
         tvPhone.setText(spannableStringBuilder);
+
+
         if(!TextUtils.isEmpty(data.createtime)){
             tvStatus.setText(TimeUtils.getDateWithString(data.createtime,"yyyy-MM-dd"));
             CommonUtil.orgfFromType(getContext(),tvFrom,data.cstatus,data.nowchancetype,data.chancetype);
@@ -119,6 +123,10 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
             public void onClick(View v) {
                 //我开拓的
                 if (index == GetOrgFollow.STATUS_INDEX_CONCERN){
+                    if (TextUtils.equals(data.cstatus, Constants.CSTATUS_ALREADY_CLAIM)){
+                        ToastUtil.toastCenter(getContext(),"已通过审核，无需再次审核");
+                        return;
+                    }
                     Intent  intent=new Intent(getContext(), RobIngActivty.class);
                     intent.putExtra(RobIngActivty.APPOINT_SALE_KEY,RobIngActivty.APPOINT_SALE_VALUE);
                     intent.putExtra(RobIngActivty.ORG_BEAN_ROB,new Gson().toJson(data));

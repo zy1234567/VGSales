@@ -896,4 +896,24 @@ public class CommonUtil {
         }
         return m + ":" + s;
     }
+    /**
+     * 判断四种来源
+     */
+    public static void source(Context context,TextView textView,String cstatus,String nowchancetype,
+                              String chancetype) {
+        if (TextUtils.equals(cstatus,Constants.CSTATUS_ORG_CLAIM_ING) &&
+                TextUtils.equals(nowchancetype,Constants.NOW_CHANCE_TYPE_APP_CLAIM)){
+            textView.setText("app认领");
+            textView.setTextColor(context.getResources().getColor(R.color.color_102));
+            return;
+        }
+
+        if (TextUtils.equals(cstatus,Constants.CSTATUS_ORG_CLAIM_ING) &&
+                TextUtils.equals(nowchancetype,Constants.NOW_CHANCE_TYPE_WEB_CLAIM)){
+            textView.setText("web认领");
+            textView.setTextColor(context.getResources().getColor(R.color.color_102));
+            return;
+        }
+
+    }
 }

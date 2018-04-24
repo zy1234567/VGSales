@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.add_certification.RobAddVCertificationActivity;
@@ -27,6 +28,7 @@ import com.ztstech.vgmate.event.ApproveEvent;
 import com.ztstech.vgmate.manager.MatissePhotoHelper;
 import com.ztstech.vgmate.matisse.Matisse;
 import com.ztstech.vgmate.matisse.MimeType;
+import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.CustomGridView;
 import com.ztstech.vgmate.weigets.TopBar;
@@ -41,6 +43,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.ztstech.appdomain.constants.Constants.ORG_CALIM;
 import static com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty.ORG_BEAN_ROB;
 
 /**
@@ -49,8 +52,14 @@ import static com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty.ORG_
 
 public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleContract.Presenter>
         implements RobAddVAppointSaleContract.View {
-
-
+    //设置不同类型的请求吗，返回到不同的imageview上面
+    final int REQUEST_CODE_VIDIO=11;
+    final int REQUEST_CODE_LOCATION=12;
+    final int REQUSTCODEPOSITION=13;
+    /**
+     * 处理终端
+     */
+    public static final String TENMINAL_TYPE = "02";
     @BindView(R.id.top_bar)
     TopBar topBar;
     @BindView(R.id.tv_way)
@@ -97,8 +106,6 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
     LinearLayout llMore;
     @BindView(R.id.tv_more)
     EditText tvMore;
-//    @BindView(R.id.tv_more_count)
-//    TextView tvMoreCount;
     @BindView(R.id.v2)
     View v2;
     @BindView(R.id.ll_reminder)
@@ -110,16 +117,13 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
     @BindView(R.id.gv_img)
     CustomGridView customGridView;
     ImageView imgAddImg;
-     final int REQUESTCODEVIDIO=11;
-     final int REQUSTCODELOCATION=12;
-     final int REQUSTCODEPOSITION=13;
     RobChanceBean.ListBean bean;
     /**
      * 请求gps信息
      */
     public static final int REQ_GPS = 3;
-     File[] files;
-     private OrgPassData orgPassData = new OrgPassData();
+    File[] files;
+    private OrgPassData orgPassData = new OrgPassData();
     /**图片文件地址*/
     private List<String> imageFiles = new ArrayList<>();
     public static String RBIID;
@@ -167,7 +171,8 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
             public void onClick(View view) {
                 if (view == imgAddImg) {
                     MatissePhotoHelper.selectPhoto(RobAddVAppointSaleActivity.this,
-                            MAX_PIC_COUNT - imageFiles.size(), REQUSTCODEPOSITION,MimeType.ofImage());
+                            MAX_PIC_COUNT - imageFiles.size(),
+                            REQUSTCODEPOSITION,MimeType.ofImage());
                 }
             }
         });
@@ -179,9 +184,9 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==REQUESTCODEVIDIO&&resultCode==RESULT_OK){
+        if(requestCode==REQUEST_CODE_VIDIO && resultCode==RESULT_OK){
             addImg(imgVido,data,1);
-        }else  if(requestCode==REQUSTCODELOCATION&&resultCode==RESULT_OK){
+        }else  if(requestCode==REQUEST_CODE_LOCATION && resultCode==RESULT_OK){
             addImg(imgLocation,data,0);
         } else if(requestCode==REQUSTCODEPOSITION&&resultCode==RESULT_OK){
             for (int i = 0; i < Matisse.obtainPathResult(data).size(); i++){
@@ -217,7 +222,7 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
             public void onClick(View view) {
                 customGridView.removeView(itemView);
                 imageFiles.remove(imgPath);
-             //   buttontype();
+                //   buttontype();
             }
         });
     }
@@ -233,6 +238,7 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
             mPresenter.uploadimg(orgPassData,type);
         }
     }
+
     @OnClick({R.id.ll_buttom, R.id.img_vido, R.id.img_location,R.id.tv_location})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -240,15 +246,15 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
                 Commit();
                 break;
             case R.id.img_vido:
-                choosePicture(1,REQUESTCODEVIDIO);
+                choosePicture(1,REQUEST_CODE_VIDIO);
                 break;
             case R.id.img_location:
-                choosePicture(1,REQUSTCODELOCATION);
+                choosePicture(1,REQUEST_CODE_LOCATION);
                 break;
             case R.id.tv_location:
                 Intent it = new Intent(this, GpsActivity.class);
                 startActivityForResult(it, REQ_GPS);
-            break;
+                break;
             default:
                 break;
         }
@@ -257,22 +263,32 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
         MatissePhotoHelper.selectPhoto(this,
                 maxLength , requstcode,MimeType.ofImage());
     }
+
     private  void  Commit(){
-       // orgPassData.approvetype
-        orgPassData.rbiid=String.valueOf(bean.rbiid);
-        orgPassData.rbiostatus="00";
-        orgPassData.type="01";
-        orgPassData.terminal="02";
+        /**
+         * 判断是机构认领还是登记
+         */
+        if (CommonUtil.identity(bean.cstatus,bean.nowchancetype,bean.chancetype) == ORG_CALIM){
+            orgPassData.calid = bean.calid;
+            orgPassData.approvetype = 0;
+        }else{
+            orgPassData.approvetype = 1;
+        }
+        orgPassData.rbiid = String.valueOf(bean.rbiid);
+        orgPassData.rbiostatus = Constants.PASS_ORG;
+        orgPassData.type = Constants.COMMUNICATION_TYPE_CHANCE;
+        orgPassData.terminal = TENMINAL_TYPE;
         orgPassData.calid=bean.calid;
+
         if(rbRemote.isChecked()){
-           if(!tvName.getText().toString().equals("")){
-               orgPassData.wechatid=tvName.getText().toString();
-           }
-           if(!tvMore.getText().toString().equals("")) {
-               orgPassData.description = tvMore.getText().toString();
-           }
-            orgPassData.communicationtype="02";
-           mPresenter.submit(orgPassData);
+            if(!TextUtils.isEmpty(tvName.getText().toString())){
+                orgPassData.wechatid=tvName.getText().toString();
+            }
+            if(!tvMore.getText().toString().equals("")) {
+                orgPassData.description = tvMore.getText().toString();
+            }
+            orgPassData.communicationtype=Constants.LONGR_ANGE_AUDIT;
+            mPresenter.submit(orgPassData);
         }else {
             if(imageFiles==null||imageFiles.size()==0){
                 ToastUtil.toastCenter(RobAddVAppointSaleActivity.this,"定位照片不能为空！");
@@ -281,8 +297,9 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
                 ToastUtil.toastCenter(RobAddVAppointSaleActivity.this,"定位不能为空！");
                 return;
             }
+
             orgPassData.calid = bean.calid;
-            orgPassData.communicationtype="03";
+            orgPassData.communicationtype = Constants.LONG_RANGE;
             orgPassData.status = "00";
             orgPassData.spotgps=tvLocation.getText().toString();
             orgPassData.description =tvMore.getText().toString();

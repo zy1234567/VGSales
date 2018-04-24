@@ -14,7 +14,7 @@ public class OrgPassData {
      * @param: identificationtype 01:定位认证,02:加V认证
      * @param: terminal 处理终端，01：客服平台，02：其他
      * @param: type 00机构沟通记录，01机会沟通记录，02打点机构沟通记录
-     * @param: communicationtype 沟通方式,00:电话沟通,01:上门拜访,03:远程审核
+     * @param: communicationtype 沟通方式,00:电话沟通,01:上门拜访,02:远程审核
      * @param: contactsname 联系人姓名
      * @param: contactsphone 联系人手机
      * @param: roletype 担任职位

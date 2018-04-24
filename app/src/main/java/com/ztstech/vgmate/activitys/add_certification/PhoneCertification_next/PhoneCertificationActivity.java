@@ -151,7 +151,7 @@ public class PhoneCertificationActivity extends MVPActivity<PhoneCertificationCo
             String uri = Matisse.obtainPathResult(data).get(0);
             File f = new File(uri);
             imageFiles.add(0, f);
-            Glide.with(this).load(f).into(imgVido);
+            Glide.with(this).load(f).into(imgLocation);
             mPresenter.submitimg(orgPassData,0);
         }
     }

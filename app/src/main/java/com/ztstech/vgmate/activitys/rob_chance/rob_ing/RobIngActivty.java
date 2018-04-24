@@ -148,8 +148,8 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
     /** 指定销售 审核*/
     public static final String APPOINT_SALE_KEY="appoint_sale_key";
     public static final String APPOINT_SALE_VALUE="appoint_sale_value";
-     /**是否是指定销售*/
-     boolean ISSALE=false;
+    /**是否是指定销售*/
+    boolean ISSALE=false;
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_rob_ing;
@@ -183,15 +183,18 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
             tvTime.setVisibility(View.VISIBLE);
             tvTime.setText(mCountDownHandler.getCurrentText());
         }
-        CommonUtil.orgfFromType(this, tvAddType, bean.cstatus, bean.nowchancetype, bean.chancetype);
+        CommonUtil.orgfFromType(this, tvAddType,
+                bean.cstatus, bean.nowchancetype, bean.chancetype);
         tvOtype.setText(CategoryUtil.findCategoryByOtype(bean.rbiotype));
         tvOrgName.setText(bean.rbioname);
         tvLocation.setText(LocationUtils.getPName(bean.rbiprovince)
-                .concat(LocationUtils.getCName(bean.rbicity)).concat(LocationUtils.getAName(bean.rbidistrict)));
+                .concat(LocationUtils.getCName(bean.rbicity)).
+                        concat(LocationUtils.getAName(bean.rbidistrict)));
         tvDetialLocation.setText(bean.rbiaddress);
         tvPhone.setText(bean.rbicontphone);
         tvName.setText(bean.contractname);
         tvTel.setText(bean.contractphone);
+
         if (bean.orgcount >= 0) {
             tvOrgCount.setText("(名下机构数：".concat(String.valueOf(bean.orgcount)).concat(")"));
         }
@@ -203,6 +206,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
             }
 
         }
+
         if (identityFlg == PASSER_CHECK_IN) {
             llLayoutCenter.setVisibility(View.GONE);
         } else if (identityFlg == ORG_CHECK_IN_OR_CALIM) {
@@ -210,8 +214,8 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         }
 
         String[] gps = bean.rbigps.split(",");
-        tvGps.setText("E"+CommonUtil.convertToSexagesimal(Double.parseDouble(gps[0])).
-                concat("N"+CommonUtil.convertToSexagesimal(Double.parseDouble(gps[1]))));
+        tvGps.setText("E".concat(CommonUtil.convertToSexagesimal(Double.parseDouble(gps[0]))).
+                concat("N".concat(CommonUtil.convertToSexagesimal(Double.parseDouble(gps[1])))));
     }
     /**转化数据源bean*/
     private  void changeBean(){
@@ -237,17 +241,22 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
     }
     //初始化数据
     private void initData() {
-        bean=new RobChanceBean.ListBean();
+        /**
+         * 判断是否是指定销售
+         */
         if(getIntent().getStringExtra(APPOINT_SALE_KEY)!=null&&
                 getIntent().getStringExtra(APPOINT_SALE_KEY).equals(APPOINT_SALE_VALUE)){
+            bean = new RobChanceBean.ListBean();
             ISSALE=true;
             changeBean();
         }else {
             ISSALE=false;
             bean = new Gson().fromJson(getIntent().getStringExtra(ORG_BEAN_ROB), RobChanceBean.ListBean.class);
         }
+
         identityFlg = getIntent().getIntExtra(ORG_IDENTITY, 0);
         type= CommonUtil.identity(bean.cstatus,bean.nowchancetype,bean.chancetype);
+
         if(Constants.NORMAL_REGISTER== type)
         {
             isNormalRegister = true;
@@ -438,7 +447,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
     public void onEvent(ApproveEvent event) {
         finish();
     };
-
+    //使用静态内部类实现时间的倒计时
     private static class CountDownHandler extends Handler {
 
         private int mMinute;
