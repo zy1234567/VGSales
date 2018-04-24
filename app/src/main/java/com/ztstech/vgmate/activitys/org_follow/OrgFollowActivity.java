@@ -89,9 +89,9 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowContact.Presenter> i
         if (bean == null || bean.info == null) {
             return;
         }
-        String[] titles = {"我开拓的".concat(" ").concat(String.valueOf(bean.info.confirmNum)),
-                "商家介绍".concat(" ").concat(String.valueOf(bean.info.claimNum)),
-                "机会抢单".concat(" ").concat(String.valueOf(bean.info.webNum))};
+        String[] titles = {"我开拓的".concat(" ").concat(String.valueOf(bean.info.appointNum)),
+                "商家介绍".concat(" ").concat(String.valueOf(bean.info.introingNum)),
+                "机会抢单".concat(" ").concat(String.valueOf(bean.info.rushNum ))};
         adapter.setTitles(titles);
         adapter.notifyDataSetChanged();
         topBar.setTitle("客户跟进".concat("(").concat

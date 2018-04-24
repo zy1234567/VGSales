@@ -902,8 +902,10 @@ public class CommonUtil {
      */
     public static void source(Context context,TextView textView,String cstatus,String nowchancetype,
                               String chancetype) {
-        if (TextUtils.equals(cstatus,Constants.CSTATUS_ORG_CLAIM_ING) &&
-                TextUtils.equals(nowchancetype,Constants.NOW_CHANCE_TYPE_APP_CLAIM)){
+        if ((TextUtils.equals(cstatus,Constants.CSTATUS_ORG_CLAIM_ING) &&
+                TextUtils.equals(nowchancetype,Constants.NOW_CHANCE_TYPE_APP_CLAIM)) ||(
+                TextUtils.equals(cstatus,Constants.CSTATUS_ORG_CLAIM_ING)&&
+                TextUtils.equals(cstatus,Constants.CHANCE_TYPE_APP_ORG_CLAIM))){
             textView.setText("app认领");
             textView.setTextColor(context.getResources().getColor(R.color.color_102));
             return;

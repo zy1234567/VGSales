@@ -144,12 +144,14 @@ public class PhoneCertificationActivity extends MVPActivity<PhoneCertificationCo
         if (requestCode == REQUEST_CODE_VIDO && resultCode == RESULT_OK) {
             String uri = Matisse.obtainPathResult(data).get(0);
             File f = new File(uri);
+            imageFiles.clear();
             imageFiles.add(0, f);
             Glide.with(this).load(f).into(imgVido);
             mPresenter.submitimg(orgPassData,1);
         }else if (requestCode == REQUEST_CODE_LOCATION && resultCode == RESULT_OK){
             String uri = Matisse.obtainPathResult(data).get(0);
             File f = new File(uri);
+            imageFiles.clear();
             imageFiles.add(0, f);
             Glide.with(this).load(f).into(imgLocation);
             mPresenter.submitimg(orgPassData,0);
