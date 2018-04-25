@@ -2,6 +2,7 @@ package com.ztstech.vgmate.activitys.add_certification.appoint_sale;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ import com.ztstech.vgmate.manager.MatissePhotoHelper;
 import com.ztstech.vgmate.matisse.Matisse;
 import com.ztstech.vgmate.matisse.MimeType;
 import com.ztstech.vgmate.utils.CommonUtil;
+import com.ztstech.vgmate.utils.MaxTextLengthFilter;
 import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.CustomGridView;
 import com.ztstech.vgmate.weigets.TopBar;
@@ -143,6 +145,7 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
         rlWayShop.setVisibility(View.GONE);
         llReminder.setVisibility(View.VISIBLE);
         tvPass.setBackgroundResource(R.drawable.bg_c_2_f_009);
+        tvMore.setFilters(new InputFilter[]{new MaxTextLengthFilter(RobAddVAppointSaleActivity.this,300)});
         rgButton.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -297,10 +300,10 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
             orgPassData.positionpicurl=null;
             orgPassData.videopicurl=null;
             if(imageFiles==null||imageFiles.size()==0){
-                ToastUtil.toastCenter(RobAddVAppointSaleActivity.this,"定位照片不能为空！");
+                ToastUtil.toastCenter(RobAddVAppointSaleActivity.this,"实地拍照不能为空！");
                 return;
             }else if(TextUtils.equals(tvLocation.getText().toString(),"")){
-                ToastUtil.toastCenter(RobAddVAppointSaleActivity.this,"定位不能为空！");
+                ToastUtil.toastCenter(RobAddVAppointSaleActivity.this,"实地定位不能为空！");
                 return;
             }
             orgPassData.communicationtype = Constants.LONG_RANGE;

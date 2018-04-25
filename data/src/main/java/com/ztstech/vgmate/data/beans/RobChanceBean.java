@@ -78,6 +78,7 @@ public class RobChanceBean extends BaseRespBean implements Serializable {
         public String rbigps;
         public String rbipicurl;
         public String rbipicsurl;
+        public String aptitudeurl;//资格证明图片
     }
 
 }

@@ -24,8 +24,8 @@ public class RobIngImgAdapter  extends BaseAdapter {
     public RobIngImgAdapter(Context context, RobChanceBean.ListBean bean){
         this.context=context;
         this.bean=bean;
-        if(bean.rbipicsurl!=null&&!TextUtils.isEmpty(bean.rbipicsurl)) {
-            imgUrl = bean.rbipicsurl.split(",");
+        if(bean.aptitudeurl!=null&&!TextUtils.isEmpty(bean.aptitudeurl)) {
+            imgUrl = bean.aptitudeurl.split(",");
         }
     }
     @Override
@@ -59,7 +59,8 @@ public class RobIngImgAdapter  extends BaseAdapter {
             viewHolder=(ViewHolder) view.getTag();
         }
         ViewGroup.LayoutParams para =viewHolder.imageView.getLayoutParams();
-        para.width=  ( ViewUtils.getScreenWidth(context)- ViewUtils.dp2px(context,40))/4;;
+        para.width=( ViewUtils.getScreenWidth(context)- ViewUtils.dp2px(context,40))/4;;
+        para.height=ViewUtils.dp2px(80);
         viewHolder.imageView.setLayoutParams(para);
         Glide.with(context).load(imgUrl[i]).into(viewHolder.imageView);
         return view;
