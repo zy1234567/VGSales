@@ -1,9 +1,11 @@
 package com.ztstech.vgmate.activitys.add_certification.PhoneCertification_next;
 
+import com.ztstech.appdomain.user_case.LastTime;
 import com.ztstech.appdomain.user_case.OrgPass;
 import com.ztstech.appdomain.utils.RetrofitUtils;
 import com.ztstech.vgmate.activitys.PresenterImpl;
 import com.ztstech.vgmate.data.beans.BaseRespBean;
+import com.ztstech.vgmate.data.beans.LastTimeBean;
 import com.ztstech.vgmate.data.beans.UploadImageBean;
 import com.ztstech.vgmate.data.dto.OrgPassData;
 import com.ztstech.vgmate.utils.BasePresenterSubscriber;
@@ -42,6 +44,32 @@ public class PhoneCertificationPresenter extends PresenterImpl<PhoneCertificatio
 
             }
         }.run(new OrgPass(orgPassData).run());
+    }
+
+    @Override
+    public void lastTime(String rbiid) {
+        requestlastTime(rbiid);
+    }
+    /**
+     * 请求剩余时间
+     */
+    private void requestlastTime(String rbiid){
+        new BasePresenterSubscriber<LastTimeBean>(mView,false){
+
+            @Override
+            protected void childNext(LastTimeBean getComRecordBean) {
+                if (getComRecordBean.isSucceed()) {
+                    if (getComRecordBean.lasttimeMillis > 30) {
+                        mView.setLastTime(getComRecordBean.lasttimeMillis);
+                    }else{
+                        return;
+                    }
+                }else {
+                    //如果失败
+                    mView.showError(getComRecordBean.getErrmsg());
+                }
+            }
+        }.run(new LastTime(rbiid).run());
     }
     /**
      * 上传内容图片

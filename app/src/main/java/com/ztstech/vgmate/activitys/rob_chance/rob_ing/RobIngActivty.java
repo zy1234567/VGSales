@@ -19,6 +19,7 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.add_certification.RobAddVCertificationActivity;
 import com.ztstech.vgmate.activitys.add_certification.appoint_sale.RobAddVAppointSaleActivity;
+import com.ztstech.vgmate.activitys.gps.GpsActivity;
 import com.ztstech.vgmate.activitys.rob_chance.adapter.RobIngImgAdapter;
 import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
@@ -155,7 +156,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
     public static final String APPOINT_SALE_VALUE="appoint_sale_value";
     /**是否是指定销售*/
     boolean issale =false;
-
+    String[] arraygps;
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_rob_ing;
@@ -279,12 +280,20 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
             mCountDownHandler = new CountDownHandler(this, lasttime);
             mCountDownHandler.startTimer();
         }
+        //截取gps经纬度
+        arraygps = bean.rbigps.split(",");
     }
 
     @OnClick({R.id.rl_ico_gps, R.id.tv_refuse, R.id.tv_pass})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_ico_gps:
+                Intent intent1 = new Intent(this, GpsActivity.class);
+                intent1.putExtra(GpsActivity.ARG_LA,arraygps[1]);
+                intent1.putExtra(GpsActivity.ARG_LO,arraygps[0]);
+                intent1.putExtra(GpsActivity.ARG_ADDRESS,bean.rbigps);
+                intent1.putExtra(GpsActivity.SHOW_ORG_FLG,true);
+                startActivity(intent1);
                 break;
             case R.id.tv_refuse:
                 refuseReason();

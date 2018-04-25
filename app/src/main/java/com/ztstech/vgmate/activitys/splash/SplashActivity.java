@@ -26,26 +26,21 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onViewBindFinish() {
         hideSystemNavigationBar();
-        LocationUtils.init(new Runnable() {
+        if (UserRepository.getInstance().isUserLogined()) {
+            //刷新登录
+            UserRepository.getInstance().refreshLogin().observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(new Consumer<UserBean>() {
+                        @Override
+                        public void accept(UserBean userBean) {
+
+                        }
+                    });
+        }
+        runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (UserRepository.getInstance().isUserLogined()) {
-                    //刷新登录
-                    UserRepository.getInstance().refreshLogin().observeOn(AndroidSchedulers.mainThread())
-                            .subscribeOn(Schedulers.io())
-                            .subscribe(new Consumer<UserBean>() {
-                                @Override
-                                public void accept(UserBean userBean) {
-
-                                }
-                            });
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        postJump();
-                    }
-                });
+                postJump();
             }
         });
 

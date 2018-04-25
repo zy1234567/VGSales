@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
@@ -42,7 +43,8 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowContact.Presenter> i
     ViewPager viewpager;
     @BindView(R.id.rl_rob_chance)
     RelativeLayout rlRobChance;
-
+    @BindView(R.id.tv_rob_num)
+    TextView tvRobNum;
     /**
      * 要显示对应人的界面uid
      */
@@ -60,16 +62,10 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowContact.Presenter> i
 //        }else {
             topBar.getRightImage().setVisibility(View.GONE);
         }
+        topBar.getRightRedNum().setVisibility(View.GONE);
         tablayout.setupWithViewPager(viewpager);
         adapter = new FollowOrgFragmentPagerAdapter(getSupportFragmentManager(), uid);
         viewpager.setAdapter(adapter);
-//        topBar.getRightImage().setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // 点击右上角跳转到机构反馈列表界面
-//                startActivity(new Intent(OrgFollowActivity.this,OrgFeedBackActivity.class));
-//            }
-//        });
         mPresenter.loadFollowOrgNum(uid);
     }
 
@@ -90,18 +86,16 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowContact.Presenter> i
             return;
         }
         String[] titles = {"我开拓的".concat(" ").concat(String.valueOf(bean.info.appointNum)),
-                "商家介绍".concat(" ").concat(String.valueOf(bean.info.introingNum)),
+                "商家介绍".concat(" ").concat(String.valueOf(bean.info.introNum )),
                 "机会抢单".concat(" ").concat(String.valueOf(bean.info.rushNum ))};
         adapter.setTitles(titles);
         adapter.notifyDataSetChanged();
         topBar.setTitle("客户跟进".concat("(").concat
-                (String.valueOf(bean.info.confirmNum + bean.info.claimNum + bean.info.webNum)).concat(")"));
-        if (bean.info.auditNum > 0 &&
-                TextUtils.equals(uid, UserRepository.getInstance().getUser().getUserBean().info.uid)) {
-            topBar.getRightRedNum().setVisibility(View.VISIBLE);
-            topBar.getRightRedNum().setText(String.valueOf(bean.info.auditNum > 99 ? 99 : bean.info.auditNum));
-        } else {
-            topBar.getRightRedNum().setVisibility(View.GONE);
+                (String.valueOf(bean.info.appointNum + bean.info.introNum + bean.info.rushNum
+                +bean.info.rushableNum + bean.info.appointingNum + bean.info.introingNum)).concat(")"));
+        if (bean.info.rushableNum != 0){
+            tvRobNum.setText( String.valueOf(bean.info.rushableNum > 99 ? 99 : bean.info.rushableNum));
+            tvRobNum.setVisibility(View.VISIBLE);
         }
     }
 

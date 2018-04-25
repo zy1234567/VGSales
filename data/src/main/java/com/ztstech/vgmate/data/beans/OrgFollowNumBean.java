@@ -30,5 +30,7 @@ public class OrgFollowNumBean extends BaseRespBean{
         public int introNum;
         public int introingNum;
         public int rushNum;
+        public int rushableNum;
+
     }
 }

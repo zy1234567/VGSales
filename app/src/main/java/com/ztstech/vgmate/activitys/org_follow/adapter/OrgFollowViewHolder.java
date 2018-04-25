@@ -137,12 +137,14 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
 //                    Intent intent = new Intent(getContext(), ClaimOrgDetailActivity.class);
 //                    intent.putExtra(ClaimOrgDetailActivity.KEY_BEAN,new Gson().toJson(data));
 //                    getContext().startActivity(intent);
-                }else {
-                    // 不是审批列表跳转至机构详情
-                    Intent intent = new Intent(getContext(), OrgDetailV2Activity.class);
-                    intent.putExtra(OrgDetailV2Activity.ARG_RBIID,data.rbiid);
-                    intent.putExtra(OrgDetailV2Activity.ARG_RBIONAMW,data.rbioname);
-                    intent.putExtra(OrgDetailV2Activity.ARG_ORGID,data.orgid);
+                }else if (index == GetOrgFollow.STATUS_INDEX_CLAIM){
+                    if (TextUtils.equals(data.cstatus, Constants.CSTATUS_ALREADY_CLAIM)){
+                        ToastUtil.toastCenter(getContext(),"已通过审核，无需再次审核");
+                        return;
+                    }
+                    Intent  intent=new Intent(getContext(), RobIngActivty.class);
+                    intent.putExtra(RobIngActivty.APPOINT_SALE_KEY,RobIngActivty.APPOINT_SALE_VALUE);
+                    intent.putExtra(RobIngActivty.ORG_BEAN_ROB,new Gson().toJson(data));
                     getContext().startActivity(intent);
                 }
             }

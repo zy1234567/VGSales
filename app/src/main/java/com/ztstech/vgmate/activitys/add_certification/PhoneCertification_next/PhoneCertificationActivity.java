@@ -2,6 +2,8 @@ package com.ztstech.vgmate.activitys.add_certification.PhoneCertification_next;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -22,13 +24,18 @@ import com.ztstech.vgmate.event.ApproveEvent;
 import com.ztstech.vgmate.manager.MatissePhotoHelper;
 import com.ztstech.vgmate.matisse.Matisse;
 import com.ztstech.vgmate.matisse.MimeType;
+import com.ztstech.vgmate.utils.CommonUtil;
+import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -73,6 +80,11 @@ public class PhoneCertificationActivity extends MVPActivity<PhoneCertificationCo
     LinearLayout ll;
     @BindView(R.id.ll_buttom)
     LinearLayout llButtom;
+    @BindView(R.id.tv_pass)
+    TextView tvPass;
+    double lasttime;
+
+    private CountDownHandler mCountDownHandler;
     /**
      * 图片文件
      */
@@ -90,6 +102,7 @@ public class PhoneCertificationActivity extends MVPActivity<PhoneCertificationCo
 
     private void initData() {
         orgPassData = new Gson().fromJson(getIntent().getStringExtra(ORG_PASS_DATA), OrgPassData.class);
+        mPresenter.lastTime(orgPassData.rbiid);
     }
 
     @Override
@@ -98,7 +111,7 @@ public class PhoneCertificationActivity extends MVPActivity<PhoneCertificationCo
     }
 
 
-    @OnClick({R.id.img_vido, R.id.img_location, R.id.ll_buttom})
+    @OnClick({R.id.img_vido, R.id.img_location, R.id.tv_pass})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_vido:
@@ -109,7 +122,11 @@ public class PhoneCertificationActivity extends MVPActivity<PhoneCertificationCo
                 MatissePhotoHelper.selectPhoto(this,
                         1, REQUEST_CODE_LOCATION, MimeType.ofImage());
                 break;
-            case R.id.ll_buttom:
+            case R.id.tv_pass:
+                if (TextUtils.equals(tvTime.getText().toString(),"超时")){
+                    ToastUtil.toastCenter(this,"已超时");
+                    return;
+                }
                 if(TextUtils.isEmpty(etWechatNum.getText().toString())){
                     orgPassData.wechatid = etWechatNum.getText().toString();
                     mPresenter.submit(orgPassData);
@@ -135,7 +152,19 @@ public class PhoneCertificationActivity extends MVPActivity<PhoneCertificationCo
     @Override
     public void onSubmitFinish(String errorMessage) {
         EventBus.getDefault().post(new ApproveEvent(RobAddVCertificationActivity.APPROVE_FINISH));
-            finish();
+        finish();
+    }
+
+    @Override
+    public void setLastTime(double lasttime) {
+        this.lasttime = lasttime;
+        mCountDownHandler = new PhoneCertificationActivity.CountDownHandler(this, lasttime);
+        mCountDownHandler.startTimer();
+    }
+
+    @Override
+    public void showError(String errorMessage) {
+
     }
 
     @Override
@@ -156,5 +185,136 @@ public class PhoneCertificationActivity extends MVPActivity<PhoneCertificationCo
             Glide.with(this).load(f).into(imgLocation);
             mPresenter.submitimg(orgPassData,0);
         }
+    }
+
+    /**
+     * 倒计时时间变化调用
+     * @param newTimeText
+     */
+    private void onTimeChanged(String newTimeText) {
+        tvTime.setText(newTimeText);
+    }
+    /**
+     * 倒计时结束
+     */
+    private void onTimeFinish() {
+        tvTime.setText("超时");
+        tvPass.setBackgroundResource(R.drawable.bg_c_2_f_104);
+    }
+    private static class CountDownHandler extends Handler {
+
+        private int mMinute;
+        private int mSecond;
+
+        private Timer timer;
+        private TimerTask timerTask;
+
+        private WeakReference<PhoneCertificationActivity> mActivityRef;
+
+        public CountDownHandler(PhoneCertificationActivity activty, double lasttime) {
+            mActivityRef = new WeakReference<PhoneCertificationActivity>(activty);
+
+            String[] minteSecend = CommonUtil.secondToMinute(lasttime).split(":");
+            if (minteSecend != null || minteSecend.length >= 2) {
+                mMinute = Integer.parseInt(minteSecend[0]);
+                mSecond = Integer.parseInt(minteSecend[1]);
+            }else {
+                // TODO: 2018/4/21 脏数据，记录log，给后台提示
+            }
+        }
+
+
+        /**
+         * 开始倒计时
+         */
+        public void startTimer() {
+            timerTask = new TimerTask() {
+
+                @Override
+                public void run() {
+                    Message msg = new Message();
+                    msg.what = 0;
+                    sendMessage(msg);
+                }
+            };
+            timer = new Timer();
+            timer.schedule(timerTask, 0, 1000);
+        }
+
+
+        public String getCurrentText() {
+            if (mSecond >= 10) {
+                return "" + mMinute + ":" + mSecond;
+            } else {
+                return "" + mMinute + ":0" + mSecond;
+            }
+        }
+
+
+        public void cancel() {
+            if (timer != null){
+                timer.cancel();
+                timer = null;
+            }
+            if (timerTask != null){
+                timerTask = null;
+            }
+        }
+
+
+        public void handleMessage(Message msg){
+            if (isCountDownOver()) {
+                callbackActivityOnTimeFinish();
+                return;
+            }
+
+            if (mMinute == 0) {
+                if (mSecond != 0) {
+                    mSecond--;
+                    callbackActivityTimeTextChange();
+                }
+
+            } else {
+                if (mSecond == 0) {
+                    mSecond = 59;
+                    mMinute--;
+                    callbackActivityTimeTextChange();
+                } else {
+                    mSecond--;
+                    if (mSecond >= 10) {
+                        callbackActivityTimeTextChange();
+                    } else {
+                        callbackActivityTimeTextChange();
+                    }
+                }
+            }
+        } // handle message finish
+
+        private boolean isCountDownOver() {
+            return mMinute == 0 && mSecond == 0;
+        }
+
+        /**
+         * 回调Activity 倒计时结束
+         */
+        private void callbackActivityOnTimeFinish() {
+            PhoneCertificationActivity activty = mActivityRef.get();
+            if (activty == null || activty.isFinishing()) {
+                return;
+            }
+            activty.onTimeFinish();
+        }
+
+        /**
+         * 回调Activity 倒计时时间变化
+         */
+        private void callbackActivityTimeTextChange() {
+            PhoneCertificationActivity activty = mActivityRef.get();
+            if (activty == null || activty.isFinishing()) {
+                return;
+            }
+            activty.onTimeChanged(getCurrentText());
+        }
+
     }
 }

@@ -18,6 +18,11 @@ public interface PhoneCertificationContract  {
          * @param errorMessage
          */
         void onSubmitFinish(String errorMessage);
+
+        //绑定剩余时间
+        void setLastTime(double lasttime);
+
+        void showError(String errorMessage);
     }
 
     interface Presenter extends BasePresenter<PhoneCertificationContract.View> {
@@ -30,5 +35,10 @@ public interface PhoneCertificationContract  {
          * @param orgPassData
          */
         void submit(OrgPassData orgPassData);
+
+        /**
+         * 获取剩余时间
+         */
+        void lastTime(String rbiid);
     }
 }

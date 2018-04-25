@@ -149,6 +149,7 @@
         android:background="@color/list_job_0_bg_color"
         android:layout_height="55dp">
         <TextView
+            android:id="@+id/tv_pass"
             android:layout_width="0dp"
             android:gravity="center"
             android:text="通过(加V认证)"

@@ -267,8 +267,7 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
         }else{
             orgPassData.approvetype = 1;
         }
-//        mCountDownHandler = new CountDownHandler(this, lasttime);
-//        mCountDownHandler.startTimer();
+        mPresenter.lastTime(String.valueOf(bean.rbiid));
     }
 
     @Override
@@ -289,6 +288,8 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
     @Override
     public void setLastTime(double lasttime) {
         this.lasttime = lasttime;
+        mCountDownHandler = new CountDownHandler(this, lasttime);
+        mCountDownHandler.startTimer();
 
     }
 
@@ -360,6 +361,10 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
         String adver = etName.getText().toString().trim();
         String position = tvPosition.getText().toString();
         String location = tvLocation.getText().toString();
+        if (TextUtils.equals(tvTime.getText().toString(),"超时")){
+            ToastUtil.toastCenter(this,"已超时");
+            return;
+        }
         if (TextUtils.isEmpty(adver)) {
             ToastUtil.toastCenter(this, "请填写对方名称");
             return;
@@ -563,7 +568,6 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
     private void onTimeFinish() {
         tvTime.setText("超时");
         tvPass.setBackgroundResource(R.drawable.bg_c_2_f_104);
-        tvPass.setEnabled(false);
     }
     private static class CountDownHandler extends Handler {
 
