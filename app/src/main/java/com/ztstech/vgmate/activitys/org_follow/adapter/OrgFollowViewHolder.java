@@ -124,28 +124,38 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
                 //我开拓的
                 if (index == GetOrgFollow.STATUS_INDEX_CONCERN){
                     if (TextUtils.equals(data.cstatus, Constants.CSTATUS_ALREADY_CLAIM)){
-                        ToastUtil.toastCenter(getContext(),"已通过审核，无需再次审核");
-                        return;
+                        Intent intent = new Intent(getContext(), OrgDetailV2Activity.class);
+                        intent.putExtra(OrgDetailV2Activity.ARG_RBIID,data.rbiid);
+                        intent.putExtra(OrgDetailV2Activity.ARG_RBIONAMW,data.rbioname);
+                        intent.putExtra(OrgDetailV2Activity.ARG_ORGID,data.orgid);
+                        getContext().startActivity(intent);
+                    }else {
+                        Intent intent = new Intent(getContext(), RobIngActivty.class);
+                        intent.putExtra(RobIngActivty.APPOINT_SALE_KEY, RobIngActivty.APPOINT_SALE_VALUE);
+                        intent.putExtra(RobIngActivty.ORG_BEAN_ROB, new Gson().toJson(data));
+                        getContext().startActivity(intent);
                     }
-                    Intent  intent=new Intent(getContext(), RobIngActivty.class);
-                    intent.putExtra(RobIngActivty.APPOINT_SALE_KEY,RobIngActivty.APPOINT_SALE_VALUE);
-                    intent.putExtra(RobIngActivty.ORG_BEAN_ROB,new Gson().toJson(data));
-                    getContext().startActivity(intent);
                 }
-                else if (index == GetOrgFollow.STATUS_INDEX_FEEDBACK){
+                else if (index == GetOrgFollow.STATUS_INDEX_MANAGER){
 //                    // 如果是待审批列表跳转至审批详情
-//                    Intent intent = new Intent(getContext(), ClaimOrgDetailActivity.class);
-//                    intent.putExtra(ClaimOrgDetailActivity.KEY_BEAN,new Gson().toJson(data));
-//                    getContext().startActivity(intent);
+                    Intent intent = new Intent(getContext(), OrgDetailV2Activity.class);
+                    intent.putExtra(OrgDetailV2Activity.ARG_RBIID,data.rbiid);
+                    intent.putExtra(OrgDetailV2Activity.ARG_RBIONAMW,data.rbioname);
+                    intent.putExtra(OrgDetailV2Activity.ARG_ORGID,data.orgid);
+                    getContext().startActivity(intent);
                 }else if (index == GetOrgFollow.STATUS_INDEX_CLAIM){
                     if (TextUtils.equals(data.cstatus, Constants.CSTATUS_ALREADY_CLAIM)){
-                        ToastUtil.toastCenter(getContext(),"已通过审核，无需再次审核");
-                        return;
+                        Intent intent = new Intent(getContext(), OrgDetailV2Activity.class);
+                        intent.putExtra(OrgDetailV2Activity.ARG_RBIID,data.rbiid);
+                        intent.putExtra(OrgDetailV2Activity.ARG_RBIONAMW,data.rbioname);
+                        intent.putExtra(OrgDetailV2Activity.ARG_ORGID,data.orgid);
+                        getContext().startActivity(intent);
+                    }else {
+                        Intent intent = new Intent(getContext(), RobIngActivty.class);
+                        intent.putExtra(RobIngActivty.APPOINT_SALE_KEY, RobIngActivty.APPOINT_SALE_VALUE);
+                        intent.putExtra(RobIngActivty.ORG_BEAN_ROB, new Gson().toJson(data));
+                        getContext().startActivity(intent);
                     }
-                    Intent  intent=new Intent(getContext(), RobIngActivty.class);
-                    intent.putExtra(RobIngActivty.APPOINT_SALE_KEY,RobIngActivty.APPOINT_SALE_VALUE);
-                    intent.putExtra(RobIngActivty.ORG_BEAN_ROB,new Gson().toJson(data));
-                    getContext().startActivity(intent);
                 }
             }
         });

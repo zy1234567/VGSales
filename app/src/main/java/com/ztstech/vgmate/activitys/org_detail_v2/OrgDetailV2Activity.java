@@ -59,11 +59,8 @@ public class OrgDetailV2Activity extends MVPActivity<OrgDetailV2Contract.Present
         orgid = getIntent().getStringExtra(ARG_ORGID);
         rbioname = getIntent().getStringExtra(ARG_RBIONAMW);
         data = new UploadProtocolData();
-        if (TextUtils.isEmpty(orgid)){
-            tvIpload.setVisibility(View.GONE);
-        }else{
-            mPresenter.loadData(orgid);
-        }
+        tvCom.setVisibility(View.GONE);
+        mPresenter.loadData(orgid);
     }
 
     @Override
