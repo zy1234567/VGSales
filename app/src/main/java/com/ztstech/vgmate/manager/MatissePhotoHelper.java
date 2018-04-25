@@ -27,41 +27,43 @@ public class MatissePhotoHelper {
 
     public static final int REQUEST_CODE_CHOOSE = 23;
 
-    public static void selectPhoto(final Activity activity, final int maxsize, final int requestcode, final Set<MimeType> mimeTypeSet){
+    public static void selectPhoto(final Activity activity, final int maxsize,
+                                   final int requestcode, final Set<MimeType> mimeTypeSet){
 
         RxPermissions rxPermissions = new RxPermissions(activity);
-        rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Observer<Boolean>() {
-            @Override
-            public void onCompleted() {
-            }
+        rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA)
+                .subscribe(new Observer<Boolean>() {
+                    @Override
+                    public void onCompleted() {
+                    }
 
-            @Override
-            public void onError(Throwable e) {
-            }
+                    @Override
+                    public void onError(Throwable e) {
+                    }
 
-            @Override
-            public void onNext(Boolean aBoolean) {
-                if (aBoolean) {
-                    Matisse.from(activity)
-                            .choose(mimeTypeSet,false)
-                            .countable(true)
-                            .capture(true)
-                            .captureStrategy(
-                                    new CaptureStrategy(true, "com.ztstech.vgmate.fileprovider"))
-                            .maxSelectable(maxsize)
-                            .addFilter(new GifSizeFilter(8 * Filter.K * Filter.K,4))
-                            .gridExpectedSize(
-                                    activity.getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
-                            .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-                            .thumbnailScale(0.85f)
-                            .imageEngine(new GlideEngine())
-                            .forResult(requestcode);
-                } else {
-                    Toast.makeText(activity,"请打开相机相册读取权限", Toast.LENGTH_LONG)
-                            .show();
-                }
-            }
-        });
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+                        if (aBoolean) {
+                            Matisse.from(activity)
+                                    .choose(mimeTypeSet,false)
+                                    .countable(true)
+                                    .capture(true)
+                                    .captureStrategy(
+                                            new CaptureStrategy(true, "com.ztstech.vgmate.fileprovider"))
+                                    .maxSelectable(maxsize)
+                                    .addFilter(new GifSizeFilter(8 * Filter.K * Filter.K,4))
+                                    .gridExpectedSize(
+                                            activity.getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
+                                    .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                                    .thumbnailScale(0.85f)
+                                    .imageEngine(new GlideEngine())
+                                    .forResult(requestcode);
+                        } else {
+                            Toast.makeText(activity,"请打开相机相册读取权限", Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    }
+                });
     }
     public static void selectfromalbum(final Activity activity, final int maxsize){
         RxPermissions rxPermissions = new RxPermissions(activity);

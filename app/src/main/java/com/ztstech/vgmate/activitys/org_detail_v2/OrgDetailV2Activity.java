@@ -42,13 +42,12 @@ public class OrgDetailV2Activity extends MVPActivity<OrgDetailV2Contract.Present
     TopBar topBar;
     @BindView(R.id.webview)
     WebView webview;
-    @BindView(R.id.tv_com)
-    TextView tvCom;
     @BindView(R.id.tv_upload)
     TextView tvIpload;
     @BindView(R.id.ll_next)
     LinearLayout llNext;
-
+    @BindView(R.id.tv_sched)
+    TextView tvSched;
     UploadProtocolData data;
     int rbiid;
     String rbioname,orgid;
@@ -59,7 +58,6 @@ public class OrgDetailV2Activity extends MVPActivity<OrgDetailV2Contract.Present
         orgid = getIntent().getStringExtra(ARG_ORGID);
         rbioname = getIntent().getStringExtra(ARG_RBIONAMW);
         data = new UploadProtocolData();
-        tvCom.setVisibility(View.GONE);
         mPresenter.loadData(orgid);
     }
 
@@ -69,16 +67,16 @@ public class OrgDetailV2Activity extends MVPActivity<OrgDetailV2Contract.Present
     }
 
 
-    @OnClick({R.id.tv_com, R.id.tv_upload})
+    @OnClick({ R.id.tv_upload,R.id.tv_sched})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tv_com:
-                Intent intent = new Intent(this, CommmunicateListActivity.class);
-                intent.putExtra(CommmunicateListActivity.ARG_RBIID, String.valueOf(rbiid));
-                startActivity(intent);
-                break;
             case R.id.tv_upload:
                 showuploadprotocol();
+                break;
+            case R.id.tv_sched:
+
+                break;
+            default:
                 break;
         }
     }
