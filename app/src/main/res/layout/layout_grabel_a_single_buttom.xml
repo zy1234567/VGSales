@@ -104,6 +104,7 @@
         android:layout_marginLeft="12dp"/>
     <GridView
         android:id="@+id/gv_img"
+        android:layout_margin="12dp"
         android:layout_width="match_parent"
         android:verticalSpacing="5dp"
         android:horizontalSpacing="5dp"

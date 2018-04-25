@@ -6,12 +6,6 @@
     android:layout_width="match_parent"
     android:background="@color/color_107"
     android:layout_height="match_parent">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <com.ztstech.vgmate.weigets.TopBar
             android:id="@+id/top_bar"
             android:layout_width="match_parent"
@@ -21,9 +15,17 @@
             app:srcLeft="@mipmap/back_black"
             android:background="@color/color_109">
         </com.ztstech.vgmate.weigets.TopBar>
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_below="@+id/top_bar"
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <LinearLayout
             android:id="@+id/rl_top"
-            android:layout_below="@+id/top_bar"
             android:layout_width="match_parent"
             android:gravity="center_vertical"
             android:background="@color/color_107"
@@ -164,6 +166,7 @@
             android:layout_width="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
+            android:layout_alignParentBottom="true"
             android:orientation="horizontal"
             android:background="@color/list_job_0_bg_color"
             android:layout_height="55dp">

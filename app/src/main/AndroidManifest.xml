@@ -72,6 +72,7 @@
         <activity android:name=".activitys.category_info.CategoryTagsActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".activitys.add_certification.appoint_sale.RobAddVAppointSaleActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activitys.request_record_detail.RequestRecordDialogActivity"

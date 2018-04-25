@@ -1,6 +1,7 @@
 package com.ztstech.vgmate.activitys.rob_chance.rob_ing;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -201,7 +202,15 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         tvPhone.setText(bean.rbicontphone);
         tvName.setText(bean.contractname);
         tvTel.setText(bean.contractphone);
-
+        //拨打电话
+        tvTel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+bean.contractphone));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
         if (bean.orgcount >= 0) {
             tvOrgCount.setText("(名下机构数：".concat(String.valueOf(bean.orgcount)).concat(")"));
         }
@@ -214,16 +223,20 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
 
         }
 
-        if (identityFlg == PASSER_CHECK_IN) {
+//        if (identityFlg == PASSER_CHECK_IN) {
+//            llLayoutCenter.setVisibility(View.GONE);
+//        } else if (identityFlg == ORG_CHECK_IN_OR_CALIM) {
+//            llLayoutCenter.setVisibility(View.VISIBLE);
+//        }
+        if(isNormalRegister){
             llLayoutCenter.setVisibility(View.GONE);
-        } else if (identityFlg == ORG_CHECK_IN_OR_CALIM) {
+        }else {
             llLayoutCenter.setVisibility(View.VISIBLE);
+            gridView.setAdapter(new RobIngImgAdapter(RobIngActivty.this,bean));
         }
-
         String[] gps = bean.rbigps.split(",");
         tvGps.setText("E".concat(CommonUtil.convertToSexagesimal(Double.parseDouble(gps[0]))).
                 concat("N".concat(CommonUtil.convertToSexagesimal(Double.parseDouble(gps[1])))));
-        gridView.setAdapter(new RobIngImgAdapter(RobIngActivty.this,bean));
     }
     /**转化数据源bean*/
     private  void changeBean(){
@@ -248,6 +261,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
         bean.createrid=orgFollowlistBean.createrid;
         bean.rbipicsurl=orgFollowlistBean.rbipicsurl;
         bean.rbipicurl=orgFollowlistBean.rbipicurl;
+        bean.aptitudeurl=orgFollowlistBean.aptitudeurl;
     }
     //初始化数据
     private void initData() {
