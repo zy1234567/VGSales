@@ -67,7 +67,6 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
             finish();
         }
         initDialog();
-
         topBar.getLeftImage().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -53,6 +53,7 @@
             android:id="@+id/view_flg"
             android:layout_width="10dp"
             android:layout_height="10dp"
+            android:visibility="gone"
             android:layout_toRightOf="@+id/img_org"
             android:background="@drawable/bg_red_hint"
             android:layout_marginTop="5.5dp"

@@ -84,8 +84,11 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
         SpannableStringBuilder spannableStringBuilder =
                 ViewUtils.getDiffColorSpan(null, strs, colors);
         tvPhone.setText(spannableStringBuilder);
-
-
+        if(TextUtils.isEmpty(data.status)||TextUtils.equals("01",data.status)){
+            viewFlg.setVisibility(View.GONE);
+        }else {
+            viewFlg.setVisibility(View.VISIBLE);
+        }
         if(!TextUtils.isEmpty(data.createtime)){
             tvStatus.setText(TimeUtils.getDateWithString(data.createtime,"yyyy-MM-dd"));
             CommonUtil.orgfFromType(getContext(),tvFrom,data.cstatus,data.nowchancetype,data.chancetype);

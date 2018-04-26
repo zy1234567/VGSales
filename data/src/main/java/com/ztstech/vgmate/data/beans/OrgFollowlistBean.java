@@ -89,5 +89,6 @@ public class OrgFollowlistBean extends BaseRespBean implements Serializable{
         public String rbipicurl;
         public String rbipicsurl;
         public String aptitudeurl;//资格证明图片
+        public String status;//是否处理过
     }
 }
