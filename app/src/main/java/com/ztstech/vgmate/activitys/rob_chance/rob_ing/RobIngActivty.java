@@ -305,7 +305,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
                 Intent intent1 = new Intent(this, GpsActivity.class);
                 intent1.putExtra(GpsActivity.ARG_LA,arraygps[1]);
                 intent1.putExtra(GpsActivity.ARG_LO,arraygps[0]);
-                intent1.putExtra(GpsActivity.ARG_ADDRESS,bean.rbigps);
+                intent1.putExtra(GpsActivity.ARG_ADDRESS,bean.rbiaddress);
                 intent1.putExtra(GpsActivity.SHOW_ORG_FLG,true);
                 startActivity(intent1);
                 break;

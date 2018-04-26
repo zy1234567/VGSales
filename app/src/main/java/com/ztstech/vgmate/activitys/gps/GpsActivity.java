@@ -40,7 +40,7 @@ import rx.functions.Action1;
 public class GpsActivity extends BaseActivity implements  GeocodeSearch.OnGeocodeSearchListener {
 
     /**经纬度和地址的key和向GpsACtivity传的标志位的key*/
-    public final static String SHOW_ORG_FLG = "CorrectionErrorActivityFlg";
+    public final static String SHOW_ORG_FLG = "show_org_flg";
     public final static String ARG_LA = "la";
     public final static String ARG_LO = "lo";
     public final static String ARG_ADDRESS = "address";
@@ -78,7 +78,7 @@ public class GpsActivity extends BaseActivity implements  GeocodeSearch.OnGeocod
     private String location;
     /**根据gps定位位置信息以及标志位和地址信息*/
     String strla,strlo,address;
-    boolean flg = false;
+    boolean showorgflg = false;
 
     private Runnable getLocationRunnable = new Runnable() {
         @Override
@@ -88,7 +88,7 @@ public class GpsActivity extends BaseActivity implements  GeocodeSearch.OnGeocod
             // 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
             RegeocodeQuery query = new RegeocodeQuery(new LatLonPoint(latLng.latitude, latLng.longitude),
                     100,GeocodeSearch.GPS);
-            if (!flg){
+            if (!showorgflg){
                 la = latLng.latitude;
                 lo = latLng.longitude;
             }
@@ -123,26 +123,24 @@ public class GpsActivity extends BaseActivity implements  GeocodeSearch.OnGeocod
                         }
                     }
                 });
-        flg = getIntent().getBooleanExtra(SHOW_ORG_FLG,false);
-        if (flg) {
+        showorgflg = getIntent().getBooleanExtra(SHOW_ORG_FLG,false);
+        if (showorgflg) {
             strla = getIntent().getStringExtra(ARG_LA);
             strlo = getIntent().getStringExtra(ARG_LO);
             address = getIntent().getStringExtra(ARG_ADDRESS);
             la = Double.parseDouble(strla);
             lo = Double.parseDouble(strlo);
+            marker = aMap.addMarker(new MarkerOptions().position(new LatLng(la, lo))
+                    .title(address));
+            marker.setPosition(new LatLng(la, lo));
+            marker.showInfoWindow();
+            marker.setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.gps));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    marker = aMap.addMarker(new MarkerOptions().position(new LatLng(la, lo))
-                            .title(address));
-                    marker.setPosition(new LatLng(la, lo));
-                    marker.showInfoWindow();
-                    marker.setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.gps));
-                    marker.setPositionByPixels(
-                            GpsActivity.this.getResources().getDisplayMetrics().widthPixels / 2,
-                            GpsActivity.this.getResources().getDisplayMetrics().heightPixels / 2);
-                    aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(la, lo), 16));
-                    flg = false;
+                    if (marker == null) {
+                        aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(la, lo), 16));
+                    }
                 }
             },1000);
         }
@@ -179,6 +177,9 @@ public class GpsActivity extends BaseActivity implements  GeocodeSearch.OnGeocod
         }
         if (regeocodeResult != null) {
             progressHUD.dismiss();
+            if (showorgflg){
+                return;
+            }
             LatLng latLng = new LatLng(la, lo);
             if (regeocodeResult.getRegeocodeQuery().getPoint().getLatitude() == la &&
                     regeocodeResult.getRegeocodeQuery().getPoint().getLongitude() == lo) {
