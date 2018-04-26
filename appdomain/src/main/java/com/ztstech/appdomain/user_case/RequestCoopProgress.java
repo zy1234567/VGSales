@@ -16,7 +16,7 @@ public class RequestCoopProgress {
     private String orgid;
     private String rbiid;
     private RequestUploadProtocolApi api;
-    public RequestCoopProgress(String orgid,String rbiid){
+    public RequestCoopProgress(String rbiid,String orgid){
         this.orgid = orgid;
         this.rbiid = rbiid;
         api = RetrofitUtils.createService(RequestUploadProtocolApi.class);

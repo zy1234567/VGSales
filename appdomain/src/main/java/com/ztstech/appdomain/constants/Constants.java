@@ -157,4 +157,8 @@ public interface Constants {
     //沟通机会类型00机构沟通记录，01机会沟通记录
     String COMMUNICATION_TYPE_ORG = "00";
     String COMMUNICATION_TYPE_CHANCE = "01";
+
+    //已上传 00 未上传 01
+    String PASS = "00";
+    String NO_PASS = "01";
 }
