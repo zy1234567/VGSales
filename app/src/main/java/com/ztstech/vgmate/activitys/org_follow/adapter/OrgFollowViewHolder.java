@@ -57,7 +57,8 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
     TextView tvAddress;
     @BindView(R.id.body)
     LinearLayout body;
-
+    @BindView(R.id.view_flg)
+    View viewFlg;
     private int index;
 
     public OrgFollowViewHolder(View itemView, int index) {

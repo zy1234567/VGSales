@@ -175,7 +175,9 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activitys.org_follow.feedback.OrgFeedBackActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activitys.org_follow.claim_org.ClaimOrgDetailActivity"
+        <!--<activity android:name=".activitys.org_follow.claim_org.ClaimOrgDetailActivity"-->
+            <!--android:screenOrientation="portrait"/>-->
+        <activity android:name=".activitys.coop_progress.CoopProgressActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".activitys.rob_chance.rob_ing.RobIngActivty"
             android:screenOrientation="portrait"/>

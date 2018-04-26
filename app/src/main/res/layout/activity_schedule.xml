@@ -20,6 +20,177 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/img_upload_coop_agree"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/weiwan_ico"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/color_105"
+            android:layout_below="@+id/img_upload_coop_agree"
+            android:layout_marginLeft="19dp"
+            android:layout_marginStart="19dp" />
+        <View
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_below="@+id/img_upload_coop_agree"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="25.5dp"
+            android:background="@drawable/bg_105_hint"
+            android:layout_marginStart="17dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/md__defaultBackground"
+            android:text="销售上传合作伙伴协议"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="6dp"
+            android:textSize="@dimen/text_4"
+            android:layout_toRightOf="@+id/img_upload_coop_agree"
+            android:layout_marginStart="6dp"
+            android:layout_toEndOf="@+id/img_upload_coop_agree" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="客服审核"
+            android:layout_marginLeft="7dp"
+            android:layout_below="@+id/img_upload_coop_agree"
+            android:layout_toRightOf="@+id/img_upload_coop_agree"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_7"
+            android:layout_toEndOf="@+id/img_upload_coop_agree"
+            android:layout_marginStart="7dp" />
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/img_coop_partner"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/weiwan_ico"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/color_105"
+            android:layout_below="@+id/img_coop_partner"
+            android:layout_marginLeft="19dp"
+            android:layout_marginStart="19dp" />
+        <View
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_below="@+id/img_coop_partner"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="25.5dp"
+            android:background="@drawable/bg_105_hint"
+            android:layout_marginStart="17dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/md__defaultBackground"
+            android:text="客服审核通过，已结成合作伙伴"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="6dp"
+            android:textSize="@dimen/text_4"
+            android:layout_toRightOf="@+id/img_coop_partner"
+            android:layout_marginStart="6dp"
+            android:layout_toEndOf="@+id/img_coop_partner" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开机广告制作"
+            android:layout_marginLeft="7dp"
+            android:layout_below="@+id/img_coop_partner"
+            android:layout_toRightOf="@+id/img_coop_partner"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_7"
+            android:layout_toEndOf="@+id/img_coop_partner"
+            android:layout_marginStart="7dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/img_open_adver"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@mipmap/weiwan_ico"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp" />
+    <View
+        android:layout_width="1dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="3dp"
+        android:background="@color/color_105"
+        android:layout_below="@+id/img_open_adver"
+        android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp" />
+    <View
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:layout_below="@+id/img_open_adver"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="25.5dp"
+        android:background="@drawable/bg_105_hint"
+        android:layout_marginStart="17dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/md__defaultBackground"
+        android:text="运营上传机构开机广告"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="6dp"
+        android:textSize="@dimen/text_4"
+        android:layout_toRightOf="@+id/img_open_adver"
+        android:layout_marginStart="6dp"
+        android:layout_toEndOf="@+id/img_open_adver" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请销售及时跟进，张贴合作海报"
+        android:layout_marginLeft="7dp"
+        android:layout_below="@+id/img_open_adver"
+        android:layout_toRightOf="@+id/img_open_adver"
+        android:layout_marginTop="20dp"
+        android:textSize="@dimen/text_7"
+        android:layout_toEndOf="@+id/img_open_adver"
+        android:layout_marginStart="7dp" />
+</RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/img_poster"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/weiwan_ico"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/md__defaultBackground"
+            android:text="运营上传机构开机广告"
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="6dp"
+            android:textSize="@dimen/text_4"
+            android:layout_toRightOf="@+id/img_poster"
+            android:layout_marginStart="6dp"
+            android:layout_toEndOf="@+id/img_poster" />
     </RelativeLayout>
 </LinearLayout>

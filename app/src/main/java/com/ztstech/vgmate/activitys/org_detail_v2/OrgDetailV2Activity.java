@@ -16,9 +16,11 @@ import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.communicate_record.com_list.CommmunicateListActivity;
+import com.ztstech.vgmate.activitys.coop_progress.CoopProgressActivity;
 import com.ztstech.vgmate.activitys.upload_protocol.UploadActivity;
 import com.ztstech.vgmate.activitys.upload_protocol.upload_cood_poster.UploadCoodPosterActivity;
 import com.ztstech.vgmate.data.dto.AddComRecordData;
+import com.ztstech.vgmate.data.dto.CoopProgressData;
 import com.ztstech.vgmate.data.dto.UploadProtocolData;
 import com.ztstech.vgmate.data.events.UploadProtocolEvent;
 import com.ztstech.vgmate.utils.DialogUtils;
@@ -49,6 +51,7 @@ public class OrgDetailV2Activity extends MVPActivity<OrgDetailV2Contract.Present
     @BindView(R.id.tv_sched)
     TextView tvSched;
     UploadProtocolData data;
+    CoopProgressData coopProgressData;
     int rbiid;
     String rbioname,orgid;
     @Override
@@ -59,6 +62,7 @@ public class OrgDetailV2Activity extends MVPActivity<OrgDetailV2Contract.Present
         rbioname = getIntent().getStringExtra(ARG_RBIONAMW);
         data = new UploadProtocolData();
         mPresenter.loadData(orgid);
+        mPresenter.loadcoopData(String.valueOf(rbiid),orgid);
     }
 
     @Override
@@ -74,7 +78,7 @@ public class OrgDetailV2Activity extends MVPActivity<OrgDetailV2Contract.Present
                 showuploadprotocol();
                 break;
             case R.id.tv_sched:
-
+                startActivity(new Intent(this, CoopProgressActivity.class));
                 break;
             default:
                 break;
@@ -125,6 +129,11 @@ public class OrgDetailV2Activity extends MVPActivity<OrgDetailV2Contract.Present
     @Override
     public void showError(String errorMessage) {
 
+    }
+
+    @Override
+    public void setCoopData(CoopProgressData coopProgressData) {
+        this.coopProgressData = coopProgressData;
     }
 
     @Override
