@@ -37,6 +37,7 @@ public class SplashActivity extends BaseActivity {
                         }
                     });
         }
+        LocationUtils.init();
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
