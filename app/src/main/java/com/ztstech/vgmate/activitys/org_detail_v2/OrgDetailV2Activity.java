@@ -62,7 +62,6 @@ public class OrgDetailV2Activity extends MVPActivity<OrgDetailV2Contract.Present
         rbioname = getIntent().getStringExtra(ARG_RBIONAMW);
         data = new UploadProtocolData();
         mPresenter.loadData(orgid);
-        mPresenter.loadcoopData(String.valueOf(rbiid),orgid);
     }
 
     @Override
@@ -78,7 +77,8 @@ public class OrgDetailV2Activity extends MVPActivity<OrgDetailV2Contract.Present
                 showuploadprotocol();
                 break;
             case R.id.tv_sched:
-                startActivity(new Intent(this, CoopProgressActivity.class));
+                mPresenter.loadcoopData(String.valueOf(rbiid),orgid);
+
                 break;
             default:
                 break;
@@ -124,6 +124,9 @@ public class OrgDetailV2Activity extends MVPActivity<OrgDetailV2Contract.Present
     @Override
     public void setData(UploadProtocolData uploadProtocolData) {
         this.data = uploadProtocolData;
+        Intent intent = new Intent(this,CoopProgressActivity.class);
+        intent.putExtra(CoopProgressActivity.ORG_COOP_BEAN,new Gson().toJson(coopProgressData));
+        startActivity(intent);
     }
 
     @Override

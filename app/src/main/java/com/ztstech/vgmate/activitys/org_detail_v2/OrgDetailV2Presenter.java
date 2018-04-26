@@ -29,7 +29,7 @@ public class OrgDetailV2Presenter extends PresenterImpl<OrgDetailV2Contract.View
 
     //请求协议数据
     private void requestdata(String orgid) {
-        new BasePresenterSubscriber<UploadProtocolData>(mView, false) {
+        new BasePresenterSubscriber<UploadProtocolData>(mView, true) {
             @Override
             protected void childNext(UploadProtocolData uploadProtocolData) {
                 if (uploadProtocolData.isSucceed()) {
@@ -40,7 +40,7 @@ public class OrgDetailV2Presenter extends PresenterImpl<OrgDetailV2Contract.View
     }
     //请求合作进度数据
     private void requestCoopProgrss(String rbiid,String orgid){
-        new BasePresenterSubscriber<CoopProgressData>(mView, false) {
+        new BasePresenterSubscriber<CoopProgressData>(mView, true) {
             @Override
             protected void childNext(CoopProgressData coopProgressData) {
                 if (coopProgressData.isSucceed()) {
