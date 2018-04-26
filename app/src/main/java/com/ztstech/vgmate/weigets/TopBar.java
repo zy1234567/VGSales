@@ -192,7 +192,12 @@ public class TopBar extends FrameLayout {
             tvTitle.setText(title);
         }
     }
-
+    public void setTitleColor(int i){
+        this.title = title;
+        if (tvTitle != null) {
+            tvTitle.setTextColor(getContext().getResources().getColor(i));
+        }
+    }
     public void setSearchText(String searchText) {
         this.searchText = searchText;
         if (tvSearch != null) {
