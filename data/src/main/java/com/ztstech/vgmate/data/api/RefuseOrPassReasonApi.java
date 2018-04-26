@@ -59,7 +59,8 @@ public interface RefuseOrPassReasonApi {
                                               @Query("type") String type,
                                               @Query("rubbishtype") String rubbishtype,
                                               @Query("refuse") String refuse,
-                                              @Query("oname") String oname);
+                                              @Query("oname") String oname,
+                                              @Query("statustype") String statustype);
 
     /**
      * 路人登记 定位认证

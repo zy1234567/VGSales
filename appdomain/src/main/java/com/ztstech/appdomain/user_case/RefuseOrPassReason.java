@@ -38,7 +38,8 @@ public class RefuseOrPassReason implements UserCase<Observable<BaseRespBean>> {
                     refuseCalimData.type,
                     refuseCalimData.rubbishtype,
                     refuseCalimData.refuse,
-                    refuseCalimData.oname);
+                    refuseCalimData.oname,
+                    refuseCalimData.statustype);
         }
     }
 }

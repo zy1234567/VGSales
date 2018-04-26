@@ -7,11 +7,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.ztstech.appdomain.repository.UserRepository;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.BasePresenter;
 import com.ztstech.vgmate.activitys.MVPActivity;
@@ -61,7 +63,29 @@ public class OrgDetailV2Activity extends MVPActivity<OrgDetailV2Contract.Present
         orgid = getIntent().getStringExtra(ARG_ORGID);
         rbioname = getIntent().getStringExtra(ARG_RBIONAMW);
         data = new UploadProtocolData();
+        topBar.setTitle("机构主页");
+        topBar.setTitleColor(R.color.color_109);
         mPresenter.loadData(orgid);
+        webview.loadUrl("http://www.008box.com/jsp/webh5/app_mapOrgDetails.jsp?rbiid="
+                .concat(String.valueOf(rbiid)).concat("&").concat("type=01&").concat("openWhere=01"));
+        WebSettings settings = webview.getSettings();
+        settings.setDomStorageEnabled(true);
+        settings.setJavaScriptEnabled(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        settings.setUseWideViewPort(true);
+        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        settings.setAppCacheEnabled(false);
+        settings.setSaveFormData(false);
+        settings.setBuiltInZoomControls(true);
+        settings.setSavePassword(false);
+        settings.setSupportZoom(false);
+        settings.setDefaultTextEncodingName("utf-8");
+        webview.setVerticalScrollBarEnabled(false);
+        webview.setHorizontalScrollBarEnabled(false);
+        settings.setBlockNetworkImage(false);
+        webview.setInitialScale(99); //这句话是解决s8上左右晃动的问题
+
     }
 
     @Override
@@ -124,9 +148,6 @@ public class OrgDetailV2Activity extends MVPActivity<OrgDetailV2Contract.Present
     @Override
     public void setData(UploadProtocolData uploadProtocolData) {
         this.data = uploadProtocolData;
-        Intent intent = new Intent(this,CoopProgressActivity.class);
-        intent.putExtra(CoopProgressActivity.ORG_COOP_BEAN,new Gson().toJson(coopProgressData));
-        startActivity(intent);
     }
 
     @Override
@@ -137,6 +158,9 @@ public class OrgDetailV2Activity extends MVPActivity<OrgDetailV2Contract.Present
     @Override
     public void setCoopData(CoopProgressData coopProgressData) {
         this.coopProgressData = coopProgressData;
+        Intent intent = new Intent(this,CoopProgressActivity.class);
+        intent.putExtra(CoopProgressActivity.ORG_COOP_BEAN,new Gson().toJson(coopProgressData));
+        startActivity(intent);
     }
 
     @Override

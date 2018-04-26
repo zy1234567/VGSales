@@ -31,12 +31,16 @@ public class RobChancePresenter extends PresenterImpl<RobChanceContract.View> im
     @Override
     public void loadData() {
         currentpage = 1;
-        requestData();
+        requestData(currentpage);
     }
 
     @Override
     public void appendData() {
-
+        if (totalpage == currentpage){
+            mView.setData(listBean);
+        }else {
+            requestData(currentpage + 1);
+        }
     }
 
     /**
@@ -67,7 +71,7 @@ public class RobChancePresenter extends PresenterImpl<RobChanceContract.View> im
     /**
      * 请求可抢单列表数据
      */
-    private void requestData(){
+    private void requestData(int page){
         new BasePresenterSubscriber<RobChanceBean>(mView,false){
 
             @Override
@@ -88,7 +92,7 @@ public class RobChancePresenter extends PresenterImpl<RobChanceContract.View> im
                     mView.showError(getComRecordBean.getErrmsg());
                 }
             }
-        }.run(new RobChance(currentpage,null).run());
+        }.run(new RobChance(page,null).run());
     }
     /**
      * 请求剩余时间
