@@ -62,9 +62,14 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
         bottomBar.setOnTabItemClickListener(this);
         vpMain.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
         if (TextUtils.equals(UserRepository.getInstance().getUser().getUserBean().info.status,Constants.USER_ID_REFUSE)){
-            ToastUtil.toastCenter(this,"您的审核被拒绝，请重新审核");
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
+//            ToastUtil.toastCenter(this,"您的审核被拒绝，请重新审核");
+            DialogUtils.showdialogknow(MainActivity.this, "您的审核被拒绝，请重新审核。", "友情提示", new DialogUtils.showdialogCallBack() {
+                @Override
+                public void knowclick() {
+                }
+            });
+//            startActivity(new Intent(this, LoginActivity.class));
+//            finish();
         }
         initDialog();
         topBar.getLeftImage().setOnClickListener(new View.OnClickListener() {
