@@ -20,11 +20,19 @@ public class CoopProgressData extends BaseRespBean {
          * poster : 00
          * twstatus : 01
          * picture : 01
+         * teamcretime：合作伙伴上传时间
+         teamapptime：合作伙伴审核时间
+         picturetime：开机广告上传时间
+         postertime：海报上传时间
          */
 
         public String teamwork;
         public String poster;
         public String twstatus;
         public String picture;
+        public String teamcretime;
+        public String teamapptime;
+        public String picturetime;
+        public String postertime;
     }
 }

@@ -40,6 +40,8 @@ public class OrgDetailV2Activity extends MVPActivity<OrgDetailV2Contract.Present
     public static final String ARG_RBIID = "rbiid";
     public static final String ARG_RBIONAMW = "rbioname";
     public static final String ARG_ORGID = "orgid";
+    //合作精度红点
+    public static final String STATUES_FLG = "status_flg";
     //协议实体类
     public static final String ARG_BEAN_PROTOCOL = "protocol_bean";
     @BindView(R.id.top_bar)
@@ -52,16 +54,27 @@ public class OrgDetailV2Activity extends MVPActivity<OrgDetailV2Contract.Present
     LinearLayout llNext;
     @BindView(R.id.tv_sched)
     TextView tvSched;
+    @BindView(R.id.view_flg)
+    View viewFlg;
     UploadProtocolData data;
     CoopProgressData coopProgressData;
     int rbiid;
     String rbioname,orgid;
+
+    //红点标志位
+    private String status;
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
         rbiid = getIntent().getIntExtra(ARG_RBIID, 0);
         orgid = getIntent().getStringExtra(ARG_ORGID);
         rbioname = getIntent().getStringExtra(ARG_RBIONAMW);
+        status = getIntent().getStringExtra(STATUES_FLG);
+        if(TextUtils.isEmpty(status)||TextUtils.equals("01",status)){
+            viewFlg.setVisibility(View.GONE);
+        }else {
+            viewFlg.setVisibility(View.VISIBLE);
+        }
         data = new UploadProtocolData();
         topBar.setTitle("机构主页");
         topBar.setTitleColor(R.color.color_109);

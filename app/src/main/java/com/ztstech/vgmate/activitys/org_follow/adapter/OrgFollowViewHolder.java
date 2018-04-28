@@ -132,6 +132,7 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
                         intent.putExtra(OrgDetailV2Activity.ARG_RBIID,data.rbiid);
                         intent.putExtra(OrgDetailV2Activity.ARG_RBIONAMW,data.rbioname);
                         intent.putExtra(OrgDetailV2Activity.ARG_ORGID,data.orgid);
+                        intent.putExtra(OrgDetailV2Activity.STATUES_FLG,data.status);
                         getContext().startActivity(intent);
                     }else {
                         Intent intent = new Intent(getContext(), RobIngActivty.class);
@@ -141,11 +142,12 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
                     }
                 }
                 else if (index == GetOrgFollow.STATUS_INDEX_MANAGER){
-//                    // 如果是待审批列表跳转至审批详情
+                    //机会抢单
                     Intent intent = new Intent(getContext(), OrgDetailV2Activity.class);
                     intent.putExtra(OrgDetailV2Activity.ARG_RBIID,data.rbiid);
                     intent.putExtra(OrgDetailV2Activity.ARG_RBIONAMW,data.rbioname);
                     intent.putExtra(OrgDetailV2Activity.ARG_ORGID,data.orgid);
+                    intent.putExtra(OrgDetailV2Activity.STATUES_FLG,data.status);
                     getContext().startActivity(intent);
                 }else if (index == GetOrgFollow.STATUS_INDEX_CLAIM){
                     if (TextUtils.equals(data.cstatus, Constants.CSTATUS_ALREADY_CLAIM)){
@@ -153,6 +155,7 @@ public class OrgFollowViewHolder extends SimpleViewHolder<OrgFollowlistBean.List
                         intent.putExtra(OrgDetailV2Activity.ARG_RBIID,data.rbiid);
                         intent.putExtra(OrgDetailV2Activity.ARG_RBIONAMW,data.rbioname);
                         intent.putExtra(OrgDetailV2Activity.ARG_ORGID,data.orgid);
+                        intent.putExtra(OrgDetailV2Activity.STATUES_FLG,data.status);
                         getContext().startActivity(intent);
                     }else {
                         Intent intent = new Intent(getContext(), RobIngActivty.class);

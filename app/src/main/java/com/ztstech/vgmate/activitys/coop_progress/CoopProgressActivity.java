@@ -3,13 +3,14 @@ package com.ztstech.vgmate.activitys.coop_progress;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.ztstech.appdomain.constants.Constants;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.base.BaseActivity;
-import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import com.ztstech.vgmate.data.dto.CoopProgressData;
+import com.ztstech.vgmate.utils.TimeUtils;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import butterknife.BindView;
@@ -34,6 +35,15 @@ public class CoopProgressActivity extends BaseActivity {
     ImageView imgPoster;
 
     CoopProgressData coopProgressData;
+    @BindView(R.id.tv_time_coop_agree)
+    TextView tvTimeCoopAgree;
+    @BindView(R.id.tv_time_coop_parent)
+    TextView tvTimeCoopParent;
+    @BindView(R.id.tv_time_open_adver)
+    TextView tvTimeOpenAdver;
+    @BindView(R.id.tv_time_poster)
+    TextView tvTimePoster;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_schedule;
@@ -44,31 +54,46 @@ public class CoopProgressActivity extends BaseActivity {
         super.onViewBindFinish();
         coopProgressData = new Gson().fromJson(getIntent().
                 getStringExtra(ORG_COOP_BEAN), CoopProgressData.class);
+        initView();
     }
+
     //判断合作进度状态
-    private void initView(){
-        if (TextUtils.equals(coopProgressData.map.teamwork, Constants.PASS)){
+    private void initView() {
+        if (TextUtils.equals(coopProgressData.map.teamwork, Constants.PASS)) {
             imgUploadCoopAgree.setImageResource(R.mipmap.wancheng_ico);
-        }else{
+        } else {
             imgUploadCoopAgree.setImageResource(R.mipmap.weiwan_ico);
         }
 
-        if (TextUtils.equals(coopProgressData.map.twstatus, Constants.PASS)){
+        if (TextUtils.equals(coopProgressData.map.twstatus, Constants.PASS)) {
             imgCoopPartner.setImageResource(R.mipmap.wancheng_ico);
-        }else{
+        } else {
             imgCoopPartner.setImageResource(R.mipmap.weiwan_ico);
         }
 
-        if (TextUtils.equals(coopProgressData.map.picture, Constants.PASS)){
+        if (TextUtils.equals(coopProgressData.map.picture, Constants.PASS)) {
             imgOpenAdver.setImageResource(R.mipmap.wancheng_ico);
-        }else{
+        } else {
             imgOpenAdver.setImageResource(R.mipmap.weiwan_ico);
         }
 
-        if (TextUtils.equals(coopProgressData.map.poster, Constants.PASS)){
+        if (TextUtils.equals(coopProgressData.map.poster, Constants.PASS)) {
             imgPoster.setImageResource(R.mipmap.wancheng_ico);
-        }else{
+        } else {
             imgPoster.setImageResource(R.mipmap.weiwan_ico);
+        }
+
+        if (!TextUtils.isEmpty(coopProgressData.map.teamcretime)) {
+            tvTimeCoopAgree.setText(TimeUtils.getDateWithString(coopProgressData.map.teamcretime, "yyyy-MM-dd HH:mm"));
+        }
+        if (!TextUtils.isEmpty(coopProgressData.map.teamapptime)) {
+            tvTimeCoopParent.setText(TimeUtils.getDateWithString(coopProgressData.map.teamapptime, "yyyy-MM-dd HH:mm"));
+        }
+        if (!TextUtils.isEmpty(coopProgressData.map.picturetime)) {
+            tvTimeOpenAdver.setText(TimeUtils.getDateWithString(coopProgressData.map.picturetime, "yyyy-MM-dd HH:mm"));
+        }
+        if (!TextUtils.isEmpty(coopProgressData.map.postertime)) {
+            tvTimePoster.setText(TimeUtils.getDateWithString(coopProgressData.map.postertime, "yyyy-MM-dd HH:mm"));
         }
     }
 

@@ -19,8 +19,8 @@ interface AddVContract {
         File[] getImgaeFiles();
         /**
          * 提交数据
-         * @param errorMessage
          */
+        void onSuccend();
         void onSubmitFinish(String errorMessage);
         //绑定剩余时间
         void setLastTime(double lasttime);

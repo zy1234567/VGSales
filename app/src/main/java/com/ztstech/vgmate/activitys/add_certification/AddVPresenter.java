@@ -1,6 +1,7 @@
 package com.ztstech.vgmate.activitys.add_certification;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.ztstech.appdomain.user_case.AddComRecord;
@@ -58,12 +59,13 @@ public class AddVPresenter  extends PresenterImpl<AddVContract.View> implements
                                 mView.hideLoading(null);
 
                                 if (baseRespBean.isSucceed()) {
+                                        Log.e("RobAddVPresenter1","finish");
                                         //防止后台在正确情况下返回errmsg
-                                        mView.onSubmitFinish(null);
-
-
+                                        mView.onSuccend();
+//                                        mView.onSubmitFinish(null);
                                 }else {
                                         mView.onSubmitFinish(baseRespBean.getErrmsg());
+                                        Log.e("RobAddVPresenter2","finish");
                                 }
 
                         }

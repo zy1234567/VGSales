@@ -69,6 +69,7 @@ public class RobIngPresenter extends PresenterImpl<RobIngContract.View>
 
                 if (baseRespBean.isSucceed()) {
                     //防止后台在正确情况下返回errmsg
+                    mView.Success();
                     mView.onSubmitFinish(null);
                 }else {
                     mView.onSubmitFinish(baseRespBean.getErrmsg());

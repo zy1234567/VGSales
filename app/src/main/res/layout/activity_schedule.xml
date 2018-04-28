@@ -30,7 +30,7 @@
             android:layout_marginStart="12dp" />
         <View
             android:layout_width="1dp"
-            android:layout_height="50dp"
+            android:layout_height="86dp"
             android:layout_marginTop="3dp"
             android:background="@color/color_105"
             android:layout_below="@+id/img_upload_coop_agree"
@@ -41,7 +41,7 @@
             android:layout_height="5dp"
             android:layout_below="@+id/img_upload_coop_agree"
             android:layout_marginLeft="17dp"
-            android:layout_marginTop="25.5dp"
+            android:layout_marginTop="43.5dp"
             android:background="@drawable/bg_105_hint"
             android:layout_marginStart="17dp" />
         <TextView
@@ -56,13 +56,25 @@
             android:layout_marginStart="6dp"
             android:layout_toEndOf="@+id/img_upload_coop_agree" />
         <TextView
+            android:id="@+id/tv_time_coop_agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_7"
+            android:text="暂无"
+            android:layout_toRightOf="@+id/img_upload_coop_agree"
+            android:layout_below="@+id/img_upload_coop_agree"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#B1B9BF"
+            android:layout_marginStart="7dp" />
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="客服审核"
             android:layout_marginLeft="7dp"
             android:layout_below="@+id/img_upload_coop_agree"
             android:layout_toRightOf="@+id/img_upload_coop_agree"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="39.6dp"
             android:textSize="@dimen/text_7"
             android:layout_toEndOf="@+id/img_upload_coop_agree"
             android:layout_marginStart="7dp" />
@@ -79,9 +91,21 @@
             android:layout_marginTop="3dp"
             android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp" />
+        <TextView
+            android:id="@+id/tv_time_coop_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_7"
+            android:text="暂无"
+            android:layout_toRightOf="@+id/img_coop_partner"
+            android:layout_below="@+id/img_coop_partner"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#B1B9BF"
+            android:layout_marginStart="7dp" />
         <View
             android:layout_width="1dp"
-            android:layout_height="50dp"
+            android:layout_height="86dp"
             android:layout_marginTop="3dp"
             android:background="@color/color_105"
             android:layout_below="@+id/img_coop_partner"
@@ -92,7 +116,7 @@
             android:layout_height="5dp"
             android:layout_below="@+id/img_coop_partner"
             android:layout_marginLeft="17dp"
-            android:layout_marginTop="25.5dp"
+            android:layout_marginTop="43.5dp"
             android:background="@drawable/bg_105_hint"
             android:layout_marginStart="17dp" />
         <TextView
@@ -113,7 +137,7 @@
             android:layout_marginLeft="7dp"
             android:layout_below="@+id/img_coop_partner"
             android:layout_toRightOf="@+id/img_coop_partner"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="39.6dp"
             android:textSize="@dimen/text_7"
             android:layout_toEndOf="@+id/img_coop_partner"
             android:layout_marginStart="7dp" />
@@ -130,9 +154,21 @@
         android:layout_marginTop="3dp"
         android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp" />
+        <TextView
+            android:id="@+id/tv_time_open_adver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_7"
+            android:text="暂无"
+            android:layout_toRightOf="@+id/img_open_adver"
+            android:layout_below="@+id/img_open_adver"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#B1B9BF"
+            android:layout_marginStart="7dp" />
     <View
         android:layout_width="1dp"
-        android:layout_height="50dp"
+        android:layout_height="86dp"
         android:layout_marginTop="3dp"
         android:background="@color/color_105"
         android:layout_below="@+id/img_open_adver"
@@ -143,7 +179,7 @@
         android:layout_height="5dp"
         android:layout_below="@+id/img_open_adver"
         android:layout_marginLeft="17dp"
-        android:layout_marginTop="25.5dp"
+        android:layout_marginTop="43.5dp"
         android:background="@drawable/bg_105_hint"
         android:layout_marginStart="17dp" />
     <TextView
@@ -164,7 +200,7 @@
         android:layout_marginLeft="7dp"
         android:layout_below="@+id/img_open_adver"
         android:layout_toRightOf="@+id/img_open_adver"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="39.6dp"
         android:textSize="@dimen/text_7"
         android:layout_toEndOf="@+id/img_open_adver"
         android:layout_marginStart="7dp" />
@@ -185,12 +221,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/md__defaultBackground"
-            android:text="运营上传机构开机广告"
+            android:text="销售上传合作海报张贴效果图"
             android:layout_marginTop="1dp"
             android:layout_marginLeft="6dp"
             android:textSize="@dimen/text_4"
             android:layout_toRightOf="@+id/img_poster"
             android:layout_marginStart="6dp"
             android:layout_toEndOf="@+id/img_poster" />
+        <TextView
+            android:id="@+id/tv_time_poster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_7"
+            android:text="暂无"
+            android:layout_toRightOf="@+id/img_poster"
+            android:layout_below="@+id/img_poster"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#B1B9BF"
+            android:layout_marginStart="7dp" />
     </RelativeLayout>
 </LinearLayout>

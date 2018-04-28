@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.ztstech.vgmate.R;
 import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.add_certification.RobAddVCertificationActivity;
+import com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty;
 import com.ztstech.vgmate.activitys.upload_protocol.UploadActivity;
 import com.ztstech.vgmate.activitys.upload_protocol.UploadPresenter;
 import com.ztstech.vgmate.data.dto.OrgPassData;
@@ -151,8 +152,7 @@ public class PhoneCertificationActivity extends MVPActivity<PhoneCertificationCo
 
     @Override
     public void onSubmitFinish(String errorMessage) {
-        EventBus.getDefault().post(new ApproveEvent(RobAddVCertificationActivity.APPROVE_FINISH));
-        finish();
+        ToastUtil.toastCenter(this,errorMessage);
     }
 
     @Override
@@ -165,6 +165,14 @@ public class PhoneCertificationActivity extends MVPActivity<PhoneCertificationCo
     @Override
     public void showError(String errorMessage) {
 
+    }
+
+    @Override
+    public void onSuccend() {
+        Intent intent = new Intent();
+        intent.putExtra(RobIngActivty.JUDE_FINISH,RobIngActivty.JUDE_FINISH_VALUE);
+        setResult(RobAddVCertificationActivity.RESULT_CODE,intent);
+        finish();
     }
 
     @Override

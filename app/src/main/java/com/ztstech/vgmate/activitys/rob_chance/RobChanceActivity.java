@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -39,6 +40,9 @@ import static com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty.ORG_
  */
 
 public class RobChanceActivity extends MVPActivity<RobChanceContract.Presenter> implements RobChanceContract.View {
+    //跳转请求requestCode
+    public static final int REQUEST_CODE = 21;
+    public static final int RESULT_OK = 12;
     @BindView(R.id.top_bar)
     TopBar topBar;
     @BindView(R.id.recycler)
@@ -49,6 +53,8 @@ public class RobChanceActivity extends MVPActivity<RobChanceContract.Presenter> 
     private KProgressHUD kProgressHUD;
     //剩余时间
     double lasttime;
+    //第一次进页面的数据源
+    private List<RobChanceBean.ListBean> listData;
     @Override
     protected void onViewBindFinish() {
         super.onViewBindFinish();
@@ -104,6 +110,7 @@ public class RobChanceActivity extends MVPActivity<RobChanceContract.Presenter> 
 
     @Override
     public void setData(List<RobChanceBean.ListBean> listData) {
+        this.listData = listData;
         srl.finishLoadmore();
         srl.finishRefresh();
         adapter.setListData(listData);
@@ -144,7 +151,7 @@ public class RobChanceActivity extends MVPActivity<RobChanceContract.Presenter> 
         }else{
             intent.putExtra(ORG_IDENTITY,ORG_CHECK_IN_OR_CALIM);
         }
-        startActivity(intent);
+        startActivityForResult(intent,REQUEST_CODE);
         kProgressHUD.dismiss();
     }
 
@@ -152,5 +159,26 @@ public class RobChanceActivity extends MVPActivity<RobChanceContract.Presenter> 
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_rob_chance;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK){
+           RobChanceBean.ListBean robChanceBean =
+                   new Gson().fromJson(data.getStringExtra(ORG_BEAN_ROB), RobChanceBean.ListBean.class);
+            setResultList(robChanceBean);
+        }
+    }
+    private void setResultList(RobChanceBean.ListBean robChanceBean){
+        for (int i = 0 ; i < listData.size() ; i++){
+            if (listData.get(i).rbiid == robChanceBean.rbiid){
+                listData.remove(i);
+                setData(listData);
+                topBar.setTitle("可抢机会".concat("(")
+                        .concat(String.valueOf(listData.size()).concat(")")));
+                break;
+            }
+        }
     }
 }

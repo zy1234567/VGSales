@@ -34,10 +34,7 @@ public class PhoneCertificationPresenter extends PresenterImpl<PhoneCertificatio
                 mView.hideLoading(null);
 
                 if (baseRespBean.isSucceed()) {
-                    //防止后台在正确情况下返回errmsg
-                    mView.onSubmitFinish(null);
-
-
+                    mView.onSuccend();
                 }else {
                     mView.onSubmitFinish(baseRespBean.getErrmsg());
                 }

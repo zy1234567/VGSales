@@ -123,13 +123,19 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                pb.setVisibility(View.VISIBLE);
+
+                if (pb != null){
+                    pb.setVisibility(View.GONE);
+                }
                 super.onPageStarted(view, url, favicon);
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                pb.setVisibility(View.GONE);
+                if (pb != null){
+                    pb.setVisibility(View.GONE);
+                }
+
                 super.onPageFinished(view, url);
             }
 
@@ -137,7 +143,9 @@ public class ArticleDetailActivity extends MVPActivity<ArticleDetailContract.Pre
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
-                pb.setProgress(newProgress);
+                if (pb != null){
+                    pb.setProgress(newProgress);
+                }
                 super.onProgressChanged(view, newProgress);
             }
         });

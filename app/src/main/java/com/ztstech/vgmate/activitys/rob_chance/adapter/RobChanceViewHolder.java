@@ -72,7 +72,9 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
                 .into(imgOrg);
         tvTime.setText(TimeUtils.informationTime(data.createtime));
         tvName.setText(data.rbioname);
-        tvAddress.setText("地区：".concat(LocationUtils.getPName(data.rbiprovince).concat(LocationUtils.getCName(data.rbicity))).concat(LocationUtils.getAName(data.rbidistrict)));
+        tvAddress.setText("地区：".concat(LocationUtils.getPName(data.rbiprovince))
+                .concat(LocationUtils.getCName(data.rbicity)).
+                        concat(LocationUtils.getAName(data.rbidistrict)));
         if (!TextUtils.isEmpty(data.contractname) && !TextUtils.isEmpty(data.contractphone)) {
             String wholeStr=("联系人：".concat(data.contractname).concat(data.contractphone));
             SpannableStringBuilder spBuilder = new SpannableStringBuilder(wholeStr);
@@ -144,16 +146,16 @@ public class RobChanceViewHolder extends SimpleViewHolder<RobChanceBean.ListBean
         //返回路人
         if (TextUtils.equals(cstatus,Constants.CSTATUS_GRAY_UNVERIFIED) &&
                 (TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_PASSER_CHECK_IN) ||
-                TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_PASSER_CHECK_IN)) &&
+                        TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_PASSER_CHECK_IN)) &&
                 TextUtils.isEmpty(nowchancetype)){
             return PASSER_CHECK_IN;
         }
         if (TextUtils.equals(cstatus,Constants.CSTATUS_GRAY_UNVERIFIED) && TextUtils.isEmpty(nowchancetype)
                 && (TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_ORG_REGISTER) ||
-        TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_ORG_REGISTER) ||
-        TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_ORG_CHECK_IN) ||
-        TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_ORG_CHECK_IN) ||
-        TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_MAP_REGISTER))){
+                TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_ORG_REGISTER) ||
+                TextUtils.equals(chancetype,Constants.CHANCE_TYPE_WEB_ORG_CHECK_IN) ||
+                TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_ORG_CHECK_IN) ||
+                TextUtils.equals(chancetype,Constants.CHANCE_TYPE_APP_MAP_REGISTER))){
             return ORG_CHECK_IN_OR_CALIM;
         }
         if (TextUtils.equals(chancetype,Constants.CSTATUS_ORG_CLAIM_ING)){

@@ -59,6 +59,8 @@ import butterknife.OnClick;
 
 import static com.ztstech.appdomain.constants.Constants.ORG_CALIM;
 import static com.ztstech.appdomain.constants.Constants.ORG_REGISTER;
+import static com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty.JUDE_FINISH;
+import static com.ztstech.vgmate.activitys.rob_chance.rob_ing.RobIngActivty.JUDE_FINISH_VALUE;
 
 /**
  * Created by Administrator on 2018/4/20.
@@ -93,6 +95,11 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
      * 处理终端
      */
     public static final String TENMINAL_TYPE = "02";
+    /**
+     * 请求requestCode resultcode
+     */
+    public static final int REQUEST_CODE_FINISH = 34;
+    public static final int RESULT_CODE = 43;
     /**
      * 接收微信认证审核事件，销毁页面
      */
@@ -280,9 +287,17 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
     }
 
     @Override
-    public void onSubmitFinish(String msg) {
-        EventBus.getDefault().post(new ApproveEvent(RobAddVCertificationActivity.APPROVE_FINISH));
+    public void onSuccend() {
+        Intent intet = new Intent();
+        intet.putExtra(JUDE_FINISH, JUDE_FINISH_VALUE);
+        setResult(RobIngActivty.RESULT_CODE,intet);
+        Log.e("RobAddVActivity","finish");
         finish();
+    }
+
+    @Override
+    public void onSubmitFinish(String msg) {
+
     }
 
     @Override
@@ -407,7 +422,7 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
             Intent intent = new Intent(RobAddVCertificationActivity.this,
                     PhoneCertificationActivity.class);
             intent.putExtra(PhoneCertificationActivity.ORG_PASS_DATA,new Gson().toJson(orgPassData));
-            startActivity(intent);
+            startActivityForResult(intent,REQUEST_CODE_FINISH);
         } else {
             mPresenter.submit(orgPassData);
         }
@@ -476,6 +491,13 @@ public class RobAddVCertificationActivity extends MVPActivity<AddVContract.Prese
                 addItem(Matisse.obtainPathResult(data).get(i),null);
             }
             buttontype();
+        }else if (requestCode == REQUEST_CODE_FINISH && resultCode == RESULT_CODE){
+            if (TextUtils.equals(JUDE_FINISH_VALUE,data.getStringExtra(JUDE_FINISH))){
+                Intent intet = new Intent(this,RobIngActivty.class);
+                intet.putExtra(JUDE_FINISH, JUDE_FINISH_VALUE);
+                setResult(RobIngActivty.RESULT_CODE,intet);
+                finish();
+            }
         }
     }
     /**

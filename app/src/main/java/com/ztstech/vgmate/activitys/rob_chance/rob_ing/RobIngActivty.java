@@ -21,6 +21,7 @@ import com.ztstech.vgmate.activitys.MVPActivity;
 import com.ztstech.vgmate.activitys.add_certification.RobAddVCertificationActivity;
 import com.ztstech.vgmate.activitys.add_certification.appoint_sale.RobAddVAppointSaleActivity;
 import com.ztstech.vgmate.activitys.gps.GpsActivity;
+import com.ztstech.vgmate.activitys.rob_chance.RobChanceActivity;
 import com.ztstech.vgmate.activitys.rob_chance.adapter.RobIngImgAdapter;
 import com.ztstech.vgmate.data.beans.OrgFollowlistBean;
 import com.ztstech.vgmate.data.beans.RobChanceBean;
@@ -31,6 +32,7 @@ import com.ztstech.vgmate.utils.CategoryUtil;
 import com.ztstech.vgmate.utils.CommonUtil;
 import com.ztstech.vgmate.utils.DialogUtils;
 import com.ztstech.vgmate.utils.LocationUtils;
+import com.ztstech.vgmate.utils.ToastUtil;
 import com.ztstech.vgmate.weigets.TopBar;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -57,6 +59,12 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
     public static final String ORG_IDENTITY = "ORG_IDENTITY_KEY";
     //传入剩余时间
     public static final String LAST_TIME = "LAST_TIME_KEY";
+    //审核页面回传的值，根据这个值去判断是否销毁页面
+    public static final String JUDE_FINISH = "jude_finish_key";
+    public static final String JUDE_FINISH_VALUE = "jude_finish_value";
+    //请求requestcode resultcode
+    public static final int REQUEST_CODE = 23;
+    public static final int RESULT_CODE = 32;
     @BindView(R.id.top_bar)
     TopBar topBar;
     @BindView(R.id.tv_add_type)
@@ -324,7 +332,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
                     }else {
                         Intent intent = new Intent(this,RobAddVCertificationActivity.class);
                         intent.putExtra(RobAddVCertificationActivity.ORG_BEAN,new Gson().toJson(bean));
-                        startActivity(intent);
+                        startActivityForResult(intent,REQUEST_CODE);
                     }
                 }
                 break;
@@ -379,7 +387,6 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
                             }else {
                                 mPresenter.refuseRegisterCommit(orgRegisterRefuseData,Constants.ORG_REGISTER);
                             }
-                            finish();
                         }
 
                         @Override
@@ -405,7 +412,6 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
                         @Override
                         public void tvRightClick() {
                             mPresenter.refuse0rPassCommit(refuseOrPassData,Constants.ORG_CALIM);
-                            finish();
                         }
                         @Override
                         public void tvLeftClick() {
@@ -445,12 +451,15 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
 
     @Override
     public void Success() {
-
+        Intent intent = new Intent(this, RobChanceActivity.class);
+        intent.putExtra(ORG_BEAN_ROB,new Gson().toJson(bean));
+        setResult(12,intent);
+        finish();
     }
 
     @Override
     public void showError(String msg) {
-
+        ToastUtil.toastCenter(this,msg);
     }
 
     @Override
@@ -596,5 +605,15 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
             activty.onTimeChanged(getCurrentText());
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_CODE){
+            if (TextUtils.equals(JUDE_FINISH_VALUE,data.getStringExtra(JUDE_FINISH))){
+                Success();
+            }
+        }
     }
 }

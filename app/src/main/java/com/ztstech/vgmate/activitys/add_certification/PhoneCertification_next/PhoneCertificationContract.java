@@ -23,6 +23,8 @@ public interface PhoneCertificationContract  {
         void setLastTime(double lasttime);
 
         void showError(String errorMessage);
+
+        void onSuccend();
     }
 
     interface Presenter extends BasePresenter<PhoneCertificationContract.View> {
