@@ -316,7 +316,7 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
                 if(isNormalRegister){
                     locationPass();
                 }else {
-                    if(getIntent().getStringExtra(APPOINT_SALE_KEY)!=null&&
+                    if(getIntent().getStringExtra(APPOINT_SALE_KEY) != null &&
                             getIntent().getStringExtra(APPOINT_SALE_KEY).equals(APPOINT_SALE_VALUE)){
                         Intent intent = new Intent(this,RobAddVAppointSaleActivity.class);
                         intent.putExtra(ORG_BEAN_ROB,new Gson().toJson(bean));

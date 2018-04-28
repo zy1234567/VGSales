@@ -181,10 +181,10 @@ public class CommonUtil {
             InputStreamReader inputReader = new InputStreamReader(context.getResources().getAssets().open(fileName));
             BufferedReader bufReader = new BufferedReader(inputReader);
             String line = "";
-            String Result = "";
+            StringBuilder result = new StringBuilder();
             while ((line = bufReader.readLine()) != null)
-                Result += line;
-            return Result;
+                result.append(line);
+            return result.toString();
         } catch (Exception e) {
             e.printStackTrace();
         }

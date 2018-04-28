@@ -46,7 +46,6 @@ public class LocationUtils {
                 twiceCodeMap = new HashMap<>();
                 String locationJson = CommonUtil.getDataFromAssets(
                         BaseApplicationLike.getApplicationInstance(), "location.txt");
-                Log.e("locationJson",locationJson + "");
                 locationBeanList = new Gson().fromJson(locationJson,
                         new TypeToken<List<LocationBean>>() {
                         }.getType());
