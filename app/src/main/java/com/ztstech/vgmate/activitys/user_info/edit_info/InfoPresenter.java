@@ -74,7 +74,7 @@ public class InfoPresenter extends PresenterImpl<InfoContract.View> implements
                                 }
 
 
-                                uploadIfExist(model.idFile, new Action1<UploadImageBean>() {
+                                uploadCard(model.idFile, new Action1<UploadImageBean>() {
                                     @Override
                                     public void call(UploadImageBean uploadImageBean3) {
                                         if (uploadImageBean3 == null || uploadImageBean3.isSucceed()) {
@@ -83,7 +83,7 @@ public class InfoPresenter extends PresenterImpl<InfoContract.View> implements
                                                 model.idUrl = uploadImageBean3.urls;
                                             }
 
-                                            uploadIfExist(model.idBackFile, new Action1<UploadImageBean>() {
+                                            uploadCard(model.idBackFile, new Action1<UploadImageBean>() {
                                                 @Override
                                                 public void call(UploadImageBean uploadImageBean4) {
 
@@ -241,7 +241,7 @@ public class InfoPresenter extends PresenterImpl<InfoContract.View> implements
 
                     callback.call(uploadImageBean);
                 }
-            }.run(RetrofitUtils.uploadFile(new File[]{file}));
+            }.run(RetrofitUtils.uploadCard(new File[]{file}));
 
         }else {
             callback.call(null);
