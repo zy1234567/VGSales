@@ -68,7 +68,44 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowContact.Presenter> i
         viewpager.setAdapter(adapter);
         mPresenter.loadFollowOrgNum(uid);
     }
+    private void table(String [] str,int[] num){
+        for (int i =0 ; i < adapter.getCount();i++){
+            TabLayout.Tab tab = tablayout.getTabAt(i);
+            tab.setCustomView(R.layout.table_layout_item);
+            TextView tabtext = tab.getCustomView().findViewById(R.id.tab_text);
+            TextView tvTabNum = tab.getCustomView().findViewById(R.id.tv_tab_num);
+            tabtext.setText(str[i]);
+            tvTabNum.setText(String.valueOf(num[i]));
+            if (num[i] == 0){
+                tvTabNum.setVisibility(View.GONE);
+            }
+            if (i == 0){
+                tab.getCustomView().findViewById(R.id.tab_text).setSelected(true);
+                tabtext.setTextColor(this.getResources().getColor(R.color.color_001));
+            }
+        }
+        tablayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+//                tab.getCustomView().findViewById(R.id.tab_text).setSelected(true);
+                TextView tabtext = tab.getCustomView().findViewById(R.id.tab_text);
+                tabtext.setTextColor(getResources().getColor(R.color.color_001));
+                viewpager.setCurrentItem(tab.getPosition());
+            }
 
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+//                tab.getCustomView().findViewById(R.id.tab_text).setSelected(false);
+                TextView tabtext = tab.getCustomView().findViewById(R.id.tab_text);
+                tabtext.setTextColor(getResources().getColor(R.color.color_100));
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
     @Override
     protected OrgFollowContact.Presenter initPresenter() {
         return new OrgFollowPresenter(this);
@@ -85,11 +122,13 @@ public class OrgFollowActivity extends MVPActivity<OrgFollowContact.Presenter> i
         if (bean == null || bean.info == null) {
             return;
         }
-        String[] titles = {"我开拓的".concat(" ").concat(String.valueOf(bean.info.appointNum)),
-                "商家介绍".concat(" ").concat(String.valueOf(bean.info.introNum )),
-                "机会抢单".concat(" ").concat(String.valueOf(bean.info.rushNum ))};
-        adapter.setTitles(titles);
-        adapter.notifyDataSetChanged();
+        String[] titles = {"我开拓的".concat("(").concat(String.valueOf(bean.info.appointNum).concat(")")),
+                "商家介绍".concat("(").concat(String.valueOf(bean.info.introNum).concat(")")),
+                "机会抢单".concat("(").concat(String.valueOf(bean.info.rushNum).concat(")"))};
+//        adapter.setTitles(titles);
+        int[] num = {bean.info.appointingNum,bean.info.introingNum ,0};
+        table(titles,num);
+//        adapter.notifyDataSetChanged();
         topBar.setTitle("客户跟进".concat("(").concat
                 (String.valueOf(bean.info.appointNum + bean.info.introNum + bean.info.rushNum
                 +bean.info.rushableNum + bean.info.appointingNum + bean.info.introingNum)).concat(")"));

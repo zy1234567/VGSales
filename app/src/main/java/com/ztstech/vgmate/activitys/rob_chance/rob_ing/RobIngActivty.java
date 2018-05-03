@@ -243,8 +243,8 @@ public class RobIngActivty extends MVPActivity<RobIngContract.Presenter>implemen
             gridView.setAdapter(new RobIngImgAdapter(RobIngActivty.this,bean));
         }
         String[] gps = bean.rbigps.split(",");
-        tvGps.setText("E".concat(CommonUtil.convertToSexagesimal(Double.parseDouble(gps[0]))).
-                concat("N".concat(CommonUtil.convertToSexagesimal(Double.parseDouble(gps[1])))));
+        tvGps.setText("E°".concat(CommonUtil.convertToSexagesimal(Double.parseDouble(gps[0]))).
+                concat("N°".concat(CommonUtil.convertToSexagesimal(Double.parseDouble(gps[1])))));
     }
     /**转化数据源bean*/
     private  void changeBean(){

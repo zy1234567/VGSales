@@ -343,6 +343,7 @@ public class RobAddVAppointSaleActivity extends MVPActivity<RobAddVAppointSaleCo
     @Override
     public void onSubmitFinish(String errorMessage) {
         EventBus.getDefault().post(new ApproveEvent(RobAddVCertificationActivity.APPROVE_FINISH));
+        orgPassData.status = "15";
         finish();
     }
 }

@@ -80,6 +80,21 @@ public class RetrofitUtils {
         }
         return createService(UploadApi.class).uploadFile("01", parts,UserRepository.getInstance().getAuthId());
     }
+    /**
+     * 上传证件照
+     */
+    public static Observable<UploadImageBean> uploadCard(File[] files){
+        List<MultipartBody.Part> parts = new ArrayList<>(files.length);
+        for (File file : files) {
+            RequestBody requestBody = RequestBody.create(MediaType.parse("file"), file);
+
+            MultipartBody.Part part = MultipartBody.Part.createFormData("files", file.getName(),
+                    requestBody);
+            parts.add(part);
+
+        }
+        return createService(UploadApi.class).uploadFile("07", parts,UserRepository.getInstance().getAuthId());
+    }
 
     /**
      * 如果文件存在就上传，否则直接回调，url为""

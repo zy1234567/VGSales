@@ -231,7 +231,20 @@ public class InfoPresenter extends PresenterImpl<InfoContract.View> implements
         }else {
             callback.call(null);
         }
-
     }
+    private void uploadCard(File file,final Action1<UploadImageBean> callback){
+        if (file != null) {
+            new BasePresenterSubscriber<UploadImageBean>(mView){
 
+                @Override
+                public void childNext(UploadImageBean uploadImageBean) {
+
+                    callback.call(uploadImageBean);
+                }
+            }.run(RetrofitUtils.uploadFile(new File[]{file}));
+
+        }else {
+            callback.call(null);
+        }
+    }
 }

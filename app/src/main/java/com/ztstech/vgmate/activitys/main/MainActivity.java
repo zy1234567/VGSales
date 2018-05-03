@@ -172,11 +172,12 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
         View rlAddOrg = dialog.findViewById(R.id.rl_add_org);
         View rlShareInfo = dialog.findViewById(R.id.rl_share_info);
         View rlShareNotice = dialog.findViewById(R.id.rl_share_notice);
+        View rlMapIntrod = dialog.findViewById(R.id.rl_map_introd);
 
         View line1 = dialog.findViewById(R.id.line1);
         View line2 = dialog.findViewById(R.id.line2);
         View line3 = dialog.findViewById(R.id.line3);
-
+        View line4 = dialog.findViewById(R.id.line4);
 
         rlAddMate.setOnClickListener(this);
         dialogContainer.setOnClickListener(this);
@@ -251,6 +252,8 @@ public class MainActivity extends MVPActivity<MainContract.Presenter> implements
                 itNotice.putExtra(CreateShareInfoActivity.ARG_TYPE, CreateShareApi.SHARE_NOTICE);
                 startActivity(itNotice);
                 dialog.setVisibility(View.GONE);
+                break;
+            case R.id.rl_map_introd:
                 break;
             default:
                 break;

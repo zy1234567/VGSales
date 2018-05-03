@@ -48,13 +48,13 @@ public class FollowOrgFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return TITLES.length;
+        return 3;
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return TITLES[position];
-    }
+//    @Override
+//    public CharSequence getPageTitle(int position) {
+//        return TITLES[position];
+//    }
 
     public void setTitles(String[] TITLES){
         this.TITLES = TITLES;
